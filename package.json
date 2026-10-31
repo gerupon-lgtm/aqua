@@ -1,0 +1,14 @@
+{
+  "name": "aqua-notes",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\"",
+    "check": "node scripts/check-source.js",
+    "build": "node scripts/build.js",
+    "dev": "node scripts/serve.js",
+    "build:artifact": "node scripts/build-artifact.js",
+    "icons": "node scripts/create-icons.js"
+  }
+}

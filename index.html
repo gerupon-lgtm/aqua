@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- app:head:start -->
+<title>AQUA NOTES 試作</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap">
+<!-- app:head:end -->
+<!-- OFFLINE_METADATA -->
+<link rel="stylesheet" href="./src/ui/style.css">
+</head>
+<body>
+<!-- app:body:start -->
+<div class="app" id="app">
+  <header class="bar">
+    <div class="logo" aria-label="AQUA NOTES"><span class="l1">AQUA</span><span class="l2">NOTES</span></div>
+    <nav class="stages" id="stage-tabs" aria-label="お試しの面"></nav>
+    <div class="tools">
+      <button type="button" id="sound" aria-pressed="true">音 オン</button>
+      <button type="button" id="tune">調整</button>
+    </div>
+  </header>
+  <section class="cond" id="cond" aria-live="polite"></section>
+  <main class="board-wrap">
+    <svg id="board" role="img" aria-label="真横から見た水路の断面" preserveAspectRatio="xMidYMax meet"></svg>
+  </main>
+  <section class="panel" id="panel"></section>
+  <div class="notice" id="update-notice" hidden role="status"><span>新しい版があります。</span><button type="button" id="update-apply">更新する</button></div>
+  <footer class="foot"><span><span id="version"></span> 試作</span><span>© SIKUMI LAB</span></footer>
+  <div class="sheet" id="sheet" hidden></div>
+</div>
+<!-- app:body:end -->
+<script type="module" src="./src/ui/app.js"></script>
+</body>
+</html>
