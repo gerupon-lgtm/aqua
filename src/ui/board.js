@@ -98,7 +98,10 @@ function drawPipe(out, layout, c, model) {
     if (filled && !broken && flowInfo && !flowInfo.flow.isZero()) {
       const speed = Math.max(0.6, 3.2 / Math.min(6, Math.abs(flowInfo.flow.toNumber())));
       const forward = (flowInfo.flow.sign() > 0) !== reversed;
-      out.push(`<path d="${d}" fill="none" class="current${forward ? '' : ' back'}" stroke-width="${Math.max(2, w - 4)}" style="animation-duration:${speed.toFixed(2)}s"/>`);
+      // 流れの白い点。盤面は毎フレーム描き直すので、CSSのアニメーションだと毎回最初に戻って動かない（スマホで起きる）。
+      // 時刻から位置を計算する。点の間隔13を speed 秒で進む
+      const shift = model.reducedMotion ? 0 : ((model.time / 1000 / speed) * 26) % 26;
+      out.push(`<path d="${d}" fill="none" class="current" stroke-width="${Math.max(2, w - 4)}" stroke-dashoffset="${(forward ? -shift : shift).toFixed(2)}"/>`);
     }
     if (c.siphon && (!isPrimed || broken)) {
       for (const dx of [-8, 0, 8]) out.push(`<circle cx="${mx + dx}" cy="${my}" r="${Math.max(2, w / 2 - 1)}" fill="#ffffff" stroke="var(--pipe-edge)" stroke-width="1"/>`);
@@ -145,6 +148,30 @@ function surfacePath(x0, x1, y, amp, phase) {
     pts.push(`${i ? 'L' : 'M'}${x.toFixed(1)} ${(y + Math.sin(phase + i * 0.9) * amp).toFixed(2)}`);
   }
   return pts.join(' ');
+}
+
+// 噴水：中央の水柱と、左右へ落ちるしぶき。噴き上がり0.6秒、その後は高さを少しゆらしながら続ける
+const RAINBOW_AFTER_MS = 800; // 100点：噴き始めから虹が出始めるまで
+function drawFountain(out, cx, top, since, still) {
+  const rise = still ? 1 : Math.min(1, since / 600);
+  const ease = 1 - (1 - rise) ** 2;
+  const sway = still ? 0 : Math.sin(since / 170) * 1.6;
+  const peak = top - 4 - (26 + sway) * ease;
+  const base = top + 6;
+  out.push(`<path d="M${cx} ${base} L${cx} ${peak}" stroke="var(--water-mid)" stroke-width="4.5" stroke-linecap="round" opacity=".9"/>`);
+  out.push(`<path d="M${cx} ${base} L${cx} ${peak + 2}" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>`);
+  if (ease < 0.6) return;
+  const spread = 15 * ease;
+  for (const dir of [-1, 1]) {
+    out.push(`<path d="M${cx} ${peak + 1} Q${cx + dir * spread * 0.7} ${peak - 6} ${cx + dir * spread} ${top + 2}" fill="none" stroke="var(--water-mid)" stroke-width="2" stroke-linecap="round" opacity=".7"/>`);
+    // しぶきの粒：上から盤の縁へ落ちていく
+    for (let i = 0; i < 3; i++) {
+      const p = still ? (i + 0.5) / 3 : ((since / 900) + i / 3) % 1;
+      const x = cx + dir * spread * p;
+      const y = (1 - p) ** 2 * (peak + 1) + 2 * (1 - p) * p * (peak - 6) + p * p * (top + 2);
+      out.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.6" fill="var(--water-mid)" opacity="${(0.85 - p * 0.4).toFixed(2)}"/>`);
+    }
+  }
 }
 
 function basinShape(cx) {
@@ -264,11 +291,24 @@ export function renderBoard(svg, model) {
       if (verdict.verdict === 'over') {
         out.push(`<path d="M${b.right + 1} ${b.top} q4 8 1 18 M${b.left - 1} ${b.top} q-4 8 -1 18" fill="none" stroke="var(--water-mid)" stroke-width="2.4" stroke-linecap="round"/>`);
       }
-      if (verdict.verdict === 'exact') {
-        out.push(`<path d="M${cx - 30} ${b.top - 4} A30 34 0 0 1 ${cx + 30} ${b.top - 4}" fill="none" stroke="url(#bow)" stroke-width="7" opacity=".9" class="rainbow"/>`);
-      }
     }
     out.push(`<line x1="${b.left + 3}" y1="${markY}" x2="${b.right - 3}" y2="${markY}" stroke="var(--gold)" stroke-width="2"/>`);
+    // クリアの噴水と、100点の虹（2026-11-01 発案者）。ジングルの鳴り始めと同時に噴き上がり、
+    // 100点のときは噴き上がった後に虹がかかる。NGでは噴かない。
+    // 盤面は毎フレーム描き直すので、CSSのアニメーションではなく時刻から形と濃さを計算する
+    if (verdict && model.fountainAt != null && model.outcome && model.outcome !== 'ng') {
+      const since = model.time - model.fountainAt;
+      if (since >= 0) {
+        if (model.outcome === 'perfect') {
+          const k = model.reducedMotion ? 1 : Math.max(0, Math.min(1, (since - RAINBOW_AFTER_MS) / 700));
+          if (model.reducedMotion ? since >= RAINBOW_AFTER_MS : k > 0) {
+            const opacity = 0.9 * (1 - (1 - k) ** 3);
+            out.push(`<path d="M${cx - 30} ${b.top - 4} A30 34 0 0 1 ${cx + 30} ${b.top - 4}" fill="none" stroke="url(#bow)" stroke-width="7" opacity="${opacity.toFixed(3)}"/>`);
+          }
+        }
+        drawFountain(out, cx, b.top, since, model.reducedMotion);
+      }
+    }
     out.push('</g>');
     if (dy < 0) out.push(`<text x="${cx}" y="${GROUND - 26 + dy - 8}" class="tiny" text-anchor="middle">口の高さ ${esc(o.height)}</text>`);
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;

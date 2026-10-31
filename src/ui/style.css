@@ -103,11 +103,7 @@ button { font: inherit; color: inherit; }
 #board .badge-text { font-size: 11px; font-weight: 700; fill: var(--blue-deep); font-family: var(--font-body); pointer-events: none; }
 #board .badge-text.on { fill: #ffffff; }
 #board .badge-text.cand { fill: var(--ink-soft); }
-#board .current { stroke: rgba(255, 255, 255, .85); stroke-dasharray: 2 11; stroke-linecap: round; animation: flow linear infinite; }
-#board .current.back { animation-direction: reverse; }
-#board .rainbow { animation: bow .7s ease-out; }
-@keyframes flow { to { stroke-dashoffset: -26; } }
-@keyframes bow { from { opacity: 0; } to { opacity: .9; } }
+#board .current { stroke: rgba(255, 255, 255, .85); stroke-dasharray: 2 11; stroke-linecap: round; }
 
 .panel { grid-area: panel; display: grid; gap: 8px; }
 .hint { margin: 0; color: var(--ink-soft); font-size: 13.5px; }
@@ -193,7 +189,7 @@ th { color: var(--ink-soft); font-weight: 500; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #board .current, #board .rainbow { animation: none; }
+  .toast { animation: none; }
 }
 
 /* 太さ・呼び水を選ぶ（S-04） */

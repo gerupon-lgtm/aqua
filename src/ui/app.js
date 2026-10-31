@@ -8,13 +8,15 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.6.3';
-// v2：ジングルの待ちをクリアとNGに分けた（2026-11-01）。初期値を新しい値にそろえるため、v1 の調整は引き継がない
-const TIMING_KEY = 'aqua-notes.prototype-timing.v2';
+const APP_VERSION = '0.7.1';
+// v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
+const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
-// 出発点は前作 prism の関係：落ち着いた（最後の鐘が鳴った）時点から、クリアのジングル0.7秒、NGのジングル1.5秒、
-// 結果カードはどちらも1.6秒（prism の audio.js SUCCESS_JINGLE_DELAY_SECONDS・FAILURE_BELL_DELAY_SECONDS、result-timing.js）
-const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 700, jingleNgMs: 1500, cardClearMs: 1600, cardNgMs: 1600, semitones: 5, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
+// 前作 prism の間合いは「鐘の主な響きが引いてから（鐘は0.6秒で約6分の1）クリアのジングル0.7秒、NGのジングル1.5秒、
+// カードはどちらも1.6秒」。鐘は打った瞬間が最大ですぐ引くが、グラスの和音は約1秒伸びてから引く。
+// そこで、和音が約6分の1まで下がる1.4秒を前作の0.7秒にあたる点とし、前作の間隔をそのまま当てはめた：
+// クリアのジングル1.4秒・カード2.3秒、NGのジングル2.2秒・カード2.3秒（和音の長さ2.6秒のとき。2026-11-01 発案者が選択）
+const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 1400, jingleNgMs: 2200, cardClearMs: 2300, cardNgMs: 2300, semitones: 5, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
 const TIMING_FIELDS = [
   ['latencyMs', '音の準備の余裕（音が途切れるときは大きく）', 0, 300, 10],
   ['riseMs', '水面が上がる時間', 400, 3000, 100],
@@ -291,6 +293,9 @@ function drawBoard() {
     settled: v.settled,
     view,
     gateClosed: v.gateClosed,
+    // 噴水が噴き始める時刻：クリアのジングルの鳴り始めと同じ（2026-11-01 発案者。NGは噴かない）
+    fountainAt: state.run ? state.run.start + state.run.settleAt + state.run.timing.jingleMs : null,
+    outcome: state.evaluation?.outcome ?? null,
     prevLevels: state.prevLevels,
     time: now,
     reducedMotion: reducedMotionQuery.matches,
