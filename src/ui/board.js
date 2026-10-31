@@ -9,7 +9,9 @@ const SPRING_W = 46;
 
 export function layoutFor(stage) {
   const H = Number(stage.spring.height);
-  const unit = Math.min(40, 300 / (H + 1));
+  // 壁とサイフォンの山も入る高さにする
+  const top = Math.max(H, ...(stage.walls ?? []).map(w => Number(w.height)), ...stage.candidates.filter(c => c.siphon).map(c => Number(c.siphon.crest)));
+  const unit = Math.min(40, 300 / (top + 1));
   const xOf = x => 18 + x * 32.4;
   const nodes = new Map();
   nodes.set(stage.spring.id, { id: stage.spring.id, kind: 'spring', cx: xOf(stage.spring.x), w: SPRING_W });
@@ -21,18 +23,70 @@ export function layoutFor(stage) {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const WIDTH = { 1: 10, 2: 6.5, 3: 4 };
 
-// 管の通り道：塔の底から地面の下へ下り、横へ進んで、相手の底へ上がる
+// 管の通り道：塔の底から地面の下へ下り、横へ進んで、相手の底へ上がる。
+// サイフォンは塔の中の入口から上がり、壁の上の山を越えて、相手の入口へ下りる（logic-design 3章）
 function pipePath(layout, c) {
   const a = layout.nodes.get(c.a);
   const b = layout.nodes.get(c.b);
   const [left, right] = a.cx <= b.cx ? [a, b] : [b, a];
+  const reversed = left.id !== c.a;
+  const r = 9;
+  if (c.siphon) {
+    const x1 = left.cx + 7;
+    const x2 = right.cx - 7;
+    const yIn = layout.yOf(Number(c.siphon.inlet));
+    const yTop = layout.yOf(Number(c.siphon.crest));
+    const d = `M${x1} ${yIn} L${x1} ${yTop + r} Q${x1} ${yTop} ${x1 + r} ${yTop} L${x2 - r} ${yTop} Q${x2} ${yTop} ${x2} ${yTop + r} L${x2} ${yIn}`;
+    return { d, reversed, mx: (x1 + x2) / 2, my: yTop };
+  }
   const shift = (c.depth - 2) * 7;
   const x1 = left.cx + shift + (left.kind === 'spring' ? 6 : 0);
   const x2 = right.cx - shift;
   const y = GROUND + 12 + c.depth * 22;
-  const r = 9;
   const d = `M${x1} ${GROUND - 2} L${x1} ${y - r} Q${x1} ${y} ${x1 + r} ${y} L${x2 - r} ${y} Q${x2} ${y} ${x2} ${y - r} L${x2} ${GROUND - 2}`;
-  return { d, reversed: left.id !== c.a };
+  return { d, reversed, mx: (x1 + x2) / 2, my: y, gx: x1 + (x2 - x1) * 0.72 };
+}
+
+const THICK_LABEL = { 1: '太', 2: '中', 3: '細' };
+
+// 1本の水路を描く。サイフォンの未開通は山に空気（泡）がたまった様子で示す（要件5.2、screens.md 2章）
+function drawPipe(out, layout, c, model) {
+  const { connected, phase, view, primed, selected } = model;
+  const { d, reversed, mx, my, gx = mx } = pipePath(layout, c);
+  const on = connected.has(c.id);
+  const thin = Number(model.thinness(c));
+  const w = WIDTH[thin] ?? 5;
+  const flowInfo = phase !== 'edit' ? view?.result.pipes[c.id] : null;
+  const broken = phase !== 'edit' && view?.broken?.has(c.id);
+  const isPrimed = c.siphon && primed.has(c.id);
+  const filled = on && ((phase !== 'edit' && flowInfo?.wet) || (phase === 'edit' && isPrimed));
+  out.push(`<g class="pipe${on ? ' on' : ''}" data-pipe="${c.id}">`);
+  if (on) {
+    if (selected === c.id) out.push(`<path d="${d}" fill="none" stroke="var(--gold)" stroke-width="${w + 10}" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/>`);
+    out.push(`<path d="${d}" fill="none" stroke="var(--pipe-edge)" stroke-width="${w + 3}" stroke-linecap="round" stroke-linejoin="round"/>`);
+    out.push(`<path d="${d}" fill="none" stroke="${filled && !broken ? 'var(--water-mid)' : 'var(--pipe-empty)'}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
+    if (filled && !broken && flowInfo && !flowInfo.flow.isZero()) {
+      const speed = Math.max(0.6, 3.2 / Math.min(6, Math.abs(flowInfo.flow.toNumber())));
+      const forward = (flowInfo.flow.sign() > 0) !== reversed;
+      out.push(`<path d="${d}" fill="none" class="current${forward ? '' : ' back'}" stroke-width="${Math.max(2, w - 4)}" style="animation-duration:${speed.toFixed(2)}s"/>`);
+    }
+    if (c.siphon && (!isPrimed || broken)) {
+      for (const dx of [-8, 0, 8]) out.push(`<circle cx="${mx + dx}" cy="${my}" r="${Math.max(2, w / 2 - 1)}" fill="#ffffff" stroke="var(--pipe-edge)" stroke-width="1"/>`);
+    }
+  } else {
+    out.push(`<path d="${d}" fill="none" stroke="var(--pipe-off)" stroke-width="${Math.max(2, w - 3)}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity=".8"/>`);
+  }
+  if (c.adjustable && on) {
+    out.push(`<circle cx="${mx}" cy="${my}" r="10" fill="var(--card)" stroke="var(--blue)" stroke-width="1.5" pointer-events="none"/><text x="${mx}" y="${my + 4}" class="badge-text" text-anchor="middle">${THICK_LABEL[thin]}</text>`);
+  }
+  if (c.gate) {
+    const closed = model.gateClosed;
+    // 印は操作を受け取らない（下の水路のタップを邪魔しない）
+    out.push(`<rect x="${gx - 5}" y="${my - 12}" width="10" height="24" rx="2" fill="${closed ? 'var(--ink)' : 'var(--card)'}" stroke="var(--ink)" stroke-width="1.5" pointer-events="none"/>`);
+    out.push(`<text x="${gx + 9}" y="${my + 4}" class="tiny" text-anchor="start" pointer-events="none">水門${closed ? '（閉）' : ''}</text>`);
+  }
+  if (phase === 'edit') out.push(`<path d="${d}" fill="none" stroke="transparent" stroke-width="20" class="hit" data-pipe="${c.id}"/>`);
+  out.push(`</g>`);
 }
 
 // 水の色：少ない塔は明るく、多い塔は暗く（要件5.5）
@@ -62,10 +116,12 @@ function basinShape(cx) {
   };
 }
 
-// model: { stage, layout, connected:Set, phase, levels:Map(id→number|null), settled, evaluation,
+// model: { stage, layout, connected:Set, primed:Set, thinness(c), selected, phase, levels:Map(id→number|null),
+//          settled, view:{result, outlets, broken}（今見せている状態の計算結果）, gateClosed,
 //          prevLevels:Map, time, reducedMotion, highlight:{id, until} }
 export function renderBoard(svg, model) {
-  const { stage, layout, connected, phase, levels, settled, evaluation, prevLevels, time, reducedMotion } = model;
+  const { stage, layout, phase, levels, settled, prevLevels, time, reducedMotion } = model;
+  const evaluation = model.view;
   const { H, unit, towerTop } = layout;
   const out = [];
   out.push(`<defs>
@@ -79,28 +135,16 @@ export function renderBoard(svg, model) {
   out.push(`<rect x="0" y="${GROUND}" width="${VIEW_W}" height="${VIEW_H - GROUND}" fill="var(--soil)"/>`);
   out.push(`<line x1="0" y1="${GROUND}" x2="${VIEW_W}" y2="${GROUND}" stroke="var(--soil-line)" stroke-width="2"/>`);
 
-  // 水路の候補とつないだ水路
-  for (const c of stage.candidates) {
-    const { d, reversed } = pipePath(layout, c);
-    const on = connected.has(c.id);
-    const w = WIDTH[Number(c.thinness)] ?? 5;
-    const flowInfo = settled || phase !== 'edit' ? evaluation?.result.pipes[c.id] : null;
-    const wet = on && phase !== 'edit' && flowInfo?.wet;
-    out.push(`<g class="pipe${on ? ' on' : ''}" data-pipe="${c.id}">`);
-    if (on) {
-      out.push(`<path d="${d}" fill="none" stroke="var(--pipe-edge)" stroke-width="${w + 3}" stroke-linecap="round" stroke-linejoin="round"/>`);
-      out.push(`<path d="${d}" fill="none" stroke="${wet ? 'var(--water-mid)' : 'var(--pipe-empty)'}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
-      if (wet && flowInfo && !flowInfo.flow.isZero()) {
-        const speed = Math.max(0.6, 3.2 / Math.min(6, Math.abs(flowInfo.flow.toNumber())));
-        const forward = (flowInfo.flow.sign() > 0) !== reversed;
-        out.push(`<path d="${d}" fill="none" class="current${forward ? '' : ' back'}" stroke-width="${Math.max(2, w - 4)}" style="animation-duration:${speed.toFixed(2)}s"/>`);
-      }
-    } else {
-      out.push(`<path d="${d}" fill="none" stroke="var(--pipe-off)" stroke-width="${Math.max(2, w - 3)}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity=".8"/>`);
-    }
-    if (phase === 'edit') out.push(`<path d="${d}" fill="none" stroke="transparent" stroke-width="26" class="hit" data-pipe="${c.id}"/>`);
-    out.push(`</g>`);
+  // 壁（サイフォンが越える）
+  for (const wall of stage.walls ?? []) {
+    const x = 18 + wall.x * 32.4;
+    const y = layout.yOf(Number(wall.height));
+    out.push(`<rect x="${x - 8}" y="${y}" width="16" height="${GROUND - y}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+    for (let yy = y + 14; yy < GROUND; yy += 14) out.push(`<line x1="${x - 8}" y1="${yy}" x2="${x + 8}" y2="${yy}" stroke="var(--stone-edge)" stroke-width="1"/>`);
   }
+
+  // 地面の下を通る水路（サイフォンは塔の後に描いて、塔の中の入口が見えるようにする）
+  for (const c of stage.candidates.filter(c => !c.siphon)) drawPipe(out, layout, c, model);
 
   // 泉
   const spring = layout.nodes.get(stage.spring.id);
@@ -151,6 +195,9 @@ export function renderBoard(svg, model) {
     }
   }
 
+  // サイフォン（塔の中の入口から、壁の上を越える）
+  for (const c of stage.candidates.filter(c => c.siphon)) drawPipe(out, layout, c, model);
+
   // 出口の噴水盤
   for (const o of stage.outlets) {
     const node = layout.nodes.get(o.tower);
@@ -179,7 +226,8 @@ export function renderBoard(svg, model) {
       }
     }
     out.push(`<line x1="${b.left + 3}" y1="${markY}" x2="${b.right - 3}" y2="${markY}" stroke="var(--gold)" stroke-width="2"/>`);
-    out.push(`<text x="${cx}" y="${GROUND + 16}" class="tiny" text-anchor="middle">指定 ${esc(o.target)}</text>`);
+    const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
+    out.push(`<text x="${cx}" y="${GROUND + 16}" class="tiny" text-anchor="middle">指定 ${esc(target)}</text>`);
   }
   svg.innerHTML = out.join('');
 }

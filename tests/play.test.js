@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { frac } from '../src/logic/fraction.js';
 import { STAGES } from '../src/content/stages.js';
-import { analyzeStage, evaluate } from '../src/logic/play.js';
+import { analyzeStage, evaluate, judge } from '../src/logic/play.js';
 import { pipeScore, displayScore } from '../src/logic/score.js';
 import { onScale, tickSide, frequencyForMidi, midiForLevel } from '../src/logic/pitch.js';
 
@@ -24,13 +24,13 @@ test('音：目盛りに完全一致で「乗っている」、水位が高い�
 });
 
 for (const stage of STAGES) {
-  test(`お試し${stage.number}：満点は1通り、部分点のクリアがあり、クリアでは水のある塔がすべて音階に乗る`, () => {
+  test(`${stage.set}${stage.number}：満点は1通り、部分点のクリアがあり、クリアでは水のある塔がすべて音階に乗る`, () => {
     const a = analyzeStage(stage);
     assert.ok(a.perfect, '満点のつなぎ方がある');
     assert.ok(a.unique, '満点は1通り');
     assert.ok(a.clears.some(c => c.used > a.perfectCount), '部分点でクリアできるつなぎ方がある');
     for (const c of a.clears) assert.ok(c.allOnScale, `${c.ids.join('+')} で音階に乗らない塔がある`);
-    const best = evaluate(stage, a.perfect, a);
+    const best = evaluate(stage, a.perfectConfig, a);
     assert.equal(best.outcome, 'perfect');
     assert.equal(displayScore(best.score), '100.00');
   });
@@ -45,4 +45,48 @@ test('お試し1：直接の細い水路が満点、太い2本は部分点、3�
   const all = evaluate(stage, ['SA', 'AB', 'SB'], a);
   assert.equal(all.outcome, 'ng');
   assert.equal(all.outlets[0].verdict, 'over');
+});
+
+test('水門：開いた状態と閉じた状態の両方で指定どおりならクリア', () => {
+  const stage = STAGES.find(s => s.id === 'T6');
+  const a = analyzeStage(stage);
+  assert.deepEqual(a.perfect, ['SB', 'SB2']);
+  const ev = evaluate(stage, ['SB', 'SB2'], a);
+  assert.deepEqual(ev.states.map(s => s.outlets[0].flow.toString()), ['3', '2']);
+  assert.equal(evaluate(stage, ['SB'], a).outcome, 'ng', '水門の水路だけだと、閉じたときに届かない');
+});
+
+test('太さを変えられる水路：選んだ太さで計算し、満点は太さまで決まる', () => {
+  const stage = STAGES.find(s => s.id === 'T13');
+  const a = analyzeStage(stage);
+  assert.equal(a.perfectKey, 'SA:3,SB');
+  assert.equal(evaluate(stage, { connected: ['SA', 'SB'], thickness: { SA: '3' } }, a).outcome, 'perfect');
+  assert.equal(evaluate(stage, { connected: ['SA', 'SB'], thickness: { SA: '1' } }, a).outcome, 'ng');
+});
+
+test('サイフォン：呼び水をしないと流れず、桶の数で満点が決まる', () => {
+  const stage = STAGES.find(s => s.id === 'T25');
+  const a = analyzeStage(stage);
+  assert.equal(a.perfectKey, 'AB+,SA');
+  assert.equal(evaluate(stage, { connected: ['SA', 'AB'] }, a).outcome, 'ng', '呼び水なし');
+  const two = evaluate(stage, { connected: ['SA2', 'AB'], primed: ['SA2', 'AB'] }, a);
+  assert.equal(two.outcome, 'clear');
+  assert.equal(two.buckets, 2);
+});
+
+test('サイフォンは上流の水面が入口より下がると切れ、切れた後の状態で判定する', () => {
+  const stage = {
+    spring: { id: 'S', height: '6' },
+    towers: [{ id: 'A' }, { id: 'B' }],
+    outlets: [{ id: 'O', tower: 'B', height: '0', conductance: '1', target: '0' }],
+    candidates: [
+      { id: 'SA', a: 'S', b: 'A', thinness: '3' },
+      { id: 'AB', a: 'A', b: 'B', thinness: '1', siphon: { crest: '8', inlet: '3' } }
+    ]
+  };
+  const j = judge(stage, { connected: ['SA', 'AB'], primed: ['AB'] });
+  // 開通したままなら塔Aの水位は 2 で入口 3 より低いので切れる。切れた後は塔Aは泉と同じ 6、噴水盤には届かない
+  assert.deepEqual([...j.states[0].broken], ['AB']);
+  assert.equal(j.result.towers.A.level.toString(), '6');
+  assert.ok(j.outlets[0].flow.isZero());
 });

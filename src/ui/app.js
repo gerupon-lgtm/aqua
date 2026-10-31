@@ -1,13 +1,14 @@
 // 試作の画面のまとめ役：編集中 → 実行中 → 結果表示中 → 停止で編集中（要件5.3）
 import { STAGES } from '../content/stages.js';
-import { analyzeStage, evaluate } from '../logic/play.js';
+import { analyzeStage, evaluate, thinnessOf } from '../logic/play.js';
 import { onScale, tickSide, tickDistance, frequencyForLevel, DEFAULT_SCALE } from '../logic/pitch.js';
 import { displayScore } from '../logic/score.js';
 import { explain, formatAmount } from '../logic/explain.js';
+import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.3.0';
+const APP_VERSION = '0.4.0';
 const TIMING_KEY = 'aqua-notes.prototype-timing.v1';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）
 const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 1000, cardClearMs: 1800, cardNgMs: 1800, semitones: 5, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
@@ -20,9 +21,11 @@ const TIMING_FIELDS = [
   ['cardNgMs', '落ち着いてから結果まで（NG）', 0, 5000, 100],
   ['semitones', '1目盛りあたりの半音の数', 1, 7, 1]
 ];
+const GATE_HOLD_MS = 1500; // 水門の面：開いた状態で落ち着いてから、水門を閉じるまで（試作の仮の値）
 
 const $ = id => document.getElementById(id);
 const audio = new GlassAudio();
+const scoreBook = new ScoreBook((() => { try { return window.localStorage; } catch { return null; } })());
 const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
@@ -44,16 +47,19 @@ function saveTiming(values) {
   try { localStorage.setItem(TIMING_KEY, JSON.stringify(values)); return true; } catch { return false; }
 }
 
+const emptyConfig = () => ({ connected: new Set(), thickness: {}, primed: new Set() });
 const state = {
   stageIndex: 0,
-  connected: new Set(),
+  config: emptyConfig(),
+  selected: null,
   phase: 'edit',
   analysis: null,
   layout: null,
   evaluation: null,
   run: null,
   prevLevels: new Map(),
-  best: new Map(),
+  saveMessage: '',
+  newBest: false,
   timing: loadTiming(),
   details: false,
   explain: false,
@@ -70,11 +76,15 @@ function fieldText(key, value) {
 
 const scaleNow = () => ({ ...DEFAULT_SCALE, semitonesPerStep: state.run?.timing.semitones ?? state.timing.semitones });
 const stage = () => STAGES[state.stageIndex];
+const candidate = id => stage().candidates.find(c => c.id === id);
+const bucketsLeft = () => (stage().buckets ?? 0) - [...state.config.primed].filter(id => state.config.connected.has(id)).length;
+const targetText = t => (typeof t === 'object' ? `開 ${t.open}・閉 ${t.closed}` : t);
 
 function selectStage(index) {
   stopRun();
   state.stageIndex = index;
-  state.connected = new Set();
+  state.config = emptyConfig();
+  state.selected = null;
   state.prevLevels = new Map();
   state.analysis = analyzeStage(stage());
   state.layout = layoutFor(stage());
@@ -84,14 +94,40 @@ function selectStage(index) {
   renderAll();
 }
 
+// ---- 編集：水路をつなぐ・外す・太さ・呼び水（F-002、F-005、F-008） ----
+function tapPipe(id) {
+  const c = candidate(id);
+  const cfg = state.config;
+  if (!cfg.connected.has(id)) {
+    cfg.connected.add(id);
+    if (c.adjustable) cfg.thickness[id] = c.thinness;
+    state.selected = c.adjustable || c.siphon ? id : null;
+  } else if (c.adjustable || c.siphon) {
+    state.selected = state.selected === id ? null : id;
+  } else {
+    cfg.connected.delete(id);
+    state.selected = null;
+  }
+  renderAll();
+}
+
+function removePipe(id) {
+  const cfg = state.config;
+  cfg.connected.delete(id);
+  cfg.primed.delete(id); // 管を外すと桶は手元に戻る（要件5.2）
+  delete cfg.thickness[id];
+  state.selected = null;
+}
+
 // ---- 実行と再生 ----
-function hopDistances(st, connected) {
+function hopDistances(st, result) {
   const dist = new Map([[st.spring.id, 0]]);
   const queue = [st.spring.id];
   while (queue.length) {
     const here = queue.shift();
-    for (const c of st.candidates) {
-      if (!connected.has(c.id)) continue;
+    for (const [id, p] of Object.entries(result.pipes)) {
+      if (!p.wet) continue;
+      const c = st.candidates.find(x => x.id === id);
       const next = c.a === here ? c.b : c.b === here ? c.a : null;
       if (next && !dist.has(next)) { dist.set(next, dist.get(here) + 1); queue.push(next); }
     }
@@ -99,40 +135,60 @@ function hopDistances(st, connected) {
   return dist;
 }
 
+const levelsOf = result => new Map(Object.entries(result.towers).map(([id, t]) => [id, t.level ? t.level.toNumber() : null]));
+
 function startRun() {
   audio.unlock();
   const st = stage();
   const timing = { ...state.timing };
-  const evaluation = evaluate(st, [...state.connected], state.analysis, { ...DEFAULT_SCALE, semitonesPerStep: timing.semitones });
+  const scale = { ...DEFAULT_SCALE, semitonesPerStep: timing.semitones };
+  const evaluation = evaluate(st, state.config, state.analysis, scale);
   state.evaluation = evaluation;
-  const hops = hopDistances(st, state.connected);
+  state.selected = null;
+  const first = evaluation.states[0].result;
+  const last = evaluation.states[evaluation.states.length - 1].result;
+  const gated = evaluation.states.length > 1 && st.candidates.some(c => c.gate && state.config.connected.has(c.id));
+  const hops = hopDistances(st, first);
   const towers = st.towers.map(t => {
-    const r = evaluation.result.towers[t.id];
-    const delay = r.state === 'water' ? (hops.get(t.id) - 1) * 420 : 0;
+    const r = first.towers[t.id];
+    const delay = r.state === 'water' ? ((hops.get(t.id) ?? 1) - 1) * 420 : 0;
     return { id: t.id, delay, duration: timing.riseMs, target: r.state === 'water' ? r.level.toNumber() : null };
   });
-  const settleAt = Math.max(500, ...towers.filter(t => t.target !== null).map(t => t.delay + t.duration));
-  state.run = { start: performance.now(), towers, settleAt, timing, timers: [], settled: false, flowStarted: new Set() };
+  const settle1 = Math.max(500, ...towers.filter(t => t.target !== null).map(t => t.delay + t.duration));
+  const closeAt = gated ? settle1 + GATE_HOLD_MS : Infinity;
+  const settleAt = gated ? closeAt + timing.riseMs : settle1;
+  state.run = { start: performance.now(), towers, settle1, closeAt, settleAt, gated, open: levelsOf(first), closed: levelsOf(last), timing, timers: [] };
   state.phase = 'running';
 
-  const scale = { ...DEFAULT_SCALE, semitonesPerStep: timing.semitones };
   const top = frequencyForLevel(0, scale);
   const t0 = audio.now;
   for (const t of towers) {
     if (t.target === null) continue;
-    audio.glide(top, frequencyForLevel(evaluation.result.towers[t.id].level, scale), { at: t0 + t.delay / 1000, duration: t.duration / 1000 });
+    audio.glide(top, frequencyForLevel(first.towers[t.id].level, scale), { at: t0 + t.delay / 1000, duration: t.duration / 1000 });
   }
-  const later = (ms, fn) => state.run.timers.push(setTimeout(fn, ms));
-  later(settleAt, () => {
-    state.run.settled = true;
-    // 同じ高さの塔は1つの音として鳴らす（重ねると音量だけが増えるため）
-    const levels = [...new Set(st.towers.map(t => evaluation.result.towers[t.id]).filter(r => r.state === 'water').map(r => r.level.toString()))];
+  // 落ち着いた音。同じ高さの塔は1つの音として鳴らす（重ねると音量だけが増えるため）
+  const settleSound = result => {
+    const levels = [...new Set(st.towers.map(t => result.towers[t.id]).filter(r => r.state === 'water').map(r => r.level.toString()))];
     const freqs = levels.map(l => frequencyForLevel(l, scale));
     if (freqs.length) audio.chord(freqs, { length: timing.chordMs / 1000 });
-  });
+  };
+  const later = (ms, fn) => state.run.timers.push(setTimeout(fn, ms));
+  later(settle1, () => settleSound(first));
+  if (gated) {
+    // 水門を閉じると、水位が動いて音も動く（要件5.3 手順5）
+    later(closeAt, () => {
+      for (const t of st.towers) {
+        const a = first.towers[t.id];
+        const b = last.towers[t.id];
+        if (a.state === 'water' && b.state === 'water' && !a.level.eq(b.level)) {
+          audio.glide(frequencyForLevel(a.level, scale), frequencyForLevel(b.level, scale), { duration: timing.riseMs / 1000 });
+        }
+      }
+    });
+    later(settleAt, () => settleSound(last));
+  }
   if (evaluation.outcome !== 'ng') later(settleAt + timing.jingleMs, () => audio.jingle(evaluation.outcome));
   later(settleAt + (evaluation.outcome === 'ng' ? timing.cardNgMs : timing.cardClearMs), showResult);
-  for (const o of st.outlets) later(Math.min(settleAt, 600), () => state.run?.flowStarted.add(o.id));
   renderAll();
   loop();
 }
@@ -141,19 +197,23 @@ function showResult() {
   if (!state.run) return;
   state.phase = 'result';
   const ev = state.evaluation;
+  state.saveMessage = '';
+  state.newBest = false;
   if (ev.outcome !== 'ng') {
-    const prev = state.best.get(stage().id);
-    if (!prev || ev.score.cmp(prev) > 0) state.best.set(stage().id, ev.score);
+    const r = scoreBook.offer(scoreKey(stage()), ev.score);
+    state.saveMessage = r.message;
+    state.newBest = r.improved;
   }
   renderAll();
 }
 
 function stopRun() {
-  if (state.run) {
+  if (state.run && state.evaluation) {
     for (const id of state.run.timers) clearTimeout(id);
-    if (state.evaluation) {
-      state.prevLevels = new Map(Object.entries(state.evaluation.result.towers).map(([id, t]) => [id, t.level ? t.level.toNumber() : null]));
-    }
+    const last = state.evaluation.states[state.evaluation.states.length - 1];
+    state.prevLevels = levelsOf(last.result);
+    // 切れたサイフォンの桶は手元に戻る（要件5.2）
+    for (const s of state.evaluation.states) for (const id of s.broken) state.config.primed.delete(id);
   }
   audio.stopAll();
   state.run = null;
@@ -162,16 +222,35 @@ function stopRun() {
   state.explain = false;
 }
 
+// 今見せている状態：水門の面では、閉じ始めたら閉じた状態の計算結果を見せる
+function viewAt(now) {
+  const run = state.run;
+  const elapsed = now - run.start;
+  const closing = run.gated && elapsed >= run.closeAt;
+  const index = closing ? state.evaluation.states.length - 1 : 0;
+  const settled = elapsed >= run.settle1 && (!run.gated || elapsed < run.closeAt || elapsed >= run.settleAt);
+  return { elapsed, index, settled, gateClosed: closing };
+}
+
 function currentLevels(now) {
   const levels = new Map();
   for (const t of stage().towers) levels.set(t.id, null);
-  if (!state.run) return levels;
-  const elapsed = now - state.run.start;
-  for (const t of state.run.towers) {
-    if (t.target === null) continue;
-    const p = Math.max(0, Math.min(1, (elapsed - t.delay) / t.duration));
-    const eased = 1 - (1 - p) ** 3;
-    levels.set(t.id, state.run.settled ? t.target : t.target * eased);
+  const run = state.run;
+  if (!run) return levels;
+  const { elapsed } = viewAt(now);
+  const ease = p => 1 - (1 - Math.max(0, Math.min(1, p))) ** 3;
+  for (const t of run.towers) {
+    if (elapsed < run.settle1) {
+      if (t.target !== null) levels.set(t.id, t.target * ease((elapsed - t.delay) / t.duration));
+    } else if (!run.gated || elapsed < run.closeAt) {
+      levels.set(t.id, run.open.get(t.id));
+    } else {
+      const a = run.open.get(t.id) ?? 0;
+      const b = run.closed.get(t.id);
+      const p = ease((elapsed - run.closeAt) / run.timing.riseMs);
+      const v = a + ((b ?? 0) - a) * p;
+      levels.set(t.id, b === null && p >= 1 ? null : v);
+    }
   }
   return levels;
 }
@@ -192,19 +271,24 @@ function loop() {
 function drawBoard() {
   const now = performance.now();
   const scale = scaleNow();
+  const v = state.run ? viewAt(now) : { index: 0, settled: false, gateClosed: false };
+  const view = state.phase === 'edit' || !state.evaluation ? null : state.evaluation.states[v.index];
   renderBoard($('board'), {
     stage: stage(),
     layout: state.layout,
-    connected: state.connected,
+    connected: state.config.connected,
+    primed: state.config.primed,
+    thinness: c => thinnessOf(c, state.config),
+    selected: state.selected,
     phase: state.phase,
     levels: currentLevels(now),
-    settled: !!state.run?.settled,
-    evaluation: state.phase === 'edit' ? null : state.evaluation,
+    settled: v.settled,
+    view,
+    gateClosed: v.gateClosed,
     prevLevels: state.prevLevels,
     time: now,
     reducedMotion: reducedMotionQuery.matches,
     highlight: state.highlight,
-    flowStarted: state.run?.flowStarted,
     onScale: level => onScale(level, scale),
     tickDistance: level => tickDistance(level, scale)
   });
@@ -212,84 +296,123 @@ function drawBoard() {
 
 function renderTabs() {
   $('stage-tabs').innerHTML = STAGES.map((s, i) => {
-    const best = state.best.get(s.id);
+    const best = scoreBook.best(scoreKey(s));
     const mark = best ? (displayScore(best) === '100.00' ? '★' : '●') : '';
-    return `<button type="button" class="tab${i === state.stageIndex ? ' current' : ''}" data-stage="${i}" aria-label="お試し${s.number}${best ? ` 最高${displayScore(best)}点` : ''}" ${state.phase === 'running' ? 'disabled' : ''}>${s.number}<span class="mark">${mark}</span></button>`;
+    return `<button type="button" class="tab${i === state.stageIndex ? ' current' : ''}" data-stage="${i}" aria-label="${s.set}${s.number}${best ? ` 最高${displayScore(best)}点` : ''}" ${state.phase === 'running' ? 'disabled' : ''}>${s.number}<span class="mark">${mark}</span></button>`;
   }).join('');
 }
 
 function renderCondition() {
   const st = stage();
-  const targets = st.outlets.map(o => `<span class="target"><span class="dot"></span>${o.label}に <b>${o.target}</b></span>`).join('');
+  const targets = st.outlets.map(o => `<span class="target"><span class="dot"></span>${o.label}に <b>${targetText(o.target)}</b></span>`).join('');
+  const buckets = st.buckets ? `<span class="count">桶 残り <b>${bucketsLeft()}</b> / ${st.buckets}</span>` : '';
   $('cond').innerHTML = `
-    <div class="cond-title"><span class="eyebrow">お試し ${st.number}</span><span class="name">${st.title}</span></div>
-    <div class="cond-row">${targets}<span class="count">つないだ水路 <b>${state.connected.size}</b> 本</span></div>`;
+    <div class="cond-title"><span class="eyebrow">${st.set} ${st.number}</span><span class="name">${st.title}</span></div>
+    <div class="cond-row">${targets}${buckets}<span class="count">つないだ水路 <b>${state.config.connected.size}</b> 本</span></div>`;
 }
 
 const fmt = formatAmount;
 const verdictText = { exact: 'ちょうど', short: '足りない', over: '多い' };
 const sideText = { on: '目盛りに乗っている', above: '目盛りより少し上', below: '目盛りより少し下' };
+const stateTitle = { open: '水門が開いているとき', closed: '水門を閉じたとき' };
+const THICK_NAME = { 3: '細', 2: '中', 1: '太' };
+
+// 太さ・呼び水を選ぶ（S-04 部品の設定にあたる）
+function chooserHtml() {
+  const c = candidate(state.selected);
+  if (!c) return '';
+  const cfg = state.config;
+  const parts = [];
+  if (c.adjustable) {
+    parts.push(`<div class="chooser-row"><span>太さ</span>${c.adjustable.map(t => `<button type="button" class="chip${cfg.thickness[c.id] === t ? ' on' : ''}" data-thick="${t}" aria-pressed="${cfg.thickness[c.id] === t}">${THICK_NAME[t]}</button>`).join('')}</div>`);
+  }
+  if (c.siphon) {
+    const primed = cfg.primed.has(c.id);
+    parts.push(`<div class="chooser-row"><span>サイフォン</span>${primed
+      ? '<button type="button" class="chip on" data-prime="off">呼び水を取り消す</button>'
+      : `<button type="button" class="chip" data-prime="on" ${bucketsLeft() > 0 ? '' : 'disabled'}>桶で呼び水をする</button>${bucketsLeft() > 0 ? '' : '<span class="note-inline">桶が残っていません</span>'}`}</div>`);
+  }
+  return `<div class="chooser">${parts.join('')}<div class="chooser-row"><button type="button" class="chip" data-remove="1">この水路を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
+}
+
+function outletsHtml(st, outlets) {
+  return outlets.map(o => {
+    const label = st.outlets.find(x => x.id === o.id).label;
+    return `<li class="${o.verdict}"><span>${label}</span><span class="v">${verdictText[o.verdict]}</span><span class="amount">届いた <b>${fmt(o.flow)}</b>・指定 ${o.target}</span></li>`;
+  }).join('');
+}
 
 function renderPanel() {
   const panel = $('panel');
   const st = stage();
   if (state.phase === 'edit') {
+    const n = state.config.connected.size;
     panel.innerHTML = `
-      <p class="hint">${st.hint}</p>
+      ${state.selected ? chooserHtml() : `<p class="hint">${st.hint}</p>`}
       <div class="actions">
-        <button type="button" class="ghost" id="clear-wires" ${state.connected.size ? '' : 'disabled'}>配線クリア</button>
-        <button type="button" class="primary" id="run" ${state.connected.size ? '' : 'disabled'}>水を流す</button>
+        <button type="button" class="ghost" id="clear-wires" ${n ? '' : 'disabled'}>配線クリア</button>
+        <button type="button" class="primary" id="run" ${n ? '' : 'disabled'}>水を流す</button>
       </div>`;
     return;
   }
   if (state.phase === 'running') {
     panel.innerHTML = `
-      <p class="hint running">水が流れています…</p>
+      <p class="hint running">${state.run?.gated ? '水が流れています。落ち着いたら水門を閉じます…' : '水が流れています…'}</p>
       <div class="actions"><button type="button" class="ghost" id="stop">停止</button></div>`;
     return;
   }
   const ev = state.evaluation;
+  const gated = ev.states.length > 1;
   const head = ev.outcome === 'perfect' ? '100点' : ev.outcome === 'clear' ? 'クリア' : 'NG';
-  const outlets = ev.outlets.map(o => {
-    const label = st.outlets.find(x => x.id === o.id).label;
-    return `<li class="${o.verdict}"><span>${label}</span><span class="v">${verdictText[o.verdict]}</span><span class="amount">届いた <b>${fmt(o.flow)}</b>・指定 ${o.target}</span></li>`;
-  }).join('');
+  const outlets = gated
+    ? ev.states.map(s => `<li class="state-head">${stateTitle[s.name]}</li>${outletsHtml(st, s.outlets)}`).join('')
+    : outletsHtml(st, ev.outlets);
   const scale = scaleNow();
+  const shown = ev.states[ev.states.length - 1];
   const towerRows = st.towers.map(t => {
-    const r = ev.result.towers[t.id];
+    const r = shown.result.towers[t.id];
     if (r.state === 'empty') return `<tr><td>塔${t.id}</td><td colspan="3">空（泉につながっていない）</td></tr>`;
     return `<tr><td>塔${t.id}</td><td>${fmt(r.level)}</td><td>${sideText[tickSide(r.level, scale)]}</td><td>入る ${fmt(r.inflow)} ／ 出る ${fmt(r.outflow)}</td></tr>`;
   }).join('');
-  const pipeRows = st.candidates.filter(c => state.connected.has(c.id)).map(c => {
-    const p = ev.result.pipes[c.id];
-    return `<tr><td>${c.a}–${c.b}</td><td>${fmt(p.flow)}</td><td>${fmt(p.diff)}</td><td>${c.thinness}</td></tr>`;
+  const pipeRows = st.candidates.filter(c => state.config.connected.has(c.id)).map(c => {
+    const p = shown.result.pipes[c.id];
+    const thin = thinnessOf(c, state.config);
+    if (!p) return `<tr><td>${c.a}–${c.b}</td><td colspan="2">${c.gate ? '水門が閉じている' : shown.broken.has(c.id) ? 'サイフォンが切れた' : '呼び水なし'}</td><td>${thin}</td></tr>`;
+    return `<tr><td>${c.a}–${c.b}</td><td>${fmt(p.flow)}</td><td>${fmt(p.diff)}</td><td>${thin}</td></tr>`;
   }).join('');
   const swipeVerb = coarsePointer ? '指でなぞる' : 'マウスでなぞる';
   const li = items => items.map(t => `<li>${t}</li>`).join('');
   let explainHtml = '';
   if (state.explain) {
-    const e = explain(st, [...state.connected], ev, state.analysis, scale);
     const adviceTitle = ev.outcome === 'ng' ? '見直すところ' : ev.outcome === 'clear' ? '100点をめざすには' : '';
-    explainHtml = `
-      <section class="explain" aria-labelledby="explain-title">
-        <h3 id="explain-title">${e.summary}</h3>
+    explainHtml = ev.states.map((s, i) => {
+      const e = explain(st, state.config, ev, state.analysis, scale, i);
+      return `
+      <section class="explain" aria-label="解説${gated ? `（${stateTitle[s.name]}）` : ''}">
+        ${gated ? `<h4>${stateTitle[s.name]}</h4>` : ''}
+        <h3>${e.summary}</h3>
         ${e.advice.length ? `${adviceTitle ? `<h4>${adviceTitle}</h4>` : ''}<ul>${li(e.advice)}</ul>` : ''}
         <details><summary>計算を見る</summary>
           <h4>流れる量 ＝ 高さの差 ÷ 細さ</h4><ul class="calc">${li(e.steps)}</ul>
           ${e.balances.length ? `<h4>塔では、入る量 ＝ 出る量</h4><ul class="calc">${li(e.balances)}</ul>` : ''}
         </details>
       </section>`;
+    }).join('');
   }
+  const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・水路 ${ev.used} 本` : `水路 ${ev.used} 本`;
   panel.innerHTML = `
     <div class="result ${ev.outcome}" role="status">
       <div class="result-head"><span class="badge">${head}</span><span class="score">${ev.outcome === 'ng' ? '' : `${displayScore(ev.score)} 点`}</span>
-        <span class="used">水路 ${ev.used} 本${ev.outcome === 'clear' ? `（満点は ${state.analysis.perfectCount} 本）` : ''}</span></div>
+        <span class="used">${usedText}${ev.outcome === 'clear' ? `（満点は ${st.theme === 'buckets' ? `桶 ${state.analysis.perfectConfig.primed.length}・` : ''}${state.analysis.perfectCount} 本）` : ''}</span>
+        ${state.newBest ? '<span class="newbest">最高点</span>' : ''}</div>
+      ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <ul class="outlets">${outlets}</ul>
       <p class="swipe">塔を${swipeVerb}と、その塔の音を聞き直せます。</p>
       ${explainHtml}
-      <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録</summary>
+      <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
         <div class="table-wrap"><table><thead><tr><th>塔</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
         <div class="table-wrap"><table><thead><tr><th>水路</th><th>流れる量</th><th>水位の差</th><th>細さ</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
+        <div class="actions"><button type="button" class="ghost" id="export-record">記録をファイルに書き出す</button></div>
       </details>
     </div>
     <div class="actions">
@@ -346,8 +469,8 @@ function openTuning() {
     e.preventDefault();
     const next = { ...state.timing };
     for (const [key] of TIMING_FIELDS) next[key] = Number(form.elements[key].value);
-    state.timing = next;
     next.timbre = form.elements.timbre.value;
+    state.timing = next;
     audio.setLatency(next.latencyMs);
     audio.timbre = next.timbre;
     $('tune-status').textContent = saveTiming(next) ? '保存しました。次に水を流したときから使います。' : 'この端末には保存できませんでした。開いている間だけ使います。';
@@ -391,7 +514,8 @@ function swipeAt(evt) {
   if (id === swipeTower) return;
   swipeTower = id;
   if (!id) return;
-  const r = state.evaluation.result.towers[id];
+  const states = state.evaluation.states;
+  const r = states[states.length - 1].result.towers[id];
   state.highlight = { id, until: performance.now() + 450 };
   if (r.state !== 'water') return;
   audio.unlock();
@@ -405,11 +529,23 @@ function bind() {
     if (b && !b.disabled) selectStage(Number(b.dataset.stage));
   });
   $('panel').addEventListener('click', e => {
-    const id = e.target.closest('button')?.id;
+    const btn = e.target.closest('button');
+    if (!btn || btn.disabled) return;
+    const id = btn.id;
+    if (btn.dataset.thick) { state.config.thickness[state.selected] = btn.dataset.thick; renderAll(); return; }
+    if (btn.dataset.prime) {
+      if (btn.dataset.prime === 'on' && bucketsLeft() > 0) state.config.primed.add(state.selected);
+      else state.config.primed.delete(state.selected);
+      renderAll();
+      return;
+    }
+    if (btn.dataset.remove) { removePipe(state.selected); renderAll(); return; }
+    if (btn.dataset.close) { state.selected = null; renderAll(); return; }
     if (id === 'run') startRun();
     else if (id === 'stop') { stopRun(); renderAll(); }
-    else if (id === 'clear-wires') { state.connected.clear(); renderAll(); }
+    else if (id === 'clear-wires') { state.config = emptyConfig(); state.selected = null; renderAll(); }
     else if (id === 'next') selectStage(state.stageIndex + 1);
+    else if (id === 'export-record') exportRecord();
     else if (id === 'explain') {
       state.explain = !state.explain;
       renderPanel();
@@ -421,9 +557,7 @@ function bind() {
   svg.addEventListener('click', e => {
     if (state.phase !== 'edit') return;
     const pipe = e.target.closest('[data-pipe]')?.dataset.pipe;
-    if (!pipe) return;
-    if (state.connected.has(pipe)) state.connected.delete(pipe); else state.connected.add(pipe);
-    renderAll();
+    if (pipe) tapPipe(pipe);
   });
   svg.addEventListener('pointerdown', e => {
     if (state.phase !== 'result') return;
@@ -445,6 +579,21 @@ function bind() {
   $('tune').addEventListener('click', openTuning);
   $('version').textContent = `v${APP_VERSION}`;
   $('board').setAttribute('viewBox', `0 0 ${VIEW_W} ${VIEW_H}`);
+}
+
+// ---- 実行記録の書き出し（F-024、D-11）。端末には残さず、ファイルとして渡す ----
+function exportRecord() {
+  if (!state.evaluation) return;
+  const record = buildRecord({ stage: stage(), config: state.config, ev: state.evaluation, appVersion: APP_VERSION });
+  const blob = new Blob([JSON.stringify(record, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `aqua-notes-record-${stage().id}-${record.createdAt.replace(/[:.]/g, '-')}.json`;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 // ---- 通信なしで使う仕組みと、新しい版の案内（F-022、S-11） ----
