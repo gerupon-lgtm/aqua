@@ -7,7 +7,7 @@
 // 面の水路の候補（candidates）：
 //   thinness：細さ。adjustable があれば選べる細さの一覧（太さを変えられる水路、F-008）
 //   siphon：{ crest, inlet } があればサイフォン（F-005）。crest は通り道の一番高い所で、
-//           課題では泉より高く置くため、呼び水がない限り流れない。inlet は塔の中の入口の高さ
+//           課題では泉より高く置くため、呼び水がない限り流れない。inlet はグラスの中の入口の高さ
 //   gate：true なら水門（F-010）。開いた状態と閉じた状態の両方を計算する
 import { Fraction, frac } from './fraction.js';
 import { solveCircuit } from './flow.js';

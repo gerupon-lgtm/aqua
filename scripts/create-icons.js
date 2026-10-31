@@ -1,5 +1,5 @@
 // アプリのアイコン（PNG）を作る。追加のライブラリなしで、node:zlib だけで書き出す。
-// 図柄：明るい青の地に、白い泉と、水位の違う3つの塔（試作の仮。見た目の確定は T-13）
+// 図柄：明るい青の地に、白い泉と、水位の違う3つのグラス（試作の仮。見た目の確定は T-13）
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 import { dirname, join, resolve } from 'node:path';

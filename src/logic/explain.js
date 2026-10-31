@@ -21,7 +21,7 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
   const st = ev.states?.[stateIndex] ?? { result: ev.result, outlets: ev.outlets, broken: new Set(), name: 'only', clear: ev.clear };
   const r = st.result;
   const H = frac(stage.spring.height);
-  const name = id => (id === stage.spring.id ? '泉' : `塔${id}`);
+  const name = id => (id === stage.spring.id ? '泉' : `グラス${id}`);
   const levelOf = id => (id === stage.spring.id ? H : r.towers[id]?.level ?? null);
   const pipes = stage.candidates.filter(c => cfg.connected.has(c.id));
   const outletOf = id => stage.outlets.find(o => o.id === id);
@@ -50,13 +50,13 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     const t = r.towers[o.tower];
     const thin = new Fraction(1n).div(frac(o.conductance));
     steps.push(t.state === 'empty'
-      ? `塔${o.tower}が空なので、${o.label}に届かない`
-      : `塔${o.tower} ${formatAmount(t.level)} → ${o.label} ${o.height}：差 ${formatAmount(t.level.sub(frac(o.height)))} ÷ 細さ ${thin} ＝ ${formatAmount(r.outlets[o.id].flow)}`);
+      ? `グラス${o.tower}が空なので、${o.label}に届かない`
+      : `グラス${o.tower} ${formatAmount(t.level)} → ${o.label} ${o.height}：差 ${formatAmount(t.level.sub(frac(o.height)))} ÷ 細さ ${thin} ＝ ${formatAmount(r.outlets[o.id].flow)}`);
   }
-  // 分かれ道（塔）では、入る量と出る量が同じ
+  // 分かれ道（グラス）では、入る量と出る量が同じ
   const balances = stage.towers
     .filter(t => r.towers[t.id].state === 'water' && !r.towers[t.id].inflow.isZero())
-    .map(t => `塔${t.id}：入る ${formatAmount(r.towers[t.id].inflow)} ＝ 出る ${formatAmount(r.towers[t.id].outflow)}`);
+    .map(t => `グラス${t.id}：入る ${formatAmount(r.towers[t.id].inflow)} ＝ 出る ${formatAmount(r.towers[t.id].outflow)}`);
 
   const advice = [];
   const still = pipes.filter(c => flowing(c)?.wet && flowing(c).flow.isZero());
@@ -76,14 +76,14 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     }).join('');
     for (const o of wrong) {
       const tower = outletOf(o.id).tower;
-      if (r.towers[tower].state === 'empty') advice.push(`塔${tower}が空です。泉からつながっているか見直しましょう。`);
+      if (r.towers[tower].state === 'empty') advice.push(`グラス${tower}が空です。泉からつながっているか見直しましょう。`);
     }
     if (wrong.some(o => o.verdict === 'short' && !o.flow.isZero())) advice.push('流れにくさを減らすと増えます（太く・近く・並べる）。');
     if (wrong.some(o => o.verdict === 'over')) advice.push('流れにくさを増やすと減ります（細く・遠く・本数を減らす）。');
     if (wrong.some(o => o.verdict === 'over') && wrong.some(o => o.verdict === 'short')) advice.push('水は流れやすい道へ多く分かれます。');
     idle.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}のサイフォンは、呼び水（桶）をしないと流れません。`));
     still.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は両端の高さが同じで、流れていません。`));
-    if (offScale.length) advice.push(`目盛りからずれた塔があり、${kind === 'chord' ? '和音が濁りました' : '音がずれました'}。`);
+    if (offScale.length) advice.push(`目盛りからずれたグラスがあり、${kind === 'chord' ? '和音が濁りました' : '音がずれました'}。`);
   } else if (outcome === 'clear') {
     summary = stage.theme === 'buckets'
       ? `クリア。満点は桶 ${analysis.perfectConfig.primed.length} つ・水路 ${analysis.perfectCount} 本、今は桶 ${ev.buckets} つ・水路 ${ev.used} 本です。`
@@ -91,14 +91,14 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     if (stage.theme === 'buckets' && ev.buckets > analysis.perfectConfig.primed.length) advice.push('桶を使わずに届けられる道がないか探してみましょう。');
     idle.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は呼び水をしていないので流れていません。外せます。`));
     still.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は流れていないので、外せます。`));
-    // 途中の塔を通る道：細さが足し算になる
+    // 途中のグラスを通る道：細さが足し算になる
     for (const t of stage.towers) {
       const around = pipes.filter(c => (c.a === t.id || c.b === t.id) && flowing(c));
       if (r.towers[t.id].state !== 'water' || stage.outlets.some(o => o.tower === t.id) || around.length !== 2) continue;
       if (around.some(c => flowing(c).flow.isZero())) continue;
       const parts = around.map(c => thinnessOf(c, cfg));
       const sum = parts.reduce((s, x) => s.add(frac(x)), ZERO);
-      advice.push(`塔${t.id}を通ると細さは足し算（${parts.join('＋')}＝${sum}）。細さ ${sum} の1本で代われないか探してみましょう。`);
+      advice.push(`グラス${t.id}を通ると細さは足し算（${parts.join('＋')}＝${sum}）。細さ ${sum} の1本で代われないか探してみましょう。`);
     }
     // 同じ所を結ぶ水路を並べる：流れやすさ（1÷細さ）が足し算になる
     const groups = new Map();
@@ -114,9 +114,9 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     if (!advice.length) advice.push('同じ働きを1本でできる水路を探してみましょう。');
   } else {
     summary = stage.theme === 'buckets' ? '100点。いちばん少ない桶と本数で届けました。' : '100点。いちばん少ない本数で届けました。';
-    if (!offScale.length && kind === 'chord') advice.push('どの塔も目盛りに乗り、澄んだ和音になりました。');
-    else if (!offScale.length && kind === 'single') advice.push('塔の水面が目盛りに乗りました。');
+    if (!offScale.length && kind === 'chord') advice.push('どのグラスも目盛りに乗り、澄んだ和音になりました。');
+    else if (!offScale.length && kind === 'single') advice.push('グラスの水面が目盛りに乗りました。');
   }
-  if (empty.length && outcome !== 'ng') advice.push(`${empty.map(t => `塔${t.id}`).join('・')}はつながっていないので空です。`);
+  if (empty.length && outcome !== 'ng') advice.push(`${empty.map(t => `グラス${t.id}`).join('・')}はつながっていないので空です。`);
   return { summary, steps, balances, advice };
 }

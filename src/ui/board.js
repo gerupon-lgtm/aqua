@@ -17,14 +17,17 @@ export function layoutFor(stage) {
   nodes.set(stage.spring.id, { id: stage.spring.id, kind: 'spring', cx: xOf(stage.spring.x), w: SPRING_W });
   for (const t of stage.towers) nodes.set(t.id, { id: t.id, kind: 'tower', cx: xOf(t.x), w: TOWER_W });
   const towerTop = GROUND - (H + 1) * unit;
-  return { H, unit, nodes, towerTop, yOf: level => GROUND - level * unit };
+  // 地面の下の段の間隔。4段ある面は少し詰めて、盤面の下に収める
+  const maxDepth = Math.max(0, ...stage.candidates.map(c => c.depth ?? 0));
+  const depthGap = Math.min(22, (VIEW_H - GROUND - 22) / Math.max(maxDepth, 1));
+  return { H, unit, nodes, towerTop, depthGap, yOf: level => GROUND - level * unit };
 }
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const WIDTH = { 1: 10, 2: 6.5, 3: 4 };
 
-// 管の通り道：塔の底から地面の下へ下り、横へ進んで、相手の底へ上がる。
-// サイフォンは塔の中の入口から上がり、壁の上の山を越えて、相手の入口へ下りる（logic-design 3章）
+// 管の通り道：グラスの底から地面の下へ下り、横へ進んで、相手の底へ上がる。
+// サイフォンはグラスの中の入口から上がり、壁の上の山を越えて、相手の入口へ下りる（logic-design 3章）
 function pipePath(layout, c) {
   const a = layout.nodes.get(c.a);
   const b = layout.nodes.get(c.b);
@@ -37,14 +40,38 @@ function pipePath(layout, c) {
     const yIn = layout.yOf(Number(c.siphon.inlet));
     const yTop = layout.yOf(Number(c.siphon.crest));
     const d = `M${x1} ${yIn} L${x1} ${yTop + r} Q${x1} ${yTop} ${x1 + r} ${yTop} L${x2 - r} ${yTop} Q${x2} ${yTop} ${x2} ${yTop + r} L${x2} ${yIn}`;
-    return { d, reversed, mx: (x1 + x2) / 2, my: yTop };
+    return { d, reversed, mx: (x1 + x2) / 2, my: yTop, pts: [[x1, yIn], [x1, yTop], [x2, yTop], [x2, yIn]] };
   }
   const shift = (c.depth - 2) * 7;
   const x1 = left.cx + shift + (left.kind === 'spring' ? 6 : 0);
   const x2 = right.cx - shift;
-  const y = GROUND + 12 + c.depth * 22;
+  const y = GROUND + 12 + c.depth * layout.depthGap;
   const d = `M${x1} ${GROUND - 2} L${x1} ${y - r} Q${x1} ${y} ${x1 + r} ${y} L${x2 - r} ${y} Q${x2} ${y} ${x2} ${y - r} L${x2} ${GROUND - 2}`;
-  return { d, reversed, mx: (x1 + x2) / 2, my: y, gx: x1 + (x2 - x1) * 0.72 };
+  return { d, reversed, mx: (x1 + x2) / 2, my: y, gx: x1 + (x2 - x1) * 0.72, pts: [[x1, GROUND - 2], [x1, y], [x2, y], [x2, GROUND - 2]] };
+}
+
+// 盤面の点から、いちばん近い管を探す（編集中のタップ）。管の通り道を折れ線として距離を計算する。
+// 管は端で7ほどの間隔で並ぶので、重なったタップ領域の上下関係で選ぶと隣の管を拾ってしまう。
+// 画面の要素を調べずに計算だけで決めるので、スマホでも軽い
+export function pipeAt(layout, stage, x, y, reach = 14) {
+  let best = null;
+  let bestDist = reach;
+  for (const c of stage.candidates) {
+    const { pts } = pipePath(layout, c);
+    for (let i = 0; i < pts.length - 1; i++) {
+      const d = segmentDistance(x, y, pts[i], pts[i + 1]);
+      if (d < bestDist) { bestDist = d; best = c.id; }
+    }
+  }
+  return best;
+}
+
+function segmentDistance(px, py, [ax, ay], [bx, by]) {
+  const dx = bx - ax;
+  const dy = by - ay;
+  const len2 = dx * dx + dy * dy;
+  const t = len2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2)) : 0;
+  return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
 }
 
 const THICK_LABEL = { 1: '太', 2: '中', 3: '細' };
@@ -63,8 +90,11 @@ function drawPipe(out, layout, c, model) {
   out.push(`<g class="pipe${on ? ' on' : ''}" data-pipe="${c.id}">`);
   if (on) {
     if (selected === c.id) out.push(`<path d="${d}" fill="none" stroke="var(--gold)" stroke-width="${w + 10}" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/>`);
-    out.push(`<path d="${d}" fill="none" stroke="var(--pipe-edge)" stroke-width="${w + 3}" stroke-linecap="round" stroke-linejoin="round"/>`);
-    out.push(`<path d="${d}" fill="none" stroke="${filled && !broken ? 'var(--water-mid)' : 'var(--pipe-empty)'}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
+    // つないだ管は、編集中は青いふちと淡い青の中身で、候補（灰色の点線）とはっきり分ける
+    const edge = phase === 'edit' ? 'var(--blue)' : 'var(--pipe-edge)';
+    const core = filled && !broken ? 'var(--water-mid)' : phase === 'edit' ? 'var(--pipe-on)' : 'var(--pipe-empty)';
+    out.push(`<path d="${d}" fill="none" stroke="${edge}" stroke-width="${w + 4}" stroke-linecap="round" stroke-linejoin="round"/>`);
+    out.push(`<path d="${d}" fill="none" stroke="${core}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
     if (filled && !broken && flowInfo && !flowInfo.flow.isZero()) {
       const speed = Math.max(0.6, 3.2 / Math.min(6, Math.abs(flowInfo.flow.toNumber())));
       const forward = (flowInfo.flow.sign() > 0) !== reversed;
@@ -74,10 +104,19 @@ function drawPipe(out, layout, c, model) {
       for (const dx of [-8, 0, 8]) out.push(`<circle cx="${mx + dx}" cy="${my}" r="${Math.max(2, w / 2 - 1)}" fill="#ffffff" stroke="var(--pipe-edge)" stroke-width="1"/>`);
     }
   } else {
-    out.push(`<path d="${d}" fill="none" stroke="var(--pipe-off)" stroke-width="${Math.max(2, w - 3)}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity=".8"/>`);
+    // 候補も本当の太さで描く（点線のふち＋淡い中身）。つなぐ前から太さの違いが見える
+    out.push(`<path d="${d}" fill="none" stroke="var(--pipe-off)" stroke-width="${w + 3}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity=".7"/>`);
+    out.push(`<path d="${d}" fill="none" stroke="var(--card)" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>`);
   }
-  if (c.adjustable && on) {
-    out.push(`<circle cx="${mx}" cy="${my}" r="10" fill="var(--card)" stroke="var(--blue)" stroke-width="1.5" pointer-events="none"/><text x="${mx}" y="${my + 4}" class="badge-text" text-anchor="middle">${THICK_LABEL[thin]}</text>`);
+  // 太さの札。つないだ管は青地に白文字（つないだ後も太さが分かる）、候補は白地に灰色の点線。
+  // 太さを選べる候補は「細〜太」、つないだ後は選んだ太さ
+  if (on || phase === 'edit') {
+    const text = !on && c.adjustable ? `${THICK_LABEL[Math.max(...c.adjustable.map(Number))]}〜${THICK_LABEL[Math.min(...c.adjustable.map(Number))]}` : THICK_LABEL[thin];
+    const bw = text.length * 11 + 8;
+    const box = on
+      ? `fill="var(--blue)" stroke="var(--card)" stroke-width="1.5"`
+      : `fill="var(--card)" stroke="var(--pipe-off)" stroke-width="1" ${c.adjustable ? 'stroke-dasharray="3 2"' : ''}`;
+    out.push(`<rect x="${mx - bw / 2}" y="${my - 9}" width="${bw}" height="18" rx="9" ${box} pointer-events="none"/><text x="${mx}" y="${my + 4}" class="badge-text${on ? ' on' : ' cand'}" text-anchor="middle">${text}</text>`);
   }
   if (c.gate) {
     const closed = model.gateClosed;
@@ -89,7 +128,7 @@ function drawPipe(out, layout, c, model) {
   out.push(`</g>`);
 }
 
-// 水の色：少ない塔は明るく、多い塔は暗く（要件5.5）
+// 水の色：少ないグラスは明るく、多いグラスは暗く（要件5.5）
 function waterColor(level, H) {
   const t = Math.max(0, Math.min(1, level / Math.max(H, 1)));
   const light = [140, 205, 243];
@@ -143,7 +182,7 @@ export function renderBoard(svg, model) {
     for (let yy = y + 14; yy < GROUND; yy += 14) out.push(`<line x1="${x - 8}" y1="${yy}" x2="${x + 8}" y2="${yy}" stroke="var(--stone-edge)" stroke-width="1"/>`);
   }
 
-  // 地面の下を通る水路（サイフォンは塔の後に描いて、塔の中の入口が見えるようにする）
+  // 地面の下を通る水路（サイフォンはグラスの後に描いて、グラスの中の入口が見えるようにする）
   for (const c of stage.candidates.filter(c => !c.siphon)) drawPipe(out, layout, c, model);
 
   // 泉
@@ -155,7 +194,7 @@ export function renderBoard(svg, model) {
   out.push(`<path d="${surfacePath(sx0, sx0 + spring.w, sy, reducedMotion ? 0 : 0.8, time / 420)}" stroke="var(--surface)" stroke-width="2" fill="none"/>`);
   out.push(`<text x="${spring.cx}" y="${sy - 16}" class="label" text-anchor="middle">泉</text>`);
 
-  // 塔
+  // グラス
   for (const t of stage.towers) {
     const node = layout.nodes.get(t.id);
     const x0 = node.cx - TOWER_W / 2;
@@ -163,7 +202,7 @@ export function renderBoard(svg, model) {
     const level = levels.get(t.id);
     const finalT = evaluation?.result.towers[t.id];
     const onTick = settled && finalT?.state === 'water' && model.onScale(finalT.level);
-    // 塔の光（ぼかしのフィルターは処理が重いので、太い半透明の線を重ねて表す）
+    // グラスの光（ぼかしのフィルターは処理が重いので、太い半透明の線を重ねて表す）
     if (onTick) {
       out.push(`<rect x="${x0 - 5}" y="${towerTop - 5}" width="${TOWER_W + 10}" height="${GROUND - towerTop + 5}" rx="10" fill="none" stroke="var(--gold)" stroke-width="8" opacity=".22"/>`);
       out.push(`<rect x="${x0 - 2}" y="${towerTop - 2}" width="${TOWER_W + 4}" height="${GROUND - towerTop + 2}" rx="7" fill="none" stroke="var(--gold)" stroke-width="3" opacity=".75"/>`);
@@ -195,7 +234,7 @@ export function renderBoard(svg, model) {
     }
   }
 
-  // サイフォン（塔の中の入口から、壁の上を越える）
+  // サイフォン（グラスの中の入口から、壁の上を越える）
   for (const c of stage.candidates.filter(c => c.siphon)) drawPipe(out, layout, c, model);
 
   // 出口の噴水盤
@@ -205,7 +244,11 @@ export function renderBoard(svg, model) {
     const b = basinShape(cx);
     const verdict = settled ? evaluation?.outlets.find(v => v.id === o.id) : null;
     const flowing = phase !== 'edit' && evaluation?.result.outlets[o.id]?.active && !evaluation.result.outlets[o.id].flow.isZero();
-    // 塔から噴水盤への口
+    // 口の高さが0より上の出口は、口と噴水盤をその高さへ持ち上げ、台の上に置く
+    const dy = layout.yOf(Number(o.height)) - GROUND;
+    if (dy < 0) out.push(`<rect x="${cx - 14}" y="${GROUND - 4 + dy}" width="28" height="${4 - dy}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+    out.push(`<g transform="translate(0 ${dy})">`);
+    // グラスから噴水盤への口
     out.push(`<path d="M${node.cx + TOWER_W / 2 - 2} ${GROUND - 9} L${cx - 10} ${GROUND - 9} L${cx - 10} ${b.top + 6}" fill="none" stroke="var(--stone-edge)" stroke-width="7" stroke-linejoin="round"/>`);
     if (flowing && (settled || model.flowStarted?.has(o.id))) {
       out.push(`<path d="M${cx - 10} ${b.top + 6} Q${cx - 6} ${b.top - 8} ${cx - 2} ${b.top + 4}" fill="none" stroke="var(--water-mid)" stroke-width="3" stroke-linecap="round"/>`);
@@ -226,13 +269,15 @@ export function renderBoard(svg, model) {
       }
     }
     out.push(`<line x1="${b.left + 3}" y1="${markY}" x2="${b.right - 3}" y2="${markY}" stroke="var(--gold)" stroke-width="2"/>`);
+    out.push('</g>');
+    if (dy < 0) out.push(`<text x="${cx}" y="${GROUND - 26 + dy - 8}" class="tiny" text-anchor="middle">口の高さ ${esc(o.height)}</text>`);
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
     out.push(`<text x="${cx}" y="${GROUND + 16}" class="tiny" text-anchor="middle">指定 ${esc(target)}</text>`);
   }
   svg.innerHTML = out.join('');
 }
 
-// 盤面上の点から塔を探す（結果表示中のなぞりに使う）
+// 盤面上の点からグラスを探す（結果表示中のなぞりに使う）
 export function towerAt(layout, stage, x, y) {
   if (y < layout.towerTop - 12 || y > GROUND + 4) return null;
   for (const t of stage.towers) {

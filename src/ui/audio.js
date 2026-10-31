@@ -18,6 +18,15 @@ const FM_TIMBRES = {
   fm2: { ratio: 2, peak: 0.7, rest: 0.08 }
 };
 
+// 操作音。押したことが分かる仕組み（ボタンは1音、水路をつなぐと2音、グラスの音の間は鳴らさない）は前作 prism に合わせ、
+// 音そのものはこの作品に合わせて柔らかくする（2026-11-01 発案者）：正弦波の水滴のような短い音で、少し下から音程が上がり、
+// 軽く残響を通す。行は [MIDI, 開始の秒, 音量]
+const UI_DECAY = 0.22;
+const UI_CUES = {
+  tap: [[84, 0, 0.05]],
+  wire: [[84, 0, 0.045], [91, 0.075, 0.05]]
+};
+
 export class GlassAudio {
   constructor({ latencyMs = DEFAULT_LATENCY_MS } = {}) {
     this.ctx = null;
@@ -26,6 +35,8 @@ export class GlassAudio {
     this.voices = new Set();
     this.latencyMs = latencyMs;
     this.timbre = 'fm2';
+    this.towerUntil = 0; // グラスの音（水面・和音・なぞり）が鳴り終わる時刻。それまで操作音は鳴らさない（前作の鐘と同じ扱い）
+    this.uiVoices = new Set();
   }
 
   // 準備の余裕を変えるときは、鳴っている音を止めて出力を作り直す（次の操作で準備する）
@@ -114,9 +125,81 @@ export class GlassAudio {
       osc.stop(end);
       return osc;
     });
-    const voice = { env, oscs };
+    const voice = { env, oscs, at };
     this.voices.add(voice);
     oscs[0].onended = () => this.voices.delete(voice);
+  }
+
+  // グラスの音として鳴らす（操作音より優先する）
+  towerTone(freq, options = {}) {
+    const at = options.at ?? this.now;
+    const { attack = 0.09, hold = 0.6, release = 2.2 } = options;
+    this.towerUntil = Math.max(this.towerUntil, at + attack + hold + release);
+    this.tone(freq, { ...options, at });
+  }
+
+  // 操作音：ボタンを押したとき（tap）、水路をつないだとき（wire）。グラスの音が鳴っている間は鳴らさない
+  cue(kind) {
+    if (!this.ctx || this.muted || this.now < this.towerUntil) return;
+    if (this.ctx.state !== 'running') {
+      // 最初のタップでは音の準備がまだ終わっていないことがある。準備ができたら、少しの遅れまでなら鳴らす
+      const asked = performance.now();
+      this.ctx.resume().then(() => { if (performance.now() - asked < 400) this.#playCue(kind); }).catch(() => {});
+      return;
+    }
+    this.#playCue(kind);
+  }
+
+  #playCue(kind) {
+    if (this.muted || this.now < this.towerUntil) return;
+    // 続けて押したときは、前の操作音を素早く止めてから鳴らす
+    this.#fade([...this.uiVoices], 0.01);
+    this.uiVoices.clear();
+    const start = this.now + 0.005;
+    for (const [midi, offset, volume] of UI_CUES[kind]) this.#uiNote(440 * 2 ** ((midi - 69) / 12), start + offset, volume);
+  }
+
+  #uiNote(freq, at, gain) {
+    const ctx = this.ctx;
+    const osc = ctx.createOscillator();
+    const env = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq * 0.94, at);
+    osc.frequency.exponentialRampToValueAtTime(freq, at + 0.03);
+    env.gain.setValueAtTime(0.0001, at);
+    env.gain.linearRampToValueAtTime(gain, at + 0.008);
+    env.gain.exponentialRampToValueAtTime(0.0001, at + UI_DECAY);
+    osc.connect(env).connect(this.bus);
+    osc.start(at);
+    osc.stop(at + UI_DECAY + 0.02);
+    const voice = { env, oscs: [osc], at };
+    this.uiVoices.add(voice);
+    this.voices.add(voice);
+    osc.onended = () => { this.uiVoices.delete(voice); this.voices.delete(voice); };
+  }
+
+  // 鳴っている音を、今の音量から短く下げて止める。
+  // 予定を消すだけだと、余韻の途中の音が元の大きさに戻って、別の音が鳴ったように聞こえる
+  #fade(voices, seconds) {
+    const t = this.ctx.currentTime;
+    const end = t + seconds;
+    for (const v of voices) {
+      const g = v.env.gain;
+      if (v.at > t) {
+        // まだ鳴り始めていない音は、鳴らさずに止める
+        g.cancelScheduledValues(0);
+        g.setValueAtTime(0, t);
+      } else if (typeof g.cancelAndHoldAtTime === 'function') {
+        g.cancelAndHoldAtTime(t);
+        g.linearRampToValueAtTime(0, end);
+      } else {
+        const held = g.value;
+        g.cancelScheduledValues(t);
+        g.setValueAtTime(held, t);
+        g.linearRampToValueAtTime(0, end);
+      }
+      for (const o of v.oscs) { try { o.stop(Math.max(end, v.at) + 0.01); } catch { /* 既に止まっている */ } }
+    }
   }
 
   // FM合成（比較用）。変調の深さを立ち上がりで強くし、余韻に向けて弱めて、明るさが引いていくようにする。
@@ -143,7 +226,7 @@ export class GlassAudio {
       oscs.push(car);
     }
     for (const o of oscs) { o.start(at); o.stop(end); }
-    const voice = { env, oscs };
+    const voice = { env, oscs, at };
     this.voices.add(voice);
     oscs[1].onended = () => this.voices.delete(voice);
   }
@@ -164,35 +247,37 @@ export class GlassAudio {
     osc.connect(env).connect(this.bus);
     osc.start(at);
     osc.stop(at + duration + 0.4);
-    const voice = { env, oscs: [osc] };
+    this.towerUntil = Math.max(this.towerUntil, at + duration + 0.35);
+    const voice = { env, oscs: [osc], at };
     this.voices.add(voice);
     osc.onended = () => this.voices.delete(voice);
   }
 
-  // 落ち着いた和音。塔がいっせいに鳴る
+  // 落ち着いた和音。グラスがいっせいに鳴る
   chord(freqs, { at = this.now, length = 2.6 } = {}) {
     const gain = 0.2 / Math.max(1, Math.sqrt(freqs.length));
-    freqs.forEach((f, i) => this.tone(f, { at: at + i * 0.012, gain, attack: 0.12, hold: length * 0.35, release: length * 0.65 }));
+    freqs.forEach((f, i) => this.towerTone(f, { at: at + i * 0.012, gain, attack: 0.12, hold: length * 0.35, release: length * 0.65 }));
   }
 
-  // 結果のジングル（試作の仮の旋律）。NGには鳴らさない（要件5.6）
+  // 結果のジングル（試作の仮の旋律）。NGも専用の短いジングルを鳴らす（前作 prism の failure と同じ、下がる3音を
+  // この作品の音域へ1オクターブ上げたもの。要件5.6）。行は [MIDI, 開始の秒]
   jingle(kind, { at = this.now } = {}) {
-    const notes = kind === 'perfect' ? [84, 88, 91, 96, 100] : [84, 88, 91];
-    notes.forEach((midi, i) => {
+    const notes = kind === 'perfect' ? [[84, 0], [88, 0.16], [91, 0.32], [96, 0.48], [100, 0.64]]
+      : kind === 'ng' ? [[76, 0], [72, 0.25], [69, 0.52]]
+      : [[84, 0], [88, 0.16], [91, 0.32]];
+    notes.forEach(([midi, offset], i) => {
       const f = 440 * 2 ** ((midi - 69) / 12);
-      this.tone(f, { at: at + i * 0.16, gain: 0.11, attack: 0.02, hold: 0.08, release: i === notes.length - 1 ? 1.6 : 0.7 });
+      const last = i === notes.length - 1;
+      this.tone(f, { at: at + offset, gain: kind === 'ng' ? 0.1 : 0.11, attack: 0.02, hold: kind === 'ng' ? 0.14 : 0.08, release: last ? 1.6 : 0.7 });
     });
   }
 
   // 停止・消音・面の切り替えのときだけ、鳴っている音を素早く止める
+  // 操作音は止めない（押したボタンの操作音が、その操作で止まらないように。前作の preserveTap と同じ）
   stopAll() {
     if (!this.ctx) return;
-    const t = this.ctx.currentTime;
-    for (const v of this.voices) {
-      v.env.gain.cancelScheduledValues(t);
-      v.env.gain.setTargetAtTime(0.0001, t, 0.03);
-      for (const o of v.oscs) { try { o.stop(t + 0.2); } catch { /* 既に止まっている */ } }
-    }
-    this.voices.clear();
+    this.#fade([...this.voices].filter(v => !this.uiVoices.has(v)), 0.04);
+    for (const v of [...this.voices]) if (!this.uiVoices.has(v)) this.voices.delete(v);
+    this.towerUntil = 0;
   }
 }

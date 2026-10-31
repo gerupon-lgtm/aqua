@@ -6,17 +6,21 @@ import { displayScore } from '../logic/score.js';
 import { explain, formatAmount } from '../logic/explain.js';
 import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
-import { renderBoard, layoutFor, towerAt, VIEW_W, VIEW_H } from './board.js';
+import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.4.0';
-const TIMING_KEY = 'aqua-notes.prototype-timing.v1';
-// 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）
-const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 1000, cardClearMs: 1800, cardNgMs: 1800, semitones: 5, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
+const APP_VERSION = '0.6.3';
+// v2：ジングルの待ちをクリアとNGに分けた（2026-11-01）。初期値を新しい値にそろえるため、v1 の調整は引き継がない
+const TIMING_KEY = 'aqua-notes.prototype-timing.v2';
+// 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
+// 出発点は前作 prism の関係：落ち着いた（最後の鐘が鳴った）時点から、クリアのジングル0.7秒、NGのジングル1.5秒、
+// 結果カードはどちらも1.6秒（prism の audio.js SUCCESS_JINGLE_DELAY_SECONDS・FAILURE_BELL_DELAY_SECONDS、result-timing.js）
+const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 700, jingleNgMs: 1500, cardClearMs: 1600, cardNgMs: 1600, semitones: 5, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
 const TIMING_FIELDS = [
   ['latencyMs', '音の準備の余裕（音が途切れるときは大きく）', 0, 300, 10],
   ['riseMs', '水面が上がる時間', 400, 3000, 100],
   ['chordMs', '落ち着いた音の長さ（余韻を含む）', 800, 6000, 100],
-  ['jingleMs', '落ち着いてからジングルまで', 0, 4000, 100],
+  ['jingleMs', '落ち着いてからジングルまで（クリア）', 0, 4000, 100],
+  ['jingleNgMs', '落ち着いてからジングルまで（NG）', 0, 4000, 100],
   ['cardClearMs', '落ち着いてから結果まで（クリア）', 0, 5000, 100],
   ['cardNgMs', '落ち着いてから結果まで（NG）', 0, 5000, 100],
   ['semitones', '1目盛りあたりの半音の数', 1, 7, 1]
@@ -98,6 +102,8 @@ function selectStage(index) {
 function tapPipe(id) {
   const c = candidate(id);
   const cfg = state.config;
+  audio.unlock();
+  audio.cue(cfg.connected.has(id) ? 'tap' : 'wire'); // つなぐときは前作の結線と同じ2音、それ以外は操作音
   if (!cfg.connected.has(id)) {
     cfg.connected.add(id);
     if (c.adjustable) cfg.thickness[id] = c.thinness;
@@ -166,7 +172,7 @@ function startRun() {
     if (t.target === null) continue;
     audio.glide(top, frequencyForLevel(first.towers[t.id].level, scale), { at: t0 + t.delay / 1000, duration: t.duration / 1000 });
   }
-  // 落ち着いた音。同じ高さの塔は1つの音として鳴らす（重ねると音量だけが増えるため）
+  // 落ち着いた音。同じ高さのグラスは1つの音として鳴らす（重ねると音量だけが増えるため）
   const settleSound = result => {
     const levels = [...new Set(st.towers.map(t => result.towers[t.id]).filter(r => r.state === 'water').map(r => r.level.toString()))];
     const freqs = levels.map(l => frequencyForLevel(l, scale));
@@ -187,7 +193,7 @@ function startRun() {
     });
     later(settleAt, () => settleSound(last));
   }
-  if (evaluation.outcome !== 'ng') later(settleAt + timing.jingleMs, () => audio.jingle(evaluation.outcome));
+  later(settleAt + (evaluation.outcome === 'ng' ? timing.jingleNgMs : timing.jingleMs), () => audio.jingle(evaluation.outcome));
   later(settleAt + (evaluation.outcome === 'ng' ? timing.cardNgMs : timing.cardClearMs), showResult);
   renderAll();
   loop();
@@ -348,7 +354,7 @@ function renderPanel() {
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      ${state.selected ? chooserHtml() : `<p class="hint">${st.hint}</p>`}
+      <p class="hint">${st.hint}</p>
       <div class="actions">
         <button type="button" class="ghost" id="clear-wires" ${n ? '' : 'disabled'}>配線クリア</button>
         <button type="button" class="primary" id="run" ${n ? '' : 'disabled'}>水を流す</button>
@@ -371,8 +377,8 @@ function renderPanel() {
   const shown = ev.states[ev.states.length - 1];
   const towerRows = st.towers.map(t => {
     const r = shown.result.towers[t.id];
-    if (r.state === 'empty') return `<tr><td>塔${t.id}</td><td colspan="3">空（泉につながっていない）</td></tr>`;
-    return `<tr><td>塔${t.id}</td><td>${fmt(r.level)}</td><td>${sideText[tickSide(r.level, scale)]}</td><td>入る ${fmt(r.inflow)} ／ 出る ${fmt(r.outflow)}</td></tr>`;
+    if (r.state === 'empty') return `<tr><td>グラス${t.id}</td><td colspan="3">空（泉につながっていない）</td></tr>`;
+    return `<tr><td>グラス${t.id}</td><td>${fmt(r.level)}</td><td>${sideText[tickSide(r.level, scale)]}</td><td>入る ${fmt(r.inflow)} ／ 出る ${fmt(r.outflow)}</td></tr>`;
   }).join('');
   const pipeRows = st.candidates.filter(c => state.config.connected.has(c.id)).map(c => {
     const p = shown.result.pipes[c.id];
@@ -394,7 +400,7 @@ function renderPanel() {
         ${e.advice.length ? `${adviceTitle ? `<h4>${adviceTitle}</h4>` : ''}<ul>${li(e.advice)}</ul>` : ''}
         <details><summary>計算を見る</summary>
           <h4>流れる量 ＝ 高さの差 ÷ 細さ</h4><ul class="calc">${li(e.steps)}</ul>
-          ${e.balances.length ? `<h4>塔では、入る量 ＝ 出る量</h4><ul class="calc">${li(e.balances)}</ul>` : ''}
+          ${e.balances.length ? `<h4>グラスでは、入る量 ＝ 出る量</h4><ul class="calc">${li(e.balances)}</ul>` : ''}
         </details>
       </section>`;
     }).join('');
@@ -407,10 +413,10 @@ function renderPanel() {
         ${state.newBest ? '<span class="newbest">最高点</span>' : ''}</div>
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <ul class="outlets">${outlets}</ul>
-      <p class="swipe">塔を${swipeVerb}と、その塔の音を聞き直せます。</p>
+      <p class="swipe">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
-        <div class="table-wrap"><table><thead><tr><th>塔</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
         <div class="table-wrap"><table><thead><tr><th>水路</th><th>流れる量</th><th>水位の差</th><th>細さ</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
         <div class="actions"><button type="button" class="ghost" id="export-record">記録をファイルに書き出す</button></div>
       </details>
@@ -422,10 +428,34 @@ function renderPanel() {
     </div>`;
 }
 
+// 選択肢のトースト（前作 prism の配線削除のトーストに合わせる）。
+// 画面の上と下のうち、選んだ管と重なりが少ない側に置く
+function renderToast() {
+  const toast = $('toast');
+  const c = state.phase === 'edit' && state.selected ? candidate(state.selected) : null;
+  if (!c) { if (toast.open) toast.close(); toast.innerHTML = ''; return; }
+  toast.innerHTML = chooserHtml();
+  if (!toast.open) toast.showModal();
+  const rect = toast.getBoundingClientRect();
+  const pipe = $('board').querySelector(`[data-pipe="${CSS.escape(c.id)}"]`)?.getBoundingClientRect();
+  const gap = 8;
+  const bottom = Math.max(gap, innerHeight - rect.height - gap);
+  const overlap = top => pipe ? Math.max(0, Math.min(top + rect.height, pipe.bottom) - Math.max(top, pipe.top)) : 0;
+  toast.style.top = `${overlap(bottom) <= overlap(gap) ? bottom : gap}px`;
+  toast.style.left = `${Math.max(gap, (innerWidth - rect.width) / 2)}px`;
+}
+
+function closeToast() {
+  if (!state.selected) return;
+  state.selected = null;
+  renderAll();
+}
+
 function renderAll() {
   renderTabs();
   renderCondition();
   renderPanel();
+  renderToast();
   drawBoard();
   $('board').classList.toggle('swipeable', state.phase === 'result');
   $('board').classList.toggle('editable', state.phase === 'edit');
@@ -484,7 +514,7 @@ function openTuning() {
     $('tune-status').textContent = '初期値に戻しました。';
   });
   $('tune-close').addEventListener('click', () => { sheet.hidden = true; });
-  // 保存せずに、選んだ音色で2つの塔の和音と単音を鳴らして比べる
+  // 保存せずに、選んだ音色で2つのグラスの和音と単音を鳴らして比べる
   $('tune-try').addEventListener('click', () => {
     audio.unlock();
     const saved = audio.timbre;
@@ -506,6 +536,7 @@ function boardPoint(evt) {
   return m ? pt.matrixTransform(m.inverse()) : { x: 0, y: 0 };
 }
 
+
 let swipeTower = null;
 function swipeAt(evt) {
   if (state.phase !== 'result') return;
@@ -519,11 +550,21 @@ function swipeAt(evt) {
   state.highlight = { id, until: performance.now() + 450 };
   if (r.state !== 'water') return;
   audio.unlock();
-  audio.tone(frequencyForLevel(r.level, scaleNow()), { gain: 0.2, attack: 0.08, hold: 0.35, release: 1.8 });
+  audio.towerTone(frequencyForLevel(r.level, scaleNow()), { gain: 0.2, attack: 0.08, hold: 0.35, release: 1.8 });
 }
 
 function bind() {
-  document.addEventListener('pointerdown', () => audio.unlock(), { once: true });
+  // 音の準備は、触れた瞬間と離した瞬間の両方で行う（スマホは、離したときの操作でしか音を始められない機種がある）
+  document.addEventListener('pointerdown', () => audio.unlock(), true);
+  document.addEventListener('pointerup', () => audio.unlock(), true);
+  // ボタンの操作音（前作と同じく、音のオン・オフのボタン以外）。ボタンの処理より先に鳴らし、
+  // その処理で音が止まっても操作音は残す
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b || b.disabled || b.id === 'sound') return;
+    audio.unlock();
+    audio.cue('tap');
+  }, true);
   $('stage-tabs').addEventListener('click', e => {
     const b = e.target.closest('[data-stage]');
     if (b && !b.disabled) selectStage(Number(b.dataset.stage));
@@ -532,15 +573,6 @@ function bind() {
     const btn = e.target.closest('button');
     if (!btn || btn.disabled) return;
     const id = btn.id;
-    if (btn.dataset.thick) { state.config.thickness[state.selected] = btn.dataset.thick; renderAll(); return; }
-    if (btn.dataset.prime) {
-      if (btn.dataset.prime === 'on' && bucketsLeft() > 0) state.config.primed.add(state.selected);
-      else state.config.primed.delete(state.selected);
-      renderAll();
-      return;
-    }
-    if (btn.dataset.remove) { removePipe(state.selected); renderAll(); return; }
-    if (btn.dataset.close) { state.selected = null; renderAll(); return; }
     if (id === 'run') startRun();
     else if (id === 'stop') { stopRun(); renderAll(); }
     else if (id === 'clear-wires') { state.config = emptyConfig(); state.selected = null; renderAll(); }
@@ -552,13 +584,45 @@ function bind() {
       if (state.explain) document.querySelector('.explain')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
   });
+  // トーストで選んだら、設定して閉じる（もう一度管をタップすると開き直す）
+  $('toast').addEventListener('click', e => {
+    const toast = $('toast');
+    const r = toast.getBoundingClientRect();
+    if (e.target === toast && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) {
+      // 外のタップは閉じるだけにして、下にある管やボタンを押さない
+      e.preventDefault();
+      closeToast();
+      return;
+    }
+    const btn = e.target.closest('button');
+    if (!btn || btn.disabled || !state.selected) return;
+    if (btn.dataset.thick) state.config.thickness[state.selected] = btn.dataset.thick;
+    else if (btn.dataset.prime === 'on' && bucketsLeft() > 0) state.config.primed.add(state.selected);
+    else if (btn.dataset.prime === 'off') state.config.primed.delete(state.selected);
+    else if (btn.dataset.remove) removePipe(state.selected);
+    else if (!btn.dataset.close) return;
+    state.selected = null;
+    renderAll();
+  });
+  $('toast').addEventListener('cancel', e => { e.preventDefault(); closeToast(); }); // Esc
   $('panel').addEventListener('toggle', e => { if (e.target.id === 'detail') state.details = e.target.open; }, true);
   const svg = $('board');
-  svg.addEventListener('click', e => {
-    if (state.phase !== 'edit') return;
-    const pipe = e.target.closest('[data-pipe]')?.dataset.pipe;
+  // 管のタップ：指を離した時点で、触れた点にいちばん近い管を選ぶ。
+  // 管は端で7ほどの間隔で並ぶので、重なったタップ領域の上下関係で選ぶと、隣の管を拾ってしまう
+  let press = null;
+  svg.addEventListener('pointerdown', e => {
+    if (state.phase === 'edit') press = { id: e.pointerId, x: e.clientX, y: e.clientY };
+  });
+  svg.addEventListener('pointerup', e => {
+    const p = press;
+    press = null;
+    if (state.phase !== 'edit' || !p || p.id !== e.pointerId) return;
+    if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 12) return; // なぞった・ずれたときは押していない扱い
+    const p2 = boardPoint(e);
+    const pipe = pipeAt(state.layout, stage(), p2.x, p2.y);
     if (pipe) tapPipe(pipe);
   });
+  svg.addEventListener('pointercancel', () => { press = null; });
   svg.addEventListener('pointerdown', e => {
     if (state.phase !== 'result') return;
     swipeTower = null;
@@ -573,6 +637,7 @@ function bind() {
   $('sound').addEventListener('click', () => {
     audio.unlock();
     audio.setMuted(!audio.muted);
+    if (!audio.muted) audio.cue('tap'); // 音をオンにしたときだけ、確かめの操作音（前作と同じ）
     $('sound').textContent = audio.muted ? '音 オフ' : '音 オン';
     $('sound').setAttribute('aria-pressed', String(!audio.muted));
   });

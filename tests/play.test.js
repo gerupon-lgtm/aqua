@@ -24,12 +24,12 @@ test('音：目盛りに完全一致で「乗っている」、水位が高い�
 });
 
 for (const stage of STAGES) {
-  test(`${stage.set}${stage.number}：満点は1通り、部分点のクリアがあり、クリアでは水のある塔がすべて音階に乗る`, () => {
+  test(`${stage.set}${stage.number}：満点は1通り、部分点のクリアがあり、クリアでは水のあるグラスがすべて音階に乗る`, () => {
     const a = analyzeStage(stage);
     assert.ok(a.perfect, '満点のつなぎ方がある');
     assert.ok(a.unique, '満点は1通り');
     assert.ok(a.clears.some(c => c.used > a.perfectCount), '部分点でクリアできるつなぎ方がある');
-    for (const c of a.clears) assert.ok(c.allOnScale, `${c.ids.join('+')} で音階に乗らない塔がある`);
+    for (const c of a.clears) assert.ok(c.allOnScale, `${c.ids.join('+')} で音階に乗らないグラスがある`);
     const best = evaluate(stage, a.perfectConfig, a);
     assert.equal(best.outcome, 'perfect');
     assert.equal(displayScore(best.score), '100.00');
@@ -85,7 +85,7 @@ test('サイフォンは上流の水面が入口より下がると切れ、切�
     ]
   };
   const j = judge(stage, { connected: ['SA', 'AB'], primed: ['AB'] });
-  // 開通したままなら塔Aの水位は 2 で入口 3 より低いので切れる。切れた後は塔Aは泉と同じ 6、噴水盤には届かない
+  // 開通したままならグラスAの水位は 2 で入口 3 より低いので切れる。切れた後はグラスAは泉と同じ 6、噴水盤には届かない
   assert.deepEqual([...j.states[0].broken], ['AB']);
   assert.equal(j.result.towers.A.level.toString(), '6');
   assert.ok(j.outlets[0].flow.isZero());

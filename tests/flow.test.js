@@ -47,7 +47,7 @@ test('出口がない回路は泉の高さまで満ち、流れはゼロ', () =>
   assert.ok(r.pipes.AB.flow.isZero());
 });
 
-test('泉につながらない塔は空のまま', () => {
+test('泉につながらないグラスは空のまま', () => {
   const r = solveCircuit(circuit({ H: 5, towers: ['A', 'B'], outlets: [['O', 'B', 0, 1]], pipes: [['SA', 'S', 'A', 1]] }));
   assert.equal(r.towers.B.state, 'empty');
   assert.equal(r.towers.B.level, null);
@@ -65,7 +65,7 @@ test('出口の口が水位より高いと、その出口は流れない', () =>
   assert.equal(level(r, 'B'), '2');
 });
 
-test('各塔で入る量と出る量の合計が等しい（第1法則）', () => {
+test('各グラスで入る量と出る量の合計が等しい（第1法則）', () => {
   const r = solveCircuit(circuit({
     H: 9, towers: ['A', 'B', 'C'], outlets: [['O1', 'B', 1, 1], ['O2', 'C', 2, '1/2']],
     pipes: [['SA', 'S', 'A', 1], ['AB', 'A', 'B', '1/2'], ['AC', 'A', 'C', 2], ['BC', 'B', 'C', 1]]
@@ -76,7 +76,7 @@ test('各塔で入る量と出る量の合計が等しい（第1法則）', () =
   }
 });
 
-test('異常系：つないだ水路がない・塔がない回路でも止まらない', () => {
+test('異常系：つないだ水路がない・グラスがない回路でも止まらない', () => {
   assert.equal(solveCircuit(circuit({ H: 3, towers: ['A'] })).towers.A.state, 'empty');
   assert.deepEqual(solveCircuit(circuit({ H: 3, towers: [] })).towers, {});
   assert.throws(() => frac('1/0'));

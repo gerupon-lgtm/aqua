@@ -19,6 +19,7 @@
   --pipe-off: #a9bccf;
   --pipe-edge: #6f8aa5;
   --pipe-empty: #edf2f7;
+  --pipe-on: #d4e7f7;
   --stone: #fbfaf6;
   --stone-edge: #c3c8ce;
   --soil: #ece5d6;
@@ -95,10 +96,13 @@ button { font: inherit; color: inherit; }
 }
 #board { width: 100%; height: 100%; display: block; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
 #board.swipeable { touch-action: none; cursor: crosshair; }
+#board.editable { touch-action: none; } /* 編集中はタップの途中で画面のスクロールに取られないようにする */
 #board.editable .hit { cursor: pointer; }
 #board .label { font-size: 12px; fill: var(--ink-soft); font-family: var(--font-body); }
 #board .tiny { font-size: 10px; fill: var(--ink-soft); font-family: var(--font-body); }
 #board .badge-text { font-size: 11px; font-weight: 700; fill: var(--blue-deep); font-family: var(--font-body); pointer-events: none; }
+#board .badge-text.on { fill: #ffffff; }
+#board .badge-text.cand { fill: var(--ink-soft); }
 #board .current { stroke: rgba(255, 255, 255, .85); stroke-dasharray: 2 11; stroke-linecap: round; animation: flow linear infinite; }
 #board .current.back { animation-direction: reverse; }
 #board .rainbow { animation: bow .7s ease-out; }
@@ -107,6 +111,8 @@ button { font: inherit; color: inherit; }
 
 .panel { grid-area: panel; display: grid; gap: 8px; }
 .hint { margin: 0; color: var(--ink-soft); font-size: 13.5px; }
+/* 編集中と実行中で案内の行数が違っても、盤面の大きさが変わらないように3行分を確保する */
+.panel > .hint { line-height: 1.5; min-height: 4.5em; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 .actions button { height: 44px; padding: 0 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
 .primary { background: var(--blue); color: #fff; border: 1px solid var(--blue); }
@@ -191,6 +197,15 @@ th { color: var(--ink-soft); font-weight: 500; }
 }
 
 /* 太さ・呼び水を選ぶ（S-04） */
+/* 回路を作っている間の選択肢はトーストで出す。前作の配線削除のトーストと同じく、画面の上か下の、
+   選んだ管と重ならない側に置き、外をタップすると閉じる */
+.toast {
+  position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent;
+  width: max-content; max-width: calc(100vw - 16px); box-sizing: border-box;
+  box-shadow: 0 4px 14px rgba(23, 49, 76, .22); border-radius: 12px; animation: toast-in .16s ease-out;
+}
+.toast::backdrop { background: rgba(23, 49, 76, .06); }
+@keyframes toast-in { from { opacity: 0; } to { opacity: 1; } }
 .chooser { display: grid; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; }
 .chooser-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13.5px; }
 .chooser-row > span:first-child { min-width: 5em; color: var(--ink-soft); }
