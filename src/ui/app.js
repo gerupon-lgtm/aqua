@@ -8,7 +8,7 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.7.1';
+const APP_VERSION = '0.7.3';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -334,16 +334,25 @@ function chooserHtml() {
   if (!c) return '';
   const cfg = state.config;
   const parts = [];
+  // 見出しと簡単な説明（何を選ぶのか、選ぶとどうなるか）。桶の残りはバッジで目立たせる
+  if (c.siphon) {
+    const left = bucketsLeft();
+    parts.push(`<div class="chooser-head"><h3>サイフォン</h3><span class="bucket-badge${left ? '' : ' empty'}" aria-label="桶の残り ${left}個（全部で${stage().buckets}個）">桶 残り <b>${left}</b> / ${stage().buckets}</span></div>`);
+    parts.push('<p class="chooser-note">壁を越える管は、中に空気がたまっていて流れません。桶の水で満たす（呼び水）と流れ始めます。</p>');
+  } else if (c.adjustable) {
+    parts.push('<div class="chooser-head"><h3>太さを選ぶ</h3></div>');
+    parts.push('<p class="chooser-note">太いほど水が流れやすく、たくさん運びます。</p>');
+  }
   if (c.adjustable) {
     parts.push(`<div class="chooser-row"><span>太さ</span>${c.adjustable.map(t => `<button type="button" class="chip${cfg.thickness[c.id] === t ? ' on' : ''}" data-thick="${t}" aria-pressed="${cfg.thickness[c.id] === t}">${THICK_NAME[t]}</button>`).join('')}</div>`);
   }
   if (c.siphon) {
     const primed = cfg.primed.has(c.id);
-    parts.push(`<div class="chooser-row"><span>サイフォン</span>${primed
+    parts.push(`<div class="chooser-row">${primed
       ? '<button type="button" class="chip on" data-prime="off">呼び水を取り消す</button>'
       : `<button type="button" class="chip" data-prime="on" ${bucketsLeft() > 0 ? '' : 'disabled'}>桶で呼び水をする</button>${bucketsLeft() > 0 ? '' : '<span class="note-inline">桶が残っていません</span>'}`}</div>`);
   }
-  return `<div class="chooser">${parts.join('')}<div class="chooser-row"><button type="button" class="chip" data-remove="1">この水路を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
+  return `<div class="chooser">${parts.join('')}<div class="chooser-row chooser-actions"><button type="button" class="chip" data-remove="1">この水路を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
 }
 
 function outletsHtml(st, outlets) {
@@ -440,7 +449,7 @@ function renderToast() {
   const c = state.phase === 'edit' && state.selected ? candidate(state.selected) : null;
   if (!c) { if (toast.open) toast.close(); toast.innerHTML = ''; return; }
   toast.innerHTML = chooserHtml();
-  if (!toast.open) toast.showModal();
+  if (!toast.open) { toast.showModal(); toastFresh = true; }
   const rect = toast.getBoundingClientRect();
   const pipe = $('board').querySelector(`[data-pipe="${CSS.escape(c.id)}"]`)?.getBoundingClientRect();
   const gap = 8;
@@ -450,6 +459,7 @@ function renderToast() {
   toast.style.left = `${Math.max(gap, (innerWidth - rect.width) / 2)}px`;
 }
 
+let toastFresh = false; // トーストが開いてから、まだ新しく押されていない
 function closeToast() {
   if (!state.selected) return;
   state.selected = null;
@@ -590,7 +600,11 @@ function bind() {
     }
   });
   // トーストで選んだら、設定して閉じる（もう一度管をタップすると開き直す）
+  // 管をタップしてトーストが開いた直後、同じ指の「クリック」がトーストの外に届いて閉じてしまうのを防ぐ。
+  // トーストが開いてから、新しく押し始めた操作だけを受け付ける（前作の配線削除のトーストと同じ考え方）
+  $('toast').addEventListener('pointerdown', () => { toastFresh = false; }, true);
   $('toast').addEventListener('click', e => {
+    if (toastFresh) { e.preventDefault(); e.stopPropagation(); return; }
     const toast = $('toast');
     const r = toast.getBoundingClientRect();
     if (e.target === toast && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) {

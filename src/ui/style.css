@@ -2,6 +2,9 @@
    世界観として明るい1つの見た目に決めているため、暗い配色は用意しない。
    配置：上に条件、中央に断面の盤面、下に操作と結果。横向きでは盤面の右に操作を置く。 */
 :root {
+  /* 明るい見た目だけなので、端末が暗い表示でもボタンなどの既定の色を明るい側に固定する
+     （ダイアログの文字が白になり、白いボタンの上で見えなくなった。2026-11-01 スマホで確認） */
+  color-scheme: light;
   --sky-top: #f4f9fd;
   --sky-bottom: #e2eef8;
   --bg: #eef5fb;
@@ -196,17 +199,25 @@ th { color: var(--ink-soft); font-weight: 500; }
 /* 回路を作っている間の選択肢はトーストで出す。前作の配線削除のトーストと同じく、画面の上か下の、
    選んだ管と重ならない側に置き、外をタップすると閉じる */
 .toast {
-  position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent;
-  width: max-content; max-width: calc(100vw - 16px); box-sizing: border-box;
+  position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent; color: var(--ink);
+  width: min(420px, calc(100vw - 16px)); box-sizing: border-box;
   box-shadow: 0 4px 14px rgba(23, 49, 76, .22); border-radius: 12px; animation: toast-in .16s ease-out;
 }
 .toast::backdrop { background: rgba(23, 49, 76, .06); }
 @keyframes toast-in { from { opacity: 0; } to { opacity: 1; } }
-.chooser { display: grid; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; }
-.chooser-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13.5px; }
-.chooser-row > span:first-child { min-width: 5em; color: var(--ink-soft); }
-.chip { height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-weight: 600; }
+/* トーストは大きめに：見出し・説明・押しやすい高さのボタン（2026-11-01 発案者） */
+.chooser { display: grid; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 16px; }
+.chooser-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.chooser-head h3 { margin: 0; font-size: 16.5px; }
+.bucket-badge { display: inline-flex; align-items: baseline; gap: 4px; padding: 4px 12px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.bucket-badge b { font-size: 19px; line-height: 1; }
+.bucket-badge.empty { background: var(--ink-soft); }
+.chooser-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 15px; }
+.chooser-row > span:first-child { min-width: 3.5em; color: var(--ink-soft); }
+.chip { color: var(--ink); height: 46px; padding: 0 18px; border-radius: 23px; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-weight: 600; font-size: 15px; }
 .chip.on { background: var(--blue); border-color: var(--blue); color: #fff; }
 .chip:disabled { opacity: .45; cursor: default; }
-.note-inline { font-size: 12px; color: var(--ink-soft); }
+.note-inline { font-size: 13.5px; color: var(--ink-soft); }
+.chooser-note { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+.chooser-actions { justify-content: flex-end; border-top: 1px solid var(--line); padding-top: 12px; }
 .outlets .state-head { font-size: 12.5px; color: var(--ink-soft); font-weight: 600; margin-top: 2px; }
