@@ -26,6 +26,9 @@ function copyTree(dir) {
     const target = posix.join(prefix, source);
     mkdirSync(join(output, posix.dirname(target)), { recursive: true });
     copyFileSync(join(root, source), join(output, target));
+    // 絵の候補（public/graphics/candidates-*）は見比べのために配信するが、通信なしで使う資材には入れない。
+    // 候補は数十MBあり、保存すると最初の読み込みが重くなるため（2026-11-01）
+    if (source.includes('/candidates-')) continue;
     assets.push(`./${target}`);
   }
 }
