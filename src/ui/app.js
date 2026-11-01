@@ -8,9 +8,10 @@ import { displayScore } from '../logic/score.js';
 import { explain, formatAmount } from '../logic/explain.js';
 import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
+import { lessonFor, buildQuestion, answerLine, TutorialBook } from '../content/tutorial.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.9.6';
+const APP_VERSION = '0.10.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -34,6 +35,9 @@ const GATE_HOLD_MS = 1500; // 水門の面：開いた状態で落ち着いて�
 const $ = id => document.getElementById(id);
 const audio = new GlassAudio();
 const scoreBook = new ScoreBook((() => { try { return window.localStorage; } catch { return null; } })());
+const tutorial = new TutorialBook((() => { try { return window.localStorage; } catch { return null; } })());
+// 今の面で精霊の案内を出しているか（初めての面、または「ふりかえり」で開き直したとき）
+const guiding = () => tutorial.active(stage(), state.review);
 const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
@@ -120,6 +124,9 @@ function selectStage(index) {
   state.details = false;
   state.explain = false;
   state.resultClosed = false;
+  state.review = false;
+  state.asking = null;
+  state.prediction = null;
   renderAll();
 }
 
@@ -224,6 +231,15 @@ function startRun() {
   loop();
 }
 
+// 案内中の面では、流す前に「届く量」を予想してもらう（F-019）。届かないつなぎ方では聞かずに流す
+function askOrRun() {
+  if (guiding()) {
+    const q = buildQuestion(stage(), evaluate(stage(), state.config, state.analysis, scaleNow()));
+    if (q) { state.selected = null; state.asking = q; renderAll(); return; }
+  }
+  startRun();
+}
+
 function showResult() {
   if (!state.run) return;
   state.phase = 'result';
@@ -236,6 +252,11 @@ function showResult() {
     state.newBest = r.improved;
   }
   state.resultClosed = false;
+  if (state.prediction) {
+    state.explain = true;
+    tutorial.complete(stage());
+    state.review = false;
+  }
   renderAll();
 }
 
@@ -252,6 +273,7 @@ function stopRun() {
   state.phase = 'edit';
   state.details = false;
   state.explain = false;
+  state.prediction = null;
 }
 
 // 今見せている状態：水門の面では、閉じ始めたら閉じた状態の計算結果を見せる
@@ -354,6 +376,7 @@ function renderCondition() {
   const buckets = st.buckets ? `<span class="count">桶 残り <b>${bucketsLeft()}</b> / ${st.buckets}</span>` : '';
   $('cond').innerHTML = `
     <div class="cond-title"><span class="eyebrow">${st.set} ${st.number}</span><span class="name">${st.title}</span>
+      ${lessonFor(st) && !st.draw ? `<span class="draw"><button type="button" class="mini" id="review" ${state.phase === 'edit' && !guiding() ? '' : 'disabled'}>ふりかえり</button></span>` : ''}
       ${st.draw ? `<span class="draw"><span>出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${state.phase === 'edit' ? '' : 'disabled'}>別の出題</button></span>` : ''}</div>
     <div class="cond-row">${targets}${buckets}<span class="count">つないだ配管 <b>${state.config.connected.size}</b> 本</span></div>`;
 }
@@ -410,7 +433,7 @@ function renderPanel() {
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : `<p class="hint">${st.hint}</p>`}
+      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : guiding() ? `<p class="hint guide"><span class="spirit" aria-label="水の精霊"></span>${lessonFor(st).intro}</p>` : `<p class="hint">${st.hint}</p>`}
       <div class="actions">
         <button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
         <button type="button" class="primary" id="run" ${n && !state.loadError ? '' : 'disabled'}>水を流す</button>
@@ -454,7 +477,7 @@ function renderPanel() {
         ${gated ? `<h4>${stateTitle[s.name]}</h4>` : ''}
         <h3>${keepTogether(e.summary)}</h3>
         ${e.advice.length ? `${adviceTitle ? `<h4>${adviceTitle}</h4>` : ''}<ul>${li(e.advice)}</ul>` : ''}
-        <details><summary>計算を見る</summary>
+        <details${state.prediction ? ' open' : ''}><summary>計算を見る</summary>
           <h4>流れる量 ＝ 高さの差 ÷ 細さ</h4><ul class="calc">${li(e.steps)}</ul>
           ${e.balances.length ? `<h4>グラスでは、入る量 ＝ 出る量</h4><ul class="calc">${li(e.balances)}</ul>` : ''}
         </details>
@@ -485,6 +508,7 @@ function renderPanel() {
         <span class="used">${usedText}${ev.outcome === 'clear' ? `（満点は ${st.theme === 'buckets' ? `桶 ${state.analysis.perfectConfig.primed.length}・` : ''}${state.analysis.perfectCount} 本）` : ''}</span>
         ${state.newBest ? '<span class="newbest">最高点</span>' : ''}
         <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button></div>
+      ${state.prediction ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${answerLine(state.prediction.question, state.prediction.picked)}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <ul class="outlets">${outlets}</ul>
       <p class="swipe-note">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
@@ -529,14 +553,25 @@ function closeResult() {
 
 // 選択肢のトースト（前作 prism の配線削除のトーストに合わせる）。
 // 画面の上と下のうち、選んだ管と重なりが少ない側に置く
+function questionHtml() {
+  const q = state.asking;
+  return `<div class="chooser">
+    <div class="chooser-head"><h3><span class="spirit" aria-label="水の精霊"></span>予想してから流そう</h3></div>
+    <p class="chooser-note">${q.text}</p>
+    <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">${c.text}</button>`).join('')}</div>
+    <div class="chooser-row chooser-actions"><button type="button" class="chip" data-skip="1">案内をスキップ</button><button type="button" class="chip" data-close="1">やめる</button></div>
+  </div>`;
+}
+
 function renderToast() {
   const toast = $('toast');
-  const c = state.phase === 'edit' && state.selected ? candidate(state.selected) : null;
-  if (!c) { if (toast.open) toast.close(); toast.innerHTML = ''; return; }
-  toast.innerHTML = chooserHtml();
+  const asking = state.phase === 'edit' && state.asking;
+  const c = !asking && state.phase === 'edit' && state.selected ? candidate(state.selected) : null;
+  if (!c && !asking) { if (toast.open) toast.close(); toast.innerHTML = ''; return; }
+  toast.innerHTML = asking ? questionHtml() : chooserHtml();
   if (!toast.open) { toast.showModal(); toastFresh = true; }
   const rect = toast.getBoundingClientRect();
-  const pipe = $('board').querySelector(`[data-pipe="${CSS.escape(c.id)}"]`)?.getBoundingClientRect();
+  const pipe = c ? $('board').querySelector(`[data-pipe="${CSS.escape(c.id)}"]`)?.getBoundingClientRect() : null;
   const gap = 8;
   const bottom = Math.max(gap, innerHeight - rect.height - gap);
   const overlap = top => pipe ? Math.max(0, Math.min(top + rect.height, pipe.bottom) - Math.max(top, pipe.top)) : 0;
@@ -546,8 +581,9 @@ function renderToast() {
 
 let toastFresh = false; // トーストが開いてから、まだ新しく押されていない
 function closeToast() {
-  if (!state.selected) return;
+  if (!state.selected && !state.asking) return;
   state.selected = null;
+  state.asking = null;
   renderAll();
 }
 
@@ -673,12 +709,14 @@ function bind() {
   // 別の出題：同じ面を選び直したのと同じ扱い（直前と違う系統から抽選）
   $('cond').addEventListener('click', e => {
     if (e.target.closest('#redraw') && state.phase === 'edit') selectStage(state.stageIndex);
+    // ふりかえり：この面の案内と予想の問いを、もう一度出す
+    if (e.target.closest('#review') && state.phase === 'edit') { state.review = true; renderAll(); }
   });
   $('panel').addEventListener('click', e => {
     const btn = e.target.closest('button');
     if (!btn || btn.disabled) return;
     const id = btn.id;
-    if (id === 'run') startRun();
+    if (id === 'run') askOrRun();
     else if (id === 'stop') { stopRun(); renderAll(); }
     else if (id === 'clear-pipes') { state.config = emptyConfig(); state.selected = null; renderAll(); }
     else if (id === 'next') selectStage(state.stageIndex + 1);
@@ -699,6 +737,17 @@ function bind() {
       return;
     }
     const btn = e.target.closest('button');
+    if (btn && !btn.disabled && state.asking) {
+      // 予想を選んだら、その予想を覚えて流す。スキップは以後の案内を出さずに流す
+      const q = state.asking;
+      if (btn.dataset.predict) state.prediction = { question: q, picked: btn.dataset.predict };
+      else if (btn.dataset.skip) tutorial.skip();
+      else if (!btn.dataset.close) return;
+      state.asking = null;
+      renderAll();
+      if (!btn.dataset.close) startRun();
+      return;
+    }
     if (!btn || btn.disabled || !state.selected) return;
     if (btn.dataset.thick) state.config.thickness[state.selected] = btn.dataset.thick;
     else if (btn.dataset.prime === 'on' && bucketsLeft() > 0) state.config.primed.add(state.selected);

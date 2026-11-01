@@ -124,7 +124,7 @@ button { font: inherit; color: inherit; white-space: nowrap; }
 .panel { grid-area: panel; display: grid; gap: 8px; }
 .hint { margin: 0; color: var(--ink-soft); font-size: 13.5px; }
 /* 編集中と実行中で案内の行数が違っても、盤面の大きさが変わらないように3行分を確保する */
-.panel > .hint { line-height: 1.5; min-height: 4.5em; }
+.panel > .hint { line-height: 1.5; min-height: 61px; } /* 13.5px×1.5×3行。案内の文字の大きさが変わっても高さを変えない */
 .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 .actions button { height: 44px; padding: 0 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
 .primary { background: var(--blue); color: #fff; border: 1px solid var(--blue); }
@@ -260,3 +260,9 @@ th { color: var(--ink-soft); font-weight: 500; }
 .chooser-note { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
 .chooser-actions { justify-content: flex-end; border-top: 1px solid var(--line); padding-top: 12px; }
 .outlets .state-head { font-size: 12.5px; color: var(--ink-soft); font-weight: 600; margin-top: 2px; }
+
+/* 水の精霊（仮の姿：小さなしずく。見た目は T-13 で決める）と、案内・答え合わせの文（F-019） */
+.spirit { display: inline-block; width: 12px; height: 12px; margin-right: 6px; border-radius: 50% 0 50% 50%; transform: rotate(-45deg); background: linear-gradient(135deg, #8cc8f0, var(--water-mid)); vertical-align: -1px; flex: none; }
+.panel > .hint.guide { color: var(--blue-deep); font-size: 13px; }
+.guide-answer { margin: 0; padding: 8px 10px; border-radius: 8px; background: #eaf3fb; color: var(--blue-deep); font-size: 13.5px; }
+.chooser-head h3 .spirit { width: 14px; height: 14px; }
