@@ -10,7 +10,7 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.9.2';
+const APP_VERSION = '0.9.3';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -391,10 +391,16 @@ function chooserHtml() {
   return `<div class="chooser">${parts.join('')}<div class="chooser-row chooser-actions"><button type="button" class="chip" data-remove="1">この配管を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
 }
 
+// かっこ書き（前に付く数値ごと）を1かたまりにして、途中で折り返さない。
+// 文の折り返しは CSS の word-break: auto-phrase で文節ごとにするが、対応していないブラウザでもかっこは崩さない
+function keepTogether(text) {
+  return String(text).replace(/[0-9A-Za-z./−-]*（[^（）]{1,20}）/g, m => `<span class="nw">${m}</span>`);
+}
+
 function outletsHtml(st, outlets) {
   return outlets.map(o => {
     const label = st.outlets.find(x => x.id === o.id).label;
-    return `<li class="${o.verdict}"><span>${label}</span><span class="v">${verdictText[o.verdict]}</span><span class="amount">届いた <b>${fmt(o.flow)}</b>・指定 ${o.target}</span></li>`;
+    return `<li class="${o.verdict}"><span>${label}</span><span class="v">${verdictText[o.verdict]}</span><span class="amount"><span class="nw">届いた <b>${fmt(o.flow)}</b></span>・<span class="nw">指定 ${o.target}</span></span></li>`;
   }).join('');
 }
 
@@ -437,7 +443,7 @@ function renderPanel() {
     return `<tr><td>${c.a}–${c.b}</td><td>${fmt(p.flow)}</td><td>${fmt(p.diff)}</td><td>${thin}</td></tr>`;
   }).join('');
   const swipeVerb = coarsePointer ? '指でなぞる' : 'マウスでなぞる';
-  const li = items => items.map(t => `<li>${t}</li>`).join('');
+  const li = items => items.map(t => `<li>${keepTogether(t)}</li>`).join('');
   let explainHtml = '';
   if (state.explain) {
     const adviceTitle = ev.outcome === 'ng' ? '見直すところ' : ev.outcome === 'clear' ? '100点をめざすには' : '';
@@ -446,7 +452,7 @@ function renderPanel() {
       return `
       <section class="explain" aria-label="解説${gated ? `（${stateTitle[s.name]}）` : ''}">
         ${gated ? `<h4>${stateTitle[s.name]}</h4>` : ''}
-        <h3>${e.summary}</h3>
+        <h3>${keepTogether(e.summary)}</h3>
         ${e.advice.length ? `${adviceTitle ? `<h4>${adviceTitle}</h4>` : ''}<ul>${li(e.advice)}</ul>` : ''}
         <details><summary>計算を見る</summary>
           <h4>流れる量 ＝ 高さの差 ÷ 細さ</h4><ul class="calc">${li(e.steps)}</ul>
