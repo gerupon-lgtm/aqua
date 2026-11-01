@@ -22,7 +22,7 @@ function copyTree(dir) {
   for (const entry of readdirSync(join(root, dir), { withFileTypes: true })) {
     const source = posix.join(dir, entry.name);
     if (entry.isDirectory()) { if (source !== 'src/pwa') copyTree(source); continue; }
-    if (!/\.(js|css|png|svg)$/.test(entry.name)) continue;
+    if (!/\.(js|css|png|svg|webp)$/.test(entry.name)) continue;
     const target = posix.join(prefix, source);
     mkdirSync(join(output, posix.dirname(target)), { recursive: true });
     copyFileSync(join(root, source), join(output, target));

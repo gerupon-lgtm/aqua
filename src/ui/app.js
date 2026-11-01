@@ -12,7 +12,7 @@ import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 
-const APP_VERSION = '0.13.1';
+const APP_VERSION = '0.14.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -64,25 +64,6 @@ function saveTiming(values) {
   try { localStorage.setItem(TIMING_KEY, JSON.stringify(values)); return true; } catch { return false; }
 }
 
-// 絵の候補の見比べ（試作用。docs/assets.md）。資材ごとに A・B・なし（図形の仮の絵）を選び、この端末にだけ覚える
-const ART_KEY = 'aqua-art-compare-v1';
-const ART_ITEMS = [
-  ['bg', '盤面の背景（お試し）'], ['spring', '泉'], ['glass', 'グラス'], ['basin', '噴水盤'],
-  ['fountain', '噴水（クリア）'], ['rainbow', '虹（100点）'], ['spirit', '水の精霊'], ['title', 'タイトルの背景']
-];
-function loadArt() {
-  const base = Object.fromEntries(ART_ITEMS.map(([k]) => [k, 'a']));
-  try {
-    const saved = JSON.parse(localStorage.getItem(ART_KEY) || 'null');
-    for (const [k] of ART_ITEMS) if (saved && ['a', 'b', null].includes(saved[k])) base[k] = saved[k];
-  } catch { /* 読めないときは A で見比べる */ }
-  return base;
-}
-function applyArt() {
-  document.body.dataset.artSpirit = state.art.spirit ?? '';
-  document.body.dataset.artTitle = state.art.title ?? '';
-}
-
 const emptyConfig = () => ({ connected: new Set(), thickness: {}, primed: new Set() });
 const state = {
   stageIndex: 0,
@@ -108,10 +89,8 @@ const state = {
   trials: 0, // 選択プレイ：この面を開いてから「水を流す」を押した回数（F-025）
   newFewest: false,
   titleOpen: true,
-  art: null,
   played: false
 };
-state.art = loadArt();
 audio.setLatency(state.timing.latencyMs);
 audio.timbre = state.timing.timbre;
 
@@ -395,7 +374,6 @@ function drawBoard() {
     time: now,
     reducedMotion: reducedMotionQuery.matches,
     highlight: state.highlight,
-    art: state.art,
     guide: practiceStep() && practiceStep().target !== 'run' ? practiceStep().target : null,
     onScale: level => onScale(level, scale),
     tickDistance: level => tickDistance(level, scale)
@@ -1013,30 +991,7 @@ function openMenu() {
     <button type="button" class="ghost" data-sheet="parts">パーツの説明</button>
     <button type="button" class="ghost" data-sheet="howto">遊び方と概要</button>
     <button type="button" class="ghost" data-sheet="tune">調整（試作用）</button>
-    <button type="button" class="ghost" data-sheet="art">絵の候補（試作用）</button>
   </div>`);
-}
-
-// 追加の発注書（docs/assets-addendum.md）のデザイン表。画面には組み込まず、開いて見比べる
-const sheetUrl = (dir, file) => new URL(`../../public/graphics/candidates-20261101-addendum/${dir}/${file}`, import.meta.url).href;
-const SHEETS = [
-  ['sheet-ui-title', 'タイトル画面', [['sheet-ui-title-a.png', 'A'], ['sheet-ui-title-b.png', 'B']]],
-  ['sheet-ui-play', 'プレイ画面', [['sheet-ui-play-a-edit.png', 'A 編集中'], ['sheet-ui-play-a-result.png', 'A 結果'], ['sheet-ui-play-a-pc.png', 'A PC'], ['sheet-ui-play-b-edit.png', 'B 編集中'], ['sheet-ui-play-b-result.png', 'B 結果'], ['sheet-ui-play-b-pc.png', 'B PC']]],
-  ['sheet-ui-parts', '画面の部品', [['sheet-ui-parts-a.png', 'A'], ['sheet-ui-parts-b.png', 'B'], ['sheet-ui-parts-b-prediction-detail.png', 'B 予想の3択']]],
-  ['sheet-pipe', '配管', [['sheet-pipe-a.png', 'A'], ['sheet-pipe-b.png', 'B']]],
-  ['sheet-water', '水と目盛り', [['sheet-water-a.png', 'A'], ['sheet-water-b.png', 'B']]],
-  ['logo-aqua', '作品のロゴ', [['logo-aqua-a.png', 'A'], ['logo-aqua-b.png', 'B']]],
-  ['logo-series', 'シリーズのロゴ', [['logo-series-a.png', 'A'], ['logo-series-b.png', 'B']]]
-];
-function openArt() {
-  const label = v => (v === 'a' ? 'A' : v === 'b' ? 'B' : 'なし');
-  const rows = ART_ITEMS.map(([k, name]) => `<div class="art-row"><span>${name}</span><span class="art-choices">${['a', 'b', null].map(v => `<button type="button" class="chip${state.art[k] === v ? ' on' : ''}" data-art="${k}:${v ?? ''}" aria-pressed="${state.art[k] === v}">${label(v)}</button>`).join('')}</span></div>`).join('');
-  const badge = v => new URL(`../../public/graphics/candidates-20261101/ui-badges/ui-badges-${v}.png`, import.meta.url).href;
-  openSheet('絵の候補（試作用）', `<p class="note">Codex が作った候補（採用は未確定）を、資材ごとに切り替えて見比べます。「なし」は今の仮の絵です。この端末にだけ覚えます。噴水と虹はクリア・100点のときに出ます。</p>
-    <div class="art-list">${rows}</div>
-    <p class="note">盤面のバッジはデザイン表です（採用後に図形で作ります）：<a href="${badge('a')}" target="_blank" rel="noopener">A を開く</a>・<a href="${badge('b')}" target="_blank" rel="noopener">B を開く</a></p>
-    <h3 class="sheet-sub">追加のデザイン表（見るだけ。採用後に図形と書式で作ります）</h3>
-    <ul class="plain sheet-links">${SHEETS.map(([dir, name, files]) => `<li>${name}：${files.map(([file, label]) => `<a href="${sheetUrl(dir, file)}" target="_blank" rel="noopener">${label}</a>`).join('・')}</li>`).join('')}</ul>`);
 }
 
 function openRecords() {
@@ -1122,15 +1077,6 @@ function bindScreens() {
   $('sheet').addEventListener('click', e => {
     const b = e.target.closest('button');
     if (!b) { if (e.target === $('sheet')) closeSheet(); return; }
-    if (b.dataset.art) {
-      const [k, v] = b.dataset.art.split(':');
-      state.art[k] = v || null;
-      try { localStorage.setItem(ART_KEY, JSON.stringify(state.art)); } catch { /* 保存できなくても、開いている間は使える */ }
-      applyArt();
-      drawBoard();
-      openArt();
-      return;
-    }
     if (b.dataset.level) { closeSheet(); startMode('continuous', { level: b.dataset.level }); return; }
     if (b.dataset.pick !== undefined) { closeSheet(); state.played = true; selectStage(Number(b.dataset.pick)); return; }
     const k = b.dataset.sheet;
@@ -1140,7 +1086,6 @@ function bindScreens() {
     else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
     else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
     else if (k === 'tune') openTuning();
-    else if (k === 'art') openArt();
   });
   $('menu').addEventListener('click', openMenu);
   $('records').addEventListener('click', openRecords);
@@ -1193,7 +1138,6 @@ function setupOffline() {
 bind();
 // 起動はタイトル画面から（前作と同じ）。初めての人には「チュートリアル」を目立たせる
 selectStage(0);
-applyArt();
 renderTitle();
 // 書体の読み込みで文字の幅が変わるので、読み込み後にも測り直す
 document.fonts?.ready.then(() => { fitConditionHeight(); renderResultToast(); });

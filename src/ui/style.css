@@ -342,20 +342,20 @@ th { color: var(--ink-soft); font-weight: 500; }
 .parts dd { margin: 0; }
 .howto p { margin: 6px 0; font-size: 13.5px; }
 
-/* ---- 絵の候補の見比べ（試作用。docs/assets.md）。精霊とタイトルの背景は body の印で切り替える ---- */
-.art-list { display: grid; gap: 6px; margin: 8px 0; }
-.art-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14px; }
-.art-choices { display: inline-flex; gap: 6px; }
-.art-choices .chip { height: 36px; padding: 0 14px; font-size: 14px; }
-body[data-art-spirit="a"] .spirit, body[data-art-spirit="b"] .spirit {
+/* ---- 採用した絵（docs/assets.md、雰囲気 A）：水の精霊とタイトル画面の背景 ---- */
+.spirit {
   float: left; width: 26px; height: 38px; margin: -2px 6px 0 0; border-radius: 0; transform: none;
-  background: center / contain no-repeat;
+  background: url("../../public/graphics/spirit.png") center / contain no-repeat;
 }
-body[data-art-spirit="a"] .spirit { background-image: url("../../public/graphics/candidates-20261101/spirit/spirit-a.png"); }
-body[data-art-spirit="b"] .spirit { background-image: url("../../public/graphics/candidates-20261101/spirit/spirit-b.png"); }
-body[data-art-title="a"] .title-screen { background: url("../../public/graphics/candidates-20261101/title-portrait/title-portrait-a.png") center / cover no-repeat var(--sky-top); }
-body[data-art-title="b"] .title-screen { background: url("../../public/graphics/candidates-20261101/title-portrait/title-portrait-b.png") center / cover no-repeat var(--sky-top); }
+.chooser-head h3 .spirit { float: none; display: inline-block; width: 22px; height: 32px; vertical-align: middle; }
+.title-screen { background: url("../../public/graphics/title-portrait.webp") center / cover no-repeat var(--sky-top); }
 @media (orientation: landscape) {
-  body[data-art-title="a"] .title-screen { background-image: url("../../public/graphics/candidates-20261101/title-landscape/title-landscape-a.png"); }
-  body[data-art-title="b"] .title-screen { background-image: url("../../public/graphics/candidates-20261101/title-landscape/title-landscape-b.png"); }
+  .title-screen { background-image: url("../../public/graphics/title-landscape.webp"); }
 }
+
+/* ---- 画面の部品の質感（見本 A「白い陶器」）：白い面に、細い縁と内側の白い二重線、ごく淡い影 ---- */
+.cond-card, .switcher .nav, .tools button, .actions .ghost, .title-buttons button, .result, .chooser, .sheet-card, .stage-item, .level-list .level {
+  box-shadow: 0 1px 2px rgba(23, 49, 76, .08), inset 0 0 0 2px rgba(255, 255, 255, .9);
+}
+.actions .primary, .title-buttons button.primary { box-shadow: 0 2px 6px rgba(29, 79, 136, .25), inset 0 1px 0 rgba(255, 255, 255, .35); }
+.board-wrap { box-shadow: 0 1px 3px rgba(23, 49, 76, .1); }

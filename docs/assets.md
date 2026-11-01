@@ -237,3 +237,23 @@ docs/assets-addendum.md の追加発注と発案者の依頼により、Codexの
 - 組み込み：背景は盤面の空の範囲に、部品は SVG の中に画像として置く。資材は版付きの配信資材と、通信なしで使う資材の一覧に含める（ビルドが自動で拾う）
 - 確かめ方：スマホ縦（幅 360・414）・横向き・PC で実画面のスクリーンショットを撮り、部品と配管が背景に埋もれないこと、グラスの水位と目盛りが読めること、バッジが 16px でも読めることを確かめる
 - 画像の合計の大きさ：通信なしで使うため、背景は1枚 600KB 以下を目安に圧縮する（見た目が崩れない範囲で）
+
+
+## 7. 採用（2026-11-01）
+
+発案者が、追加発注の画面の見本 A・B を見比べ、全体の雰囲気を **A「白い陶器」** に決めた（資材ごとに A・B を選ぶのではなく、雰囲気で一括して決める進め方に変更。見本の絵と実画面は一致しないため、実画面で判断する）。
+
+| 資材 | 採用 | 配信用のファイル（scripts/prepare-art.py で候補 A から変換） |
+|---|---|---|
+| bg-trial | A | public/graphics/bg-trial.webp（1024×1024） |
+| title-portrait・title-landscape | A | title-portrait.webp（768×1152）・title-landscape.webp（1280×720） |
+| spirit | A | spirit.png（128×192） |
+| part-spring・part-glass | A | part-spring-{top,middle,bottom}.png・part-glass-{top,middle,bottom}.png（半分の大きさ） |
+| part-basin（台座つき） | A | part-basin.png・part-pedestal-{top,middle}.png |
+| fx-fountain・fx-rainbow | A | fx-fountain-01〜06.png・fx-rainbow.png |
+| ui-badges | A | 画像は使わず、デザイン表 A を図形（SVG）で再現（src/ui/board.js の badge） |
+| sheet-pipe・sheet-ui-parts | A | 配管のつや、画面の部品の質感（白い面・内側の白い二重線・淡い影）を図形と書式で反映 |
+
+- 合わせて約 680KB。通信なしで使う資材に入る。候補（candidates-*）は配信するが、通信なしの資材には入れない
+- 部品と背景の境界は、控えめな縁取りと陰影（assets-addendum 1-2章）
+- 未対応（絵が必要なもの）：見本 A の地面の下の質感（石の多い土）。図形で代用すると品質が下がるため、Codex に依頼する（assets-addendum 8章）
