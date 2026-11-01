@@ -91,7 +91,7 @@ const BADGE_ICON = {
   target: c => `<circle r="3.6" fill="none" stroke="${c}" stroke-width="1.4"/><circle r="1.4" fill="${c}"/>`,
   gate: c => `<rect x="-4" y="-4" width="1.6" height="8" fill="${c}"/><rect x="2.4" y="-4" width="1.6" height="8" fill="${c}"/><path d="M-2.4 -1.6 H2.4 M-2.4 1.6 H2.4" stroke="${c}" stroke-width="1.1"/>`,
   mouth: c => `<rect x="-3.8" y="-3.8" width="7.6" height="7.6" rx="1" fill="none" stroke="${c}" stroke-width="1.3"/><rect x="-2.2" y="-2.2" width="4.4" height="2.6" fill="${c}"/>`,
-  pipe: c => `<rect x="-3.4" y="-1.4" width="6.8" height="2.8" fill="${c}"/><rect x="-4.6" y="-2.6" width="1.6" height="5.2" rx=".4" fill="${c}"/><rect x="3" y="-2.6" width="1.6" height="5.2" rx=".4" fill="${c}"/>`,
+  pipe: (c, t = 1) => { const h = { 1: 3.4, 2: 2.2, 3: 1.2 }[t] ?? 2.2; return `<rect x="-3.4" y="${-h / 2}" width="6.8" height="${h}" fill="${c}"/><rect x="-4.6" y="-2.6" width="1.6" height="5.2" rx=".4" fill="${c}"/><rect x="3" y="-2.6" width="1.6" height="5.2" rx=".4" fill="${c}"/>`; },
   cup: c => `<path d="M-3.4 -3.8 H3.4 L2.5 3.8 H-2.5 Z" fill="none" stroke="${c}" stroke-width="1.3" stroke-linejoin="round"/>`
 };
 const BADGE_MARK = {
@@ -101,9 +101,8 @@ const BADGE_MARK = {
 };
 const textWidth = (text, size) => [...String(text)].reduce((n, ch) => n + (/[\x20-\x7e]/.test(ch) ? size * 0.6 : size * 1.02), 0);
 // x：align が 'middle' なら中心、'start' なら左端。戻り値は幅
-function badge(out, { x, y, text, icon, tone = 'light', mark = null, align = 'middle', size = 9.5, dashed = false }) {
+function badge(out, { x, y, text, icon, iconArg, tone = 'light', mark = null, align = 'middle', size = 9.5, dashed = false, h = 15 }) {
   const t = BADGE_TONE[tone];
-  const h = 15;
   const iconW = icon ? 12 : 0;
   const markW = mark ? 13 : 0;
   const w = Math.round(6 + iconW + textWidth(text, size) + 6 + markW);
@@ -113,7 +112,7 @@ function badge(out, { x, y, text, icon, tone = 'light', mark = null, align = 'mi
   out.push(`<g class="board-badge" pointer-events="none">`);
   out.push(`<rect x="${x0}" y="${y0}" width="${w}" height="${h}" rx="3.5" fill="${t.fill}" stroke="${t.edge}" stroke-width="1.2" ${dashed ? 'stroke-dasharray="2.5 1.8"' : ''}/>`);
   out.push(`<rect x="${x0 + 1.6}" y="${y0 + 1.6}" width="${w - 3.2}" height="${h - 3.2}" rx="2.2" fill="none" stroke="${t.inner}" stroke-width=".8"/>`);
-  if (icon) out.push(`<g transform="translate(${x0 + 9} ${y})">${BADGE_ICON[icon](t.icon)}</g>`);
+  if (icon) out.push(`<g transform="translate(${x0 + 9} ${y})">${BADGE_ICON[icon](t.icon, iconArg)}</g>`);
   out.push(`<text x="${x0 + 6 + iconW + textWidth(text, size) / 2}" y="${y + size * 0.36}" font-size="${size}" font-weight="700" fill="${t.ink}" text-anchor="middle" class="board-badge-text">${text}</text>`);
   if (mark) {
     const mx = x0 + w - markW;
@@ -176,13 +175,13 @@ function drawPipe(out, layout, c, model) {
     out.push(`<path d="${d}" fill="none" stroke="var(--card)" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>`);
     out.push(`<path d="${d}" fill="none" stroke="#e3ebf3" stroke-width="${Math.max(1, w * 0.3)}" stroke-linecap="round" stroke-linejoin="round" opacity=".9" transform="translate(0 ${w * 0.2})"/>`);
   }
-  // 太さの札。つないだ管は青地に白文字（つないだ後も太さが分かる）、候補は白地に灰色の点線。
-  // 太さに細さ（流れにくさ）の数字を添える（「太1」）。流れる量＝高さの差÷細さ を札から計算できるようにする（2026-11-01 発案者）。
-  // 太さを選べる候補は「細3〜太1」、つないだ後は選んだ太さ
+  // 細さの札。つないだ管は青、候補は白（太さを選べる候補は点線の縁）。
+  // 「細さ 1」と、計算に使う数字だけを出す（以前の「太1・中2・細3」は太さの言葉と数字が混ざって分かりにくかった。2026-11-01 発案者）。
+  // 印の線の太さで、太い・細いも見て分かるようにする。太さを選べる候補は「細さ 1〜3」
   if (on || phase === 'edit') {
-    const thickText = t => `${THICK_LABEL[t]}${t}`;
-    const text = !on && c.adjustable ? `${thickText(Math.max(...c.adjustable.map(Number)))}〜${thickText(Math.min(...c.adjustable.map(Number)))}` : thickText(thin);
-    badge(out, { x: mx, y: my, text, icon: 'pipe', tone: on ? 'blue' : 'light', dashed: !on && Boolean(c.adjustable) });
+    const range = c.adjustable?.map(Number) ?? [];
+    const text = !on && c.adjustable ? `細さ ${Math.min(...range)}〜${Math.max(...range)}` : `細さ ${thin}`;
+    badge(out, { x: mx, y: my, text, icon: 'pipe', iconArg: on || !c.adjustable ? thin : 2, tone: on ? 'blue' : 'light', dashed: !on && Boolean(c.adjustable) });
   }
   if (c.gate) {
     const closed = model.gateClosed;
@@ -260,6 +259,10 @@ export function renderBoard(svg, model) {
     <linearGradient id="bow" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#e98a8a"/><stop offset=".22" stop-color="#efc173"/><stop offset=".42" stop-color="#e6e07d"/>
       <stop offset=".6" stop-color="#8fd3a3"/><stop offset=".8" stop-color="#83b6ea"/><stop offset="1" stop-color="#ad94e3"/></linearGradient>
+    <!-- 絵の形に沿った縁取り（明るい背景で白い噴水盤・噴水が溶け込まないように）と、虹の色を鮮やかにする -->
+    <filter id="art-edge" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="0" stdDeviation=".8" flood-color="#1d4f88" flood-opacity=".55"/></filter>
+    <filter id="water-glow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1.2" flood-color="#2a6db5" flood-opacity=".75"/></filter>
+    <filter id="vivid" x="-10%" y="-10%" width="120%" height="120%"><feColorMatrix type="saturate" values="2"/><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="#ffffff" flood-opacity=".9"/></filter>
   </defs>`);
   out.push(`<rect x="0" y="0" width="${VIEW_W}" height="${GROUND}" fill="url(#sky)"/>`);
   if (pick.bg) {
@@ -362,16 +365,19 @@ export function renderBoard(svg, model) {
     out.push(`<g class="basin" transform="translate(0 ${dy})">`);
     // グラスから噴水盤への口
     out.push(`<path d="M${node.cx + TOWER_W / 2 - 2} ${GROUND - 9} L${cx - 10} ${GROUND - 9} L${cx - 10} ${b.top + 6}" fill="none" stroke="var(--stone-edge)" stroke-width="7" stroke-linejoin="round"/>`);
-    // 口にも細さがある（配管と同じく流れる量の計算に入る）。見えないと計算が合わないので、器の正面に「口 太1」と書く
-    // （口とグラスのすき間は狭く、札が隠れるため。2026-11-01 発案者）
+    // 出口にも細さがある（配管と同じく流れる量の計算に入る）。見えないと計算が合わないので、器の下に配管と同じ札「出口 細さ 1」を置く（2026-11-01 発案者）
     const mouth = 1 / Number(o.conductance ?? 1);
-    const mouthText = Number.isInteger(mouth) && THICK_LABEL[mouth] ? `${THICK_LABEL[mouth]}${mouth}` : `細さ${+mouth.toFixed(2)}`;
+    const mouthText = `出口 細さ ${Number.isInteger(mouth) ? mouth : +mouth.toFixed(2)}`;
     if (flowing && (settled || model.flowStarted?.has(o.id))) {
       out.push(`<path d="M${cx - 10} ${b.top + 6} Q${cx - 6} ${b.top - 8} ${cx - 2} ${b.top + 4}" fill="none" stroke="var(--water-mid)" stroke-width="3" stroke-linecap="round"/>`);
     }
     out.push(`<path class="bowl" d="${b.bowl}" fill="${pick.basin ? 'none' : 'var(--stone)'}" stroke="${pick.basin ? 'none' : 'var(--stone-edge)'}" stroke-width="1.5"/>`);
     if (pick.basin) out.push(`<ellipse cx="${cx}" cy="${GROUND - 2}" rx="24" ry="3.5" fill="rgba(29, 79, 136, .15)"/>`);
-    if (pick.basin) out.push(`<image href="${art('part-basin.png')}" x="${cx - 27}" y="${b.top - 3}" width="54" height="${54 * 208 / 384}" preserveAspectRatio="xMidYMid meet"/>`);
+    if (pick.basin) {
+      out.push(`<image href="${art('part-basin.png')}" x="${cx - 27}" y="${b.top - 3}" width="54" height="${54 * 208 / 384}" preserveAspectRatio="xMidYMid meet" filter="url(#art-edge)"/>`);
+      // 空のときも器の内側が分かるよう、内側をごく淡い青にする
+      out.push(`<path d="${b.bowl}" fill="rgba(75, 154, 216, .14)" stroke="none"/>`);
+    }
     // 指定量の印と、届いた量
     const markY = b.top + 9;
     // 届いた量が0のときは水を描かない。器の底は丸く GROUND まで下がるので、量0の水面を底の一番下に合わせる
@@ -385,7 +391,6 @@ export function renderBoard(svg, model) {
         out.push(`<path d="M${b.right + 1} ${b.top} q4 8 1 18 M${b.left - 1} ${b.top} q-4 8 -1 18" fill="none" stroke="var(--water-mid)" stroke-width="2.4" stroke-linecap="round"/>`);
       }
     }
-    badge(out, { x: cx, y: b.top - 11, text: `口 ${mouthText}`, icon: 'mouth', size: 9 });
     out.push(`<line x1="${b.left + 3}" y1="${markY}" x2="${b.right - 3}" y2="${markY}" stroke="var(--gold)" stroke-width="2"/>`);
     // クリアの噴水と、100点の虹（2026-11-01 発案者）。ジングルの鳴り始めと同時に噴き上がり、
     // 100点のときは噴き上がった後に虹がかかる。NGでは噴かない。
@@ -396,8 +401,9 @@ export function renderBoard(svg, model) {
         if (model.outcome === 'perfect') {
           const k = model.reducedMotion ? 1 : Math.max(0, Math.min(1, (since - RAINBOW_AFTER_MS) / 700));
           if (model.reducedMotion ? since >= RAINBOW_AFTER_MS : k > 0) {
-            const opacity = 0.9 * (1 - (1 - k) ** 3);
-            if (pick.rainbow) out.push(`<image href="${art('fx-rainbow.png')}" x="${cx - 54}" y="${b.top - 76}" width="108" height="72" opacity="${opacity.toFixed(3)}"/>`);
+            const opacity = 1 - (1 - k) ** 3;
+            // 虹ははっきり見せる（2026-11-01 発案者）：大きく、色を鮮やかに、白い縁で空から浮かせる
+            if (pick.rainbow) out.push(`<image href="${art('fx-rainbow.png')}" x="${cx - 66}" y="${b.top - 92}" width="132" height="88" opacity="${opacity.toFixed(3)}" filter="url(#vivid)"/>`);
             else out.push(`<path d="M${cx - 30} ${b.top - 4} A30 34 0 0 1 ${cx + 30} ${b.top - 4}" fill="none" stroke="url(#bow)" stroke-width="7" opacity="${opacity.toFixed(3)}"/>`);
           }
         }
@@ -405,15 +411,17 @@ export function renderBoard(svg, model) {
           // 6コマ。140ミリ秒ごとに進め、高く上がった後は4〜6コマ目を繰り返す（コマの速さは仮の値）
           const n = Math.floor(since / 140);
           const frame = model.reducedMotion ? 6 : n < 6 ? n + 1 : 4 + ((n - 6) % 3);
-          out.push(`<image href="${art(`fx-fountain-0${frame}.png`)}" x="${cx - 30}" y="${b.top - 72}" width="60" height="80"/>`);
+          out.push(`<image href="${art(`fx-fountain-0${frame}.png`)}" x="${cx - 30}" y="${b.top - 72}" width="60" height="80" filter="url(#water-glow)"/>`);
         } else drawFountain(out, cx, b.top, since, model.reducedMotion);
       }
     }
-    out.push('</g>');
-    if (dy < 0) badge(out, { x: cx, y: b.top + dy - 29, text: `口の高さ ${o.height}`, icon: 'mouth', size: 9 });
+    // 目標の量の名札：前作のプリズム名のように、噴水盤そのものに大きく乗せる。結果で色と印が変わる（2026-11-01 発案者）
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
     const [vt, vm] = verdict ? VERDICT_BADGE[verdict.verdict] ?? ['light', null] : ['light', null];
-    badge(out, { x: cx, y: GROUND + 14, text: `指定 ${target}`, icon: 'target', tone: vt, mark: vm });
+    badge(out, { x: cx, y: b.top + 12, text: `目標 ${target}`, icon: 'target', tone: vt === 'light' ? 'blue' : vt, mark: vm, size: 11, h: 18 });
+    out.push('</g>');
+    if (dy < 0) badge(out, { x: cx, y: b.top + dy - 14, text: `口の高さ ${o.height}`, icon: 'mouth', size: 9 });
+    badge(out, { x: cx, y: GROUND + 14 + (dy < 0 ? 0 : 0), text: mouthText, icon: 'pipe', iconArg: Math.round(mouth), size: 9 });
   }
   drawGuide(out, stage, layout, model.guide);
   svg.innerHTML = out.join('');

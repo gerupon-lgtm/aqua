@@ -13,7 +13,7 @@ const run = (index, ids) => {
 
 test('NG（多すぎ）：理由と、流れにくさを増やす見直しを短く示す', () => {
   const { e } = run(0, ['SA', 'AB', 'SB']);
-  assert.equal(e.summary, '噴水盤：3（指定 2）。多すぎます。');
+  assert.equal(e.summary, '噴水盤：3（目標 2）。多すぎます。');
   assert.ok(e.advice.includes('流れにくさを増やすと減ります（細く・遠く・本数を減らす）。'));
   assert.ok(e.steps.includes('グラスB 3 → 噴水盤 0：差 3 ÷ 細さ 1 ＝ 3'));
 });

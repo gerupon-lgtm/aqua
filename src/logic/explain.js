@@ -72,7 +72,7 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     summary = wrong.map(o => {
       const label = outletOf(o.id).label;
       if (o.flow.isZero()) return `${label}に水が届いていません。`;
-      return `${label}：${formatAmount(o.flow)}（指定 ${o.target}）。${o.verdict === 'short' ? '足りません' : '多すぎます'}。`;
+      return `${label}：${formatAmount(o.flow)}（目標 ${o.target}）。${o.verdict === 'short' ? '足りません' : '多すぎます'}。`;
     }).join('');
     for (const o of wrong) {
       const tower = outletOf(o.id).tower;

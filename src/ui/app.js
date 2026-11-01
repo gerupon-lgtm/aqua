@@ -12,7 +12,7 @@ import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 
-const APP_VERSION = '0.14.0';
+const APP_VERSION = '0.14.1';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -1033,8 +1033,8 @@ function openStageList() {
 const PARTS_HTML = `<dl class="parts">
   <dt>泉</dt><dd>水が出るところ。泉の水の高さが、流れのもとになります。</dd>
   <dt>グラス</dt><dd>水がたまります。水位で音が決まり、水が多いほど低い音。目盛りに乗ると澄んだ和音になります。</dd>
-  <dt>配管</dt><dd>泉とグラスをつなぎます。札の数字は細さ（太1・中2・細3）。流れる量＝高さの差÷細さ。縦につなぐと細さは足し算、並べると流れやすくなります。</dd>
-  <dt>噴水盤</dt><dd>届けたい量（指定）を受けます。口にも細さ（口 太1）があります。口が高い受け皿は、その高さより上の分だけ流れます。</dd>
+  <dt>配管</dt><dd>泉とグラスをつなぎます。札の数字は細さ（1が太く、3が細い）。流れる量＝高さの差÷細さ。縦につなぐと細さは足し算、並べると流れやすくなります。</dd>
+  <dt>噴水盤</dt><dd>届けたい量（目標）を受けます。出口にも細さ（出口 細さ 1）があります。口が高い受け皿は、その高さより上の分だけ流れます。</dd>
   <dt>太さを選べる配管</dt><dd>タップして太さを選びます。</dd>
   <dt>サイフォンと桶</dt><dd>壁を越える配管です。桶で呼び水をすると流れます。桶の数には限りがあります。</dd>
   <dt>水門</dt><dd>流したあと自動で閉じます。開いたときと閉じたときの両方で、指定どおりに届けます。</dd>
