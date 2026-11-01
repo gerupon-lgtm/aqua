@@ -10,7 +10,7 @@
 | 要件定義 | ドラフト v0.3（【想定】はすべて承認済み。文書全体の確認は未実施） |
 | 基本設計 | v0.1 |
 | 試作・実装 | 試作中（v0.9.0：1〜30面。お試し1〜6は固定、7〜30面は検査済みの出題を各8つ用意し、面を選ぶたびに抽選（npm run generate:challenges）。計算・盤面・音・解説、水門、太さを変えられる配管、サイフォンと桶、口の高い受け皿、選択肢のトースト、操作音とNGのジングル、クリアの噴水と100点の虹、成績の自動保存、実行記録の書き出し、通信なしの利用（PWA）。GitHub Pages に公開。実機は一部のみ発案者が確認。自由作成・チュートリアルは未実装。面の難しさは試遊で確認する） |
-| 公開 | 試作を GitHub Pages で公開中（https://gerupon-lgtm.github.io/aqua/）。独自ドメイン aqua.sikumilab.com は未設定 |
+| 公開 | 試作を GitHub Pages で公開中（https://aqua.sikumilab.com/ 。2026-11-01 発案者が独自ドメインを設定。旧アドレス https://gerupon-lgtm.github.io/aqua/ は新しいアドレスへ転送される） |
 
 ## 文書
 
@@ -29,4 +29,4 @@
 - `npm run build:artifact`：確認用に1つのページ（`artifact/aqua-notes.html`）へまとめる
 - `npm run icons`：アイコン（`public/`）を作り直す
 
-main に送ると、GitHub Actions がテストとビルドを行い、GitHub Pages（https://gerupon-lgtm.github.io/aqua/）へ公開する。
+main に送ると、GitHub Actions がテストとビルドを行い、GitHub Pages（https://aqua.sikumilab.com/）へ公開する。

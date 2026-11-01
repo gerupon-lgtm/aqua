@@ -15,7 +15,7 @@
 - JavaScript（ES modules、追加のライブラリなし）、盤面はSVG、音は Web Audio、PWA
 - 数値は分数（`BigInt`）。浮動小数点は描画と発音の直前だけ
 - コマンド（前作と同じ構成）：`npm test`（テスト）、`npm run check`（構文）、`npm run build`（ビルド）、`npm run dev`（開発用サーバー）、`npm run generate:challenges`（出題の生成と検査）
-- GitHub で管理し、Cloudflare から aqua.sikumilab.com へ自動公開
+- GitHub で管理し、main に送ると GitHub Actions で GitHub Pages（独自ドメイン aqua.sikumilab.com）へ自動公開
 
 ## 変更の扱い（要件定義書0章）
 
