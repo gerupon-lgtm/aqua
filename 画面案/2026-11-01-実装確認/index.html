@@ -6,7 +6,7 @@
 body{height:auto;padding:16px;box-sizing:border-box}h1{font-size:18px;margin:0 0 8px}p{margin:6px 0;font-size:13px}label{font-size:13px}select,button{font:inherit;padding:6px;border:1px solid #b4c8dc;border-radius:6px;background:white;color:#17314c}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.compare{display:grid;grid-template-columns:repeat(2,minmax(0,360px));gap:16px;align-items:start}.preview{border:1px solid #c6d6e6;border-radius:12px;overflow:hidden;background:#eef5fb}.preview h2{font-size:14px;margin:0;padding:8px 12px;background:white}.preview svg{display:block;width:100%;aspect-ratio:360/470;touch-action:manipulation}.caption{color:#566d86;max-width:736px}#status{min-height:1.5em}@media(max-width:650px){.compare{grid-template-columns:minmax(0,360px)}}
 </style>
 <h1>アクア・ノーツ：実際の盤面で比較</h1>
-<p class="caption">v0.14.2 作業中・未公開。本番と同じ描画・計算を使っています。管をタップして接続できます。「必要量」は仮表記です。</p>
+<p class="caption">v0.14.3と同じ盤面描画。本番と同じ描画・計算を使っています。管をタップして接続できます。「必要量」は仮表記です。</p>
 <div class="controls"><label>面 <select id="stage"></select></label><label>出題 <select id="question"></select></label><label>状態 <select id="mode"><option value="edit">編集・未接続</option><option value="all">編集・全部接続</option><option value="perfect" selected>100点の結果</option><option value="ng">届かない結果</option><option value="low">低い水位の結果</option></select></label><button id="clear">接続を消す</button></div>
 <p id="condition"></p><p id="status"></p>
 <div class="compare"><section class="preview"><h2>水が入った状態</h2><svg id="round" viewBox="0 0 360 470" role="img" aria-label="陶器の枠とガラスの器"></svg></section><section class="preview"><h2>空の器</h2><svg id="pill" viewBox="0 0 360 470" role="img" aria-label="空の陶器とガラスの器"></svg></section></div>

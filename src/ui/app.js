@@ -11,8 +11,9 @@ import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText } from '../content/tutorial.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
+import { resultCardDelay } from './visual-timing.js';
 
-const APP_VERSION = '0.14.2';
+const APP_VERSION = '0.14.3';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -245,7 +246,7 @@ function startRun() {
     later(settleAt, () => settleSound(last));
   }
   later(settleAt + (evaluation.outcome === 'ng' ? timing.jingleNgMs : timing.jingleMs), () => audio.jingle(evaluation.outcome));
-  later(settleAt + (evaluation.outcome === 'ng' ? timing.cardNgMs : timing.cardClearMs), showResult);
+  later(settleAt + resultCardDelay(evaluation.outcome, timing), showResult);
   renderAll();
   loop();
 }
@@ -704,7 +705,7 @@ function openTuning() {
   sheet.innerHTML = `
     <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="tune-title">
       <h2 id="tune-title">タイミングの調整（試作用）</h2>
-      <p class="note">グラスハープの余韻に合わせて決めるための仮の設定です。この端末にだけ保存し、次に水を流したときから使います。</p>
+      <p class="note">グラスハープの余韻に合わせて決めるための仮の設定です。この端末にだけ保存し、次に水を流したときから使います。100点では、虹を見せてから結果を出す時間を優先します。</p>
       <form id="tune-form">
         ${TIMING_FIELDS.map(([key, label, min, max, step]) => `
           <label class="field" for="tune-${key}"><span>${label}</span>

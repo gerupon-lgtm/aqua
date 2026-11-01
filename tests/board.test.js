@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { STAGES } from '../src/content/stages.js';
 import { analyzeStage, evaluate, thinnessOf } from '../src/logic/play.js';
 import { renderBoard, layoutFor } from '../src/ui/board.js';
+import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS } from '../src/ui/visual-timing.js';
 
 // 盤面の描画の点検（DOMを使わず、描いたSVGの文字列を調べる）
 function draw(stage, config, options = {}) {
@@ -52,6 +53,18 @@ test('控えめな演出では、噴水と虹の表示が時刻で揺れない',
   const a = draw(STAGES[0], config, { fountainAt: 0, time: 1600, reducedMotion: true });
   const b = draw(STAGES[0], config, { fountainAt: 0, time: 2600, reducedMotion: true });
   assert.equal(a.svg, b.svg);
+});
+
+test('通常の動きでも、虹が薄い途中から出そろうまでを結果カードより先に描く', () => {
+  const config = { connected: new Set(['SB']), primed: new Set(), thickness: {} };
+  const middle = draw(STAGES[0], config, { fountainAt: 0, time: RAINBOW_AFTER_MS + RAINBOW_FADE_MS / 2, reducedMotion: false });
+  const opacity = Number(middle.svg.match(/class="rainbow" opacity="([\d.]+)"/)?.[1]);
+  assert.ok(opacity > 0 && opacity < 1, '虹が薄い途中の状態がある');
+  const fullAt = RAINBOW_AFTER_MS + RAINBOW_FADE_MS;
+  const full = draw(STAGES[0], config, { fountainAt: 0, time: fullAt, reducedMotion: false });
+  assert.ok(full.svg.includes('class="rainbow" opacity="1.000"'));
+  const timing = { jingleMs: 1400, cardClearMs: 2300, cardNgMs: 2300 };
+  assert.ok(resultCardDelay('perfect', timing) - timing.jingleMs >= fullAt + 500);
 });
 
 test('届いた噴水盤には水を描く', () => {

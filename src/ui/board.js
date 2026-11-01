@@ -1,5 +1,6 @@
 // 断面の盤面（SVG）。真横から見た図で、画面の上下がそのまま高さ（screens.md 2章）。
 // 計算は分数で済ませてあり、ここでは描画の直前に小数へ直すだけ。
+import { RAINBOW_AFTER_MS, RAINBOW_FADE_MS } from './visual-timing.js';
 
 export const VIEW_W = 360;
 export const VIEW_H = 470;
@@ -307,7 +308,6 @@ function surfacePath(x0, x1, y, amp, phase) {
 }
 
 // 噴水：中央の水柱と、左右へ落ちるしぶき。噴き上がり0.6秒、その後は高さを少しゆらしながら続ける
-const RAINBOW_AFTER_MS = 800; // 100点：噴き始めから虹が出始めるまで
 function drawFountain(out, cx, top, since, still) {
   const rise = still ? 1 : Math.min(1, since / 600);
   const ease = 1 - (1 - rise) ** 2;
@@ -533,7 +533,7 @@ export function renderBoard(svg, model) {
       const since = model.time - model.fountainAt;
       if (since >= 0) {
         if (model.outcome === 'perfect') {
-          const k = model.reducedMotion ? 1 : Math.max(0, Math.min(1, (since - RAINBOW_AFTER_MS) / 700));
+          const k = model.reducedMotion ? 1 : Math.max(0, Math.min(1, (since - RAINBOW_AFTER_MS) / RAINBOW_FADE_MS));
           if (model.reducedMotion ? since >= RAINBOW_AFTER_MS : k > 0) {
             const opacity = 1 - (1 - k) ** 3;
             drawRainbow(out, cx, b.top, opacity);
