@@ -18,7 +18,7 @@ const FM_TIMBRES = {
   fm2: { ratio: 2, peak: 0.7, rest: 0.08 }
 };
 
-// 操作音。押したことが分かる仕組み（ボタンは1音、水路をつなぐと2音、グラスの音の間は鳴らさない）は前作 prism に合わせ、
+// 操作音。押したことが分かる仕組み（ボタンは1音、配管をつなぐと2音、グラスの音の間は鳴らさない）は前作 prism に合わせ、
 // 音そのものはこの作品に合わせて柔らかくする（2026-11-01 発案者）：正弦波の水滴のような短い音で、少し下から音程が上がり、
 // 軽く残響を通す。行は [MIDI, 開始の秒, 音量]
 const UI_DECAY = 0.22;
@@ -138,7 +138,7 @@ export class GlassAudio {
     this.tone(freq, { ...options, at });
   }
 
-  // 操作音：ボタンを押したとき（tap）、水路をつないだとき（wire）。グラスの音が鳴っている間は鳴らさない
+  // 操作音：ボタンを押したとき（tap）、配管をつないだとき（wire）。グラスの音が鳴っている間は鳴らさない
   cue(kind) {
     if (!this.ctx || this.muted || this.now < this.towerUntil) return;
     if (this.ctx.state !== 'running') {

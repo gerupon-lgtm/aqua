@@ -31,7 +31,7 @@ function shuffle(list, random) {
   return a;
 }
 
-// 数値の組み合わせ：泉の高さ × 各水路の細さ（太さを選べる水路は選ぶ側なので変えない）
+// 数値の組み合わせ：泉の高さ × 各配管の細さ（太さを選べる配管は選ぶ側なので変えない）
 function valueGrid(stage) {
   const v = stage.vary;
   let grid = (v.spring ?? [stage.spring.height]).map(spring => ({ spring, thinness: {} }));

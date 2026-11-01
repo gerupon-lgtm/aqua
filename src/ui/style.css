@@ -100,7 +100,7 @@ button { font: inherit; color: inherit; }
 .board-wrap {
   grid-area: board; min-height: 0; border-radius: 14px; overflow: hidden;
   background: var(--sky-top); border: 1px solid var(--line);
-  display: flex; align-items: flex-end;
+  display: flex; align-items: flex-end; position: relative;
 }
 #board { width: 100%; height: 100%; display: block; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
 #board.swipeable { touch-action: none; cursor: crosshair; }
@@ -123,12 +123,35 @@ button { font: inherit; color: inherit; }
 .primary:disabled { opacity: .45; cursor: default; }
 .ghost { background: var(--card); border: 1px solid var(--line); }
 .ghost:disabled { opacity: .5; cursor: default; }
+/* 開いている間は色で示す。文字を変えるとボタンの幅が変わり、折り返して盤面が縮むため */
+.ghost[aria-expanded="true"] { background: #eaf3fb; border-color: var(--blue); color: var(--blue-deep); }
+/* 下の欄のボタンは1行に収める（折り返すと盤面が縮む） */
+.panel > .actions { flex-wrap: nowrap; }
+.panel > .actions button { padding: 0 14px; white-space: nowrap; min-width: 0; }
 button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
-.result {
-  background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px;
-  display: grid; gap: 6px; max-height: 38vh; overflow-y: auto;
+/* 結果は盤面の中に重ねるトーストで出す。盤面の大きさは変えない（2026-11-01 発案者）。
+   前作 prism のクリア・未達成のトーストに合わせ、右上の×・トースト以外へのタッチ・Esc で閉じる。
+   置き場所は app.js が噴水盤を避けて決める。長くなったら（解説・記録）盤面の高さの中でスクロールする */
+.result-toast {
+  position: absolute; z-index: 2; max-height: calc(100% - 12px);
+  display: flex; flex-direction: column; animation: toast-in .2s ease-out;
 }
+.result {
+  background: rgba(255, 255, 255, .97); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px;
+  display: grid; gap: 8px; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  box-shadow: 0 4px 14px rgba(23, 49, 76, .22);
+}
+.result.perfect { border-color: var(--gold); }
+.result-toast .result-head { position: relative; padding-right: 40px; }
+.result-head .close {
+  position: absolute; top: -4px; right: -4px; width: 36px; height: 36px; border-radius: 18px; border: 1px solid var(--line);
+  background: var(--card); color: var(--ink-soft); font-size: 18px; line-height: 1; cursor: pointer; flex: none;
+}
+.result-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.result-actions button { height: 42px; padding: 0 14px; border-radius: 10px; cursor: pointer; font-weight: 600; white-space: nowrap; }
+/* 入らないときの小さな形：出口ごとの行を省く（結果の全文は「解説」と「くわしい記録」で読める） */
+.result-toast.compact .outlets, .result-toast.compact .warn { display: none; }
 .result-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; }
 .badge { font-family: var(--font-logo); font-weight: 600; font-size: 20px; letter-spacing: .04em; }
 .result.perfect .badge, .result.clear .badge { color: var(--blue-deep); }
@@ -153,7 +176,6 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .explain p { margin: 0; }
 .explain ul { margin: 0; padding-left: 1.2em; display: grid; gap: 3px; }
 .explain .calc { font-variant-numeric: tabular-nums; color: var(--ink-soft); }
-.result:has(.explain) { max-height: 44vh; }
 details summary { cursor: pointer; font-size: 13px; color: var(--ink-soft); }
 .table-wrap { overflow-x: auto; margin-top: 6px; }
 table { border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; width: 100%; }
@@ -193,11 +215,10 @@ th { color: var(--ink-soft); font-weight: 500; }
   .cond { align-content: start; }
   .panel { align-content: end; }
   .foot { grid-area: bar; justify-content: flex-end; gap: 8px; display: none; }
-  .result { max-height: 52vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .toast { animation: none; }
+  .toast, .result-toast { animation: none; }
 }
 
 /* 太さ・呼び水を選ぶ（S-04） */

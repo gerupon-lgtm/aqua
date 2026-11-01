@@ -76,7 +76,7 @@ function segmentDistance(px, py, [ax, ay], [bx, by]) {
 
 const THICK_LABEL = { 1: '太', 2: '中', 3: '細' };
 
-// 1本の水路を描く。サイフォンの未開通は山に空気（泡）がたまった様子で示す（要件5.2、screens.md 2章）
+// 1本の配管を描く。サイフォンの未開通は山に空気（泡）がたまった様子で示す（要件5.2、screens.md 2章）
 function drawPipe(out, layout, c, model) {
   const { connected, phase, view, primed, selected } = model;
   const { d, reversed, mx, my, gx = mx } = pipePath(layout, c);
@@ -123,7 +123,7 @@ function drawPipe(out, layout, c, model) {
   }
   if (c.gate) {
     const closed = model.gateClosed;
-    // 印は操作を受け取らない（下の水路のタップを邪魔しない）
+    // 印は操作を受け取らない（下の配管のタップを邪魔しない）
     out.push(`<rect x="${gx - 5}" y="${my - 12}" width="10" height="24" rx="2" fill="${closed ? 'var(--ink)' : 'var(--card)'}" stroke="var(--ink)" stroke-width="1.5" pointer-events="none"/>`);
     out.push(`<text x="${gx + 9}" y="${my + 4}" class="tiny" text-anchor="start" pointer-events="none">水門${closed ? '（閉）' : ''}</text>`);
   }
@@ -209,7 +209,7 @@ export function renderBoard(svg, model) {
     for (let yy = y + 14; yy < GROUND; yy += 14) out.push(`<line x1="${x - 8}" y1="${yy}" x2="${x + 8}" y2="${yy}" stroke="var(--stone-edge)" stroke-width="1"/>`);
   }
 
-  // 地面の下を通る水路（サイフォンはグラスの後に描いて、グラスの中の入口が見えるようにする）
+  // 地面の下を通る配管（サイフォンはグラスの後に描いて、グラスの中の入口が見えるようにする）
   for (const c of stage.candidates.filter(c => !c.siphon)) drawPipe(out, layout, c, model);
 
   // 泉
@@ -274,13 +274,13 @@ export function renderBoard(svg, model) {
     // 口の高さが0より上の出口は、口と噴水盤をその高さへ持ち上げ、台の上に置く
     const dy = layout.yOf(Number(o.height)) - GROUND;
     if (dy < 0) out.push(`<rect x="${cx - 14}" y="${GROUND - 4 + dy}" width="28" height="${4 - dy}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
-    out.push(`<g transform="translate(0 ${dy})">`);
+    out.push(`<g class="basin" transform="translate(0 ${dy})">`);
     // グラスから噴水盤への口
     out.push(`<path d="M${node.cx + TOWER_W / 2 - 2} ${GROUND - 9} L${cx - 10} ${GROUND - 9} L${cx - 10} ${b.top + 6}" fill="none" stroke="var(--stone-edge)" stroke-width="7" stroke-linejoin="round"/>`);
     if (flowing && (settled || model.flowStarted?.has(o.id))) {
       out.push(`<path d="M${cx - 10} ${b.top + 6} Q${cx - 6} ${b.top - 8} ${cx - 2} ${b.top + 4}" fill="none" stroke="var(--water-mid)" stroke-width="3" stroke-linecap="round"/>`);
     }
-    out.push(`<path d="${b.bowl}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+    out.push(`<path class="bowl" d="${b.bowl}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
     // 指定量の印と、届いた量
     const markY = b.top + 9;
     if (verdict) {

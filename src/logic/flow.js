@@ -1,14 +1,14 @@
 // 流れの計算（logic-design 4章）。落ち着いた後の状態だけを求める。
-// 試作の範囲：泉1つ・グラス・出口・水路。サイフォンと水門はまだ扱わない。
+// 試作の範囲：泉1つ・グラス・出口・配管。サイフォンと水門はまだ扱わない。
 //
 // 回路の形：
 //   spring:  { id, height }                       泉。水位が height に固定
 //   towers:  [{ id }]                             グラス。水位が未知
 //   outlets: [{ id, tower, height, conductance }] 出口。口の高さと流れやすさ。水を出すだけ
-//   pipes:   [{ id, a, b, conductance }]          つないだ水路。流れやすさ＝1÷細さ
+//   pipes:   [{ id, a, b, conductance }]          つないだ配管。流れやすさ＝1÷細さ
 import { Fraction, ZERO } from './fraction.js';
 
-// 泉から水路をたどって行けるグラス（出口からはたどらない、4.1）
+// 泉から配管をたどって行けるグラス（出口からはたどらない、4.1）
 function reachableTowers(circuit) {
   const towerIds = new Set(circuit.towers.map(t => t.id));
   const seen = new Set([circuit.spring.id]);

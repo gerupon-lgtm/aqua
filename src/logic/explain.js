@@ -86,7 +86,7 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     if (offScale.length) advice.push(`目盛りからずれたグラスがあり、${kind === 'chord' ? '和音が濁りました' : '音がずれました'}。`);
   } else if (outcome === 'clear') {
     summary = stage.theme === 'buckets'
-      ? `クリア。満点は桶 ${analysis.perfectConfig.primed.length} つ・水路 ${analysis.perfectCount} 本、今は桶 ${ev.buckets} つ・水路 ${ev.used} 本です。`
+      ? `クリア。満点は桶 ${analysis.perfectConfig.primed.length} つ・配管 ${analysis.perfectCount} 本、今は桶 ${ev.buckets} つ・配管 ${ev.used} 本です。`
       : `クリア。満点は ${analysis.perfectCount} 本、今は ${ev.used} 本です。`;
     if (stage.theme === 'buckets' && ev.buckets > analysis.perfectConfig.primed.length) advice.push('桶を使わずに届けられる道がないか探してみましょう。');
     idle.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は呼び水をしていないので流れていません。外せます。`));
@@ -100,7 +100,7 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
       const sum = parts.reduce((s, x) => s.add(frac(x)), ZERO);
       advice.push(`グラス${t.id}を通ると細さは足し算（${parts.join('＋')}＝${sum}）。細さ ${sum} の1本で代われないか探してみましょう。`);
     }
-    // 同じ所を結ぶ水路を並べる：流れやすさ（1÷細さ）が足し算になる
+    // 同じ所を結ぶ配管を並べる：流れやすさ（1÷細さ）が足し算になる
     const groups = new Map();
     for (const c of pipes.filter(flowing)) {
       const key = [c.a, c.b].sort().join('|');
@@ -109,9 +109,9 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     for (const group of groups.values()) {
       if (group.length < 2) continue;
       const ease = group.reduce((s, c) => s.add(new Fraction(1n).div(frac(thinnessOf(c, cfg)))), ZERO);
-      advice.push(`並べた水路は、細さ ${new Fraction(1n).div(ease)} の1本と同じ働きです。1本で済まないか探してみましょう。`);
+      advice.push(`並べた配管は、細さ ${new Fraction(1n).div(ease)} の1本と同じ働きです。1本で済まないか探してみましょう。`);
     }
-    if (!advice.length) advice.push('同じ働きを1本でできる水路を探してみましょう。');
+    if (!advice.length) advice.push('同じ働きを1本でできる配管を探してみましょう。');
   } else {
     summary = stage.theme === 'buckets' ? '100点。いちばん少ない桶と本数で届けました。' : '100点。いちばん少ない本数で届けました。';
     if (!offScale.length && kind === 'chord') advice.push('どのグラスも目盛りに乗り、澄んだ和音になりました。');

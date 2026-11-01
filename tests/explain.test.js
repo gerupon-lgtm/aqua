@@ -31,7 +31,7 @@ test('NG（足りない）：高さの違う2つのグラスがずれると「�
   assert.ok(e.balances.some(b => b.startsWith('グラスA：入る 24/5')));
 });
 
-test('クリア：100点へのヒントは、途中のグラス・流れていない水路・並べた水路を見る', () => {
+test('クリア：100点へのヒントは、途中のグラス・流れていない配管・並べた配管を見る', () => {
   assert.ok(run(0, ['SA', 'AB']).e.advice.some(a => a.includes('（1＋1＝2）')));
   assert.ok(run(2, ['SA', 'AB', 'SB']).e.advice.includes('グラスA–グラスBは流れていないので、外せます。'));
   assert.ok(run(1, ['P2', 'P3']).e.advice.some(a => a.includes('細さ 1 の1本と同じ働き')));

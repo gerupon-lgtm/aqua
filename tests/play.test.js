@@ -37,7 +37,7 @@ for (const stage of STAGES.filter(s => !s.vary)) {
   });
 }
 
-test('お試し1：直接の細い水路が満点、太い2本は部分点、3本はNG', () => {
+test('お試し1：直接の細い配管が満点、太い2本は部分点、3本はNG', () => {
   const stage = STAGES[0];
   const a = analyzeStage(stage);
   assert.deepEqual(a.perfect, ['SB']);
@@ -54,10 +54,10 @@ test('水門：開いた状態と閉じた状態の両方で指定どおりな�
   assert.deepEqual(a.perfect, ['SB', 'SB2']);
   const ev = evaluate(stage, ['SB', 'SB2'], a);
   assert.deepEqual(ev.states.map(s => s.outlets[0].flow.toString()), ['3', '2']);
-  assert.equal(evaluate(stage, ['SB'], a).outcome, 'ng', '水門の水路だけだと、閉じたときに届かない');
+  assert.equal(evaluate(stage, ['SB'], a).outcome, 'ng', '水門の配管だけだと、閉じたときに届かない');
 });
 
-test('太さを変えられる水路：選んだ太さで計算し、満点は太さまで決まる', () => {
+test('太さを変えられる配管：選んだ太さで計算し、満点は太さまで決まる', () => {
   const stage = STAGES.find(s => s.id === 'T13');
   const a = analyzeStage(stage);
   assert.equal(a.perfectKey, 'SA:3,SB');

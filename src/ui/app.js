@@ -10,7 +10,7 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.9.0';
+const APP_VERSION = '0.9.1';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -94,7 +94,7 @@ const targetText = t => (typeof t === 'object' ? `開 ${t.open}・閉 ${t.closed
 const lastDrawn = new Map();
 
 // 面を選ぶたびに、直前と違う系統から出題を抽選する。お試しは固定。
-// 「停止してつなぎ直す」「配線クリア」では呼ばないので、同じ出題を保つ
+// 「つなぎ直す」「配管クリア」では呼ばないので、同じ出題を保つ
 function selectStage(index) {
   stopRun();
   state.stageIndex = index;
@@ -119,10 +119,11 @@ function selectStage(index) {
   state.evaluation = null;
   state.details = false;
   state.explain = false;
+  state.resultClosed = false;
   renderAll();
 }
 
-// ---- 編集：水路をつなぐ・外す・太さ・呼び水（F-002、F-005、F-008） ----
+// ---- 編集：配管をつなぐ・外す・太さ・呼び水（F-002、F-005、F-008） ----
 function tapPipe(id) {
   const c = candidate(id);
   const cfg = state.config;
@@ -234,6 +235,7 @@ function showResult() {
     state.saveMessage = r.message;
     state.newBest = r.improved;
   }
+  state.resultClosed = false;
   renderAll();
 }
 
@@ -353,7 +355,7 @@ function renderCondition() {
   $('cond').innerHTML = `
     <div class="cond-title"><span class="eyebrow">${st.set} ${st.number}</span><span class="name">${st.title}</span>
       ${st.draw ? `<span class="draw"><span>出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${state.phase === 'edit' ? '' : 'disabled'}>別の出題</button></span>` : ''}</div>
-    <div class="cond-row">${targets}${buckets}<span class="count">つないだ水路 <b>${state.config.connected.size}</b> 本</span></div>`;
+    <div class="cond-row">${targets}${buckets}<span class="count">つないだ配管 <b>${state.config.connected.size}</b> 本</span></div>`;
 }
 
 const fmt = formatAmount;
@@ -386,7 +388,7 @@ function chooserHtml() {
       ? '<button type="button" class="chip on" data-prime="off">呼び水を取り消す</button>'
       : `<button type="button" class="chip" data-prime="on" ${bucketsLeft() > 0 ? '' : 'disabled'}>桶で呼び水をする</button>${bucketsLeft() > 0 ? '' : '<span class="note-inline">桶が残っていません</span>'}`}</div>`);
   }
-  return `<div class="chooser">${parts.join('')}<div class="chooser-row chooser-actions"><button type="button" class="chip" data-remove="1">この水路を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
+  return `<div class="chooser">${parts.join('')}<div class="chooser-row chooser-actions"><button type="button" class="chip" data-remove="1">この配管を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
 }
 
 function outletsHtml(st, outlets) {
@@ -404,7 +406,7 @@ function renderPanel() {
     panel.innerHTML = `
       ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : `<p class="hint">${st.hint}</p>`}
       <div class="actions">
-        <button type="button" class="ghost" id="clear-wires" ${n ? '' : 'disabled'}>配線クリア</button>
+        <button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
         <button type="button" class="primary" id="run" ${n && !state.loadError ? '' : 'disabled'}>水を流す</button>
       </div>`;
     return;
@@ -453,27 +455,82 @@ function renderPanel() {
       </section>`;
     }).join('');
   }
-  const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・水路 ${ev.used} 本` : `水路 ${ev.used} 本`;
+  const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・配管 ${ev.used} 本` : `配管 ${ev.used} 本`;
+  const retryLabel = ev.outcome === 'ng' ? '配管を見直す' : 'もう一度';
+  const hasNext = ev.outcome !== 'ng' && state.stageIndex < STAGES.length - 1;
+  // 結果は盤面の中に重ねるトーストで出し、下の欄は編集中と同じ高さ（案内＋ボタン1行）に保つ。
+  // 欄が伸びると盤面が縮むため（2026-11-01 発案者）。閉じたトーストは「結果」で開き直す
   panel.innerHTML = `
-    <div class="result ${ev.outcome}" role="status">
-      <div class="result-head"><span class="badge">${head}</span><span class="score">${ev.outcome === 'ng' ? '' : `${displayScore(ev.score)} 点`}</span>
+    <p class="hint">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
+    <div class="actions">
+      <button type="button" class="ghost" id="show-result" aria-expanded="${!state.resultClosed}">結果</button>
+      <button type="button" class="ghost" id="stop">${retryLabel}</button>
+      ${hasNext ? '<button type="button" class="primary" id="next">次へ</button>' : ''}
+    </div>`;
+  state.resultHtml = `
+    <div class="result ${ev.outcome}">
+      <div class="result-head"><span class="badge" role="status">${head}</span><span class="score">${ev.outcome === 'ng' ? '' : `${displayScore(ev.score)} 点`}</span>
         <span class="used">${usedText}${ev.outcome === 'clear' ? `（満点は ${st.theme === 'buckets' ? `桶 ${state.analysis.perfectConfig.primed.length}・` : ''}${state.analysis.perfectCount} 本）` : ''}</span>
-        ${state.newBest ? '<span class="newbest">最高点</span>' : ''}</div>
+        ${state.newBest ? '<span class="newbest">最高点</span>' : ''}
+        <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button></div>
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <ul class="outlets">${outlets}</ul>
-      <p class="swipe">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
         <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
-        <div class="table-wrap"><table><thead><tr><th>水路</th><th>流れる量</th><th>水位の差</th><th>細さ</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>配管</th><th>流れる量</th><th>水位の差</th><th>細さ</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
         <div class="actions"><button type="button" class="ghost" id="export-record">記録をファイルに書き出す</button></div>
       </details>
-    </div>
-    <div class="actions">
-      <button type="button" class="ghost" id="explain" aria-expanded="${state.explain}">${state.explain ? '解説を閉じる' : '解説'}</button>
-      <button type="button" class="ghost" id="stop">停止してつなぎ直す</button>
-      ${ev.outcome !== 'ng' && state.stageIndex < STAGES.length - 1 ? '<button type="button" class="primary" id="next">次の面へ</button>' : ''}
+      <div class="result-actions">
+        <button type="button" class="ghost" id="explain" aria-expanded="${state.explain}">解説</button>
+        <button type="button" class="ghost" id="stop">${retryLabel}</button>
+        ${hasNext ? '<button type="button" class="primary" id="next">次へ</button>' : ''}
+      </div>
     </div>`;
+}
+
+// 結果のトースト（前作 prism のクリア・未達成のトーストに合わせる）。
+// 盤面の中で、噴水盤（噴水と虹が出る場所）と重ならない位置を、下・上・中ほどの順に探す。
+// 入らないときは出口の行を省いた小さな形にする。解説・記録を開いている間は上に寄せ、盤面の高さの中でスクロールする
+function renderResultToast() {
+  const toast = $('result-toast');
+  const show = state.phase === 'result' && !state.resultClosed;
+  toast.hidden = !show;
+  if (!show) { toast.innerHTML = ''; delete toast.dataset.html; return; }
+  if (toast.dataset.html !== state.resultHtml) { toast.innerHTML = state.resultHtml; toast.dataset.html = state.resultHtml; }
+  const area = toast.parentElement.getBoundingClientRect();
+  const pad = 6;
+  const width = Math.min(420, area.width - pad * 2);
+  toast.style.width = `${width}px`;
+  const basins = [...$('board').querySelectorAll('.basin .bowl')].map(e => {
+    const r = e.getBoundingClientRect();
+    return { left: r.left - 16, right: r.right + 16, top: r.top - 80, bottom: r.bottom + 4 };
+  });
+  const overlap = (a, b) => Math.min(a.right, b.right) > Math.max(a.left, b.left) && Math.min(a.bottom, b.bottom) > Math.max(a.top, b.top);
+  const reading = state.explain || state.details;
+  for (const compact of reading ? [false] : [false, true]) {
+    toast.classList.toggle('compact', compact);
+    const h = toast.getBoundingClientRect().height;
+    const ys = reading ? [pad] : [area.height - h - pad, pad, (area.height - h) / 2];
+    const xs = [(area.width - width) / 2, pad, area.width - width - pad];
+    for (const y of ys) for (const x of xs) {
+      const place = { left: area.left + x, right: area.left + x + width, top: area.top + y, bottom: area.top + y + h };
+      if (y < 0 || (!reading && basins.some(b => overlap(place, b)))) continue;
+      toast.style.left = `${x}px`;
+      toast.style.top = `${y}px`;
+      return;
+    }
+  }
+  // どこにも入らないときは、小さな形で盤面の上に置く
+  toast.style.left = `${(area.width - width) / 2}px`;
+  toast.style.top = `${pad}px`;
+}
+
+function closeResult() {
+  if (state.phase !== 'result' || state.resultClosed) return;
+  state.resultClosed = true;
+  renderPanel();
+  renderResultToast();
 }
 
 // 選択肢のトースト（前作 prism の配線削除のトーストに合わせる）。
@@ -506,6 +563,7 @@ function renderAll() {
   renderPanel();
   renderToast();
   drawBoard();
+  renderResultToast();
   $('board').classList.toggle('swipeable', state.phase === 'result');
   $('board').classList.toggle('editable', state.phase === 'edit');
 }
@@ -628,14 +686,9 @@ function bind() {
     const id = btn.id;
     if (id === 'run') startRun();
     else if (id === 'stop') { stopRun(); renderAll(); }
-    else if (id === 'clear-wires') { state.config = emptyConfig(); state.selected = null; renderAll(); }
+    else if (id === 'clear-pipes') { state.config = emptyConfig(); state.selected = null; renderAll(); }
     else if (id === 'next') selectStage(state.stageIndex + 1);
-    else if (id === 'export-record') exportRecord();
-    else if (id === 'explain') {
-      state.explain = !state.explain;
-      renderPanel();
-      if (state.explain) document.querySelector('.explain')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
+    else if (id === 'show-result') { state.resultClosed = !state.resultClosed; renderPanel(); renderResultToast(); }
   });
   // トーストで選んだら、設定して閉じる（もう一度管をタップすると開き直す）
   // 管をタップしてトーストが開いた直後、同じ指の「クリック」がトーストの外に届いて閉じてしまうのを防ぐ。
@@ -662,7 +715,33 @@ function bind() {
     renderAll();
   });
   $('toast').addEventListener('cancel', e => { e.preventDefault(); closeToast(); }); // Esc
-  $('panel').addEventListener('toggle', e => { if (e.target.id === 'detail') state.details = e.target.open; }, true);
+  // 結果のトースト：たたむと見出しの1行だけにして、盤面を広く見せる
+  $('result-toast').addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    if (btn.id === 'export-record') exportRecord();
+    else if (btn.id === 'result-close') closeResult();
+    else if (btn.id === 'stop') { stopRun(); renderAll(); }
+    else if (btn.id === 'next') selectStage(state.stageIndex + 1);
+    else if (btn.id === 'explain') {
+      state.explain = !state.explain;
+      renderPanel();
+      renderResultToast();
+      if (state.explain) $('result-toast').querySelector('.explain')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  });
+  // 結果のトースト以外に触れると閉じる（前作と同じ）。触れた操作そのもの（グラスのなぞり・ボタン）はそのまま行う
+  document.addEventListener('pointerdown', e => {
+    if (e.target.closest('#result-toast, #show-result')) return;
+    closeResult();
+  }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeResult(); });
+  addEventListener('resize', () => renderResultToast());
+  $('result-toast').addEventListener('toggle', e => {
+    if (e.target.id !== 'detail') return;
+    state.details = e.target.open;
+    renderResultToast();
+  }, true);
   const svg = $('board');
   // 管のタップ：指を離した時点で、触れた点にいちばん近い管を選ぶ。
   // 管は端で7ほどの間隔で並ぶので、重なったタップ領域の上下関係で選ぶと、隣の管を拾ってしまう

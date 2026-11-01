@@ -1,11 +1,11 @@
 // 面の定義（1〜30面）。お試し1〜6は固定の出題。7〜30面は
 // vary（変えてよい数値の範囲）から scripts/generate-challenges.js で検査済みの出題を8つずつ作り、challenges.js から抽選する。
-// vary：spring 泉の高さの候補、thinnessAll／thinness[水路] 細さの候補、maxTarget 指定量の上限、
-//       minPerfect 満点の本数の下限、mustUse 満点で必ず使う水路、minBuckets 満点で使う桶の下限、seed 乱数の種。
+// vary：spring 泉の高さの候補、thinnessAll／thinness[配管] 細さの候補、maxTarget 指定量の上限、
+//       minPerfect 満点の本数の下限、mustUse 満点で必ず使う配管、minBuckets 満点で使う桶の下限、seed 乱数の種。
 // 出題のある面では、ここにある細さ・指定量は使われない（出題の値で置き換える）。
 // 数値は試作用に、すべてのつなぎ方を調べて「満点が1通り・部分点あり・クリアでは水のあるグラスが目盛りに乗る」を
 // 満たすものを選んだ（tests/play.test.js で確かめる）。本番の出題の生成と各面8つの出題（T-04）はまだ。
-// 高さは文字列の分数。x は盤面の横位置（0〜10）。thinness は水路の細さ（1 太・2 中・3 細）。
+// 高さは文字列の分数。x は盤面の横位置（0〜10）。thinness は配管の細さ（1 太・2 中・3 細）。
 // depth は地面の下を通る深さの段（重なりを避けるための描き分け）。set は面のまとまりの名前。
 
 export const STAGES = [
@@ -15,7 +15,7 @@ export const STAGES = [
     number: 1,
     set: 'お試し',
     title: 'まっすぐ届ける',
-    hint: '水路をタップしてつなぎ、「水を流す」を押します。',
+    hint: '配管をタップしてつなぎ、「水を流す」を押します。',
     spring: { id: 'S', x: 1.1, height: '6' },
     towers: [{ id: 'A', x: 4.4 }, { id: 'B', x: 7.2 }],
     outlets: [{ id: 'O1', tower: 'B', height: '0', conductance: '1', target: '2', label: '噴水盤' }],
@@ -31,7 +31,7 @@ export const STAGES = [
     number: 2,
     set: 'お試し',
     title: '分かれる水',
-    hint: '2本の細い水路は、1本の太い水路と同じだけ運べるでしょうか。',
+    hint: '2本の細い配管は、1本の太い配管と同じだけ運べるでしょうか。',
     spring: { id: 'S', x: 1.4, height: '6' },
     towers: [{ id: 'A', x: 6.4 }],
     outlets: [{ id: 'O1', tower: 'A', height: '0', conductance: '1', target: '3', label: '噴水盤' }],
@@ -63,7 +63,7 @@ export const STAGES = [
   {
     // 口の高い受け皿（2026-11-01 発案者の案：受け皿が中央にあり、両横から流れ込む）。
     // 受け皿の口の高さは 3。グラスの水位が口より上の分だけ出る。片側からだけでは足りず、左右の両方から入れると満点。
-    // 中の水路2本は太い1本と同じだけ運ぶので、遠回りの2本でも届く（部分点）
+    // 中の配管2本は太い1本と同じだけ運ぶので、遠回りの2本でも届く（部分点）
     id: 'T4',
     version: 1,
     number: 4,
@@ -572,7 +572,7 @@ export const STAGES = [
     number: 13,
     set: '流れを調える',
     title: '太さで分ける',
-    hint: '太さを変えられる水路は、つないだあとにもう一度タップして太さを選びます。',
+    hint: '太さを変えられる配管は、つないだあとにもう一度タップして太さを選びます。',
     spring: { id: 'S', x: 1.1, height: '8' },
     towers: [{ id: 'A', x: 4.4 }, { id: 'B', x: 7.4 }],
     outlets: [
@@ -592,7 +592,7 @@ export const STAGES = [
     number: 14,
     set: '流れを調える',
     title: '二本の太さ',
-    hint: '太さを選べる水路が二本あります。両方の噴水盤がちょうどになる太さを探します。',
+    hint: '太さを選べる配管が二本あります。両方の噴水盤がちょうどになる太さを探します。',
     spring: {
       id: 'S',
       x: 1.1,
@@ -980,7 +980,7 @@ export const STAGES = [
     number: 18,
     set: '流れを調える',
     title: '流れを調えるのまとめ',
-    hint: '太さを選べる水路が三本あります。少ない本数で、ちょうどにします。',
+    hint: '太さを選べる配管が三本あります。少ない本数で、ちょうどにします。',
     spring: {
       id: 'S',
       x: 1.1,

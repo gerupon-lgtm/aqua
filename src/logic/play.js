@@ -1,11 +1,11 @@
 // 面のつなぎ方から計算・判定・採点を行う（logic-design 4〜5章）
 //
 // つなぎ方（config）：
-//   connected：つないだ水路のID
-//   thickness：太さを変えられる水路の細さ（{ID: '1'|'2'|'3'}）。ないときは面の既定
+//   connected：つないだ配管のID
+//   thickness：太さを変えられる配管の細さ（{ID: '1'|'2'|'3'}）。ないときは面の既定
 //   primed：桶で呼び水をしたサイフォンのID
-// 面の水路の候補（candidates）：
-//   thinness：細さ。adjustable があれば選べる細さの一覧（太さを変えられる水路、F-008）
+// 面の配管の候補（candidates）：
+//   thinness：細さ。adjustable があれば選べる細さの一覧（太さを変えられる配管、F-008）
 //   siphon：{ crest, inlet } があればサイフォン（F-005）。crest は通り道の一番高い所で、
 //           課題では泉より高く置くため、呼び水がない限り流れない。inlet はグラスの中の入口の高さ
 //   gate：true なら水門（F-010）。開いた状態と閉じた状態の両方を計算する
@@ -103,7 +103,7 @@ export function judge(stage, config, scale = DEFAULT_SCALE) {
   };
 }
 
-// 面で選べるつなぎ方をすべて作る（水路ごとに：つながない／太さの選択／サイフォンなら呼び水の有無）
+// 面で選べるつなぎ方をすべて作る（配管ごとに：つながない／太さの選択／サイフォンなら呼び水の有無）
 export function allConfigs(stage) {
   let configs = [{ connected: [], thickness: {}, primed: [] }];
   for (const c of stage.candidates) {

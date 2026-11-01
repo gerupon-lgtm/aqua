@@ -19,7 +19,7 @@ test('分数は約分され、比較は完全一致', () => {
   assert.throws(() => frac(1).div(0));
 });
 
-test('直列：泉6、太い水路2本と出口で、流れる量2・水位4と2', () => {
+test('直列：泉6、太い配管2本と出口で、流れる量2・水位4と2', () => {
   const r = solveCircuit(circuit({
     H: 6, towers: ['A', 'B'], outlets: [['O', 'B', 0, 1]],
     pipes: [['SA', 'S', 'A', 1], ['AB', 'A', 'B', 1]]
@@ -30,7 +30,7 @@ test('直列：泉6、太い水路2本と出口で、流れる量2・水位4と2
   assert.equal(r.pipes.SA.flow.toString(), '2');
 });
 
-test('並列：細い水路2本は太い1本と同じ量を運ぶ', () => {
+test('並列：細い配管2本は太い1本と同じ量を運ぶ', () => {
   const thin = solveCircuit(circuit({
     H: 6, towers: ['A'], outlets: [['O', 'A', 0, 1]],
     pipes: [['P2', 'S', 'A', '1/2'], ['P3', 'S', 'A', '1/2']]
@@ -76,7 +76,7 @@ test('各グラスで入る量と出る量の合計が等しい（第1法則）'
   }
 });
 
-test('異常系：つないだ水路がない・グラスがない回路でも止まらない', () => {
+test('異常系：つないだ配管がない・グラスがない回路でも止まらない', () => {
   assert.equal(solveCircuit(circuit({ H: 3, towers: ['A'] })).towers.A.state, 'empty');
   assert.deepEqual(solveCircuit(circuit({ H: 3, towers: [] })).towers, {});
   assert.throws(() => frac('1/0'));
