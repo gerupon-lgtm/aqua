@@ -12,7 +12,7 @@ import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 
-const APP_VERSION = '0.14.1';
+const APP_VERSION = '0.14.2';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -497,7 +497,7 @@ function keepTogether(text) {
 function outletsHtml(st, outlets) {
   return outlets.map(o => {
     const label = st.outlets.find(x => x.id === o.id).label;
-    return `<li class="${o.verdict}"><span>${label}</span><span class="v">${verdictText[o.verdict]}</span><span class="amount"><span class="nw">届いた <b>${fmt(o.flow)}</b></span>・<span class="nw">指定 ${o.target}</span></span></li>`;
+    return `<li class="${o.verdict}"><div class="delivery-head"><span>${label}</span><span class="v">${verdictText[o.verdict]}</span></div><div class="delivery-values"><div><span>必要量</span><b>${o.target}</b></div><div><span>届いた量</span><b>${fmt(o.flow)}</b></div></div></li>`;
   }).join('');
 }
 
@@ -531,7 +531,7 @@ function renderPanel() {
   const shown = ev.states[ev.states.length - 1];
   const towerRows = st.towers.map(t => {
     const r = shown.result.towers[t.id];
-    if (r.state === 'empty') return `<tr><td>グラス${t.id}</td><td colspan="3">空（泉につながっていない）</td></tr>`;
+    if (r.state === 'empty') return `<tr><td>グラス${t.id}</td><td colspan="3">空（給水塔につながっていない）</td></tr>`;
     return `<tr><td>グラス${t.id}</td><td>${fmt(r.level)}</td><td>${sideText[tickSide(r.level, scale)]}</td><td>入る ${fmt(r.inflow)} ／ 出る ${fmt(r.outflow)}</td></tr>`;
   }).join('');
   const pipeRows = st.candidates.filter(c => state.config.connected.has(c.id)).map(c => {
@@ -596,15 +596,21 @@ function renderPanel() {
     </div>`;
   state.resultHtml = `
     <div class="result ${ev.outcome}">
-      <div class="result-head"><span class="badge" role="status">${head}</span><span class="score">${ev.outcome === 'ng' ? '' : `${displayScore(ev.score)} 点`}</span>
-        <span class="used">${usedText}${ev.outcome === 'clear' ? `（満点は ${st.theme === 'buckets' ? `桶 ${state.analysis.perfectConfig.primed.length}・` : ''}${state.analysis.perfectCount} 本）` : ''}</span>
-        ${state.newBest ? '<span class="newbest">最高点</span>' : ''}
-        <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button></div>
+      <div class="result-head">
+        <span class="badge" role="status">${ev.outcome === 'perfect' ? 'PERFECT' : ev.outcome === 'ng' ? '結果' : head}</span>
+        <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button>
+        <div class="result-hero">
+          ${ev.outcome === 'perfect' ? '<svg class="laurels" viewBox="0 0 200 76" aria-hidden="true"><defs><g id="laurel"><path d="M48 68 Q17 50 29 12" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M29 15 Q15 3 25 0 Q34 2 29 15 M26 28 Q8 20 13 12 Q24 11 26 28 M28 41 Q8 39 10 28 Q23 26 28 41 M35 54 Q13 58 12 46 Q24 39 35 54 M48 66 Q24 74 23 62 Q35 53 48 66 M29 18 Q46 6 42 21 Q37 29 29 30 M28 33 Q46 22 44 35 Q40 43 31 44 M34 48 Q51 38 50 51 Q46 59 40 59" fill="currentColor"/></g></defs><use href="#laurel"/><use href="#laurel" transform="translate(200 0) scale(-1 1)"/></svg>' : ''}
+          <span class="score">${ev.outcome === 'ng' ? '<span class="result-ng-word">NG</span>' : `${displayScore(ev.score).replace(/\.00$/, '')}<small>点</small>`}</span>
+        </div>
+        ${state.newBest ? '<span class="newbest"><svg viewBox="0 0 20 15" width="16" height="12" aria-hidden="true"><path d="M2 12 L1 3 6 6 10 0 14 6 19 3 18 12 Z M2 14 H18" fill="currentColor"/></svg> 最高点</span>' : ''}
+        <span class="used">${usedText}</span>
+      </div>
       ${isPractice() ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${practiceResultText(ev.outcome)}</p>` : ''}
       ${state.prediction ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${answerLine(state.prediction.question, state.prediction.picked)}</p>` : ''}
       ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
-      <ul class="outlets">${outlets}</ul>
+      <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectConfig.primed.length}</span>` : ''}</div></div>
       <p class="swipe-note">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
@@ -1031,16 +1037,16 @@ function openStageList() {
 }
 
 const PARTS_HTML = `<dl class="parts">
-  <dt>泉</dt><dd>水が出るところ。泉の水の高さが、流れのもとになります。</dd>
+  <dt>給水塔</dt><dd>水が出るところ。給水塔の水の高さが、流れのもとになります。</dd>
   <dt>グラス</dt><dd>水がたまります。水位で音が決まり、水が多いほど低い音。目盛りに乗ると澄んだ和音になります。</dd>
-  <dt>配管</dt><dd>泉とグラスをつなぎます。札の数字は細さ（1が太く、3が細い）。流れる量＝高さの差÷細さ。縦につなぐと細さは足し算、並べると流れやすくなります。</dd>
-  <dt>噴水盤</dt><dd>届けたい量（目標）を受けます。出口にも細さ（出口 細さ 1）があります。口が高い受け皿は、その高さより上の分だけ流れます。</dd>
+  <dt>配管</dt><dd>給水塔とグラスをつなぎます。丸い札は「太・中・細」です。計算で使う細さは、太＝1・中＝2・細＝3。流れる量＝高さの差÷細さ。縦につなぐと細さは足し算、並べると流れやすくなります。</dd>
+  <dt>噴水盤</dt><dd>必要量の水を受けます。白い陶器の枠とガラスの内器で、水位と薄い金色の目印を見比べます。出口の管の太さは引き出し線の先の丸い札で示します。口が高い受け皿は、その高さより上の分だけ流れます。</dd>
   <dt>太さを選べる配管</dt><dd>タップして太さを選びます。</dd>
   <dt>サイフォンと桶</dt><dd>壁を越える配管です。桶で呼び水をすると流れます。桶の数には限りがあります。</dd>
-  <dt>水門</dt><dd>流したあと自動で閉じます。開いたときと閉じたときの両方で、指定どおりに届けます。</dd>
+  <dt>水門</dt><dd>流したあと自動で閉じます。開いたときと閉じたときの両方で、必要量を届けます。</dd>
 </dl>`;
 const HOWTO_HTML = `<div class="howto">
-  <p>配管をタップしてつなぎ、「水を流す」を押します。噴水盤に指定どおりの量が届けばクリア。使った配管が少ないほど高い点で、いちばん少ない答えが100点です（桶を使う面は、桶の少なさが先）。</p>
+  <p>配管をタップしてつなぎ、「水を流す」を押します。噴水盤に必要量が届けばクリア。使った配管が少ないほど高い点で、いちばん少ない答えが100点です（桶を使う面は、桶の少なさが先）。</p>
   <p>流れたあと、グラスを指でなぞると、そのグラスの音を聞き直せます。結果の「解説」で、なぜその量になったかを確かめられます。</p>
   <h3 class="sheet-sub">遊び方</h3>
   <ul class="plain"><li>チュートリアル：画面の見方と、お試し1〜6面で流れの決まりを学びます。</li>

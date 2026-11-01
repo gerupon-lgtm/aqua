@@ -21,7 +21,7 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
   const st = ev.states?.[stateIndex] ?? { result: ev.result, outlets: ev.outlets, broken: new Set(), name: 'only', clear: ev.clear };
   const r = st.result;
   const H = frac(stage.spring.height);
-  const name = id => (id === stage.spring.id ? '泉' : `グラス${id}`);
+  const name = id => (id === stage.spring.id ? '給水塔' : `グラス${id}`);
   const levelOf = id => (id === stage.spring.id ? H : r.towers[id]?.level ?? null);
   const pipes = stage.candidates.filter(c => cfg.connected.has(c.id));
   const outletOf = id => stage.outlets.find(o => o.id === id);
@@ -72,11 +72,11 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     summary = wrong.map(o => {
       const label = outletOf(o.id).label;
       if (o.flow.isZero()) return `${label}に水が届いていません。`;
-      return `${label}：${formatAmount(o.flow)}（目標 ${o.target}）。${o.verdict === 'short' ? '足りません' : '多すぎます'}。`;
+      return `${label}：${formatAmount(o.flow)}（必要量 ${o.target}）。${o.verdict === 'short' ? '足りません' : '多すぎます'}。`;
     }).join('');
     for (const o of wrong) {
       const tower = outletOf(o.id).tower;
-      if (r.towers[tower].state === 'empty') advice.push(`グラス${tower}が空です。泉からつながっているか見直しましょう。`);
+      if (r.towers[tower].state === 'empty') advice.push(`グラス${tower}が空です。給水塔からつながっているか見直しましょう。`);
     }
     if (wrong.some(o => o.verdict === 'short' && !o.flow.isZero())) advice.push('流れにくさを減らすと増えます（太く・近く・並べる）。');
     if (wrong.some(o => o.verdict === 'over')) advice.push('流れにくさを増やすと減ります（細く・遠く・本数を減らす）。');

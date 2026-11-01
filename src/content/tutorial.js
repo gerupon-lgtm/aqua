@@ -86,14 +86,14 @@ export const PRACTICE = {
 // 練習面の手順。target は光らせる場所（spring・tower・basin・badges・pipe:ID・run）。
 // until は次へ進む条件：next（「次へ」を押す）、connect:ID（その配管をつなぐ）、run（「水を流す」を押す）
 export const PRACTICE_STEPS = [
-  { target: 'spring', until: 'next', text: '左は泉です。水が高さ4まで入っていて、ここから流れ出します。' },
+  { target: 'spring', until: 'next', text: '左は給水塔です。水が高さ4まで入っていて、ここから流れ出します。' },
   { target: 'tower', until: 'next', text: 'グラスです。横の線は目盛り。水が多いほど低い音が鳴ります。' },
-  { target: 'basin', until: 'next', text: '噴水盤の「目標 2」は届けたい水の量。下の「出口 細さ 1」は出口の細さです。' },
-  { target: 'badges', until: 'next', text: '配管の札は細さです。数字が小さいほど太く、水が流れやすい。' },
-  { target: 'pipe:P1', until: 'connect:P1', text: '光っている細さ1の配管をタップして、つなぎましょう。' },
+  { target: 'basin', until: 'next', text: '「必要量2」が届けたい量。水位と金色の目印を見比べます。線の先の丸い札は出口の管の太さです。' },
+  { target: 'badges', until: 'next', text: '管の上の丸い札は「太・中・細」です。太い管ほど、水が流れやすくなります。' },
+  { target: 'pipe:P1', until: 'connect:P1', text: '光っている「太」の配管をタップして、つなぎましょう。' },
   { target: 'run', until: 'run', text: '届く量＝高さの差÷細さの合計。4÷(1＋出口の1)＝2。「水を流す」を押しましょう。' }
 ];
 
 export const practiceResultText = outcome => (outcome === 'ng'
-  ? '目標と違う量が届きました。「配管を見直す」で、細さ1の配管だけをつないでみましょう。'
+  ? '必要量と違う量が届きました。「配管を見直す」で、「太」の配管だけをつないでみましょう。'
   : '噴水盤に2届きました。結果の「解説」で計算を確かめ、「次へ」でお試し1へ進みましょう。');

@@ -1,0 +1,1422 @@
+{
+  "version": "0.14.2",
+  "beforeFix": {
+    "questions": 198,
+    "states": 396,
+    "found": "23面の100点状態8件で必要量の札と太さバッジが重なる。その他は問題なし。"
+  },
+  "afterFix": {
+    "states": 74,
+    "scope": "全30面の各最後の出題を編集/100点、23面は全8出題を編集/100点",
+    "issues": []
+  },
+  "geometryRegression": "全198出題の必要量・高さ札の回避をtests/layout.test.jsで検査。全141テスト合格。",
+  "states": [
+    {
+      "stage": 1,
+      "question": 1,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M251.28 361 H286.28 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 1,
+      "question": 1,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M251.28 361 H286.28 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 2,
+      "question": 1,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M225.36 361 H260.36 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 2,
+      "question": 1,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M225.36 361 H260.36 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 3,
+      "question": 1,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M160.56 361 H195.56 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 3,
+      "question": 1,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M160.56 361 H195.56 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 4,
+      "question": 1,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M167.04 361 H202.04 V350",
+          "source": "A",
+          "transform": "translate(0 -100)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 4,
+      "question": 1,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M167.04 361 H202.04 V350",
+          "source": "A",
+          "transform": "translate(0 -100)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 5,
+      "question": 1,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 5,
+      "question": 1,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 6,
+      "question": 1,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M251.28 361 H286.28 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 6,
+      "question": 1,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M251.28 361 H286.28 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 7,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 7,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 8,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M134.64 361 H169.64 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 8,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M134.64 361 H169.64 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 9,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 9,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 10,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 10,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 11,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 11,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 12,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 12,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 13,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M160.56 361 H195.56 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 13,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M160.56 361 H195.56 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 14,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 14,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 15,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 15,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 16,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 16,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 17,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 17,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 18,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 18,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 19,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 -80)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 19,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 -80)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 20,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 -30)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 -90)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 20,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M154.08 361 H189.08 V350",
+          "source": "A",
+          "transform": "translate(0 -30)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 -90)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 21,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 -60)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 21,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 -60)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 22,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -69.23076923076923)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 22,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -69.23076923076923)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 24,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 -27.272727272727252)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -81.81818181818181)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 24,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M121.68 361 H156.68 V350",
+          "source": "A",
+          "transform": "translate(0 -27.272727272727252)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -81.81818181818181)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 25,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 25,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 26,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M157.32 361 H192.32 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 26,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M157.32 361 H192.32 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 27,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 27,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 28,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M157.32 361 H192.32 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 28,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M157.32 361 H192.32 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 29,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 29,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 30,
+      "question": 8,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 30,
+      "question": 8,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M257.76 361 H292.76 V350",
+          "source": "B",
+          "transform": "translate(0 0)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 1,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 1,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 2,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 2,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 3,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 3,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -46.15384615384613)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -23.076923076923094)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 4,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -54.54545454545456)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -27.272727272727252)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 4,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -54.54545454545456)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -27.272727272727252)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 5,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -54.54545454545456)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -27.272727272727252)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 5,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -54.54545454545456)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -27.272727272727252)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 6,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -60)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -30)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 6,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -60)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -30)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 7,
+      "mode": "edit",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -54.54545454545456)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -27.272727272727252)"
+        }
+      ],
+      "outside": []
+    },
+    {
+      "stage": 23,
+      "question": 7,
+      "mode": "perfect",
+      "collisions": [],
+      "outletPaths": [
+        {
+          "d": "M111.96 361 H146.95999999999998 V350",
+          "source": "A",
+          "transform": "translate(0 0)"
+        },
+        {
+          "d": "M199.43999999999997 361 H234.43999999999997 V350",
+          "source": "B",
+          "transform": "translate(0 -54.54545454545456)"
+        },
+        {
+          "d": "M290.16 361 H325.16 V350",
+          "source": "C",
+          "transform": "translate(0 -27.272727272727252)"
+        }
+      ],
+      "outside": []
+    }
+  ]
+}

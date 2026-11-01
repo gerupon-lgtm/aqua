@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>アクア・ノーツ 実装比較</title>
+<link rel="stylesheet" href="../../src/ui/style.css">
+<style>
+body{height:auto;padding:16px;box-sizing:border-box}h1{font-size:18px;margin:0 0 8px}p{margin:6px 0;font-size:13px}label{font-size:13px}select,button{font:inherit;padding:6px;border:1px solid #b4c8dc;border-radius:6px;background:white;color:#17314c}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.compare{display:grid;grid-template-columns:repeat(2,minmax(0,360px));gap:16px;align-items:start}.preview{border:1px solid #c6d6e6;border-radius:12px;overflow:hidden;background:#eef5fb}.preview h2{font-size:14px;margin:0;padding:8px 12px;background:white}.preview svg{display:block;width:100%;aspect-ratio:360/470;touch-action:manipulation}.caption{color:#566d86;max-width:736px}#status{min-height:1.5em}@media(max-width:650px){.compare{grid-template-columns:minmax(0,360px)}}
+</style>
+<h1>アクア・ノーツ：実際の盤面で比較</h1>
+<p class="caption">v0.14.2 作業中・未公開。本番と同じ描画・計算を使っています。管をタップして接続できます。「必要量」は仮表記です。</p>
+<div class="controls"><label>面 <select id="stage"></select></label><label>出題 <select id="question"></select></label><label>状態 <select id="mode"><option value="edit">編集・未接続</option><option value="all">編集・全部接続</option><option value="perfect" selected>100点の結果</option><option value="ng">届かない結果</option><option value="low">低い水位の結果</option></select></label><button id="clear">接続を消す</button></div>
+<p id="condition"></p><p id="status"></p>
+<div class="compare"><section class="preview"><h2>水が入った状態</h2><svg id="round" viewBox="0 0 360 470" role="img" aria-label="陶器の枠とガラスの器"></svg></section><section class="preview"><h2>空の器</h2><svg id="pill" viewBox="0 0 360 470" role="img" aria-label="空の陶器とガラスの器"></svg></section></div>
+<h2 style="font-size:14px">器の拡大（上と同じ描画）</h2>
+<div class="compare" style="max-width:400px"><section class="preview"><h2>水が入った状態</h2><svg id="zoomA" viewBox="137 304 84 90" role="img" aria-label="水が入った器の拡大"></svg></section><section class="preview"><h2>空の器</h2><svg id="zoomB" viewBox="137 304 84 90" role="img" aria-label="空の器の拡大"></svg></section></div>
+<p class="caption">白い陶器の枠とガラスの内器。手前の陶器と、ガラス越しの奥側に浅く湾曲した目盛りがあります。金色の目印が必要量。配管は採用済みの丸バッジで、出口は引き出し線で示します。音・結果カード全体はアプリ本体で確認します。</p>
+<p><a href="../../index.html">アプリ本体を開く</a></p>
+<script type="module">
+import {STAGES} from '../../src/content/stages.js';
+import {CHALLENGES} from '../../src/content/challenges.js';
+import {applyValues} from '../../src/content/challenge-draw.js';
+import {analyzeStage,evaluate,normalizeConfig,thinnessOf,allConfigs,judge} from '../../src/logic/play.js';
+import {onScale,tickDistance} from '../../src/logic/pitch.js';
+import {layoutFor,renderBoard,pipeAt,basinPlacement} from '../../src/ui/board.js';
+const $=id=>document.getElementById(id);
+let stage,layout,analysis,config=normalizeConfig([]);
+$('stage').innerHTML=STAGES.map((s,i)=>`<option value="${i}">${s.number} ${s.title}</option>`).join('');
+$('stage').value='7';
+function questions(){const bank=CHALLENGES[STAGES[$('stage').value].id]??[];$('question').innerHTML=bank.length?bank.map((q,i)=>`<option value="${i}">${i+1}/8</option>`).join(''):'<option value="0">固定</option>';if(bank.length)$('question').value='7';load();}
+function load(){const base=STAGES[$('stage').value],q=CHALLENGES[base.id]?.[$('question').value];stage=q?applyValues(base,q.values):structuredClone(base);layout=layoutFor(stage);analysis=analyzeStage(stage);changeMode();}
+function lowConfig(){let best=analysis.perfectConfig,min=Infinity;for(const c of allConfigs(stage)){const r=judge(stage,c).result;const levels=stage.outlets.map(o=>r.towers[o.tower].level?.toNumber()??0).filter(x=>x>0);if(levels.length&&Math.min(...levels)<min){min=Math.min(...levels);best=c;}}return best;}
+function changeMode(){config=normalizeConfig($('mode').value==='low'?lowConfig():$('mode').value==='perfect'?analysis.perfectConfig:$('mode').value==='all'?stage.candidates.map(c=>c.id):[]);render();}
+function render(){const ev=evaluate(stage,config,analysis),result=['perfect','ng','low'].includes($('mode').value);$('condition').textContent=`${stage.number} ${stage.title} ／ `+stage.outlets.map(o=>`${o.label} ${typeof o.target==='object'?`開${o.target.open}・閉${o.target.closed}`:o.target}`).join('・');$('status').textContent=`接続 ${config.connected.size}本${result?` ／ ${ev.outcome==='perfect'?'100点':ev.outcome==='clear'?'クリア':'未達'}`:''}`;for(const z of ['zoomA','zoomB']){const o=stage.outlets[0],cx=basinPlacement(layout,o).cx,dy=layout.yOf(Number(o.height))-370;document.getElementById(z).setAttribute('viewBox',`${cx-64} ${272+dy} 110 145`); }for(const id of ['round','pill','zoomA','zoomB'])renderBoard($(id),{stage,layout,connected:['pill','zoomB'].includes(id)?new Set():config.connected,primed:config.primed,thinness:c=>thinnessOf(c,config),selected:null,phase:['pill','zoomB'].includes(id)?'edit':result?'result':'edit',levels:new Map(stage.towers.map(t=>[t.id,result&&!['pill','zoomB'].includes(id)?ev.result.towers[t.id].level?.toNumber()??null:null])),settled:result&&!['pill','zoomB'].includes(id),view:ev.states[0],gateClosed:false,fountainAt:result&&!['pill','zoomB'].includes(id)&&ev.outcome!=='ng'?0:null,outcome:ev.outcome,prevLevels:new Map(),time:2400,reducedMotion:true,highlight:null,onScale,tickDistance,pipeBadge:'round',basinWindows:'glass'});}
+for(const id of ['round','pill'])$(id).addEventListener('click',e=>{if(['perfect','ng','low'].includes($('mode').value))return;const p=new DOMPoint(e.clientX,e.clientY).matrixTransform($(id).getScreenCTM().inverse());const pipe=pipeAt(layout,stage,p.x,p.y);if(pipe){config.connected.has(pipe)?config.connected.delete(pipe):config.connected.add(pipe);render();}});
+$('stage').onchange=questions;$('question').onchange=load;$('mode').onchange=changeMode;$('clear').onclick=()=>{$('mode').value='edit';changeMode();};questions();
+</script></html>

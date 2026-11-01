@@ -105,7 +105,7 @@ export const STAGES = [
     number: 6,
     set: 'お試し',
     title: '水門を閉じても',
-    hint: '水門は、開いた状態のあと自動で閉じます。どちらの状態でも指定どおりに届けましょう。',
+    hint: '水門は、開いた状態のあと自動で閉じます。どちらの状態でも、必要量を届けましょう。',
     spring: { id: 'S', x: 1.1, height: '6' },
     towers: [{ id: 'A', x: 4.4 }, { id: 'B', x: 7.2 }],
     outlets: [{ id: 'O1', tower: 'B', height: '0', conductance: '1', target: { open: '3', closed: '2' }, label: '噴水盤' }],
@@ -122,7 +122,7 @@ export const STAGES = [
     number: 7,
     set: '分けて届ける',
     title: '二つの噴水盤へ',
-    hint: '二つの噴水盤に、それぞれ指定の量を届けます。どのグラスを通すかで、分かれ方が変わります。',
+    hint: '二つの噴水盤に、それぞれ必要な量を届けます。どのグラスを通すかで、分かれ方が変わります。',
     spring: { id: 'S', x: 1.1, height: '8' },
     towers: [{ id: 'A', x: 4.2 }, { id: 'B', x: 7.4 }],
     outlets: [
@@ -264,7 +264,7 @@ export const STAGES = [
     number: 10,
     set: '分けて届ける',
     title: '三つの噴水盤',
-    hint: '三つの噴水盤に、それぞれ指定の量を届けます。',
+    hint: '三つの噴水盤に、それぞれ必要な量を届けます。',
     spring: {
       id: 'S',
       x: 1.1,

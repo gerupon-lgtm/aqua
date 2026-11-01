@@ -5,4 +5,6 @@ artifact/
 # 取り込み用の候補は public/graphics/candidates-*/ にあり、そちらは送る
 画面案/**/*.png
 画面案/**/*.apng
+画面案/**/*.jpg
+画面案/**/*.jpeg
 !画面案/*/overview.png

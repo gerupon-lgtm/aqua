@@ -13,7 +13,7 @@ const run = (index, ids) => {
 
 test('NG（多すぎ）：理由と、流れにくさを増やす見直しを短く示す', () => {
   const { e } = run(0, ['SA', 'AB', 'SB']);
-  assert.equal(e.summary, '噴水盤：3（目標 2）。多すぎます。');
+  assert.equal(e.summary, '噴水盤：3（必要量 2）。多すぎます。');
   assert.ok(e.advice.includes('流れにくさを増やすと減ります（細く・遠く・本数を減らす）。'));
   assert.ok(e.steps.includes('グラスB 3 → 噴水盤 0：差 3 ÷ 細さ 1 ＝ 3'));
 });
@@ -21,7 +21,7 @@ test('NG（多すぎ）：理由と、流れにくさを増やす見直しを短
 test('NG（届かない）：空のグラスと、つながりの見直しを示す', () => {
   const { e } = run(2, ['SA']);
   assert.match(e.summary, /右の噴水盤に水が届いていません/);
-  assert.ok(e.advice.includes('グラスBが空です。泉からつながっているか見直しましょう。'));
+  assert.ok(e.advice.includes('グラスBが空です。給水塔からつながっているか見直しましょう。'));
 });
 
 test('NG（足りない）：高さの違う2つのグラスがずれると「和音が濁った」と言う', () => {
@@ -48,6 +48,6 @@ test('同じ高さの重なりや単音は「和音」と言わない', () => {
 test('100点：理由を短く示す', () => {
   const { e } = run(0, ['SB']);
   assert.equal(e.summary, '100点。いちばん少ない本数で届けました。');
-  assert.ok(e.steps.includes('泉 6 → グラスB 2：差 4 ÷ 細さ 2 ＝ 2'));
+  assert.ok(e.steps.includes('給水塔 6 → グラスB 2：差 4 ÷ 細さ 2 ＝ 2'));
   assert.ok(e.advice.includes('グラスAはつながっていないので空です。'));
 });
