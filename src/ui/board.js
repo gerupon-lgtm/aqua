@@ -283,9 +283,11 @@ export function renderBoard(svg, model) {
     out.push(`<path class="bowl" d="${b.bowl}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
     // 指定量の印と、届いた量
     const markY = b.top + 9;
-    if (verdict) {
+    // 届いた量が0のときは水を描かない。器の底は丸く GROUND まで下がるので、量0の水面を底の一番下に合わせる
+    // （以前は GROUND−4 を量0にしていて、空のグラスの噴水盤にも底の丸みの分だけ水が見えた。2026-11-01 発案者がスマホで確認）
+    if (verdict && verdict.flow.sign() > 0) {
       const ratio = Math.min(1.25, verdict.flow.toNumber() / Math.max(verdict.target.toNumber(), 1e-9));
-      const fillTop = GROUND - 4 - (GROUND - 4 - markY) * ratio;
+      const fillTop = GROUND - (GROUND - markY) * ratio;
       out.push(`<clipPath id="clip-${o.id}"><path d="${b.bowl}"/></clipPath>`);
       out.push(`<rect x="${b.left - 4}" y="${Math.max(b.top - 2, fillTop)}" width="52" height="${GROUND}" fill="var(--water-mid)" opacity=".85" clip-path="url(#clip-${o.id})"/>`);
       if (verdict.verdict === 'over') {
