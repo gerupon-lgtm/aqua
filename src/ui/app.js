@@ -10,7 +10,7 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.9.1';
+const APP_VERSION = '0.9.2';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -458,7 +458,7 @@ function renderPanel() {
   const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・配管 ${ev.used} 本` : `配管 ${ev.used} 本`;
   const retryLabel = ev.outcome === 'ng' ? '配管を見直す' : 'もう一度';
   const hasNext = ev.outcome !== 'ng' && state.stageIndex < STAGES.length - 1;
-  // 結果は盤面の中に重ねるトーストで出し、下の欄は編集中と同じ高さ（案内＋ボタン1行）に保つ。
+  // 結果は下の欄に重ねるトーストで出し、下の欄は編集中と同じ高さ（案内＋ボタン1行）に保つ。
   // 欄が伸びると盤面が縮むため（2026-11-01 発案者）。閉じたトーストは「結果」で開き直す
   panel.innerHTML = `
     <p class="hint">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
@@ -475,6 +475,7 @@ function renderPanel() {
         <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button></div>
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <ul class="outlets">${outlets}</ul>
+      <p class="swipe-note">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
         <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
@@ -489,41 +490,22 @@ function renderPanel() {
     </div>`;
 }
 
-// 結果のトースト（前作 prism のクリア・未達成のトーストに合わせる）。
-// 盤面の中で、噴水盤（噴水と虹が出る場所）と重ならない位置を、下・上・中ほどの順に探す。
-// 入らないときは出口の行を省いた小さな形にする。解説・記録を開いている間は上に寄せ、盤面の高さの中でスクロールする
+// 結果のトースト（前作 prism のクリア・未達成のトーストに合わせる）。クリアもNGも同じ。
+// 画面の下、下の欄（案内とボタン）に重ねて置く。トーストに同じボタンがあるので欄は隠れてよい。
+// 解説・くわしい記録を開くとトーストを上へ広げ、盤面の上端までの高さでスクロールする（2026-11-01 発案者）
 function renderResultToast() {
   const toast = $('result-toast');
   const show = state.phase === 'result' && !state.resultClosed;
   toast.hidden = !show;
   if (!show) { toast.innerHTML = ''; delete toast.dataset.html; return; }
   if (toast.dataset.html !== state.resultHtml) { toast.innerHTML = state.resultHtml; toast.dataset.html = state.resultHtml; }
-  const area = toast.parentElement.getBoundingClientRect();
-  const pad = 6;
-  const width = Math.min(420, area.width - pad * 2);
+  const panel = $('panel').getBoundingClientRect();
+  const boardTop = $('board').parentElement.getBoundingClientRect().top;
+  const width = Math.min(420, panel.width);
   toast.style.width = `${width}px`;
-  const basins = [...$('board').querySelectorAll('.basin .bowl')].map(e => {
-    const r = e.getBoundingClientRect();
-    return { left: r.left - 16, right: r.right + 16, top: r.top - 80, bottom: r.bottom + 4 };
-  });
-  const overlap = (a, b) => Math.min(a.right, b.right) > Math.max(a.left, b.left) && Math.min(a.bottom, b.bottom) > Math.max(a.top, b.top);
-  const reading = state.explain || state.details;
-  for (const compact of reading ? [false] : [false, true]) {
-    toast.classList.toggle('compact', compact);
-    const h = toast.getBoundingClientRect().height;
-    const ys = reading ? [pad] : [area.height - h - pad, pad, (area.height - h) / 2];
-    const xs = [(area.width - width) / 2, pad, area.width - width - pad];
-    for (const y of ys) for (const x of xs) {
-      const place = { left: area.left + x, right: area.left + x + width, top: area.top + y, bottom: area.top + y + h };
-      if (y < 0 || (!reading && basins.some(b => overlap(place, b)))) continue;
-      toast.style.left = `${x}px`;
-      toast.style.top = `${y}px`;
-      return;
-    }
-  }
-  // どこにも入らないときは、小さな形で盤面の上に置く
-  toast.style.left = `${(area.width - width) / 2}px`;
-  toast.style.top = `${pad}px`;
+  toast.style.left = `${panel.right - width}px`;
+  toast.style.bottom = `${Math.max(0, innerHeight - panel.bottom)}px`;
+  toast.style.maxHeight = `${panel.bottom - boardTop}px`;
 }
 
 function closeResult() {

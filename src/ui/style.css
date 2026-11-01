@@ -130,11 +130,12 @@ button { font: inherit; color: inherit; }
 .panel > .actions button { padding: 0 14px; white-space: nowrap; min-width: 0; }
 button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
-/* 結果は盤面の中に重ねるトーストで出す。盤面の大きさは変えない（2026-11-01 発案者）。
+/* 結果は画面の下、下の欄に重ねるトーストで出す。盤面の大きさは変えない（2026-11-01 発案者）。
    前作 prism のクリア・未達成のトーストに合わせ、右上の×・トースト以外へのタッチ・Esc で閉じる。
-   置き場所は app.js が噴水盤を避けて決める。長くなったら（解説・記録）盤面の高さの中でスクロールする */
+   解説・くわしい記録を開くと上へ広がり、盤面の上端までの高さでスクロールする。
+   位置と高さの上限は app.js が下の欄に合わせて決める */
 .result-toast {
-  position: absolute; z-index: 2; max-height: calc(100% - 12px);
+  position: fixed; z-index: 5;
   display: flex; flex-direction: column; animation: toast-in .2s ease-out;
 }
 .result {
@@ -150,8 +151,7 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 }
 .result-actions { display: flex; gap: 8px; justify-content: flex-end; }
 .result-actions button { height: 42px; padding: 0 14px; border-radius: 10px; cursor: pointer; font-weight: 600; white-space: nowrap; }
-/* 入らないときの小さな形：出口ごとの行を省く（結果の全文は「解説」と「くわしい記録」で読める） */
-.result-toast.compact .outlets, .result-toast.compact .warn { display: none; }
+.swipe-note { margin: 0; font-size: 12.5px; color: var(--blue-deep); }
 .result-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; }
 .badge { font-family: var(--font-logo); font-weight: 600; font-size: 20px; letter-spacing: .04em; }
 .result.perfect .badge, .result.clear .badge { color: var(--blue-deep); }
