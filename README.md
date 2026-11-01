@@ -18,7 +18,7 @@
 - [要件定義書](要件定義書_AQUA_NOTES.md)
 - [基本設計サマリ](基本設計サマリ.md)
 - [AI実装指示](AGENTS.md)
-- [処理設計](docs/logic-design.md)・[データ定義](docs/data-model.md)・[画面定義](docs/screens.md)・[タスクと要件対応](docs/tasks.md)
+- [処理設計](docs/logic-design.md)・[データ定義](docs/data-model.md)・[画面定義](docs/screens.md)・[タスクと要件対応](docs/tasks.md)・[絵の発注書](docs/assets.md)
 
 ## 試作の動かし方
 
