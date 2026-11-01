@@ -270,3 +270,10 @@ th { color: var(--ink-soft); font-weight: 500; }
 .panel > .hint.guide { color: var(--blue-deep); font-size: 13px; }
 .guide-answer { margin: 0; padding: 8px 10px; border-radius: 8px; background: #eaf3fb; color: var(--blue-deep); font-size: 13.5px; }
 .chooser-head h3 .spirit { width: 14px; height: 14px; }
+/* 練習面の案内：説明している部品と、押すボタンを金色で光らせる */
+#board .guide-ring { fill: none; stroke: var(--gold); stroke-width: 3; animation: guide-pulse 1.2s ease-in-out infinite; }
+#board path.guide-ring { stroke-width: 18; opacity: .4; }
+.guide-target { box-shadow: 0 0 0 3px var(--gold); animation: guide-pulse 1.2s ease-in-out infinite; }
+@keyframes guide-pulse { 50% { opacity: .55; } }
+.tab.practice { min-width: 56px; padding: 0 10px; font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { #board .guide-ring, .guide-target { animation: none; } }

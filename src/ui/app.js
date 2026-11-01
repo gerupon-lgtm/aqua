@@ -8,10 +8,10 @@ import { displayScore } from '../logic/score.js';
 import { explain, formatAmount } from '../logic/explain.js';
 import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
-import { lessonFor, buildQuestion, answerLine, TutorialBook } from '../content/tutorial.js';
+import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText } from '../content/tutorial.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.10.3';
+const APP_VERSION = '0.11.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -37,6 +37,9 @@ const scoreBook = new ScoreBook((() => { try { return window.localStorage; } cat
 const tutorial = new TutorialBook((() => { try { return window.localStorage; } catch { return null; } })());
 // 今の面で精霊の案内を出しているか（初めての面、または「ふりかえり」で開き直したとき）
 const guiding = () => tutorial.active(stage(), state.review);
+// 練習面（番号 -1 で選ぶ）と、今の案内の手順
+const isPractice = () => stage()?.id === PRACTICE.id;
+const practiceStep = () => (isPractice() && state.phase === 'edit' ? PRACTICE_STEPS[state.practiceStep] ?? null : null);
 const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
@@ -100,7 +103,8 @@ const lastDrawn = new Map();
 function selectStage(index) {
   stopRun();
   state.stageIndex = index;
-  const base = STAGES[index];
+  const base = index < 0 ? PRACTICE : STAGES[index];
+  state.practiceStep = 0;
   state.loadError = '';
   try {
     state.current = drawChallenge(base, CHALLENGES[base.id], { previousId: lastDrawn.get(base.id) });
@@ -144,6 +148,7 @@ function tapPipe(id) {
     cfg.connected.delete(id);
     state.selected = null;
   }
+  if (practiceStep()?.until === `connect:${id}` && cfg.connected.has(id)) state.practiceStep++;
   renderAll();
 }
 
@@ -231,6 +236,7 @@ function startRun() {
 
 // 案内中の面では、流す前に「届く量」を予想してもらう（F-019）。届かないつなぎ方では聞かずに流す
 function askOrRun() {
+  if (practiceStep()?.until === 'run') state.practiceStep++;
   if (guiding()) {
     const q = buildQuestion(stage(), evaluate(stage(), state.config, state.analysis, scaleNow()));
     if (q) { state.selected = null; state.asking = q; renderAll(); return; }
@@ -250,6 +256,7 @@ function showResult() {
     state.newBest = r.improved;
   }
   state.resultClosed = false;
+  if (isPractice() && ev.outcome !== 'ng') tutorial.complete(PRACTICE);
   if (state.prediction) {
     state.explain = true;
     tutorial.complete(stage());
@@ -344,6 +351,7 @@ function drawBoard() {
     time: now,
     reducedMotion: reducedMotionQuery.matches,
     highlight: state.highlight,
+    guide: practiceStep() && practiceStep().target !== 'run' ? practiceStep().target : null,
     onScale: level => onScale(level, scale),
     tickDistance: level => tickDistance(level, scale)
   });
@@ -361,7 +369,8 @@ function bestOfStage(s) {
 }
 
 function renderTabs() {
-  $('stage-tabs').innerHTML = STAGES.map((s, i) => {
+  const practiceTab = `<button type="button" class="tab practice${state.stageIndex === -1 ? ' current' : ''}" data-stage="-1" aria-label="練習 画面の見方" ${state.phase === 'running' ? 'disabled' : ''}>練習</button>`;
+  $('stage-tabs').innerHTML = practiceTab + STAGES.map((s, i) => {
     const best = bestOfStage(s);
     const mark = best ? (displayScore(best) === '100.00' ? '★' : '●') : '';
     return `<button type="button" class="tab${i === state.stageIndex ? ' current' : ''}" data-stage="${i}" aria-label="${s.set}${s.number}${best ? ` 最高${displayScore(best)}点` : ''}" ${state.phase === 'running' ? 'disabled' : ''}>${s.number}<span class="mark">${mark}</span></button>`;
@@ -373,7 +382,8 @@ function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', r
   const targets = st.outlets.map(o => `<span class="target"><span class="dot"></span>${o.label}に <b>${targetText(o.target)}</b></span>`).join('');
   const buckets = st.buckets ? `<span class="count">桶 残り <b>${left}</b> / ${st.buckets}</span>` : '';
   return `
-    <div class="cond-title"><span class="eyebrow">${st.set} ${st.number}</span><span class="name">${st.title}</span>
+    <div class="cond-title"><span class="eyebrow">${st.set}${st.id === PRACTICE.id ? '' : ` ${st.number}`}</span><span class="name">${st.title}</span>
+      ${st.id === PRACTICE.id ? `<span class="draw"><button type="button" class="mini" id="practice-restart" ${phase === 'edit' ? '' : 'disabled'}>最初から</button></span>` : ''}
       ${lessonFor(st) && !st.draw ? `<span class="draw"><button type="button" class="mini" id="review" ${review ? '' : 'disabled'}>ふりかえり</button></span>` : ''}
       ${st.draw ? `<span class="draw"><span>出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${phase === 'edit' ? '' : 'disabled'}>別の出題</button></span>` : ''}</div>
     <div class="cond-row">${targets}${buckets}<span class="count">つないだ配管 <b>${connected}</b> 本</span></div>`;
@@ -398,7 +408,7 @@ function fitConditionHeight() {
   probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;min-height:0;width:${cond.clientWidth}px`;
   cond.parentElement.append(probe);
   let max = 0;
-  for (const st of STAGES) {
+  for (const st of [PRACTICE, ...STAGES]) {
     const shown = CHALLENGES[st.id]?.length ? { ...st, draw: { number: 8, total: 8 } } : st;
     probe.innerHTML = condHtml(shown, { left: 10, connected: 10 });
     max = Math.max(max, probe.getBoundingClientRect().height);
@@ -459,10 +469,11 @@ function renderPanel() {
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : guiding() ? `<p class="hint guide"><span class="spirit" aria-label="水の精霊"></span>${lessonFor(st).intro}</p>` : `<p class="hint">${st.hint}</p>`}
-      <div class="actions">
-        <button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
-        <button type="button" class="primary" id="run" ${n && !state.loadError ? '' : 'disabled'}>水を流す</button>
+      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : practiceStep() ? `<p class="hint guide"><span class="spirit" aria-label="水の精霊"></span>${practiceStep().text}</p>` : guiding() ? `<p class="hint guide"><span class="spirit" aria-label="水の精霊"></span>${lessonFor(st).intro}</p>` : `<p class="hint">${st.hint}</p>`}
+      <div class="actions">${practiceStep()?.until === 'next'
+        ? '<button type="button" class="primary" id="guide-next">次へ</button>'
+        : `<button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
+        <button type="button" class="primary${practiceStep()?.target === 'run' ? ' guide-target' : ''}" id="run" ${n && !state.loadError ? '' : 'disabled'}>水を流す</button>`}
       </div>`;
     return;
   }
@@ -534,6 +545,7 @@ function renderPanel() {
         <span class="used">${usedText}${ev.outcome === 'clear' ? `（満点は ${st.theme === 'buckets' ? `桶 ${state.analysis.perfectConfig.primed.length}・` : ''}${state.analysis.perfectCount} 本）` : ''}</span>
         ${state.newBest ? '<span class="newbest">最高点</span>' : ''}
         <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button></div>
+      ${isPractice() ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${practiceResultText(ev.outcome)}</p>` : ''}
       ${state.prediction ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${answerLine(state.prediction.question, state.prediction.picked)}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <ul class="outlets">${outlets}</ul>
@@ -583,8 +595,8 @@ function questionHtml() {
   const q = state.asking;
   return `<div class="chooser">
     <div class="chooser-head"><h3><span class="spirit" aria-label="水の精霊"></span>予想してから流そう</h3></div>
-    <p class="chooser-note">${q.text}</p>
-    <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">${c.text}</button>`).join('')}</div>
+    <p class="chooser-note">${q.text}<br>選んでから水が流れます。</p>
+    <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">${c.text} 届く</button>`).join('')}</div>
     <div class="chooser-row chooser-actions"><button type="button" class="chip" data-skip="1">案内をスキップ</button><button type="button" class="chip" data-close="1">やめる</button></div>
   </div>`;
 }
@@ -737,12 +749,14 @@ function bind() {
     if (e.target.closest('#redraw') && state.phase === 'edit') selectStage(state.stageIndex);
     // ふりかえり：この面の案内と予想の問いを、もう一度出す
     if (e.target.closest('#review') && state.phase === 'edit') { state.review = true; renderAll(); }
+    if (e.target.closest('#practice-restart') && state.phase === 'edit') selectStage(-1);
   });
   $('panel').addEventListener('click', e => {
     const btn = e.target.closest('button');
     if (!btn || btn.disabled) return;
     const id = btn.id;
     if (id === 'run') askOrRun();
+    else if (id === 'guide-next') { state.practiceStep++; renderAll(); }
     else if (id === 'stop') { stopRun(); renderAll(); }
     else if (id === 'clear-pipes') { state.config = emptyConfig(); state.selected = null; renderAll(); }
     else if (id === 'next') selectStage(state.stageIndex + 1);
@@ -900,7 +914,8 @@ function setupOffline() {
 }
 
 bind();
-selectStage(0);
+// 練習面を終えていない（スキップもしていない）ときは、練習面から始める
+selectStage(tutorial.data.done[PRACTICE.id] || tutorial.data.skipped ? 0 : -1);
 fitConditionHeight();
 // 書体の読み込みで文字の幅が変わるので、読み込み後にも測り直す
 document.fonts?.ready.then(() => { fitConditionHeight(); renderResultToast(); });

@@ -76,3 +76,20 @@ test('記録：初めての面だけ案内し、完了・スキップを覚え�
   assert.ok(!b2.active(s1));
   assert.ok(JSON.parse(store.get(TUTORIAL_KEY)).skipped);
 });
+
+test('練習面：太1を1本つなぐと 4÷(1＋口1)＝2 で100点。手順の光らせる配管が実在する', async () => {
+  const { PRACTICE, PRACTICE_STEPS, practiceResultText } = await import('../src/content/tutorial.js');
+  const ev = evaluate(PRACTICE, config(['P1']), analyzeStage(PRACTICE));
+  assert.equal(ev.outlets[0].flow.toString(), '2');
+  assert.equal(ev.outcome, 'perfect');
+  assert.notEqual(evaluate(PRACTICE, config(['P2']), analyzeStage(PRACTICE)).outcome, 'perfect');
+  for (const step of PRACTICE_STEPS) {
+    assert.ok(step.text.length <= 52, `手順の文が長い：${step.text}`);
+    for (const ref of [step.target, step.until]) {
+      const id = ref.split(':')[1];
+      if (id) assert.ok(PRACTICE.candidates.some(c => c.id === id), `${ref} の配管がない`);
+    }
+  }
+  assert.ok(practiceResultText('ng').length <= 52 && practiceResultText('perfect').length <= 52);
+  assert.equal(lessonFor(PRACTICE), null, '練習面にはお試し面の予想の問いを出さない');
+});

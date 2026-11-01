@@ -323,7 +323,35 @@ export function renderBoard(svg, model) {
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
     out.push(`<text x="${cx}" y="${GROUND + 16}" class="tiny" text-anchor="middle">指定 ${esc(target)}</text>`);
   }
+  drawGuide(out, stage, layout, model.guide);
   svg.innerHTML = out.join('');
+}
+
+// 練習面の案内で、説明している部品を金色の枠で光らせる（前作のチュートリアルと同じく、操作する場所を示す）。
+// guide：spring・tower・basin・badges・pipe:ID。枠は操作を受け取らない
+function drawGuide(out, stage, layout, guide) {
+  if (!guide) return;
+  const ring = (x, y, w, h) => out.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" class="guide-ring" pointer-events="none"/>`);
+  if (guide === 'spring') {
+    const s = layout.nodes.get(stage.spring.id);
+    const sy = layout.yOf(layout.H);
+    ring(s.cx - s.w / 2 - 10, sy - 30, s.w + 20, GROUND - sy + 36);
+  } else if (guide === 'tower') {
+    const n = layout.nodes.get(stage.towers[0].id);
+    ring(n.cx - TOWER_W / 2 - 12, layout.towerTop - 8, TOWER_W + 24, GROUND - layout.towerTop + 14);
+  } else if (guide === 'basin') {
+    const o = stage.outlets[0];
+    const cx = layout.nodes.get(o.tower).cx + TOWER_W / 2 + 28;
+    ring(cx - 32, GROUND - 34, 64, 58);
+  } else if (guide === 'badges') {
+    for (const c of stage.candidates) {
+      const { mx, my } = pipePath(layout, c);
+      out.push(`<rect x="${mx - 22}" y="${my - 14}" width="44" height="28" rx="14" class="guide-ring" pointer-events="none"/>`);
+    }
+  } else if (guide.startsWith('pipe:')) {
+    const c = stage.candidates.find(x => x.id === guide.slice(5));
+    if (c) out.push(`<path d="${pipePath(layout, c).d}" fill="none" class="guide-ring" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>`);
+  }
 }
 
 // 盤面上の点からグラスを探す（結果表示中のなぞりに使う）

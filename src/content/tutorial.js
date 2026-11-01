@@ -64,3 +64,36 @@ export class TutorialBook {
   complete(stage) { this.data.done[stage.id] = true; this.#save(); }
   skip() { this.data.skipped = true; this.#save(); }
 }
+
+// 練習面（画面の見方と操作の案内）。お試し1面の前に置き、精霊が部品を1つずつ光らせて説明する（2026-11-01 発案者）。
+// お試し面の予想の問いは、ここで読み方を覚えてから解く。出題の生成・検査の対象（STAGES）には入れない
+export const PRACTICE = {
+  id: 'P0',
+  version: 1,
+  number: 0,
+  set: '練習',
+  title: '画面の見方',
+  hint: '配管をタップしてつなぎ、「水を流す」を押します。',
+  spring: { id: 'S', x: 1.4, height: '4' },
+  towers: [{ id: 'A', x: 5.6 }],
+  outlets: [{ id: 'O1', tower: 'A', height: '0', conductance: '1', target: '2', label: '噴水盤' }],
+  candidates: [
+    { id: 'P1', a: 'S', b: 'A', thinness: '1', depth: 1 },
+    { id: 'P2', a: 'S', b: 'A', thinness: '3', depth: 2 }
+  ]
+};
+
+// 練習面の手順。target は光らせる場所（spring・tower・basin・badges・pipe:ID・run）。
+// until は次へ進む条件：next（「次へ」を押す）、connect:ID（その配管をつなぐ）、run（「水を流す」を押す）
+export const PRACTICE_STEPS = [
+  { target: 'spring', until: 'next', text: '左は泉です。水が高さ4まで入っていて、ここから流れ出します。' },
+  { target: 'tower', until: 'next', text: 'グラスです。横の線は目盛り。水が多いほど低い音が鳴ります。' },
+  { target: 'basin', until: 'next', text: '噴水盤の「指定 2」は届けたい水の量。「口 太1」は出口の細さです。' },
+  { target: 'badges', until: 'next', text: '配管の札の数字は細さです。太1・中2・細3。数字が小さいほど流れやすい。' },
+  { target: 'pipe:P1', until: 'connect:P1', text: '光っている太1の配管をタップして、つなぎましょう。' },
+  { target: 'run', until: 'run', text: '届く量＝高さの差÷細さの合計。4÷(太1＋口1)＝2。「水を流す」を押しましょう。' }
+];
+
+export const practiceResultText = outcome => (outcome === 'ng'
+  ? '指定と違う量が届きました。「配管を見直す」で、太1だけをつないでみましょう。'
+  : '噴水盤に2届きました。結果の「解説」で計算を確かめ、「次へ」でお試し1へ進みましょう。');
