@@ -14,9 +14,9 @@ import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
 import { PARTS_HTML, HOWTO_HTML } from './info-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
-import { resultCardDelay, STAGE_CUE_MS, stageCueOpacity } from './visual-timing.js';
+import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
 
-const APP_VERSION = '0.14.5';
+const APP_VERSION = '0.14.6';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -149,7 +149,7 @@ function selectStage(index) {
   state.contAction = null;
   state.newFewest = false;
   if (state.mode === 'select') lastSelectIndex = index;
-  state.stageCueUntil = !state.titleOpen && index >= 0 && !state.loadError ? performance.now() + STAGE_CUE_MS : 0;
+  state.stageCueUntil = !state.titleOpen && !state.loadError ? performance.now() + STAGE_CUE_WAIT_MS + STAGE_CUE_MS : 0;
   renderAll();
 }
 
@@ -618,7 +618,7 @@ function renderPanel() {
   state.resultHtml = `
     <div class="result ${ev.outcome}">
       <div class="result-head">
-        <span class="badge" role="status">${ev.outcome === 'perfect' ? 'PERFECT' : ev.outcome === 'ng' ? '結果' : head}</span>
+        <span class="badge" role="status">結果${ev.outcome === 'ng' ? '' : `<small>${ev.outcome === 'perfect' ? 'PERFECT' : head}</small>`}</span>
         <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button>
         <div class="result-hero">
           ${ev.outcome === 'perfect' ? '<svg class="laurels" viewBox="0 0 200 76" aria-hidden="true"><defs><g id="laurel"><path d="M48 68 Q17 50 29 12" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M29 15 Q15 3 25 0 Q34 2 29 15 M26 28 Q8 20 13 12 Q24 11 26 28 M28 41 Q8 39 10 28 Q23 26 28 41 M35 54 Q13 58 12 46 Q24 39 35 54 M48 66 Q24 74 23 62 Q35 53 48 66 M29 18 Q46 6 42 21 Q37 29 29 30 M28 33 Q46 22 44 35 Q40 43 31 44 M34 48 Q51 38 50 51 Q46 59 40 59" fill="currentColor"/></g></defs><use href="#laurel"/><use href="#laurel" transform="translate(200 0) scale(-1 1)"/></svg>' : ''}

@@ -35,3 +35,10 @@ test('グラスの名前、数字の範囲、空白付きの本数も途中で�
   const html = textMarkup('グラスA 1〜6面 2 本');
   for (const unit of ['グラスA', '1〜6面', '2 本']) assert.ok(html.includes(`class="text-unit">${unit}</span>`));
 });
+
+test('かっこの必要量と計算記号・細さを、切れ端にしない', () => {
+  const text = '（必要量 4）。差 24/5（約4.80） ÷ 細さ 1 ＝ 24/5（約4.80）';
+  const html = textMarkup(text);
+  assert.equal(html.replace(/<[^>]+>/g, ''), text);
+  for (const unit of ['（必要量 4）。', '差 24/5（約4.80）', '÷ 細さ 1', '＝ 24/5（約4.80）']) assert.ok(html.includes(`class="text-unit">${unit}</span>`), unit);
+});

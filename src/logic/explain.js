@@ -69,11 +69,16 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
   let summary;
   if (outcome === 'ng') {
     const wrong = st.outlets.filter(o => o.verdict !== 'exact');
-    summary = wrong.map(o => {
-      const label = outletOf(o.id).label;
-      if (o.flow.isZero()) return `${label}に水が届いていません。`;
-      return `${label}：${formatAmount(o.flow)}（必要量 ${o.target}）。${o.verdict === 'short' ? '足りません' : '多すぎます'}。`;
-    }).join('');
+    // 同じ状態の器はまとめる。各量は結果の数値欄で確認できる。
+    const labels = list => list.map(o => outletOf(o.id).label).join('・');
+    const missing = wrong.filter(o => o.flow.isZero());
+    const short = wrong.filter(o => !o.flow.isZero() && o.verdict === 'short');
+    const over = wrong.filter(o => o.verdict === 'over');
+    summary = [
+      missing.length ? `${labels(missing)}に水が届いていません。` : '',
+      short.length ? `${labels(short)}は、水が足りません。` : '',
+      over.length ? `${labels(over)}は、水が多すぎます。` : ''
+    ].join('');
     for (const o of wrong) {
       const tower = outletOf(o.id).tower;
       if (r.towers[tower].state === 'empty') advice.push(`グラス${tower}が空です。給水塔からつながっているか見直しましょう。`);

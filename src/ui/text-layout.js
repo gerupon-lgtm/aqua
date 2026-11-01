@@ -10,10 +10,11 @@ const TERMS = [
   '予想どおり', '予想', '実際', '届きました', '届きません', '届けます', '届けましょう', '届けました',
   '流れます', '流れません', '足りません', '足りない', '多すぎます', 'ちょうど', '変わります',
   'つながっていない', 'つないだあと', 'つなぎましょう', '確かめましょう', '見比べます', '聞き直せます',
-  '並べると', '並べて', '比べて', '選びます', '調えます', '使えます', '探します', '組み合わせて'
+  '並べると', '並べて', '比べて', '選びます', '調えます', '使えます', '探します', '組み合わせて',
+  '水が届いていません', '流れにくさ', '流れやすさ', '減らすと', '増やすと', '足し算', '流れていません'
 ].sort((a, b) => b.length - a.length);
 // 分数と「約」の括弧は本文では一まとまり。大きな数値欄だけはamountMarkupで分ける。
-const token = new RegExp(`(?:[−-]?\\d+(?:[./]\\d+)*(?:[〜–]\\d+)?(?:（約[−-]?\\d+(?:\\.\\d+)?）)?(?: ?(?:秒|本|回|個|面))?|グラス[A-Z]|${TERMS.join('|')})(?:には|では|から|まで|より|だけ|ほど|は|が|を|に|の|へ|で|と|も|や)?[、。！？]?`, 'g');
+const token = new RegExp(`(?:（[^（）]{1,24}）|(?:[÷＝→] ?)?(?:差 ?|細さ ?|入る ?|出る ?)?[−-]?\\d+(?:[./]\\d+)*(?:[〜–]\\d+)?(?:（約[−-]?\\d+(?:\\.\\d+)?）)?(?: ?(?:秒|本|回|個|面))?|→ ?(?:グラス[A-Z]|給水塔|(?:左の|右の|中の)?噴水盤|高い受け皿)|グラス[A-Z]|${TERMS.join('|')})(?:には|では|から|まで|より|だけ|ほど|は|が|を|に|の|へ|で|と|も|や)?[、。！？：]?`, 'g');
 
 export function textMarkup(text) {
   let result = '', at = 0;
@@ -39,5 +40,5 @@ export function deliveryMarkup(label, outlet) {
   const [icon, name] = VERDICTS[outlet.verdict];
   // 320px幅では「549/139」（7文字）も2列に収まらない。
   const wide = Math.max(String(outlet.target).length, String(outlet.flow).length) >= 7;
-  return `<li class="${outlet.verdict}"><div class="delivery-head"><span>${textMarkup(label)}</span><span class="verdict-badge ${outlet.verdict}"><span aria-hidden="true">${icon}</span>${name}</span></div><div class="delivery-values${wide ? ' long-amount' : ''}"><div><span class="amount-label">必要量</span>${amountMarkup(outlet.target)}</div><div><span class="amount-label">届いた量</span>${amountMarkup(outlet.flow)}</div></div></li>`;
+  return `<li class="${outlet.verdict}"><div class="delivery-head${wide ? ' long-label' : ''}"><span>${textMarkup(label)}</span><span class="verdict-badge ${outlet.verdict}"><span aria-hidden="true">${icon}</span>${name}</span></div><div class="delivery-values${wide ? ' long-amount' : ''}"><div><span class="amount-label">必要量</span>${amountMarkup(outlet.target)}</div><div><span class="amount-label">届いた量</span>${amountMarkup(outlet.flow)}</div></div></li>`;
 }

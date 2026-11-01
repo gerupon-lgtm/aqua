@@ -1,0 +1,75 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v0.14.6 結果と文字組みの点検</title><link rel="stylesheet" href="../../src/ui/style.css">
+<style>body{height:auto;padding:18px;box-sizing:border-box}h1{font-size:19px}button{min-height:40px;padding:6px 14px}#report{white-space:pre-wrap;font-size:13px;max-width:1000px}.stage{position:relative;height:1px;overflow:hidden}.probe{position:absolute;left:0;top:0;visibility:hidden}.demo{max-width:360px}.demo svg{width:100%;aspect-ratio:360/470;background:#eef5fb}#samples{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,360px));gap:16px}.sample{min-width:0}.sample .result{box-sizing:border-box}summary{font-size:15px}</style>
+<h1>本番の文字組み・光の変化を点検</h1><p>本番と同じ表示関数、計算、検査済みの出題を使う。画面全体の生成画像ではない。</p>
+<button id="audit">全出題と説明を点検</button> <label><input id="still" type="checkbox">光の変化を控える</label>
+<p id="progress" role="status">待機中</p><div class="demo"><svg id="demo" viewBox="0 0 360 470" aria-label="本番の配管の光"></svg></div>
+<pre id="report"></pre><div id="samples"></div><div class="stage"><div class="probe" id="probe"></div></div>
+<script type="module">
+import {STAGES} from '../../src/content/stages.js';
+import {CHALLENGES} from '../../src/content/challenges.js';
+import {applyValues} from '../../src/content/challenge-draw.js';
+import {PRACTICE,PRACTICE_STEPS,LESSONS,answerLine,practiceResultText} from '../../src/content/tutorial.js';
+import {normalizeConfig,analyzeStage,evaluate,thinnessOf} from '../../src/logic/play.js';
+import {explain} from '../../src/logic/explain.js';
+import {frac} from '../../src/logic/fraction.js';
+import {onScale,tickDistance} from '../../src/logic/pitch.js';
+import {guideMessage} from '../../src/ui/guide-copy.js';
+import {textMarkup,deliveryMarkup} from '../../src/ui/text-layout.js';
+import {PARTS_HTML,HOWTO_HTML} from '../../src/ui/info-copy.js';
+import {renderBoard,layoutFor} from '../../src/ui/board.js';
+const $=id=>document.getElementById(id),probe=$('probe');
+const widths=[320,360,414]; let busy=false;
+const errors=[],counts={questions:0,states:0,measurements:0,guides:0,information:0};
+function check(label,html,width,kind='result'){
+  probe.style.width=(width-32)+'px';
+  probe.innerHTML=kind==='info'?`<div class="sheet-card">${html}</div>`:kind==='guide'?`<section class="panel"><p class="hint guide">${html}</p></section>`:kind==='hint'?`<section class="panel"><p class="hint">${html}</p></section>`:`<section class="result">${html}</section>`;
+  counts.measurements++;
+  const parts=[probe,...probe.querySelectorAll('.guide-copy,.delivery-head,.delivery-values>div,.parts dd,.howto p,.note,.amount-number,.explain li,.explain h3')];
+  const overflow=parts.filter(n=>n.scrollWidth>n.clientWidth+1).map(n=>({tag:n.className||n.tagName,text:n.textContent.slice(0,140),width:n.clientWidth,scroll:n.scrollWidth}));
+  if(overflow.length)errors.push({label,width,overflow});
+  for(const row of probe.querySelectorAll('.outlets li')){
+    const badge=row.querySelector('.verdict-badge'),amount=row.querySelector('.delivery-values>div:nth-child(2) .amount-number');
+    if(badge&&amount){const a=badge.getBoundingClientRect(),b=amount.getBoundingClientRect(),offset=Math.abs((a.left+a.right-b.left-b.right)/2);if(offset>1)errors.push({label,width,badgeOffset:offset});}
+  }
+  if(kind==='guide'){
+    const height=probe.querySelector('.hint').getBoundingClientRect().height;
+    if(height>120.5)errors.push({label,width,guideHeight:height});
+  }
+}
+function fromKey(key){const cfg={connected:[],primed:[],thickness:{}};for(const part of key.split(',').filter(Boolean)){const p=/^([^:+]+)(?::([^+]+))?(\+)?$/.exec(part);cfg.connected.push(p[1]);if(p[2])cfg.thickness[p[1]]=p[2];if(p[3])cfg.primed.push(p[1]);}return cfg;}
+function resultCopy(stage,cfg,analysis){
+  const ev=evaluate(stage,cfg,analysis);
+  const rows=ev.states.map(s=>s.outlets.map(o=>deliveryMarkup(stage.outlets.find(x=>x.id===o.id).label,o)).join('')).join('');
+  const prose=ev.states.map((s,i)=>{const e=explain(stage,cfg,ev,analysis,undefined,i);return `<section class="explain"><h3>${textMarkup(e.summary)}</h3><ul>${[...e.advice,...e.steps,...e.balances].map(t=>`<li>${textMarkup(t)}</li>`).join('')}</ul></section>`;}).join('');
+  return `<div class="result-metrics"><ul class="outlets">${rows}</ul><div class="minimum"><span>満点の本数</span><b>${analysis.perfectCount}<small>本</small></b></div></div>${prose}`;
+}
+$('audit').onclick=async()=>{
+  if(busy)return;busy=true;errors.length=0;for(const k in counts)counts[k]=0;$('samples').innerHTML='';
+  await document.fonts.ready;
+  const guides=[...PRACTICE_STEPS.map(s=>s.text),...Object.values(LESSONS).map(s=>s.intro),practiceResultText('perfect'),practiceResultText('ng'),answerLine({answer:frac('5/2'),label:'高い受け皿'},'5/2'),answerLine({answer:frac('5/2'),label:'高い受け皿'},'3')];
+  for(const [i,text]of guides.entries())for(const width of widths){check('案内'+i,guideMessage(text),width,'guide');counts.guides++;}
+  for(const width of widths)for(const [name,html]of [['パーツ',PARTS_HTML],['遊び方',HOWTO_HTML]]){check(name,html,width,'info');counts.information++;}
+  for(const base of STAGES){
+    const bank=CHALLENGES[base.id]??[null];
+    for(const q of bank){
+      const stage=q?applyValues(base,q.values):base;
+      const analysis=q?{...q.expected,perfectConfig:fromKey(q.expected.perfectKey)}:analyzeStage(stage);
+      const configs=[['空',[]],['満点',analysis.perfectConfig],['全接続',stage.candidates.map(c=>c.id)],...stage.candidates.map(c=>['単管'+c.id,[c.id]])];
+      if(q?.expected.partialKeys?.length)configs.push(['部分点',fromKey(q.expected.partialKeys[0])]);
+      for(const [kind,config]of configs){const cfg=normalizeConfig(config);const html=resultCopy(stage,cfg,analysis);for(const width of widths)check(`${stage.number}-${q?.number??1}-${kind}`,html,width);counts.states++;}
+      for(const width of widths)check(`通常の説明${stage.number}`,textMarkup(stage.hint),width,'hint');
+      counts.questions++;
+      if(counts.questions%8===0){$('progress').textContent=`${counts.questions}出題・${counts.measurements}表示を点検`;await new Promise(requestAnimationFrame);}
+    }
+  }
+  // 指摘された5/2と整数、長い分数も同じ表示で並べて保存できる。
+  for(const [value,needed]of [['2','2'],['5/2','3'],['25/6','3'],['1234567/891','3']]){
+    const flow=frac(value),target=frac(needed),verdict=flow.eq(target)?'exact':flow.cmp(target)<0?'short':'over';
+    const node=document.createElement('section');node.className='sample';node.innerHTML=`<h2>${value}</h2><div class="result"><div class="result-metrics"><ul class="outlets">${deliveryMarkup('高い受け皿',{flow,target,verdict})}</ul><div class="minimum"><span>満点の本数</span><b>3<small>本</small></b></div></div></div>`;$('samples').append(node);
+  }
+  probe.innerHTML='';busy=false;$('progress').textContent='点検完了';$('report').textContent=JSON.stringify({counts,errors},null,2);
+};
+const demoLayout=layoutFor(PRACTICE);let last=0;
+function animate(time){if(time-last>50&&!busy){last=time;renderBoard($('demo'),{stage:PRACTICE,layout:demoLayout,connected:new Set(),primed:new Set(),thinness:c=>c.thinness,phase:'edit',levels:new Map(),prevLevels:new Map(),time,reducedMotion:$('still').checked,guide:'pipe:P1',settled:false,onScale,tickDistance});}requestAnimationFrame(animate);}requestAnimationFrame(animate);
+</script></html>

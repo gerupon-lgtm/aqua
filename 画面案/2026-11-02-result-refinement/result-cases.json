@@ -1,0 +1,1268 @@
+[
+  {
+    "case": "clear",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 329.0625,
+      "width": 288,
+      "x": 16,
+      "y": 263
+    },
+    "clientHeight": 370,
+    "heading": "結果クリア",
+    "headingSize": "22px",
+    "hero": {
+      "height": 58,
+      "width": 200,
+      "x": 61,
+      "y": 444.640625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 372.3125,
+      "width": 288,
+      "x": 16,
+      "y": 399.75
+    },
+    "scrollHeight": 370,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      320,
+      800
+    ]
+  },
+  {
+    "case": "clear",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 370,
+    "heading": "結果クリア",
+    "headingSize": "22px",
+    "hero": {
+      "height": 58,
+      "width": 200,
+      "x": 80,
+      "y": 444.640625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 372.3125,
+      "width": 328,
+      "x": 16,
+      "y": 399.75
+    },
+    "scrollHeight": 370,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "case": "clear",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "clientHeight": 353,
+    "heading": "結果クリア",
+    "headingSize": "22px",
+    "hero": {
+      "height": 58,
+      "width": 200,
+      "x": 107,
+      "y": 558.03125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 354.921875,
+      "width": 382,
+      "x": 16,
+      "y": 513.140625
+    },
+    "scrollHeight": 353,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      414,
+      896
+    ]
+  },
+  {
+    "case": "clear",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 336,
+      "width": 484,
+      "x": 16,
+      "y": 50
+    },
+    "clientHeight": 334,
+    "heading": "結果クリア",
+    "headingSize": "22px",
+    "hero": {
+      "height": 58,
+      "width": 200,
+      "x": 560.5,
+      "y": 94.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 336,
+      "width": 320,
+      "x": 508,
+      "y": 50
+    },
+    "scrollHeight": 370,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  {
+    "case": "clear",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 482,
+      "width": 849.609375,
+      "x": 24,
+      "y": 78
+    },
+    "clientHeight": 370,
+    "heading": "結果クリア",
+    "headingSize": "22px",
+    "hero": {
+      "height": 58,
+      "width": 200,
+      "x": 976.796875,
+      "y": 232.578125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 372.3125,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 187.6875
+    },
+    "scrollHeight": 370,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      600
+    ]
+  },
+  {
+    "case": "clear",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clientHeight": 370,
+    "heading": "結果クリア",
+    "headingSize": "22px",
+    "hero": {
+      "height": 58,
+      "width": 200,
+      "x": 976.796875,
+      "y": 428.578125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 372.3125,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 383.6875
+    },
+    "scrollHeight": 370,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "case": "perfect",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 329.0625,
+      "width": 288,
+      "x": 16,
+      "y": 263
+    },
+    "clientHeight": 388,
+    "heading": "結果PERFECT",
+    "headingSize": "22px",
+    "hero": {
+      "height": 76,
+      "width": 200,
+      "x": 61,
+      "y": 426.640625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 390.3125,
+      "width": 288,
+      "x": 16,
+      "y": 381.75
+    },
+    "scrollHeight": 388,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      320,
+      800
+    ]
+  },
+  {
+    "case": "perfect",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 388,
+    "heading": "結果PERFECT",
+    "headingSize": "22px",
+    "hero": {
+      "height": 76,
+      "width": 200,
+      "x": 80,
+      "y": 426.640625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 390.3125,
+      "width": 328,
+      "x": 16,
+      "y": 381.75
+    },
+    "scrollHeight": 388,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "case": "perfect",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "clientHeight": 371,
+    "heading": "結果PERFECT",
+    "headingSize": "22px",
+    "hero": {
+      "height": 76,
+      "width": 200,
+      "x": 107,
+      "y": 540.03125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 372.921875,
+      "width": 382,
+      "x": 16,
+      "y": 495.140625
+    },
+    "scrollHeight": 371,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      414,
+      896
+    ]
+  },
+  {
+    "case": "perfect",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 336,
+      "width": 484,
+      "x": 16,
+      "y": 50
+    },
+    "clientHeight": 334,
+    "heading": "結果PERFECT",
+    "headingSize": "22px",
+    "hero": {
+      "height": 58,
+      "width": 200,
+      "x": 560.5,
+      "y": 94.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 336,
+      "width": 320,
+      "x": 508,
+      "y": 50
+    },
+    "scrollHeight": 370,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  {
+    "case": "perfect",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 482,
+      "width": 849.609375,
+      "x": 24,
+      "y": 78
+    },
+    "clientHeight": 388,
+    "heading": "結果PERFECT",
+    "headingSize": "22px",
+    "hero": {
+      "height": 76,
+      "width": 200,
+      "x": 976.796875,
+      "y": 214.578125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 390.3125,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 169.6875
+    },
+    "scrollHeight": 388,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      600
+    ]
+  },
+  {
+    "case": "perfect",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "✓ちょうど"
+      }
+    ],
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clientHeight": 388,
+    "heading": "結果PERFECT",
+    "headingSize": "22px",
+    "hero": {
+      "height": 76,
+      "width": 200,
+      "x": 976.796875,
+      "y": 410.578125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 390.3125,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 365.6875
+    },
+    "scrollHeight": 388,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "case": "three-basins",
+    "badges": [
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      }
+    ],
+    "board": {
+      "height": 329.0625,
+      "width": 288,
+      "x": 16,
+      "y": 263
+    },
+    "clientHeight": 507,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 61,
+      "y": 307.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 509.0625,
+      "width": 288,
+      "x": 16,
+      "y": 263
+    },
+    "scrollHeight": 615,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      320,
+      800
+    ]
+  },
+  {
+    "case": "three-basins",
+    "badges": [
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 529,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 72.5,
+      "y": 285.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 531.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "scrollHeight": 615,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "case": "three-basins",
+    "badges": [
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      }
+    ],
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "clientHeight": 598,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 107,
+      "y": 313.15625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 599.796875,
+      "width": 382,
+      "x": 16,
+      "y": 268.265625
+    },
+    "scrollHeight": 598,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      414,
+      896
+    ]
+  },
+  {
+    "case": "three-basins",
+    "badges": [
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      }
+    ],
+    "board": {
+      "height": 336,
+      "width": 484,
+      "x": 16,
+      "y": 50
+    },
+    "clientHeight": 334,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 560.5,
+      "y": 94.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 336,
+      "width": 320,
+      "x": 508,
+      "y": 50
+    },
+    "scrollHeight": 615,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  {
+    "case": "three-basins",
+    "badges": [
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      }
+    ],
+    "board": {
+      "height": 482,
+      "width": 849.609375,
+      "x": 24,
+      "y": 78
+    },
+    "clientHeight": 480,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 969.296875,
+      "y": 122.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 482,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 78
+    },
+    "scrollHeight": 615,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      600
+    ]
+  },
+  {
+    "case": "three-basins",
+    "badges": [
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      },
+      {
+        "offset": 0,
+        "text": "＋多い"
+      }
+    ],
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clientHeight": 615,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 976.796875,
+      "y": 183.703125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 617.1875,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 138.8125
+    },
+    "scrollHeight": 615,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "case": "gate",
+    "badges": [
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 329.0625,
+      "width": 288,
+      "x": 16,
+      "y": 263
+    },
+    "clientHeight": 469,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 61,
+      "y": 345.578125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 471.375,
+      "width": 288,
+      "x": 16,
+      "y": 300.6875
+    },
+    "scrollHeight": 469,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      320,
+      800
+    ]
+  },
+  {
+    "case": "gate",
+    "badges": [
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 469,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 80,
+      "y": 345.578125
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 471.375,
+      "width": 328,
+      "x": 16,
+      "y": 300.6875
+    },
+    "scrollHeight": 469,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "case": "gate",
+    "badges": [
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "clientHeight": 452,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 107,
+      "y": 458.96875
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 453.984375,
+      "width": 382,
+      "x": 16,
+      "y": 414.078125
+    },
+    "scrollHeight": 452,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      414,
+      896
+    ]
+  },
+  {
+    "case": "gate",
+    "badges": [
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 336,
+      "width": 484,
+      "x": 16,
+      "y": 50
+    },
+    "clientHeight": 334,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 560.5,
+      "y": 94.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 336,
+      "width": 320,
+      "x": 508,
+      "y": 50
+    },
+    "scrollHeight": 469,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  {
+    "case": "gate",
+    "badges": [
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 482,
+      "width": 849.609375,
+      "x": 24,
+      "y": 78
+    },
+    "clientHeight": 469,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 976.796875,
+      "y": 133.515625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 471.375,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 88.625
+    },
+    "scrollHeight": 469,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      600
+    ]
+  },
+  {
+    "case": "gate",
+    "badges": [
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clientHeight": 469,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 976.796875,
+      "y": 329.515625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 471.375,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 284.625
+    },
+    "scrollHeight": 469,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "case": "short-two",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.4921875,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 329.0625,
+      "width": 288,
+      "x": 16,
+      "y": 263
+    },
+    "clientHeight": 442,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 61,
+      "y": 373.046875
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 443.90625,
+      "width": 288,
+      "x": 16,
+      "y": 328.15625
+    },
+    "scrollHeight": 442,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      320,
+      800
+    ]
+  },
+  {
+    "case": "short-two",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 442,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 80,
+      "y": 373.046875
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 443.90625,
+      "width": 328,
+      "x": 16,
+      "y": 328.15625
+    },
+    "scrollHeight": 442,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "case": "short-two",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "clientHeight": 425,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 107,
+      "y": 486.4375
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 426.515625,
+      "width": 382,
+      "x": 16,
+      "y": 441.546875
+    },
+    "scrollHeight": 425,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      414,
+      896
+    ]
+  },
+  {
+    "case": "short-two",
+    "badges": [
+      {
+        "offset": -0.4921875,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.4921875,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 336,
+      "width": 484,
+      "x": 16,
+      "y": 50
+    },
+    "clientHeight": 334,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 560.5,
+      "y": 94.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 336,
+      "width": 320,
+      "x": 508,
+      "y": 50
+    },
+    "scrollHeight": 442,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  {
+    "case": "short-two",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 482,
+      "width": 849.609375,
+      "x": 24,
+      "y": 78
+    },
+    "clientHeight": 442,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 976.796875,
+      "y": 160.984375
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 443.90625,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 116.09375
+    },
+    "scrollHeight": 442,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      600
+    ]
+  },
+  {
+    "case": "short-two",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clientHeight": 442,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 976.796875,
+      "y": 356.984375
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 443.90625,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 312.09375
+    },
+    "scrollHeight": 442,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      800
+    ]
+  }
+]

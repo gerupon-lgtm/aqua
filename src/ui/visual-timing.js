@@ -3,6 +3,8 @@ export const RAINBOW_AFTER_MS = 800;
 export const RAINBOW_FADE_MS = 700;
 export const RAINBOW_HOLD_MS = 500;
 export const STAGE_CUE_MS = 1100;
+// 画面を移ったあと、視線が条件へ向く時間を置く。
+export const STAGE_CUE_WAIT_MS = 400;
 
 export function stageCueOpacity(until, now, still = false) {
   const left = until - now;

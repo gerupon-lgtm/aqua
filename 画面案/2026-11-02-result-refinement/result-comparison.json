@@ -1,0 +1,178 @@
+[
+  {
+    "name": "after-plain-360",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 442,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 80,
+      "y": 373.046875
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 443.90625,
+      "width": 328,
+      "x": 16,
+      "y": 328.15625
+    },
+    "scrollHeight": 442,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "after-explain-360",
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 529,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 72.5,
+      "y": 178.890625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 531.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "scrollHeight": 990,
+    "summary": [
+      "左の噴水盤・右の噴水盤は、水が足りません。"
+    ],
+    "version": "v0.14.6",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "before-plain-360",
+    "badges": [
+      {
+        "offset": 5.7109375,
+        "text": "−足りない"
+      },
+      {
+        "offset": 5.7109375,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 501,
+    "heading": "結果",
+    "headingSize": "14px",
+    "hero": {
+      "height": 76,
+      "width": 200,
+      "x": 80,
+      "y": 306.234375
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 503.125,
+      "width": 328,
+      "x": 16,
+      "y": 268.9375
+    },
+    "scrollHeight": 501,
+    "summary": [],
+    "version": "v0.14.5",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "before-explain-360",
+    "badges": [
+      {
+        "offset": 3.2109375,
+        "text": "−足りない"
+      },
+      {
+        "offset": 3.2109375,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clientHeight": 529,
+    "heading": "結果",
+    "headingSize": "14px",
+    "hero": {
+      "height": 76,
+      "width": 200,
+      "x": 72.5,
+      "y": 88.296875
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 531.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "scrollHeight": 1054,
+    "summary": [
+      "左の噴水盤：16/5（約3.20）（必要量 4）。足りません。右の噴水盤：8/5（約1.60）（必要量 4）。足りません。"
+    ],
+    "version": "v0.14.5",
+    "viewport": [
+      360,
+      800
+    ]
+  }
+]
