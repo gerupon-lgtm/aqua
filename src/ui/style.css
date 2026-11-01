@@ -157,6 +157,9 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
   position: absolute; top: -4px; right: -4px; width: 36px; height: 36px; border-radius: 18px; border: 1px solid var(--line);
   background: var(--card); color: var(--ink-soft); font-size: 18px; line-height: 1; cursor: pointer; flex: none;
 }
+/* 「もう一度」と「配管を見直す」は同じ幅（長いほうに合わせる）。「次へ」がないときは見えない場所を残す */
+.panel > .actions .retry, .result-actions .retry { width: calc(6em + 32px); min-width: 0; }
+.actions .slot, .result-actions .slot { visibility: hidden; }
 .result-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 .result-actions button { height: 42px; padding: 0 14px; border-radius: 10px; cursor: pointer; font-weight: 600; white-space: nowrap; }
 .swipe-note { margin: 0; font-size: 12.5px; color: var(--blue-deep); }

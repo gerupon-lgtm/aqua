@@ -10,7 +10,7 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.9.5';
+const APP_VERSION = '0.9.6';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -464,14 +464,20 @@ function renderPanel() {
   const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・配管 ${ev.used} 本` : `配管 ${ev.used} 本`;
   const retryLabel = ev.outcome === 'ng' ? '配管を見直す' : 'もう一度';
   const hasNext = ev.outcome !== 'ng' && state.stageIndex < STAGES.length - 1;
+  // ボタンの位置はクリアとNGでそろえる：左から 解説（結果）・もう一度／配管を見直す・次へ。
+  // 「次へ」がないとき（NG・最後の面）も同じ幅の見えない場所を残し、「もう一度」が右端へずれないようにする。
+  // 「もう一度」のつもりで「次へ」を押してしまうのを防ぐ（2026-11-01 発案者）
+  const nextButton = hasNext
+    ? '<button type="button" class="primary next" id="next">次へ</button>'
+    : '<button type="button" class="primary next slot" tabindex="-1" aria-hidden="true" disabled>次へ</button>';
   // 結果は下の欄に重ねるトーストで出し、下の欄は編集中と同じ高さ（案内＋ボタン1行）に保つ。
   // 欄が伸びると盤面が縮むため（2026-11-01 発案者）。閉じたトーストは「結果」で開き直す
   panel.innerHTML = `
     <p class="hint">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
     <div class="actions">
       <button type="button" class="ghost" id="show-result" aria-expanded="${!state.resultClosed}">結果</button>
-      <button type="button" class="ghost" id="stop">${retryLabel}</button>
-      ${hasNext ? '<button type="button" class="primary" id="next">次へ</button>' : ''}
+      <button type="button" class="ghost retry" id="stop">${retryLabel}</button>
+      ${nextButton}
     </div>`;
   state.resultHtml = `
     <div class="result ${ev.outcome}">
@@ -490,8 +496,8 @@ function renderPanel() {
       </details>
       <div class="result-actions">
         <button type="button" class="ghost" id="explain" aria-expanded="${state.explain}">解説</button>
-        <button type="button" class="ghost" id="stop">${retryLabel}</button>
-        ${hasNext ? '<button type="button" class="primary" id="next">次へ</button>' : ''}
+        <button type="button" class="ghost retry" id="stop">${retryLabel}</button>
+        ${nextButton}
       </div>
     </div>`;
 }
