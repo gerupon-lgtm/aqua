@@ -11,7 +11,7 @@ import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook } from '../content/tutorial.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.10.0';
+const APP_VERSION = '0.10.1';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -19,7 +19,7 @@ const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // カードはどちらも1.6秒」。鐘は打った瞬間が最大ですぐ引くが、グラスの和音は約1秒伸びてから引く。
 // そこで、和音が約6分の1まで下がる1.4秒を前作の0.7秒にあたる点とし、前作の間隔をそのまま当てはめた：
 // クリアのジングル1.4秒・カード2.3秒、NGのジングル2.2秒・カード2.3秒（和音の長さ2.6秒のとき。2026-11-01 発案者が選択）
-const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 1400, jingleNgMs: 2200, cardClearMs: 2300, cardNgMs: 2300, semitones: 5, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
+const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 1400, jingleNgMs: 2200, cardClearMs: 2300, cardNgMs: 2300, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
 const TIMING_FIELDS = [
   ['latencyMs', '音の準備の余裕（音が途切れるときは大きく）', 0, 300, 10],
   ['riseMs', '水面が上がる時間', 400, 3000, 100],
@@ -27,8 +27,7 @@ const TIMING_FIELDS = [
   ['jingleMs', '落ち着いてからジングルまで（クリア）', 0, 4000, 100],
   ['jingleNgMs', '落ち着いてからジングルまで（NG）', 0, 4000, 100],
   ['cardClearMs', '落ち着いてから結果まで（クリア）', 0, 5000, 100],
-  ['cardNgMs', '落ち着いてから結果まで（NG）', 0, 5000, 100],
-  ['semitones', '1目盛りあたりの半音の数', 1, 7, 1]
+  ['cardNgMs', '落ち着いてから結果まで（NG）', 0, 5000, 100]
 ];
 const GATE_HOLD_MS = 1500; // 水門の面：開いた状態で落ち着いてから、水門を閉じるまで（試作の仮の値）
 
@@ -83,12 +82,11 @@ audio.setLatency(state.timing.latencyMs);
 audio.timbre = state.timing.timbre;
 
 function fieldText(key, value) {
-  if (key === 'semitones') return String(value);
   if (key === 'latencyMs') return `${value} ミリ秒`;
   return `${(value / 1000).toFixed(1)} 秒`;
 }
 
-const scaleNow = () => ({ ...DEFAULT_SCALE, semitonesPerStep: state.run?.timing.semitones ?? state.timing.semitones });
+const scaleNow = () => DEFAULT_SCALE;
 const stage = () => state.current;
 const candidate = id => stage().candidates.find(c => c.id === id);
 const bucketsLeft = () => (stage().buckets ?? 0) - [...state.config.primed].filter(id => state.config.connected.has(id)).length;
@@ -179,7 +177,7 @@ function startRun() {
   audio.unlock();
   const st = stage();
   const timing = { ...state.timing };
-  const scale = { ...DEFAULT_SCALE, semitonesPerStep: timing.semitones };
+  const scale = DEFAULT_SCALE;
   const evaluation = evaluate(st, state.config, state.analysis, scale);
   state.evaluation = evaluation;
   state.selected = null;
@@ -656,7 +654,7 @@ function openTuning() {
     audio.unlock();
     const saved = audio.timbre;
     audio.timbre = form.elements.timbre.value;
-    const scale = { ...DEFAULT_SCALE, semitonesPerStep: Number(form.elements.semitones.value) };
+    const scale = DEFAULT_SCALE;
     audio.tone(frequencyForLevel(2, scale), { gain: 0.2, attack: 0.08, hold: 0.35, release: 1.8 });
     audio.chord([frequencyForLevel(4, scale), frequencyForLevel(2, scale)], { at: audio.now + 1.6, length: Number(form.elements.chordMs.value) / 1000 });
     audio.timbre = saved;
