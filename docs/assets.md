@@ -182,6 +182,30 @@ Game asset on a genuinely transparent background: a single tall clear glass vess
 | 加工 | 切り抜き・縮小などをしたか（していなければ「加工なし」） |
 | 採用 | 発案者が実画面で見比べて選んだ日と、候補の置き場所 |
 
+
+### 2026-11-01：優先度1のA/B候補（未採用）
+
+発案者の画像制作依頼により、Codexの組み込み画像生成で全10資材IDに各2案を制作。台座A/Bを別に含め、候補原本22枚（別途バッジBの修正前1枚も保持）。**採用は全て未確定。発案者が実画面で選んでから確定する。**
+
+[比較一覧・確認範囲](../画面案/2026-11-01-priority1/README.md)。資材ごとのREADMEに指示文全文、参照画像、加工、保存先、採否を記録。原本も同じ候補フォルダに保持。
+
+| 資材 | 候補と出所 | 取り込み用候補の保存先 |
+|---|---|---|
+| bg-trial A/B | [README](../画面案/2026-11-01-bg-trial/README.md) | `public/graphics/candidates-20261101/bg-trial/` |
+| fx-fountain A/B | [README](../画面案/2026-11-01-fx-fountain/README.md) | `public/graphics/candidates-20261101/fx-fountain/` |
+| fx-rainbow A/B | [README](../画面案/2026-11-01-fx-rainbow/README.md) | `public/graphics/candidates-20261101/fx-rainbow/` |
+| part-basin A/B | [README](../画面案/2026-11-01-part-basin/README.md) | `public/graphics/candidates-20261101/part-basin/` |
+| part-glass A/B | [README](../画面案/2026-11-01-part-glass/README.md) | `public/graphics/candidates-20261101/part-glass/` |
+| part-spring A/B | [README](../画面案/2026-11-01-part-spring/README.md) | `public/graphics/candidates-20261101/part-spring/` |
+| spirit A/B | [README](../画面案/2026-11-01-spirit/README.md) | `public/graphics/candidates-20261101/spirit/` |
+| title-landscape A/B | [README](../画面案/2026-11-01-title-landscape/README.md) | `public/graphics/candidates-20261101/title-landscape/` |
+| title-portrait A/B | [README](../画面案/2026-11-01-title-portrait/README.md) | `public/graphics/candidates-20261101/title-portrait/` |
+| ui-badges A/B | [README](../画面案/2026-11-01-ui-badges/README.md) | `public/graphics/candidates-20261101/ui-badges/` |
+
+前作の夜の遺跡・天文台・出発点・星の精霊を参照し、白と青の昼の対として制作した。精霊は同じシリーズの顔・髪・浮遊する姿を引き継ぐ。泉・グラスは上48px／胴64px／下40px、台座は上／胴、噴水は各384×512の6コマに分割。虹は768×512、バッジは1536×1024の参照表。透明度・寸法・繰り返す胴の上下端を確認し、加工と検査値を比較フォルダへ記録。
+
+比較用候補であり、現在の公開版には未組み込み。16〜20pxの札・分割接続・噴水の動きの自然さ・背景上での読みやすさ・実機での見え方は、採用時の実画面で確認する。ソース・index.html・版・キャッシュ設定には変更なし。コミット・GitHub送信・デプロイなし。
+
 ## 6. 組み込みと確かめ方
 
 - 組み込み：背景は盤面の空の範囲に、部品は SVG の中に画像として置く。資材は版付きの配信資材と、通信なしで使う資材の一覧に含める（ビルドが自動で拾う）

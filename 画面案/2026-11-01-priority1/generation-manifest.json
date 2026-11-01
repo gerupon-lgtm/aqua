@@ -1,0 +1,371 @@
+[
+  {
+    "id": "spirit-a",
+    "family": "spirit",
+    "title": "星の精霊の昼の対",
+    "prompt": "Use case: illustration-story. Create a new character game asset, WATER SPIRIT candidate A for AQUA NOTES. Reference image is the existing STAR SPIRIT, use it as a series identity/style reference, not an edit target. Its daytime sibling must preserve the recognizable small floating humanoid silhouette, silver-white wavy swept hair, tiny simple pale face and two warm golden oval eyes, flowing cape and translucent lower robe/feet, elegant luminous painterly rendering. Translate navy starfield cloak to pearl white and translucent azure WATER with subtle flowing ripple texture, thin restrained pale-gold trim. Hair ends curl like water droplets. ONE small pale gold star pendant links the siblings; replace overhead star orbit with a delicate water ripple halo without extra gold stars. Calm intelligent expression, no cartoon outline, no oversized anime eyes. Full body centered, all hair, halo, cape and feet fully visible, portrait 1024x1536, small transparent margins. Readable when rendered at 38x56px. Genuinely transparent RGBA background including around glow, no opaque scenery or backdrop, no text, no frame, no watermark. Candidate A has a recognizable short shoulder cape flowing outward like reference, water blue on its lower edge.",
+    "refs": [
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\spirit-guide.png"
+    ],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-69628edf-a967-43e2-85db-cf6f91c7874e.png",
+    "original": "画面案/2026-11-01-spirit/originals/spirit-a.png",
+    "processing": [
+      "1024×1536 RGBA。生成画像の絵と透明度を保持してPNG保存。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-spirit\\spirit-a.png"
+  },
+  {
+    "id": "bg-trial-a",
+    "family": "bg-trial",
+    "title": "若葉の湧き庭",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Square 1536x1536 board SKY background. Central 70% horizontally (x15%-85%) and entire upper 80% remain almost empty pale luminous sky with faint soft clouds, low contrast so overlaid game parts and pipes stay readable. All architecture, rocks and leaves confined to extreme left/right 15% and bottom corners, horizon at the very bottom 4%, no ground cross-section below it. No fountains, spring vessels, glasses, pipes, foreground game objects, water features, or central monuments. Candidate A: natural spring garden suggested only through a few fresh willow leaves at the outer corners, worn ivory stone garden edges at bottom far corners, tiny distant blue mountains at the bottom edge, overwhelmingly open clear morning sky.",
+    "refs": [
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\graphics\\ruins.png"
+    ],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c939f44c-e553-451f-a06b-a3b51cc08dcb.png",
+    "original": "画面案/2026-11-01-bg-trial/originals/bg-trial-a.png",
+    "processing": [
+      "原本 1254×1254 → 1536×1536。切り抜きなし。RGB PNG、減色なし。600KB程度を目指した減色試作では石・葉の細部に色の段差が出たため、取り込み用は画質を保つ版とした。",
+      "compact-study.pngは容量優先の減色試作で、正式な候補の代替ではない。取り込み用の容量は上のファイル一覧を参照。600KBの目安は未達。原本・圧縮試作・画質を保つ版を比較できる。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-bg-trial\\bg-trial-a.png"
+  },
+  {
+    "id": "bg-trial-b",
+    "family": "bg-trial",
+    "title": "白石の回廊庭",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Square 1536x1536 board SKY background. Central 70% horizontally (x15%-85%) and entire upper 80% remain almost empty pale luminous sky with faint soft clouds, low contrast so overlaid game parts and pipes stay readable. All architecture, rocks and leaves confined to extreme left/right 15% and bottom corners, horizon at the very bottom 4%, no ground cross-section below it. No fountains, spring vessels, glasses, pipes, foreground game objects, water features, or central monuments. Candidate B: airy white-stone cloister garden, slender weathered ivory columns cropped at the extreme outer edges only, a few young climbing leaves, faint blue hill horizon in bottom 4%. No arch spans the center. More architectural than A yet equally empty and pale in central game area.",
+    "refs": [
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\graphics\\observatory.png"
+    ],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-4528f985-df1b-482d-901d-43d50642050d.png",
+    "original": "画面案/2026-11-01-bg-trial/originals/bg-trial-b.png",
+    "processing": [
+      "原本 1254×1254 → 1536×1536。切り抜きなし。RGB PNG、減色なし。600KB程度を目指した減色試作では石・葉の細部に色の段差が出たため、取り込み用は画質を保つ版とした。",
+      "compact-study.pngは容量優先の減色試作で、正式な候補の代替ではない。取り込み用の容量は上のファイル一覧を参照。600KBの目安は未達。原本・圧縮試作・画質を保つ版を比較できる。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-bg-trial\\bg-trial-b.png"
+  },
+  {
+    "id": "title-portrait-a",
+    "family": "title-portrait",
+    "title": "朝光の白石庭・縦",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Title screen background, NOT board background. Central 70% of the width and y15%-85% must be a very pale nearly empty low-contrast atmospheric sky/bright haze: app logo at y15%-45% and buttons y45%-85% must remain readable. Architecture and transparent water vessels are scenic and allowed only near extreme side edges or very bottom y90%-100%; do not draw text, logo, interface buttons, panels or frames. No foreground fountain in the center. Daytime sister composition to reference nighttime observatory. Portrait 1024x1536. Candidate A scene: morning white stone spring garden, ivory colonnade at far left, fresh leaves at far right, tiny glass-harp-like clear water vessels glinting on a distant terrace in bottom corners. Horizon extremely low; sunlight from upper left, clean pearly cyan sky. Calm pale central field.",
+    "refs": [
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\graphics\\observatory.png",
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\graphics\\ruins.png"
+    ],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-a755cd56-02fb-4ed8-8798-1a67919a547f.png",
+    "original": "画面案/2026-11-01-title-portrait/originals/title-portrait-a.png",
+    "processing": [
+      "原本 1024×1536 → 1024×1536。切り抜きなし。RGB PNG、減色なし。600KB程度を目指した減色試作では石・葉の細部に色の段差が出たため、取り込み用は画質を保つ版とした。",
+      "compact-study.pngは容量優先の減色試作で、正式な候補の代替ではない。取り込み用の容量は上のファイル一覧を参照。600KBの目安は未達。原本・圧縮試作・画質を保つ版を比較できる。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-title-portrait\\title-portrait-a.png"
+  },
+  {
+    "id": "title-portrait-b",
+    "family": "title-portrait",
+    "title": "水の音楽堂・縦",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Title screen background, NOT board background. Central 70% of the width and y15%-85% must be a very pale nearly empty low-contrast atmospheric sky/bright haze: app logo at y15%-45% and buttons y45%-85% must remain readable. Architecture and transparent water vessels are scenic and allowed only near extreme side edges or very bottom y90%-100%; do not draw text, logo, interface buttons, panels or frames. No foreground fountain in the center. Daytime sister composition to reference nighttime observatory. Portrait 1024x1536. Candidate B scene: a white daylight water-music pavilion beside a misty blue lake; distant low domed gazebo and slender trees confined to outer right bottom; glass water bowls far left bottom; sky remains overwhelmingly pale white blue, central empty haze. More silvery and airy than A, no giant buildings.",
+    "refs": [
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\graphics\\observatory.png",
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\graphics\\ruins.png"
+    ],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c54db1e0-5e63-44a9-89a6-7ad5a854aa3d.png",
+    "original": "画面案/2026-11-01-title-portrait/originals/title-portrait-b.png",
+    "processing": [
+      "原本 1024×1536 → 1024×1536。切り抜きなし。RGB PNG、減色なし。600KB程度を目指した減色試作では石・葉の細部に色の段差が出たため、取り込み用は画質を保つ版とした。",
+      "compact-study.pngは容量優先の減色試作で、正式な候補の代替ではない。取り込み用の容量は上のファイル一覧を参照。600KBの目安は未達。原本・圧縮試作・画質を保つ版を比較できる。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-title-portrait\\title-portrait-b.png"
+  },
+  {
+    "id": "title-landscape-a",
+    "family": "title-landscape",
+    "title": "朝光の白石庭・横",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Title screen background, NOT board background. Central 70% of the width and y15%-85% must be a very pale nearly empty low-contrast atmospheric sky/bright haze: app logo at y15%-45% and buttons y45%-85% must remain readable. Architecture and transparent water vessels are scenic and allowed only near extreme side edges or very bottom y90%-100%; do not draw text, logo, interface buttons, panels or frames. No foreground fountain in the center. Daytime sister composition to reference nighttime observatory. Wide landscape 1672x941, aspect ratio 16:9. Create the SAME EXACT SCENE and art direction as the attached portrait candidate, recomposed for landscape: preserve its architecture type, plants, glass vessels and daytime palette. Keep x25%-75%, y10%-88% very pale open sky/haze so centered title menu remains readable; scenery confined to side wings and bottom 10%. No arch overhead, no large central water vessel. This is a companion landscape asset, not a portrait crop. No text or UI.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-a755cd56-02fb-4ed8-8798-1a67919a547f.png"
+    ],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-87c3c188-9369-4a50-bd7d-14fe300e3efe.png",
+    "original": "画面案/2026-11-01-title-landscape/originals/title-landscape-a.png",
+    "processing": [
+      "原本 1672×941 → 1672×941。切り抜きなし。RGB PNG、減色なし。600KB程度を目指した減色試作では石・葉の細部に色の段差が出たため、取り込み用は画質を保つ版とした。",
+      "compact-study.pngは容量優先の減色試作で、正式な候補の代替ではない。取り込み用の容量は上のファイル一覧を参照。600KBの目安は未達。原本・圧縮試作・画質を保つ版を比較できる。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-title-landscape\\title-landscape-a.png"
+  },
+  {
+    "id": "title-landscape-b",
+    "family": "title-landscape",
+    "title": "水の音楽堂・横",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Title screen background, NOT board background. Central 70% of the width and y15%-85% must be a very pale nearly empty low-contrast atmospheric sky/bright haze: app logo at y15%-45% and buttons y45%-85% must remain readable. Architecture and transparent water vessels are scenic and allowed only near extreme side edges or very bottom y90%-100%; do not draw text, logo, interface buttons, panels or frames. No foreground fountain in the center. Daytime sister composition to reference nighttime observatory. Wide landscape 1672x941, aspect ratio 16:9. Create the SAME EXACT SCENE and art direction as the attached portrait candidate, recomposed for landscape: preserve its architecture type, plants, glass vessels and daytime palette. Keep x25%-75%, y10%-88% very pale open sky/haze so centered title menu remains readable; scenery confined to side wings and bottom 10%. No arch overhead, no large central water vessel. This is a companion landscape asset, not a portrait crop. No text or UI.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c54db1e0-5e63-44a9-89a6-7ad5a854aa3d.png"
+    ],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-20e19685-05c9-4bba-9d6d-9fa2b6898284.png",
+    "original": "画面案/2026-11-01-title-landscape/originals/title-landscape-b.png",
+    "processing": [
+      "原本 1672×941 → 1672×941。切り抜きなし。RGB PNG、減色なし。600KB程度を目指した減色試作では石・葉の細部に色の段差が出たため、取り込み用は画質を保つ版とした。",
+      "compact-study.pngは容量優先の減色試作で、正式な候補の代替ではない。取り込み用の容量は上のファイル一覧を参照。600KBの目安は未達。原本・圧縮試作・画質を保つ版を比較できる。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-title-landscape\\title-landscape-b.png"
+  },
+  {
+    "id": "spirit-b",
+    "family": "spirit",
+    "title": "しずくの衣の案内役",
+    "prompt": "Use case: illustration-story. New WATER SPIRIT character candidate B, day sibling of attached STAR SPIRIT style reference. Preserve series identity: floating small humanoid with same proportions, simple pale face, two tiny gold oval eyes, silver-white wavy hair swept up, calm wise presence, long translucent lower robe and small feet. DIFFERENT WATER DESIGN from A: a narrower elegant teardrop silhouette, pearl-white short shoulder mantle and long watery azure translucent robe with ripple-like hem, small hand extended in a gentle guiding gesture. Hair ends form two clear water droplets. Exactly ONE tiny pale gold four-point star clasp on chest, NO forehead star, NO extra stars, NO large gold medallion, NO orbit. Small thin water ripple halo in cool blue only. Painterly luminous refined fantasy same finish as reference, not generic anime, not comic. Entire figure within 1024x1536 portrait transparent RGBA canvas with breathing room, all hair and feet visible. No scenery, no background shadow, no text/frame. Strong silhouette readable at 38x56px.",
+    "refs": [
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\spirit-guide.png"
+    ],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-5c0e9abf-f9ad-4255-b8e7-2de857df9dfe.png",
+    "original": "画面案/2026-11-01-spirit/originals/spirit-b.png",
+    "processing": [
+      "1024×1536 RGBA。生成画像の絵と透明度を保持してPNG保存。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-spirit\\spirit-b.png"
+  },
+  {
+    "id": "part-spring-a",
+    "family": "part-spring",
+    "title": "白石の端正な泉",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single isolated game part on genuinely transparent RGBA background, portrait 1024x1536. White ivory stone tall OPEN reservoir vessel viewed perfectly straight from side as a 2D CUTAWAY. NOT a fountain, no flowing water. A rectangular upright stone U-shaped container: narrow ivory stone vertical side walls with perfectly parallel straight sides, open hollow central interior truly TRANSPARENT from below thin horizontal mouth rim down to a shallow rounded solid stone bottom. NO opaque back wall in the center, NO water, NO plants, NO handles, NO pipe, NO pedestal, NO ground shadow. Subtle cool gray bevels, VERY restrained pale gold line only along upper rim. Full vessel fills x15%-85%, y8%-92%. Upper rim and rounded base compact, central 60% plain constant cross-section suitable for stretching vertically. Ornament only at cap and base; body walls smooth. Clear game readable silhouette; do not draw a scene or multiple pieces. Candidate A restrained classical smooth stone.",
+    "refs": [
+      "C:\\Users\\user\\Documents\\project\\ダイクストラ法検証\\public\\graphics\\source.png"
+    ],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-6ba4a53c-7ff5-46ee-9002-0b37b62d40d0.png",
+    "original": "画面案/2026-11-01-part-spring/originals/part-spring-a.png",
+    "processing": [
+      "原本の物体領域を余白つきで切り出し (131, 90, 893, 1446)、幅240pxへ縦横比を保って縮小。全体像の上0〜128pxを高さ48px、下290〜427pxを高さ40pxへ調整して分離し、縁と底の形が途中で切れないようにした。胴は中央1行を高さ64pxへ拡大し、縦の繰り返し境界を同一にした。描き足し・背景消去なし。",
+      "原本の胴の縦模様は全体像に保持。分割用の胴は縦方向に一定となる。上下の部品は縦方向の寸法を調整している。接続の反射・色の差の見え方は比較画像と実画面で要確認。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-spring\\part-spring-a-whole.png"
+  },
+  {
+    "id": "part-spring-b",
+    "family": "part-spring",
+    "title": "波の彫り縁の泉",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single game reservoir, transparent RGBA, 1024x1536 portrait. Front view CUTAWAY upright OPEN U-shaped white stone water container. Parallel perfectly straight vertical side walls, empty inner cavity genuinely transparent, compact rounded bottom. Entire outline within margins. Upper mouth is a thin ivory rim, NOT closed by a lid. No water, no pipe, no pedestal, no floor, no shadow, no star motifs or crystals, no scene. Central body constant cross-section for vertically repeating tile; no carvings on body. Decorative stone only along thin side walls, rim and bottom; center must be empty. Candidate B: ivory limestone rim and base have a SINGLE subtle shallow wave relief, smooth pale blue-gray side stone, minimalist aquatic architecture, no gold except one tiny sunlit glint at the rim. This is a functional hollow reservoir, not a decorative picture frame.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2908eae7-439a-4a64-b088-c4a968c39772.png",
+    "original": "画面案/2026-11-01-part-spring/originals/part-spring-b.png",
+    "processing": [
+      "原本の物体領域を余白つきで切り出し (74, 26, 950, 1507)、幅240pxへ縦横比を保って縮小。全体像の上0〜122pxを高さ48px、下276〜406pxを高さ40pxへ調整して分離し、縁と底の形が途中で切れないようにした。胴は中央1行を高さ64pxへ拡大し、縦の繰り返し境界を同一にした。描き足し・背景消去なし。",
+      "原本の胴の縦模様は全体像に保持。分割用の胴は縦方向に一定となる。上下の部品は縦方向の寸法を調整している。接続の反射・色の差の見え方は比較画像と実画面で要確認。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-spring\\part-spring-b-whole.png"
+  },
+  {
+    "id": "part-glass-a",
+    "family": "part-glass",
+    "title": "薄縁のクリアグラス",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single clear GLASS HARP vessel game asset, transparent RGBA portrait 1024x1536. Entire upright glass cylinder viewed exactly straight on, no perspective tilt, NO stem, NO wineglass foot. Perfectly parallel straight side walls, simple open thin elliptical rim and shallow round bottom. Empty interior, no water, NO tick marks, no graduations, no label, no pipe, no scenery or ground shadow. Clear center almost completely transparent; shape seen only through thin silver-white edge highlights and soft blue refraction. Slim silhouette suitable for width34 screen units and variable heights150-300: central 70% constant cross-section suitable for vertically repeating a strip. Compact rim/base, full vessel within canvas, no glow halo outside. Only a faint warm edge highlight, no gold metal. Candidate A extremely fine crystal glass, restrained vertical highlights, almost invisible clear body, delicate rolled rim, simple smooth rounded bottom.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-a331abbf-4e16-4fc9-b047-65b3ea7dad7d.png",
+    "original": "画面案/2026-11-01-part-glass/originals/part-glass-a.png",
+    "processing": [
+      "原本の物体領域を余白つきで切り出し (266, 38, 758, 1502)、幅136pxへ縦横比を保って縮小。全体像の上0〜65pxを高さ48px、下332〜405pxを高さ40pxへ調整して分離し、縁と底の形が途中で切れないようにした。胴は中央1行を高さ64pxへ拡大し、縦の繰り返し境界を同一にした。描き足し・背景消去なし。",
+      "原本の胴の縦模様は全体像に保持。分割用の胴は縦方向に一定となる。上下の部品は縦方向の寸法を調整している。接続の反射・色の差の見え方は比較画像と実画面で要確認。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-glass\\part-glass-a-whole.png"
+  },
+  {
+    "id": "part-glass-b",
+    "family": "part-glass",
+    "title": "青い反射のリムグラス",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single game GLASS HARP vessel on truly transparent RGBA background 1024x1536 portrait, no scene. Candidate B: elegant slightly thicker crystal cylindrical glass, a thin ice-blue doubled rim and faint vertical blue highlights, shallow softly rounded bottom. Strict straight-on elevation, parallel straight vertical sides of CONSTANT width over middle 70%, NOT a goblet, NO stem or foot, no taper, no decorations in the center. EMPTY, no water, no tick marks, no numbers, no pipes, no floor shadow, no opaque halo; interior nearly transparent for animated water layer drawn behind it. Isolated full tall vessel with margins. Stronger cool-blue side edge than A so at width34px the silhouette stays clear. Body can be vertically tiled, top and base compact. Same luminous restrained painterly game asset finish as reference, NO stars and no gold framework.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-a331abbf-4e16-4fc9-b047-65b3ea7dad7d.png"
+    ],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-4211f234-fac0-4fac-8050-2bad48428ee0.png",
+    "original": "画面案/2026-11-01-part-glass/originals/part-glass-b.png",
+    "processing": [
+      "原本の物体領域を余白つきで切り出し (262, 35, 764, 1505)、幅136pxへ縦横比を保って縮小。全体像の上0〜64pxを高さ48px、下326〜398pxを高さ40pxへ調整して分離し、縁と底の形が途中で切れないようにした。胴は中央1行を高さ64pxへ拡大し、縦の繰り返し境界を同一にした。描き足し・背景消去なし。",
+      "原本の胴の縦模様は全体像に保持。分割用の胴は縦方向に一定となる。上下の部品は縦方向の寸法を調整している。接続の反射・色の差の見え方は比較画像と実画面で要確認。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-glass\\part-glass-b-whole.png"
+  },
+  {
+    "id": "part-basin-a",
+    "family": "part-basin",
+    "title": "金の細縁の噴水盤",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single isolated game FOUNTAIN BASIN, transparent RGBA background, wide canvas 1536x832, finished target384x208. White ivory stone inverted trapezoid vessel with broad open top and rounded shallow bottom, viewed exactly straight from front as cutaway. Subtle thin pale-gold line only along mouth rim. EMPTY interior cavity truly transparent; no blue water, no fountain jets. A small plain open pipe inlet enters from LEFT side only, no right pipe. Soft blue-gray bevel, smooth classic stone, no crystals/stars/ornament, no feet/pedestal, no floor/ground shadow. Compact silhouette centered with small transparent margin, entire basin and left inlet visible. Side wall shape narrows toward rounded bottom, broad opening, suitable for front view game board with width48 height26. Do not draw scenery or a realistic back wall blocking the cavity.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-ea0c5bfc-03cc-4ecf-88c9-190b88ccee00.png",
+    "original": "画面案/2026-11-01-part-basin/originals/part-basin-a.png",
+    "processing": [
+      "物体領域 (0, 163, 1704, 855) を余白つきで切り出し、縦横比を保って384×208の透過キャンバスへ収めた。内側の透明部分は生成結果を保持。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-basin\\part-basin-a.png"
+  },
+  {
+    "id": "part-basin-b",
+    "family": "part-basin",
+    "title": "水紋の彫り縁の噴水盤",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single isolated game FOUNTAIN BASIN candidate B, true transparent RGBA background, wide1536x832 canvas for target384x208. Entire ivory limestone vessel viewed straight front CUTAWAY, shallow inverted trapezoid bowl with a broad open mouth and gently round bottom. Center cavity is EMPTY and transparent so app draws water behind. Thin pale gold line at rim, one restrained shallow WAVE relief on the outside bottom stone, soft cool blue-gray stone bevels. Slightly softer rounded corners than A. A short small inlet enters from LEFT only. No liquid, no jets, no pedestal, no handles, no stars/crystals, no floor/shadow or scene. Leave small transparent margin, functional clean silhouette at game width48px. Interior MUST stay open transparent, not an opaque back wall.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-8b36fe7d-421d-431c-b17e-ec42ee978a8d.png",
+    "original": "画面案/2026-11-01-part-basin/originals/part-basin-b.png",
+    "processing": [
+      "物体領域 (0, 191, 1704, 818) を余白つきで切り出し、縦横比を保って384×208の透過キャンバスへ収めた。内側の透明部分は生成結果を保持。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-basin\\part-basin-b.png"
+  },
+  {
+    "id": "part-basin-pedestal-a",
+    "family": "part-basin",
+    "title": "端正な白石台座",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Isolated WHITE STONE PEDESTAL matching minimalist classical fountain basin, true transparent RGBA background, portrait1024x1536. A simple upright RECTANGULAR stone plinth viewed perfectly straight front. NO basin or bowl on top. Broad shallow flat top cap (about top15%), constant-width straight rectangular pillar shaft below (about75%), with NO foot or bottom widening because shaft is vertically extendable. Smooth ivory stone, subtle pale blue-gray side bevels, single faint pale gold line on cap only, no carvings, no columns/fluting, no gems/stars. Central front face opaque stone. Entire support within margins, no ground, no floor shadow, no other objects. This asset will split into top cap and a vertically repeating body strip at target width224px.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-16e11e62-bb20-4d6c-ad95-06d856880630.png",
+    "original": "画面案/2026-11-01-part-basin/originals/part-basin-pedestal-a.png",
+    "processing": [
+      "物体領域 (205, 97, 816, 1486) を余白つきで切り出し、幅224pxへ比例縮小。上96pxと中央1行を高さ64pxへ拡大した胴を分離。胴の上下端は同一。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-basin\\part-basin-pedestal-a-whole.png"
+  },
+  {
+    "id": "part-basin-pedestal-b",
+    "family": "part-basin",
+    "title": "水紋の白石台座",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. A SINGLE white limestone game PEDESTAL on true transparent RGBA1024x1536portrait. Full front elevation, shallow broad top cap on straight rectangular pillar. No bowl/no basin. Candidate B: one delicate shallow wave relief on top cap matching wave-relief fountain basin, rest of tall shaft is smooth and featureless ivory stone with blue-gray side bevel. Top cap15%, constant width shaft75%, no base flare/foot since shaft will vertically repeat. NO gold except one tiny reflected edge glint. No stars, no crystals, no floor shadow, no scenery. Entire silhouette in margins, opaque stone face. Top and body will be extracted separately target224px wide.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-d9a078e7-8b14-4e4c-90cb-bdc20b734dce.png",
+    "original": "画面案/2026-11-01-part-basin/originals/part-basin-pedestal-b.png",
+    "processing": [
+      "物体領域 (184, 54, 838, 1510) を余白つきで切り出し、幅224pxへ比例縮小。上96pxと中央1行を高さ64pxへ拡大した胴を分離。胴の上下端は同一。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-part-basin\\part-basin-pedestal-b-whole.png"
+  },
+  {
+    "id": "fx-fountain-a",
+    "family": "fx-fountain",
+    "title": "一筋の澄んだ噴水",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Animation SPRITE SHEET ONLY on genuinely transparent RGBA background. EXACTLY six equal cells in a clean 3 columns x 2 rows grid, no gutters, NO grid lines, NO labels or numbers. Canvas1152x1024, each cell384x512. Read left-to-right top row frames1-3 then bottom row frames4-6. All SIX water jets have same origin exactly at cell x50%, y95%, no basin, no ground, no rainbow. Frame1 small rising spurt occupying bottom20%; frame2 bottom40%; frame3 bottom65%; frame4 almost fully grown; frames5 and6 full height near90% with subtly changed droplets. Frames4-6 are similarly tall and form a quiet sustainable loop. White and soft-blue translucent water, delicate sparkling droplets, restrained pale gold glints only, graceful physical spray, clear against bright sky. Entire spray stays inside its own cell with 8% side margin and8% top margin. No background glow rectangle, no cloud, no decorations, no text. Candidate A: ONE central smooth water jet splitting only at its delicate crown into a restrained umbrella of fine droplets. Do not multiply jets. Calm elegant fountain with clean silhouette.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-a46f2306-3ec8-43fe-a750-1c286935c55c.png",
+    "original": "画面案/2026-11-01-fx-fountain/originals/fx-fountain-a.png",
+    "processing": [
+      "6コマの生成シート (1330, 1182) を1152×1024へ寸法調整し、3列×2行の固定枠で各384×512へ分割。左上から行順。描き足しなし。",
+      "preview.apngは比較専用：各140ms、1〜6の後4〜6を繰り返す。アプリの正式な速度・原点合わせは採用時の実画面で決める。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-fx-fountain\\fx-fountain-a-sheet.png"
+  },
+  {
+    "id": "fx-fountain-b",
+    "family": "fx-fountain",
+    "title": "三筋の扇状の噴水",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Animation SPRITE SHEET ONLY on genuinely transparent RGBA background. EXACTLY six equal cells in a clean 3 columns x 2 rows grid, no gutters, NO grid lines, NO labels or numbers. Canvas1152x1024, each cell384x512. Read left-to-right top row frames1-3 then bottom row frames4-6. All SIX water jets have same origin exactly at cell x50%, y95%, no basin, no ground, no rainbow. Frame1 small rising spurt occupying bottom20%; frame2 bottom40%; frame3 bottom65%; frame4 almost fully grown; frames5 and6 full height near90% with subtly changed droplets. Frames4-6 are similarly tall and form a quiet sustainable loop. White and soft-blue translucent water, delicate sparkling droplets, restrained pale gold glints only, graceful physical spray, clear against bright sky. Entire spray stays inside its own cell with 8% side margin and8% top margin. No background glow rectangle, no cloud, no decorations, no text. Candidate B: THREE fine jets from one common origin, the middle jet tallest and two lower graceful outward arcs, airy balanced fan silhouette rather than broad foamy umbrella, sparse delicate droplets. Quiet celebration suitable for glass-harp sounds.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-8cbbf596-c5ca-4385-97a5-a8fac033c66f.png",
+    "original": "画面案/2026-11-01-fx-fountain/originals/fx-fountain-b.png",
+    "processing": [
+      "6コマの生成シート (1330, 1182) を1152×1024へ寸法調整し、3列×2行の固定枠で各384×512へ分割。左上から行順。描き足しなし。",
+      "preview.apngは比較専用：各140ms、1〜6の後4〜6を繰り返す。アプリの正式な速度・原点合わせは採用時の実画面で決める。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-fx-fountain\\fx-fountain-b-sheet.png"
+  },
+  {
+    "id": "fx-rainbow-a",
+    "family": "fx-rainbow",
+    "title": "淡い光の虹",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single isolated RAINBOW effect game asset on truly transparent RGBA background, wide768x512 canvas. A graceful SHALLOW ARCH (much flatter than a semicircle), rainbow span about85% canvas width, apex about y25%, both ends near y65%. Translucent softly blended pastel colors in correct red-orange-yellow-green-cyan-blue-violet order, refined light not candy stripes. No white cloud on either end, no sky, no scene, no basin, no fountain, no text, no border. Inner arch and corners genuinely transparent. Delicate soft luminous edges, not huge opaque glow. Just a few tiny warm pale-gold light specks at ends connect it to PRISM NOTES. Plenty transparent space under arc; usable above a small fountain. Candidate A: thin mist-like luminous spectrum, very soft blending and minimal sparkles, elegant clear sunlit water rainbow.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-f17d289c-ea3e-4819-9c00-585db2a3a2de.png",
+    "original": "画面案/2026-11-01-fx-rainbow/originals/fx-rainbow-a.png",
+    "processing": [
+      "原本 1536×1024 を768×512へ比例縮小。透過を保持。加工による描き足しなし。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-fx-rainbow\\fx-rainbow-a.png"
+  },
+  {
+    "id": "fx-rainbow-b",
+    "family": "fx-rainbow",
+    "title": "水滴の輝きの虹",
+    "prompt": "Use case: illustration-story. New game art for AQUA NOTES, the daytime sister of PRISM NOTES. Use attached image(s) only as painterly series style reference: refined, luminous, serene mature fantasy, delicate material texture, no cartoon. White #f4f9fd and soft blue #e2eef8, restrained pale gold only on lit edges, morning light from upper left. No lettering, logos, signatures, frames, people or characters. Single isolated RAINBOW effect game asset on truly transparent RGBA background, wide768x512 canvas. A graceful SHALLOW ARCH (much flatter than a semicircle), rainbow span about85% canvas width, apex about y25%, both ends near y65%. Translucent softly blended pastel colors in correct red-orange-yellow-green-cyan-blue-violet order, refined light not candy stripes. No white cloud on either end, no sky, no scene, no basin, no fountain, no text, no border. Inner arch and corners genuinely transparent. Delicate soft luminous edges, not huge opaque glow. Just a few tiny warm pale-gold light specks at ends connect it to PRISM NOTES. Plenty transparent space under arc; usable above a small fountain. Candidate B: somewhat narrower defined spectral ribbon than A, watery refracted edge and a few clear droplet-like glints; quiet pearly luminous color, a low shallow arch not semicircular; no clouds or ornate curls.",
+    "refs": [],
+    "alpha": true,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-0aefd2a5-d4a2-42e3-900f-eb90e0a18606.png",
+    "original": "画面案/2026-11-01-fx-rainbow/originals/fx-rainbow-b.png",
+    "processing": [
+      "原本 1536×1024 を768×512へ比例縮小。透過を保持。加工による描き足しなし。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-fx-rainbow\\fx-rainbow-b.png"
+  },
+  {
+    "id": "ui-badges-a",
+    "family": "ui-badges",
+    "title": "角丸の青い札",
+    "prompt": "Use case: ui-mockup. UI design reference sheet1536x1024 RGB for AQUA NOTES bright daytime white-blue game. Clean flat production UI drawing rather than painterly decorative prop. Match the family of PRISM NOTES' small rectangular blue labels with white text: mature restrained, crisp flat fills, high contrast, white/blue #17314c #2a6db5 #1d4f88, tiny #c9a14a accent ONLY for exact success. These labels will be reconstructed as SVG at16-20px tall, so use simple shapes, generous interior and legible Japanese sans-serif; no thin ornate calligraphy, no drop shadows, no noisy texture. Pale off-white background. Arrange SEVEN compact horizontal category rows with clear spacing. Need ALL following sample badges, exact Japanese text: row1 one 泉. row2 four badges each saying 指定 2: normal pale blue, exact arrival blue with small gold check, excess muted orange with plus symbol, shortfall gray-blue with minus symbol. row3 four badges each saying 開 3・閉 2 in the same4 states. row4 two badges 口 太1 and 口の高さ 3. row5 eight pipe badges: 太1 中2 細3 細3〜太1 in unconnected state (WHITE fill, gray-blue edge and dark text), then same four texts in connected state (BLUE fill white text). row6 two gate badges 水門 and 水門（閉）, open blue and closed slate with clear outline icon. row7 one empty-glass badge 空. Total22 sample badges. State markers must distinguish without color alone. All words exact, no added English, no numbers outside required badge text, no logo/watermark, no character/scenery. Do not turn badges into giant decorative buttons. Candidate A: small rounded rectangular badges with corner radius3px at final18px height, simple strong outer edges and restrained paired thin border. Keep every example compact and visually related; zero leaf or scroll decorations.",
+    "refs": [],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-b5a9ab62-6a21-4b15-932f-2654f876fa87.png",
+    "original": "画面案/2026-11-01-ui-badges/originals/ui-badges-a.png",
+    "processing": [
+      "1536×1024 RGBのデザイン表。図形として描き直すための参照であり、札全体をそのまま縮小して配信するための画像ではない。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-ui-badges\\ui-badges-a.png"
+  },
+  {
+    "id": "ui-badges-b",
+    "family": "ui-badges",
+    "title": "隅切りの端正な札",
+    "prompt": "Use case: ui-mockup. UI design reference sheet1536x1024 RGB for AQUA NOTES bright daytime white-blue game. Clean flat production UI drawing rather than painterly decorative prop. Match the family of PRISM NOTES' small rectangular blue labels with white text: mature restrained, crisp flat fills, high contrast, white/blue #17314c #2a6db5 #1d4f88, tiny #c9a14a accent ONLY for exact success. These labels will be reconstructed as SVG at16-20px tall, so use simple shapes, generous interior and legible Japanese sans-serif; no thin ornate calligraphy, no drop shadows, no noisy texture. Pale off-white background. Arrange SEVEN compact horizontal category rows with clear spacing. Need ALL following sample badges, exact Japanese text: row1 one 泉. row2 four badges each saying 指定 2: normal pale blue, exact arrival blue with small gold check, excess muted orange with plus symbol, shortfall gray-blue with minus symbol. row3 four badges each saying 開 3・閉 2 in the same4 states. row4 two badges 口 太1 and 口の高さ 3. row5 eight pipe badges: 太1 中2 細3 細3〜太1 in unconnected state (WHITE fill, gray-blue edge and dark text), then same four texts in connected state (BLUE fill white text). row6 two gate badges 水門 and 水門（閉）, open blue and closed slate with clear outline icon. row7 one empty-glass badge 空. Total22 sample badges. State markers must distinguish without color alone. All words exact, no added English, no numbers outside required badge text, no logo/watermark, no character/scenery. Do not turn badges into giant decorative buttons. Candidate B: shallow CHAMFERED CORNERS (cut corners), SINGLE dark-blue border not double border, subtly ivory fills for neutral and solid cobalt for connected, tiny simple square state marker at right. Slightly more architectural and compact than rounded A. Use bold readable Noto-style Japanese sans serif. Every badge is horizontal and compact; icons optional but small, prioritize text, no extra headers. Maintain all22 examples in7rows exactly as specified. No ornamental frame or filigree.\n\nSecond tool call (colour correction):\nUse case: precise-object-edit. Edit target: the attached AQUA NOTES badge design sheet candidate B. Make ONLY this small color correction: in row5 the four CONNECTED PIPE badges 太1 中2 細3 細3〜太1, replace each GOLD square/check status marker with a WHITE check status marker (keep readable against blue); in row6 open 水門 badge replace GOLD square/check with WHITE. Preserve pale-gold success markers ONLY in row2 and row3 exact-arrival status badges (second badge in each of those rows). Keep all22 badge layouts, Japanese lettering, shapes, positions, blue/white colors, borders, size1536x1024, and every other pixel design unchanged as faithfully as possible. Do not add or remove anything, no new text. RGB white background. This respects series rule that gold is reserved for light/success, not ordinary connected pipes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-ef2dd011-f162-4a24-8ba1-e550e6f73d21.png"
+    ],
+    "alpha": false,
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-d6fd3acb-baeb-4114-8c71-23e8bd8b5465.png",
+    "initial_path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-ef2dd011-f162-4a24-8ba1-e550e6f73d21.png",
+    "initial_prompt": "Use case: ui-mockup. UI design reference sheet1536x1024 RGB for AQUA NOTES bright daytime white-blue game. Clean flat production UI drawing rather than painterly decorative prop. Match the family of PRISM NOTES' small rectangular blue labels with white text: mature restrained, crisp flat fills, high contrast, white/blue #17314c #2a6db5 #1d4f88, tiny #c9a14a accent ONLY for exact success. These labels will be reconstructed as SVG at16-20px tall, so use simple shapes, generous interior and legible Japanese sans-serif; no thin ornate calligraphy, no drop shadows, no noisy texture. Pale off-white background. Arrange SEVEN compact horizontal category rows with clear spacing. Need ALL following sample badges, exact Japanese text: row1 one 泉. row2 four badges each saying 指定 2: normal pale blue, exact arrival blue with small gold check, excess muted orange with plus symbol, shortfall gray-blue with minus symbol. row3 four badges each saying 開 3・閉 2 in the same4 states. row4 two badges 口 太1 and 口の高さ 3. row5 eight pipe badges: 太1 中2 細3 細3〜太1 in unconnected state (WHITE fill, gray-blue edge and dark text), then same four texts in connected state (BLUE fill white text). row6 two gate badges 水門 and 水門（閉）, open blue and closed slate with clear outline icon. row7 one empty-glass badge 空. Total22 sample badges. State markers must distinguish without color alone. All words exact, no added English, no numbers outside required badge text, no logo/watermark, no character/scenery. Do not turn badges into giant decorative buttons. Candidate B: shallow CHAMFERED CORNERS (cut corners), SINGLE dark-blue border not double border, subtly ivory fills for neutral and solid cobalt for connected, tiny simple square state marker at right. Slightly more architectural and compact than rounded A. Use bold readable Noto-style Japanese sans serif. Every badge is horizontal and compact; icons optional but small, prioritize text, no extra headers. Maintain all22 examples in7rows exactly as specified. No ornamental frame or filigree.",
+    "edit_prompt": "Use case: precise-object-edit. Edit target: the attached AQUA NOTES badge design sheet candidate B. Make ONLY this small color correction: in row5 the four CONNECTED PIPE badges 太1 中2 細3 細3〜太1, replace each GOLD square/check status marker with a WHITE check status marker (keep readable against blue); in row6 open 水門 badge replace GOLD square/check with WHITE. Preserve pale-gold success markers ONLY in row2 and row3 exact-arrival status badges (second badge in each of those rows). Keep all22 badge layouts, Japanese lettering, shapes, positions, blue/white colors, borders, size1536x1024, and every other pixel design unchanged as faithfully as possible. Do not add or remove anything, no new text. RGB white background. This respects series rule that gold is reserved for light/success, not ordinary connected pipes.",
+    "original": "画面案/2026-11-01-ui-badges/originals/ui-badges-b.png",
+    "processing": [
+      "1536×1024 RGBのデザイン表。図形として描き直すための参照であり、札全体をそのまま縮小して配信するための画像ではない。"
+    ],
+    "files": [],
+    "preview": "\\\\192.168.100.200\\disk1\\LLM Project\\AQUA NOTES\\aqua_basic_design\\aqua\\画面案\\2026-11-01-ui-badges\\ui-badges-b.png"
+  }
+]

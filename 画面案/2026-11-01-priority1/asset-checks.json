@@ -1,0 +1,778 @@
+[
+  {
+    "id": "spirit-a",
+    "file": "public/graphics/candidates-20261101/spirit/spirit-a.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "bytes": 1869299,
+    "sha256": "d794f80c931380582c96c35394b86c655044618c76dbeefc5d31ab3aa8f9001e",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "notes": ""
+  },
+  {
+    "id": "bg-trial-a",
+    "file": "public/graphics/candidates-20261101/bg-trial/bg-trial-a.png",
+    "size": [
+      1536,
+      1536
+    ],
+    "mode": "RGB",
+    "bytes": 2401177,
+    "sha256": "1327ca7f4ec3f354c37241a9966d6491d5324f009e2a05b1074b31b3fdf15ce5",
+    "alpha_extrema": null,
+    "notes": ""
+  },
+  {
+    "id": "bg-trial-b",
+    "file": "public/graphics/candidates-20261101/bg-trial/bg-trial-b.png",
+    "size": [
+      1536,
+      1536
+    ],
+    "mode": "RGB",
+    "bytes": 2681968,
+    "sha256": "bac6155d01598634508bd129f6052605669e5b2f3d47fa2b29bd1221ba636add",
+    "alpha_extrema": null,
+    "notes": ""
+  },
+  {
+    "id": "title-portrait-a",
+    "file": "public/graphics/candidates-20261101/title-portrait/title-portrait-a.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGB",
+    "bytes": 2141357,
+    "sha256": "123ad5d15118e17f7ec26da975c200900d4fff9ccb1b4a162c89d83c3594793a",
+    "alpha_extrema": null,
+    "notes": ""
+  },
+  {
+    "id": "title-portrait-b",
+    "file": "public/graphics/candidates-20261101/title-portrait/title-portrait-b.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGB",
+    "bytes": 1762943,
+    "sha256": "a8095a9a71b919d433847c7cedb3e298795d7b5e98dba35de8e3b59dcd4bc5e1",
+    "alpha_extrema": null,
+    "notes": ""
+  },
+  {
+    "id": "title-landscape-a",
+    "file": "public/graphics/candidates-20261101/title-landscape/title-landscape-a.png",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "bytes": 2297411,
+    "sha256": "8655243fa0cd8cc14eecd16f5a1cebae36e60d934eed69c6c0748820ab9bfc6f",
+    "alpha_extrema": null,
+    "notes": ""
+  },
+  {
+    "id": "title-landscape-b",
+    "file": "public/graphics/candidates-20261101/title-landscape/title-landscape-b.png",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "bytes": 1802932,
+    "sha256": "e33058b62de86d90db4cf5b2581b3e3bd307ba762022bd7e064c4e34a1207e10",
+    "alpha_extrema": null,
+    "notes": ""
+  },
+  {
+    "id": "spirit-b",
+    "file": "public/graphics/candidates-20261101/spirit/spirit-b.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "bytes": 1922729,
+    "sha256": "ea6da40bf927c0e5269a7bcd557bd5bad40f24db80b5c1c53cab3c507beaab1a",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-spring-a",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-a-whole.png",
+    "size": [
+      240,
+      427
+    ],
+    "mode": "RGBA",
+    "bytes": 77654,
+    "sha256": "ed3f2af484b79116bbf6cea65ea0af4b04447e5915f017880b8f15711adff5bf",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": "全体像。分割前の参考用。"
+  },
+  {
+    "id": "part-spring-a",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-a-top.png",
+    "size": [
+      240,
+      48
+    ],
+    "mode": "RGBA",
+    "bytes": 9928,
+    "sha256": "bd5f72a182bb0931ae9c0843611acdd8789d936d433cd981ce0ad8fb9deace63",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-spring-a",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-a-middle.png",
+    "size": [
+      240,
+      64
+    ],
+    "mode": "RGBA",
+    "bytes": 499,
+    "sha256": "c561457ca6a88c265b4112420c66c1847e1274ef53b40dcf749ea2bf4b02217b",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-spring-a",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-a-bottom.png",
+    "size": [
+      240,
+      40
+    ],
+    "mode": "RGBA",
+    "bytes": 11939,
+    "sha256": "32a1b6e3188a6f598d42ea52e67aba5b4d162a821396930cbbe50c196c3da5bc",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-spring-b",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-b-whole.png",
+    "size": [
+      240,
+      406
+    ],
+    "mode": "RGBA",
+    "bytes": 70943,
+    "sha256": "ac39fa79a017b91da8778acd5cb1dda5cd492eadb8d1db986163bd236617867d",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": "全体像。分割前の参考用。"
+  },
+  {
+    "id": "part-spring-b",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-b-top.png",
+    "size": [
+      240,
+      48
+    ],
+    "mode": "RGBA",
+    "bytes": 9918,
+    "sha256": "259f830b33b18ce9a1491736f0d974463ed35998cc4281435adf84887705cb28",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-spring-b",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-b-middle.png",
+    "size": [
+      240,
+      64
+    ],
+    "mode": "RGBA",
+    "bytes": 483,
+    "sha256": "84e00310031e4d07bc51cd0767db9408276fb62192245f186c9fe4779694f72a",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-spring-b",
+    "file": "public/graphics/candidates-20261101/part-spring/part-spring-b-bottom.png",
+    "size": [
+      240,
+      40
+    ],
+    "mode": "RGBA",
+    "bytes": 10182,
+    "sha256": "a3d76b2b93ce0d7c7a123c2a6194638e93abafc3bc1337611a1c1643245fb58f",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-glass-a",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-a-whole.png",
+    "size": [
+      136,
+      405
+    ],
+    "mode": "RGBA",
+    "bytes": 72391,
+    "sha256": "93abe6245763a7128f710056cfcd4857d677450f4e62b6e7706946d3077de72a",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": "全体像。分割前の参考用。"
+  },
+  {
+    "id": "part-glass-a",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-a-top.png",
+    "size": [
+      136,
+      48
+    ],
+    "mode": "RGBA",
+    "bytes": 10791,
+    "sha256": "30082fb2313b077023f4f11f461a6297064a286a01eea77c7a16cfa38c49c5b3",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-glass-a",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-a-middle.png",
+    "size": [
+      136,
+      64
+    ],
+    "mode": "RGBA",
+    "bytes": 567,
+    "sha256": "e7faac0554685ea45962b5c64c19b50877b9705312e87cb4ae0f970ed6e9ca01",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-glass-a",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-a-bottom.png",
+    "size": [
+      136,
+      40
+    ],
+    "mode": "RGBA",
+    "bytes": 10915,
+    "sha256": "9fdd1098447a398b63f6559acf7959f031b0ab8362b990c46266e77ccbc6ee7d",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-glass-b",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-b-whole.png",
+    "size": [
+      136,
+      398
+    ],
+    "mode": "RGBA",
+    "bytes": 73264,
+    "sha256": "795c1e504a2c3a134d511b6065f9b9d9712901400869e5a6624ee87577e4e56d",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": "全体像。分割前の参考用。"
+  },
+  {
+    "id": "part-glass-b",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-b-top.png",
+    "size": [
+      136,
+      48
+    ],
+    "mode": "RGBA",
+    "bytes": 11118,
+    "sha256": "bbf89b5b59ad3ea2a62cc8b52bdc36d2b36cd5adeb0d80a5dd730ace0c402eb8",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-glass-b",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-b-middle.png",
+    "size": [
+      136,
+      64
+    ],
+    "mode": "RGBA",
+    "bytes": 575,
+    "sha256": "5e14b64cc3f5ea39fae42e4f7331152ab4cf930a536238546b29196e327c0e70",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-glass-b",
+    "file": "public/graphics/candidates-20261101/part-glass/part-glass-b-bottom.png",
+    "size": [
+      136,
+      40
+    ],
+    "mode": "RGBA",
+    "bytes": 11182,
+    "sha256": "8a103c6d0447b69e98b795486e3f2825681b0713f9d9e118569e26d46a7bbec6",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-a",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-a.png",
+    "size": [
+      384,
+      208
+    ],
+    "mode": "RGBA",
+    "bytes": 43901,
+    "sha256": "75aba35268ef1f271d2a46e7921e276ecdb2f15fe95142e00bf39f05ef264bec",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-b",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-b.png",
+    "size": [
+      384,
+      208
+    ],
+    "mode": "RGBA",
+    "bytes": 64535,
+    "sha256": "d7dd3fc5f8d7d557fb1335824ba8abaa65d4be07612ed45508d0ffb6387ac6d3",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-pedestal-a",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-pedestal-a-whole.png",
+    "size": [
+      224,
+      509
+    ],
+    "mode": "RGBA",
+    "bytes": 115732,
+    "sha256": "edcbe4d4a90bd88e37b02c788771b4692492808fcbb52944c75ce1ef89025246",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-pedestal-a",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-pedestal-a-top.png",
+    "size": [
+      224,
+      96
+    ],
+    "mode": "RGBA",
+    "bytes": 27917,
+    "sha256": "2825423632ec5c4606970f1ebcbb6b89e549d33916fea83f1cdba4d10b4023a3",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-pedestal-a",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-pedestal-a-middle.png",
+    "size": [
+      224,
+      64
+    ],
+    "mode": "RGBA",
+    "bytes": 602,
+    "sha256": "f1d16f507e9fc6442cad13ecd78742b6fe47953f77a42f77367d1283d0174e98",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-pedestal-b",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-pedestal-b-whole.png",
+    "size": [
+      224,
+      499
+    ],
+    "mode": "RGBA",
+    "bytes": 96612,
+    "sha256": "57440467397df6597c3dd63ee129a416a89f6cd0eb7f872758dad7584ff1a330",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-pedestal-b",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-pedestal-b-top.png",
+    "size": [
+      224,
+      96
+    ],
+    "mode": "RGBA",
+    "bytes": 30463,
+    "sha256": "164ccebd4b1dbf057e976c58f48d542bdbfab7fecc0ea741e08714d3536479c9",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "part-basin-pedestal-b",
+    "file": "public/graphics/candidates-20261101/part-basin/part-basin-pedestal-b-middle.png",
+    "size": [
+      224,
+      64
+    ],
+    "mode": "RGBA",
+    "bytes": 520,
+    "sha256": "6c5cde03f5da1e6066ec255a27bc8d59459b284685d2225fcb2b6a972b004470",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-a",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-a-sheet.png",
+    "size": [
+      1152,
+      1024
+    ],
+    "mode": "RGBA",
+    "bytes": 905255,
+    "sha256": "fa2b57441d689681bb5555ef3b3ca28af62cdab578d1208fac100f3ce6eea20d",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-a",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-a-01.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 39466,
+    "sha256": "34f221c55cfe1c37d4257ecee1d2fd657c72f05a8c702d92abe0ffe4776eb2ac",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-a",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-a-02.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 81054,
+    "sha256": "b7ef5210c82f428ec20b6e5fa42e5d9fe51ec115c4b410b55955b8e801483eb8",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-a",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-a-03.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 148117,
+    "sha256": "cfbb4191691fd75a50e739a8819c9add2eaae7d736e456e6e0333609601a476d",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-a",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-a-04.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 203409,
+    "sha256": "5f6b7356f83d4ec0737a412bca8869c0ce8705256ebfd6026773c9e4423e3ff1",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-a",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-a-05.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 221636,
+    "sha256": "947b6a3b06563f92de0cd185a19b35693d8a512437b35220b2ba8b9efdca52b8",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-a",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-a-06.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 212788,
+    "sha256": "fa784fdcdbe34c9f6b630c4a9718cdc5cfbb91f39861ff97e144916f904bfa4a",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-b",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-b-sheet.png",
+    "size": [
+      1152,
+      1024
+    ],
+    "mode": "RGBA",
+    "bytes": 993647,
+    "sha256": "29f6a3ac3dd21517f3ed27394c034d01bd56c79f53b5f62498b7ff5945c36704",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-b",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-b-01.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 56395,
+    "sha256": "15803b38144bcb0d6268e189cb00008a4af3029ef08ba2c8393b883ca164c99b",
+    "alpha_extrema": [
+      0,
+      253
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-b",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-b-02.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 109435,
+    "sha256": "8345d6bdf9795faa340f90732793b7fbb01feccdfba9761444660072d4179882",
+    "alpha_extrema": [
+      0,
+      252
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-b",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-b-03.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 184966,
+    "sha256": "13955c5504c306bcc626806f09893550f6c50370463af370f543c557700701d6",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-b",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-b-04.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 209896,
+    "sha256": "96203517611c5645936499ed4d6007e225313041976719d76bdbe3e043c2e23d",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-b",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-b-05.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 216980,
+    "sha256": "eb0cc655fff7668a2a9ce6a320efec85764ebb11f16f42280674dadb470d9007",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-fountain-b",
+    "file": "public/graphics/candidates-20261101/fx-fountain/fx-fountain-b-06.png",
+    "size": [
+      384,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 216849,
+    "sha256": "cd5d26871a9c1e36c68e5c1057cdb9f800dff019f8faab20ffce20ff31ee9e4c",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-rainbow-a",
+    "file": "public/graphics/candidates-20261101/fx-rainbow/fx-rainbow-a.png",
+    "size": [
+      768,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 155965,
+    "sha256": "83014b34c2ca82e132b2ff0248e53cf16ae78d29b41babae17aede994189d6bd",
+    "alpha_extrema": [
+      0,
+      250
+    ],
+    "notes": ""
+  },
+  {
+    "id": "fx-rainbow-b",
+    "file": "public/graphics/candidates-20261101/fx-rainbow/fx-rainbow-b.png",
+    "size": [
+      768,
+      512
+    ],
+    "mode": "RGBA",
+    "bytes": 162201,
+    "sha256": "281f0a9a9921dfdb890b9c0c7470401d84065d459f45fcc485e768ad091b3f3b",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "notes": ""
+  },
+  {
+    "id": "ui-badges-a",
+    "file": "public/graphics/candidates-20261101/ui-badges/ui-badges-a.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 883132,
+    "sha256": "1d6a4a7e3b3369c8295ddd836094e3611c8482120d56960034e62e8d5a9b508d",
+    "alpha_extrema": null,
+    "notes": ""
+  },
+  {
+    "id": "ui-badges-b",
+    "file": "public/graphics/candidates-20261101/ui-badges/ui-badges-b.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 1064121,
+    "sha256": "82f738412494d7b236d29907b574ff911755a1b31e584a916b8bf95a942c7e43",
+    "alpha_extrema": null,
+    "notes": ""
+  }
+]

@@ -1,3 +1,8 @@
 node_modules/
 dist/
 artifact/
+# 絵の候補の原本・比較画像は手元だけに置く（2026-11-01 発案者）。README・記録の JSON・一覧画像（overview.png）だけを送る。
+# 取り込み用の候補は public/graphics/candidates-*/ にあり、そちらは送る
+画面案/**/*.png
+画面案/**/*.apng
+!画面案/*/overview.png

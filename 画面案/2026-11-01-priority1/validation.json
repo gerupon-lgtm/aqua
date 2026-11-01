@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-01",
+  "generated_originals": 23,
+  "final_candidate_designs_including_pedestals": 22,
+  "families": 10,
+  "exported_pngs": 50,
+  "protected_files_changed": [
+    "docs/assets.md"
+  ],
+  "assets_sections_1_to_4_and_6_unchanged": true,
+  "tile_middle_edges_identical": true,
+  "all_export_alpha_valid": true,
+  "application_integration_tested": false,
+  "adoption": "未確定",
+  "committed_or_pushed": false
+}
