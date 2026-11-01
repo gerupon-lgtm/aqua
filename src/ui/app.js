@@ -10,8 +10,9 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText } from '../content/tutorial.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
+import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 
-const APP_VERSION = '0.11.0';
+const APP_VERSION = '0.12.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -35,8 +36,10 @@ const $ = id => document.getElementById(id);
 const audio = new GlassAudio();
 const scoreBook = new ScoreBook((() => { try { return window.localStorage; } catch { return null; } })());
 const tutorial = new TutorialBook((() => { try { return window.localStorage; } catch { return null; } })());
-// 今の面で精霊の案内を出しているか（初めての面、または「ふりかえり」で開き直したとき）
-const guiding = () => tutorial.active(stage(), state.review);
+const modeBook = new ModeBook((() => { try { return window.localStorage; } catch { return null; } })());
+// 今の面で精霊の案内を出しているか（チュートリアル、選択プレイで初めての面、または「ふりかえり」で開き直したとき）。
+// 連続プレイでは出さない（Q-16）
+const guiding = () => state.mode !== 'continuous' && tutorial.active(stage(), state.review);
 // 練習面（番号 -1 で選ぶ）と、今の案内の手順
 const isPractice = () => stage()?.id === PRACTICE.id;
 const practiceStep = () => (isPractice() && state.phase === 'edit' ? PRACTICE_STEPS[state.practiceStep] ?? null : null);
@@ -79,7 +82,14 @@ const state = {
   timing: loadTiming(),
   details: false,
   explain: false,
-  highlight: null
+  highlight: null,
+  mode: 'select', // tutorial・continuous・select
+  continuous: null, // 連続プレイの進み具合（ContinuousRun）
+  contAction: null, // 連続プレイで、結果のあとにすること（next・retry・gameover・complete）
+  trials: 0, // 選択プレイ：この面を開いてから「水を流す」を押した回数（F-025）
+  newFewest: false,
+  titleOpen: true,
+  played: false
 };
 audio.setLatency(state.timing.latencyMs);
 audio.timbre = state.timing.timbre;
@@ -126,9 +136,14 @@ function selectStage(index) {
   state.details = false;
   state.explain = false;
   state.resultClosed = false;
-  state.review = false;
+  // チュートリアルでは、お試し面の案内と予想の問いを毎回出す
+  state.review = state.mode === 'tutorial' && Boolean(lessonFor(base));
   state.asking = null;
   state.prediction = null;
+  state.trials = 0;
+  state.contAction = null;
+  state.newFewest = false;
+  if (state.mode === 'select') lastSelectIndex = index;
   renderAll();
 }
 
@@ -180,6 +195,7 @@ const levelsOf = result => new Map(Object.entries(result.towers).map(([id, t]) =
 
 function startRun() {
   audio.unlock();
+  state.trials++;
   const st = stage();
   const timing = { ...state.timing };
   const scale = DEFAULT_SCALE;
@@ -256,6 +272,13 @@ function showResult() {
     state.newBest = r.improved;
   }
   state.resultClosed = false;
+  state.newFewest = false;
+  // 選択プレイ：クリアまでの試行回数の最少を記録（F-025）。連続プレイ：NGを数え、次にすることを決める（F-026）
+  if (state.mode === 'select' && ev.outcome !== 'ng' && !isPractice()) state.newFewest = modeBook.offerTrials(stage().id, state.trials);
+  if (state.mode === 'continuous' && state.continuous) {
+    state.contAction = state.continuous.record(ev.outcome);
+    if (state.contAction === 'gameover' || state.contAction === 'complete') modeBook.offerContinuous(state.continuous.level.id, state.continuous.cleared);
+  }
   if (isPractice() && ev.outcome !== 'ng') tutorial.complete(PRACTICE);
   if (state.prediction) {
     state.explain = true;
@@ -368,50 +391,65 @@ function bestOfStage(s) {
   return best;
 }
 
-function renderTabs() {
-  const practiceTab = `<button type="button" class="tab practice${state.stageIndex === -1 ? ' current' : ''}" data-stage="-1" aria-label="練習 画面の見方" ${state.phase === 'running' ? 'disabled' : ''}>練習</button>`;
-  $('stage-tabs').innerHTML = practiceTab + STAGES.map((s, i) => {
-    const best = bestOfStage(s);
-    const mark = best ? (displayScore(best) === '100.00' ? '★' : '●') : '';
-    return `<button type="button" class="tab${i === state.stageIndex ? ' current' : ''}" data-stage="${i}" aria-label="${s.set}${s.number}${best ? ` 最高${displayScore(best)}点` : ''}" ${state.phase === 'running' ? 'disabled' : ''}>${s.number}<span class="mark">${mark}</span></button>`;
-  }).join('');
-}
-
-// 条件の欄。下の「欄の高さをそろえる」でも、同じ形を全部の面について測る
-function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', review = false } = {}) {
-  const targets = st.outlets.map(o => `<span class="target"><span class="dot"></span>${o.label}に <b>${targetText(o.target)}</b></span>`).join('');
-  const buckets = st.buckets ? `<span class="count">桶 残り <b>${left}</b> / ${st.buckets}</span>` : '';
+// 面の切り替えと条件カード（前作 prism に合わせる。docs/reference/prism-v0.100.0-q3-layout.png）。
+// 1行目：‹ 面の名前と所属 ∨ ›（前後の移動は選択プレイだけ。名前を押すと面の一覧）。
+// 条件カード：「クリア条件」と、出題・別の出題などの小さなボタン／条件の一文／資源の行（桶・配管・連続プレイのNGの残り）
+const MODE_NAME = { tutorial: 'チュートリアル', continuous: '連続プレイ', select: '選択プレイ' };
+function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', review = false, mode = 'select', cont = null } = {}) {
+  const isPrac = st.id === PRACTICE.id;
+  const nav = mode === 'select' && phase !== 'running';
+  const sub = mode === 'continuous' && cont ? `連続プレイ（${cont.level.name}）・${st.set}` : `${MODE_NAME[mode]}・${st.set}`;
+  const goal = `${st.outlets.map(o => `<span class="nw">${o.label}に <b>${targetText(o.target)}</b></span>`).join('・')} 届ける`;
+  const res = [
+    st.buckets ? `<span class="nw">桶 残り <b>${left}</b> / ${st.buckets}</span>` : '',
+    `<span class="nw">配管 <b>${connected}</b> 本</span>`,
+    mode === 'continuous' && cont ? `<span class="nw ng-left">${cont.level.limit === null ? `NG <b>${cont.ng}</b> 回` : `NG 残り <b>${cont.left}</b> 回`}</span>` : ''
+  ].filter(Boolean).join('');
+  const tools = isPrac ? `<button type="button" class="mini" id="practice-restart" ${phase === 'edit' ? '' : 'disabled'}>最初から</button>`
+    : mode === 'select' && lessonFor(st) && !st.draw ? `<button type="button" class="mini" id="review" ${review ? '' : 'disabled'}>ふりかえり</button>`
+    : mode === 'select' && st.draw ? `<span class="draw-no">出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${phase === 'edit' ? '' : 'disabled'}>別の出題</button>`
+    : '';
   return `
-    <div class="cond-title"><span class="eyebrow">${st.set}${st.id === PRACTICE.id ? '' : ` ${st.number}`}</span><span class="name">${st.title}</span>
-      ${st.id === PRACTICE.id ? `<span class="draw"><button type="button" class="mini" id="practice-restart" ${phase === 'edit' ? '' : 'disabled'}>最初から</button></span>` : ''}
-      ${lessonFor(st) && !st.draw ? `<span class="draw"><button type="button" class="mini" id="review" ${review ? '' : 'disabled'}>ふりかえり</button></span>` : ''}
-      ${st.draw ? `<span class="draw"><span>出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${phase === 'edit' ? '' : 'disabled'}>別の出題</button></span>` : ''}</div>
-    <div class="cond-row">${targets}${buckets}<span class="count">つないだ配管 <b>${connected}</b> 本</span></div>`;
+    <div class="switcher">
+      <button type="button" class="nav" id="stage-prev" aria-label="前の面" ${nav && state.stageIndex > -1 ? '' : 'disabled'} ${mode === 'select' ? '' : 'hidden'}>‹</button>
+      <button type="button" class="stage-name" id="stage-list" ${mode === 'select' && phase !== 'running' ? '' : 'disabled'}>
+        <span class="name">${isPrac ? '' : `${st.number} `}${st.title}</span><span class="sub">${sub}</span>${mode === 'select' ? '<span class="caret" aria-hidden="true">∨</span>' : ''}</button>
+      <button type="button" class="nav" id="stage-next" aria-label="次の面" ${nav && state.stageIndex < STAGES.length - 1 ? '' : 'disabled'} ${mode === 'select' ? '' : 'hidden'}>›</button>
+    </div>
+    <div class="cond-card">
+      <div class="cond-head"><span class="cond-label">クリア条件</span><span class="cond-tools">${tools}</span></div>
+      <div class="cond-goal">${goal}</div>
+      <div class="cond-res">${res}</div>
+    </div>`;
 }
 
 function renderCondition() {
   $('cond').innerHTML = condHtml(stage(), {
     left: bucketsLeft(), connected: state.config.connected.size, phase: state.phase,
-    review: state.phase === 'edit' && !guiding()
+    review: state.phase === 'edit' && !guiding(), mode: state.mode, cont: state.continuous
   });
 }
 
-// 条件の欄の高さを、全部の面で一番高いものにそろえる。面の名前・噴水盤の数・桶の有無で折り返しの行数が変わり、
+// 条件の欄の高さを、全部の面・全部のモードで一番高いものにそろえる。面の名前・噴水盤の数・桶の有無で折り返しの行数が変わり、
 // 盤面の大きさが面ごとに変わっていたため（2026-11-01 発案者、iPhone で確認）。
 // 文字の幅は端末の書体で変わるので、その端末・その画面幅で実際に測る。画面幅が変わったら測り直す
 function fitConditionHeight() {
   const cond = $('cond');
+  if (!cond.clientWidth) return;
   const probe = cond.cloneNode(false);
   probe.removeAttribute('id');
   probe.removeAttribute('aria-live');
   probe.setAttribute('aria-hidden', 'true');
   probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;min-height:0;width:${cond.clientWidth}px`;
   cond.parentElement.append(probe);
+  const cont = new ContinuousRun('beginner', STAGES.length);
   let max = 0;
   for (const st of [PRACTICE, ...STAGES]) {
     const shown = CHALLENGES[st.id]?.length ? { ...st, draw: { number: 8, total: 8 } } : st;
-    probe.innerHTML = condHtml(shown, { left: 10, connected: 10 });
-    max = Math.max(max, probe.getBoundingClientRect().height);
+    for (const mode of ['select', 'continuous', 'tutorial']) {
+      probe.innerHTML = condHtml(shown, { left: 10, connected: 10, mode, cont });
+      max = Math.max(max, probe.getBoundingClientRect().height);
+    }
   }
   probe.remove();
   cond.style.minHeight = `${Math.ceil(max)}px`;
@@ -522,21 +560,38 @@ function renderPanel() {
     }).join('');
   }
   const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・配管 ${ev.used} 本` : `配管 ${ev.used} 本`;
-  const retryLabel = ev.outcome === 'ng' ? '配管を見直す' : 'もう一度';
-  const hasNext = ev.outcome !== 'ng' && state.stageIndex < STAGES.length - 1;
   // ボタンの位置はクリアとNGでそろえる：左から 解説（結果）・もう一度／配管を見直す・次へ。
   // 「次へ」がないとき（NG・最後の面）も同じ幅の見えない場所を残し、「もう一度」が右端へずれないようにする。
-  // 「もう一度」のつもりで「次へ」を押してしまうのを防ぐ（2026-11-01 発案者）
-  const nextButton = hasNext
-    ? '<button type="button" class="primary next" id="next">次へ</button>'
-    : '<button type="button" class="primary next slot" tabindex="-1" aria-hidden="true" disabled>次へ</button>';
+  // 「もう一度」のつもりで「次へ」を押してしまうのを防ぐ（2026-11-01 発案者）。
+  // 連続プレイ：クリアは「次へ」だけ（同じ面のやり直しはしない）、NGは「配管を見直す」。ゲームオーバー・全面クリアは「もう一度挑戦」「タイトルへ」
+  const slot = (cls, label) => `<button type="button" class="${cls} slot" tabindex="-1" aria-hidden="true" disabled>${label}</button>`;
+  const act = state.mode === 'continuous' ? state.contAction : null;
+  const finished = act === 'gameover' || act === 'complete';
+  const retryButton = finished ? '<button type="button" class="ghost retry" id="cont-restart">もう一度挑戦</button>'
+    : act === 'next' ? slot('ghost retry', 'もう一度')
+    : `<button type="button" class="ghost retry" id="stop">${ev.outcome === 'ng' ? '配管を見直す' : 'もう一度'}</button>`;
+  const tutorialEnd = state.mode === 'tutorial' && state.stageIndex === TUTORIAL_LAST && ev.outcome !== 'ng';
+  const hasNext = act ? act === 'next' : ev.outcome !== 'ng' && state.stageIndex < STAGES.length - 1;
+  const nextButton = finished || tutorialEnd ? `<button type="button" class="primary next" id="to-title">${tutorialEnd ? '完了' : 'タイトルへ'}</button>`
+    : hasNext ? '<button type="button" class="primary next" id="next">次へ</button>'
+    : slot('primary next', '次へ');
+  // モードのひとこと：選択プレイは試行回数、連続プレイはNGの残りと結果
+  const cont = state.continuous;
+  const modeLine = state.mode === 'select' && ev.outcome !== 'ng' && !isPractice()
+    ? `試行 ${state.trials} 回（この面の最少 ${modeBook.fewest(stage().id) ?? state.trials} 回）${state.newFewest ? '<span class="newbest">最少</span>' : ''}`
+    : state.mode === 'continuous' && cont
+      ? act === 'gameover' ? `ゲームオーバー：${cont.cleared} 面クリア（${cont.level.name}の最高 ${modeBook.bestContinuous(cont.level.id) ?? cont.cleared} 面）`
+      : act === 'complete' ? `全 ${cont.stageCount} 面クリア！（NG ${cont.ng} 回）`
+      : cont.level.limit === null ? `連続プレイ（${cont.level.name}）：${cont.cleared} 面クリア・NG ${cont.ng} 回`
+      : `連続プレイ（${cont.level.name}）：${cont.cleared} 面クリア・NG 残り ${cont.left} 回`
+      : '';
   // 結果は下の欄に重ねるトーストで出し、下の欄は編集中と同じ高さ（案内＋ボタン1行）に保つ。
   // 欄が伸びると盤面が縮むため（2026-11-01 発案者）。閉じたトーストは「結果」で開き直す
   panel.innerHTML = `
     <p class="hint">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
     <div class="actions">
       <button type="button" class="ghost" id="show-result" aria-expanded="${!state.resultClosed}">結果</button>
-      <button type="button" class="ghost retry" id="stop">${retryLabel}</button>
+      ${retryButton}
       ${nextButton}
     </div>`;
   state.resultHtml = `
@@ -547,6 +602,7 @@ function renderPanel() {
         <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button></div>
       ${isPractice() ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${practiceResultText(ev.outcome)}</p>` : ''}
       ${state.prediction ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${answerLine(state.prediction.question, state.prediction.picked)}</p>` : ''}
+      ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <ul class="outlets">${outlets}</ul>
       <p class="swipe-note">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
@@ -558,7 +614,7 @@ function renderPanel() {
       </details>
       <div class="result-actions">
         <button type="button" class="ghost" id="explain" aria-expanded="${state.explain}">解説</button>
-        <button type="button" class="ghost retry" id="stop">${retryLabel}</button>
+        ${retryButton}
         ${nextButton}
       </div>
     </div>`;
@@ -626,7 +682,6 @@ function closeToast() {
 }
 
 function renderAll() {
-  renderTabs();
   renderCondition();
   renderPanel();
   renderToast();
@@ -740,16 +795,18 @@ function bind() {
     audio.unlock();
     audio.cue('tap');
   }, true);
-  $('stage-tabs').addEventListener('click', e => {
-    const b = e.target.closest('[data-stage]');
-    if (b && !b.disabled) selectStage(Number(b.dataset.stage));
-  });
   // 別の出題：同じ面を選び直したのと同じ扱い（直前と違う系統から抽選）
   $('cond').addEventListener('click', e => {
     if (e.target.closest('#redraw') && state.phase === 'edit') selectStage(state.stageIndex);
     // ふりかえり：この面の案内と予想の問いを、もう一度出す
     if (e.target.closest('#review') && state.phase === 'edit') { state.review = true; renderAll(); }
     if (e.target.closest('#practice-restart') && state.phase === 'edit') selectStage(-1);
+    // 面の切り替え（選択プレイだけ）：‹ › で前後、名前で一覧
+    if (state.mode === 'select' && state.phase !== 'running') {
+      if (e.target.closest('#stage-prev:not(:disabled)')) selectStage(state.stageIndex - 1);
+      else if (e.target.closest('#stage-next:not(:disabled)')) selectStage(state.stageIndex + 1);
+      else if (e.target.closest('#stage-list:not(:disabled)')) openStageList();
+    }
   });
   $('panel').addEventListener('click', e => {
     const btn = e.target.closest('button');
@@ -759,7 +816,9 @@ function bind() {
     else if (id === 'guide-next') { state.practiceStep++; renderAll(); }
     else if (id === 'stop') { stopRun(); renderAll(); }
     else if (id === 'clear-pipes') { state.config = emptyConfig(); state.selected = null; renderAll(); }
-    else if (id === 'next') selectStage(state.stageIndex + 1);
+    else if (id === 'next') goNext();
+    else if (id === 'to-title') openTitle(state.mode === 'tutorial' ? 'チュートリアルを終えました。連続プレイか選択プレイで遊びましょう。' : '');
+    else if (id === 'cont-restart') startMode('continuous', { level: state.continuous.level.id });
     else if (id === 'show-result') { state.resultClosed = !state.resultClosed; renderPanel(); renderResultToast(); }
   });
   // トーストで選んだら、設定して閉じる（もう一度管をタップすると開き直す）
@@ -805,7 +864,9 @@ function bind() {
     if (btn.id === 'export-record') exportRecord();
     else if (btn.id === 'result-close') closeResult();
     else if (btn.id === 'stop') { stopRun(); renderAll(); }
-    else if (btn.id === 'next') selectStage(state.stageIndex + 1);
+    else if (btn.id === 'next') goNext();
+    else if (btn.id === 'to-title') openTitle(state.mode === 'tutorial' ? 'チュートリアルを終えました。連続プレイか選択プレイで遊びましょう。' : '');
+    else if (btn.id === 'cont-restart') startMode('continuous', { level: state.continuous.level.id });
     else if (btn.id === 'explain') {
       state.explain = !state.explain;
       renderPanel();
@@ -864,9 +925,170 @@ function bind() {
     $('sound').textContent = audio.muted ? '音 オフ' : '音 オン';
     $('sound').setAttribute('aria-pressed', String(!audio.muted));
   });
-  $('tune').addEventListener('click', openTuning);
+  bindScreens();
   $('version').textContent = `v${APP_VERSION}`;
+  $('title-version').textContent = `v${APP_VERSION} 試作`;
   $('board').setAttribute('viewBox', `0 0 ${VIEW_W} ${VIEW_H}`);
+}
+
+// ---- タイトル画面・モード・メニュー（前作 prism に合わせる。要件 F-025・F-026、2026-11-01 確定） ----
+// タイトル：チュートリアル／連続プレイ／選択プレイ／自由作成（準備中）／パーツの説明／遊び方と概要／プレイ画面へ／更新
+const TUTORIAL_LAST = 5; // チュートリアルはお試し6面（番号5）まで
+let lastSelectIndex = 0; // 選択プレイで最後に開いていた面（アプリを開いている間だけ）
+
+function openTitle(message = '') {
+  stopRun();
+  state.titleOpen = true;
+  closeSheet();
+  renderTitle(message);
+}
+function renderTitle(message = '') {
+  const title = $('title');
+  title.hidden = !state.titleOpen;
+  $('app').inert = state.titleOpen;
+  if (!state.titleOpen) return;
+  const firstTime = !tutorial.data.done[PRACTICE.id] && !tutorial.data.skipped;
+  title.querySelector('[data-title="tutorial"]').classList.toggle('primary', firstTime);
+  title.querySelector('[data-title="continuous"]').classList.toggle('primary', !firstTime);
+  title.querySelector('[data-title="resume"]').disabled = !state.played;
+  $('title-message').textContent = message;
+}
+function closeTitle() {
+  state.titleOpen = false;
+  renderTitle();
+  fitConditionHeight();
+  renderAll();
+}
+
+function startMode(mode, { level = null, index = null } = {}) {
+  state.mode = mode;
+  state.played = true;
+  state.continuous = mode === 'continuous' ? new ContinuousRun(level, STAGES.length) : null;
+  closeTitle();
+  selectStage(mode === 'tutorial' ? -1 : mode === 'continuous' ? 0 : (index ?? lastSelectIndex));
+}
+
+// 結果の「次へ」：連続プレイは記録を進め、チュートリアルはお試し6面のあとタイトルへ戻る
+function goNext() {
+  if (state.mode === 'continuous') state.continuous.advance();
+  if (state.mode === 'tutorial' && state.stageIndex >= TUTORIAL_LAST) { openTitle('チュートリアルを終えました。連続プレイか選択プレイで遊びましょう。'); return; }
+  selectStage(state.stageIndex + 1);
+}
+
+// 下から出るシート（メニュー・記録・説明・レベル・面の一覧）。調整のシートと同じ置き場所を使う
+function openSheet(title, body, actions = '<button type="button" class="ghost" data-sheet="close">閉じる</button>') {
+  const sheet = $('sheet');
+  sheet.innerHTML = `<div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <h2 id="sheet-title">${title}</h2>${body}<div class="actions">${actions}</div></div>`;
+  sheet.hidden = false;
+}
+function closeSheet() { $('sheet').hidden = true; }
+
+function openMenu() {
+  openSheet('メニュー', `<div class="menu-grid">
+    <button type="button" class="ghost" data-sheet="title">タイトルへ</button>
+    <button type="button" class="ghost" data-sheet="records">記録</button>
+    <button type="button" class="ghost" data-sheet="parts">パーツの説明</button>
+    <button type="button" class="ghost" data-sheet="howto">遊び方と概要</button>
+    <button type="button" class="ghost" data-sheet="tune">調整（試作用）</button>
+  </div>`);
+}
+
+function openRecords() {
+  const rows = [PRACTICE, ...STAGES].map(s => {
+    const best = bestOfStage(s);
+    const few = modeBook.fewest(s.id);
+    return `<tr><td>${s.id === PRACTICE.id ? '練習' : s.number}</td><td>${s.title}</td><td>${best ? `${displayScore(best)} 点` : '―'}</td><td>${few ? `${few} 回` : '―'}</td></tr>`;
+  }).join('');
+  const cont = LEVELS.map(l => `<li>${l.name}（${l.note}）：${modeBook.bestContinuous(l.id) === null ? 'まだ記録がありません' : `最高 ${modeBook.bestContinuous(l.id)} 面クリア`}</li>`).join('');
+  openSheet('記録', `<h3 class="sheet-sub">連続プレイ</h3><ul class="plain">${cont}</ul>
+    <h3 class="sheet-sub">面ごと（最高点・クリアまでの最少の試行回数）</h3>
+    <div class="table-wrap"><table><thead><tr><th>面</th><th>名前</th><th>最高点</th><th>最少試行</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+}
+
+function openLevels() {
+  const items = LEVELS.map(l => {
+    const best = modeBook.bestContinuous(l.id);
+    return `<button type="button" class="ghost level" data-level="${l.id}"><b>${l.name}</b><span>${l.note}${best === null ? '' : `・最高 ${best} 面`}</span></button>`;
+  }).join('');
+  openSheet('連続プレイ', `<p class="note">お試し1面から30面まで順に進みます。クリアできなかった回（NG）が上限を超えるとゲームオーバー。部分点のクリアでも次へ進めます。</p><div class="level-list">${items}</div>`,
+    '<button type="button" class="ghost" data-sheet="close">やめる</button>');
+}
+
+function openStageList() {
+  const groups = new Map();
+  for (const [i, s] of STAGES.entries()) {
+    if (!groups.has(s.set)) groups.set(s.set, []);
+    groups.get(s.set).push([i, s]);
+  }
+  const item = (i, s, label) => {
+    const best = bestOfStage(s);
+    const mark = best ? (displayScore(best) === '100.00' ? '★' : '●') : '';
+    return `<button type="button" class="stage-item${i === state.stageIndex ? ' current' : ''}" data-pick="${i}"><span class="no">${label}</span><span class="t">${s.title}</span><span class="m">${mark}</span></button>`;
+  };
+  const body = `<div class="stage-list">${item(-1, PRACTICE, '練習')}${[...groups].map(([set, list]) => `<h3 class="sheet-sub">${set}</h3>${list.map(([i, s]) => item(i, s, s.number)).join('')}`).join('')}</div>`;
+  openSheet('面を選ぶ', body);
+}
+
+const PARTS_HTML = `<dl class="parts">
+  <dt>泉</dt><dd>水が出るところ。泉の水の高さが、流れのもとになります。</dd>
+  <dt>グラス</dt><dd>水がたまります。水位で音が決まり、水が多いほど低い音。目盛りに乗ると澄んだ和音になります。</dd>
+  <dt>配管</dt><dd>泉とグラスをつなぎます。札の数字は細さ（太1・中2・細3）。流れる量＝高さの差÷細さ。縦につなぐと細さは足し算、並べると流れやすくなります。</dd>
+  <dt>噴水盤</dt><dd>届けたい量（指定）を受けます。口にも細さ（口 太1）があります。口が高い受け皿は、その高さより上の分だけ流れます。</dd>
+  <dt>太さを選べる配管</dt><dd>タップして太さを選びます。</dd>
+  <dt>サイフォンと桶</dt><dd>壁を越える配管です。桶で呼び水をすると流れます。桶の数には限りがあります。</dd>
+  <dt>水門</dt><dd>流したあと自動で閉じます。開いたときと閉じたときの両方で、指定どおりに届けます。</dd>
+</dl>`;
+const HOWTO_HTML = `<div class="howto">
+  <p>配管をタップしてつなぎ、「水を流す」を押します。噴水盤に指定どおりの量が届けばクリア。使った配管が少ないほど高い点で、いちばん少ない答えが100点です（桶を使う面は、桶の少なさが先）。</p>
+  <p>流れたあと、グラスを指でなぞると、そのグラスの音を聞き直せます。結果の「解説」で、なぜその量になったかを確かめられます。</p>
+  <h3 class="sheet-sub">遊び方</h3>
+  <ul class="plain"><li>チュートリアル：画面の見方と、お試し1〜6面で流れの決まりを学びます。</li>
+  <li>連続プレイ：1面から順に進みます。レベルごとに、NGの回数に上限があります。</li>
+  <li>選択プレイ：好きな面を選んで遊びます。面ごとに最高点と、クリアまでの最少の試行回数を記録します。</li>
+  <li>自由作成：準備中です。</li></ul>
+</div>`;
+
+// 「更新」：新しい版を探す。見つかれば画面下に「更新する」の案内が出る（F-022）
+async function checkUpdate() {
+  try {
+    const reg = await navigator.serviceWorker?.getRegistration();
+    if (!reg) { renderTitle('この画面では更新を確かめられません（開発用の画面です）。'); return; }
+    await reg.update();
+    renderTitle(reg.waiting || reg.installing ? '新しい版があります。画面下の「更新する」を押してください。' : `いまの版 v${APP_VERSION} が最新です。`);
+  } catch {
+    renderTitle('更新を確かめられませんでした。通信できる場所でもう一度お試しください。');
+  }
+}
+
+function bindScreens() {
+  $('title').addEventListener('click', e => {
+    const b = e.target.closest('[data-title]');
+    if (!b || b.disabled) return;
+    const k = b.dataset.title;
+    if (k === 'tutorial') startMode('tutorial');
+    else if (k === 'continuous') openLevels();
+    else if (k === 'select') startMode('select');
+    else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
+    else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
+    else if (k === 'resume') closeTitle();
+    else if (k === 'update') checkUpdate();
+  });
+  $('sheet').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) { if (e.target === $('sheet')) closeSheet(); return; }
+    if (b.dataset.level) { closeSheet(); startMode('continuous', { level: b.dataset.level }); return; }
+    if (b.dataset.pick !== undefined) { closeSheet(); state.played = true; selectStage(Number(b.dataset.pick)); return; }
+    const k = b.dataset.sheet;
+    if (k === 'close') closeSheet();
+    else if (k === 'title') openTitle();
+    else if (k === 'records') openRecords();
+    else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
+    else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
+    else if (k === 'tune') openTuning();
+  });
+  $('menu').addEventListener('click', openMenu);
+  $('records').addEventListener('click', openRecords);
 }
 
 // ---- 実行記録の書き出し（F-024、D-11）。端末には残さず、ファイルとして渡す ----
@@ -914,9 +1136,9 @@ function setupOffline() {
 }
 
 bind();
-// 練習面を終えていない（スキップもしていない）ときは、練習面から始める
-selectStage(tutorial.data.done[PRACTICE.id] || tutorial.data.skipped ? 0 : -1);
-fitConditionHeight();
+// 起動はタイトル画面から（前作と同じ）。初めての人には「チュートリアル」を目立たせる
+selectStage(0);
+renderTitle();
 // 書体の読み込みで文字の幅が変わるので、読み込み後にも測り直す
 document.fonts?.ready.then(() => { fitConditionHeight(); renderResultToast(); });
 setupOffline();

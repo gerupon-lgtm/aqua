@@ -277,3 +277,67 @@ th { color: var(--ink-soft); font-weight: 500; }
 @keyframes guide-pulse { 50% { opacity: .55; } }
 .tab.practice { min-width: 56px; padding: 0 10px; font-size: 13px; }
 @media (prefers-reduced-motion: reduce) { #board .guide-ring, .guide-target { animation: none; } }
+
+/* ---- タイトル画面（前作 prism に合わせる。背景の絵は T-13 で決める。いまは空の色の重ね） ---- */
+.title-screen {
+  position: fixed; inset: 0; z-index: 18; overflow-y: auto;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 70%, var(--soil) 100%);
+  display: grid; place-items: start center;
+  padding: max(28px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.title-inner { width: min(440px, 100%); display: grid; gap: 18px; justify-items: center; padding-top: 6vh; }
+.title-logo { display: grid; justify-items: center; line-height: 1; font-family: var(--font-logo); color: var(--blue-deep); }
+.title-logo .l1 { font-weight: 600; font-size: 48px; letter-spacing: .16em; }
+.title-logo .l2 { font-weight: 500; font-size: 16px; letter-spacing: .5em; color: var(--water-mid); margin-top: 6px; }
+.title-lead { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.title-buttons { width: 100%; display: grid; gap: 10px; margin-top: 8px; }
+.title-buttons button { height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 600; cursor: pointer; }
+.title-buttons button.big { height: 58px; font-size: 17px; }
+.title-buttons button.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.title-buttons button:disabled { opacity: .45; cursor: default; }
+.title-buttons .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.title-message { margin: 0; min-height: 1.5em; font-size: 13px; color: var(--blue-deep); text-align: center; }
+.title-foot { display: flex; gap: 12px; font-size: 11px; color: var(--ink-soft); }
+
+/* ---- 面の切り替えと条件カード（前作の ‹ 名前 ∨ › と条件カード） ---- */
+.switcher { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 6px; align-items: stretch; }
+.switcher .nav { height: 46px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 20px; cursor: pointer; }
+.switcher .nav[hidden] { display: block !important; visibility: hidden; }
+.switcher .nav:disabled { opacity: .4; cursor: default; }
+.stage-name { position: relative; min-width: 0; display: grid; justify-items: start; align-content: center; gap: 1px; padding: 4px 26px 4px 10px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: var(--ink); text-align: left; cursor: pointer; }
+.stage-name:disabled { cursor: default; color: var(--ink); }
+.stage-name .name { font-weight: 700; font-size: 17px; max-width: 100%; }
+.stage-name .sub { font-size: 12px; color: var(--ink-soft); }
+.stage-name .caret { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--ink-soft); font-size: 13px; }
+.cond-card { border: 1px solid var(--line); border-radius: 12px; background: var(--card); padding: 8px 12px; display: grid; gap: 4px; }
+.cond-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; }
+.cond-label { font-size: 12px; letter-spacing: .08em; color: var(--ink-soft); }
+.cond-tools { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-soft); }
+.cond-goal { font-size: 15.5px; font-weight: 600; }
+.cond-goal b { font-size: 17px; color: var(--blue-deep); font-variant-numeric: tabular-nums; }
+.cond-res { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: 13px; color: var(--ink-soft); }
+.cond-res b { color: var(--ink); font-size: 15px; font-variant-numeric: tabular-nums; }
+.cond-res .ng-left b { color: var(--ng); }
+
+/* ---- 結果のモードのひとこと、シートの中身 ---- */
+.mode-line { margin: 0; font-size: 13px; color: var(--blue-deep); }
+.sheet { z-index: 20; }
+.notice { z-index: 25; }
+.sheet-sub { margin: 12px 0 6px; font-size: 13px; color: var(--ink-soft); font-weight: 600; }
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
+.menu-grid button { height: 48px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+.level-list { display: grid; gap: 8px; margin: 8px 0; }
+.level-list .level { display: grid; justify-items: start; gap: 2px; padding: 10px 14px; border-radius: 12px; text-align: left; cursor: pointer; }
+.level-list .level b { font-size: 16px; }
+.level-list .level span { font-size: 12.5px; color: var(--ink-soft); }
+.stage-list { display: grid; gap: 4px; }
+.stage-item { display: grid; grid-template-columns: 40px minmax(0, 1fr) 20px; align-items: center; gap: 8px; height: 42px; padding: 0 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-align: left; cursor: pointer; }
+.stage-item.current { border-color: var(--blue); background: #eaf3fb; }
+.stage-item .no { font-weight: 700; font-variant-numeric: tabular-nums; }
+.stage-item .t { overflow: hidden; text-overflow: ellipsis; }
+.stage-item .m { color: var(--gold); }
+.plain { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 13.5px; }
+.parts { margin: 8px 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 13.5px; }
+.parts dt { font-weight: 700; color: var(--blue-deep); }
+.parts dd { margin: 0; }
+.howto p { margin: 6px 0; font-size: 13.5px; }

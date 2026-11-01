@@ -15,13 +15,29 @@
 </head>
 <body>
 <!-- app:body:start -->
+<!-- タイトル画面（前作 prism に合わせる）。背景の絵とタイトルの一言は T-13 で決める（いまは仮） -->
+<section class="title-screen" id="title" aria-label="アクア・ノーツのタイトル">
+  <div class="title-inner">
+    <div class="title-logo" aria-label="AQUA NOTES"><span class="l1">AQUA</span><span class="l2">NOTES</span></div>
+    <p class="title-lead">水をつなぎ、グラスを鳴らす。（仮）</p>
+    <div class="title-buttons">
+      <button type="button" class="big" data-title="tutorial">チュートリアル</button>
+      <button type="button" class="big" data-title="continuous">連続プレイ</button>
+      <div class="pair"><button type="button" data-title="select">選択プレイ</button><button type="button" data-title="free" disabled>自由作成（準備中）</button></div>
+      <div class="pair"><button type="button" data-title="parts">パーツの説明</button><button type="button" data-title="howto">遊び方と概要</button></div>
+      <div class="pair"><button type="button" data-title="resume" disabled>プレイ画面へ</button><button type="button" data-title="update">更新</button></div>
+    </div>
+    <p class="title-message" id="title-message" role="status"></p>
+    <footer class="title-foot"><span>© SIKUMI LAB</span><span id="title-version"></span></footer>
+  </div>
+</section>
 <div class="app" id="app">
   <header class="bar">
     <div class="logo" aria-label="AQUA NOTES"><span class="l1">AQUA</span><span class="l2">NOTES</span></div>
-    <nav class="stages" id="stage-tabs" aria-label="お試しの面"></nav>
     <div class="tools">
+      <button type="button" id="records">記録</button>
       <button type="button" id="sound" aria-pressed="true">音 オン</button>
-      <button type="button" id="tune">調整</button>
+      <button type="button" id="menu" aria-label="メニュー">☰</button>
     </div>
   </header>
   <section class="cond" id="cond" aria-live="polite"></section>
@@ -31,10 +47,11 @@
   <dialog class="toast" id="toast" aria-label="配管の設定"></dialog>
   <section class="panel" id="panel"></section>
   <div class="result-toast" id="result-toast" hidden></div>
-  <div class="notice" id="update-notice" hidden role="status"><span>新しい版があります。</span><button type="button" id="update-apply">更新する</button></div>
   <footer class="foot"><span><span id="version"></span> 試作</span><span>© SIKUMI LAB</span></footer>
-  <div class="sheet" id="sheet" hidden></div>
 </div>
+<!-- シートと更新の案内は、タイトル画面からも使うので #app の外に置く -->
+<div class="sheet" id="sheet" hidden></div>
+<div class="notice" id="update-notice" hidden role="status"><span>新しい版があります。</span><button type="button" id="update-apply">更新する</button></div>
 <!-- app:body:end -->
 <script type="module" src="./src/ui/app.js"></script>
 </body>
