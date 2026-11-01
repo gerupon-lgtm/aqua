@@ -44,6 +44,8 @@
 - その出題の数値（細さ、指定量（水門の面は開いた状態・閉じた状態の両方）、泉の高さ、桶の数）
 - 検査結果：満点のつなぎ方、部分点の基準、満点のつなぎ方での各グラスの期待水位
 - 生成に使った乱数の種と生成器の版（再現のため）
+- 置き場所：`src/content/challenges.js`（生成ファイル。手で書き換えない）。形：`CHALLENGES[面ID] = [{ id: "T7-1", number, baseVersion, family: "A"|"B", values: { spring, thinness: {水路: 細さ}, targets: {出口: 指定量}, buckets? }, expected: { perfectKey, perfectCount, partialKeys, levels: {グラス: 水位} }, seed, generator }]`
+- 成績のキーは出題ごと（面ID＋出題番号＋内容版）。面の印は、今の内容版のどの出題かを問わず、いちばん良い成績を使う。13・25面は出題の導入で内容版を2に上げたので、試作の版1の成績は消さずに別の成績として残る
 
 ### D-03 回路の状態
 

@@ -59,7 +59,7 @@ export function buildRecord({ stage, config, ev, appVersion, now = new Date() })
     format: RECORD_FORMAT,
     app: { name: 'AQUA NOTES', version: appVersion },
     createdAt: now.toISOString(), // 世界標準時の ISO 8601（AGENTS.md「日時」）
-    stage: { id: stage.id, version: stage.version ?? 1, draw: 1, title: stage.title },
+    stage: { id: stage.id, version: stage.version ?? 1, draw: stage.draw?.number ?? 1, drawId: stage.draw?.id ?? null, family: stage.draw?.family ?? null, title: stage.title },
     circuit: {
       springHeight: stage.spring.height,
       connected: [...cfg.connected].sort(),

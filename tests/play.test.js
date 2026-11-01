@@ -23,7 +23,8 @@ test('音：目盛りに完全一致で「乗っている」、水位が高い�
   assert.ok(midiForLevel(frac(5)) < midiForLevel(frac(2)));
 });
 
-for (const stage of STAGES) {
+// 出題のある面（vary）は、出題ごとに tests/challenges.test.js で確かめる
+for (const stage of STAGES.filter(s => !s.vary)) {
   test(`${stage.set}${stage.number}：満点は1通り、部分点のクリアがあり、クリアでは水のあるグラスがすべて音階に乗る`, () => {
     const a = analyzeStage(stage);
     assert.ok(a.perfect, '満点のつなぎ方がある');

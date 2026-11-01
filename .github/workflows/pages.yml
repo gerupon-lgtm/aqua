@@ -21,6 +21,7 @@ jobs:
           package-manager-cache: false
       - run: npm run check
       - run: npm test
+      - run: npm run check:challenges
       - run: npm run build
       - uses: actions/upload-pages-artifact@v4
         with:

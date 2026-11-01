@@ -1,5 +1,7 @@
 // 試作の画面のまとめ役：編集中 → 実行中 → 結果表示中 → 停止で編集中（要件5.3）
 import { STAGES } from '../content/stages.js';
+import { CHALLENGES } from '../content/challenges.js';
+import { drawChallenge } from '../content/challenge-draw.js';
 import { analyzeStage, evaluate, thinnessOf } from '../logic/play.js';
 import { onScale, tickSide, tickDistance, frequencyForLevel, DEFAULT_SCALE } from '../logic/pitch.js';
 import { displayScore } from '../logic/score.js';
@@ -8,7 +10,7 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.7.3';
+const APP_VERSION = '0.9.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -56,6 +58,8 @@ function saveTiming(values) {
 const emptyConfig = () => ({ connected: new Set(), thickness: {}, primed: new Set() });
 const state = {
   stageIndex: 0,
+  current: null, // 遊んでいる面（出題の数値を当てはめたもの）
+  loadError: '', // 出題を出せない理由（C-04）
   config: emptyConfig(),
   selected: null,
   phase: 'edit',
@@ -81,18 +85,36 @@ function fieldText(key, value) {
 }
 
 const scaleNow = () => ({ ...DEFAULT_SCALE, semitonesPerStep: state.run?.timing.semitones ?? state.timing.semitones });
-const stage = () => STAGES[state.stageIndex];
+const stage = () => state.current;
 const candidate = id => stage().candidates.find(c => c.id === id);
 const bucketsLeft = () => (stage().buckets ?? 0) - [...state.config.primed].filter(id => state.config.connected.has(id)).length;
 const targetText = t => (typeof t === 'object' ? `開 ${t.open}・閉 ${t.closed}` : t);
 
+// 直前の出題（面IDごと）。アプリを開いている間だけ覚え、端末には保存しない（logic-design 7.4）
+const lastDrawn = new Map();
+
+// 面を選ぶたびに、直前と違う系統から出題を抽選する。お試しは固定。
+// 「停止してつなぎ直す」「配線クリア」では呼ばないので、同じ出題を保つ
 function selectStage(index) {
   stopRun();
   state.stageIndex = index;
+  const base = STAGES[index];
+  state.loadError = '';
+  try {
+    state.current = drawChallenge(base, CHALLENGES[base.id], { previousId: lastDrawn.get(base.id) });
+    if (state.current.draw) lastDrawn.set(base.id, state.current.draw.id);
+  } catch (error) {
+    state.current = structuredClone(base);
+    state.loadError = error.message;
+  }
   state.config = emptyConfig();
   state.selected = null;
   state.prevLevels = new Map();
   state.analysis = analyzeStage(stage());
+  // 出題データの検査結果と、端末での計算が一致しない出題は遊ばせない（C-04）
+  if (!state.loadError && stage().expected && state.analysis.perfectKey !== stage().expected.perfectKey) {
+    state.loadError = 'この出題は、検査の結果と計算が一致しないため遊べません。別の出題を選んでください。';
+  }
   state.layout = layoutFor(stage());
   state.evaluation = null;
   state.details = false;
@@ -208,7 +230,7 @@ function showResult() {
   state.saveMessage = '';
   state.newBest = false;
   if (ev.outcome !== 'ng') {
-    const r = scoreBook.offer(scoreKey(stage()), ev.score);
+    const r = scoreBook.offer(scoreKey(stage(), stage().draw?.number ?? 1), ev.score);
     state.saveMessage = r.message;
     state.newBest = r.improved;
   }
@@ -305,9 +327,20 @@ function drawBoard() {
   });
 }
 
+// 面の印には、その面（今の内容版）のどの出題かを問わず、いちばん良い成績を使う
+function bestOfStage(s) {
+  const count = CHALLENGES[s.id]?.length ?? 1;
+  let best = null;
+  for (let n = 1; n <= count; n++) {
+    const b = scoreBook.best(scoreKey(s, n));
+    if (b && (!best || b.cmp(best) > 0)) best = b;
+  }
+  return best;
+}
+
 function renderTabs() {
   $('stage-tabs').innerHTML = STAGES.map((s, i) => {
-    const best = scoreBook.best(scoreKey(s));
+    const best = bestOfStage(s);
     const mark = best ? (displayScore(best) === '100.00' ? '★' : '●') : '';
     return `<button type="button" class="tab${i === state.stageIndex ? ' current' : ''}" data-stage="${i}" aria-label="${s.set}${s.number}${best ? ` 最高${displayScore(best)}点` : ''}" ${state.phase === 'running' ? 'disabled' : ''}>${s.number}<span class="mark">${mark}</span></button>`;
   }).join('');
@@ -318,7 +351,8 @@ function renderCondition() {
   const targets = st.outlets.map(o => `<span class="target"><span class="dot"></span>${o.label}に <b>${targetText(o.target)}</b></span>`).join('');
   const buckets = st.buckets ? `<span class="count">桶 残り <b>${bucketsLeft()}</b> / ${st.buckets}</span>` : '';
   $('cond').innerHTML = `
-    <div class="cond-title"><span class="eyebrow">${st.set} ${st.number}</span><span class="name">${st.title}</span></div>
+    <div class="cond-title"><span class="eyebrow">${st.set} ${st.number}</span><span class="name">${st.title}</span>
+      ${st.draw ? `<span class="draw"><span>出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${state.phase === 'edit' ? '' : 'disabled'}>別の出題</button></span>` : ''}</div>
     <div class="cond-row">${targets}${buckets}<span class="count">つないだ水路 <b>${state.config.connected.size}</b> 本</span></div>`;
 }
 
@@ -368,10 +402,10 @@ function renderPanel() {
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      <p class="hint">${st.hint}</p>
+      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : `<p class="hint">${st.hint}</p>`}
       <div class="actions">
         <button type="button" class="ghost" id="clear-wires" ${n ? '' : 'disabled'}>配線クリア</button>
-        <button type="button" class="primary" id="run" ${n ? '' : 'disabled'}>水を流す</button>
+        <button type="button" class="primary" id="run" ${n && !state.loadError ? '' : 'disabled'}>水を流す</button>
       </div>`;
     return;
   }
@@ -583,6 +617,10 @@ function bind() {
   $('stage-tabs').addEventListener('click', e => {
     const b = e.target.closest('[data-stage]');
     if (b && !b.disabled) selectStage(Number(b.dataset.stage));
+  });
+  // 別の出題：同じ面を選び直したのと同じ扱い（直前と違う系統から抽選）
+  $('cond').addEventListener('click', e => {
+    if (e.target.closest('#redraw') && state.phase === 'edit') selectStage(state.stageIndex);
   });
   $('panel').addEventListener('click', e => {
     const btn = e.target.closest('button');
