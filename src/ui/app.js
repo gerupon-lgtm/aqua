@@ -11,7 +11,7 @@ import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook } from '../content/tutorial.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.10.1';
+const APP_VERSION = '0.10.2';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。

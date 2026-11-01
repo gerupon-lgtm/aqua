@@ -36,6 +36,9 @@
 }
 
 html, body { height: 100%; }
+/* iPhone（WebKit）が文字を自動で拡大しないようにする。結果のトーストで一部の文字だけが大きくなり、横にはみ出した
+   （2026-11-01 発案者、iPhone XR の Chrome で確認）。拡大は利用者の拡大操作に任せる */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 [hidden] { display: none !important; }
 body {
   margin: 0;
@@ -147,8 +150,9 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
   display: flex; flex-direction: column; animation: toast-in .2s ease-out;
 }
 .result {
+  grid-template-columns: minmax(0, 1fr); /* 中の表が広くても、トーストの幅を超えない（表は .table-wrap の中で横に動かす） */
   background: rgba(255, 255, 255, .97); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px;
-  display: grid; gap: 8px; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  display: grid; gap: 8px; min-height: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
   box-shadow: 0 4px 14px rgba(23, 49, 76, .22);
 }
 .result.perfect { border-color: var(--gold); }
