@@ -11,7 +11,7 @@ import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook } from '../content/tutorial.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 
-const APP_VERSION = '0.10.2';
+const APP_VERSION = '0.10.3';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -368,15 +368,43 @@ function renderTabs() {
   }).join('');
 }
 
-function renderCondition() {
-  const st = stage();
+// 条件の欄。下の「欄の高さをそろえる」でも、同じ形を全部の面について測る
+function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', review = false } = {}) {
   const targets = st.outlets.map(o => `<span class="target"><span class="dot"></span>${o.label}に <b>${targetText(o.target)}</b></span>`).join('');
-  const buckets = st.buckets ? `<span class="count">桶 残り <b>${bucketsLeft()}</b> / ${st.buckets}</span>` : '';
-  $('cond').innerHTML = `
+  const buckets = st.buckets ? `<span class="count">桶 残り <b>${left}</b> / ${st.buckets}</span>` : '';
+  return `
     <div class="cond-title"><span class="eyebrow">${st.set} ${st.number}</span><span class="name">${st.title}</span>
-      ${lessonFor(st) && !st.draw ? `<span class="draw"><button type="button" class="mini" id="review" ${state.phase === 'edit' && !guiding() ? '' : 'disabled'}>ふりかえり</button></span>` : ''}
-      ${st.draw ? `<span class="draw"><span>出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${state.phase === 'edit' ? '' : 'disabled'}>別の出題</button></span>` : ''}</div>
-    <div class="cond-row">${targets}${buckets}<span class="count">つないだ配管 <b>${state.config.connected.size}</b> 本</span></div>`;
+      ${lessonFor(st) && !st.draw ? `<span class="draw"><button type="button" class="mini" id="review" ${review ? '' : 'disabled'}>ふりかえり</button></span>` : ''}
+      ${st.draw ? `<span class="draw"><span>出題 ${st.draw.number} / ${st.draw.total}</span><button type="button" class="mini" id="redraw" ${phase === 'edit' ? '' : 'disabled'}>別の出題</button></span>` : ''}</div>
+    <div class="cond-row">${targets}${buckets}<span class="count">つないだ配管 <b>${connected}</b> 本</span></div>`;
+}
+
+function renderCondition() {
+  $('cond').innerHTML = condHtml(stage(), {
+    left: bucketsLeft(), connected: state.config.connected.size, phase: state.phase,
+    review: state.phase === 'edit' && !guiding()
+  });
+}
+
+// 条件の欄の高さを、全部の面で一番高いものにそろえる。面の名前・噴水盤の数・桶の有無で折り返しの行数が変わり、
+// 盤面の大きさが面ごとに変わっていたため（2026-11-01 発案者、iPhone で確認）。
+// 文字の幅は端末の書体で変わるので、その端末・その画面幅で実際に測る。画面幅が変わったら測り直す
+function fitConditionHeight() {
+  const cond = $('cond');
+  const probe = cond.cloneNode(false);
+  probe.removeAttribute('id');
+  probe.removeAttribute('aria-live');
+  probe.setAttribute('aria-hidden', 'true');
+  probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;min-height:0;width:${cond.clientWidth}px`;
+  cond.parentElement.append(probe);
+  let max = 0;
+  for (const st of STAGES) {
+    const shown = CHALLENGES[st.id]?.length ? { ...st, draw: { number: 8, total: 8 } } : st;
+    probe.innerHTML = condHtml(shown, { left: 10, connected: 10 });
+    max = Math.max(max, probe.getBoundingClientRect().height);
+  }
+  probe.remove();
+  cond.style.minHeight = `${Math.ceil(max)}px`;
 }
 
 const fmt = formatAmount;
@@ -777,7 +805,11 @@ function bind() {
     closeResult();
   }, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeResult(); });
-  addEventListener('resize', () => renderResultToast());
+  let lastWidth = 0;
+  addEventListener('resize', () => {
+    if (innerWidth !== lastWidth) { lastWidth = innerWidth; fitConditionHeight(); }
+    renderResultToast();
+  });
   $('result-toast').addEventListener('toggle', e => {
     if (e.target.id !== 'detail') return;
     state.details = e.target.open;
@@ -869,4 +901,7 @@ function setupOffline() {
 
 bind();
 selectStage(0);
+fitConditionHeight();
+// 書体の読み込みで文字の幅が変わるので、読み込み後にも測り直す
+document.fonts?.ready.then(() => { fitConditionHeight(); renderResultToast(); });
 setupOffline();

@@ -92,7 +92,7 @@ button { font: inherit; color: inherit; white-space: nowrap; }
   font-size: 13px; cursor: pointer; white-space: nowrap;
 }
 
-.cond { grid-area: cond; display: grid; gap: 4px; }
+.cond { grid-area: cond; display: grid; gap: 4px; align-content: start; } /* 高さは app.js が全部の面で一番高いものにそろえる */
 .cond-title { display: flex; align-items: baseline; gap: 10px; }
 .eyebrow { font-size: 11.5px; letter-spacing: .12em; color: var(--ink-soft); }
 .name { font-weight: 700; font-size: 17px; text-wrap: balance; }
