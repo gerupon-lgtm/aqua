@@ -7,7 +7,14 @@ export const STAGE_CUE_MS = 1100;
 export function stageCueOpacity(until, now, still = false) {
   const left = until - now;
   if (left <= 0 || left > STAGE_CUE_MS) return 0;
-  return still ? .85 : Math.sin(Math.PI * left / STAGE_CUE_MS) * .9;
+  if (still) return 1;
+  const elapsed = STAGE_CUE_MS - left;
+  // 一度明るくなり、読める時間を保ってから消える。薄い縁だけの合図にしない。
+  return elapsed < 120 ? elapsed / 120 : elapsed < 750 ? 1 : left / 350;
+}
+
+export function guideGlowOpacity(time, still = false) {
+  return still ? 1 : .45 + .55 * (Math.sin(time / 1200 * Math.PI * 2) + 1) / 2;
 }
 
 export function resultCardDelay(outcome, timing) {

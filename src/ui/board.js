@@ -1,6 +1,6 @@
 // 断面の盤面（SVG）。真横から見た図で、画面の上下がそのまま高さ（screens.md 2章）。
 // 計算は分数で済ませてあり、ここでは描画の直前に小数へ直すだけ。
-import { RAINBOW_AFTER_MS, RAINBOW_FADE_MS } from './visual-timing.js';
+import { RAINBOW_AFTER_MS, RAINBOW_FADE_MS, guideGlowOpacity } from './visual-timing.js';
 
 export const VIEW_W = 360;
 export const VIEW_H = 470;
@@ -213,7 +213,8 @@ const BADGE_TONE = {
   light: { fill: '#ffffff', edge: '#1d4f88', inner: 'rgba(29, 79, 136, .22)', ink: '#17314c', icon: '#1d4f88' },
   blue: { fill: '#1d56a0', edge: '#163f78', inner: 'rgba(255, 255, 255, .45)', ink: '#ffffff', icon: '#ffffff' },
   orange: { fill: '#dc5a2c', edge: '#b4421c', inner: 'rgba(255, 255, 255, .45)', ink: '#ffffff', icon: '#ffffff' },
-  slate: { fill: '#4b5e77', edge: '#36475d', inner: 'rgba(255, 255, 255, .4)', ink: '#ffffff', icon: '#ffffff' }
+  slate: { fill: '#4b5e77', edge: '#36475d', inner: 'rgba(255, 255, 255, .4)', ink: '#ffffff', icon: '#ffffff' },
+  gold: { fill: '#ffe19c', edge: '#956e21', inner: '#fff6dc', ink: '#17314c', icon: '#1d4f88' }
 };
 // 印（中心 0,0、おおよそ 9×9）
 const BADGE_ICON = {
@@ -280,7 +281,8 @@ function drawPipe(out, layout, c, model) {
   const filled = on && ((phase !== 'edit' && flowInfo?.wet) || (phase === 'edit' && isPrimed));
   // 土にも空にも埋もれない青と白の二重の光。管そのものと札は上に描く。
   if (model.guide === `pipe:${c.id}`) {
-    out.push(`<g class="guide-pipe" pointer-events="none"><path d="${d}" fill="none" stroke="#0875cb" stroke-width="${w + 12}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#ffffff" stroke-width="${w + 7}" stroke-linecap="round" stroke-linejoin="round"/></g>`);
+    const glow = guideGlowOpacity(model.time, model.reducedMotion).toFixed(3);
+    out.push(`<g class="guide-pipe" pointer-events="none"><path class="guide-bloom" d="${d}" fill="none" stroke="#2bbaff" stroke-width="${w + 24}" opacity="${glow}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#0875cb" stroke-width="${w + 12}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#ffffff" stroke-width="${w + 7}" stroke-linecap="round" stroke-linejoin="round"/></g>`);
   }
   out.push(`<g class="pipe${on ? ' on' : ''}" data-pipe="${c.id}">`);
   if (on) {
@@ -320,7 +322,12 @@ function drawPipeLabel(out, layout, c, model, position) {
   const { phase } = model;
   if (on || phase === 'edit') {
     const { x, y } = position;
-    if (model.guide === `pipe:${c.id}`) out.push(`<circle cx="${x}" cy="${y}" r="13" fill="#ffffff" stroke="#0875cb" stroke-width="2.5" pointer-events="none"/>`);
+    if (model.guide === `pipe:${c.id}`) {
+      const glow = guideGlowOpacity(model.time, model.reducedMotion).toFixed(3);
+      out.push(`<g class="guide-spark" opacity="${glow}" fill="#ffffff" stroke="#1a9ddd" stroke-width=".7" pointer-events="none">`);
+      for (const [dx, dy] of [[-16,-13],[16,-13],[-16,13],[16,13]]) out.push(`<path d="M${x + dx} ${y + dy - 5} l1.4 3.6 3.6 1.4 -3.6 1.4 -1.4 3.6 -1.4 -3.6 -3.6 -1.4 3.6 -1.4Z"/>`);
+      out.push(`</g><circle cx="${x}" cy="${y}" r="13" fill="#ffffff" stroke="#0875cb" stroke-width="2.5" pointer-events="none"/>`);
+    }
     thicknessBadge(out, x, y, thin, { on, round: model.pipeBadge !== 'pill', adjustable: !on && Boolean(c.adjustable), id: c.id });
   }
   if (c.gate) {
@@ -520,8 +527,11 @@ export function renderBoard(svg, model) {
     if (dy < 0 && pick.basin) {
       // 台座の絵：上（224×96 を半分にしたもの）と、縦に伸ばす中
       const pw = 30, topH = pw * 48 / 112;
+      const top = GROUND - 4 + dy;
+      out.push(`<g class="pedestal"><ellipse cx="${cx}" cy="${GROUND + 2}" rx="20" ry="3" fill="#70583e" opacity=".22"/><path class="pedestal-body" d="M${cx - 15} ${top} H${cx + 15} V${top + 7} L${cx + 11} ${top + 11} V${GROUND - 5} H${cx - 11} V${top + 11} L${cx - 15} ${top + 7}Z" fill="#fffefa" stroke="#537594" stroke-width="1.2"/><path d="M${cx + 4} ${top + 10} H${cx + 11} V${GROUND - 5} H${cx + 4}Z" fill="#d2e1ed"/>`);
       out.push(`<image href="${art('part-pedestal-middle.png')}" x="${cx - pw / 2}" y="${GROUND - 4 + dy + topH - 0.5}" width="${pw}" height="${Math.max(0, 4 - dy - topH + 0.5)}" preserveAspectRatio="none"/>`);
       out.push(`<image href="${art('part-pedestal-top.png')}" x="${cx - pw / 2}" y="${GROUND - 4 + dy}" width="${pw}" height="${topH}" preserveAspectRatio="none"/>`);
+      out.push(`<path d="M${cx - 15} ${top} H${cx + 15} V${top + 7} L${cx + 11} ${top + 11} V${GROUND - 5} H${cx - 11} V${top + 11} L${cx - 15} ${top + 7}Z" fill="none" stroke="#537594" stroke-width="1.1"/><rect class="pedestal-foot" x="${cx - 17}" y="${GROUND - 6}" width="34" height="7" rx="1.5" fill="#fffefa" stroke="#537594" stroke-width="1.2"/></g>`);
     } else if (dy < 0) out.push(`<rect x="${cx - 14}" y="${GROUND - 4 + dy}" width="28" height="${4 - dy}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
     out.push(`<g class="basin" transform="translate(0 ${dy})">`);
     // 出口の高さを維持し、グラス前面から器へ伸びる管として描く。
@@ -595,12 +605,12 @@ export function renderBoard(svg, model) {
     // 量の札は器のすぐ上に少し離す（発案者の選択）。「必要量」は比較中の仮表記。
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
     const [vt, vm] = verdict ? VERDICT_BADGE[verdict.verdict] ?? ['light', null] : ['light', null];
-    badge(out, { x: cx, y: b.top - 18, text: `必要量${target}`, tone: vt, mark: vm, size: 9, h: 16 });
     if (model.startCue > 0) {
       const w = 12 + textWidth(`必要量${target}`, 9);
       const left = Math.min(VIEW_W - w - 2, Math.max(2, cx - w / 2));
-      out.push(`<rect class="start-cue" x="${left - 2}" y="${b.top - 28}" width="${w + 4}" height="20" rx="5" fill="#ffe3a3" fill-opacity=".18" stroke="#b18a35" stroke-width="2.5" opacity="${model.startCue.toFixed(3)}" pointer-events="none"/>`);
+      out.push(`<rect class="start-cue" x="${left - 3}" y="${b.top - 29}" width="${w + 6}" height="22" rx="5" fill="#ffe19c" stroke="#a17b29" stroke-width="2.5" opacity="${model.startCue.toFixed(3)}" pointer-events="none"/>`);
     }
+    badge(out, { x: cx, y: b.top - 18, text: `必要量${target}`, tone: model.startCue > .5 ? 'gold' : vt, mark: vm, size: 9, h: 16 });
     out.push('</g>');
     if (dy < 0) badge(out, { x: cx, y: b.top + dy - 38, text: `高さ${o.height}`, size: 8, h: 13 });
     // 短い出口の管は、引き出し線の先で太さを示す。「出口 太」の札は置かない。

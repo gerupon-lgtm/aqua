@@ -10,11 +10,13 @@ import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText } from '../content/tutorial.js';
 import { guideMessage } from './guide-copy.js';
+import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
+import { PARTS_HTML, HOWTO_HTML } from './info-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, stageCueOpacity } from './visual-timing.js';
 
-const APP_VERSION = '0.14.4';
+const APP_VERSION = '0.14.5';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -149,7 +151,6 @@ function selectStage(index) {
   if (state.mode === 'select') lastSelectIndex = index;
   state.stageCueUntil = !state.titleOpen && index >= 0 && !state.loadError ? performance.now() + STAGE_CUE_MS : 0;
   renderAll();
-  if (state.stageCueUntil) loop();
 }
 
 // ---- 編集：配管をつなぐ・外す・太さ・呼び水（F-002、F-005、F-008） ----
@@ -252,7 +253,6 @@ function startRun() {
   later(settleAt + (evaluation.outcome === 'ng' ? timing.jingleNgMs : timing.jingleMs), () => audio.jingle(evaluation.outcome));
   later(settleAt + resultCardDelay(evaluation.outcome, timing), showResult);
   renderAll();
-  loop();
 }
 
 // 案内中の面では、流す前に「届く量」を予想してもらう（F-019）。届かないつなぎ方では聞かずに流す
@@ -346,10 +346,15 @@ function currentLevels(now) {
 // 描き直しは1秒に約30回までにして、音の処理に余裕を残す
 let frame = 0;
 let lastDraw = 0;
+function boardAnimating(now = performance.now()) {
+  if (state.titleOpen) return false;
+  return state.phase !== 'edit' || now < state.stageCueUntil ||
+    (!reducedMotionQuery.matches && practiceStep()?.target.startsWith('pipe:'));
+}
 function loop() {
   cancelAnimationFrame(frame);
   const tick = now => {
-    const done = state.phase === 'edit' && now >= state.stageCueUntil;
+    const done = !boardAnimating(now);
     // 最後は32msの間隔を待たず描く。薄い合図が残ったまま停止することを防ぐ。
     if (now - lastDraw >= 32 || done) { lastDraw = now; drawBoard(); }
     if (!done) frame = requestAnimationFrame(tick);
@@ -423,7 +428,7 @@ function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', r
     <div class="switcher">
       <button type="button" class="nav" id="stage-prev" aria-label="前の面" ${nav && state.stageIndex > -1 ? '' : 'disabled'} ${mode === 'select' ? '' : 'hidden'}>‹</button>
       <button type="button" class="stage-name" id="stage-list" ${mode === 'select' && phase !== 'running' ? '' : 'disabled'}>
-        <span class="name">${isPrac ? '' : `${st.number} `}${st.title}</span><span class="sub">${sub}</span>${mode === 'select' ? '<span class="caret" aria-hidden="true">∨</span>' : ''}</button>
+        <span class="name">${textMarkup(`${isPrac ? '' : `${st.number} `}${st.title}`)}</span><span class="sub">${textMarkup(sub)}</span>${mode === 'select' ? '<span class="caret" aria-hidden="true">∨</span>' : ''}</button>
       <button type="button" class="nav" id="stage-next" aria-label="次の面" ${nav && state.stageIndex < STAGES.length - 1 ? '' : 'disabled'} ${mode === 'select' ? '' : 'hidden'}>›</button>
     </div>
     <div class="cond-card">
@@ -466,7 +471,6 @@ function fitConditionHeight() {
 }
 
 const fmt = formatAmount;
-const verdictText = { exact: 'ちょうど', short: '足りない', over: '多い' };
 const sideText = { on: '目盛りに乗っている', above: '目盛りより少し上', below: '目盛りより少し下' };
 const stateTitle = { open: '水門が開いているとき', closed: '水門を閉じたとき' };
 const THICK_NAME = { 3: '細', 2: '中', 1: '太' };
@@ -481,10 +485,10 @@ function chooserHtml() {
   if (c.siphon) {
     const left = bucketsLeft();
     parts.push(`<div class="chooser-head"><h3>サイフォン</h3><span class="bucket-badge${left ? '' : ' empty'}" aria-label="桶の残り ${left}個（全部で${stage().buckets}個）">桶 残り <b>${left}</b> / ${stage().buckets}</span></div>`);
-    parts.push('<p class="chooser-note">壁を越える管は、中に空気がたまっていて流れません。桶の水で満たす（呼び水）と流れ始めます。</p>');
+    parts.push(`<p class="chooser-note">${phraseMarkup('壁を越える管は、|中に空気がたまっていて|流れません。|桶の水で満たす（呼び水）と|流れ始めます。')}</p>`);
   } else if (c.adjustable) {
     parts.push('<div class="chooser-head"><h3>太さを選ぶ</h3></div>');
-    parts.push('<p class="chooser-note">太いほど水が流れやすく、たくさん運びます。</p>');
+    parts.push(`<p class="chooser-note">${phraseMarkup('太いほど水が流れやすく、|たくさん運びます。')}</p>`);
   }
   if (c.adjustable) {
     parts.push(`<div class="chooser-row"><span>太さ</span>${c.adjustable.map(t => `<button type="button" class="chip${cfg.thickness[c.id] === t ? ' on' : ''}" data-thick="${t}" aria-pressed="${cfg.thickness[c.id] === t}">${THICK_NAME[t]}</button>`).join('')}</div>`);
@@ -501,13 +505,13 @@ function chooserHtml() {
 // かっこ書き（前に付く数値ごと）を1かたまりにして、途中で折り返さない。
 // 文の折り返しは CSS の word-break: auto-phrase で文節ごとにするが、対応していないブラウザでもかっこは崩さない
 function keepTogether(text) {
-  return String(text).replace(/[0-9A-Za-z./−-]*（[^（）]{1,20}）/g, m => `<span class="nw">${m}</span>`);
+  return textMarkup(text);
 }
 
 function outletsHtml(st, outlets) {
   return outlets.map(o => {
     const label = st.outlets.find(x => x.id === o.id).label;
-    return `<li class="${o.verdict}"><div class="delivery-head"><span>${label}</span><span class="v">${verdictText[o.verdict]}</span></div><div class="delivery-values"><div><span>必要量</span><b>${o.target}</b></div><div><span>届いた量</span><b>${fmt(o.flow)}</b></div></div></li>`;
+    return deliveryMarkup(label, o);
   }).join('');
 }
 
@@ -518,7 +522,7 @@ function renderPanel() {
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : practiceStep() ? `<p class="hint guide">${guideMessage(practiceStep().text)}</p>` : guiding() ? `<p class="hint guide">${guideMessage(lessonFor(st).intro)}</p>` : `<p class="hint">${st.hint}</p>`}
+      ${state.loadError ? `<p class="warn" role="alert">${textMarkup(state.loadError)}</p>` : practiceStep() ? `<p class="hint guide">${guideMessage(practiceStep().text)}</p>` : guiding() ? `<p class="hint guide">${guideMessage(lessonFor(st).intro)}</p>` : `<p class="hint">${textMarkup(st.hint)}</p>`}
       <div class="actions">${practiceStep()?.until === 'next'
         ? '<button type="button" class="primary" id="guide-next">次へ</button>'
         : `<button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
@@ -533,7 +537,7 @@ function renderPanel() {
   }
   if (state.phase === 'running') {
     panel.innerHTML = `
-      <p class="hint running">${state.run?.gated ? '水が流れています。落ち着いたら水門を閉じます…' : '水が流れています…'}</p>
+      <p class="hint running">${textMarkup(state.run?.gated ? '水が流れています。落ち着いたら水門を閉じます…' : '水が流れています…')}</p>
       <div class="actions"><button type="button" class="ghost" id="stop">停止</button></div>`;
     return;
   }
@@ -541,7 +545,7 @@ function renderPanel() {
   const gated = ev.states.length > 1;
   const head = ev.outcome === 'perfect' ? '100点' : ev.outcome === 'clear' ? 'クリア' : 'NG';
   const outlets = gated
-    ? ev.states.map(s => `<li class="state-head">${stateTitle[s.name]}</li>${outletsHtml(st, s.outlets)}`).join('')
+    ? ev.states.map(s => `<li class="state-head">${textMarkup(stateTitle[s.name])}</li>${outletsHtml(st, s.outlets)}`).join('')
     : outletsHtml(st, ev.outlets);
   const scale = scaleNow();
   const shown = ev.states[ev.states.length - 1];
@@ -593,18 +597,19 @@ function renderPanel() {
     : slot('primary next', '次へ');
   // モードのひとこと：選択プレイは試行回数、連続プレイはNGの残りと結果
   const cont = state.continuous;
-  const modeLine = state.mode === 'select' && ev.outcome !== 'ng' && !isPractice()
-    ? `試行 ${state.trials} 回（この面の最少 ${modeBook.fewest(stage().id) ?? state.trials} 回）${state.newFewest ? '<span class="newbest">最少</span>' : ''}`
+  const modeCopy = state.mode === 'select' && ev.outcome !== 'ng' && !isPractice()
+    ? `試行 ${state.trials} 回（この面の最少 ${modeBook.fewest(stage().id) ?? state.trials} 回）`
     : state.mode === 'continuous' && cont
       ? act === 'gameover' ? `ゲームオーバー：${cont.cleared} 面クリア（${cont.level.name}の最高 ${modeBook.bestContinuous(cont.level.id) ?? cont.cleared} 面）`
       : act === 'complete' ? `全 ${cont.stageCount} 面クリア！（NG ${cont.ng} 回）`
       : cont.level.limit === null ? `連続プレイ（${cont.level.name}）：${cont.cleared} 面クリア・NG ${cont.ng} 回`
       : `連続プレイ（${cont.level.name}）：${cont.cleared} 面クリア・NG 残り ${cont.left} 回`
       : '';
+  const modeLine = textMarkup(modeCopy) + (state.mode === 'select' && state.newFewest ? '<span class="newbest">最少</span>' : '');
   // 結果は下の欄に重ねるトーストで出し、下の欄は編集中と同じ高さ（案内＋ボタン1行）に保つ。
   // 欄が伸びると盤面が縮むため（2026-11-01 発案者）。閉じたトーストは「結果」で開き直す
   panel.innerHTML = `
-    <p class="hint">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
+    <p class="hint">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
     <div class="actions">
       <button type="button" class="ghost" id="show-result" aria-expanded="${!state.resultClosed}">結果</button>
       ${retryButton}
@@ -620,14 +625,14 @@ function renderPanel() {
           <span class="score">${ev.outcome === 'ng' ? '<span class="result-ng-word">NG</span>' : `${displayScore(ev.score).replace(/\.00$/, '')}<small>点</small>`}</span>
         </div>
         ${state.newBest ? '<span class="newbest"><svg viewBox="0 0 20 15" width="16" height="12" aria-hidden="true"><path d="M2 12 L1 3 6 6 10 0 14 6 19 3 18 12 Z M2 14 H18" fill="currentColor"/></svg> 最高点</span>' : ''}
-        <span class="used">${usedText}</span>
+        <span class="used">${textMarkup(usedText)}</span>
       </div>
       ${isPractice() ? `<p class="guide-answer">${guideMessage(practiceResultText(ev.outcome))}</p>` : ''}
       ${state.prediction ? `<p class="guide-answer">${guideMessage(answerLine(state.prediction.question, state.prediction.picked))}</p>` : ''}
       ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
-      ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
+      ${state.saveMessage ? `<p class="warn">${textMarkup(state.saveMessage)}</p>` : ''}
       <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectConfig.primed.length}</span>` : ''}</div></div>
-      <p class="swipe-note">グラスを${swipeVerb}と、そのグラスの音を聞き直せます。</p>
+      <p class="swipe-note">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
         <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
@@ -673,8 +678,8 @@ function questionHtml() {
   const q = state.asking;
   return `<div class="chooser">
     <div class="chooser-head"><h3><span class="spirit" aria-label="水の精霊"></span>予想してから流そう</h3></div>
-    <p class="chooser-note">${q.text}<br>選んでから水が流れます。</p>
-    <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">${c.text} 届く</button>`).join('')}</div>
+    <p class="chooser-note">${textMarkup(q.text)}<br>${textMarkup('選んでから水が流れます。')}</p>
+    <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">${textMarkup(c.text)} 届く</button>`).join('')}</div>
     <div class="chooser-row chooser-actions"><button type="button" class="chip" data-skip="1">案内をスキップ</button><button type="button" class="chip" data-close="1">やめる</button></div>
   </div>`;
 }
@@ -717,6 +722,8 @@ function renderAll() {
   renderResultToast();
   $('board').classList.toggle('swipeable', state.phase === 'result');
   $('board').classList.toggle('editable', state.phase === 'edit');
+  if (boardAnimating()) loop();
+  else cancelAnimationFrame(frame);
 }
 
 // ---- 調整用の設定（試作） ----
@@ -726,10 +733,10 @@ function openTuning() {
   sheet.innerHTML = `
     <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="tune-title">
       <h2 id="tune-title">タイミングの調整（試作用）</h2>
-      <p class="note">グラスハープの余韻に合わせて決めるための仮の設定です。この端末にだけ保存し、次に水を流したときから使います。100点では、虹を見せてから結果を出す時間を優先します。</p>
+      <p class="note">${phraseMarkup('グラスハープの余韻に合わせて|決めるための仮の設定です。|この端末にだけ保存し、|次に水を流したときから使います。|100点では、|虹を見せてから結果を出す時間を|優先します。')}</p>
       <form id="tune-form">
         ${TIMING_FIELDS.map(([key, label, min, max, step]) => `
-          <label class="field" for="tune-${key}"><span>${label}</span>
+          <label class="field" for="tune-${key}"><span>${textMarkup(label)}</span>
             <span class="val" id="tune-${key}-val">${fieldText(key, v[key])}</span>
             <input type="range" id="tune-${key}" name="${key}" min="${min}" max="${max}" step="${step}" value="${v[key]}">
           </label>`).join('')}
@@ -761,7 +768,7 @@ function openTuning() {
     state.timing = next;
     audio.setLatency(next.latencyMs);
     audio.timbre = next.timbre;
-    $('tune-status').textContent = saveTiming(next) ? '保存しました。次に水を流したときから使います。' : 'この端末には保存できませんでした。開いている間だけ使います。';
+    $('tune-status').innerHTML = saveTiming(next) ? phraseMarkup('保存しました。|次に水を流したときから使います。') : phraseMarkup('この端末には保存できませんでした。|開いている間だけ使います。');
   });
   $('tune-reset').addEventListener('click', () => {
     state.timing = { ...DEFAULT_TIMING };
@@ -769,7 +776,7 @@ function openTuning() {
     audio.setLatency(state.timing.latencyMs);
     audio.timbre = state.timing.timbre;
     openTuning();
-    $('tune-status').textContent = '初期値に戻しました。';
+    $('tune-status').innerHTML = textMarkup('初期値に戻しました。');
   });
   $('tune-close').addEventListener('click', () => { sheet.hidden = true; });
   // 保存せずに、選んだ音色で2つのグラスの和音と単音を鳴らして比べる
@@ -908,6 +915,11 @@ function bind() {
     closeResult();
   }, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeResult(); });
+  reducedMotionQuery.addEventListener('change', () => {
+    drawBoard();
+    if (boardAnimating()) loop();
+    else cancelAnimationFrame(frame);
+  });
   let layoutFrame = 0;
   addEventListener('resize', () => {
     cancelAnimationFrame(layoutFrame);
@@ -991,7 +1003,7 @@ function renderTitle(message = '') {
   title.querySelector('[data-title="tutorial"]').classList.toggle('primary', firstTime);
   title.querySelector('[data-title="continuous"]').classList.toggle('primary', !firstTime);
   title.querySelector('[data-title="resume"]').disabled = !state.played;
-  $('title-message').textContent = message;
+  $('title-message').innerHTML = textMarkup(message);
 }
 function closeTitle() {
   state.titleOpen = false;
@@ -1019,7 +1031,7 @@ function goNext() {
 function openSheet(title, body, actions = '<button type="button" class="ghost" data-sheet="close">閉じる</button>') {
   const sheet = $('sheet');
   sheet.innerHTML = `<div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-    <h2 id="sheet-title">${title}</h2>${body}<div class="actions">${actions}</div></div>`;
+    <h2 id="sheet-title">${textMarkup(title)}</h2>${body}<div class="actions">${actions}</div></div>`;
   sheet.hidden = false;
 }
 function closeSheet() { $('sheet').hidden = true; }
@@ -1040,9 +1052,9 @@ function openRecords() {
     const few = modeBook.fewest(s.id);
     return `<tr><td>${s.id === PRACTICE.id ? '練習' : s.number}</td><td>${s.title}</td><td>${best ? `${displayScore(best)} 点` : '―'}</td><td>${few ? `${few} 回` : '―'}</td></tr>`;
   }).join('');
-  const cont = LEVELS.map(l => `<li>${l.name}（${l.note}）：${modeBook.bestContinuous(l.id) === null ? 'まだ記録がありません' : `最高 ${modeBook.bestContinuous(l.id)} 面クリア`}</li>`).join('');
+  const cont = LEVELS.map(l => `<li>${phraseMarkup(`${l.name}（${l.note}）：|${modeBook.bestContinuous(l.id) === null ? 'まだ記録がありません' : `最高 ${modeBook.bestContinuous(l.id)} 面クリア`}`)}</li>`).join('');
   openSheet('記録', `<h3 class="sheet-sub">連続プレイ</h3><ul class="plain">${cont}</ul>
-    <h3 class="sheet-sub">面ごと（最高点・クリアまでの最少の試行回数）</h3>
+    <h3 class="sheet-sub">${phraseMarkup('面ごと|（最高点・|クリアまでの最少の試行回数）')}</h3>
     <div class="table-wrap"><table><thead><tr><th>面</th><th>名前</th><th>最高点</th><th>最少試行</th></tr></thead><tbody>${rows}</tbody></table></div>`);
 }
 
@@ -1051,7 +1063,7 @@ function openLevels() {
     const best = modeBook.bestContinuous(l.id);
     return `<button type="button" class="ghost level" data-level="${l.id}"><b>${l.name}</b><span>${l.note}${best === null ? '' : `・最高 ${best} 面`}</span></button>`;
   }).join('');
-  openSheet('連続プレイ', `<p class="note">お試し1面から30面まで順に進みます。クリアできなかった回（NG）が上限を超えるとゲームオーバー。部分点のクリアでも次へ進めます。</p><div class="level-list">${items}</div>`,
+  openSheet('連続プレイ', `<p class="note">${phraseMarkup('お試し1面から30面まで|順に進みます。|クリアできなかった回（NG）が|上限を超えるとゲームオーバー。|部分点のクリアでも次へ進めます。')}</p><div class="level-list">${items}</div>`,
     '<button type="button" class="ghost" data-sheet="close">やめる</button>');
 }
 
@@ -1069,27 +1081,6 @@ function openStageList() {
   const body = `<div class="stage-list">${item(-1, PRACTICE, '練習')}${[...groups].map(([set, list]) => `<h3 class="sheet-sub">${set}</h3>${list.map(([i, s]) => item(i, s, s.number)).join('')}`).join('')}</div>`;
   openSheet('面を選ぶ', body);
 }
-
-const partPicture = (id, alt) => `<img class="part-illustration" src="${new URL(`../../public/graphics/intro-${id}.svg`, import.meta.url).href}" alt="${alt}" width="960" height="360">`;
-const PARTS_HTML = `<dl class="parts">
-  <dt>給水塔</dt><dd>水が出るところ。給水塔の水の高さが、流れのもとになります。</dd>
-  <dt>グラス</dt><dd>水がたまります。水位で音が決まり、水が多いほど低い音。目盛りに乗ると澄んだ和音になります。</dd>
-  <dt>配管</dt><dd>給水塔とグラスをつなぎます。丸い札は「太・中・細」です。計算で使う細さは、太＝1・中＝2・細＝3。流れる量＝高さの差÷細さ。縦につなぐと細さは足し算、並べると流れやすくなります。</dd>
-  <dt>噴水盤</dt><dd>${partPicture('outlets', '給水塔から分かれた水が2つの噴水盤へ届く様子')}必要量の水を受けます。白い陶器の枠とガラスの内器で、水位と薄い金色の目印を見比べます。出口の管の太さは引き出し線の先の丸い札で示します。</dd>
-  <dt>高さの違う出口</dt><dd>${partPicture('height', '出口より高い水位の分だけ、水が流れる様子')}口が高い受け皿は、その高さより上の分だけ流れます。高さの差は口の高さから測ります。</dd>
-  <dt>太さを選べる配管</dt><dd>${partPicture('adjustable', '配管をタップして3段階の太さを選ぶ様子')}タップして「太・中・細」から選びます。</dd>
-  <dt>サイフォンと桶</dt><dd>${partPicture('siphon', '桶で壁を越える管の空気を水に置き換え、流れるようにする様子')}壁を越える配管です。桶で呼び水をすると流れます。桶の数には限りがあります。</dd>
-  <dt>水門</dt><dd>${partPicture('gate', '水門が開いているときと閉じたあとで、水の通り道が変わる様子')}流したあと自動で閉じます。開いたときと閉じたときの両方で、必要量を届けます。</dd>
-</dl>`;
-const HOWTO_HTML = `<div class="howto">
-  <p>配管をタップしてつなぎ、「水を流す」を押します。噴水盤に必要量が届けばクリア。使った配管が少ないほど高い点で、いちばん少ない答えが100点です（桶を使う面は、桶の少なさが先）。</p>
-  <p>流れたあと、グラスを指でなぞると、そのグラスの音を聞き直せます。結果の「解説」で、なぜその量になったかを確かめられます。</p>
-  <h3 class="sheet-sub">遊び方</h3>
-  <ul class="plain"><li>チュートリアル：画面の見方と、お試し1〜6面で流れの決まりを学びます。</li>
-  <li>連続プレイ：1面から順に進みます。レベルごとに、NGの回数に上限があります。</li>
-  <li>選択プレイ：好きな面を選んで遊びます。面ごとに最高点と、クリアまでの最少の試行回数を記録します。</li>
-  <li>自由作成：準備中です。</li></ul>
-</div>`;
 
 // 「更新」：新しい版を探す。見つかれば画面下に「更新する」の案内が出る（F-022）
 async function checkUpdate() {

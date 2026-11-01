@@ -1,0 +1,449 @@
+{
+  "counts": {
+    "questions": 198,
+    "states": 1688,
+    "measurements": 5712,
+    "guides": 48,
+    "information": 6
+  },
+  "errors": [
+    {
+      "label": "7-2-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量549/139（約3.95）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量441/139（約3.17）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "8-8-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量657/151（約4.35）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量333/151（約2.21）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "9-2-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量424/163（約2.60）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量312/163（約1.91）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "9-6-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量296/119（約2.49）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "10-1-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量600/101（約5.94）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量564/101（約5.58）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量468/101（約4.63）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "10-3-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量342/167（約2.05）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量354/167（約2.12）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量480/167（約2.87）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "10-4-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量376/167（約2.25）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量488/167（約2.92）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量608/167（約3.64）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "10-5-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量416/187（約2.22）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量472/187（約2.52）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量488/187（約2.61）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "10-7-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量264/125（約2.11）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量904/375（約2.41）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量272/125（約2.18）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "12-1-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量816/191（約4.27）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量744/191（約3.90）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "12-2-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量708/143（約4.95）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量900/143（約6.29）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "12-4-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量423/121（約3.50）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量342/121（約2.83）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "12-5-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量560/127（約4.41）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量488/127（約3.84）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "12-6-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量654/205（約3.19）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "12-8-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量972/193（約5.04）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "16-5-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量732/139（約5.27）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量588/139（約4.23）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "22-7-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量288/121（約2.38）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "22-8-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量285/119（約2.39）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量342/119（約2.87）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "23-8-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量624/163（約3.83）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量658/163（約4.04）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量687/163（約4.21）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "24-1-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量797/128（約6.23）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量423/128（約3.30）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "24-3-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量808/203（約3.98）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量446/203（約2.20）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "24-4-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量452/115（約3.93）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量266/115（約2.31）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "24-5-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量941/418（約2.25）",
+          "width": 76,
+          "scroll": 90
+        },
+        {
+          "tag": "DIV",
+          "text": "届いた量156/209（約0.75）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    },
+    {
+      "label": "24-6-全接続",
+      "width": 320,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "text": "届いた量355/158（約2.25）",
+          "width": 76,
+          "scroll": 90
+        }
+      ]
+    }
+  ]
+}

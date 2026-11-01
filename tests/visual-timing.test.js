@@ -9,6 +9,12 @@ test('開始の合図は1.1秒だけで、控えめ設定では同じ濃さを�
   assert.equal(stageCueOpacity(STAGE_CUE_MS, 100, true), stageCueOpacity(STAGE_CUE_MS, 1000, true));
 });
 
+test('開始合図には読み取れる明るさを保つ区間があり、控えめでも同じ最大の濃さを使う', () => {
+  assert.equal(stageCueOpacity(STAGE_CUE_MS, 150), 1);
+  assert.equal(stageCueOpacity(STAGE_CUE_MS, 700), 1);
+  assert.equal(stageCueOpacity(STAGE_CUE_MS, 150, true), 1);
+});
+
 const timing = { jingleMs: 1400, cardClearMs: 2300, cardNgMs: 2300 };
 
 test('100点の結果は虹が出そろい、500ms見せた後になる', () => {

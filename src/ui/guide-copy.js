@@ -1,5 +1,6 @@
 // 画面幅に合わせて、短い文節の間だけで折り返す。文そのものや案内の進行は変えない。
 // auto-phraseが使えない端末でも、精霊の右側で文の左端をそろえる。
+import { textMarkup } from './text-layout.js';
 const COPY = [
   '水は|高いところから|低いところへ|流れます。|流れる量＝高さの差÷細さ。|縦につなぐと|細さは足し算です。',
   '配管を並べてつなぐと、|通り道が増えて|流れやすくなります。|細さ2を2本並べると、|細さ1の1本と比べて？',
@@ -15,10 +16,9 @@ const COPY = [
   '届く量＝|高さの差÷細さの合計。|4÷(1＋出口の1)＝2。|「水を流す」を|押しましょう。'
 ];
 const PHRASES = new Map(COPY.map(copy => { const parts = copy.split('|'); return [parts.join(''), parts]; }));
-const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 export function guideMessage(text) {
   const parts = PHRASES.get(text);
-  const copy = parts ? parts.map(part => `<span class="phrase">${escape(part)}</span>`).join('') : escape(text);
+  const copy = parts ? parts.map(part => `<span class="phrase">${textMarkup(part)}</span>`).join('') : textMarkup(text);
   return `<span class="spirit" role="img" aria-label="水の精霊"></span><span class="guide-copy">${copy}</span>`;
 }

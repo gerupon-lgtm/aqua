@@ -39,6 +39,22 @@ test('案内中の配管は白と青の下敷きで示し、札より後の色�
   assert.ok(!svg.includes('path.guide-ring'));
 });
 
+test('配管の案内は時刻で光量が変わる。控えめ表示でも光と輝きの印が消えない', () => {
+  const cfg = { connected: new Set(), primed: new Set(), thickness: {} };
+  const sample = (time, reducedMotion) => draw(PRACTICE, cfg, { guide: 'pipe:P1', phase: 'edit', time, reducedMotion }).svg;
+  const glow = svg => /class="guide-bloom"[^>]*opacity="([^"]+)"/.exec(svg)?.[1];
+  assert.notEqual(glow(sample(0, false)), glow(sample(300, false)));
+  assert.equal(glow(sample(0, true)), '1.000');
+  assert.equal(glow(sample(0, true)), glow(sample(300, true)));
+  assert.ok(sample(0, true).includes('class="guide-spark"'));
+});
+
+test('高い器の台座には不透明な陶器の面と地面につく足がある', () => {
+  const { svg } = draw(STAGES[3], { connected: new Set(), primed: new Set(), thickness: {} }, { phase: 'edit' });
+  assert.match(svg, /class="pedestal-body"[^>]*fill="#fffefa"/);
+  assert.match(svg, /class="pedestal-foot"[^>]*fill="#fffefa"/);
+});
+
 test('8面の交差は接続点や段を動かさず、管をまたぐ図形で示す', () => {
   const stage = STAGES[7], layout = layoutFor(stage);
   const before = stage.candidates.map(c => pipePath(layout, c));

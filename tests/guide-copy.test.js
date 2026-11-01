@@ -8,12 +8,14 @@ test('練習と6面の説明は元の文を保ち、端末に依存せず短い�
     const markup = guideMessage(text);
     assert.ok(markup.includes('class="phrase"'), text);
     assert.equal(markup.replace(/<[^>]+>/g, ''), text);
-    assert.ok([...markup.matchAll(/class="phrase">([^<]+)/g)].every(m => [...m[1]].length <= 17), text);
+    const phrases = markup.replace(/<span class="text-unit">([^<]*)<\/span>/g, '$1');
+    const chunks = [...phrases.matchAll(/class="phrase">([^<]+)/g)];
+    assert.ok(chunks.length > 0 && chunks.every(m => [...m[1]].length <= 17), text);
   }
 });
 
 test('動的な答え合わせでも精霊と本文は別の列で、文中のHTMLは実行させない', () => {
   const markup = guideMessage('届いた量は <2> でした。');
   assert.ok(markup.includes('class="guide-copy"'));
-  assert.ok(markup.includes('&lt;2&gt;'));
+  assert.ok(markup.replace(/<[^>]+>/g, '').includes('&lt;2&gt;'));
 });
