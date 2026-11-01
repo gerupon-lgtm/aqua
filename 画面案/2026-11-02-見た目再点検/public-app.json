@@ -1,0 +1,206 @@
+{
+  "title": {
+    "buttons": [
+      {
+        "background": "rgb(255, 255, 255)",
+        "opacity": "1",
+        "text": "チュートリアル"
+      },
+      {
+        "background": "rgb(42, 109, 181)",
+        "opacity": "1",
+        "text": "連続プレイ"
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "opacity": "1",
+        "text": "選択プレイ"
+      },
+      {
+        "background": "rgb(231, 238, 246)",
+        "opacity": "1",
+        "text": "自由作成（準備中）"
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "opacity": "1",
+        "text": "パーツの説明"
+      },
+      {
+        "background": "rgb(255, 255, 255)",
+        "opacity": "1",
+        "text": "遊び方と概要"
+      },
+      {
+        "background": "rgb(231, 238, 246)",
+        "opacity": "1",
+        "text": "プレイ画面へ"
+      }
+    ],
+    "overflow": false,
+    "pictures": [
+      {
+        "class": "title-emblem title-spirit",
+        "image": "url(\"https://aqua.sikumilab.com/v0.14.5/public/graphics/spirit-detail-v2.png\")"
+      },
+      {
+        "class": "title-emblem title-glass",
+        "image": "url(\"https://aqua.sikumilab.com/v0.14.5/public/graphics/title-glass-v2.png\")"
+      },
+      {
+        "class": "title-emblem title-fountain",
+        "image": "url(\"https://aqua.sikumilab.com/v0.14.5/public/graphics/title-fountain-v2.png\")"
+      }
+    ],
+    "version": "v0.14.5 試作"
+  },
+  "glow": {
+    "board": {
+      "height": 448.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    },
+    "clearButtons": 1,
+    "condition": {
+      "height": 180,
+      "width": 382,
+      "x": 16,
+      "y": 50
+    },
+    "frame": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "height": 896,
+    "overflows": [],
+    "pageOverflow": false,
+    "panel": {
+      "height": 172,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "width": 414
+  },
+  "result": {
+    "board": {
+      "height": 448.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    },
+    "clearButtons": 0,
+    "condition": {
+      "height": 180,
+      "width": 382,
+      "x": 16,
+      "y": 50
+    },
+    "frame": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "height": 896,
+    "overflows": [],
+    "pageOverflow": false,
+    "panel": {
+      "height": 172,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "width": 414
+  },
+  "exact": [
+    "✓ちょうど"
+  ],
+  "updatedVersion": "v0.14.5 試作",
+  "startCue": {
+    "cardFill": "linear-gradient(rgb(255, 241, 196), rgb(255, 223, 145))",
+    "feet": 1,
+    "opacity": "1.000",
+    "pedestals": 1
+  },
+  "cueAfter": "0.000",
+  "fraction": {
+    "board": {
+      "height": 448.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    },
+    "clearButtons": 0,
+    "condition": {
+      "height": 180,
+      "width": 382,
+      "x": 16,
+      "y": 50
+    },
+    "frame": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "height": 896,
+    "overflows": [],
+    "pageOverflow": false,
+    "panel": {
+      "height": 172,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "width": 414
+  },
+  "quantities": {
+    "amounts": [
+      {
+        "approx": "",
+        "exact": "3"
+      },
+      {
+        "approx": "（約2.50）",
+        "exact": "5/2"
+      }
+    ],
+    "badge": "−足りない"
+  },
+  "pc": {
+    "board": {
+      "height": 600,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "clearButtons": 0,
+    "condition": {
+      "height": 272,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 96
+    },
+    "frame": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "height": 800,
+    "overflows": [],
+    "pageOverflow": false,
+    "panel": {
+      "height": 372,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 384
+    },
+    "width": 1280
+  },
+  "errors": []
+}
