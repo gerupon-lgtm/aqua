@@ -118,6 +118,7 @@ button { font: inherit; color: inherit; white-space: nowrap; }
 #board .badge-text { font-size: 11px; font-weight: 700; fill: var(--blue-deep); font-family: var(--font-body); pointer-events: none; }
 #board .badge-text.on { fill: #ffffff; }
 #board .badge-text.cand { fill: var(--ink-soft); }
+#board .badge-text.mouth { font-size: 10px; fill: var(--ink-soft); }
 #board .current { stroke: rgba(255, 255, 255, .85); stroke-dasharray: 2 11; stroke-linecap: round; }
 
 .panel { grid-area: panel; display: grid; gap: 8px; }

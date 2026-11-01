@@ -112,10 +112,12 @@ function drawPipe(out, layout, c, model) {
     out.push(`<path d="${d}" fill="none" stroke="var(--card)" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>`);
   }
   // 太さの札。つないだ管は青地に白文字（つないだ後も太さが分かる）、候補は白地に灰色の点線。
-  // 太さを選べる候補は「細〜太」、つないだ後は選んだ太さ
+  // 太さに細さ（流れにくさ）の数字を添える（「太1」）。流れる量＝高さの差÷細さ を札から計算できるようにする（2026-11-01 発案者）。
+  // 太さを選べる候補は「細3〜太1」、つないだ後は選んだ太さ
   if (on || phase === 'edit') {
-    const text = !on && c.adjustable ? `${THICK_LABEL[Math.max(...c.adjustable.map(Number))]}〜${THICK_LABEL[Math.min(...c.adjustable.map(Number))]}` : THICK_LABEL[thin];
-    const bw = text.length * 11 + 8;
+    const thickText = t => `${THICK_LABEL[t]}${t}`;
+    const text = !on && c.adjustable ? `${thickText(Math.max(...c.adjustable.map(Number)))}〜${thickText(Math.min(...c.adjustable.map(Number)))}` : thickText(thin);
+    const bw = [...text].reduce((n, ch) => n + (/[0-9]/.test(ch) ? 7 : 11), 8);
     const box = on
       ? `fill="var(--blue)" stroke="var(--card)" stroke-width="1.5"`
       : `fill="var(--card)" stroke="var(--pipe-off)" stroke-width="1" ${c.adjustable ? 'stroke-dasharray="3 2"' : ''}`;
@@ -277,6 +279,10 @@ export function renderBoard(svg, model) {
     out.push(`<g class="basin" transform="translate(0 ${dy})">`);
     // グラスから噴水盤への口
     out.push(`<path d="M${node.cx + TOWER_W / 2 - 2} ${GROUND - 9} L${cx - 10} ${GROUND - 9} L${cx - 10} ${b.top + 6}" fill="none" stroke="var(--stone-edge)" stroke-width="7" stroke-linejoin="round"/>`);
+    // 口にも細さがある（配管と同じく流れる量の計算に入る）。見えないと計算が合わないので、器の正面に「口 太1」と書く
+    // （口とグラスのすき間は狭く、札が隠れるため。2026-11-01 発案者）
+    const mouth = 1 / Number(o.conductance ?? 1);
+    const mouthText = Number.isInteger(mouth) && THICK_LABEL[mouth] ? `${THICK_LABEL[mouth]}${mouth}` : `細さ${+mouth.toFixed(2)}`;
     if (flowing && (settled || model.flowStarted?.has(o.id))) {
       out.push(`<path d="M${cx - 10} ${b.top + 6} Q${cx - 6} ${b.top - 8} ${cx - 2} ${b.top + 4}" fill="none" stroke="var(--water-mid)" stroke-width="3" stroke-linecap="round"/>`);
     }
@@ -294,6 +300,7 @@ export function renderBoard(svg, model) {
         out.push(`<path d="M${b.right + 1} ${b.top} q4 8 1 18 M${b.left - 1} ${b.top} q-4 8 -1 18" fill="none" stroke="var(--water-mid)" stroke-width="2.4" stroke-linecap="round"/>`);
       }
     }
+    out.push(`<text x="${cx}" y="${GROUND - 7}" class="badge-text mouth" text-anchor="middle">口 ${mouthText}</text>`);
     out.push(`<line x1="${b.left + 3}" y1="${markY}" x2="${b.right - 3}" y2="${markY}" stroke="var(--gold)" stroke-width="2"/>`);
     // クリアの噴水と、100点の虹（2026-11-01 発案者）。ジングルの鳴り始めと同時に噴き上がり、
     // 100点のときは噴き上がった後に虹がかかる。NGでは噴かない。
