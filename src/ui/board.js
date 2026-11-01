@@ -76,6 +76,19 @@ function segmentDistance(px, py, [ax, ay], [bx, by]) {
 
 const THICK_LABEL = { 1: '太', 2: '中', 3: '細' };
 
+// 絵の候補（docs/assets.md、Codex の画像生成。採用は未確定）。見比べのため、資材ごとに A・B・なし（図形の仮の絵）を切り替える。
+// model.art = { bg, spring, glass, basin, fountain, rainbow }（値は 'a'・'b'・null）
+const ART_BASE = new URL('../../public/graphics/candidates-20261101/', import.meta.url).href;
+const art = (dir, file) => `${ART_BASE}${dir}/${file}`;
+// 縦に伸ばす3分割の部品：上と下は幅に合わせて縮め、中は高さいっぱいに伸ばす（中は縦にむらのない絵）
+function sliced(out, dir, v, x, y, w, h, srcW, topH, bottomH) {
+  const k = w / srcW;
+  const t = topH * k, b = bottomH * k;
+  out.push(`<image href="${art(dir, `${dir}-${v}-middle.png`)}" x="${x}" y="${y + t - 0.5}" width="${w}" height="${Math.max(0, h - t - b + 1)}" preserveAspectRatio="none"/>`);
+  out.push(`<image href="${art(dir, `${dir}-${v}-top.png`)}" x="${x}" y="${y}" width="${w}" height="${t}" preserveAspectRatio="none"/>`);
+  out.push(`<image href="${art(dir, `${dir}-${v}-bottom.png`)}" x="${x}" y="${y + h - b}" width="${w}" height="${b}" preserveAspectRatio="none"/>`);
+}
+
 // 1本の配管を描く。サイフォンの未開通は山に空気（泡）がたまった様子で示す（要件5.2、screens.md 2章）
 function drawPipe(out, layout, c, model) {
   const { connected, phase, view, primed, selected } = model;
@@ -189,6 +202,7 @@ function basinShape(cx) {
 //          prevLevels:Map, time, reducedMotion, highlight:{id, until} }
 export function renderBoard(svg, model) {
   const { stage, layout, phase, levels, settled, prevLevels, time, reducedMotion } = model;
+  const pick = model.art ?? {};
   const evaluation = model.view;
   const { H, unit, towerTop } = layout;
   const out = [];
@@ -200,6 +214,7 @@ export function renderBoard(svg, model) {
       <stop offset=".6" stop-color="#8fd3a3"/><stop offset=".8" stop-color="#83b6ea"/><stop offset="1" stop-color="#ad94e3"/></linearGradient>
   </defs>`);
   out.push(`<rect x="0" y="0" width="${VIEW_W}" height="${GROUND}" fill="url(#sky)"/>`);
+  if (pick.bg) out.push(`<image href="${art('bg-trial', `bg-trial-${pick.bg}.png`)}" x="0" y="0" width="${VIEW_W}" height="${GROUND}" preserveAspectRatio="xMidYMax slice"/>`);
   out.push(`<rect x="0" y="${GROUND}" width="${VIEW_W}" height="${VIEW_H - GROUND}" fill="var(--soil)"/>`);
   out.push(`<line x1="0" y1="${GROUND}" x2="${VIEW_W}" y2="${GROUND}" stroke="var(--soil-line)" stroke-width="2"/>`);
 
@@ -218,9 +233,10 @@ export function renderBoard(svg, model) {
   const spring = layout.nodes.get(stage.spring.id);
   const sx0 = spring.cx - spring.w / 2;
   const sy = layout.yOf(H);
-  out.push(`<rect x="${sx0 - 4}" y="${sy - 10}" width="${spring.w + 8}" height="${GROUND - sy + 10}" rx="5" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+  if (!pick.spring) out.push(`<rect x="${sx0 - 4}" y="${sy - 10}" width="${spring.w + 8}" height="${GROUND - sy + 10}" rx="5" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
   out.push(`<rect x="${sx0}" y="${sy}" width="${spring.w}" height="${GROUND - sy}" fill="${waterColor(H, H)}"/>`);
   out.push(`<path d="${surfacePath(sx0, sx0 + spring.w, sy, reducedMotion ? 0 : 0.8, time / 420)}" stroke="var(--surface)" stroke-width="2" fill="none"/>`);
+  if (pick.spring) sliced(out, 'part-spring', pick.spring, sx0 - 8, sy - 12, spring.w + 16, GROUND - sy + 12, 240, 48, 40);
   out.push(`<text x="${spring.cx}" y="${sy - 16}" class="label" text-anchor="middle">泉</text>`);
 
   // グラス
@@ -236,7 +252,7 @@ export function renderBoard(svg, model) {
       out.push(`<rect x="${x0 - 5}" y="${towerTop - 5}" width="${TOWER_W + 10}" height="${GROUND - towerTop + 5}" rx="10" fill="none" stroke="var(--gold)" stroke-width="8" opacity=".22"/>`);
       out.push(`<rect x="${x0 - 2}" y="${towerTop - 2}" width="${TOWER_W + 4}" height="${GROUND - towerTop + 2}" rx="7" fill="none" stroke="var(--gold)" stroke-width="3" opacity=".75"/>`);
     }
-    out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="url(#glassfill)"/>`);
+    if (!pick.glass) out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="url(#glassfill)"/>`);
     if (level !== null && level !== undefined && level * unit > 1.5) {
       const y = layout.yOf(level);
       out.push(`<rect x="${x0 + 2}" y="${y}" width="${TOWER_W - 4}" height="${(GROUND - y - 1).toFixed(2)}" rx="3" fill="${waterColor(level, H)}" opacity=".92"/>`);
@@ -244,6 +260,7 @@ export function renderBoard(svg, model) {
       const amp = reducedMotion ? 0 : dist * 6;
       out.push(`<path d="${surfacePath(x0 + 2, x1 - 2, y, amp, time / 260 + node.cx)}" stroke="var(--surface)" stroke-width="2.2" fill="none" stroke-linecap="round"/>`);
     }
+    if (pick.glass) sliced(out, 'part-glass', pick.glass, x0 - 3, towerTop - 4, TOWER_W + 6, GROUND - towerTop + 4, 136, 48, 40);
     // 目盛り（音名は出さない）
     for (let k = 1; k <= H; k++) {
       const y = layout.yOf(k);
@@ -256,8 +273,8 @@ export function renderBoard(svg, model) {
       out.push(`<line x1="${x0 + 3}" y1="${y}" x2="${x1 - 3}" y2="${y}" stroke="var(--prev)" stroke-width="1.6" stroke-dasharray="3 3"/>`);
     }
     const lit = model.highlight && model.highlight.id === t.id && model.highlight.until > time;
-    out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="none" stroke="${lit ? 'var(--gold)' : 'var(--glass-edge)'}" stroke-width="${lit ? 3 : 1.8}"/>`);
-    out.push(`<rect x="${x0 + 5}" y="${towerTop + 6}" width="3" height="${GROUND - towerTop - 14}" rx="1.5" fill="#ffffff" opacity=".7"/>`);
+    if (!pick.glass || lit) out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="none" stroke="${lit ? 'var(--gold)' : 'var(--glass-edge)'}" stroke-width="${lit ? 3 : 1.8}"/>`);
+    if (!pick.glass) out.push(`<rect x="${x0 + 5}" y="${towerTop + 6}" width="3" height="${GROUND - towerTop - 14}" rx="1.5" fill="#ffffff" opacity=".7"/>`);
     if (settled && finalT?.state === 'empty') {
       out.push(`<text x="${node.cx}" y="${GROUND - 10}" class="tiny" text-anchor="middle">空</text>`);
     }
@@ -286,7 +303,8 @@ export function renderBoard(svg, model) {
     if (flowing && (settled || model.flowStarted?.has(o.id))) {
       out.push(`<path d="M${cx - 10} ${b.top + 6} Q${cx - 6} ${b.top - 8} ${cx - 2} ${b.top + 4}" fill="none" stroke="var(--water-mid)" stroke-width="3" stroke-linecap="round"/>`);
     }
-    out.push(`<path class="bowl" d="${b.bowl}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+    out.push(`<path class="bowl" d="${b.bowl}" fill="${pick.basin ? 'none' : 'var(--stone)'}" stroke="${pick.basin ? 'none' : 'var(--stone-edge)'}" stroke-width="1.5"/>`);
+    if (pick.basin) out.push(`<image href="${art('part-basin', `part-basin-${pick.basin}.png`)}" x="${cx - 27}" y="${b.top - 3}" width="54" height="${54 * 208 / 384}" preserveAspectRatio="xMidYMid meet"/>`);
     // 指定量の印と、届いた量
     const markY = b.top + 9;
     // 届いた量が0のときは水を描かない。器の底は丸く GROUND まで下がるので、量0の水面を底の一番下に合わせる
@@ -312,10 +330,16 @@ export function renderBoard(svg, model) {
           const k = model.reducedMotion ? 1 : Math.max(0, Math.min(1, (since - RAINBOW_AFTER_MS) / 700));
           if (model.reducedMotion ? since >= RAINBOW_AFTER_MS : k > 0) {
             const opacity = 0.9 * (1 - (1 - k) ** 3);
-            out.push(`<path d="M${cx - 30} ${b.top - 4} A30 34 0 0 1 ${cx + 30} ${b.top - 4}" fill="none" stroke="url(#bow)" stroke-width="7" opacity="${opacity.toFixed(3)}"/>`);
+            if (pick.rainbow) out.push(`<image href="${art('fx-rainbow', `fx-rainbow-${pick.rainbow}.png`)}" x="${cx - 54}" y="${b.top - 76}" width="108" height="72" opacity="${opacity.toFixed(3)}"/>`);
+            else out.push(`<path d="M${cx - 30} ${b.top - 4} A30 34 0 0 1 ${cx + 30} ${b.top - 4}" fill="none" stroke="url(#bow)" stroke-width="7" opacity="${opacity.toFixed(3)}"/>`);
           }
         }
-        drawFountain(out, cx, b.top, since, model.reducedMotion);
+        if (pick.fountain) {
+          // 6コマ。140ミリ秒ごとに進め、高く上がった後は4〜6コマ目を繰り返す（コマの速さは仮の値）
+          const n = Math.floor(since / 140);
+          const frame = model.reducedMotion ? 6 : n < 6 ? n + 1 : 4 + ((n - 6) % 3);
+          out.push(`<image href="${art('fx-fountain', `fx-fountain-${pick.fountain}-0${frame}.png`)}" x="${cx - 30}" y="${b.top - 72}" width="60" height="80"/>`);
+        } else drawFountain(out, cx, b.top, since, model.reducedMotion);
       }
     }
     out.push('</g>');
