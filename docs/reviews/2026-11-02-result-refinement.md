@@ -22,4 +22,7 @@
 
 ## 公開
 
-公開前。最終のテスト・公開元・公開版の点検後に追記する。
+- 配信元 `8bbbdd36c736adcafb1fac17f35528341c9723b5`。GitHub Actions [41354528359](https://github.com/gerupon-lgtm/aqua/actions/runs/41354528359)で最終コードの構文・162テスト・出題検査・ビルド・公開が成功。
+- https://aqua.sikumilab.com/ のbuild-info.jsonはv0.14.6・同じ配信元・57資材。57資材・sw.js・OFLの59件が、HTTP状態・型・SHA-256で一致（public-assets.json）。
+- 公開版で旧v0.14.5の更新の案内から適用し、v0.14.6で再起動。開始合図0→1→0、414×896の3面SA/ABの大きな「結果」と2つの不足バッジ、一度にまとまった不足の説明、計算表示を確認。1280×800のPCもはみ出し0、バッジの中心差1px以内、コンソールエラー0（public-app.json）。
+- 公開版の実画面JPEGは同じ点検フォルダに手元だけ保持。資料のみの追記ではアプリを再公開しない。機能担当への引き継ぎはhandoff-visual.md 11章。

@@ -7,6 +7,7 @@
 - result-comparison.json：変更前の公開v0.14.5と修正版の同じ3面SA/AB、360×800での高さ・スクロール量・見出し・判定札・説明の比較。
 - result-cases.json：本体で操作して出した各種結果と縦横・PCの確認。
 - cue-timing.json：開始の合図を本体で採取。正確な400ms境界はvisual-timing.test.jsで別途確認する。
+- public-assets.json／public-app.json：公開資材59件の一致と、更新後の公開アプリの見出し・バッジ位置・説明・PC配置・開始合図・エラーの確認。
 - JPEGは実アプリの画面で、生成画像ではない。手元だけに保持しGitへ送らない。発案者の添付画像も公開しない。
 
 前版の点検記録は変更しない。公開状態と機能担当向けの注意は[点検](../../docs/reviews/2026-11-02-result-refinement.md)とhandoff-visual.md 11章を参照。

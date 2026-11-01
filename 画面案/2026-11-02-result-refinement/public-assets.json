@@ -1,0 +1,598 @@
+{
+  "checkedAt": "2026-11-01T21:57:26.422939+00:00",
+  "version": "0.14.6",
+  "commit": "8bbbdd36c736adcafb1fac17f35528341c9723b5",
+  "offlineAssets": 57,
+  "checks": [
+    {
+      "path": "./index.html",
+      "status": 200,
+      "contentType": "text/html",
+      "bytes": 4288,
+      "sha256": "e805b311c2bc2c0168a9bf531af141a7a22687e042c3ea57a0d537bea2682163",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./manifest.webmanifest",
+      "status": 200,
+      "contentType": "application/manifest+json",
+      "bytes": 510,
+      "sha256": "92587264202726dde094791fccd986596a3d3f7bc9b7f9a1fc42bdc201a58a0d",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/content/challenge-draw.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 2285,
+      "sha256": "e9e7322f56f4dd8b37b0205483bbdada5967a1b1b7786108f269e65cd0b0f78b",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/content/challenges.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 121028,
+      "sha256": "4710ce64542725ee08951ed0c9632964c46a67674a974001d77584b37bc4b08f",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/content/stages.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 41875,
+      "sha256": "5ebf485a6043313a909c7c9d76f8f30385ca9c96983e4810e4a83b2df43ab4c5",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/content/tutorial.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 7109,
+      "sha256": "51e9c771ef5269d92174f807c83942fafe6e12e611c5dbc9ffddb1e9542a4d03",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/challenge-check.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 2180,
+      "sha256": "14360d042f7bff63378c7f427cba21d80a7e8807b0758a4dc7fbe9a877f1bc45",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/explain.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 8908,
+      "sha256": "d19f816fa8a3561fe76f2825e5536aff16af9239bd5ae6c158c36269a135fa31",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/flow.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 6889,
+      "sha256": "0164f6fcdbe1a81bc9ecadc46ca8838610d6b145bdae97f89843e6e5ca34a5f7",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/fraction.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 2853,
+      "sha256": "fb06c8842d93ce76108e4feb8acc4dac43b4b6fac25aee4a3e1f7b31e6390b27",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/generate.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 6624,
+      "sha256": "01fc52677747cc4a924382238e71cec7360d7d335382b37c3fe41900f8f6b4d2",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/modes.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 3795,
+      "sha256": "517a39683eae8c23f831bff3fcd6bc54aba1bf4a3d24b6a30a5523e2bb07f809",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/pitch.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 2789,
+      "sha256": "ff2c7fd6bdbf2c0b8e5ae3a77367bba495f45923c9ffdd4573d05573af0a36a6",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/play.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 7877,
+      "sha256": "d4111a4cc69f5c02059b977a7a1cfb6e6d794ccf50b14f1ca2daf8a2a3f3323d",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/records.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 4165,
+      "sha256": "5e5a1ff372ea91c37a61322b455b76d1737edad0831a5c3f62f445be5d475f42",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/logic/score.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 1165,
+      "sha256": "a089bf44f96c9486cdb5591851d44252a78ca50b4e6fefd933b4686f9498fbbb",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/app.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 64494,
+      "sha256": "7ccef9556748de4101be63883744ae208b2e2913b9b316037c817eebb20dc948",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/audio.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 12342,
+      "sha256": "c4e98dc3e9d00adf883123ab977ee94d095d0babc2d0eab4bc67a11c95a02a1f",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/board.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 47562,
+      "sha256": "a727042630d5e7b9b2dbbfba93259ba17ee326c58062f808d8a6a6088a02b1a2",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/guide-copy.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 2232,
+      "sha256": "7cd8ea4a8ad2775bb32ec8e93d1bf3e5e8022924243838a36201607910e8e3be",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/info-copy.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 3549,
+      "sha256": "14916fcf23d8d799e0c17d54285834d8cb51bf64048b2c85e9c3fc56ca3846cc",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/style.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bytes": 38853,
+      "sha256": "79b006179baafffe02993f75e734149c9eee506ad64e2b7e67a159c482c52baa",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/text-layout.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 3840,
+      "sha256": "38b50110f50be006065b241ea7a38de0d654d62c602edb28bb10f554ec41a6c3",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/src/ui/visual-timing.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 1268,
+      "sha256": "9038d3da187198d1b048ea7ae018534f8713da890e8bb57df5751b25a930cb57",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/apple-touch-icon.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 776,
+      "sha256": "6933653c55f01b7c2df854663b3d26a5d59daedbdf82cb6cae7869f5b4282e56",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/fonts/montserrat-500.ttf",
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 180036,
+      "sha256": "637639da93fdd9178e52662cce4bd5a59a544eb60677bb6ef9f89bc472607e5d",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/fonts/montserrat-600.ttf",
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 180584,
+      "sha256": "c535bb158e8cfc3c27654f73aa68a87732899e7d9b10d8496b68605a56d947a7",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/bg-trial.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 72606,
+      "sha256": "4767a7a136db873cfd685a4c0b4b8ebed592690747f4a18ee9eac201330e3336",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/fx-fountain-01.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 11035,
+      "sha256": "eaa3940b34b36f59d24a6d75b576738403bd7f59249cc617214e9338577ac16f",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/fx-fountain-02.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 23215,
+      "sha256": "37ee37968ccc0d05a537d33e660d727902bae8d4365cb4c4099f7d2741c02959",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/fx-fountain-03.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 41644,
+      "sha256": "63397aea24706430d86a64049a59ca4cd1427369bd983c0e1decad9bbbc4fc9e",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/fx-fountain-04.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 57202,
+      "sha256": "96d3d559e69704f17ac697a5691ea85fa0eb80749e2c7133aa95b126bf2eca17",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/fx-fountain-05.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 63044,
+      "sha256": "e0fcef1bccdc0ed781bb3b8dc7be2184aa305b5f84b66afbb861c31661d5eba7",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/fx-fountain-06.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 60178,
+      "sha256": "5bc210c67f6d6fa9611ec04c612d290c30ab163e1ab199155200c57c25bfa44c",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/fx-rainbow.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 44943,
+      "sha256": "7535d2b4e0dac36f110acea72aed48f43d3133928002268f91b20796c6788b5d",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/intro-adjustable.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2020,
+      "sha256": "017830fa9746c8d1a1fb73aeb8f8f013c4fbaecfe4e4d728cc508a6db891a70d",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/intro-gate.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4964,
+      "sha256": "0fdeb06ce87a988d7e90d352ddbb262a7f12e8e965a9ca865d8631b869440eb5",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/intro-height.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 1912,
+      "sha256": "9e2da8ae9f83ba7ad53f3fa0240e995fd039b1a7c41a1f5c3da3c7c9657bc3f2",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/intro-outlets.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 3519,
+      "sha256": "b08000edcb6a479f095abc750bd15a0a961bb873c38efabd56120c1cf29de78c",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/intro-siphon.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2351,
+      "sha256": "3313e12dc2e8fc6f203019154e45301398eba0c5774ea3ff80e9413c8e2ab801",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-basin.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 14062,
+      "sha256": "f14cac291b9487ada092e2a7e499412bfc02e93c6127fb55941e9ff5f6f8ced5",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-glass-bottom.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3317,
+      "sha256": "b465fe779340bf29f7af57ab621674ba4988e071d55258c42f5b7e0f98203695",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-glass-middle.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 339,
+      "sha256": "141c7ac1f40043c8f8cd8b94be5099e382e19cdee35067e5600cfe0e8b23f87d",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-glass-top.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3305,
+      "sha256": "5aed7c251df34d77ca42f163bd97ef7d0e083997b1ba54e69ba7e2c75b88ae35",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-pedestal-middle.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 351,
+      "sha256": "cfa9c880f62ac6d5551d2526f5d0eeb6d8a39bf7776426938a0ec321c05b61f1",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-pedestal-top.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 8279,
+      "sha256": "39fc89f59810d3d087f9bfdbe6ecfc5f84fddfe97f56bac78510b323b985ac68",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-spring-bottom.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3792,
+      "sha256": "9c494567f75be23973ee80a85c003a86330c03241c956f00d066fea60a1e6ae5",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-spring-middle.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 310,
+      "sha256": "b16214b7e88e43a4090e06d50925d457ffa7ae36a5f60a3a80cfe8adb7da47ad",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/part-spring-top.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3245,
+      "sha256": "a33846c0f93c6e1ee7ba35b618a361e5c92d1fead5b5f87678d6a1288accf26e",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/spirit-detail-v2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 118262,
+      "sha256": "d1fa4ed1502f743d94ee535dd028dc40af7d88d21e4bd4e4a6e5e7addb656c6c",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/spirit.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 35229,
+      "sha256": "3cb0bed80fd67a633c1fb1f707e6f2633af9186502891a0d1959325417e39d64",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/title-fountain-v2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 164713,
+      "sha256": "5b3ee90819f07af528e1eff9801cf86151b306e00c2e7321a0c8ce99425e9eb7",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/title-glass-v2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 123625,
+      "sha256": "520f7271957a67014b69a0058b162d67a7b0e45d4d8e26d9fa6aab089ba32f23",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/title-landscape.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 140054,
+      "sha256": "92a28145e7f0942998163f5dedd66de870195df4c0c92a724766bf8330633928",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/graphics/title-portrait.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 113926,
+      "sha256": "1527ef278b05946e23413bd2c8288195234a7f7cffa7fba96a9e98f92e197b12",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/icon-192.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 823,
+      "sha256": "cb32e2bda25ce12686877fa9f2401c93b02c2de0ebfa8ae519f48141b1048cbf",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/icon-512.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 7141,
+      "sha256": "f6be7b911bee79fddc0f07beb1297fc8e0aac785574645424137271c6df05c01",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./sw.js",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 4006,
+      "sha256": "86eec279d6ba403de05bca40149e3af1556bbf65a0e03014c50a3f7b88b2dafb",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    },
+    {
+      "path": "./v0.14.6/public/fonts/OFL.txt",
+      "status": 200,
+      "contentType": "text/plain",
+      "bytes": 4400,
+      "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+      "localMatch": true,
+      "manifestMatch": true,
+      "typeMatch": true
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "plain": {
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "clientHeight": 425,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 107,
+      "y": 486.4375
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 426.515625,
+      "width": 382,
+      "x": 16,
+      "y": 441.546875
+    },
+    "scrollHeight": 425,
+    "summary": [],
+    "version": "v0.14.6",
+    "viewport": [
+      414,
+      896
+    ]
+  },
+  "explain": {
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "clientHeight": 578,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 107,
+      "y": 332.765625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 580.1875,
+      "width": 382,
+      "x": 16,
+      "y": 287.875
+    },
+    "scrollHeight": 578,
+    "summary": [
+      "左の噴水盤・右の噴水盤は、水が足りません。"
+    ],
+    "version": "v0.14.6",
+    "viewport": [
+      414,
+      896
+    ]
+  },
+  "pc": {
+    "badges": [
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      },
+      {
+        "offset": -0.5078125,
+        "text": "−足りない"
+      }
+    ],
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clientHeight": 658,
+    "heading": "結果",
+    "headingSize": "22px",
+    "hero": {
+      "height": 37.1875,
+      "width": 200,
+      "x": 969.296875,
+      "y": -46.109375
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "rect": {
+      "height": 660,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 96
+    },
+    "scrollHeight": 930,
+    "summary": [
+      "左の噴水盤・右の噴水盤は、水が足りません。"
+    ],
+    "version": "v0.14.6",
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  "cue": [
+    "0.000",
+    "1.000",
+    "0.000"
+  ],
+  "errors": []
+}
