@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-01",
+  "families": 7,
+  "main_pngs": 18,
+  "detail_pngs": 1,
+  "pngs_total": 19,
+  "adoption": "未確定",
+  "boundary_specification_applied_to_pngs": 10,
+  "old_candidate_hashes_unchanged": true,
+  "old_candidate_changes": [],
+  "protected_baseline_differences": [
+    "src/ui/board.js",
+    "docs/assets-addendum.md",
+    "docs/assets.md"
+  ],
+  "other_changes_detected": [
+    "src/ui/board.js",
+    "docs/assets-addendum.md"
+  ],
+  "assets_outside_chapter5_preserved": true,
+  "new_delivery_files_verified": 108,
+  "image_dimensions_and_rgb_verified": true,
+  "markdown_relative_links_verified": true,
+  "all_originals_and_revisions_retained": true,
+  "application_integration_tested": false,
+  "generated_pixel_geometry_exactly_matches_live_layout_tested": false,
+  "code_written_by_this_task": false,
+  "committed_pushed_or_deployed": false
+}

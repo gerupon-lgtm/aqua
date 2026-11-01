@@ -206,6 +206,32 @@ Game asset on a genuinely transparent background: a single tall clear glass vess
 
 比較用候補であり、現在の公開版には未組み込み。16〜20pxの札・分割接続・噴水の動きの自然さ・背景上での読みやすさ・実機での見え方は、採用時の実画面で確認する。ソース・index.html・版・キャッシュ設定には変更なし。コミット・GitHub送信・デプロイなし。
 
+### 2026-11-01：追加発注・優先度1のA/B候補（未採用）
+
+docs/assets-addendum.md の追加発注と発案者の依頼により、Codexの組み込み画像生成で7資材を各A/Bで制作。プレイ画面は各案にスマホ編集中・結果・PCの3枚。主候補18枚と部品表Bの予想3択の拡大見本1枚、合計19枚。**全案未採用。発案者が実画面で見比べて選んでから確定する。**
+
+[比較一覧・確認範囲](../画面案/2026-11-01-priority1-addendum/README.md)。各資材のREADMEに初回・修正の指示文全文、参照、加工、原本・修正前と候補の保存先を記録。
+
+| 資材 | 比較と出所 | 新しい保存先 |
+|---|---|---|
+| sheet-pipe A/B | [README](../画面案/2026-11-01-sheet-pipe-addendum/README.md) | `public/graphics/candidates-20261101-addendum/sheet-pipe/` |
+| sheet-water A/B | [README](../画面案/2026-11-01-sheet-water-addendum/README.md) | `public/graphics/candidates-20261101-addendum/sheet-water/` |
+| sheet-ui-play A/B | [README](../画面案/2026-11-01-sheet-ui-play-addendum/README.md) | `public/graphics/candidates-20261101-addendum/sheet-ui-play/` |
+| sheet-ui-title A/B | [README](../画面案/2026-11-01-sheet-ui-title-addendum/README.md) | `public/graphics/candidates-20261101-addendum/sheet-ui-title/` |
+| sheet-ui-parts A/B | [README](../画面案/2026-11-01-sheet-ui-parts-addendum/README.md) | `public/graphics/candidates-20261101-addendum/sheet-ui-parts/` |
+| logo-aqua A/B | [README](../画面案/2026-11-01-logo-aqua-addendum/README.md) | `public/graphics/candidates-20261101-addendum/logo-aqua/` |
+| logo-series A/B | [README](../画面案/2026-11-01-logo-series-addendum/README.md) | `public/graphics/candidates-20261101-addendum/logo-series/` |
+
+公開版v0.13.0のスマホ配置と前作のスマホ／PC画面を参照し、昼の白と青へ展開。配置・大きさを変える提案ではなく、PCは追加発注書の前作と同じ左盤面・右条件列の指定に従う。デザイン表の文字・数値は見本で、計算・得点・機能の変更を示さない。ロゴは採用後に実際のMontserratと図形で組み、副題の採否は未確定。
+
+部品表Bの主表の予想欄は2択に見えるため、付属の「B案・予想3択の拡大見本」が正しい3択構成を示す。寸法・RGB・原本・相対リンクを確認。画像の画素と既存矩形の完全一致や、実画面への組み込み・実フォント・小さい表示・実機は未検証。
+
+既存の `public/graphics/candidates-20261101/` はこの作業で書き換えない。新候補は `public/graphics/candidates-20261101-addendum/` のみ。プログラム・index.html・版・キャッシュは変更せず、コミット・GitHub送信・デプロイなし。
+
+
+作業中に追加発注書1-2「部品と背景の境界」が追記されたため、配管・水・プレイの計10枚を濃い青の縁（制作値#1d4f88前後）と淡い青の局所的な陰影へ更新。明るい背景を保ち、透明な素材と反射を残した。更新前もhistory原本として保持。
+
+
 ## 6. 組み込みと確かめ方
 
 - 組み込み：背景は盤面の空の範囲に、部品は SVG の中に画像として置く。資材は版付きの配信資材と、通信なしで使う資材の一覧に含める（ビルドが自動で拾う）

@@ -1,0 +1,919 @@
+[
+  {
+    "id": "sheet-pipe-a",
+    "family": "sheet-pipe",
+    "variant": "a",
+    "title": "白い陶器の配管",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Sheet-pipe, landscape design sheet1536x1024 RGB. Organize clearly labelled rows and panels. Include material cutaway/exploded CROSS SECTION with outer edge / inner body / blue water layers, 3 pipe widths in exact visual ratio10:6.5:4 game units (labels 太1 / 中2 / 細3), and4 states: 候補 gray-blue dashed hollow outline; つないだ・水なし solid empty pipe; 流れている blue water with moving WHITE DOT train shown in3 small sequential stills, no arrowheads baked into pipes; 太さを選べる候補 with the sample badge 細3〜太1. Show 90-degree rounded L elbow, junction into bottom of a tall transparent upright stemless glass, TWO close parallel pipes with routes kept visually distinct, and ordinary crossing with visible over/under interruption so destinations remain traceable (NOT a junction). Pipes must ONLY connect at glasses, never at crossings. Show small rectangular labels 太1/中2/細3 over pipe, white/dark text on blue/white badge as in reference. Pale sky and warm soil panels demonstrate readability both above and below ground. Use consistent cross section on straight and curved samples; main purpose precise practical drawing rules for SVG reconstruction, not scenery. Candidate A: PORCELAIN, narrow cool gray-blue outside edge, ivory ceramic wall, hollow light interior and translucent cobalt water inside; soft single highlight, modest rounded joins, understated rounded rectangular badges. White outline remains visible on bright sky and beige soil. One coherent material throughout this sheet.\n\nCorrection call:\nUse case: precise-object-edit. Edit the attached AQUA NOTES PIPE DESIGN SHEET, preserve its white porcelain material, blue-and-white styling and all useful sample panels, 1536x1024. Correct exactly these technical issues: (1) In the glass-connection sample, show a tall UPRIGHT STRAIGHT-SIDED STEMLESS CYLINDRICAL GLASS, not a wine goblet; pipe comes straight UP into the BOTTOM CENTER, not into the side wall, no pipe entering from above. (2) The adjustable candidate must be one hollow DASHED constant-width pipe outline with the label 細3〜太1; do NOT draw funnel, taper, stacked different widths along one pipe or a physical expanding segment. (3) Any width-ratio heading must read exactly 10 : 6.5 : 4, and labels exactly 太1 中2 細3. (4) Underground visibility panel background must be pale warm flat SOIL #ece5d6 with subtle stone speckles, not dark rocky brown, preserve pipe readability. (5) Replace the large invented serif AQUA NOTES brand heading with the plain Japanese sheet title 配管のデザイン表. Leave all other states, samples, 3 sequential white-dot motion stills and non-connecting crossing diagrams intact. This is a design sheet with sample Japanese text, not a new gameplay layout. No new panels or objects.\n\nAdditional correction call:\nUse case: precise-object-edit. IMAGE1 is edit target, entire porcelain PIPE DESIGN SHEET. IMAGE2 is supporting reference for the CORRECT bottom connection geometry only. Change ONLY the lower-row panel titled グラスへの接続: DELETE the vertical blue tube that currently runs from the TOP of that panel DOWN through the glass from above. There must be NO PIPE ABOVE THE GLASS and NO TUBE INSIDE THE GLASS. Keep a simple upright stemless cylinder; a pipe connects to its BOTTOM CENTER from BELOW, with short straight tube extending downward OUTSIDE and UNDER the bottom, like image2. To create space, the glass may be slightly shorter within this one panel only. All upper/top space above its mouth must be plain background, no tube. Keep porcelain material. Preserve all other panels, labels, pipe samples, title, typography, 1536x1024 layout and colors unchanged. Do not change any other section.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-pipe-a design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-badges-a.png",
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-bg-a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-7887486b-7560-4779-93ad-311ae8071378.png",
+    "initial_path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-718f2173-9b31-49b8-a31b-00c42deaba22.png",
+    "initial_prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Sheet-pipe, landscape design sheet1536x1024 RGB. Organize clearly labelled rows and panels. Include material cutaway/exploded CROSS SECTION with outer edge / inner body / blue water layers, 3 pipe widths in exact visual ratio10:6.5:4 game units (labels 太1 / 中2 / 細3), and4 states: 候補 gray-blue dashed hollow outline; つないだ・水なし solid empty pipe; 流れている blue water with moving WHITE DOT train shown in3 small sequential stills, no arrowheads baked into pipes; 太さを選べる候補 with the sample badge 細3〜太1. Show 90-degree rounded L elbow, junction into bottom of a tall transparent upright stemless glass, TWO close parallel pipes with routes kept visually distinct, and ordinary crossing with visible over/under interruption so destinations remain traceable (NOT a junction). Pipes must ONLY connect at glasses, never at crossings. Show small rectangular labels 太1/中2/細3 over pipe, white/dark text on blue/white badge as in reference. Pale sky and warm soil panels demonstrate readability both above and below ground. Use consistent cross section on straight and curved samples; main purpose precise practical drawing rules for SVG reconstruction, not scenery. Candidate A: PORCELAIN, narrow cool gray-blue outside edge, ivory ceramic wall, hollow light interior and translucent cobalt water inside; soft single highlight, modest rounded joins, understated rounded rectangular badges. White outline remains visible on bright sky and beige soil. One coherent material throughout this sheet.",
+    "edit_prompt": "Use case: precise-object-edit. Edit the attached AQUA NOTES PIPE DESIGN SHEET, preserve its white porcelain material, blue-and-white styling and all useful sample panels, 1536x1024. Correct exactly these technical issues: (1) In the glass-connection sample, show a tall UPRIGHT STRAIGHT-SIDED STEMLESS CYLINDRICAL GLASS, not a wine goblet; pipe comes straight UP into the BOTTOM CENTER, not into the side wall, no pipe entering from above. (2) The adjustable candidate must be one hollow DASHED constant-width pipe outline with the label 細3〜太1; do NOT draw funnel, taper, stacked different widths along one pipe or a physical expanding segment. (3) Any width-ratio heading must read exactly 10 : 6.5 : 4, and labels exactly 太1 中2 細3. (4) Underground visibility panel background must be pale warm flat SOIL #ece5d6 with subtle stone speckles, not dark rocky brown, preserve pipe readability. (5) Replace the large invented serif AQUA NOTES brand heading with the plain Japanese sheet title 配管のデザイン表. Leave all other states, samples, 3 sequential white-dot motion stills and non-connecting crossing diagrams intact. This is a design sheet with sample Japanese text, not a new gameplay layout. No new panels or objects.",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c64ae6e8-6f8f-4499-afe9-2cbd97a28535.png",
+        "prompt": "Use case: precise-object-edit. IMAGE1 is edit target, entire porcelain PIPE DESIGN SHEET. IMAGE2 is supporting reference for the CORRECT bottom connection geometry only. Change ONLY the lower-row panel titled グラスへの接続: DELETE the vertical blue tube that currently runs from the TOP of that panel DOWN through the glass from above. There must be NO PIPE ABOVE THE GLASS and NO TUBE INSIDE THE GLASS. Keep a simple upright stemless cylinder; a pipe connects to its BOTTOM CENTER from BELOW, with short straight tube extending downward OUTSIDE and UNDER the bottom, like image2. To create space, the glass may be slightly shorter within this one panel only. All upper/top space above its mouth must be plain background, no tube. Keep porcelain material. Preserve all other panels, labels, pipe samples, title, typography, 1536x1024 layout and colors unchanged. Do not change any other section.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c64ae6e8-6f8f-4499-afe9-2cbd97a28535.png",
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2f50b729-19b5-47f1-b3d2-30cda576e6b5.png"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-5daa2876-c2f4-4eab-a66d-255b1eff0d96.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-pipe-a design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-5daa2876-c2f4-4eab-a66d-255b1eff0d96.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-pipe/sheet-pipe-a.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-pipe-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-pipe-b",
+    "family": "sheet-pipe",
+    "variant": "b",
+    "title": "青い縁のガラス管",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Sheet-pipe, landscape design sheet1536x1024 RGB. Organize clearly labelled rows and panels. Include material cutaway/exploded CROSS SECTION with outer edge / inner body / blue water layers, 3 pipe widths in exact visual ratio10:6.5:4 game units (labels 太1 / 中2 / 細3), and4 states: 候補 gray-blue dashed hollow outline; つないだ・水なし solid empty pipe; 流れている blue water with moving WHITE DOT train shown in3 small sequential stills, no arrowheads baked into pipes; 太さを選べる候補 with the sample badge 細3〜太1. Show 90-degree rounded L elbow, junction into bottom of a tall transparent upright stemless glass, TWO close parallel pipes with routes kept visually distinct, and ordinary crossing with visible over/under interruption so destinations remain traceable (NOT a junction). Pipes must ONLY connect at glasses, never at crossings. Show small rectangular labels 太1/中2/細3 over pipe, white/dark text on blue/white badge as in reference. Pale sky and warm soil panels demonstrate readability both above and below ground. Use consistent cross section on straight and curved samples; main purpose precise practical drawing rules for SVG reconstruction, not scenery. Candidate B: CLEAR GLASS TUBES with a crisp blue outer edge, pale double refraction line and almost transparent interior; blue water visibly contained within outline, no white ceramic body. Blue-gray dashed outline for candidates, subtle chamfered rectangular badges. Clear gaps between close parallel lines and legible crossings. One coherent material throughout this sheet.\n\nCorrection call:\nUse case: precise-object-edit. Edit the attached AQUA NOTES PIPE DESIGN SHEET, preserve its transparent glass material, blue-and-white styling and all useful sample panels, 1536x1024. Correct exactly these technical issues: (1) In the glass-connection sample, show a tall UPRIGHT STRAIGHT-SIDED STEMLESS CYLINDRICAL GLASS, not a wine goblet; pipe comes straight UP into the BOTTOM CENTER, not into the side wall, no pipe entering from above. (2) The adjustable candidate must be one hollow DASHED constant-width pipe outline with the label 細3〜太1; do NOT draw funnel, taper, stacked different widths along one pipe or a physical expanding segment. (3) Any width-ratio heading must read exactly 10 : 6.5 : 4, and labels exactly 太1 中2 細3. (4) Underground visibility panel background must be pale warm flat SOIL #ece5d6 with subtle stone speckles, not dark rocky brown, preserve pipe readability. (5) Replace the large invented serif AQUA NOTES brand heading with the plain Japanese sheet title 配管のデザイン表. Leave all other states, samples, 3 sequential white-dot motion stills and non-connecting crossing diagrams intact. This is a design sheet with sample Japanese text, not a new gameplay layout. No new panels or objects.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-pipe-b design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-badges-a.png",
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-bg-a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-dcc0b075-6ff1-4369-a2fe-e3b04d5abaeb.png",
+    "initial_path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-f267543a-5158-4888-ad51-c74c1c9afbb0.png",
+    "initial_prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Sheet-pipe, landscape design sheet1536x1024 RGB. Organize clearly labelled rows and panels. Include material cutaway/exploded CROSS SECTION with outer edge / inner body / blue water layers, 3 pipe widths in exact visual ratio10:6.5:4 game units (labels 太1 / 中2 / 細3), and4 states: 候補 gray-blue dashed hollow outline; つないだ・水なし solid empty pipe; 流れている blue water with moving WHITE DOT train shown in3 small sequential stills, no arrowheads baked into pipes; 太さを選べる候補 with the sample badge 細3〜太1. Show 90-degree rounded L elbow, junction into bottom of a tall transparent upright stemless glass, TWO close parallel pipes with routes kept visually distinct, and ordinary crossing with visible over/under interruption so destinations remain traceable (NOT a junction). Pipes must ONLY connect at glasses, never at crossings. Show small rectangular labels 太1/中2/細3 over pipe, white/dark text on blue/white badge as in reference. Pale sky and warm soil panels demonstrate readability both above and below ground. Use consistent cross section on straight and curved samples; main purpose precise practical drawing rules for SVG reconstruction, not scenery. Candidate B: CLEAR GLASS TUBES with a crisp blue outer edge, pale double refraction line and almost transparent interior; blue water visibly contained within outline, no white ceramic body. Blue-gray dashed outline for candidates, subtle chamfered rectangular badges. Clear gaps between close parallel lines and legible crossings. One coherent material throughout this sheet.",
+    "edit_prompt": "Use case: precise-object-edit. Edit the attached AQUA NOTES PIPE DESIGN SHEET, preserve its transparent glass material, blue-and-white styling and all useful sample panels, 1536x1024. Correct exactly these technical issues: (1) In the glass-connection sample, show a tall UPRIGHT STRAIGHT-SIDED STEMLESS CYLINDRICAL GLASS, not a wine goblet; pipe comes straight UP into the BOTTOM CENTER, not into the side wall, no pipe entering from above. (2) The adjustable candidate must be one hollow DASHED constant-width pipe outline with the label 細3〜太1; do NOT draw funnel, taper, stacked different widths along one pipe or a physical expanding segment. (3) Any width-ratio heading must read exactly 10 : 6.5 : 4, and labels exactly 太1 中2 細3. (4) Underground visibility panel background must be pale warm flat SOIL #ece5d6 with subtle stone speckles, not dark rocky brown, preserve pipe readability. (5) Replace the large invented serif AQUA NOTES brand heading with the plain Japanese sheet title 配管のデザイン表. Leave all other states, samples, 3 sequential white-dot motion stills and non-connecting crossing diagrams intact. This is a design sheet with sample Japanese text, not a new gameplay layout. No new panels or objects.",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2f50b729-19b5-47f1-b3d2-30cda576e6b5.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-pipe-b design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2f50b729-19b5-47f1-b3d2-30cda576e6b5.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-pipe/sheet-pipe-b.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-pipe-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-water-a",
+    "family": "sheet-water",
+    "variant": "a",
+    "title": "澄んだ水と細い光",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-WATER landscape reference1536x1024 RGB, title 水と目盛りのデザイン表 (plain Japanese sans-serif, do not invent a display brand logo). Tidy 3rows of technical illustrated samples, sparse restrained labels. Tall straight-sided STEMLESS cylinders exactly front-on, regular evenly spaced short horizontal TICKS on LEFT outside each glass. Include low and high water glass side by side, water shades deepen gently with depth, crisp subtle ripple surface; a hollow ivory spring reservoir with water; thin PALE GOLD DASHED line for PREVIOUS water level labelled 前回の水面, distinguish from current solid blue surface; glass exactly ON a tick glowing with very narrow soft pale-gold edge, label 目盛りに合う; glass surface BETWEEN ticks with gentle wave line labelled 目盛りの間; EMPTY transparent glass labelled 空; three shallow white fountain basins labelled 指定まで / 多い / 少ない with a fixed target mark and water respectively exactly at/above/below that mark, plus small ✓ / + / − indicators. All basin targets same height, water levels differ. Gold glass glow means MUSICAL SCALE ALIGNMENT ONLY, never an answer or puzzle-clear marker; text 音階の目印、正解の印ではない in small readable note. Use pale sky #f4f9fd and #e2eef8 for samples, no perspective bars or landscape interfering, no musical note names, no numbers/ticks inside water, no goblet stems, no overflowing giant waterfall. Candidate A: highly transparent water with only a subtle cyan gradient, fine silver-blue glass edge and one controlled narrow golden glow line. Calm almost-flat clean surfaces, delicate drawing, neat rounded white labels.\n\nAdditional correction call:\nUse case: precise-object-edit. Edit the attached WATER DESIGN SHEET. Make ONLY these semantic corrections while retaining layout, all glass shapes and drawing style, 1536x1024: Remove ALL upward FOUNTAIN JETS/spouts from the three shallow basin samples and from the spring-reservoir sample. The three basins illustrate target/over/under water levels, NOT completed animations, so their water surface may have subtle ripples only, NO jet above it. Spring remains a hollow stone reservoir holding still water, NO spout. For the sample labelled 目盛りに合う, shift its CURRENT SOLID BLUE water surface exactly onto the adjacent highlighted tick; keep PREVIOUS gold DASHED waterline distinct at another level. Preserve empty glass, between-ticks gentle ripple, all existing captions, three basin water levels and target mark comparisons, colors, panels and text. No new objects or text.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-water-a design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-bg-a.png",
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-badges-a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-23205055-c741-4d7b-b41f-ad2830689b98.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-5621dc23-207f-4f56-b265-5e41660fd1d3.png",
+        "prompt": "Use case: precise-object-edit. Edit the attached WATER DESIGN SHEET. Make ONLY these semantic corrections while retaining layout, all glass shapes and drawing style, 1536x1024: Remove ALL upward FOUNTAIN JETS/spouts from the three shallow basin samples and from the spring-reservoir sample. The three basins illustrate target/over/under water levels, NOT completed animations, so their water surface may have subtle ripples only, NO jet above it. Spring remains a hollow stone reservoir holding still water, NO spout. For the sample labelled 目盛りに合う, shift its CURRENT SOLID BLUE water surface exactly onto the adjacent highlighted tick; keep PREVIOUS gold DASHED waterline distinct at another level. Preserve empty glass, between-ticks gentle ripple, all existing captions, three basin water levels and target mark comparisons, colors, panels and text. No new objects or text.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-5621dc23-207f-4f56-b265-5e41660fd1d3.png"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-6b66a110-cf67-4ff6-a969-cbc10fadc6cb.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-water-a design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-6b66a110-cf67-4ff6-a969-cbc10fadc6cb.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-water/sheet-water-a.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-water-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-water-b",
+    "family": "sheet-water",
+    "variant": "b",
+    "title": "青い輪郭と水面の反射",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-WATER landscape reference1536x1024 RGB, title 水と目盛りのデザイン表 (plain Japanese sans-serif, do not invent a display brand logo). Tidy 3rows of technical illustrated samples, sparse restrained labels. Tall straight-sided STEMLESS cylinders exactly front-on, regular evenly spaced short horizontal TICKS on LEFT outside each glass. Include low and high water glass side by side, water shades deepen gently with depth, crisp subtle ripple surface; a hollow ivory spring reservoir with water; thin PALE GOLD DASHED line for PREVIOUS water level labelled 前回の水面, distinguish from current solid blue surface; glass exactly ON a tick glowing with very narrow soft pale-gold edge, label 目盛りに合う; glass surface BETWEEN ticks with gentle wave line labelled 目盛りの間; EMPTY transparent glass labelled 空; three shallow white fountain basins labelled 指定まで / 多い / 少ない with a fixed target mark and water respectively exactly at/above/below that mark, plus small ✓ / + / − indicators. All basin targets same height, water levels differ. Gold glass glow means MUSICAL SCALE ALIGNMENT ONLY, never an answer or puzzle-clear marker; text 音階の目印、正解の印ではない in small readable note. Use pale sky #f4f9fd and #e2eef8 for samples, no perspective bars or landscape interfering, no musical note names, no numbers/ticks inside water, no goblet stems, no overflowing giant waterfall. Candidate B: stronger cool-blue outer glass contour and gently layered pale-blue water with a defined reflective meniscus. A thin luminous waterline and tiny sparse specular gleams, compact chamfered neutral labels. No gold beyond musical alignment and previous-level guide.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-water-b design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-bg-a.png",
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-badges-a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-df371a84-c0ef-4ba4-8128-b847ba6c4cd7.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-28b7094e-6064-4a3a-af90-466d62a331af.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-water-b design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-28b7094e-6064-4a3a-af90-466d62a331af.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-water/sheet-water-b.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-water-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-aqua-a",
+    "family": "logo-aqua",
+    "variant": "a",
+    "title": "文字だけの二段ロゴ",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Landscape1536x1024 RGB LOGO DESIGN SHEET, precise typography study, clean flat surface not painterly. Actual wordmark MUST use geometric Montserrat-style sans-serif, NEVER serif. Top line AQUA (weight600) and below NOTES (weight500) with wide tracking, same stacked proportions and letter spacing family as attached PRISM wordmark. Words spelled exactly AQUA and NOTES, NOT a single-line AQUA NOTES logotype. Main column LEFT shows large mark in cobalt #2a6db5 on pale white-blue background; column RIGHT shows exact same design in ivory white on solid deep navy #101d35. Bottom row shows small header size and compact title size on both backgrounds. Do not invent lettering in other words, no third brand, no mockup objects, no devices. All instances are the same candidate treatment, 2-line stacking maintained. Spacing generous and geometric, no distortion of glyph shapes. Small annotation labels 明るい背景 / 濃い背景 / 小さい表示 okay. This is a reference for reconstruction with actual Montserrat font, not an image wordmark to paste into app. Candidate A: PURE TYPOGRAPHY, no droplet, no wave, no star, no decorative glyph substitution. Focus on the pristine two-line day sibling wordmark.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\prism-mobile.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c5a614e5-4b25-483d-b049-9000091d8e1a.png",
+    "output": "public/graphics/candidates-20261101-addendum/logo-aqua/logo-aqua-a.png",
+    "candidate_folder": "画面案/2026-11-01-logo-aqua-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-aqua-b",
+    "family": "logo-aqua",
+    "variant": "b",
+    "title": "小さなしずくと波紋",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Landscape1536x1024 RGB LOGO DESIGN SHEET, precise typography study, clean flat surface not painterly. Actual wordmark MUST use geometric Montserrat-style sans-serif, NEVER serif. Top line AQUA (weight600) and below NOTES (weight500) with wide tracking, same stacked proportions and letter spacing family as attached PRISM wordmark. Words spelled exactly AQUA and NOTES, NOT a single-line AQUA NOTES logotype. Main column LEFT shows large mark in cobalt #2a6db5 on pale white-blue background; column RIGHT shows exact same design in ivory white on solid deep navy #101d35. Bottom row shows small header size and compact title size on both backgrounds. Do not invent lettering in other words, no third brand, no mockup objects, no devices. All instances are the same candidate treatment, 2-line stacking maintained. Spacing generous and geometric, no distortion of glyph shapes. Small annotation labels 明るい背景 / 濃い背景 / 小さい表示 okay. This is a reference for reconstruction with actual Montserrat font, not an image wordmark to paste into app. Candidate B: SAME EXACT 2-line Montserrat wordmark proportions as A, add ONE tiny clear water droplet with a single thin horizontal ripple under/beside the Q tail as a restrained SEPARATE decoration, not inside the counters and not replacing any letter. No large badge/emblem. Decoration blue/white matching wordmark, no gold.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\prism-mobile.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c5dd4a4f-c595-485e-8a81-8447a526f72c.png",
+    "output": "public/graphics/candidates-20261101-addendum/logo-aqua/logo-aqua-b.png",
+    "candidate_folder": "画面案/2026-11-01-logo-aqua-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-series-a",
+    "family": "logo-series",
+    "variant": "a",
+    "title": "共通の二段組み",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. LOGO-SERIES landscape1536x1024 RGB design sheet. Series name EXACTLY SIKUMI over NOTES as TWO stacked lines, same geometric MONTSERRAT sans-serif family and proportions as PRISM/NOTES and AQUA/NOTES. No serif. Show: large primary mark on bright pearl white field in blue; same mark on navy night field in ivory white; pure BLACK single-color version and WHITE single-color reverse version; two real usage lockups with SMALL SINGLE LINE SIKUMI NOTES 01 above TWO-LINE PRISM / NOTES and SMALL SINGLE LINE SIKUMI NOTES 02 above TWO-LINE AQUA / NOTES. These are series numbers, not levels. The series line must remain much smaller than work logo. Show optional subtitle exactly しくみを、音で確かめる。 with a small label 副題案・未確定. Footer small exact creator line by SIKUMI LAB. Clean well-spaced flat identity sheet, no 3D mockups, no physical objects, no character, no night background scenery. Keep name SIKUMI NOTES clearly distinct from creator SIKUMI LAB. Consistent wordmarks throughout, night/day alternate color only, optional subtitle is NOT adopted. Candidate A: pure restrained typographic series mark, no added symbol, same stacking and generous tracked NOTES as work logos.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\prism-mobile.png",
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c5a614e5-4b25-483d-b049-9000091d8e1a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-61b3d705-2206-41b2-b004-0a065661f9e0.png",
+    "output": "public/graphics/candidates-20261101-addendum/logo-series/logo-series-a.png",
+    "candidate_folder": "画面案/2026-11-01-logo-series-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-series-b",
+    "family": "logo-series",
+    "variant": "b",
+    "title": "二段組みと細い二重の響き",
+    "size": [
+      1536,
+      1024
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. LOGO-SERIES landscape1536x1024 RGB design sheet. Series name EXACTLY SIKUMI over NOTES as TWO stacked lines, same geometric MONTSERRAT sans-serif family and proportions as PRISM/NOTES and AQUA/NOTES. No serif. Show: large primary mark on bright pearl white field in blue; same mark on navy night field in ivory white; pure BLACK single-color version and WHITE single-color reverse version; two real usage lockups with SMALL SINGLE LINE SIKUMI NOTES 01 above TWO-LINE PRISM / NOTES and SMALL SINGLE LINE SIKUMI NOTES 02 above TWO-LINE AQUA / NOTES. These are series numbers, not levels. The series line must remain much smaller than work logo. Show optional subtitle exactly しくみを、音で確かめる。 with a small label 副題案・未確定. Footer small exact creator line by SIKUMI LAB. Clean well-spaced flat identity sheet, no 3D mockups, no physical objects, no character, no night background scenery. Keep name SIKUMI NOTES clearly distinct from creator SIKUMI LAB. Consistent wordmarks throughout, night/day alternate color only, optional subtitle is NOT adopted. Candidate B: same typographic skeleton, add a restrained tiny two-line horizontal echo/ripple motif beneath NOTES, abstract enough for both star/light and water. Motif must work in one color, do not add a droplet or star or replace letters; no decorative emblem.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\prism-mobile.png",
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c5a614e5-4b25-483d-b049-9000091d8e1a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-d7cf42f7-3c37-4222-8b5b-98d21e4b2c00.png",
+    "output": "public/graphics/candidates-20261101-addendum/logo-series/logo-series-b.png",
+    "candidate_folder": "画面案/2026-11-01-logo-series-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-parts-a",
+    "family": "sheet-ui-parts",
+    "variant": "a",
+    "title": "白い陶器の縁と青い面",
+    "size": [
+      1536,
+      2048
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-PARTS portrait1536x2048 RGB design specification sheet, tidy grid of real UI components with sufficient spacing, labelled sections in Japanese. No phone frame. Title UI部品のデザイン表. Seven sections: (1) BUTTONS four sizes 大 / ふつう / 小 / 丸い選択肢, each in four states ふつう / 押せない / 選んでいる / 案内で押してほしい; last state ONLY pale-gold tutorial outline, selected BLUE, disabled muted but readable. Preserve usable 44px touch height at device scale. (2) CONDITION CARD sample クリア条件 / 噴水盤に 2 届ける / 桶 2・配管 3本・NG 残り20回, a small ふりかえり control in title row. (3) STAGE SWITCHER ‹ 1 まっすぐ届ける ∨ › and small subline 選択プレイ・お試し. (4) TOASTS include selection options 太1 中2 細3; prediction question どれだけ届く？ choices 1 届く / 2 届く / 3 届く and note 選んでから水が流れます; THREE result variants 100点 / クリア / NG with small 最高点 and 最少 marks, outlet row 指定 2・届いた 2 for success and 届いた 1 for NG; rows 解説, 記録, footerbuttons もう一度 / 次へ or 配管を見直す for NG. Result dismiss × at upper right. (5) BOTTOM SHEETS four miniature panels メニュー / 記録 / 面の一覧 / レベルの選択; show same family of surfaces and distinct headers, level choices フリー and ビギナー. (6) GUIDE ROW with small humanoid WATER SPIRIT matching attached guide asset on LEFT and 2-line advice on RIGHT. (7) UPDATE NOTICE 新しい版があります / 更新する. Simple consistent blue line icons, no extra gameplay. White/blue surfaces and dark ink labels, design must be reproducible in CSS/SVG, not textured impossible-to-read fantasy ornament. Candidate A: ivory porcelain-white cards with small rounded corners8px at device scale, thin blue-gray stroke and subtle upper edge highlight. Solid cobalt primary buttons, neutral white secondary buttons. Keep quiet and clear, no gold button fills.\n\nAdditional correction call:\nUse case: precise-object-edit. Edit attached UI COMPONENT DESIGN SHEET, preserve its overall grid, rounded porcelain visual style, colors, state examples, component dimensions and portrait composition. Correct SAMPLE TEXT and omissions so this visual proposal cannot introduce new functionality: (1) Guide row sentence must be exactly 水は高いところから低いところへ流れます。 Delete any claim about pipe thickness changing the distance water reaches. (2) In メニュー miniature show ONLY タイトルへ / 記録 / パーツの説明 / 遊び方と概要 / 調整. Remove 用語集, ホーム, お知らせ and all other invented entries. In 記録 miniature replace all コレクション/実績/メダル/統計/プレイ履歴 menu entries with a small plain table header 面・最高点・最少 and one sample row 1・100点・3本. Do not invent new collection or achievement features. (3) Level labels EXACTLY フリー and ビギナー. (4) Prediction sample must show THREE choices 1 届く / 2 届く / 3 届く with 選んでから水が流れます。 Keep or add a compact separate selection sample with 太1 / 中2 / 細3 inside section4 without altering other section positions. (5) THREE RESULT cards 100点 / クリア / NG retained. In NG card, footer has 解説 and 配管を見直す only, keep the unused third/right NEXT slot empty, no もう一度 or 次へ on NG. Success cards retain もう一度 / 次へ, small 最高点 / 最少 marks. (6) Gold tutorial-outline state must appear for each of4 button sizes; ordinary selected buttons BLUE. (7) Do not print invented numeric component heights as a new size specification: remove parenthetical 高さXXpx labels only, keep actual drawn button shapes unchanged. All other content and layout untouched. No extra headings or functionality.\n\nAdditional correction call:\nUse case: precise-object-edit. Edit ONLY ONE short text line in the attached UI component sheet. In SECTION2 条件カード, directly below its クリア条件 header, the current text wrongly reads 水は高いところから低いところへ流れます。. Replace ONLY that line with EXACTLY 噴水盤に 2 届ける, as the actual puzzle condition; make the numeral2 slightly larger blue as in original intent. Do NOT change the bottom GUIDE row, which must continue to say 水は高いところから低いところへ流れます。. Preserve every other pixel design, words, layout, control, all16 button states, and portrait dimensions. This is one line correction only.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-spirit-b.png",
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-badges-a.png",
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c5a614e5-4b25-483d-b049-9000091d8e1a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-b81fd410-03ff-4946-8102-207455a848cd.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-60caa8a0-bd23-4c9b-a0ab-50b4f2557cd8.png",
+        "prompt": "Use case: precise-object-edit. Edit attached UI COMPONENT DESIGN SHEET, preserve its overall grid, rounded porcelain visual style, colors, state examples, component dimensions and portrait composition. Correct SAMPLE TEXT and omissions so this visual proposal cannot introduce new functionality: (1) Guide row sentence must be exactly 水は高いところから低いところへ流れます。 Delete any claim about pipe thickness changing the distance water reaches. (2) In メニュー miniature show ONLY タイトルへ / 記録 / パーツの説明 / 遊び方と概要 / 調整. Remove 用語集, ホーム, お知らせ and all other invented entries. In 記録 miniature replace all コレクション/実績/メダル/統計/プレイ履歴 menu entries with a small plain table header 面・最高点・最少 and one sample row 1・100点・3本. Do not invent new collection or achievement features. (3) Level labels EXACTLY フリー and ビギナー. (4) Prediction sample must show THREE choices 1 届く / 2 届く / 3 届く with 選んでから水が流れます。 Keep or add a compact separate selection sample with 太1 / 中2 / 細3 inside section4 without altering other section positions. (5) THREE RESULT cards 100点 / クリア / NG retained. In NG card, footer has 解説 and 配管を見直す only, keep the unused third/right NEXT slot empty, no もう一度 or 次へ on NG. Success cards retain もう一度 / 次へ, small 最高点 / 最少 marks. (6) Gold tutorial-outline state must appear for each of4 button sizes; ordinary selected buttons BLUE. (7) Do not print invented numeric component heights as a new size specification: remove parenthetical 高さXXpx labels only, keep actual drawn button shapes unchanged. All other content and layout untouched. No extra headings or functionality.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-60caa8a0-bd23-4c9b-a0ab-50b4f2557cd8.png"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-f4ae0007-d3cc-44bc-bf3f-49fd952fccfe.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY ONE short text line in the attached UI component sheet. In SECTION2 条件カード, directly below its クリア条件 header, the current text wrongly reads 水は高いところから低いところへ流れます。. Replace ONLY that line with EXACTLY 噴水盤に 2 届ける, as the actual puzzle condition; make the numeral2 slightly larger blue as in original intent. Do NOT change the bottom GUIDE row, which must continue to say 水は高いところから低いところへ流れます。. Preserve every other pixel design, words, layout, control, all16 button states, and portrait dimensions. This is one line correction only.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-f4ae0007-d3cc-44bc-bf3f-49fd952fccfe.png"
+        ]
+      }
+    ],
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-parts/sheet-ui-parts-a.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-parts-addendum",
+    "processing": {
+      "original_size": [
+        1024,
+        1536
+      ],
+      "fitted_size": [
+        1365,
+        2048
+      ],
+      "offset": [
+        85,
+        0
+      ],
+      "target_size": [
+        1536,
+        2048
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-parts-b",
+    "family": "sheet-ui-parts",
+    "variant": "b",
+    "title": "すりガラスと隅切りの面",
+    "size": [
+      1536,
+      2048
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-PARTS portrait1536x2048 RGB design specification sheet, tidy grid of real UI components with sufficient spacing, labelled sections in Japanese. No phone frame. Title UI部品のデザイン表. Seven sections: (1) BUTTONS four sizes 大 / ふつう / 小 / 丸い選択肢, each in four states ふつう / 押せない / 選んでいる / 案内で押してほしい; last state ONLY pale-gold tutorial outline, selected BLUE, disabled muted but readable. Preserve usable 44px touch height at device scale. (2) CONDITION CARD sample クリア条件 / 噴水盤に 2 届ける / 桶 2・配管 3本・NG 残り20回, a small ふりかえり control in title row. (3) STAGE SWITCHER ‹ 1 まっすぐ届ける ∨ › and small subline 選択プレイ・お試し. (4) TOASTS include selection options 太1 中2 細3; prediction question どれだけ届く？ choices 1 届く / 2 届く / 3 届く and note 選んでから水が流れます; THREE result variants 100点 / クリア / NG with small 最高点 and 最少 marks, outlet row 指定 2・届いた 2 for success and 届いた 1 for NG; rows 解説, 記録, footerbuttons もう一度 / 次へ or 配管を見直す for NG. Result dismiss × at upper right. (5) BOTTOM SHEETS four miniature panels メニュー / 記録 / 面の一覧 / レベルの選択; show same family of surfaces and distinct headers, level choices フリー and ビギナー. (6) GUIDE ROW with small humanoid WATER SPIRIT matching attached guide asset on LEFT and 2-line advice on RIGHT. (7) UPDATE NOTICE 新しい版があります / 更新する. Simple consistent blue line icons, no extra gameplay. White/blue surfaces and dark ink labels, design must be reproducible in CSS/SVG, not textured impossible-to-read fantasy ornament. Candidate B: frosted translucent-white surfaces with crisp chamfered tiny corners, single cool-blue fine border, very subtle glass edge. Cobalt primary buttons and ink text. Restrained architectural geometry, no dark mode, no gold button fills.\n\nAdditional correction call:\nUse case: precise-object-edit. Edit attached UI COMPONENT DESIGN SHEET, preserve its overall grid, frosted blue visual style, colors, state examples, component dimensions and portrait composition. Correct SAMPLE TEXT and omissions so this visual proposal cannot introduce new functionality: (1) Guide row sentence must be exactly 水は高いところから低いところへ流れます。 Delete any claim about pipe thickness changing the distance water reaches. (2) In メニュー miniature show ONLY タイトルへ / 記録 / パーツの説明 / 遊び方と概要 / 調整. Remove 用語集, ホーム, お知らせ and all other invented entries. In 記録 miniature replace all コレクション/実績/メダル/統計/プレイ履歴 menu entries with a small plain table header 面・最高点・最少 and one sample row 1・100点・3本. Do not invent new collection or achievement features. (3) Level labels EXACTLY フリー and ビギナー. (4) Prediction sample must show THREE choices 1 届く / 2 届く / 3 届く with 選んでから水が流れます。 Keep or add a compact separate selection sample with 太1 / 中2 / 細3 inside section4 without altering other section positions. (5) THREE RESULT cards 100点 / クリア / NG retained. In NG card, footer has 解説 and 配管を見直す only, keep the unused third/right NEXT slot empty, no もう一度 or 次へ on NG. Success cards retain もう一度 / 次へ, small 最高点 / 最少 marks. (6) Gold tutorial-outline state must appear for each of4 button sizes; ordinary selected buttons BLUE. (7) Do not print invented numeric component heights as a new size specification: remove parenthetical 高さXXpx labels only, keep actual drawn button shapes unchanged. All other content and layout untouched. No extra headings or functionality.\n\nAdditional correction call:\nUse case: precise-object-edit. Attached UI parts sheet. Make ONLY2 local corrections, leave every other panel, text, layout, shape and color unchanged. FIRST, section4 SECOND panel titled どれだけ届く？ currently has only TWO choices 1 and3. Erase ONLY the choice-button row in that single panel and redraw it as exactly THREE EQUAL NARROW BUTTONS side-by-side occupying the SAME TOTAL WIDTH: left text 1 届く, CENTER text 2 届く, right text 3 届く. Reduce each button width so all3 fit. Do not alter first 太1/中2/細3 panel, which already has3choices. Keep note 選んでから水が流れます。 SECOND, in section1 FOURTH column of tutorial-highlight states, add thin pale-gold glowing outlines to the ふつうボタン row AND 小ボタン row, matching the already golden 大ボタン and 丸い選択肢 above/below. Thus ALL FOUR shapes in that last column have gold outline; the BLUE selected third column untouched. Preserve guide, condition, menus, result cards and portrait composition completely.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-spirit-b.png",
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\aqua-badges-a.png",
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c5a614e5-4b25-483d-b049-9000091d8e1a.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-0db18e8a-0f17-4afe-af41-1fd5ef5874a6.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-6df7e01f-a87f-4481-8ff9-5992ea613b89.png",
+        "prompt": "Use case: precise-object-edit. Edit attached UI COMPONENT DESIGN SHEET, preserve its overall grid, frosted blue visual style, colors, state examples, component dimensions and portrait composition. Correct SAMPLE TEXT and omissions so this visual proposal cannot introduce new functionality: (1) Guide row sentence must be exactly 水は高いところから低いところへ流れます。 Delete any claim about pipe thickness changing the distance water reaches. (2) In メニュー miniature show ONLY タイトルへ / 記録 / パーツの説明 / 遊び方と概要 / 調整. Remove 用語集, ホーム, お知らせ and all other invented entries. In 記録 miniature replace all コレクション/実績/メダル/統計/プレイ履歴 menu entries with a small plain table header 面・最高点・最少 and one sample row 1・100点・3本. Do not invent new collection or achievement features. (3) Level labels EXACTLY フリー and ビギナー. (4) Prediction sample must show THREE choices 1 届く / 2 届く / 3 届く with 選んでから水が流れます。 Keep or add a compact separate selection sample with 太1 / 中2 / 細3 inside section4 without altering other section positions. (5) THREE RESULT cards 100点 / クリア / NG retained. In NG card, footer has 解説 and 配管を見直す only, keep the unused third/right NEXT slot empty, no もう一度 or 次へ on NG. Success cards retain もう一度 / 次へ, small 最高点 / 最少 marks. (6) Gold tutorial-outline state must appear for each of4 button sizes; ordinary selected buttons BLUE. (7) Do not print invented numeric component heights as a new size specification: remove parenthetical 高さXXpx labels only, keep actual drawn button shapes unchanged. All other content and layout untouched. No extra headings or functionality.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-6df7e01f-a87f-4481-8ff9-5992ea613b89.png"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-3a85e801-9825-44f2-b7e1-4dc44253bad1.png",
+        "prompt": "Use case: precise-object-edit. Attached UI parts sheet. Make ONLY2 local corrections, leave every other panel, text, layout, shape and color unchanged. FIRST, section4 SECOND panel titled どれだけ届く？ currently has only TWO choices 1 and3. Erase ONLY the choice-button row in that single panel and redraw it as exactly THREE EQUAL NARROW BUTTONS side-by-side occupying the SAME TOTAL WIDTH: left text 1 届く, CENTER text 2 届く, right text 3 届く. Reduce each button width so all3 fit. Do not alter first 太1/中2/細3 panel, which already has3choices. Keep note 選んでから水が流れます。 SECOND, in section1 FOURTH column of tutorial-highlight states, add thin pale-gold glowing outlines to the ふつうボタン row AND 小ボタン row, matching the already golden 大ボタン and 丸い選択肢 above/below. Thus ALL FOUR shapes in that last column have gold outline; the BLUE selected third column untouched. Preserve guide, condition, menus, result cards and portrait composition completely.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-3a85e801-9825-44f2-b7e1-4dc44253bad1.png"
+        ]
+      }
+    ],
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-parts/sheet-ui-parts-b.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-parts-addendum",
+    "processing": {
+      "original_size": [
+        1024,
+        1536
+      ],
+      "fitted_size": [
+        1365,
+        2048
+      ],
+      "offset": [
+        85,
+        0
+      ],
+      "target_size": [
+        1536,
+        2048
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-b-edit",
+    "family": "sheet-ui-play",
+    "variant": "b",
+    "state": "edit",
+    "title": "すりガラスの縁・編集中",
+    "size": [
+      1170,
+      2532
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-PLAY EDITING screen, a single ULTRA-TALL portrait1170x2532 (aspect390:844), RGB, no phone frame or status bar. Input1 is CURRENT AQUA MOBILE SCREEN and the EXACT LAYOUT TEMPLATE, input2 is PRISM MOBILE SCREEN for series styling only. Retain Input1 component positions, proportions, widths/heights; do NOT copy prism gameplay, prism node layout or night colors. At1170x2532: header y0-141 with 2-line AQUA/NOTES at x48 left, 記録 / 音オン / ☰ at right; stage row y150-309 ‹ 1 まっすぐ届ける ∨ ›, subline 選択プレイ・お試し; condition card x48 y324 w1074 h300 with クリア条件, ふりかえり top right, 噴水盤に 2 届ける and 配管 0本. Board fixed x51 y726 w1068 h1356, preserve full tall panel and its lower SOIL zone starting79% down; same source LEFT, two tall stemless GLASSES center, BASIN right, pipe routes below ground from original screenshot; do not widen, shrink or rearrange board or game parts. Subtle edge-only white fantasy garden sky behind game parts, light low-contrast center. GUIDE row x48 y2109 w1074 h200: tiny same-series water spirit LEFT of exact text 水は高いところから低いところへ流れます。流れる量＝高さの差÷細さ。 Buttons remain at bottom RIGHT: 配管クリア x513 y2316 w315 h132, 水を流す x852 y2316 w270 h132. Preserve empty lower left space; do not center or enlarge buttons. Footer v0.13.0 試作 © SIKUMI LAB at y2480. Remove black UPDATE AVAILABLE overlay from template only, it is temporary; do not move any remaining element into its place. All current visual styling temporary: redesign color, edges and surfaces while maintaining this rigid layout. Editing state: source has water, glasses EMPTY, pipes not flowing, no success fountain, rainbow or result panel. White/blue theme, quiet flat functional UI with painterly board. No new legend, resources, controls or invented features. Candidate B: frosted white-blue panels with very small clipped/chamfered corners, cool crisp blue rim, restrained glass reflections. Same 2-line geometric logo and control sizes, do not add a giant droplet.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-b-edit design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [],
+    "recent": 2,
+    "reference_note": "直前の公開版スマホ編集中スクリーンショット（配置参照）と docs/reference/prism-v0.100.0-q3-layout.png（シリーズ参照）。CUAで390×844の配置を確認し、指示文に3倍の座標を記録。",
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-ce84cb37-5189-4062-9050-382e2161f909.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2800039e-f73a-4721-875d-20b51bf3e862.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-b-edit design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2800039e-f73a-4721-875d-20b51bf3e862.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-b-edit.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-play-addendum",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-a-edit",
+    "family": "sheet-ui-play",
+    "variant": "a",
+    "state": "edit",
+    "title": "陶器の縁・編集中",
+    "size": [
+      1170,
+      2532
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-PLAY EDITING screen, a single ULTRA-TALL portrait1170x2532 (aspect390:844), RGB, no phone frame or status bar. Input1 is CURRENT AQUA MOBILE SCREEN and the EXACT LAYOUT TEMPLATE, input2 is PRISM MOBILE SCREEN for series styling only. Retain Input1 component positions, proportions, widths/heights; do NOT copy prism gameplay, prism node layout or night colors. At1170x2532: header y0-141 with 2-line AQUA/NOTES at x48 left, 記録 / 音オン / ☰ at right; stage row y150-309 ‹ 1 まっすぐ届ける ∨ ›, subline 選択プレイ・お試し; condition card x48 y324 w1074 h300 with クリア条件, ふりかえり top right, 噴水盤に 2 届ける and 配管 0本. Board fixed x51 y726 w1068 h1356, preserve full tall panel and its lower SOIL zone starting79% down; same source LEFT, two tall stemless GLASSES center, BASIN right, pipe routes below ground from original screenshot; do not widen, shrink or rearrange board or game parts. Subtle edge-only white fantasy garden sky behind game parts, light low-contrast center. GUIDE row x48 y2109 w1074 h200: tiny same-series water spirit LEFT of exact text 水は高いところから低いところへ流れます。流れる量＝高さの差÷細さ。 Buttons remain at bottom RIGHT: 配管クリア x513 y2316 w315 h132, 水を流す x852 y2316 w270 h132. Preserve empty lower left space; do not center or enlarge buttons. Footer v0.13.0 試作 © SIKUMI LAB at y2480. Remove black UPDATE AVAILABLE overlay from template only, it is temporary; do not move any remaining element into its place. All current visual styling temporary: redesign color, edges and surfaces while maintaining this rigid layout. Editing state: source has water, glasses EMPTY, pipes not flowing, no success fountain, rainbow or result panel. White/blue theme, quiet flat functional UI with painterly board. No new legend, resources, controls or invented features. Candidate A: white porcelain cards, small rounded8px corners, fine cool blue-gray stroke, clear cobalt primary button. Simple Montserrat two-line AQUA/NOTES with NO emblem.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-a-edit design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [],
+    "recent": 2,
+    "reference_note": "直前の公開版スマホ編集中スクリーンショット（配置参照）と docs/reference/prism-v0.100.0-q3-layout.png（シリーズ参照）。CUAで390×844の配置を確認し、指示文に3倍の座標を記録。",
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-aaf1fb99-198c-4542-82e4-98fcb568c8fc.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-69732dcf-db49-4d6c-ba38-82c1d196b1f5.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-a-edit design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-69732dcf-db49-4d6c-ba38-82c1d196b1f5.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-a-edit.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-play-addendum",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-a-result",
+    "family": "sheet-ui-play",
+    "variant": "a",
+    "state": "result",
+    "title": "陶器の縁・結果",
+    "size": [
+      1170,
+      2532
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Use case: precise-object-edit. Edit attached AQUA mobile EDITING design to create its matching RESULT screen. KEEP every header/stage/card/board/guide/button rectangle exactly in the same position and size, identical1170x2532 ultratall aspect, no phone frame, no reflow or shrinking board. Only change water/run state and add a lower overlay. Source stays left, glass1 and glass2 and basin stay in exact locations, same pipe routes. Show a modest amount of blue water in glasses exactly aligned to a left tick, narrow pale-gold musical light; a small clear fountain rises from right basin with a soft shallow rainbow above it, understated. Replace 配管0本 with 配管3本 as a fictional design sample, not a calculation specification. Add a SINGLE floating white RESULT TOAST anchored to bottom panel, x48..1122 y~2040..2450, overlapping/hiding guide and lower buttons, while leaving board frame and glass positions untouched. Header 100点 with a tiny 最高点 mark, dismiss × at upper right. Body row 指定2 / 届いた2, small 最少3本. Text グラスのふちをなぞると、音を聞き直せます。 Small disclosure くわしい記録. Footer three aligned buttons 解説 / もう一度 / 次へ, main blue 次へ at right. Keep text short to fit toast, no huge trophy/characters or second modal. Main original lower buttons obscured beneath overlay, not relocated. Keep original footer outside toast. Do not introduce collection, achievements, statistics, currencies, extra levels or new buttons. Palette white and blue, gold only for success/musical glints. This is a visual sample, all numbers are sample strings.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-a-result design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces, fountain jet and rainbow subtle edges) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-69732dcf-db49-4d6c-ba38-82c1d196b1f5.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-6853ec06-e984-4e22-b218-e9be115398df.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-cd31b76d-d02a-44b6-ae57-6d9d861d8c4f.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-a-result design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces, fountain jet and rainbow subtle edges) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-cd31b76d-d02a-44b6-ae57-6d9d861d8c4f.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-a-result.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-play-addendum",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-b-result",
+    "family": "sheet-ui-play",
+    "variant": "b",
+    "state": "result",
+    "title": "すりガラスの縁・結果",
+    "size": [
+      1170,
+      2532
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. Use case: precise-object-edit. Edit attached AQUA mobile EDITING design to create its matching RESULT screen. KEEP every header/stage/card/board/guide/button rectangle exactly in the same position and size, identical1170x2532 ultratall aspect, no phone frame, no reflow or shrinking board. Only change water/run state and add a lower overlay. Source stays left, glass1 and glass2 and basin stay in exact locations, same pipe routes. Show a modest amount of blue water in glasses exactly aligned to a left tick, narrow pale-gold musical light; a small clear fountain rises from right basin with a soft shallow rainbow above it, understated. Replace 配管0本 with 配管3本 as a fictional design sample, not a calculation specification. Add a SINGLE floating white RESULT TOAST anchored to bottom panel, x48..1122 y~2040..2450, overlapping/hiding guide and lower buttons, while leaving board frame and glass positions untouched. Header 100点 with a tiny 最高点 mark, dismiss × at upper right. Body row 指定2 / 届いた2, small 最少3本. Text グラスのふちをなぞると、音を聞き直せます。 Small disclosure くわしい記録. Footer three aligned buttons 解説 / もう一度 / 次へ, main blue 次へ at right. Keep text short to fit toast, no huge trophy/characters or second modal. Main original lower buttons obscured beneath overlay, not relocated. Keep original footer outside toast. Do not introduce collection, achievements, statistics, currencies, extra levels or new buttons. Palette white and blue, gold only for success/musical glints. This is a visual sample, all numbers are sample strings.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-b-result design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces, fountain jet and rainbow subtle edges) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2800039e-f73a-4721-875d-20b51bf3e862.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-9765210e-93d7-4d4a-b3ca-472f783da600.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-dca6a6f8-2802-4bf3-90fa-ab94e64ef97a.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-b-result design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces, fountain jet and rainbow subtle edges) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-dca6a6f8-2802-4bf3-90fa-ab94e64ef97a.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-b-result.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-play-addendum",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-title-a",
+    "family": "sheet-ui-title",
+    "variant": "a",
+    "title": "陶器の白と文字だけのロゴ",
+    "size": [
+      1170,
+      2532
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-TITLE. Input is CURRENT AQUA title screen, use it as RIGID LAYOUT TEMPLATE. Create a single ultratall portrait1170x2532 RGB (aspect390:844), no phone outline or status bar. Preserve every logo/button/copyright location and dimensions. Retain same bright painterly garden background and all existing objects in scene; change UI surfaces and wordmark finish only. Remove black update-available overlay at bottom, leaving background visible, do not move elements into its place. Add the specifically requested small series text SIKUMI NOTES 02 ABOVE the existing two-line geometric MONTSERRAT AQUA / NOTES wordmark; series line small, work logo remains same size/position at about y255-435, no serif. Tagline 水をつなぎ、グラスを鳴らす。（仮） at about y531. EXACT button rectangles at3x template scale: x48 y639 w1074 h174 チュートリアル; x48 y843 w1074 h174 連続プレイ; row3 y1047 h144: x48 w522 選択プレイ and x600 w522 自由作成（準備中） disabled; row4 y1221 h144: パーツの説明 and 遊び方と概要 in SAME2columns; row5 y1395 h144: プレイ画面へ and 更新 in SAME2columns. Gap between rows30px. Do NOT add large panels, different button groups, extra headings, controls or change wording. Tutorial selected main button cobalt white text; other enabled buttons white dark-blue text, disabled visibly muted. Footer centered © SIKUMI LAB v0.13.0 試作 around y1725; retain scene below it. No additional series label inside buttons. White-blue daytime sister of PRISM NOTES, elegant readable restrained, preserve current hierarchy and board-free title composition. Candidate A: porcelain-white buttons with small rounded corners8px at device scale, thin blue-gray border, gentle top edge highlight only. PURE typographic 2line AQUA/NOTES with no emblem. No gold outlines except a tiny naturally sunlit edge.\n\nAdditional correction call:\nUse case: precise-object-edit. Edit ONLY ONE button label on attached AQUA title screen. The LEFT HALF-WIDTH button in the FIRST TWO-COLUMN ROW, below the full-width 連続プレイ button and beside disabled 自由作成（準備中）, incorrectly repeats 連続プレイ. Replace ONLY that left half-width button text with exact 選択プレイ. Keep the FULL-WIDTH second button above reading 連続プレイ. Do not move, resize, redraw or restyle any button or text besides that one label. Keep all other lettering, series line SIKUMI NOTES 02, AQUA/NOTES logo, background and every element unchanged. No new labels or layout changes.",
+    "refs": [],
+    "recent": 1,
+    "reference_note": "公開版v0.13.0のタイトル画面（CUAで390×844表示）。ボタン8個の矩形を読み、指示文に3倍の座標を記録。",
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-f993e8bc-220b-489d-995d-bd274ea15994.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-4ed593ac-7a4d-409f-b990-2c8ef7927286.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY ONE button label on attached AQUA title screen. The LEFT HALF-WIDTH button in the FIRST TWO-COLUMN ROW, below the full-width 連続プレイ button and beside disabled 自由作成（準備中）, incorrectly repeats 連続プレイ. Replace ONLY that left half-width button text with exact 選択プレイ. Keep the FULL-WIDTH second button above reading 連続プレイ. Do not move, resize, redraw or restyle any button or text besides that one label. Keep all other lettering, series line SIKUMI NOTES 02, AQUA/NOTES logo, background and every element unchanged. No new labels or layout changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-4ed593ac-7a4d-409f-b990-2c8ef7927286.png"
+        ]
+      }
+    ],
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-title/sheet-ui-title-a.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-title-addendum",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-title-b",
+    "family": "sheet-ui-title",
+    "variant": "b",
+    "title": "すりガラスと小さなしずく",
+    "size": [
+      1170,
+      2532
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-TITLE. Input is CURRENT AQUA title screen, use it as RIGID LAYOUT TEMPLATE. Create a single ultratall portrait1170x2532 RGB (aspect390:844), no phone outline or status bar. Preserve every logo/button/copyright location and dimensions. Retain same bright painterly garden background and all existing objects in scene; change UI surfaces and wordmark finish only. Remove black update-available overlay at bottom, leaving background visible, do not move elements into its place. Add the specifically requested small series text SIKUMI NOTES 02 ABOVE the existing two-line geometric MONTSERRAT AQUA / NOTES wordmark; series line small, work logo remains same size/position at about y255-435, no serif. Tagline 水をつなぎ、グラスを鳴らす。（仮） at about y531. EXACT button rectangles at3x template scale: x48 y639 w1074 h174 チュートリアル; x48 y843 w1074 h174 連続プレイ; row3 y1047 h144: x48 w522 選択プレイ and x600 w522 自由作成（準備中） disabled; row4 y1221 h144: パーツの説明 and 遊び方と概要 in SAME2columns; row5 y1395 h144: プレイ画面へ and 更新 in SAME2columns. Gap between rows30px. Do NOT add large panels, different button groups, extra headings, controls or change wording. Tutorial selected main button cobalt white text; other enabled buttons white dark-blue text, disabled visibly muted. Footer centered © SIKUMI LAB v0.13.0 試作 around y1725; retain scene below it. No additional series label inside buttons. White-blue daytime sister of PRISM NOTES, elegant readable restrained, preserve current hierarchy and board-free title composition. Candidate B: frosted-white buttons with tiny cut/chamfered corners and a single clear-blue rim, very subtle glass reflection, little extra ornament. Add ONE tiny blue droplet/ripple beside Q tail without replacing letter, keep same logo width/height. No gold filled buttons.",
+    "refs": [],
+    "recent": 1,
+    "reference_note": "公開版v0.13.0のタイトル画面（CUAで390×844表示）。ボタン8個の矩形を読み、指示文に3倍の座標を記録。",
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-bd743172-7dac-4f78-9230-6554a8e6df29.png",
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-title/sheet-ui-title-b.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-title-addendum",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-a-pc",
+    "family": "sheet-ui-play",
+    "variant": "a",
+    "state": "pc",
+    "title": "陶器の縁・PC",
+    "size": [
+      1920,
+      1080
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-PLAY PC editing view. SINGLE full desktop screen1920x1080 RGB landscape16:9, no device/browser chrome. Input1 PRISM PC layout is the EXACT STRUCTURE reference; input2 matching AQUA mobile candidate is style/parts reference. Follow specified PC TWO-COLUMN structure (do NOT reproduce current centered one-column AQUA PC placeholder). Header x24..1896 y16..90: 2-line AQUA/NOTES logo LEFT and tagline 水をつなぎ、グラスを鳴らす。 to its right; action buttons 記録 / 音オン / 更新 / ☰ at far right. Large BOARD frame left x24 y110 w1434 h900. Background fills entire board, bright low-contrast white-stone garden and open pale sky at center. Same AQUA source at left, two upright tall stemless glasses at center and basin right, soil cross-section bottom21%, pipe paths below ground, keep original glass proportions and object relationships; no prisms/bells/star gameplay copied from PRISM. Board toolbar inside bottom frame strip y935-1010, contains 配管クリア then − / 全体 / ＋ at right. Small legend inside board lower left つないだ配管 / つなげる配管. Sidebar RIGHT x1482 y110 w414 h900: group title お試し・湧き水の庭, stage navigation ‹ 1 まっすぐ届ける ∨ ›, condition section この課題の条件 with ⓘ, exact condition 噴水盤に 2 届ける; resource block 配管の本数 / 上限6本 / 使用0本 / 残り6本 plus small 桶の残り2 / NGの残り20; status 配管をつないでください。; small guide row water spirit to left of text; main large cobalt 水を流す anchored near sidebar bottom and small disabled 停止 below. Footer © SIKUMI LAB v0.13.0 試作. All numbers are specimen strings and no changes to scoring/limits are proposed. Editing state, empty glasses, no fountain/rainbow/result overlay, no new controls beyond listed. Landscape UI remains readable, restrained elegant white-blue daytime series, no black huge panels, no invented menus. Candidate A: same porcelain white, small rounded corners and thin blue-gray strokes as the attached mobile candidate.\n\nAdditional correction call:\nUse case: precise-object-edit. Make ONLY2 small style corrections to attached AQUA PC design. Preserve absolutely all layout, typography, object positions, panel sizes and other colors. The ordinary HEADER 更新 button currently has a GOLD FILL; change its fill to WHITE/very pale blue and its text and fine border to DARK BLUE, matching other neutral header controls. Ordinary resource remaining count 6 must also be BLUE rather than gold. Gold should remain only as tiny natural reflected highlights on fantasy stone/glass materials, not normal UI states. Add/retain a tiny footer on the lower-right blank margin exactly © SIKUMI LAB v0.13.0 試作, without changing sidebar/board dimensions. No other changes, no new content. Keep landscape1920x1080 aspect.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-a-pc design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\prism-pc.webp",
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-69732dcf-db49-4d6c-ba38-82c1d196b1f5.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-31ff6090-bc17-4d42-a7c7-bac4af1eb094.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-4657842d-9558-4c1d-908b-cc63a37cf1ad.png",
+        "prompt": "Use case: precise-object-edit. Make ONLY2 small style corrections to attached AQUA PC design. Preserve absolutely all layout, typography, object positions, panel sizes and other colors. The ordinary HEADER 更新 button currently has a GOLD FILL; change its fill to WHITE/very pale blue and its text and fine border to DARK BLUE, matching other neutral header controls. Ordinary resource remaining count 6 must also be BLUE rather than gold. Gold should remain only as tiny natural reflected highlights on fantasy stone/glass materials, not normal UI states. Add/retain a tiny footer on the lower-right blank margin exactly © SIKUMI LAB v0.13.0 試作, without changing sidebar/board dimensions. No other changes, no new content. Keep landscape1920x1080 aspect.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-4657842d-9558-4c1d-908b-cc63a37cf1ad.png"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-403fa8fc-9029-4c6a-99c5-1a998bad1446.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-a-pc design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-403fa8fc-9029-4c6a-99c5-1a998bad1446.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-a-pc.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-play-addendum",
+    "processing": {
+      "original_size": [
+        1672,
+        941
+      ],
+      "fitted_size": [
+        1919,
+        1080
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1920,
+        1080
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-b-pc",
+    "family": "sheet-ui-play",
+    "variant": "b",
+    "state": "pc",
+    "title": "すりガラスの縁・PC",
+    "size": [
+      1920,
+      1080
+    ],
+    "prompt": "Use case: ui-mockup. AQUA NOTES daytime sister of PRISM NOTES: serene mature elegant fantasy with clean readable UI, pearl white #f4f9fd, soft sky blue #e2eef8, ink #17314c, cobalt #2a6db5, ice blue #4b9ad8, restrained pale gold #c9a14a ONLY for musical alignment or tutorial highlight. All current screen VISUAL STYLING is temporary and may be redesigned, but layout and component dimensions must not change. Deliver a flat front-on design reference, no physical phone/tablet frame, no perspective, no new gameplay or invented controls. Japanese text may appear in design sheets. No watermark, signature, unrelated brand. Refined materials restrained; no cartoon, no ornate rococo frames, no excessive glowing haze. SHEET-UI-PLAY PC editing view. SINGLE full desktop screen1920x1080 RGB landscape16:9, no device/browser chrome. Input1 PRISM PC layout is the EXACT STRUCTURE reference; input2 matching AQUA mobile candidate is style/parts reference. Follow specified PC TWO-COLUMN structure (do NOT reproduce current centered one-column AQUA PC placeholder). Header x24..1896 y16..90: 2-line AQUA/NOTES logo LEFT and tagline 水をつなぎ、グラスを鳴らす。 to its right; action buttons 記録 / 音オン / 更新 / ☰ at far right. Large BOARD frame left x24 y110 w1434 h900. Background fills entire board, bright low-contrast white-stone garden and open pale sky at center. Same AQUA source at left, two upright tall stemless glasses at center and basin right, soil cross-section bottom21%, pipe paths below ground, keep original glass proportions and object relationships; no prisms/bells/star gameplay copied from PRISM. Board toolbar inside bottom frame strip y935-1010, contains 配管クリア then − / 全体 / ＋ at right. Small legend inside board lower left つないだ配管 / つなげる配管. Sidebar RIGHT x1482 y110 w414 h900: group title お試し・湧き水の庭, stage navigation ‹ 1 まっすぐ届ける ∨ ›, condition section この課題の条件 with ⓘ, exact condition 噴水盤に 2 届ける; resource block 配管の本数 / 上限6本 / 使用0本 / 残り6本 plus small 桶の残り2 / NGの残り20; status 配管をつないでください。; small guide row water spirit to left of text; main large cobalt 水を流す anchored near sidebar bottom and small disabled 停止 below. Footer © SIKUMI LAB v0.13.0 試作. All numbers are specimen strings and no changes to scoring/limits are proposed. Editing state, empty glasses, no fountain/rainbow/result overlay, no new controls beyond listed. Landscape UI remains readable, restrained elegant white-blue daytime series, no black huge panels, no invented menus. Candidate B: same frosted white surface and small chamfered edges with clear blue rim as attached mobile candidate.\n\nAdditional correction call:\nUse case: precise-object-edit. Make ONLY2 small style corrections to attached AQUA PC design. Preserve absolutely all layout, typography, object positions, panel sizes and other colors. The ordinary HEADER 更新 button currently has a GOLD FILL; change its fill to WHITE/very pale blue and its text and fine border to DARK BLUE, matching other neutral header controls. Ordinary resource remaining count 6 must also be BLUE rather than gold. Gold should remain only as tiny natural reflected highlights on fantasy stone/glass materials, not normal UI states. Add/retain a tiny footer on the lower-right blank margin exactly © SIKUMI LAB v0.13.0 試作, without changing sidebar/board dimensions. No other changes, no new content. Keep landscape1920x1080 aspect.\n\nConfirmed boundary direction (addendum1-2):\nUse case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-b-pc design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+    "refs": [
+      "C:\\Users\\user\\.codex\\visualizations\\2026\\11\\01\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\addendum-work\\references\\prism-pc.webp",
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-2800039e-f73a-4721-875d-20b51bf3e862.png"
+    ],
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-d06e38bc-2764-427f-a6fc-b60f5aa2357b.png",
+    "revisions": [
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-43672f6d-b6ab-4fd3-b996-4e000f1dd862.png",
+        "prompt": "Use case: precise-object-edit. Make ONLY2 small style corrections to attached AQUA PC design. Preserve absolutely all layout, typography, object positions, panel sizes and other colors. The ordinary HEADER 更新 button currently has a GOLD FILL; change its fill to WHITE/very pale blue and its text and fine border to DARK BLUE, matching other neutral header controls. Ordinary resource remaining count 6 must also be BLUE rather than gold. Gold should remain only as tiny natural reflected highlights on fantasy stone/glass materials, not normal UI states. Add/retain a tiny footer on the lower-right blank margin exactly © SIKUMI LAB v0.13.0 試作, without changing sidebar/board dimensions. No other changes, no new content. Keep landscape1920x1080 aspect.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-43672f6d-b6ab-4fd3-b996-4e000f1dd862.png"
+        ]
+      },
+      {
+        "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-09f09b77-c968-4d12-a2b3-76041d43a8a9.png",
+        "prompt": "Use case: precise-object-edit. Edit ONLY material EDGE SEPARATION on the attached AQUA NOTES sheet-ui-play-b-pc design, in response to a newly confirmed art direction. Preserve all shapes, component positions, dimensions, routes, water levels, text, buttons, samples and layout EXACTLY. All white/transparent GAME PARTS (glass vessel outlines, ivory spring reservoir, fountain basin, pipes, water surfaces) must be cleanly readable over BRIGHT backdrop: add a restrained DARK BLUE binding contour around their silhouette, approximately #1d4f88 (not black), fine but clearly present at small final size, about1.3-1.8 screen px on full screen views. Keep an inner white/glass highlight and transparent refraction intact; do NOT make glass opaque or flatten its material. Add only a very soft pale BLUE contact/ambient halo immediately around EACH PART, not a surrounding rectangle. Do NOT darken entire background, panel or scene. No strong cartoon outline, heavy glow, black shadow, new objects or changed sizes. Water's current surface edge dark blue and slight blue local shadow; pale-gold musical alignment lights remain delicate. Do NOT outline Japanese text, logo, human guide, ordinary UI controls or all scenery. Header and footer text remain unchanged. Correct blue contour and local pale shadow only, same canvas aspect and ALL existing graphic content. This is final material separation refinement; no text or logic changes.",
+        "refs": [
+          "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-09f09b77-c968-4d12-a2b3-76041d43a8a9.png"
+        ]
+      }
+    ],
+    "binding_updated": true,
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-b-pc.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-play-addendum",
+    "processing": {
+      "original_size": [
+        1672,
+        941
+      ],
+      "fitted_size": [
+        1919,
+        1080
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1920,
+        1080
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-parts-b-prediction-detail",
+    "family": "sheet-ui-parts",
+    "variant": "b",
+    "state": "prediction-detail",
+    "title": "B案・予想3択の拡大見本",
+    "size": [
+      1536,
+      1024
+    ],
+    "refs": [
+      "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-0db18e8a-0f17-4afe-af41-1fd5ef5874a6.png"
+    ],
+    "prompt": "Use case: ui-mockup. NEW standalone enlarged DETAIL SHEET for AQUA NOTES candidate B. Attached sheet is ONLY a visual material reference; do NOT copy its two-button prediction example. Canvas1536x1024 RGB. One large frosted white/light-blue prediction card with crisp blue edge, Japanese sans-serif, empty pale background. Small sheet caption B案・予想の問い（3択の詳細） outside card. In card header exact どれだけ届く？ with × upper right. Main contents: EXACTLY THREE SEPARATE EQUALLY SIZED BUTTONS in a SINGLE HORIZONTAL ROW. There MUST be a LEFT button text 1 届く, a CENTER button text 2 届く, and a RIGHT button text 3 届く. Three buttons, three equal columns, all visible, no missing middle. Put a thin vertical gap between each. CENTER button cobalt BLUE with WHITE text to demonstrate a chosen option, left/right WHITE with DARK BLUE text. Do not merge any buttons. Under row exact note 選んでから水が流れます。. No submit/confirm button, no fourth option, no numbers as option indices outside those quantities. All3 labels large readable, amount plus 届く indicates flow quantity. Quiet elegant daytime white/blue palette, no scene, no serif, no gold, no decorations. Detail sheet supplements B's primary UI component sheet; preserves actual three-choice behavior.",
+    "path": "C:\\Users\\user\\.codex\\generated_images\\01a1962c-6d7f-7672-8c5a-0cb45a96f3ff\\exec-c08df26e-fa42-4b41-bb85-f73350c359fc.png",
+    "output": "public/graphics/candidates-20261101-addendum/sheet-ui-parts/sheet-ui-parts-b-prediction-detail.png",
+    "candidate_folder": "画面案/2026-11-01-sheet-ui-parts-addendum",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  }
+]

@@ -12,7 +12,7 @@ import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 
-const APP_VERSION = '0.13.0';
+const APP_VERSION = '0.13.1';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -1017,13 +1017,26 @@ function openMenu() {
   </div>`);
 }
 
+// 追加の発注書（docs/assets-addendum.md）のデザイン表。画面には組み込まず、開いて見比べる
+const sheetUrl = (dir, file) => new URL(`../../public/graphics/candidates-20261101-addendum/${dir}/${file}`, import.meta.url).href;
+const SHEETS = [
+  ['sheet-ui-title', 'タイトル画面', [['sheet-ui-title-a.png', 'A'], ['sheet-ui-title-b.png', 'B']]],
+  ['sheet-ui-play', 'プレイ画面', [['sheet-ui-play-a-edit.png', 'A 編集中'], ['sheet-ui-play-a-result.png', 'A 結果'], ['sheet-ui-play-a-pc.png', 'A PC'], ['sheet-ui-play-b-edit.png', 'B 編集中'], ['sheet-ui-play-b-result.png', 'B 結果'], ['sheet-ui-play-b-pc.png', 'B PC']]],
+  ['sheet-ui-parts', '画面の部品', [['sheet-ui-parts-a.png', 'A'], ['sheet-ui-parts-b.png', 'B'], ['sheet-ui-parts-b-prediction-detail.png', 'B 予想の3択']]],
+  ['sheet-pipe', '配管', [['sheet-pipe-a.png', 'A'], ['sheet-pipe-b.png', 'B']]],
+  ['sheet-water', '水と目盛り', [['sheet-water-a.png', 'A'], ['sheet-water-b.png', 'B']]],
+  ['logo-aqua', '作品のロゴ', [['logo-aqua-a.png', 'A'], ['logo-aqua-b.png', 'B']]],
+  ['logo-series', 'シリーズのロゴ', [['logo-series-a.png', 'A'], ['logo-series-b.png', 'B']]]
+];
 function openArt() {
   const label = v => (v === 'a' ? 'A' : v === 'b' ? 'B' : 'なし');
   const rows = ART_ITEMS.map(([k, name]) => `<div class="art-row"><span>${name}</span><span class="art-choices">${['a', 'b', null].map(v => `<button type="button" class="chip${state.art[k] === v ? ' on' : ''}" data-art="${k}:${v ?? ''}" aria-pressed="${state.art[k] === v}">${label(v)}</button>`).join('')}</span></div>`).join('');
   const badge = v => new URL(`../../public/graphics/candidates-20261101/ui-badges/ui-badges-${v}.png`, import.meta.url).href;
   openSheet('絵の候補（試作用）', `<p class="note">Codex が作った候補（採用は未確定）を、資材ごとに切り替えて見比べます。「なし」は今の仮の絵です。この端末にだけ覚えます。噴水と虹はクリア・100点のときに出ます。</p>
     <div class="art-list">${rows}</div>
-    <p class="note">盤面のバッジはデザイン表です（採用後に図形で作ります）：<a href="${badge('a')}" target="_blank" rel="noopener">A を開く</a>・<a href="${badge('b')}" target="_blank" rel="noopener">B を開く</a></p>`);
+    <p class="note">盤面のバッジはデザイン表です（採用後に図形で作ります）：<a href="${badge('a')}" target="_blank" rel="noopener">A を開く</a>・<a href="${badge('b')}" target="_blank" rel="noopener">B を開く</a></p>
+    <h3 class="sheet-sub">追加のデザイン表（見るだけ。採用後に図形と書式で作ります）</h3>
+    <ul class="plain sheet-links">${SHEETS.map(([dir, name, files]) => `<li>${name}：${files.map(([file, label]) => `<a href="${sheetUrl(dir, file)}" target="_blank" rel="noopener">${label}</a>`).join('・')}</li>`).join('')}</ul>`);
 }
 
 function openRecords() {

@@ -214,7 +214,9 @@ export function renderBoard(svg, model) {
       <stop offset=".6" stop-color="#8fd3a3"/><stop offset=".8" stop-color="#83b6ea"/><stop offset="1" stop-color="#ad94e3"/></linearGradient>
   </defs>`);
   out.push(`<rect x="0" y="0" width="${VIEW_W}" height="${GROUND}" fill="url(#sky)"/>`);
-  if (pick.bg) out.push(`<image href="${art('bg-trial', `bg-trial-${pick.bg}.png`)}" x="0" y="0" width="${VIEW_W}" height="${GROUND}" preserveAspectRatio="xMidYMax slice"/>`);
+  if (pick.bg) {
+    out.push(`<image href="${art('bg-trial', `bg-trial-${pick.bg}.png`)}" x="0" y="0" width="${VIEW_W}" height="${GROUND}" preserveAspectRatio="xMidYMax slice"/>`);
+  }
   out.push(`<rect x="0" y="${GROUND}" width="${VIEW_W}" height="${VIEW_H - GROUND}" fill="var(--soil)"/>`);
   out.push(`<line x1="0" y1="${GROUND}" x2="${VIEW_W}" y2="${GROUND}" stroke="var(--soil-line)" stroke-width="2"/>`);
 
@@ -233,10 +235,17 @@ export function renderBoard(svg, model) {
   const spring = layout.nodes.get(stage.spring.id);
   const sx0 = spring.cx - spring.w / 2;
   const sy = layout.yOf(H);
+  // 絵の部品は、明るい背景に溶け込まないよう、部品の周りだけに青い陰影を置き、縁を濃い青で縁取る（バインディング）。
+  // 前作は暗い背景に淡い陰影と明るい縁取りで分けていた。本作は明るい背景なので、その逆（2026-11-01 発案者）。
+  // 仕上がりは採用する絵に合わせて決める。それまでは目立たない控えめな値にしておく（強すぎると「あからさま」になる）
+  if (pick.spring) out.push(`<rect x="${sx0 - 9}" y="${sy - 11}" width="${spring.w + 18}" height="${GROUND - sy + 11}" rx="8" fill="none" stroke="rgba(29, 79, 136, .1)" stroke-width="4"/>`);
   if (!pick.spring) out.push(`<rect x="${sx0 - 4}" y="${sy - 10}" width="${spring.w + 8}" height="${GROUND - sy + 10}" rx="5" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
   out.push(`<rect x="${sx0}" y="${sy}" width="${spring.w}" height="${GROUND - sy}" fill="${waterColor(H, H)}"/>`);
   out.push(`<path d="${surfacePath(sx0, sx0 + spring.w, sy, reducedMotion ? 0 : 0.8, time / 420)}" stroke="var(--surface)" stroke-width="2" fill="none"/>`);
-  if (pick.spring) sliced(out, 'part-spring', pick.spring, sx0 - 8, sy - 12, spring.w + 16, GROUND - sy + 12, 240, 48, 40);
+  if (pick.spring) {
+    sliced(out, 'part-spring', pick.spring, sx0 - 8, sy - 12, spring.w + 16, GROUND - sy + 12, 240, 48, 40);
+    out.push(`<rect x="${sx0 - 7}" y="${sy - 11}" width="${spring.w + 14}" height="${GROUND - sy + 11}" rx="6" fill="none" stroke="var(--blue-deep)" stroke-width="1" opacity=".4"/>`);
+  }
   out.push(`<text x="${spring.cx}" y="${sy - 16}" class="label" text-anchor="middle">泉</text>`);
 
   // グラス
@@ -253,6 +262,7 @@ export function renderBoard(svg, model) {
       out.push(`<rect x="${x0 - 2}" y="${towerTop - 2}" width="${TOWER_W + 4}" height="${GROUND - towerTop + 2}" rx="7" fill="none" stroke="var(--gold)" stroke-width="3" opacity=".75"/>`);
     }
     if (!pick.glass) out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="url(#glassfill)"/>`);
+    else out.push(`<rect x="${x0 - 4}" y="${towerTop - 3}" width="${TOWER_W + 8}" height="${GROUND - towerTop + 3}" rx="8" fill="rgba(29, 79, 136, .04)" stroke="rgba(29, 79, 136, .1)" stroke-width="4"/>`);
     if (level !== null && level !== undefined && level * unit > 1.5) {
       const y = layout.yOf(level);
       out.push(`<rect x="${x0 + 2}" y="${y}" width="${TOWER_W - 4}" height="${(GROUND - y - 1).toFixed(2)}" rx="3" fill="${waterColor(level, H)}" opacity=".92"/>`);
@@ -260,7 +270,10 @@ export function renderBoard(svg, model) {
       const amp = reducedMotion ? 0 : dist * 6;
       out.push(`<path d="${surfacePath(x0 + 2, x1 - 2, y, amp, time / 260 + node.cx)}" stroke="var(--surface)" stroke-width="2.2" fill="none" stroke-linecap="round"/>`);
     }
-    if (pick.glass) sliced(out, 'part-glass', pick.glass, x0 - 3, towerTop - 4, TOWER_W + 6, GROUND - towerTop + 4, 136, 48, 40);
+    if (pick.glass) {
+      sliced(out, 'part-glass', pick.glass, x0 - 3, towerTop - 4, TOWER_W + 6, GROUND - towerTop + 4, 136, 48, 40);
+      out.push(`<rect x="${x0 - 1.5}" y="${towerTop - 2}" width="${TOWER_W + 3}" height="${GROUND - towerTop + 2}" rx="6" fill="none" stroke="var(--blue-deep)" stroke-width="1" opacity=".4"/>`);
+    }
     // 目盛り（音名は出さない）
     for (let k = 1; k <= H; k++) {
       const y = layout.yOf(k);
@@ -304,6 +317,7 @@ export function renderBoard(svg, model) {
       out.push(`<path d="M${cx - 10} ${b.top + 6} Q${cx - 6} ${b.top - 8} ${cx - 2} ${b.top + 4}" fill="none" stroke="var(--water-mid)" stroke-width="3" stroke-linecap="round"/>`);
     }
     out.push(`<path class="bowl" d="${b.bowl}" fill="${pick.basin ? 'none' : 'var(--stone)'}" stroke="${pick.basin ? 'none' : 'var(--stone-edge)'}" stroke-width="1.5"/>`);
+    if (pick.basin) out.push(`<ellipse cx="${cx}" cy="${GROUND - 2}" rx="24" ry="3.5" fill="rgba(29, 79, 136, .15)"/>`);
     if (pick.basin) out.push(`<image href="${art('part-basin', `part-basin-${pick.basin}.png`)}" x="${cx - 27}" y="${b.top - 3}" width="54" height="${54 * 208 / 384}" preserveAspectRatio="xMidYMid meet"/>`);
     // 指定量の印と、届いた量
     const markY = b.top + 9;

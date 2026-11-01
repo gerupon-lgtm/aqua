@@ -1,0 +1,648 @@
+[
+  {
+    "id": "sheet-pipe-a",
+    "family": "sheet-pipe",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-pipe/sheet-pipe-a.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 1785501,
+    "sha256": "006b756313c5d88e1251a98cee104eb29f86feea85c3c051b03c4609f51d00ea",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-pipe-b",
+    "family": "sheet-pipe",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-pipe/sheet-pipe-b.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 1702499,
+    "sha256": "340610c45a7bd064a35cd1ae3daeec8c348b52285f4e0d444066fdce0b0d9ba3",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-water-a",
+    "family": "sheet-water",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-water/sheet-water-a.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 1416104,
+    "sha256": "b08213e362bae2322117e1450cfac76fa8644f6af2ef5fdcdef26e45b468dce7",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-water-b",
+    "family": "sheet-water",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-water/sheet-water-b.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 1391535,
+    "sha256": "6f2bc5dca1216589d86af84ebf08575604940fc2dda41fea7b209e514c868f5f",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-aqua-a",
+    "family": "logo-aqua",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/logo-aqua/logo-aqua-a.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 916924,
+    "sha256": "e078c9149e633aabf166e2cc690a0a50d80c8e2cb8662753854fcedc00b1520a",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-aqua-b",
+    "family": "logo-aqua",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/logo-aqua/logo-aqua-b.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 967539,
+    "sha256": "dbfdf8431ffcb2b7051fee7c0cba7bfc5ebf781403493cf131ebd14be95938bd",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-series-a",
+    "family": "logo-series",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/logo-series/logo-series-a.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 970853,
+    "sha256": "7a1aaf9619381e9b9055641255682a986c2b3072ea7fb7bea2458bf794685546",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "logo-series-b",
+    "family": "logo-series",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/logo-series/logo-series-b.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 877879,
+    "sha256": "ca3706cf89c456cfeb0ffd85a71ee5c847a4f837bbf1432f61380ebf8f905e79",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-parts-a",
+    "family": "sheet-ui-parts",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-parts/sheet-ui-parts-a.png",
+    "size": [
+      1536,
+      2048
+    ],
+    "mode": "RGB",
+    "bytes": 2168942,
+    "sha256": "aba8047cd8e8d9e1a1e1afaac0fbe1b7a4941ecd156883a67a000dce0cc073ee",
+    "processing": {
+      "original_size": [
+        1024,
+        1536
+      ],
+      "fitted_size": [
+        1365,
+        2048
+      ],
+      "offset": [
+        85,
+        0
+      ],
+      "target_size": [
+        1536,
+        2048
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-parts-b",
+    "family": "sheet-ui-parts",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-parts/sheet-ui-parts-b.png",
+    "size": [
+      1536,
+      2048
+    ],
+    "mode": "RGB",
+    "bytes": 2008749,
+    "sha256": "5513e98532a79510261bf5a8793835dce51370e9d74f46af6d46722a5747d671",
+    "processing": {
+      "original_size": [
+        1024,
+        1536
+      ],
+      "fitted_size": [
+        1365,
+        2048
+      ],
+      "offset": [
+        85,
+        0
+      ],
+      "target_size": [
+        1536,
+        2048
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-b-edit",
+    "family": "sheet-ui-play",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-b-edit.png",
+    "size": [
+      1170,
+      2532
+    ],
+    "mode": "RGB",
+    "bytes": 2638598,
+    "sha256": "ffa82e3d5495b7db98f46fa6d14ea1ad92ea905cdfc3c4ea8770879281adff04",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-a-edit",
+    "family": "sheet-ui-play",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-a-edit.png",
+    "size": [
+      1170,
+      2532
+    ],
+    "mode": "RGB",
+    "bytes": 2690418,
+    "sha256": "46ad89ff413437f51555dfc9bf66a838123e6f831be2b61a42066765d94c179a",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-a-result",
+    "family": "sheet-ui-play",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-a-result.png",
+    "size": [
+      1170,
+      2532
+    ],
+    "mode": "RGB",
+    "bytes": 2489937,
+    "sha256": "aff1794161fd927042ca4c9f39a9da0bf3f130b83578032dadb38ad17b2ca21b",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-b-result",
+    "family": "sheet-ui-play",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-b-result.png",
+    "size": [
+      1170,
+      2532
+    ],
+    "mode": "RGB",
+    "bytes": 2568331,
+    "sha256": "55ea7c5f155dccec42a4bf5928a6baeaa27de8112b7dbd6546fac36373c0146c",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-title-a",
+    "family": "sheet-ui-title",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-title/sheet-ui-title-a.png",
+    "size": [
+      1170,
+      2532
+    ],
+    "mode": "RGB",
+    "bytes": 2763604,
+    "sha256": "804e4e4f49c400d69d61f79775d4359731e74ca7912fe745c826dc05919855ea",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-title-b",
+    "family": "sheet-ui-title",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-title/sheet-ui-title-b.png",
+    "size": [
+      1170,
+      2532
+    ],
+    "mode": "RGB",
+    "bytes": 2848832,
+    "sha256": "97e6c58f2562a4cd558b98988fb797fbe459142bda58da1e820a065965a4500f",
+    "processing": {
+      "original_size": [
+        853,
+        1844
+      ],
+      "fitted_size": [
+        1170,
+        2529
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "target_size": [
+        1170,
+        2532
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-a-pc",
+    "family": "sheet-ui-play",
+    "variant": "a",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-a-pc.png",
+    "size": [
+      1920,
+      1080
+    ],
+    "mode": "RGB",
+    "bytes": 2447422,
+    "sha256": "fb4ea365adb19fe1d38fd7871a555b3309a6c48b75d42c87e3acfae2da0616be",
+    "processing": {
+      "original_size": [
+        1672,
+        941
+      ],
+      "fitted_size": [
+        1919,
+        1080
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1920,
+        1080
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-play-b-pc",
+    "family": "sheet-ui-play",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-play/sheet-ui-play-b-pc.png",
+    "size": [
+      1920,
+      1080
+    ],
+    "mode": "RGB",
+    "bytes": 2332225,
+    "sha256": "c3caec84759bf925828597f1ebdd86aed73a9c4e62d168ac59cbed6a28a7d351",
+    "processing": {
+      "original_size": [
+        1672,
+        941
+      ],
+      "fitted_size": [
+        1919,
+        1080
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1920,
+        1080
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  },
+  {
+    "id": "sheet-ui-parts-b-prediction-detail",
+    "family": "sheet-ui-parts",
+    "variant": "b",
+    "file": "public/graphics/candidates-20261101-addendum/sheet-ui-parts/sheet-ui-parts-b-prediction-detail.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "bytes": 1049808,
+    "sha256": "3bee862552deec45e36ddefeb4d04a40cabae0c5a03f2c10f056ca85d34e0031",
+    "processing": {
+      "original_size": [
+        1536,
+        1024
+      ],
+      "fitted_size": [
+        1536,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "target_size": [
+        1536,
+        1024
+      ],
+      "crop": false,
+      "aspect_preserved": true,
+      "color_reduction": false
+    }
+  }
+]
