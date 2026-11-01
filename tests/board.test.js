@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { STAGES } from '../src/content/stages.js';
 import { analyzeStage, evaluate, thinnessOf } from '../src/logic/play.js';
-import { renderBoard, layoutFor } from '../src/ui/board.js';
+import { renderBoard, layoutFor, pipeCrossings, pipePath } from '../src/ui/board.js';
 import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS } from '../src/ui/visual-timing.js';
+import { PRACTICE } from '../src/content/tutorial.js';
 
 // 盤面の描画の点検（DOMを使わず、描いたSVGの文字列を調べる）
 function draw(stage, config, options = {}) {
@@ -18,6 +19,35 @@ function draw(stage, config, options = {}) {
   });
   return { ev, svg: svg.innerHTML };
 }
+
+test('器の案内枠に必要量の札と器が入り、高い出口でも札を外へ置き去りにしない', () => {
+  for (const stage of [PRACTICE, ...STAGES]) {
+    const { svg } = draw(stage, { connected: new Set(), primed: new Set(), thickness: {} }, { guide: 'basin' });
+    const match = /<rect x="([^"]+)" y="([^"]+)" width="([^"]+)" height="([^"]+)" rx="10" class="guide-ring-back"/.exec(svg);
+    assert.ok(match, stage.id);
+    const [, , y, , h] = match.map(Number);
+    const floor = layoutFor(stage).yOf(Number(stage.outlets[0].height));
+    assert.ok(y <= floor - 60, `${stage.id}: 札の上が枠から出ている`);
+    assert.ok(y + h >= floor + 3, `${stage.id}: 器の底が枠から出ている`);
+  }
+});
+
+test('案内中の配管は白と青の下敷きで示し、札より後の色の膜で覆わない', () => {
+  const { svg } = draw(PRACTICE, { connected: new Set(), primed: new Set(), thickness: {} }, { guide: 'pipe:P1', phase: 'edit' });
+  assert.ok(svg.indexOf('class="guide-pipe"') < svg.indexOf('data-pipe="P1"'));
+  assert.ok(svg.includes('stroke="#0875cb"'));
+  assert.ok(!svg.includes('path.guide-ring'));
+});
+
+test('8面の交差は接続点や段を動かさず、管をまたぐ図形で示す', () => {
+  const stage = STAGES[7], layout = layoutFor(stage);
+  const before = stage.candidates.map(c => pipePath(layout, c));
+  const crossings = pipeCrossings(layout, stage);
+  assert.ok(crossings.some(c => c.id === 'SB'));
+  const { svg } = draw(stage, { connected: new Set(), primed: new Set(), thickness: {} }, { phase: 'edit' });
+  assert.ok(svg.includes('data-pipe-bridge="SB"'));
+  assert.deepEqual(stage.candidates.map(c => pipePath(layout, c)), before);
+});
 
 test('届いた量が0の噴水盤には水を描かない（空のグラスの噴水盤に水が見えた不具合）', () => {
   const stage = STAGES[0];

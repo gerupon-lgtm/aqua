@@ -6,9 +6,6 @@
 <!-- app:head:start -->
 <title>AQUA NOTES 試作</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap">
 <!-- app:head:end -->
 <!-- OFFLINE_METADATA -->
 <link rel="stylesheet" href="./src/ui/style.css">
@@ -18,22 +15,33 @@
 <!-- タイトル画面（前作 prism に合わせる）。背景の絵とタイトルの一言は T-13 で決める（いまは仮） -->
 <section class="title-screen" id="title" aria-label="アクア・ノーツのタイトル">
   <div class="title-inner">
-    <div class="title-logo" aria-label="AQUA NOTES"><span class="l1">AQUA</span><span class="l2">NOTES</span></div>
-    <p class="title-lead">水をつなぎ、グラスを鳴らす。（仮）</p>
-    <div class="title-buttons">
+    <div class="title-hero">
+      <div class="series-logo" aria-label="SIKUMI NOTES 02"><span>SIKUMI</span><span>NOTES</span><b>02</b></div>
+      <h1 class="title-logo" aria-label="AQUA NOTES"><svg viewBox="0 0 1000 440" aria-hidden="true"><text class="aqua" x="500" y="260">AQUA</text><text class="notes" x="500" y="420">NOTES</text></svg></h1>
+      <p class="title-lead">水をつなぎ、グラスを鳴らす。</p>
+      <div class="title-symbols" aria-hidden="true">
+        <span class="title-spirit"></span><i></i>
+        <svg viewBox="0 0 90 100"><defs><linearGradient id="hero-glass"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".5" stop-color="#b3e4ff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient></defs><path d="M24 10 H66 L62 86 Q45 94 28 86Z" fill="url(#hero-glass)" stroke="#527492" stroke-width="2"/><path d="M28 49 Q45 53 62 49 L60 84 Q45 90 30 84Z" fill="#63b4e0" opacity=".75"/><path d="M27 49 Q45 53 63 49" fill="none" stroke="#236eaa" stroke-width="2"/><path d="M28 16 L31 40 M59 18 L57 33" fill="none" stroke="#fff" stroke-width="3"/><path d="M22 28 H29 M22 44 H29 M23 61 H30 M24 77 H31" stroke="#527492" stroke-width="1.5"/><ellipse cx="45" cy="10" rx="21" ry="3" fill="#f4fcff" stroke="#527492" stroke-width="2"/></svg><i></i>
+        <svg viewBox="0 0 90 100"><path d="M45 65 V12 M45 23 Q23 22 20 52 M45 23 Q67 22 70 52" fill="none" stroke="#4ba1d4" stroke-width="3" stroke-linecap="round"/><path d="M45 64 V15" stroke="#fff" stroke-width="1.3"/><path d="M9 67 H81 L71 94 Q45 100 19 94Z" fill="#fffefa" stroke="#527492" stroke-width="2"/><path d="M20 76 H70 L64 90 Q45 94 26 90Z" fill="#83c6e5" stroke="#8ca4b5"/><ellipse cx="45" cy="67" rx="36" ry="5" fill="#fffefa" stroke="#527492" stroke-width="2"/><ellipse cx="45" cy="67" rx="30" ry="2.5" fill="#d7effb" stroke="#c6ab6c"/></svg>
+      </div>
+    </div>
+    <nav class="title-menu" aria-label="はじめのメニュー"><div class="title-buttons">
       <button type="button" class="big" data-title="tutorial">チュートリアル</button>
       <button type="button" class="big" data-title="continuous">連続プレイ</button>
       <div class="pair"><button type="button" data-title="select">選択プレイ</button><button type="button" data-title="free" disabled>自由作成（準備中）</button></div>
       <div class="pair"><button type="button" data-title="parts">パーツの説明</button><button type="button" data-title="howto">遊び方と概要</button></div>
-      <div class="pair"><button type="button" data-title="resume" disabled>プレイ画面へ</button><button type="button" data-title="update">更新</button></div>
+      <button type="button" data-title="resume" disabled>プレイ画面へ</button>
     </div>
     <p class="title-message" id="title-message" role="status"></p>
     <footer class="title-foot"><span>© SIKUMI LAB</span><span id="title-version"></span></footer>
+    </nav>
   </div>
+  <button type="button" class="title-update" data-title="update">更新</button>
 </section>
 <div class="app" id="app">
   <header class="bar">
     <div class="logo" aria-label="AQUA NOTES"><span class="l1">AQUA</span><span class="l2">NOTES</span></div>
+    <p class="desktop-tagline">水をつなぎ、グラスを鳴らす。</p>
     <div class="tools">
       <button type="button" id="records">記録</button>
       <button type="button" id="sound" aria-pressed="true">音 オン</button>
@@ -43,6 +51,7 @@
   <section class="cond" id="cond" aria-live="polite"></section>
   <main class="board-wrap">
     <svg id="board" role="img" aria-label="真横から見た配管の断面" preserveAspectRatio="xMidYMax meet"></svg>
+    <div class="board-footer"><div id="board-aux" class="board-aux"></div><div class="board-legend" aria-hidden="true"><span><i></i>接続済み</span><span><i class="candidate"></i>つなげる配管</span><span>太・中・細：管の太さ</span></div></div>
   </main>
   <dialog class="toast" id="toast" aria-label="配管の設定"></dialog>
   <section class="panel" id="panel"></section>

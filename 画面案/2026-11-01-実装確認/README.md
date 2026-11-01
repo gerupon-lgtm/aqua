@@ -18,3 +18,6 @@
 古い比較画像は途中案で、最新の仕様の根拠にはしない。JPEGは手元だけ。最新の指示と確認はdocs/reviews/2026-11-01-visual-finish.md、機能担当向けの境界はdocs/handoff-visual.mdの7章を参照。
 
 100点の結果はv0.14.3で虹の後へ変更。本体を実再生した時系列はtiming-samples-v0143.json、画面はrainbow-before-result-v0143.jpg。通常の動きの虹の変化も本番SVGのテストで確認する。
+
+
+v0.14.4ではタイトル・PC配置・案内の枠・精霊・文の折り返し・開始合図・残る交差・挿絵を仕上げた。最新の依頼の照合と確認はdocs/reviews/2026-11-01-series-and-guide.md、引き継ぎはdocs/handoff-visual.mdの9章。v0144-app-layout-audit.jsonはPC/360幅の全30面ずつ、v0144-guide-copy-audit.jsonは12文×2幅の確認値。v0144-*.jpgは実画面の記録で、手元だけに保持。

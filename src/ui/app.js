@@ -9,11 +9,12 @@ import { explain, formatAmount } from '../logic/explain.js';
 import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText } from '../content/tutorial.js';
+import { guideMessage } from './guide-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
-import { resultCardDelay } from './visual-timing.js';
+import { resultCardDelay, STAGE_CUE_MS, stageCueOpacity } from './visual-timing.js';
 
-const APP_VERSION = '0.14.3';
+const APP_VERSION = '0.14.4';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -84,6 +85,7 @@ const state = {
   details: false,
   explain: false,
   highlight: null,
+  stageCueUntil: 0,
   mode: 'select', // tutorial・continuous・select
   continuous: null, // 連続プレイの進み具合（ContinuousRun）
   contAction: null, // 連続プレイで、結果のあとにすること（next・retry・gameover・complete）
@@ -145,7 +147,9 @@ function selectStage(index) {
   state.contAction = null;
   state.newFewest = false;
   if (state.mode === 'select') lastSelectIndex = index;
+  state.stageCueUntil = !state.titleOpen && index >= 0 && !state.loadError ? performance.now() + STAGE_CUE_MS : 0;
   renderAll();
+  if (state.stageCueUntil) loop();
 }
 
 // ---- 編集：配管をつなぐ・外す・太さ・呼び水（F-002、F-005、F-008） ----
@@ -345,14 +349,18 @@ let lastDraw = 0;
 function loop() {
   cancelAnimationFrame(frame);
   const tick = now => {
-    if (now - lastDraw >= 32) { lastDraw = now; drawBoard(); }
-    if (state.phase !== 'edit') frame = requestAnimationFrame(tick);
+    const done = state.phase === 'edit' && now >= state.stageCueUntil;
+    // 最後は32msの間隔を待たず描く。薄い合図が残ったまま停止することを防ぐ。
+    if (now - lastDraw >= 32 || done) { lastDraw = now; drawBoard(); }
+    if (!done) frame = requestAnimationFrame(tick);
   };
   frame = requestAnimationFrame(tick);
 }
 
 function drawBoard() {
   const now = performance.now();
+  const startCue = stageCueOpacity(state.stageCueUntil, now, reducedMotionQuery.matches);
+  $('cond').style.setProperty('--stage-cue', startCue.toFixed(3));
   const scale = scaleNow();
   const v = state.run ? viewAt(now) : { index: 0, settled: false, gateClosed: false };
   const view = state.phase === 'edit' || !state.evaluation ? null : state.evaluation.states[v.index];
@@ -376,6 +384,7 @@ function drawBoard() {
     reducedMotion: reducedMotionQuery.matches,
     highlight: state.highlight,
     guide: practiceStep() && practiceStep().target !== 'run' ? practiceStep().target : null,
+    startCue,
     onScale: level => onScale(level, scale),
     tickDistance: level => tickDistance(level, scale)
   });
@@ -505,15 +514,21 @@ function outletsHtml(st, outlets) {
 function renderPanel() {
   const panel = $('panel');
   const st = stage();
+  $('board-aux').replaceChildren();
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : practiceStep() ? `<p class="hint guide"><span class="spirit" aria-label="水の精霊"></span>${practiceStep().text}</p>` : guiding() ? `<p class="hint guide"><span class="spirit" aria-label="水の精霊"></span>${lessonFor(st).intro}</p>` : `<p class="hint">${st.hint}</p>`}
+      ${state.loadError ? `<p class="warn" role="alert">${state.loadError}</p>` : practiceStep() ? `<p class="hint guide">${guideMessage(practiceStep().text)}</p>` : guiding() ? `<p class="hint guide">${guideMessage(lessonFor(st).intro)}</p>` : `<p class="hint">${st.hint}</p>`}
       <div class="actions">${practiceStep()?.until === 'next'
         ? '<button type="button" class="primary" id="guide-next">次へ</button>'
         : `<button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
         <button type="button" class="primary${practiceStep()?.target === 'run' ? ' guide-target' : ''}" id="run" ${n && !state.loadError ? '' : 'disabled'}>水を流す</button>`}
       </div>`;
+    // PCだけ補助操作を盤面の下へ置く。同じボタンを移すので、無効条件も同じ。
+    if (matchMedia('(min-width: 1024px) and (min-height: 600px)').matches) {
+      const clear = panel.querySelector('#clear-pipes');
+      if (clear) $('board-aux').append(clear);
+    }
     return;
   }
   if (state.phase === 'running') {
@@ -607,8 +622,8 @@ function renderPanel() {
         ${state.newBest ? '<span class="newbest"><svg viewBox="0 0 20 15" width="16" height="12" aria-hidden="true"><path d="M2 12 L1 3 6 6 10 0 14 6 19 3 18 12 Z M2 14 H18" fill="currentColor"/></svg> 最高点</span>' : ''}
         <span class="used">${usedText}</span>
       </div>
-      ${isPractice() ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${practiceResultText(ev.outcome)}</p>` : ''}
-      ${state.prediction ? `<p class="guide-answer"><span class="spirit" aria-label="水の精霊"></span>${answerLine(state.prediction.question, state.prediction.picked)}</p>` : ''}
+      ${isPractice() ? `<p class="guide-answer">${guideMessage(practiceResultText(ev.outcome))}</p>` : ''}
+      ${state.prediction ? `<p class="guide-answer">${guideMessage(answerLine(state.prediction.question, state.prediction.picked))}</p>` : ''}
       ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${state.saveMessage}</p>` : ''}
       <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectConfig.primed.length}</span>` : ''}</div></div>
@@ -685,6 +700,12 @@ function closeToast() {
   if (!state.selected && !state.asking) return;
   state.selected = null;
   state.asking = null;
+  renderAll();
+}
+
+function clearPipes() {
+  state.config = emptyConfig();
+  state.selected = null;
   renderAll();
 }
 
@@ -822,7 +843,7 @@ function bind() {
     if (id === 'run') askOrRun();
     else if (id === 'guide-next') { state.practiceStep++; renderAll(); }
     else if (id === 'stop') { stopRun(); renderAll(); }
-    else if (id === 'clear-pipes') { state.config = emptyConfig(); state.selected = null; renderAll(); }
+    else if (id === 'clear-pipes') clearPipes();
     else if (id === 'next') goNext();
     else if (id === 'to-title') openTitle(state.mode === 'tutorial' ? 'チュートリアルを終えました。連続プレイか選択プレイで遊びましょう。' : '');
     else if (id === 'cont-restart') startMode('continuous', { level: state.continuous.level.id });
@@ -887,10 +908,18 @@ function bind() {
     closeResult();
   }, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeResult(); });
-  let lastWidth = 0;
+  let layoutFrame = 0;
   addEventListener('resize', () => {
-    if (innerWidth !== lastWidth) { lastWidth = innerWidth; fitConditionHeight(); }
-    renderResultToast();
+    cancelAnimationFrame(layoutFrame);
+    layoutFrame = requestAnimationFrame(() => {
+      // 高さだけの変更でもPCの詰め方が変わるので、条件を測り直す。
+      fitConditionHeight();
+      renderPanel();
+      renderResultToast();
+    });
+  });
+  $('board-aux').addEventListener('click', e => {
+    if (state.phase === 'edit' && e.target.closest('#clear-pipes:not(:disabled)')) clearPipes();
   });
   $('result-toast').addEventListener('toggle', e => {
     if (e.target.id !== 'detail') return;
@@ -910,7 +939,10 @@ function bind() {
     if (state.phase !== 'edit' || !p || p.id !== e.pointerId) return;
     if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 12) return; // なぞった・ずれたときは押していない扱い
     const p2 = boardPoint(e);
-    const pipe = pipeAt(state.layout, stage(), p2.x, p2.y);
+    // 丸い札と交差のまたぎは、見えている管そのものを選ぶ。ほかは従来どおり近い管。
+    const tagged = e.target.closest('[data-pipe-label], [data-pipe-bridge]');
+    const taggedId = tagged?.dataset.pipeLabel ?? tagged?.dataset.pipeBridge;
+    const pipe = stage().candidates.some(c => c.id === taggedId) ? taggedId : pipeAt(state.layout, stage(), p2.x, p2.y);
     if (pipe) tapPipe(pipe);
   });
   svg.addEventListener('pointercancel', () => { press = null; });
@@ -945,6 +977,7 @@ let lastSelectIndex = 0; // 選択プレイで最後に開いていた面（ア�
 
 function openTitle(message = '') {
   stopRun();
+  state.stageCueUntil = 0;
   state.titleOpen = true;
   closeSheet();
   renderTitle(message);
@@ -1037,14 +1070,16 @@ function openStageList() {
   openSheet('面を選ぶ', body);
 }
 
+const partPicture = (id, alt) => `<img class="part-illustration" src="${new URL(`../../public/graphics/intro-${id}.svg`, import.meta.url).href}" alt="${alt}" width="960" height="360">`;
 const PARTS_HTML = `<dl class="parts">
   <dt>給水塔</dt><dd>水が出るところ。給水塔の水の高さが、流れのもとになります。</dd>
   <dt>グラス</dt><dd>水がたまります。水位で音が決まり、水が多いほど低い音。目盛りに乗ると澄んだ和音になります。</dd>
   <dt>配管</dt><dd>給水塔とグラスをつなぎます。丸い札は「太・中・細」です。計算で使う細さは、太＝1・中＝2・細＝3。流れる量＝高さの差÷細さ。縦につなぐと細さは足し算、並べると流れやすくなります。</dd>
-  <dt>噴水盤</dt><dd>必要量の水を受けます。白い陶器の枠とガラスの内器で、水位と薄い金色の目印を見比べます。出口の管の太さは引き出し線の先の丸い札で示します。口が高い受け皿は、その高さより上の分だけ流れます。</dd>
-  <dt>太さを選べる配管</dt><dd>タップして太さを選びます。</dd>
-  <dt>サイフォンと桶</dt><dd>壁を越える配管です。桶で呼び水をすると流れます。桶の数には限りがあります。</dd>
-  <dt>水門</dt><dd>流したあと自動で閉じます。開いたときと閉じたときの両方で、必要量を届けます。</dd>
+  <dt>噴水盤</dt><dd>${partPicture('outlets', '給水塔から分かれた水が2つの噴水盤へ届く様子')}必要量の水を受けます。白い陶器の枠とガラスの内器で、水位と薄い金色の目印を見比べます。出口の管の太さは引き出し線の先の丸い札で示します。</dd>
+  <dt>高さの違う出口</dt><dd>${partPicture('height', '出口より高い水位の分だけ、水が流れる様子')}口が高い受け皿は、その高さより上の分だけ流れます。高さの差は口の高さから測ります。</dd>
+  <dt>太さを選べる配管</dt><dd>${partPicture('adjustable', '配管をタップして3段階の太さを選ぶ様子')}タップして「太・中・細」から選びます。</dd>
+  <dt>サイフォンと桶</dt><dd>${partPicture('siphon', '桶で壁を越える管の空気を水に置き換え、流れるようにする様子')}壁を越える配管です。桶で呼び水をすると流れます。桶の数には限りがあります。</dd>
+  <dt>水門</dt><dd>${partPicture('gate', '水門が開いているときと閉じたあとで、水の通り道が変わる様子')}流したあと自動で閉じます。開いたときと閉じたときの両方で、必要量を届けます。</dd>
 </dl>`;
 const HOWTO_HTML = `<div class="howto">
   <p>配管をタップしてつなぎ、「水を流す」を押します。噴水盤に必要量が届けばクリア。使った配管が少ないほど高い点で、いちばん少ない答えが100点です（桶を使う面は、桶の少なさが先）。</p>

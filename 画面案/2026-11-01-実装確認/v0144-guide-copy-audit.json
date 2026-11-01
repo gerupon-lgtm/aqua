@@ -1,0 +1,647 @@
+{
+  "samples": 24,
+  "overflow": [],
+  "maxHeight": 120,
+  "details": [
+    {
+      "label": "1：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "左は給水塔です。",
+          "wide": false
+        },
+        {
+          "text": "水が高さ4まで入っていて、",
+          "wide": false
+        },
+        {
+          "text": "ここから流れ出します。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "1：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "左は給水塔です。",
+          "wide": false
+        },
+        {
+          "text": "水が高さ4まで入っていて、",
+          "wide": false
+        },
+        {
+          "text": "ここから流れ出します。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "2：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "グラスです。",
+          "wide": false
+        },
+        {
+          "text": "横の線は目盛り。",
+          "wide": false
+        },
+        {
+          "text": "水が多いほど",
+          "wide": false
+        },
+        {
+          "text": "低い音が鳴ります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "2：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "グラスです。",
+          "wide": false
+        },
+        {
+          "text": "横の線は目盛り。",
+          "wide": false
+        },
+        {
+          "text": "水が多いほど",
+          "wide": false
+        },
+        {
+          "text": "低い音が鳴ります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "3：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "「必要量2」が届けたい量。",
+          "wide": false
+        },
+        {
+          "text": "水位と金色の目印を",
+          "wide": false
+        },
+        {
+          "text": "見比べます。",
+          "wide": false
+        },
+        {
+          "text": "線の先の丸い札は",
+          "wide": false
+        },
+        {
+          "text": "出口の管の太さです。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "3：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "「必要量2」が届けたい量。",
+          "wide": false
+        },
+        {
+          "text": "水位と金色の目印を",
+          "wide": false
+        },
+        {
+          "text": "見比べます。",
+          "wide": false
+        },
+        {
+          "text": "線の先の丸い札は",
+          "wide": false
+        },
+        {
+          "text": "出口の管の太さです。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "4：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "管の上の丸い札は",
+          "wide": false
+        },
+        {
+          "text": "「太・中・細」です。",
+          "wide": false
+        },
+        {
+          "text": "太い管ほど、",
+          "wide": false
+        },
+        {
+          "text": "水が流れやすくなります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "4：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "管の上の丸い札は",
+          "wide": false
+        },
+        {
+          "text": "「太・中・細」です。",
+          "wide": false
+        },
+        {
+          "text": "太い管ほど、",
+          "wide": false
+        },
+        {
+          "text": "水が流れやすくなります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "5：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "光っている「太」の配管を",
+          "wide": false
+        },
+        {
+          "text": "タップして、",
+          "wide": false
+        },
+        {
+          "text": "つなぎましょう。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "5：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "光っている「太」の配管を",
+          "wide": false
+        },
+        {
+          "text": "タップして、",
+          "wide": false
+        },
+        {
+          "text": "つなぎましょう。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "6：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "届く量＝",
+          "wide": false
+        },
+        {
+          "text": "高さの差÷細さの合計。",
+          "wide": false
+        },
+        {
+          "text": "4÷(1＋出口の1)＝2。",
+          "wide": false
+        },
+        {
+          "text": "「水を流す」を",
+          "wide": false
+        },
+        {
+          "text": "押しましょう。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "6：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "届く量＝",
+          "wide": false
+        },
+        {
+          "text": "高さの差÷細さの合計。",
+          "wide": false
+        },
+        {
+          "text": "4÷(1＋出口の1)＝2。",
+          "wide": false
+        },
+        {
+          "text": "「水を流す」を",
+          "wide": false
+        },
+        {
+          "text": "押しましょう。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "7：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "水は",
+          "wide": false
+        },
+        {
+          "text": "高いところから",
+          "wide": false
+        },
+        {
+          "text": "低いところへ",
+          "wide": false
+        },
+        {
+          "text": "流れます。",
+          "wide": false
+        },
+        {
+          "text": "流れる量＝高さの差÷細さ。",
+          "wide": false
+        },
+        {
+          "text": "縦につなぐと",
+          "wide": false
+        },
+        {
+          "text": "細さは足し算です。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "7：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "水は",
+          "wide": false
+        },
+        {
+          "text": "高いところから",
+          "wide": false
+        },
+        {
+          "text": "低いところへ",
+          "wide": false
+        },
+        {
+          "text": "流れます。",
+          "wide": false
+        },
+        {
+          "text": "流れる量＝高さの差÷細さ。",
+          "wide": false
+        },
+        {
+          "text": "縦につなぐと",
+          "wide": false
+        },
+        {
+          "text": "細さは足し算です。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "8：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "配管を並べてつなぐと、",
+          "wide": false
+        },
+        {
+          "text": "通り道が増えて",
+          "wide": false
+        },
+        {
+          "text": "流れやすくなります。",
+          "wide": false
+        },
+        {
+          "text": "細さ2を2本並べると、",
+          "wide": false
+        },
+        {
+          "text": "細さ1の1本と比べて？",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "8：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "配管を並べてつなぐと、",
+          "wide": false
+        },
+        {
+          "text": "通り道が増えて",
+          "wide": false
+        },
+        {
+          "text": "流れやすくなります。",
+          "wide": false
+        },
+        {
+          "text": "細さ2を2本並べると、",
+          "wide": false
+        },
+        {
+          "text": "細さ1の1本と比べて？",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "9：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "グラスに入った水は、",
+          "wide": false
+        },
+        {
+          "text": "入った分だけ",
+          "wide": false
+        },
+        {
+          "text": "出ていきます。",
+          "wide": false
+        },
+        {
+          "text": "水は分かれて、",
+          "wide": false
+        },
+        {
+          "text": "両方の噴水盤へ届きます。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "9：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "グラスに入った水は、",
+          "wide": false
+        },
+        {
+          "text": "入った分だけ",
+          "wide": false
+        },
+        {
+          "text": "出ていきます。",
+          "wide": false
+        },
+        {
+          "text": "水は分かれて、",
+          "wide": false
+        },
+        {
+          "text": "両方の噴水盤へ届きます。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "10：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "受け皿の口が高いと、",
+          "wide": false
+        },
+        {
+          "text": "グラスの水位が",
+          "wide": false
+        },
+        {
+          "text": "口より上がった分だけ",
+          "wide": false
+        },
+        {
+          "text": "流れます。",
+          "wide": false
+        },
+        {
+          "text": "高さの差は",
+          "wide": false
+        },
+        {
+          "text": "口の高さから測ります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "10：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "受け皿の口が高いと、",
+          "wide": false
+        },
+        {
+          "text": "グラスの水位が",
+          "wide": false
+        },
+        {
+          "text": "口より上がった分だけ",
+          "wide": false
+        },
+        {
+          "text": "流れます。",
+          "wide": false
+        },
+        {
+          "text": "高さの差は",
+          "wide": false
+        },
+        {
+          "text": "口の高さから測ります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "11：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "近道と回り道があります。",
+          "wide": false
+        },
+        {
+          "text": "同じ量を届けられるなら、",
+          "wide": false
+        },
+        {
+          "text": "配管の本数が少ないほど",
+          "wide": false
+        },
+        {
+          "text": "高い点になります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "11：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "近道と回り道があります。",
+          "wide": false
+        },
+        {
+          "text": "同じ量を届けられるなら、",
+          "wide": false
+        },
+        {
+          "text": "配管の本数が少ないほど",
+          "wide": false
+        },
+        {
+          "text": "高い点になります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "12：360px画面",
+      "height": 120,
+      "width": 252,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "水門は流したあと",
+          "wide": false
+        },
+        {
+          "text": "自動で閉じます。",
+          "wide": false
+        },
+        {
+          "text": "道が1本減ると、",
+          "wide": false
+        },
+        {
+          "text": "水の分かれ方が",
+          "wide": false
+        },
+        {
+          "text": "変わります。",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "label": "12：414px画面",
+      "height": 120,
+      "width": 306,
+      "overflow": false,
+      "phrases": [
+        {
+          "text": "水門は流したあと",
+          "wide": false
+        },
+        {
+          "text": "自動で閉じます。",
+          "wide": false
+        },
+        {
+          "text": "道が1本減ると、",
+          "wide": false
+        },
+        {
+          "text": "水の分かれ方が",
+          "wide": false
+        },
+        {
+          "text": "変わります。",
+          "wide": false
+        }
+      ]
+    }
+  ]
+}

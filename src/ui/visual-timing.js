@@ -2,6 +2,13 @@
 export const RAINBOW_AFTER_MS = 800;
 export const RAINBOW_FADE_MS = 700;
 export const RAINBOW_HOLD_MS = 500;
+export const STAGE_CUE_MS = 1100;
+
+export function stageCueOpacity(until, now, still = false) {
+  const left = until - now;
+  if (left <= 0 || left > STAGE_CUE_MS) return 0;
+  return still ? .85 : Math.sin(Math.PI * left / STAGE_CUE_MS) * .9;
+}
 
 export function resultCardDelay(outcome, timing) {
   if (outcome === 'ng') return timing.cardNgMs;

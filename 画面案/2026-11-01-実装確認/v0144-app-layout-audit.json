@@ -1,0 +1,1052 @@
+[
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "1 まっすぐ届ける選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "2 分かれる水選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "3 二つの噴水盤選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "4 高い受け皿選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "5 近道と回り道選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "6 水門を閉じても選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "7 二つの噴水盤へ選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "8 間のグラスを通って選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "9 奥の二つへ選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "10 三つの噴水盤選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "11 二本ずつの道選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "12 分けて届けるのまとめ選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "13 太さで分ける選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "14 二本の太さ選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "15 奥で分ける選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "16 並べるか、太くするか選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "17 遠くまで調える選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "18 流れを調えるのまとめ選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "19 高い噴水盤選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "20 奥ほど高い選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "21 高さの違う両端選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "22 高い口と低い口選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "23 三つの高さ選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "24 高さのまとめ選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "25 壁の向こうへ選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "26 壁の手前と向こう選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "27 二つの壁選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "28 一つの桶で選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "29 桶を減らす選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 660,
+      "w": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "clearCount": 1,
+    "condBottom": 368,
+    "horizontalOverflow": false,
+    "panelBottom": 756,
+    "title": "30 壁を越えるのまとめ選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "1 まっすぐ届ける選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "2 分かれる水選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "3 二つの噴水盤選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "4 高い受け皿選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "5 近道と回り道選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "6 水門を閉じても選択プレイ・お試し∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "7 二つの噴水盤へ選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "8 間のグラスを通って選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "9 奥の二つへ選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "10 三つの噴水盤選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "11 二本ずつの道選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "12 分けて届けるのまとめ選択プレイ・分けて届ける∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "13 太さで分ける選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "14 二本の太さ選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "15 奥で分ける選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "16 並べるか、太くするか選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "17 遠くまで調える選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "18 流れを調えるのまとめ選択プレイ・流れを調える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "19 高い噴水盤選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "20 奥ほど高い選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "21 高さの違う両端選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "22 高い口と低い口選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "23 三つの高さ選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "24 高さのまとめ選択プレイ・低い出口、高い出口∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "25 壁の向こうへ選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "26 壁の手前と向こう選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "27 二つの壁選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "28 一つの桶で選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "29 桶を減らす選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "board": {
+      "h": 351.0625,
+      "w": 328,
+      "x": 16,
+      "y": 241
+    },
+    "clearCount": 1,
+    "horizontalOverflow": false,
+    "panelBottom": 772.0625,
+    "title": "30 壁を越えるのまとめ選択プレイ・壁を越える∨",
+    "verticalOverflow": false,
+    "viewport": [
+      360,
+      800
+    ]
+  }
+]

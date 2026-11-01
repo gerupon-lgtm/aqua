@@ -22,7 +22,7 @@ function copyTree(dir) {
   for (const entry of readdirSync(join(root, dir), { withFileTypes: true })) {
     const source = posix.join(dir, entry.name);
     if (entry.isDirectory()) { if (source !== 'src/pwa') copyTree(source); continue; }
-    if (!/\.(js|css|png|svg|webp)$/.test(entry.name)) continue;
+    if (!/\.(js|css|png|svg|webp|ttf)$/.test(entry.name)) continue;
     const target = posix.join(prefix, source);
     mkdirSync(join(output, posix.dirname(target)), { recursive: true });
     copyFileSync(join(root, source), join(output, target));
@@ -34,6 +34,9 @@ function copyTree(dir) {
 }
 copyTree('src');
 copyTree('public');
+// 同梱するMontserratの利用条件も、配信するファイルに添える。
+mkdirSync(join(output, prefix, 'public/fonts'), { recursive: true });
+copyFileSync(join(root, 'public/fonts/OFL.txt'), join(output, prefix, 'public/fonts/OFL.txt'));
 
 let index = read('index.html');
 if (!index.includes('<!-- OFFLINE_METADATA -->')) throw new Error('index.html に OFFLINE_METADATA の印がありません。');

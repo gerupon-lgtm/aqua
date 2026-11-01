@@ -41,7 +41,8 @@ export function layoutFor(stage) {
 }
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const WIDTH = { 1: 10, 2: 6.5, 3: 4 };
+// 画面の線幅はそろえる。計算上の3段階は丸い太・中・細で伝える（発案者）。
+const WIDTH = { 1: 5.5, 2: 5.5, 3: 5.5 };
 
 // 管の通り道：グラスの底から地面の下へ下り、横へ進んで、相手の底へ上がる。
 // サイフォンはグラスの中の入口から上がり、壁の上の山を越えて、相手の入口へ下りる（logic-design 3章）
@@ -118,6 +119,43 @@ function segmentDistance(px, py, [ax, ay], [bx, by]) {
   const len2 = dx * dx + dy * dy;
   const t = len2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2)) : 0;
   return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
+}
+
+// 地中の交差は合流ではない。水平の管に小さなまたぎを置き、奥の縦管を一部隠す。
+// 段や接続点は動かさず、近い交差は1つのまたぎにまとめる。
+const crossingCache = new WeakMap();
+export function pipeCrossings(layout, stage) {
+  if (crossingCache.has(layout)) return crossingCache.get(layout);
+  const routes = stage.candidates.filter(c => !c.siphon).map(c => ({ c, p: pipePath(layout, c) }));
+  const crossings = [];
+  for (const { c, p } of routes) {
+    const xs = new Set();
+    for (const { c: other, p: q } of routes) {
+      if (c.id === other.id) continue;
+      for (const [a, b] of [[q.pts[0], q.pts[1]], [q.pts[3], q.pts[2]]]) {
+        if (a[0] > p.pts[1][0] + 12 && a[0] < p.pts[2][0] - 12 && p.my > a[1] + 13 && p.my < b[1] - 13) xs.add(a[0]);
+      }
+    }
+    let group;
+    for (const x of [...xs].sort((a, b) => a - b)) {
+      if (group && x - group.right < 22) group.right = x;
+      else { group = { id: c.id, left: x, right: x, y: p.my }; crossings.push(group); }
+    }
+  }
+  crossingCache.set(layout, crossings);
+  return crossings;
+}
+
+function drawCrossings(out, layout, stage, model) {
+  for (const cross of pipeCrossings(layout, stage)) {
+    const { id, left, right, y } = cross;
+    const c = stage.candidates.find(c => c.id === id), on = model.connected.has(id);
+    const w = WIDTH[Number(model.thinness(c))] ?? 6.5;
+    const color = [215,183,131].map((v, i) => Math.round(v + ([172,128,88][i] - v) * Math.min(1, (y - GROUND) / (VIEW_H - GROUND))));
+    const d = `M${left - 10} ${y} Q${left - 6} ${y} ${left - 5} ${y - 5} Q${(left + right) / 2} ${y - 12} ${right + 5} ${y - 5} Q${right + 6} ${y} ${right + 10} ${y}`;
+    const wet = on && model.phase !== 'edit' && model.view?.result.pipes[id]?.wet && !model.view?.broken?.has(id);
+    out.push(`<g class="pipe-bridge" data-pipe-bridge="${id}"><rect x="${left - 10}" y="${y - 14}" width="${right - left + 20}" height="${w / 2 + 17}" fill="rgb(${color})" pointer-events="none"/><rect x="${left - 10}" y="${y - 14}" width="${right - left + 20}" height="${w / 2 + 17}" fill="url(#pebbles)" pointer-events="none"/><path d="${d}" fill="none" stroke="${on ? 'var(--blue)' : 'var(--pipe-off)'}" stroke-width="${w + 4}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${wet ? 'var(--water-mid)' : on && model.phase === 'edit' ? 'var(--pipe-on)' : '#fff'}" stroke-width="${w}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="transparent" stroke-width="20"/></g>`);
+  }
 }
 
 const THICK_LABEL = { 1: '太', 2: '中', 3: '細' };
@@ -240,6 +278,10 @@ function drawPipe(out, layout, c, model) {
   const broken = phase !== 'edit' && view?.broken?.has(c.id);
   const isPrimed = c.siphon && primed.has(c.id);
   const filled = on && ((phase !== 'edit' && flowInfo?.wet) || (phase === 'edit' && isPrimed));
+  // 土にも空にも埋もれない青と白の二重の光。管そのものと札は上に描く。
+  if (model.guide === `pipe:${c.id}`) {
+    out.push(`<g class="guide-pipe" pointer-events="none"><path d="${d}" fill="none" stroke="#0875cb" stroke-width="${w + 12}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#ffffff" stroke-width="${w + 7}" stroke-linecap="round" stroke-linejoin="round"/></g>`);
+  }
   out.push(`<g class="pipe${on ? ' on' : ''}" data-pipe="${c.id}">`);
   if (on) {
     if (selected === c.id) out.push(`<path d="${d}" fill="none" stroke="var(--gold)" stroke-width="${w + 10}" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/>`);
@@ -278,6 +320,7 @@ function drawPipeLabel(out, layout, c, model, position) {
   const { phase } = model;
   if (on || phase === 'edit') {
     const { x, y } = position;
+    if (model.guide === `pipe:${c.id}`) out.push(`<circle cx="${x}" cy="${y}" r="13" fill="#ffffff" stroke="#0875cb" stroke-width="2.5" pointer-events="none"/>`);
     thicknessBadge(out, x, y, thin, { on, round: model.pipeBadge !== 'pill', adjustable: !on && Boolean(c.adjustable), id: c.id });
   }
   if (c.gate) {
@@ -394,6 +437,7 @@ export function renderBoard(svg, model) {
 
   // 地面の下を通る配管（サイフォンはグラスの後に描いて、グラスの中の入口が見えるようにする）
   for (const c of stage.candidates.filter(c => !c.siphon)) drawPipe(out, layout, c, model);
+  drawCrossings(out, layout, stage, model);
 
   // 泉
   const spring = layout.nodes.get(stage.spring.id);
@@ -552,6 +596,11 @@ export function renderBoard(svg, model) {
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
     const [vt, vm] = verdict ? VERDICT_BADGE[verdict.verdict] ?? ['light', null] : ['light', null];
     badge(out, { x: cx, y: b.top - 18, text: `必要量${target}`, tone: vt, mark: vm, size: 9, h: 16 });
+    if (model.startCue > 0) {
+      const w = 12 + textWidth(`必要量${target}`, 9);
+      const left = Math.min(VIEW_W - w - 2, Math.max(2, cx - w / 2));
+      out.push(`<rect class="start-cue" x="${left - 2}" y="${b.top - 28}" width="${w + 4}" height="20" rx="5" fill="#ffe3a3" fill-opacity=".18" stroke="#b18a35" stroke-width="2.5" opacity="${model.startCue.toFixed(3)}" pointer-events="none"/>`);
+    }
     out.push('</g>');
     if (dy < 0) badge(out, { x: cx, y: b.top + dy - 38, text: `高さ${o.height}`, size: 8, h: 13 });
     // 短い出口の管は、引き出し線の先で太さを示す。「出口 太」の札は置かない。
@@ -567,11 +616,11 @@ export function renderBoard(svg, model) {
   svg.innerHTML = out.join('');
 }
 
-// 練習面の案内で、説明している部品を金色の枠で光らせる（前作のチュートリアルと同じく、操作する場所を示す）。
+// 練習面の案内。説明の札も含めて、背景から分かれる青と白の二重枠で囲む。
 // guide：spring・tower・basin・badges・pipe:ID。枠は操作を受け取らない
 function drawGuide(out, stage, layout, guide) {
   if (!guide) return;
-  const ring = (x, y, w, h) => out.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" class="guide-ring" pointer-events="none"/>`);
+  const ring = (x, y, w, h) => out.push(`<g class="guide-frame" pointer-events="none"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" class="guide-ring-back"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" class="guide-ring"/></g>`);
   if (guide === 'spring') {
     const s = layout.nodes.get(stage.spring.id);
     const sy = layout.yOf(layout.H);
@@ -584,16 +633,17 @@ function drawGuide(out, stage, layout, guide) {
     const vessel = basinPlacement(layout, o);
     const cx = vessel.cx;
     const dy = layout.yOf(Number(o.height)) - GROUND;
-    ring(cx - vessel.width / 2 - 5, GROUND - 42 + dy, vessel.width + 10, 62);
+    // 必要量の札は器の上端−18、札の高さ16。札の上にも5px空ける。
+    const top = basinShape(cx).top - 18 - 8 - 5 + dy;
+    ring(cx - vessel.width / 2 - 5, top, vessel.width + 10, GROUND + 8 + dy - top);
+    const label = outletLabelPositions(layout, stage).get(o.id);
+    ring(label.x - 14, label.y - 14, 28, 28);
   } else if (guide === 'badges') {
     for (const c of stage.candidates) {
       const { x: mx, y: my } = pipeLabelPositions(layout, stage).get(c.id);
-      out.push(`<rect x="${mx - 22}" y="${my - 14}" width="44" height="28" rx="14" class="guide-ring" pointer-events="none"/>`);
+      ring(mx - 14, my - 14, 28, 28);
     }
-  } else if (guide.startsWith('pipe:')) {
-    const c = stage.candidates.find(x => x.id === guide.slice(5));
-    if (c) out.push(`<path d="${pipePath(layout, c).d}" fill="none" class="guide-ring" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>`);
-  }
+  } // pipe:ID は管と札の下に描く。最後に重ねて管の中身を隠さない。
 }
 
 // 盤面上の点からグラスを探す（結果表示中のなぞりに使う）

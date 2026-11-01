@@ -1,6 +1,8 @@
 /* 昼の明るい世界、白と青が基調。淡い金色は光る場所だけ（要件5.5、screens.md 0章）。
    世界観として明るい1つの見た目に決めているため、暗い配色は用意しない。
    配置：上に条件、中央に断面の盤面、下に操作と結果。横向きでは盤面の右に操作を置く。 */
+@font-face { font-family: Montserrat; src: url("../../public/fonts/montserrat-500.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: Montserrat; src: url("../../public/fonts/montserrat-600.ttf") format("truetype"); font-weight: 600; font-display: swap; }
 :root {
   /* 明るい見た目だけなので、端末が暗い表示でもボタンなどの既定の色を明るい側に固定する
      （ダイアログの文字が白になり、白いボタンの上で見えなくなった。2026-11-01 スマホで確認） */
@@ -78,6 +80,7 @@ button { font: inherit; color: inherit; white-space: nowrap; }
 .logo { display: grid; line-height: 1; font-family: var(--font-logo); color: var(--blue-deep); }
 .logo .l1 { font-weight: 600; font-size: 17px; letter-spacing: .14em; }
 .logo .l2 { font-weight: 500; font-size: 10.5px; letter-spacing: .36em; color: var(--water-mid); }
+.desktop-tagline { display: none; }
 .stages { display: flex; gap: 6px; margin-left: auto; }
 .tab {
   min-width: 38px; height: 34px; border-radius: 17px; border: 1px solid var(--line);
@@ -92,7 +95,7 @@ button { font: inherit; color: inherit; white-space: nowrap; }
   font-size: 13px; cursor: pointer; white-space: nowrap;
 }
 
-.cond { grid-area: cond; display: grid; gap: 4px; align-content: start; } /* 高さは app.js が全部の面で一番高いものにそろえる */
+.cond { grid-area: cond; display: grid; grid-template-rows: auto 1fr; gap: 4px; align-content: start; } /* 共通の高さは条件カードの内側へ収め、カードと盤面の間に余分な空きを作らない */
 .cond-title { display: flex; align-items: baseline; gap: 10px; }
 .eyebrow { font-size: 11.5px; letter-spacing: .12em; color: var(--ink-soft); }
 .name { font-weight: 700; font-size: 17px; text-wrap: balance; }
@@ -112,6 +115,7 @@ button { font: inherit; color: inherit; white-space: nowrap; }
   background: var(--sky-top); border: 1px solid var(--line);
   display: flex; align-items: flex-end; position: relative;
 }
+.board-footer { display: none; }
 #board { width: 100%; height: 100%; display: block; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
 #board.swipeable { touch-action: none; cursor: crosshair; }
 #board.editable { touch-action: none; } /* 編集中はタップの途中で画面のスクロールに取られないようにする */
@@ -127,7 +131,7 @@ button { font: inherit; color: inherit; white-space: nowrap; }
 .panel { grid-area: panel; display: grid; gap: 8px; }
 .hint { margin: 0; color: var(--ink-soft); font-size: 13.5px; }
 /* 編集中と実行中で案内の行数が違っても、盤面の大きさが変わらないように3行分を確保する */
-.panel > .hint { line-height: 1.5; min-height: 61px; } /* 13.5px×1.5×3行。案内の文字の大きさが変わっても高さを変えない */
+.panel > .hint { line-height: 1.6; min-height: 120px; } /* 案内の有無・実行・結果で盤面を動かさない */
 .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 .actions button { height: 44px; padding: 0 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
 .primary { background: var(--blue); color: #fff; border: 1px solid var(--blue); }
@@ -265,39 +269,64 @@ th { color: var(--ink-soft); font-weight: 500; }
 .chooser-actions { justify-content: flex-end; border-top: 1px solid var(--line); padding-top: 12px; }
 .outlets .state-head { font-size: 12.5px; color: var(--ink-soft); font-weight: 600; margin-top: 2px; }
 
-/* 水の精霊（仮の姿：小さなしずく。見た目は T-13 で決める）と、案内・答え合わせの文（F-019） */
-.spirit { display: inline-block; width: 12px; height: 12px; margin-right: 6px; border-radius: 50% 0 50% 50%; transform: rotate(-45deg); background: linear-gradient(135deg, #8cc8f0, var(--water-mid)); vertical-align: -1px; flex: none; }
-.panel > .hint.guide { color: var(--blue-deep); font-size: 13px; }
-.guide-answer { margin: 0; padding: 8px 10px; border-radius: 8px; background: #eaf3fb; color: var(--blue-deep); font-size: 13.5px; }
-.chooser-head h3 .spirit { width: 14px; height: 14px; }
-/* 練習面の案内：説明している部品と、押すボタンを金色で光らせる */
-#board .guide-ring { fill: none; stroke: var(--gold); stroke-width: 3; animation: guide-pulse 1.2s ease-in-out infinite; }
-#board path.guide-ring { stroke-width: 18; opacity: .4; }
-.guide-target { box-shadow: 0 0 0 3px var(--gold); animation: guide-pulse 1.2s ease-in-out infinite; }
-@keyframes guide-pulse { 50% { opacity: .55; } }
+/* 精霊と文章は別の列。画像の下へ回り込ませず、全行の左端をそろえる。 */
+.hint.guide, .guide-answer { display: grid; grid-template-columns: 64px minmax(0,1fr); align-items: start; gap: 12px; }
+.panel > .hint.guide { color: var(--blue-deep); font-size: 14px; }
+.guide-copy { min-width: 0; line-height: 1.6; }
+.guide-copy .phrase { display: inline-block; white-space: nowrap; }
+.guide-answer { margin: 0; padding: 10px; border-radius: 10px; background: #eaf3fb; color: var(--blue-deep); font-size: 14px; }
+/* 青の外側に白い縁を置き、空・土のどちらにも消えないようにする。 */
+#board .guide-ring-back { fill: none; stroke: #fff; stroke-width: 6; }
+#board .guide-ring { fill: none; stroke: #075fae; stroke-width: 2.8; }
+#board .guide-pipe { filter: drop-shadow(0 0 3px #b6eeff); }
+.guide-target { box-shadow: 0 0 0 2px #fff, 0 0 0 5px #075fae; }
 .tab.practice { min-width: 56px; padding: 0 10px; font-size: 13px; }
-@media (prefers-reduced-motion: reduce) { #board .guide-ring, .guide-target { animation: none; } }
 
 /* ---- タイトル画面（前作 prism に合わせる。背景の絵は T-13 で決める。いまは空の色の重ね） ---- */
 .title-screen {
   position: fixed; inset: 0; z-index: 18; overflow-y: auto;
   background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 70%, var(--soil) 100%);
-  display: grid; place-items: start center;
-  padding: max(28px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: grid; place-items: stretch center; box-sizing: border-box;
+  padding: max(20px, env(safe-area-inset-top, 0px)) max(18px, env(safe-area-inset-right, 0px)) max(14px, env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px));
 }
-.title-inner { width: min(440px, 100%); display: grid; gap: 18px; justify-items: center; padding-top: 6vh; }
-.title-logo { display: grid; justify-items: center; line-height: 1; font-family: var(--font-logo); color: var(--blue-deep); }
-.title-logo .l1 { font-weight: 600; font-size: 48px; letter-spacing: .16em; }
-.title-logo .l2 { font-weight: 500; font-size: 16px; letter-spacing: .5em; color: var(--water-mid); margin-top: 6px; }
-.title-lead { margin: 0; color: var(--ink-soft); font-size: 14px; }
-.title-buttons { width: 100%; display: grid; gap: 10px; margin-top: 8px; }
-.title-buttons button { height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-weight: 600; cursor: pointer; }
-.title-buttons button.big { height: 58px; font-size: 17px; }
+.title-inner { width: min(1000px, 100%); min-height: 0; display: grid; grid-template-rows: minmax(250px,1fr) auto; gap: clamp(8px,2vh,24px); }
+.title-hero { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; padding-bottom: clamp(16px,4vh,40px); text-align: center; }
+.title-logo { width: min(360px,90%); margin: 0; line-height: 1; font-family: var(--font-logo); color: var(--blue-deep); filter: drop-shadow(0 2px 2px #fff); }
+.title-logo svg { display: block; width: 100%; max-height: 25vh; fill: currentColor; }
+.title-logo .aqua { font-size: 240px; font-weight: 600; letter-spacing: 30px; text-anchor: middle; }
+.title-logo .notes { font-size: 90px; font-weight: 500; letter-spacing: 50px; text-anchor: middle; }
+.title-lead { margin: 12px 0; color: #294b6a; font-size: 13px; text-shadow: 0 1px 3px #fff; }
+.title-symbols { display: flex; align-items: center; justify-content: center; width: min(360px,85%); gap: 12px; }
+.title-symbols > svg, .title-symbols > .title-spirit { flex: none; width: 23%; height: clamp(42px,12vh,95px); }
+.title-spirit { background: url("../../public/graphics/spirit.png") center / contain no-repeat; filter: drop-shadow(0 1px 1px #3b78a5); }
+.title-symbols i { flex: 1; height: 1px; background: linear-gradient(90deg,transparent,#527fa4,transparent); }
+.title-menu { width: min(430px,100%); justify-self: center; text-align: center; }
+.title-buttons { width: 100%; display: grid; gap: 8px; }
+.title-buttons button { height: 44px; border-radius: 9px; border: 1px solid #9fb6cc; background: rgba(255,255,255,.94); color: var(--ink); font-weight: 500; cursor: pointer; }
+.title-buttons button.big { height: 44px; font-size: 15px; }
+.title-buttons .pair button { height: 48px; }
 .title-buttons button.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
 .title-buttons button:disabled { opacity: .45; cursor: default; }
-.title-buttons .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.title-message { margin: 0; min-height: 1.5em; font-size: 13px; color: var(--blue-deep); text-align: center; }
-.title-foot { display: flex; gap: 12px; font-size: 11px; color: var(--ink-soft); }
+.title-buttons .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.title-buttons [data-title="resume"] { background: rgba(244,249,253,.85); }
+.title-message { margin: 8px 0 0; font-size: 13px; color: var(--blue-deep); }
+.title-message:empty { display: none; }
+.title-foot { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 10px; color: #3e5b75; }
+.series-logo { display: grid; grid-template-columns: auto auto; gap: 0 8px; margin-bottom: 6px; font: 600 10px/1.15 var(--font-logo); letter-spacing: .14em; color: #315f89; text-align: center; }
+.series-logo span { grid-column: 1; }
+.series-logo b { grid-column: 2; grid-row: 1/3; align-self: center; border-left: 1px solid #88a7bf; padding-left: 8px; font-size: 17px; letter-spacing: 0; }
+.title-update { position: absolute; top: max(10px,env(safe-area-inset-top)); right: max(12px,env(safe-area-inset-right)); min-height: 32px; padding: 4px 13px; background: rgba(255,255,255,.9); border: 1px solid #9fb6cc; border-radius: 9px; font-size: 13px; cursor: pointer; }
+@media (min-aspect-ratio: 1/1) {
+  .title-inner { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); grid-template-rows: minmax(0,1fr); align-items: center; gap: 24px; }
+  .title-hero { padding-bottom: 0; }
+  .title-logo svg { max-height: 40vh; }
+  .title-symbols > svg, .title-symbols > .title-spirit { height: clamp(42px,20vh,95px); }
+}
+@media (max-aspect-ratio: 1/1) and (max-height: 650px) {
+  .title-inner { grid-template-rows: minmax(180px,1fr) auto; gap: 6px; }
+  .title-hero { padding-bottom: 8px; }
+  .title-symbols { display: none; }
+}
 
 /* ---- 面の切り替えと条件カード（前作の ‹ 名前 ∨ › と条件カード） ---- */
 .switcher { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 6px; align-items: stretch; }
@@ -309,7 +338,8 @@ th { color: var(--ink-soft); font-weight: 500; }
 .stage-name .name { font-weight: 700; font-size: 17px; max-width: 100%; }
 .stage-name .sub { font-size: 12px; color: var(--ink-soft); }
 .stage-name .caret { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--ink-soft); font-size: 13px; }
-.cond-card { border: 1px solid var(--line); border-radius: 12px; background: var(--card); padding: 8px 12px; display: grid; gap: 4px; }
+.cond-card { position: relative; border: 1px solid var(--line); border-radius: 12px; background: var(--card); padding: 8px 12px; display: grid; grid-template-rows: auto 1fr auto; align-items: start; gap: 4px; }
+.cond-card::after { content: ''; position: absolute; inset: 0; border: 2px solid #c4a05a; background: rgba(255,216,128,.15); border-radius: inherit; opacity: var(--stage-cue,0); pointer-events: none; }
 .cond-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; }
 .cond-label { font-size: 12px; letter-spacing: .08em; color: var(--ink-soft); }
 .cond-tools { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-soft); }
@@ -337,17 +367,20 @@ th { color: var(--ink-soft); font-weight: 500; }
 .stage-item .t { overflow: hidden; text-overflow: ellipsis; }
 .stage-item .m { color: var(--gold); }
 .plain { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 13.5px; }
-.parts { margin: 8px 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 13.5px; }
-.parts dt { font-weight: 700; color: var(--blue-deep); }
+.parts { margin: 8px 0; display: grid; grid-template-columns: minmax(0,1fr); gap: 6px; font-size: 14px; line-height: 1.65; }
+.parts dt { font-weight: 700; color: var(--blue-deep); margin-top: 12px; font-size: 16px; }
 .parts dd { margin: 0; }
+.part-illustration { display: block; width: 100%; height: auto; max-height: 190px; object-fit: contain; margin-bottom: 8px; background: #f0f7fc; border-radius: 10px; }
 .howto p { margin: 6px 0; font-size: 13.5px; }
 
 /* ---- 採用した絵（docs/assets.md、雰囲気 A）：水の精霊とタイトル画面の背景 ---- */
 .spirit {
-  float: left; width: 26px; height: 38px; margin: -2px 6px 0 0; border-radius: 0; transform: none;
-  background: url("../../public/graphics/spirit.png") center / contain no-repeat;
+  display: inline-block; position: relative; width: 64px; height: 94px; flex: none; vertical-align: middle;
+  border-radius: 46%; background: radial-gradient(ellipse,#cfe5f6 12%,#e7f2fb 65%,#f7fbff 100%); box-shadow: inset 0 0 0 1px #b8d1e5;
 }
-.chooser-head h3 .spirit { float: none; display: inline-block; width: 22px; height: 32px; vertical-align: middle; }
+.spirit::after { content: ''; position: absolute; inset: 2px; background: url("../../public/graphics/spirit.png") center / contain no-repeat; filter: drop-shadow(1px 0 0 #5e93b9) drop-shadow(-1px 0 0 #5e93b9) drop-shadow(0 1px 1px #fff); }
+.chooser-head h3 { display: flex; align-items: center; gap: 12px; }
+.chooser-head h3 .spirit { width: 52px; height: 76px; }
 .title-screen { background: url("../../public/graphics/title-portrait.webp") center / cover no-repeat var(--sky-top); }
 @media (orientation: landscape) {
   .title-screen { background-image: url("../../public/graphics/title-landscape.webp"); }
@@ -395,4 +428,78 @@ th { color: var(--ink-soft); font-weight: 500; }
   .result-hero { min-height: 58px; }
   .result-hero .laurels { height: 58px; }
   .result-hero .score { font-size: 36px; }
+}
+
+/* 前作と同じく、PCでは左が盤面、右が条件と案内・操作。同じ要素をCSSで置く。 */
+@media (min-width: 1024px) and (min-height: 600px) {
+  .app { max-width: 1600px; padding: 16px 24px 8px; gap: 16px 24px; grid-template-columns: minmax(0,1fr) clamp(340px,28vw,400px); grid-template-rows: 64px auto minmax(0,1fr) 20px; grid-template-areas: "bar bar" "board cond" "board panel" "foot foot"; }
+  .bar { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .logo .l1 { font-size: 29px; }
+  .logo .l2 { font-size: 14px; letter-spacing: .48em; }
+  .desktop-tagline { display: block; margin: 0 0 0 12px; color: var(--ink-soft); font-size: 16px; }
+  .tools { gap: 10px; }
+  .tools button { height: 44px; padding-inline: 16px; font-size: 15px; }
+  .cond { gap: 12px; }
+  .switcher { grid-template-columns: 44px minmax(0,1fr) 44px; gap: 8px; }
+  .switcher .name { font-size: 21px; }
+  .switcher .sub { font-size: 13px; }
+  .switcher .nav { height: 60px; }
+  .cond-card { padding: 14px 16px; gap: 10px; }
+  .cond-goal { font-size: 19px; line-height: 1.65; }
+  .cond-goal b { font-size: 23px; }
+  .cond-res { font-size: 15px; }
+  .cond-label { font-size: 13px; }
+  .panel { align-content: end; min-height: 0; gap: 20px; }
+  .panel > .hint { min-height: 160px; font-size: 16px; }
+  .panel > .hint.guide { font-size: 16px; }
+  .panel > .actions { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px; }
+  .panel > .actions .primary { grid-column: 1/-1; grid-row: 1; font-size: 20px; min-height: 62px; }
+  .panel > .actions button { height: 48px; font-size: 16px; }
+  .panel > .actions .retry { width: auto; }
+  .panel > .actions #next { grid-column: 2; }
+  .board-wrap { display: grid; grid-template-rows: minmax(0,1fr) 58px; }
+  .board-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px 18px; padding: 6px 14px; border-top: 1px solid var(--line); background: #f8fbfe; box-sizing: border-box; }
+  .board-aux button { height: 42px; border-radius: 9px; padding: 0 14px; font-size: 14px; cursor: pointer; }
+  .board-legend { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 14px; color: var(--ink-soft); font-size: 12px; }
+  .board-legend span { display: flex; align-items: center; gap: 6px; }
+  .board-legend i { width: 23px; border-top: 4px solid #2a6db5; }
+  .board-legend i.candidate { border-top: 3px dashed #8ea8bf; }
+  .foot { font-size: 12px; }
+}
+
+/* 低い横画面では、条件と案内が重ならないよう右列を少し広げて詰める。 */
+@media (min-width: 1024px) and (min-height: 600px) and (max-height: 740px) {
+  .app { padding-block: 12px 8px; row-gap: 12px; grid-template-rows: 54px auto minmax(0,1fr) 20px; }
+  .bar { padding-bottom: 8px; }
+  .switcher .name { font-size: 17px; }
+  .switcher .sub { font-size: 12px; }
+  .switcher .nav { height: 48px; }
+  .cond { gap: 8px; }
+  .cond-card { padding: 10px 12px; gap: 6px; }
+  .cond-goal { font-size: 17px; line-height: 1.45; }
+  .cond-goal b { font-size: 19px; }
+  .panel { gap: 12px; }
+  .panel > .hint, .panel > .hint.guide { min-height: 120px; font-size: 14px; }
+  .panel > .actions .primary { min-height: 52px; font-size: 18px; }
+  .panel > .actions button { height: 44px; font-size: 14px; }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  .app { grid-template-columns: minmax(0,1fr) 320px; }
+  .switcher { grid-template-columns: 36px minmax(0,1fr) 36px; gap: 4px; }
+  .switcher .nav { height: 40px; }
+  .stage-name { padding: 3px 20px 3px 6px; }
+  .stage-name .name { font-size: 15px; line-height: 1.3; }
+  .stage-name .sub { font-size: 11px; line-height: 1.3; }
+  .cond-card { padding: 6px 10px; gap: 2px; }
+  .cond-head { min-height: 24px; }
+  .cond-goal { font-size: 14px; line-height: 1.45; }
+  .cond-goal b { font-size: 15px; }
+  .cond-label, .cond-tools { font-size: 11px; }
+  .cond-res { font-size: 12px; gap: 2px 10px; }
+  .cond-res b { font-size: 13px; }
+  .mini { height: 24px; padding-inline: 8px; font-size: 11.5px; }
+  .panel > .hint, .panel > .hint.guide { min-height: 106px; font-size: 13px; }
+  .hint.guide { grid-template-columns: 52px minmax(0,1fr); gap: 10px; }
+  .hint.guide .spirit { width: 52px; height: 76px; }
 }

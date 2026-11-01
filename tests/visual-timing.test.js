@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS, RAINBOW_HOLD_MS } from '../src/ui/visual-timing.js';
+import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS, RAINBOW_HOLD_MS, STAGE_CUE_MS, stageCueOpacity } from '../src/ui/visual-timing.js';
+
+test('開始の合図は1.1秒だけで、控えめ設定では同じ濃さを保ち、古い合図は残らない', () => {
+  assert.ok(stageCueOpacity(STAGE_CUE_MS, 550) > .8);
+  assert.equal(stageCueOpacity(STAGE_CUE_MS, STAGE_CUE_MS), 0);
+  assert.equal(stageCueOpacity(0, 1), 0);
+  assert.equal(stageCueOpacity(STAGE_CUE_MS, 100, true), stageCueOpacity(STAGE_CUE_MS, 1000, true));
+});
 
 const timing = { jingleMs: 1400, cardClearMs: 2300, cardNgMs: 2300 };
 
