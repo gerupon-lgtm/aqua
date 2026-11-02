@@ -16,5 +16,7 @@ pipePathの描く線へ曲線を含め、1本の連続した管とする。背�
 - states.json：6面×5状態＝30表示・40か所。背景を塗る四角は0、管本体と交差の色・描く線・流れの点の位置は一致。
 - after-water.jpg / after-two-crossings.jpg：流れる水と、交差が2か所の面。
 - local-t8-body-taps.jpg：実アプリでまたぐSBを直接押し、次に下のACを押して2本を別々に接続できた画面。
+- public-assets.json / public-app.json：公開資材59件の一致、旧v0.14.10からの更新、公開版の直接の押下と3寸法の点検。
+- public-mobile.jpg / public-pc.jpg：公開本体の実画面。画像は手元に保存し、Gitには含めない。
 
 高さバッジのA/B案は隣の2026-11-03-basin-badge-layoutへ保存。比較だけで、今回の交差の修正に採用していない。スマホ実機での見え方・指操作の受け入れは未確認。

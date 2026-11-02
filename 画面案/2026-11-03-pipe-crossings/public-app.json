@@ -1,0 +1,291 @@
+{
+  "version": "0.14.11",
+  "updatedFrom": "0.14.10",
+  "layouts": [
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "8 間のグラスを通って\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "8 間のグラスを通って\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 756,
+        "height": 44,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 712,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 712
+      },
+      "badgeMinimum": 35.74468994140625,
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "contentWidth": 459.5744680851064,
+      "guide": false,
+      "hint": {
+        "bottom": 692,
+        "height": 160,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 532,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 532
+      },
+      "legend": {
+        "bottom": 752,
+        "height": 32,
+        "left": 563.609375,
+        "right": 862.609375,
+        "top": 720,
+        "width": 299,
+        "x": 563.609375,
+        "y": 720
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        1280,
+        800
+      ],
+      "stage": "8 間のグラスを通って\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 697,
+        "height": 600,
+        "left": 25,
+        "right": 872.609375,
+        "top": 97,
+        "width": 847.609375,
+        "x": 25,
+        "y": 97
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    }
+  ],
+  "result": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 20.732391357421875,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 266.55946601941747,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "8 間のグラスを通って\n選択プレイ・分けて届ける\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      58,
+      360,
+      412
+    ]
+  },
+  "sameMobileFrame": true,
+  "selectedByBodyTaps": [
+    "SB",
+    "AC"
+  ],
+  "bridges": [
+    {
+      "curve": "M122.63999999999999 426 C128.64 426 128.64 418 134.64 418 H134.64 C140.64 418 140.64 426 146.64 426",
+      "id": "SB",
+      "opaqueRects": 0
+    }
+  ],
+  "errors": []
+}
