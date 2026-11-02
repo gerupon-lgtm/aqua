@@ -1,0 +1,426 @@
+{
+  "beforeVersion": "0.14.7",
+  "before": {
+    "actions": {
+      "bottom": 652.0625,
+      "height": 44,
+      "left": 16,
+      "right": 374,
+      "top": 608.0625,
+      "width": 358,
+      "x": 16,
+      "y": 608.0625
+    },
+    "badgeMinimum": 11.2633056640625,
+    "board": {
+      "bottom": 472.0625,
+      "height": 231.0625,
+      "left": 16,
+      "right": 374,
+      "top": 241,
+      "width": 358,
+      "x": 16,
+      "y": 241
+    },
+    "contentWidth": 144.81382978723406,
+    "guide": false,
+    "hint": {
+      "bottom": 600.0625,
+      "height": 120,
+      "left": 16,
+      "right": 374,
+      "top": 480.0625,
+      "width": 358,
+      "x": 16,
+      "y": 480.0625
+    },
+    "legend": {
+      "bottom": 469.0625,
+      "height": 32,
+      "left": 45.5,
+      "right": 344.5,
+      "top": 437.0625,
+      "width": 299,
+      "x": 45.5,
+      "y": 437.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 431.0625,
+      "height": 189.0625,
+      "left": 17,
+      "right": 373,
+      "top": 242,
+      "width": 356,
+      "x": 17,
+      "y": 242
+    },
+    "viewBox": [
+      0,
+      0,
+      360,
+      470
+    ]
+  },
+  "afterVersion": "0.14.8",
+  "after": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "beforeRun": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "result": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "resultText": "結果\nPERFECT\n×\n100点\n配管 1 本\n\n試行 1 回（この面の最少 1 回）\n\n噴水盤\n✓\nちょうど\n必要量\n2\n届いた量\n2\n満点の本数\n1本\n\nグラスをマウスでなぞると、そのグラスの音を聞き直せます。\n\nくわしい記録\n解説\nもう一度\n次へ",
+  "explanationBefore": {
+    "height": 459,
+    "rootOverflow": false,
+    "scrollHeight": 604,
+    "scrollTop": 35
+  },
+  "explanationAfter": {
+    "height": 459,
+    "rootOverflow": false,
+    "scrollHeight": 604,
+    "scrollTop": 145
+  },
+  "desktop": {
+    "actions": {
+      "bottom": 756,
+      "height": 120,
+      "left": 897.609375,
+      "right": 1256,
+      "top": 636,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 636
+    },
+    "badgeMinimum": 35.74468994140625,
+    "board": {
+      "bottom": 756,
+      "height": 660,
+      "left": 24,
+      "right": 873.609375,
+      "top": 96,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "contentWidth": 459.5744680851064,
+    "guide": false,
+    "hint": {
+      "bottom": 616,
+      "height": 160,
+      "left": 897.609375,
+      "right": 1256,
+      "top": 456,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 456
+    },
+    "legend": {
+      "bottom": 752,
+      "height": 32,
+      "left": 563.609375,
+      "right": 862.609375,
+      "top": 720,
+      "width": 299,
+      "x": 563.609375,
+      "y": 720
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      1280,
+      800
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 697,
+      "height": 600,
+      "left": 25,
+      "right": 872.609375,
+      "top": 97,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "viewBox": [
+      0,
+      0,
+      360,
+      470
+    ]
+  },
+  "rotatedBack": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "errors": []
+}
