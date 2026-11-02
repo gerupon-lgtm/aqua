@@ -8,7 +8,7 @@ export const TUTORIAL_KEY = 'aqua-tutorial-v1';
 
 // 面ごとの教え（精霊の言葉）と、予想の問いで聞く状態。下の欄の案内（3行まで）に収まる長さにする
 export const LESSONS = {
-  T1: { intro: '水は高いところから低いところへ流れます。流れる量＝高さの差÷管の数字。縦につなぐと数字は足し算です。' },
+  T1: { intro: '水は高いところから低いところへ流れます。毎秒の量＝高さの差÷管の数字。縦につなぐと数字は足し算です。' },
   T2: { intro: '配管を並べてつなぐと、通り道が増えて流れやすくなります。中の管2本と、太の管1本を比べてみましょう。' },
   T3: { intro: 'グラスに入った水は、入った分だけ出ていきます。水は分かれて、両方の噴水盤へ届きます。' },
   T4: { intro: '水位と口の高さの差を、出口の管の数字で割ります。口より低い水位では流れません。' },
@@ -34,7 +34,7 @@ export function buildQuestion(stage, ev, random = Math.random) {
   while (wrong.length < 2 && pool.length) wrong.push(pool.splice(Math.floor(random() * pool.length), 1)[0]);
   const choices = [answer, ...wrong].sort((a, b) => a.cmp(b));
   return {
-    text: `${ev.states.length > 1 ? '水門が開いているとき、' : ''}${label}に届く量は？`,
+    text: `${ev.states.length > 1 ? '水門が開いているとき、' : ''}${label}に毎秒届く量は？`,
     label,
     answer,
     choices: choices.map(c => ({ value: c.toString(), text: formatAmount(c) }))
@@ -44,8 +44,8 @@ export function buildQuestion(stage, ev, random = Math.random) {
 // 答え合わせの一文（結果のトーストに出す）
 export function answerLine(question, picked) {
   const actual = formatAmount(question.answer);
-  if (frac(picked).eq(question.answer)) return `予想どおり！ ${question.label}に ${actual} 届きました。下の解説で計算を確かめましょう。`;
-  return `予想は ${formatAmount(frac(picked))}、実際は ${actual} でした。下の解説で、どこで差が出たか確かめましょう。`;
+  if (frac(picked).eq(question.answer)) return `予想どおり！ ${question.label}に 毎秒${actual} 届きました。下の解説で計算を確かめましょう。`;
+  return `予想は毎秒${formatAmount(frac(picked))}、実際は毎秒${actual}でした。下の解説で、どこで差が出たか確かめましょう。`;
 }
 
 // 記録（D-08）：面ごとの完了と、全体のスキップ。保存できない端末でも遊べるよう、失敗は無視する
@@ -88,12 +88,12 @@ export const PRACTICE = {
 export const PRACTICE_STEPS = [
   { target: 'spring', until: 'next', text: '左は給水塔です。水が高さ4まで入っていて、ここから流れ出します。' },
   { target: 'tower', until: 'next', text: 'グラスの目盛り1つが高さ1です。左の数字と見比べます。水が多いほど低い音です。' },
-  { target: 'basin', until: 'next', text: '「必要量2」が届けたい量。水位と金色の目印を見比べます。線の先の丸い札は出口の管の太さです。' },
+  { target: 'basin', until: 'next', text: '「必要量2/秒」は毎秒2です。器にためる量ではありません。水は出たあと下へ流れます。' },
   { target: 'badges', until: 'next', text: '下の凡例を見ましょう。太は1、中は2、細は3。同じ高さの差なら、小さい数字ほど多く流れます。' },
   { target: 'pipe:P1', until: 'connect:P1', text: '光っている「太」の配管をタップして、つなぎましょう。' },
-  { target: 'run', until: 'run', text: '届く量＝高さの差÷管の数字の合計。4÷(1＋出口の1)＝2。「水を流す」を押しましょう。' }
+  { target: 'run', until: 'run', text: '毎秒の量＝高さの差÷管の数字の合計。4÷(1＋出口の1)＝2。「水を流す」を押しましょう。' }
 ];
 
 export const practiceResultText = outcome => (outcome === 'ng'
   ? '必要量と違う量が届きました。「配管を見直す」で、「太」の配管だけをつないでみましょう。'
-  : '噴水盤に2届きました。結果の「解説」で計算を確かめ、「次へ」でお試し1へ進みましょう。');
+  : '噴水盤に毎秒2届きました。結果の「解説」で計算を確かめ、「次へ」でお試し1へ進みましょう。');

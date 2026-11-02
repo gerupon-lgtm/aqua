@@ -5,7 +5,7 @@ const escapeText = text => String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;'
 const TERMS = [
   '太さを選べる配管', '太さを変えられる配管', 'グラスの水位', '高さの差', '水位の差', '流れる量', '流れやすくなります',
   '高い受け皿', '左の噴水盤', '右の噴水盤', '中の噴水盤', '噴水盤', '給水塔', 'サイフォン', 'グラス', '配管',
-  '管の数字', '凡例', '水門', '呼び水', '必要量', '届いた量', '目盛り', '通り道', '分かれ道', '受け皿', '細さ', '太さ', '本数', 'グラスハープ', 'ジングル',
+  '管の数字', '毎秒の量', '毎秒', '出口高さ', '吹き出し口', '凡例', '水門', '呼び水', '必要量', '届いた量', '目盛り', '通り道', '分かれ道', '受け皿', '細さ', '太さ', '本数', 'グラスハープ', 'ジングル',
   'チュートリアル', '連続プレイ', '選択プレイ', '自由作成', 'パーツの説明', 'いちばん少ない',
   '予想どおり', '予想', '実際', '届きました', '届きません', '届けます', '届けましょう', '届けました',
   '流れます', '流れません', '足りません', '足りない', '多すぎます', 'ちょうど', '変わります',
@@ -14,7 +14,7 @@ const TERMS = [
   '水が届いていません', '流れにくさ', '流れやすさ', '減らすと', '増やすと', '足し算', '流れていません'
 ].sort((a, b) => b.length - a.length);
 // 分数と「約」の括弧は本文では一まとまり。大きな数値欄だけはamountMarkupで分ける。
-const token = new RegExp(`(?:（[^（）]{1,24}）|(?:[÷＝→] ?)?(?:差 ?|細さ ?|管の数字 ?|入る ?|出る ?)?[−-]?\\d+(?:[./]\\d+)*(?:[〜–]\\d+)?(?:（約[−-]?\\d+(?:\\.\\d+)?）)?(?: ?(?:秒|本|回|個|面))?|→ ?(?:グラス[A-Z]|給水塔|(?:左の|右の|中の)?噴水盤|高い受け皿)|グラス[A-Z]|${TERMS.join('|')})(?:には|では|から|まで|より|だけ|ほど|は|が|を|に|の|へ|で|と|も|や)?[、。！？：]?`, 'g');
+const token = new RegExp(`(?:（[^（）]{1,24}）|(?:[÷＝→] ?)?(?:差 ?|細さ ?|管の数字 ?|入る ?|出る ?|毎秒 ?)?[−-]?\\d+(?:[./]\\d+)*(?:[〜–]\\d+)?(?:（約[−-]?\\d+(?:\\.\\d+)?）)?(?:/秒| ?(?:秒|本|回|個|面))?|→ ?(?:グラス[A-Z]|給水塔|(?:左の|右の|中の)?噴水盤|高い受け皿)|グラス[A-Z]|${TERMS.join('|')})(?:には|では|から|まで|より|だけ|ほど|は|が|を|に|の|へ|で|と|も|や)?[、。！？：]?`, 'g');
 
 export function textMarkup(text) {
   let result = '', at = 0;
@@ -30,15 +30,15 @@ export function phraseMarkup(text) {
   return String(text).split('|').map(part => `<span class="phrase">${textMarkup(part)}</span>`).join('');
 }
 
-export function amountMarkup(value) {
+export function amountMarkup(value, { perSecond = false } = {}) {
   const f = frac(value), exact = f.toString();
-  return `<b class="amount-number"><span class="amount-exact">${exact}</span>${f.isInteger() ? '' : `<span class="amount-approx">（約${f.toNumber().toFixed(2)}）</span>`}</b>`;
+  return `<b class="amount-number"><span class="amount-exact">${perSecond ? '<small class="amount-unit">毎秒</small>' : ''}${exact}</span>${f.isInteger() ? '' : `<span class="amount-approx">（約${f.toNumber().toFixed(2)}）</span>`}</b>`;
 }
 
 const VERDICTS = { exact: ['✓', 'ちょうど'], short: ['−', '足りない'], over: ['＋', '多い'] };
 export function deliveryMarkup(label, outlet) {
   const [icon, name] = VERDICTS[outlet.verdict];
-  // 320px幅では「549/139」（7文字）も2列に収まらない。
-  const wide = Math.max(String(outlet.target).length, String(outlet.flow).length) >= 7;
-  return `<li class="${outlet.verdict}"><div class="delivery-head${wide ? ' long-label' : ''}"><span>${textMarkup(label)}</span><span class="verdict-badge ${outlet.verdict}"><span aria-hidden="true">${icon}</span>${name}</span></div><div class="delivery-values${wide ? ' long-amount' : ''}"><div><span class="amount-label">必要量</span>${amountMarkup(outlet.target)}</div><div><span class="amount-label">届いた量</span>${amountMarkup(outlet.flow)}</div></div></li>`;
+  // 毎秒の接頭辞も含め、長い分数は1列で表示する。
+  const wide = Math.max(String(outlet.target).length, String(outlet.flow).length) >= 4;
+  return `<li class="${outlet.verdict}"><div class="delivery-head${wide ? ' long-label' : ''}"><span>${textMarkup(label)}</span><span class="verdict-badge ${outlet.verdict}"><span aria-hidden="true">${icon}</span>${name}</span></div><div class="delivery-values${wide ? ' long-amount' : ''}"><div><span class="amount-label">必要量</span>${amountMarkup(outlet.target, { perSecond: true })}</div><div><span class="amount-label">届いた量</span>${amountMarkup(outlet.flow, { perSecond: true })}</div></div></li>`;
 }

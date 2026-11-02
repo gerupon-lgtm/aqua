@@ -16,7 +16,7 @@ import { renderBoard, layoutFor, towerAt, pipeAt, boardViewBox, VIEW_W, VIEW_H }
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
 
-const APP_VERSION = '0.14.9';
+const APP_VERSION = '0.14.10';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -418,7 +418,7 @@ function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', r
   const isPrac = st.id === PRACTICE.id;
   const nav = mode === 'select' && phase !== 'running';
   const sub = mode === 'continuous' && cont ? `連続プレイ（${cont.level.name}）・${st.set}` : `${MODE_NAME[mode]}・${st.set}`;
-  const goal = `${st.outlets.map(o => `<span class="nw">${o.label}に <b>${targetText(o.target)}</b></span>`).join('・')} 届ける`;
+  const goal = `毎秒 ${st.outlets.map(o => `<span class="nw">${o.label}に <b>${targetText(o.target)}</b></span>`).join('・')} 届ける`;
   const res = [
     st.buckets ? `<span class="nw">桶 残り <b>${left}</b> / ${st.buckets}</span>` : '',
     `<span class="nw">配管 <b>${connected}</b> 本</span>`,
@@ -578,8 +578,8 @@ function renderPanel() {
         <h3>${keepTogether(e.summary)}</h3>
         ${e.advice.length ? `${adviceTitle ? `<h4>${adviceTitle}</h4>` : ''}<ul>${li(e.advice)}</ul>` : ''}
         <details${state.prediction ? ' open' : ''}><summary>計算を見る</summary>
-          <h4>流れる量 ＝ 高さの差 ÷ 管の数字</h4><ul class="calc">${li(e.steps)}</ul>
-          ${e.balances.length ? `<h4>グラスでは、入る量 ＝ 出る量</h4><ul class="calc">${li(e.balances)}</ul>` : ''}
+          <h4>毎秒の量 ＝ 高さの差 ÷ 管の数字</h4><ul class="calc">${li(e.steps)}</ul>
+          ${e.balances.length ? `<h4>グラスでは、毎秒入る量 ＝ 毎秒出る量</h4><ul class="calc">${li(e.balances)}</ul>` : ''}
         </details>
       </section>`;
     }).join('');
@@ -640,8 +640,8 @@ function renderPanel() {
       <p class="swipe-note">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
-        <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
-        <div class="table-wrap"><table><thead><tr><th>配管</th><th>流れる量</th><th>水位の差</th><th>管の数字</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>毎秒の出入り</th></tr></thead><tbody>${towerRows}</tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>配管</th><th>毎秒の量</th><th>水位の差</th><th>管の数字</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
         <div class="actions"><button type="button" class="ghost" id="export-record">記録をファイルに書き出す</button></div>
       </details>
       <div class="result-actions">
@@ -684,7 +684,7 @@ function questionHtml() {
   return `<div class="chooser">
     <div class="chooser-head"><h3><span class="spirit" aria-label="水の精霊"></span>予想してから流そう</h3></div>
     <p class="chooser-note">${textMarkup(q.text)}<br>${textMarkup('選んでから水が流れます。')}</p>
-    <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">${textMarkup(c.text)} 届く</button>`).join('')}</div>
+    <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">毎秒${textMarkup(c.text)} 届く</button>`).join('')}</div>
     <div class="chooser-row chooser-actions"><button type="button" class="chip" data-skip="1">案内をスキップ</button><button type="button" class="chip" data-close="1">やめる</button></div>
   </div>`;
 }

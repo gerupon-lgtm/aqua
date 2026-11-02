@@ -1,0 +1,4494 @@
+{
+  "representativeSizes": [
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518829345703125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 718.0625,
+        "height": 44,
+        "left": 12,
+        "right": 348,
+        "top": 674.0625,
+        "width": 336,
+        "x": 12,
+        "y": 674.0625
+      },
+      "badgeMinimum": 24.810089111328125,
+      "board": {
+        "bottom": 598.0625,
+        "height": 401.0625,
+        "left": 12,
+        "right": 348,
+        "top": 197,
+        "width": 336,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 318.9866504854369,
+      "guide": false,
+      "hint": {
+        "bottom": 670.0625,
+        "height": 68,
+        "left": 12,
+        "right": 348,
+        "top": 602.0625,
+        "width": 336,
+        "x": 12,
+        "y": 602.0625
+      },
+      "legend": {
+        "bottom": 596.0625,
+        "height": 28,
+        "left": 57.5,
+        "right": 302.5,
+        "top": 568.0625,
+        "width": 245,
+        "x": 57.5,
+        "y": 568.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        360,
+        740
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 563.0625,
+        "height": 365.0625,
+        "left": 13,
+        "right": 347,
+        "top": 198,
+        "width": 334,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 874.0625,
+        "height": 44,
+        "left": 12,
+        "right": 402,
+        "top": 830.0625,
+        "width": 390,
+        "x": 12,
+        "y": 830.0625
+      },
+      "badgeMinimum": 30.177734375,
+      "board": {
+        "bottom": 754.0625,
+        "height": 557.0625,
+        "left": 12,
+        "right": 402,
+        "top": 197,
+        "width": 390,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 388,
+      "guide": false,
+      "hint": {
+        "bottom": 826.0625,
+        "height": 68,
+        "left": 12,
+        "right": 402,
+        "top": 758.0625,
+        "width": 390,
+        "x": 12,
+        "y": 758.0625
+      },
+      "legend": {
+        "bottom": 752.0625,
+        "height": 28,
+        "left": 84.5,
+        "right": 329.5,
+        "top": 724.0625,
+        "width": 245,
+        "x": 84.5,
+        "y": 724.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        414,
+        896
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 719.0625,
+        "height": 521.0625,
+        "left": 13,
+        "right": 401,
+        "top": 198,
+        "width": 388,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 386,
+        "height": 44,
+        "left": 508,
+        "right": 828,
+        "top": 342,
+        "width": 320,
+        "x": 508,
+        "y": 342
+      },
+      "badgeMinimum": 17.514892578125,
+      "board": {
+        "bottom": 386,
+        "height": 336,
+        "left": 16,
+        "right": 500,
+        "top": 50,
+        "width": 484,
+        "x": 16,
+        "y": 50
+      },
+      "contentWidth": 225.19148936170217,
+      "guide": false,
+      "hint": {
+        "bottom": 334,
+        "height": 106,
+        "left": 508,
+        "right": 828,
+        "top": 228,
+        "width": 320,
+        "x": 508,
+        "y": 228
+      },
+      "legend": {
+        "bottom": 383,
+        "height": 32,
+        "left": 108.5,
+        "right": 407.5,
+        "top": 351,
+        "width": 299,
+        "x": 108.5,
+        "y": 351
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        844,
+        390
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 345,
+        "height": 294,
+        "left": 17,
+        "right": 499,
+        "top": 51,
+        "width": 482,
+        "x": 17,
+        "y": 51
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 756,
+        "height": 44,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 712,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 712
+      },
+      "badgeMinimum": 35.74468994140625,
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "contentWidth": 459.5744680851064,
+      "guide": false,
+      "hint": {
+        "bottom": 692,
+        "height": 160,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 532,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 532
+      },
+      "legend": {
+        "bottom": 752,
+        "height": 32,
+        "left": 563.609375,
+        "right": 862.609375,
+        "top": 720,
+        "width": 299,
+        "x": 563.609375,
+        "y": 720
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        1280,
+        800
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 697,
+        "height": 600,
+        "left": 25,
+        "right": 872.609375,
+        "top": 97,
+        "width": 847.609375,
+        "x": 25,
+        "y": 97
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    }
+  ],
+  "allStages": [
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 14.7901611328125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 190.1594387755102,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "2 分かれる水\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 14.7901611328125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 190.1594387755102,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "6 水門を閉じても\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "7 二つの噴水盤へ\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "8 間のグラスを通って\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.242828369140625,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 208.8365155131265,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "9 奥の二つへ\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        51,
+        360,
+        419
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "10 三つの噴水盤\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "11 二本ずつの道\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "12 分けて届けるのまとめ\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "13 太さで分ける\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "14 二本の太さ\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "15 奥で分ける\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "16 並べるか、太くするか\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.242828369140625,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 208.8365155131265,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "17 遠くまで調える\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        51,
+        360,
+        419
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "18 流れを調えるのまとめ\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "19 高い噴水盤\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "20 奥ほど高い\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "21 高さの違う両端\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "22 高い口と低い口\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.242828369140625,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 208.8365155131265,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "23 三つの高さ\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        51,
+        360,
+        419
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361572265625,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "24 高さのまとめ\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.0570068359375,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 219.30451127819543,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "25 壁の向こうへ\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.0570068359375,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 219.30451127819543,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "26 壁の手前と向こう\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.0570068359375,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 219.30451127819543,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "27 二つの壁\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.0570068359375,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 219.30451127819543,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "28 一つの桶で\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.0570068359375,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 219.30451127819543,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "29 桶を減らす\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.0570068359375,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 219.30451127819543,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "30 壁を越えるのまとめ\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.407867431640625,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 275.2443609022556,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "30 壁を越えるのまとめ\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.40789794921875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 275.2443609022556,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "29 桶を減らす\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.407867431640625,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 275.2443609022556,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "28 一つの桶で\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.407867431640625,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 275.2443609022556,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "27 二つの壁\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.40789794921875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 275.2443609022556,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "26 壁の手前と向こう\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.40789794921875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 275.2443609022556,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "25 壁の向こうへ\n選択プレイ・壁を越える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        71,
+        360,
+        399
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.38604736328125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 262.10620525059664,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "24 高さのまとめ\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        51,
+        360,
+        419
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.58251953125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 264.63253012048193,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "23 三つの高さ\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        55,
+        360,
+        415
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "22 高い口と低い口\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "21 高さの違う両端\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.73236083984375,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "20 奥ほど高い\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "19 高い噴水盤\n選択プレイ・低い出口、高い出口\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "18 流れを調えるのまとめ\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "17 遠くまで調える\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "16 並べるか、太くするか\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "15 奥で分ける\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.38604736328125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 262.10620525059664,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "14 二本の太さ\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        51,
+        360,
+        419
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.58251953125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 264.63253012048193,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "13 太さで分ける\n選択プレイ・流れを調える\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        55,
+        360,
+        415
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.38604736328125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 262.10620525059664,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "12 分けて届けるのまとめ\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        51,
+        360,
+        419
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.386016845703125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 262.10620525059664,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "11 二本ずつの道\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        51,
+        360,
+        419
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.7901611328125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 280.15943877551024,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "10 三つの噴水盤\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "9 奥の二つへ\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "8 間のグラスを通って\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.58251953125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 264.63253012048193,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "7 二つの噴水盤へ\n選択プレイ・分けて届ける\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        55,
+        360,
+        415
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.7901611328125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 280.15943877551024,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "6 水門を閉じても\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 19.21875,
+      "board": {
+        "bottom": 502.0625,
+        "height": 305.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 247.0982142857143,
+      "guide": true,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 104,
+        "left": 12,
+        "right": 378,
+        "top": 506.0625,
+        "width": 366,
+        "x": 12,
+        "y": 506.0625
+      },
+      "legend": {
+        "bottom": 500.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 472.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 472.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 467.0625,
+        "height": 269.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 19.21875,
+      "board": {
+        "bottom": 502.0625,
+        "height": 305.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 247.0982142857143,
+      "guide": true,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 104,
+        "left": 12,
+        "right": 378,
+        "top": 506.0625,
+        "width": 366,
+        "x": 12,
+        "y": 506.0625
+      },
+      "legend": {
+        "bottom": 500.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 472.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 472.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "2 分かれる水\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 467.0625,
+        "height": 269.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 21.7901611328125,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 280.15943877551024,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    }
+  ]
+}

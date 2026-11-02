@@ -187,8 +187,8 @@ export function outletLabelPositions(layout, stage) {
       for (const other of stage.outlets) {
         const otherX = basinPlacement(layout, other).cx;
         const dy = layout.yOf(Number(other.height)) - GROUND;
-        if (Math.abs(y - (GROUND - 52 + dy)) < 17) n += Math.max(0, 40 - Math.abs(x - otherX)) * 30;
-        if (Number(other.height) > 0 && Math.abs(y - (GROUND - 72 + dy)) < 16) n += Math.max(0, 29 - Math.abs(x - otherX)) * 30;
+        if (Math.abs(y - (GROUND - 52 + dy)) < 23) n += Math.max(0, 54 - Math.abs(x - otherX)) * 30;
+        if (Math.abs(y - (GROUND - 72 + dy)) < 23) n += Math.max(0, 40 - Math.abs(x - otherX)) * 30;
       }
       for (const p of routes) for (const [a, b] of [[p.pts[0], p.pts[1]], [p.pts[2], p.pts[3]]]) {
         if (y < Math.min(a[1], b[1]) - 9 || y > Math.max(a[1], b[1]) + 9) continue;
@@ -366,7 +366,7 @@ function drawFountain(out, cx, top, since, still) {
   const rise = still ? 1 : Math.min(1, since / 600);
   const ease = 1 - (1 - rise) ** 2;
   const sway = still ? 0 : Math.sin(since / 170) * 1.6;
-  const peak = top - 4 - (54 + sway) * ease;
+  const peak = top - 4 - (86 + sway) * ease;
   const base = top + 6;
   out.push(`<path class="fountain-core" d="M${cx} ${base} L${cx} ${peak}" stroke="#216ea8" stroke-width="4.5" stroke-linecap="round" opacity=".95"/>`);
   out.push(`<path d="M${cx} ${base} L${cx} ${peak + 2}" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>`);
@@ -562,9 +562,10 @@ export function renderBoard(svg, model) {
       out.push(`<path d="M${cx - 15} ${top} H${cx + 15} V${top + 7} L${cx + 11} ${top + 11} V${GROUND - 5} H${cx - 11} V${top + 11} L${cx - 15} ${top + 7}Z" fill="none" stroke="#537594" stroke-width="1.1"/><rect class="pedestal-foot" x="${cx - 17}" y="${GROUND - 6}" width="34" height="7" rx="1.5" fill="#fffefa" stroke="#537594" stroke-width="1.2"/></g>`);
     } else if (dy < 0) out.push(`<rect x="${cx - 14}" y="${GROUND - 4 + dy}" width="28" height="${4 - dy}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
     out.push(`<g class="basin" transform="translate(0 ${dy})">`);
-    // 出口の高さを維持し、グラス前面から器へ伸びる管として描く。
-    const outletPipeX = node.cx + TOWER_W / 2 + 18;
-    const outletPipe = `M${node.cx} ${GROUND - 9} H${outletPipeX} V${GROUND - 20}`;
+    // 吹き出し口の中心が計算の高さ。グラスから短い管で回し、口を上向きにする。
+    // 上下の移動dyを含め、終点の高さは必ずlayout.yOf(o.height)になる。
+    const outletPipeX = cx;
+    const outletPipe = `M${node.cx} ${GROUND} V${GROUND + 8} H${outletPipeX} V${GROUND}`;
     out.push(`<path class="outlet-pipe" data-outlet-source="${esc(o.tower)}" d="${outletPipe}" fill="none" stroke="#7b92a5" stroke-width="5" stroke-linejoin="round"/>`);
     // 出口も通常の管と同じ「太・中・細」で示す。
     const mouth = 1 / Number(o.conductance ?? 1);
@@ -578,36 +579,18 @@ export function renderBoard(svg, model) {
     out.push(`<path class="porcelain-body" d="${b.bowl} ${windowPaths.join(' ')}" fill-rule="evenodd" fill="url(#porcelain)" stroke="#527492" stroke-width="1.2"/>`);
     out.push(`<ellipse cx="${cx}" cy="${b.top}" rx="31" ry="4.5" fill="#fffefa" stroke="#527492" stroke-width="1.2"/><ellipse cx="${cx}" cy="${b.top - .2}" rx="27.5" ry="2.7" fill="#f5f0e4" stroke="#d3b879" stroke-width=".7"/>`);
     out.push(`<g class="ceramic-windows" fill="#f9f7ef" stroke="#8ca4b5" stroke-width=".55">${windows}</g>`);
-    const clipId = `${svg.id ? `${svg.id}-` : ''}clip-${o.id}`;
-    out.push(`<clipPath id="${clipId}">${windows}</clipPath>`);
-    // ガラス越しの奥の陶器。背面の目盛りは上へ浅く湾曲させ、手前より薄くする。
-    out.push(`<g class="rear-gauge" clip-path="url(#${clipId})" fill="none">`);
-    for (const fraction of [.25, .5, .8]) {
-      const y = windowBottom - (windowBottom - windowTop) * fraction;
-      const r = 21 - (y - windowTop) * .25;
-      out.push(`<path d="M${cx - r} ${y} Q${cx} ${y - 5} ${cx + r} ${y}" stroke="${fraction === .8 ? '#ac883c' : '#7f909b'}" stroke-width="${fraction === .8 ? '.85' : '.55'}" opacity="${fraction === .8 ? '.65' : '.4'}"/>`);
-    }
-    out.push('</g>');
-    // 届いた量が0なら水を描かない。必要量はゲージの80%位置、残り20%で多すぎる状態を示す。
-    if (verdict && verdict.flow.sign() > 0) {
-      const ratio = Math.min(1.25, verdict.flow.toNumber() / Math.max(verdict.target.toNumber(), 1e-9));
-      const fillTop = windowBottom - (windowBottom - windowTop) * ratio / 1.25;
-      out.push(`<g clip-path="url(#${clipId})"><rect class="amount-fill" x="${cx - 24}" y="${fillTop}" width="48" height="${windowBottom - fillTop + 1}" fill="#388ac7" opacity=".76"/><path d="M${cx - 24} ${fillTop} H${cx + 24}" stroke="#165785" stroke-width=".8"/></g>`);
-      if (verdict.verdict === 'over') {
-        out.push(`<path d="M${b.right + 1} ${b.top} q4 8 1 18 M${b.left - 1} ${b.top} q-4 8 -1 18" fill="none" stroke="var(--water-mid)" stroke-width="2.4" stroke-linecap="round"/>`);
-      }
-    }
+    // 器の窓は流れる水を見るためのもの。流量を水位へ置き換える塗り・目盛りは使わない。
     out.push(`<path class="glass-shine" d="M${cx - 19} ${windowTop + 2} l2 8 M${cx + 19} ${windowTop + 2} l-1 5" fill="none" stroke="#ffffff" stroke-width="1.2" opacity=".8"/>`);
-    // 手前の陶器にも同じ高さの目盛り。円い器の外周に沿う短い弧にする。
-    for (const fraction of [.25, .5, .8]) {
-      const y = windowBottom - (windowBottom - windowTop) * fraction;
-      const r = 28 - (y - windowTop) * .28;
-      out.push(`<path class="${fraction === .8 ? 'amount-mark' : 'ceramic-tick'}" d="M${cx - r} ${y} q1.5 .7 3 .9 M${cx + r - 3} ${y + .9} q1.5 -.2 3 -.9" stroke="${fraction === .8 ? '#b28c3c' : '#9aa9b4'}" stroke-width="${fraction === .8 ? '1' : '.6'}" stroke-linecap="round" fill="none"/>`);
-    }
+    out.push(`<path class="basin-drain" d="M${cx + 11} ${GROUND - 3} h5 m-5 2 h5" stroke="#6f8aa5" stroke-width="1" fill="none"/>`);
     out.push('</g>');
     // 短い出口管は細めの固定幅。実際のサイズは引き出し先の丸バッジで示す。
-    const horizontal = `M${node.cx} ${GROUND - 9} H${outletPipeX}`;
-    out.push(`<g class="outlet-visible" fill="none" stroke-linecap="round" pointer-events="none"><path d="${horizontal}" stroke="#6f8aa5" stroke-width="6"/><path d="${horizontal}" stroke="${flowing ? '#4b9ad8' : '#edf2f7'}" stroke-width="3.6"/></g>`);
+    out.push(`<g class="outlet-visible" fill="none" stroke-linecap="round" pointer-events="none"><path d="${outletPipe}" stroke="#6f8aa5" stroke-width="6"/><path d="${outletPipe}" stroke="${flowing ? '#4b9ad8' : '#edf2f7'}" stroke-width="3.6"/></g>`);
+    // 目盛りと同じ高さに出口の印。水位が低くてもグラスの左側を隠さない短い基準線。
+    out.push(`<g class="outlet-mouth" data-outlet="${esc(o.id)}" data-height="${o.height}" data-mouth-y="${layout.yOf(Number(o.height))}" aria-label="出口の高さ${o.height}" pointer-events="none"><ellipse cx="${cx}" cy="${GROUND}" rx="3.4" ry="1.6" fill="${flowing ? '#4b9ad8' : '#ffffff'}" stroke="#1d4f88" stroke-width="1"/><path d="M${node.cx - TOWER_W / 2 - 7} ${GROUND} h11" stroke="#1d4f88" stroke-width="1.4"/></g>`);
+    if (flowing && settled) {
+      const p = reducedMotion ? .5 : (time % 900) / 900;
+      out.push(`<g class="through-flow" fill="none" stroke="#287fb5" stroke-linecap="round" pointer-events="none"><path d="M${cx} ${GROUND} v-18 q7 0 10 12 l4 3 v8" stroke-width="2.3"/><circle cx="${cx}" cy="${GROUND - 18 * p}" r="1.6" fill="#dff6ff" stroke-width=".5"/><path d="M${cx + 14} ${GROUND + 7} v4 m-2 -2 l2 2 2 -2" stroke-width="1.4"/></g>`);
+    }
     // クリアの噴水と、100点の虹（2026-11-01 発案者）。ジングルの鳴り始めと同時に噴き上がり、
     // 100点のときは噴き上がった後に虹がかかる。NGでは噴かない。
     // 盤面は毎フレーム描き直すので、CSSのアニメーションではなく時刻から形と濃さを計算する
@@ -621,31 +604,31 @@ export function renderBoard(svg, model) {
             drawRainbow(out, cx, b.top, opacity);
           }
         }
-        drawFountain(out, cx, b.top, since, model.reducedMotion);
+        drawFountain(out, cx, GROUND - 6, since, model.reducedMotion);
         if (pick.fountain) {
           // 6コマ。140ミリ秒ごとに進め、高く上がった後は4〜6コマ目を繰り返す（コマの速さは仮の値）
           const n = Math.floor(since / 140);
           const frame = model.reducedMotion ? 6 : n < 6 ? n + 1 : 4 + ((n - 6) % 3);
-          out.push(`<image href="${art(`fx-fountain-0${frame}.png`)}" x="${cx - 30}" y="${b.top - 72}" width="60" height="80" opacity=".65"/>`);
+          out.push(`<image href="${art(`fx-fountain-0${frame}.png`)}" x="${cx - 30}" y="${GROUND - 78}" width="60" height="80" opacity=".65"/>`);
         }
       }
     }
-    // 量の札は器のすぐ上に少し離す（発案者の選択）。「必要量」は比較中の仮表記。
+    // 小さな札は /秒、結果の数値は毎秒と明記する。同じ量の流れを指し、水位ではない。
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
     const [vt, vm] = verdict ? VERDICT_BADGE[verdict.verdict] ?? ['light', null] : ['light', null];
     if (model.startCue > 0) {
-      const w = 12 + textWidth(`必要量${target}`, 9);
+      const w = 12 + textWidth(`必要量${target}/秒`, 9);
       const left = Math.min(VIEW_W - w - 2, Math.max(2, cx - w / 2));
       out.push(`<rect class="start-cue" x="${left - 3}" y="${b.top - 29}" width="${w + 6}" height="22" rx="5" fill="#ffe19c" stroke="#a17b29" stroke-width="2.5" opacity="${model.startCue.toFixed(3)}" pointer-events="none"/>`);
     }
-    badge(out, { x: cx, y: b.top - 18, text: `必要量${target}`, tone: model.startCue > .5 ? 'gold' : vt, mark: vm, size: 9, h: 16 });
+    badge(out, { x: cx, y: b.top - 18, text: `必要量${target}/秒`, tone: model.startCue > .5 ? 'gold' : vt, mark: vm, size: 9, h: 16 });
     out.push('</g>');
-    if (dy < 0) badge(out, { x: cx, y: b.top + dy - 38, text: `高さ${o.height}`, size: 8, h: 13 });
+    badge(out, { x: cx, y: b.top + dy - 38, text: `出口高さ${o.height}`, size: 8, h: 13 });
     // 短い出口の管は、引き出し線の先で太さを示す。「出口 太」の札は置かない。
     const { x: labelX, y: labelY } = outletLabelPositions(layout, stage).get(o.id);
     const sourceX = (node.cx + outletPipeX) / 2;
     const leftLabel = labelX < node.cx;
-    out.push(`<path class="outlet-leader" d="M${sourceX} ${GROUND + dy - 9} L${labelX + (leftLabel ? 8 : -8)} ${labelY + 4}" fill="none" stroke="#1d4f88" stroke-width=".8" pointer-events="none"/><circle cx="${sourceX}" cy="${GROUND + dy - 9}" r="1.4" fill="#1d4f88" pointer-events="none"/>`);
+    out.push(`<path class="outlet-leader" d="M${sourceX} ${GROUND + dy + 8} L${labelX + (leftLabel ? 8 : -8)} ${labelY + 4}" fill="none" stroke="#1d4f88" stroke-width=".8" pointer-events="none"/><circle cx="${sourceX}" cy="${GROUND + dy + 8}" r="1.4" fill="#1d4f88" pointer-events="none"/>`);
     thicknessBadge(out, labelX, labelY, mouth, { id: `outlet-${o.id}` });
   }
   const labelPositions = pipeLabelPositions(layout, stage);

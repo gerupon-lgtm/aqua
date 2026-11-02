@@ -51,7 +51,7 @@ test('届かないつなぎ方では問いを出さない。水門の面は開�
 test('答え合わせの文：当たりとはずれ', () => {
   const q = buildQuestion(STAGES[0], evalOf(STAGES[0], ['SA', 'AB']));
   assert.match(answerLine(q, '2'), /^予想どおり/);
-  assert.match(answerLine(q, '4'), /^予想は 4、実際は 2/);
+  assert.match(answerLine(q, '4'), /^予想は毎秒4、実際は毎秒2/);
 });
 
 test('記録：初めての面だけ案内し、完了・スキップを覚える。ふりかえりでは出す。保存できなくても動く', () => {

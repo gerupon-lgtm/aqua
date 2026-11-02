@@ -44,14 +44,14 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     const diff = levelOf(hi).sub(levelOf(lo));
     steps.push(diff.isZero()
       ? `${name(c.a)}–${name(c.b)}：高さが同じ（${formatAmount(levelOf(c.a))}）で流れない`
-      : `${name(hi)} ${formatAmount(levelOf(hi))} → ${name(lo)} ${formatAmount(levelOf(lo))}：差 ${formatAmount(diff)} ÷ 管の数字 ${thin} ＝ ${formatAmount(diff.div(frac(thin)))}`);
+      : `${name(hi)} ${formatAmount(levelOf(hi))} → ${name(lo)} ${formatAmount(levelOf(lo))}：差 ${formatAmount(diff)} ÷ 管の数字 ${thin} ＝ 毎秒${formatAmount(diff.div(frac(thin)))}`);
   }
   for (const o of stage.outlets) {
     const t = r.towers[o.tower];
     const thin = new Fraction(1n).div(frac(o.conductance));
     steps.push(t.state === 'empty'
       ? `グラス${o.tower}が空なので、${o.label}に届かない`
-      : `グラス${o.tower} ${formatAmount(t.level)} → ${o.label} ${o.height}：差 ${formatAmount(t.level.sub(frac(o.height)))} ÷ 管の数字 ${thin} ＝ ${formatAmount(r.outlets[o.id].flow)}`);
+      : `グラス${o.tower} ${formatAmount(t.level)} → ${o.label} ${o.height}：差 ${formatAmount(t.level.sub(frac(o.height)))} ÷ 管の数字 ${thin} ＝ 毎秒${formatAmount(r.outlets[o.id].flow)}`);
   }
   // 分かれ道（グラス）では、入る量と出る量が同じ
   const balances = stage.towers

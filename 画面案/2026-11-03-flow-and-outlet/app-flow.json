@@ -1,0 +1,700 @@
+{
+  "edit": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "result": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "timeline": [
+    {
+      "elapsed": 24,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 92,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 158,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 229,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 296,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 362,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 429,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 496,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 564,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 634,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 722,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 789,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 853,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 927,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 998,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": false
+    },
+    {
+      "elapsed": 1064,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1137,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1207,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1273,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1338,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1425,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1491,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1561,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1629,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1699,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1775,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1856,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1928,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 1999,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2063,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2143,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2209,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2289,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2357,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2436,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2509,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2579,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2645,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2719,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2799,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2874,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 2957,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 3024,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 3092,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 3158,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0,
+      "through": true
+    },
+    {
+      "elapsed": 3222,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3296,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3363,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3431,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3519,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3592,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3662,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3730,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3804,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 3876,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 13476,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 13751,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 13869,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 13977,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14067,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14169,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14253,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14342,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14432,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14516,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14602,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14702,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14784,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14871,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 14967,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15051,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15148,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15249,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15353,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15445,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15542,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15629,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15715,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15804,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    },
+    {
+      "elapsed": 15896,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1,
+      "through": true
+    }
+  ]
+}

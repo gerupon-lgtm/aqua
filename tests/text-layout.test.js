@@ -20,7 +20,13 @@ test('実際に足りない4面の結果は、判定バッジと分数を同じ�
   const html = deliveryMarkup('高い受け皿', ev.outlets[0]);
   assert.match(html, /class="verdict-badge short"/);
   assert.ok(html.includes('足りない'));
-  assert.match(html, /class="amount-exact">5\/2/);
+  assert.match(html, /class="amount-unit">毎秒<\/small>5\/2/);
+});
+
+test('毎秒の値と小さな札の /秒 を数値と離して折り返さない', () => {
+  const html = textMarkup('毎秒5/2（約2.50） 必要量2/秒');
+  assert.ok(html.includes('class="text-unit">毎秒5/2（約2.50）'));
+  assert.ok(html.includes('class="text-unit">2/秒'));
 });
 
 test('案内と解説の分数・近似値、ゲームの語は一まとまりで、元の文を保つ', () => {

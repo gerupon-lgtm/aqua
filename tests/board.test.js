@@ -100,13 +100,15 @@ test('届いた量が0の噴水盤には水を描かない（空のグラスの�
   const config = { connected: new Set(['SA']), primed: new Set(), thickness: {} };
   const { ev, svg } = draw(stage, config);
   assert.ok(ev.outlets.every(o => o.flow.isZero()), '前提：噴水盤に何も届かない');
-  assert.ok(!svg.includes('class="amount-fill"'), '量0の噴水盤に水の塗りがある');
+  assert.ok(!svg.includes('class="through-flow"'), '量0の噴水盤に流れる水がある');
+  assert.ok(!svg.includes('class="amount-fill"'), '量を水位に置き換えない');
 });
 
-test('空の器にも陶器の枠と奥側の目盛りがあり、出口は引き出し線で示す', () => {
+test('空の器にも陶器の枠と窓があり、流量用の水位目盛りは付けない', () => {
   const { svg } = draw(STAGES[0], { connected: new Set(), primed: new Set(), thickness: {} });
   assert.ok(svg.includes('class="porcelain-body"'));
-  assert.ok(svg.includes('class="rear-gauge"'));
+  assert.ok(svg.includes('class="ceramic-windows"'));
+  assert.ok(!svg.includes('class="rear-gauge"') && !svg.includes('class="amount-mark"'));
   assert.ok(svg.includes('class="outlet-leader"'));
   assert.ok(!svg.includes('出口 太') && !svg.includes('細さ 1') && !svg.includes('目標'));
 });
@@ -143,10 +145,28 @@ test('通常の動きでも、虹が薄い途中から出そろうまでを結�
   assert.ok(resultCardDelay('perfect', timing) - timing.jingleMs >= fullAt + 500);
 });
 
-test('届いた噴水盤には水を描く', () => {
+test('届いた水は流れとして描き、量をたまった水位で示さない', () => {
   const stage = STAGES[0];
   const config = { connected: new Set(['SB']), primed: new Set(), thickness: {} };
   const { ev, svg } = draw(stage, config);
   assert.ok(ev.outlets.some(o => !o.flow.isZero()), '前提：噴水盤に届く');
-  assert.ok(svg.includes('class="amount-fill"'), '届いた噴水盤に水の塗りがない');
+  assert.ok(svg.includes('class="through-flow"'), '届いた水の流れがない');
+  assert.ok(!svg.includes('class="amount-fill"'), '流量を水位へ置き換えない');
+});
+
+test('全30面で実際に描く吹き出し口と管の終点が、計算の出口高さに一致する', () => {
+  for (const stage of [PRACTICE, ...STAGES]) {
+    const { svg } = draw(stage, { connected: new Set(), primed: new Set(), thickness: {} });
+    const mouths = [...svg.matchAll(/<g class="basin" transform="translate\(0 ([^)]+)\)">([\s\S]*?)<g class="outlet-mouth" data-outlet="([^"]+)"[^>]*><ellipse cx="([^"]+)" cy="([^"]+)"/g)];
+    assert.equal(mouths.length, stage.outlets.length);
+    for (const [, offset, body, id, , localY] of mouths) {
+      const o = stage.outlets.find(o => o.id === id), expected = layoutFor(stage).yOf(Number(o.height));
+      assert.ok(Math.abs(Number(offset) + Number(localY) - expected) < 1e-8);
+      const d = /class="outlet-pipe"[^>]*d="([^"]+)"/.exec(body)?.[1];
+      const tipY = /V([\d.-]+)$/.exec(d)?.[1];
+      assert.ok(Math.abs(Number(offset) + Number(tipY) - expected) < 1e-8);
+      assert.ok(svg.includes(`>出口高さ${o.height}</text>`));
+      assert.ok(svg.includes('/秒</text>'));
+    }
+  }
 });
