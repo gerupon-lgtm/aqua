@@ -87,7 +87,7 @@ export const PRACTICE = {
 // until は次へ進む条件：next（「次へ」を押す）、connect:ID（その配管をつなぐ）、run（「水を流す」を押す）
 export const PRACTICE_STEPS = [
   { target: 'spring', until: 'next', text: '左は給水塔です。水が高さ4まで入っていて、ここから流れ出します。' },
-  { target: 'tower', until: 'next', text: 'グラスです。横の線は目盛り。水が多いほど低い音が鳴ります。' },
+  { target: 'tower', until: 'next', text: 'グラスの目盛り1つが高さ1です。左の数字と見比べます。水が多いほど低い音です。' },
   { target: 'basin', until: 'next', text: '「必要量2」が届けたい量。水位と金色の目印を見比べます。線の先の丸い札は出口の管の太さです。' },
   { target: 'badges', until: 'next', text: '下の凡例を見ましょう。太は1、中は2、細は3。同じ高さの差なら、小さい数字ほど多く流れます。' },
   { target: 'pipe:P1', until: 'connect:P1', text: '光っている「太」の配管をタップして、つなぎましょう。' },

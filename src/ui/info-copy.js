@@ -4,7 +4,7 @@ import { phraseMarkup } from './text-layout.js';
 const partPicture = (id, alt) => `<img class="part-illustration" src="${new URL(`../../public/graphics/intro-${id}.svg`, import.meta.url).href}" alt="${alt}" width="960" height="360">`;
 export const PARTS_HTML = `<dl class="parts">
   <dt>給水塔</dt><dd>${phraseMarkup('水が出るところ。|給水塔の水の高さが、|流れのもとになります。')}</dd>
-  <dt>グラス</dt><dd>${phraseMarkup('水がたまります。|水位で音が決まり、|水が多いほど低い音。|目盛りに乗ると|澄んだ和音になります。')}</dd>
+  <dt>グラス</dt><dd>${phraseMarkup('水がたまります。|左の物差しと目盛りを|同じ高さで見比べます。|地面が高さ0、|目盛り1つが高さ1です。|水位で音が決まり、|水が多いほど低い音。|目盛りに乗ると|澄んだ和音になります。')}</dd>
   <dt>配管</dt><dd>${phraseMarkup('給水塔とグラスをつなぎます。|丸い札は太さと数字の2段です。|太＝1・中＝2・細＝3。|同じ高さの差なら、|小さい数字ほど多く流れます。|流れる量＝高さの差÷管の数字。|縦につなぐと数字は足し算、|並べると流れやすくなります。')}</dd>
   <dt>噴水盤</dt><dd>${partPicture('outlets', '給水塔から分かれた水が2つの噴水盤へ届く様子')}${phraseMarkup('必要量の水を受けます。|白い陶器の枠とガラスの内器で、|水位と薄い金色の目印を|見比べます。|出口の管の太さは|引き出し線の先の丸い札で示します。')}</dd>
   <dt>高さの違う出口</dt><dd>${partPicture('height', '出口と水位の差に応じて、水が流れる様子')}${phraseMarkup('水位と口の高さの差を、|出口の管の数字で割ります。|口より低い水位では流れません。')}</dd>

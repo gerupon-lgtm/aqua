@@ -1,0 +1,2453 @@
+[
+  {
+    "screen": {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 117,
+          "right": 203,
+          "text": "配管クリア",
+          "top": 574.0625,
+          "width": 86,
+          "x": 117,
+          "y": 574.0625
+        },
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 209,
+          "right": 295,
+          "text": "水を流す",
+          "top": 574.0625,
+          "width": 86,
+          "x": 209,
+          "y": 574.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518798828125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 117,
+          "right": 203,
+          "text": "配管クリア",
+          "top": 574.0625,
+          "width": 86,
+          "x": 117,
+          "y": 574.0625
+        },
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 209,
+          "right": 295,
+          "text": "水を流す",
+          "top": 574.0625,
+          "width": 86,
+          "x": 209,
+          "y": 574.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 14.7901611328125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 190.1594387755102,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 117,
+          "right": 203,
+          "text": "配管クリア",
+          "top": 574.0625,
+          "width": 86,
+          "x": 117,
+          "y": 574.0625
+        },
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 209,
+          "right": 295,
+          "text": "水を流す",
+          "top": 574.0625,
+          "width": 86,
+          "x": 209,
+          "y": 574.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 718.0625,
+        "height": 44,
+        "left": 12,
+        "right": 348,
+        "top": 674.0625,
+        "width": 336,
+        "x": 12,
+        "y": 674.0625
+      },
+      "badgeMinimum": 24.81005859375,
+      "board": {
+        "bottom": 598.0625,
+        "height": 401.0625,
+        "left": 12,
+        "right": 348,
+        "top": 197,
+        "width": 336,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 318.9866504854369,
+      "guide": false,
+      "hint": {
+        "bottom": 670.0625,
+        "height": 68,
+        "left": 12,
+        "right": 348,
+        "top": 602.0625,
+        "width": 336,
+        "x": 12,
+        "y": 602.0625
+      },
+      "legend": {
+        "bottom": 596.0625,
+        "height": 28,
+        "left": 57.5,
+        "right": 302.5,
+        "top": 568.0625,
+        "width": 245,
+        "x": 57.5,
+        "y": 568.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        360,
+        740
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 563.0625,
+        "height": 365.0625,
+        "left": 13,
+        "right": 347,
+        "top": 198,
+        "width": 334,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 718.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 130.328125,
+          "right": 229.65625,
+          "text": "配管クリア",
+          "top": 674.0625,
+          "width": 99.328125,
+          "x": 130.328125,
+          "y": 674.0625
+        },
+        {
+          "bottom": 718.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 235.65625,
+          "right": 335,
+          "text": "水を流す",
+          "top": 674.0625,
+          "width": 99.34375,
+          "x": 235.65625,
+          "y": 674.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 718.0625,
+        "height": 44,
+        "left": 12,
+        "right": 348,
+        "top": 674.0625,
+        "width": 336,
+        "x": 12,
+        "y": 674.0625
+      },
+      "badgeMinimum": 24.81005859375,
+      "board": {
+        "bottom": 598.0625,
+        "height": 401.0625,
+        "left": 12,
+        "right": 348,
+        "top": 197,
+        "width": 336,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 318.9866504854369,
+      "guide": false,
+      "hint": {
+        "bottom": 670.0625,
+        "height": 68,
+        "left": 12,
+        "right": 348,
+        "top": 602.0625,
+        "width": 336,
+        "x": 12,
+        "y": 602.0625
+      },
+      "legend": {
+        "bottom": 596.0625,
+        "height": 28,
+        "left": 57.5,
+        "right": 302.5,
+        "top": 568.0625,
+        "width": 245,
+        "x": 57.5,
+        "y": 568.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        360,
+        740
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 563.0625,
+        "height": 365.0625,
+        "left": 13,
+        "right": 347,
+        "top": 198,
+        "width": 334,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 718.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 130.328125,
+          "right": 229.65625,
+          "text": "配管クリア",
+          "top": 674.0625,
+          "width": 99.328125,
+          "x": 130.328125,
+          "y": 674.0625
+        },
+        {
+          "bottom": 718.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 235.65625,
+          "right": 335,
+          "text": "水を流す",
+          "top": 674.0625,
+          "width": 99.34375,
+          "x": 235.65625,
+          "y": 674.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 718.0625,
+        "height": 44,
+        "left": 12,
+        "right": 348,
+        "top": 674.0625,
+        "width": 336,
+        "x": 12,
+        "y": 674.0625
+      },
+      "badgeMinimum": 23.50445556640625,
+      "board": {
+        "bottom": 562.0625,
+        "height": 365.0625,
+        "left": 12,
+        "right": 348,
+        "top": 197,
+        "width": 336,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 302.2002551020408,
+      "guide": true,
+      "hint": {
+        "bottom": 670.0625,
+        "height": 104,
+        "left": 12,
+        "right": 348,
+        "top": 566.0625,
+        "width": 336,
+        "x": 12,
+        "y": 566.0625
+      },
+      "legend": {
+        "bottom": 560.0625,
+        "height": 28,
+        "left": 57.5,
+        "right": 302.5,
+        "top": 532.0625,
+        "width": 245,
+        "x": 57.5,
+        "y": 532.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        360,
+        740
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 527.0625,
+        "height": 329.0625,
+        "left": 13,
+        "right": 347,
+        "top": 198,
+        "width": 334,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 718.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 130.328125,
+          "right": 229.65625,
+          "text": "配管クリア",
+          "top": 674.0625,
+          "width": 99.328125,
+          "x": 130.328125,
+          "y": 674.0625
+        },
+        {
+          "bottom": 718.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 235.65625,
+          "right": 335,
+          "text": "水を流す",
+          "top": 674.0625,
+          "width": 99.34375,
+          "x": 235.65625,
+          "y": 674.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 658.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 140.328125,
+          "right": 249.65625,
+          "text": "配管クリア",
+          "top": 614.0625,
+          "width": 109.328125,
+          "x": 140.328125,
+          "y": 614.0625
+        },
+        {
+          "bottom": 658.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 255.65625,
+          "right": 365,
+          "text": "水を流す",
+          "top": 614.0625,
+          "width": 109.34375,
+          "x": 255.65625,
+          "y": 614.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 20.732391357421875,
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 266.55946601941747,
+      "guide": false,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 68,
+        "left": 12,
+        "right": 378,
+        "top": 542.0625,
+        "width": 366,
+        "x": 12,
+        "y": 542.0625
+      },
+      "legend": {
+        "bottom": 536.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 508.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 508.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 503.0625,
+        "height": 305.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 658.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 140.328125,
+          "right": 249.65625,
+          "text": "配管クリア",
+          "top": 614.0625,
+          "width": 109.328125,
+          "x": 140.328125,
+          "y": 614.0625
+        },
+        {
+          "bottom": 658.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 255.65625,
+          "right": 365,
+          "text": "水を流す",
+          "top": 614.0625,
+          "width": 109.34375,
+          "x": 255.65625,
+          "y": 614.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 19.21875,
+      "board": {
+        "bottom": 502.0625,
+        "height": 305.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 247.0982142857143,
+      "guide": true,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 104,
+        "left": 12,
+        "right": 378,
+        "top": 506.0625,
+        "width": 366,
+        "x": 12,
+        "y": 506.0625
+      },
+      "legend": {
+        "bottom": 500.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 472.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 472.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 467.0625,
+        "height": 269.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 658.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 140.328125,
+          "right": 249.65625,
+          "text": "配管クリア",
+          "top": 614.0625,
+          "width": 109.328125,
+          "x": 140.328125,
+          "y": 614.0625
+        },
+        {
+          "bottom": 658.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 255.65625,
+          "right": 365,
+          "text": "水を流す",
+          "top": 614.0625,
+          "width": 109.34375,
+          "x": 255.65625,
+          "y": 614.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 874.0625,
+        "height": 44,
+        "left": 12,
+        "right": 402,
+        "top": 830.0625,
+        "width": 390,
+        "x": 12,
+        "y": 830.0625
+      },
+      "badgeMinimum": 30.17779541015625,
+      "board": {
+        "bottom": 754.0625,
+        "height": 559.0625,
+        "left": 12,
+        "right": 402,
+        "top": 195,
+        "width": 390,
+        "x": 12,
+        "y": 195
+      },
+      "contentWidth": 388,
+      "guide": false,
+      "hint": {
+        "bottom": 826.0625,
+        "height": 68,
+        "left": 12,
+        "right": 402,
+        "top": 758.0625,
+        "width": 390,
+        "x": 12,
+        "y": 758.0625
+      },
+      "legend": {
+        "bottom": 752.0625,
+        "height": 28,
+        "left": 84.5,
+        "right": 329.5,
+        "top": 724.0625,
+        "width": 245,
+        "x": 84.5,
+        "y": 724.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        414,
+        896
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 719.0625,
+        "height": 523.0625,
+        "left": 13,
+        "right": 401,
+        "top": 196,
+        "width": 388,
+        "x": 13,
+        "y": 196
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 874.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 148.328125,
+          "right": 265.65625,
+          "text": "配管クリア",
+          "top": 830.0625,
+          "width": 117.328125,
+          "x": 148.328125,
+          "y": 830.0625
+        },
+        {
+          "bottom": 874.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 271.65625,
+          "right": 389,
+          "text": "水を流す",
+          "top": 830.0625,
+          "width": 117.34375,
+          "x": 271.65625,
+          "y": 830.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 874.0625,
+        "height": 44,
+        "left": 12,
+        "right": 402,
+        "top": 830.0625,
+        "width": 390,
+        "x": 12,
+        "y": 830.0625
+      },
+      "badgeMinimum": 30.177734375,
+      "board": {
+        "bottom": 754.0625,
+        "height": 559.0625,
+        "left": 12,
+        "right": 402,
+        "top": 195,
+        "width": 390,
+        "x": 12,
+        "y": 195
+      },
+      "contentWidth": 388,
+      "guide": false,
+      "hint": {
+        "bottom": 826.0625,
+        "height": 68,
+        "left": 12,
+        "right": 402,
+        "top": 758.0625,
+        "width": 390,
+        "x": 12,
+        "y": 758.0625
+      },
+      "legend": {
+        "bottom": 752.0625,
+        "height": 28,
+        "left": 84.5,
+        "right": 329.5,
+        "top": 724.0625,
+        "width": 245,
+        "x": 84.5,
+        "y": 724.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        414,
+        896
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 719.0625,
+        "height": 523.0625,
+        "left": 13,
+        "right": 401,
+        "top": 196,
+        "width": 388,
+        "x": 13,
+        "y": 196
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 874.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 148.328125,
+          "right": 265.65625,
+          "text": "配管クリア",
+          "top": 830.0625,
+          "width": 117.328125,
+          "x": 148.328125,
+          "y": 830.0625
+        },
+        {
+          "bottom": 874.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 271.65625,
+          "right": 389,
+          "text": "水を流す",
+          "top": 830.0625,
+          "width": 117.34375,
+          "x": 271.65625,
+          "y": 830.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 874.0625,
+        "height": 44,
+        "left": 12,
+        "right": 402,
+        "top": 830.0625,
+        "width": 390,
+        "x": 12,
+        "y": 830.0625
+      },
+      "badgeMinimum": 30.177734375,
+      "board": {
+        "bottom": 718.0625,
+        "height": 523.0625,
+        "left": 12,
+        "right": 402,
+        "top": 195,
+        "width": 390,
+        "x": 12,
+        "y": 195
+      },
+      "contentWidth": 388,
+      "guide": true,
+      "hint": {
+        "bottom": 826.0625,
+        "height": 104,
+        "left": 12,
+        "right": 402,
+        "top": 722.0625,
+        "width": 390,
+        "x": 12,
+        "y": 722.0625
+      },
+      "legend": {
+        "bottom": 716.0625,
+        "height": 28,
+        "left": 84.5,
+        "right": 329.5,
+        "top": 688.0625,
+        "width": 245,
+        "x": 84.5,
+        "y": 688.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        414,
+        896
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 683.0625,
+        "height": 487.0625,
+        "left": 13,
+        "right": 401,
+        "top": 196,
+        "width": 388,
+        "x": 13,
+        "y": 196
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 874.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 148.328125,
+          "right": 265.65625,
+          "text": "配管クリア",
+          "top": 830.0625,
+          "width": 117.328125,
+          "x": 148.328125,
+          "y": 830.0625
+        },
+        {
+          "bottom": 874.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 271.65625,
+          "right": 389,
+          "text": "水を流す",
+          "top": 830.0625,
+          "width": 117.34375,
+          "x": 271.65625,
+          "y": 830.0625
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 386,
+        "height": 44,
+        "left": 508,
+        "right": 828,
+        "top": 342,
+        "width": 320,
+        "x": 508,
+        "y": 342
+      },
+      "badgeMinimum": 17.514892578125,
+      "board": {
+        "bottom": 386,
+        "height": 336,
+        "left": 16,
+        "right": 500,
+        "top": 50,
+        "width": 484,
+        "x": 16,
+        "y": 50
+      },
+      "contentWidth": 225.19148936170217,
+      "guide": false,
+      "hint": {
+        "bottom": 334,
+        "height": 106,
+        "left": 508,
+        "right": 828,
+        "top": 228,
+        "width": 320,
+        "x": 508,
+        "y": 228
+      },
+      "legend": {
+        "bottom": 383,
+        "height": 32,
+        "left": 108.5,
+        "right": 407.5,
+        "top": 351,
+        "width": 299,
+        "x": 108.5,
+        "y": 351
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        844,
+        390
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 345,
+        "height": 294,
+        "left": 17,
+        "right": 499,
+        "top": 51,
+        "width": 482,
+        "x": 17,
+        "y": 51
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 386,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 621,
+          "right": 715,
+          "text": "配管クリア",
+          "top": 342,
+          "width": 94,
+          "x": 621,
+          "y": 342
+        },
+        {
+          "bottom": 386,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 721,
+          "right": 815,
+          "text": "水を流す",
+          "top": 342,
+          "width": 94,
+          "x": 721,
+          "y": 342
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 386,
+        "height": 44,
+        "left": 508,
+        "right": 828,
+        "top": 342,
+        "width": 320,
+        "x": 508,
+        "y": 342
+      },
+      "badgeMinimum": 17.514892578125,
+      "board": {
+        "bottom": 386,
+        "height": 336,
+        "left": 16,
+        "right": 500,
+        "top": 50,
+        "width": 484,
+        "x": 16,
+        "y": 50
+      },
+      "contentWidth": 225.19148936170217,
+      "guide": false,
+      "hint": {
+        "bottom": 334,
+        "height": 106,
+        "left": 508,
+        "right": 828,
+        "top": 228,
+        "width": 320,
+        "x": 508,
+        "y": 228
+      },
+      "legend": {
+        "bottom": 383,
+        "height": 32,
+        "left": 108.5,
+        "right": 407.5,
+        "top": 351,
+        "width": 299,
+        "x": 108.5,
+        "y": 351
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        844,
+        390
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 345,
+        "height": 294,
+        "left": 17,
+        "right": 499,
+        "top": 51,
+        "width": 482,
+        "x": 17,
+        "y": 51
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 386,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 621,
+          "right": 715,
+          "text": "配管クリア",
+          "top": 342,
+          "width": 94,
+          "x": 621,
+          "y": 342
+        },
+        {
+          "bottom": 386,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 721,
+          "right": 815,
+          "text": "水を流す",
+          "top": 342,
+          "width": 94,
+          "x": 721,
+          "y": 342
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 386,
+        "height": 44,
+        "left": 508,
+        "right": 828,
+        "top": 342,
+        "width": 320,
+        "x": 508,
+        "y": 342
+      },
+      "badgeMinimum": 17.514892578125,
+      "board": {
+        "bottom": 386,
+        "height": 336,
+        "left": 16,
+        "right": 500,
+        "top": 50,
+        "width": 484,
+        "x": 16,
+        "y": 50
+      },
+      "contentWidth": 225.19148936170217,
+      "guide": true,
+      "hint": {
+        "bottom": 334,
+        "height": 106,
+        "left": 508,
+        "right": 828,
+        "top": 228,
+        "width": 320,
+        "x": 508,
+        "y": 228
+      },
+      "legend": {
+        "bottom": 383,
+        "height": 32,
+        "left": 108.5,
+        "right": 407.5,
+        "top": 351,
+        "width": 299,
+        "x": 108.5,
+        "y": 351
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        844,
+        390
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 345,
+        "height": 294,
+        "left": 17,
+        "right": 499,
+        "top": 51,
+        "width": 482,
+        "x": 17,
+        "y": 51
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 386,
+          "height": 44,
+          "hidden": false,
+          "id": "clear-pipes",
+          "left": 621,
+          "right": 715,
+          "text": "配管クリア",
+          "top": 342,
+          "width": 94,
+          "x": 621,
+          "y": 342
+        },
+        {
+          "bottom": 386,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 721,
+          "right": 815,
+          "text": "水を流す",
+          "top": 342,
+          "width": 94,
+          "x": 721,
+          "y": 342
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 756,
+        "height": 44,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 712,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 712
+      },
+      "badgeMinimum": 35.74468994140625,
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "contentWidth": 459.5744680851064,
+      "guide": false,
+      "hint": {
+        "bottom": 692,
+        "height": 160,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 532,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 532
+      },
+      "legend": {
+        "bottom": 752,
+        "height": 32,
+        "left": 563.609375,
+        "right": 862.609375,
+        "top": 720,
+        "width": 299,
+        "x": 563.609375,
+        "y": 720
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        1280,
+        800
+      ],
+      "stage": "3 二つの噴水盤\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 697,
+        "height": 600,
+        "left": 25,
+        "right": 872.609375,
+        "top": 97,
+        "width": 847.609375,
+        "x": 25,
+        "y": 97
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 756,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 1136.203125,
+          "right": 1243,
+          "text": "水を流す",
+          "top": 712,
+          "width": 106.796875,
+          "x": 1136.203125,
+          "y": 712
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 756,
+        "height": 44,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 712,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 712
+      },
+      "badgeMinimum": 35.74468994140625,
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "contentWidth": 459.5744680851064,
+      "guide": false,
+      "hint": {
+        "bottom": 692,
+        "height": 160,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 532,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 532
+      },
+      "legend": {
+        "bottom": 752,
+        "height": 32,
+        "left": 563.609375,
+        "right": 862.609375,
+        "top": 720,
+        "width": 299,
+        "x": 563.609375,
+        "y": 720
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        1280,
+        800
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 697,
+        "height": 600,
+        "left": 25,
+        "right": 872.609375,
+        "top": 97,
+        "width": 847.609375,
+        "x": 25,
+        "y": 97
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 756,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 1136.203125,
+          "right": 1243,
+          "text": "水を流す",
+          "top": 712,
+          "width": 106.796875,
+          "x": 1136.203125,
+          "y": 712
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 336.6666666666667
+        },
+        {
+          "value": 2,
+          "y": 303.3333333333333
+        },
+        {
+          "value": 3,
+          "y": 270
+        },
+        {
+          "value": 4,
+          "y": 236.66666666666663
+        },
+        {
+          "value": 5,
+          "y": 203.33333333333331
+        },
+        {
+          "value": 6,
+          "y": 170
+        },
+        {
+          "value": 7,
+          "y": 136.66666666666666
+        },
+        {
+          "value": 8,
+          "y": 103.33333333333331
+        }
+      ],
+      "source": "給水塔高さ8",
+      "sourceLabel": "給水塔の高さ8"
+    }
+  },
+  {
+    "screen": {
+      "actions": {
+        "bottom": 756,
+        "height": 44,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 712,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 712
+      },
+      "badgeMinimum": 35.74468994140625,
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "contentWidth": 459.5744680851064,
+      "guide": true,
+      "hint": {
+        "bottom": 692,
+        "height": 160,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 532,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 532
+      },
+      "legend": {
+        "bottom": 752,
+        "height": 32,
+        "left": 563.609375,
+        "right": 862.609375,
+        "top": 720,
+        "width": 299,
+        "x": 563.609375,
+        "y": 720
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        1280,
+        800
+      ],
+      "stage": "5 近道と回り道\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 697,
+        "height": 600,
+        "left": 25,
+        "right": 872.609375,
+        "top": 97,
+        "width": 847.609375,
+        "x": 25,
+        "y": 97
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 756,
+          "height": 44,
+          "hidden": false,
+          "id": "run",
+          "left": 1136.203125,
+          "right": 1243,
+          "text": "水を流す",
+          "top": 712,
+          "width": 106.796875,
+          "x": 1136.203125,
+          "y": 712
+        }
+      ],
+      "resultButtons": [],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  }
+]

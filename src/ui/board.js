@@ -173,7 +173,8 @@ export function outletLabelPositions(layout, stage) {
     const preferred = node.cx - 34;
     const y = layout.yOf(Number(o.height)) - 82;
     // 大きくした2段の札も、隣の器の名札を覆わない近い空きへ置く。
-    const choices = [preferred, ...Array.from({ length: 167 }, (_, i) => 14 + i * 2)].filter(x => x >= 14 && x <= VIEW_W - 14);
+    // 左端の共通の物差し（0〜22）を丸い札で隠さない。
+    const choices = [preferred, ...Array.from({ length: 154 }, (_, i) => 40 + i * 2)].filter(x => x >= 40 && x <= VIEW_W - 14);
     const score = x => {
       let n = Math.abs(x - preferred) * .03;
       for (const tower of layout.nodes.values()) {
@@ -482,7 +483,15 @@ export function renderBoard(svg, model) {
   }
   // 給水塔：水の高さが見える縦長の設備。自然の泉という呼び名は使わない。
   out.push(`<rect x="${sx0 - 7}" y="${GROUND - 5}" width="${spring.w + 14}" height="6" rx="2" fill="url(#porcelain)" stroke="#627e9b" stroke-width="1"/>`);
-  badge(out, { x: spring.cx, y: sy - 22, text: '給水塔', tone: 'blue' });
+  out.push(`<g class="source-height" aria-label="給水塔の高さ${esc(stage.spring.height)}">`);
+  badge(out, { x: spring.cx, y: sy - 32, text: '給水塔', tone: 'blue' });
+  badge(out, { x: spring.cx, y: sy - 15, text: `高さ${stage.spring.height}`, size: 9, h: 14 });
+  out.push('</g>');
+  // 給水塔の目盛りも、グラスと共通の高さ1ずつ。青い水の上で読める白い刻み。
+  for (let k = 1; k <= H; k++) {
+    const y = layout.yOf(k);
+    out.push(`<line class="spring-tick" data-height-level="${k}" x1="${sx0 + spring.w - 7}" y1="${y}" x2="${sx0 + spring.w - 1}" y2="${y}" stroke="#ffffff" stroke-width="1.5"/>`);
+  }
 
   // グラス
   for (const t of stage.towers) {
@@ -513,7 +522,7 @@ export function renderBoard(svg, model) {
     // 目盛り（音名は出さない）
     for (let k = 1; k <= H; k++) {
       const y = layout.yOf(k);
-      out.push(`<line x1="${x0 - 5}" y1="${y}" x2="${x0 + 5}" y2="${y}" stroke="var(--tick)" stroke-width="1.4"/>`);
+      out.push(`<line class="glass-tick" data-height-level="${k}" x1="${x0 - 5}" y1="${y}" x2="${x0 + 5}" y2="${y}" stroke="var(--tick)" stroke-width="1.4"/>`);
     }
     // 前回の水面の線（編集中だけ）
     const prev = prevLevels?.get(t.id);
@@ -641,6 +650,13 @@ export function renderBoard(svg, model) {
   }
   const labelPositions = pipeLabelPositions(layout, stage);
   for (const c of stage.candidates) drawPipeLabel(out, layout, c, model, labelPositions.get(c.id));
+  // 左の既存の余白へ共通の物差し。グラスと給水塔に同じ yOf を使う。
+  out.push(`<g class="height-ruler" aria-label="高さの物差し。地面が0、1目盛りは高さ1。" pointer-events="none"><rect x="1" y="${sy - 22}" width="21" height="${GROUND - sy + 30}" rx="3" fill="#ffffff" fill-opacity=".9" stroke="#b6cadb" stroke-width=".7"/><text x="11.5" y="${sy - 10}" text-anchor="middle" font-size="9" font-weight="700" fill="#173f70">高さ</text><path d="M19 ${sy} V${GROUND}" fill="none" stroke="#507c9f" stroke-width=".8"/>`);
+  for (let k = 0; k <= H; k++) {
+    const y = layout.yOf(k);
+    out.push(`<g class="ruler-tick" data-height-level="${k}"><line x1="17" y1="${y}" x2="21" y2="${y}" stroke="#507c9f" stroke-width="1"/><text x="15" y="${y + 4}" text-anchor="end" font-size="12" font-weight="600" fill="#173f70">${k}</text></g>`);
+  }
+  out.push('</g>');
   drawGuide(out, stage, layout, model.guide);
   svg.innerHTML = out.join('');
 }
@@ -653,7 +669,7 @@ function drawGuide(out, stage, layout, guide) {
   if (guide === 'spring') {
     const s = layout.nodes.get(stage.spring.id);
     const sy = layout.yOf(layout.H);
-    ring(s.cx - s.w / 2 - 10, sy - 30, s.w + 20, GROUND - sy + 36);
+    ring(s.cx - s.w / 2 - 10, sy - 42, s.w + 20, GROUND - sy + 48);
   } else if (guide === 'tower') {
     const n = layout.nodes.get(stage.towers[0].id);
     ring(n.cx - TOWER_W / 2 - 12, layout.towerTop - 8, TOWER_W + 24, GROUND - layout.towerTop + 14);

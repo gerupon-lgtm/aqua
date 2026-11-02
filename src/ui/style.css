@@ -551,6 +551,14 @@ th { color: var(--ink-soft); font-weight: 500; }
   .hint.guide .spirit { width: 52px; height: 76px; }
 }
 
+/* 下部の操作も結果カードと同じ3列・内側の余白へそろえる。未使用の列は空ける。 */
+.panel > .actions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; width: min(420px,100%); justify-self: end; padding-inline: 13px; box-sizing: border-box; }
+.panel > .actions button, .panel > .actions .retry { width: 100%; min-width: 0; height: 44px; padding: 0 4px; font-size: 12px; box-sizing: border-box; }
+.panel > .actions .primary { grid-column: auto; grid-row: auto; min-height: 44px; font-size: 12px; }
+.panel > .actions #show-result { grid-column: 1; }
+.panel > .actions #clear-pipes, .panel > .actions #stop, .panel > .actions #cont-restart { grid-column: 2; }
+.panel > .actions #run, .panel > .actions #guide-next, .panel > .actions #next, .panel > .actions #to-title { grid-column: 3; }
+
 /* 無効な操作も、背後が透けて文字が消えないようにする。 */
 .app button:disabled:not(.stage-name), .title-screen button:disabled, .toast button:disabled, .sheet button:disabled { opacity: 1; background: #e7eef6; color: #52677f; border-color: #bdcbd9; box-shadow: none; }
 .switcher .nav:disabled { opacity: 1; background: #edf2f8; color: #73879c; }

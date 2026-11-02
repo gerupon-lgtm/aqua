@@ -5,6 +5,8 @@ import { analyzeStage, evaluate, thinnessOf } from '../src/logic/play.js';
 import { renderBoard, layoutFor, pipeCrossings, pipePath } from '../src/ui/board.js';
 import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS } from '../src/ui/visual-timing.js';
 import { PRACTICE } from '../src/content/tutorial.js';
+import { CHALLENGES } from '../src/content/challenges.js';
+import { applyValues } from '../src/content/challenge-draw.js';
 
 // 盤面の描画の点検（DOMを使わず、描いたSVGの文字列を調べる）
 function draw(stage, config, options = {}) {
@@ -28,6 +30,23 @@ test('太さを変えた管は、太さと同じ計算値を2段の札と読み�
     assert.ok(tag.includes(`>${word}</text><text`));
     assert.ok(tag.includes(`>${value}</text>`));
     assert.ok(tag.includes('pointer-events="all"'));
+  }
+});
+
+test('出題で変わる給水塔の高さと、物差し・給水塔・グラスの目盛りが一致する', () => {
+  const base = STAGES[6];
+  for (const stage of [STAGES[0], ...CHALLENGES[base.id].map(q => applyValues(base, q.values))]) {
+    const { svg } = draw(stage, { connected: new Set(), primed: new Set(), thickness: {} }, { phase: 'edit' });
+    const H = Number(stage.spring.height), layout = layoutFor(stage);
+    assert.ok(svg.includes(`aria-label="給水塔の高さ${stage.spring.height}"`));
+    assert.ok(svg.includes(`>高さ${stage.spring.height}</text>`));
+    const ruler = [...svg.matchAll(/class="ruler-tick" data-height-level="(\d+)"><line[^>]*y1="([^"]+)"/g)];
+    assert.equal(ruler.length, H + 1);
+    for (const [, value, y] of ruler) {
+      assert.equal(Number(y), layout.yOf(Number(value)));
+      if (Number(value) === 0) continue;
+      for (const kind of ['spring', 'glass']) assert.ok(svg.includes(`class="${kind}-tick" data-height-level="${value}"`) && new RegExp(`class="${kind}-tick" data-height-level="${value}"[^>]*y1="${y}"`).test(svg));
+    }
   }
 });
 
