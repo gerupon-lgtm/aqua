@@ -17,6 +17,8 @@
 - app-flow.json：1面の実操作と外枠、噴水・虹・結果の観測。
 - practice-layout.json：320×640の練習。毎秒の説明も104pxの案内欄に収まる。
 - diagrams.html：同じ意味へそろえた説明の挿絵4枚。
+- public-assets.json / public-app.json：v0.14.10の配信59資材の一致、旧版からの更新と実操作。
+- public-t4-empty.jpg / public-t4-through-flow.jpg / public-t4-rate-result.jpg / public-t4-rainbow-before-result.jpg / public-t4-perfect-result.jpg / public-t4-success.jpg / public-pc.jpg：公開本体の実画面。手元だけに保存する。
 - local-t4-rate-result.png / local-t4-through-flow.png / local-t1-success.png：実画面。画像は手元に保管しGitには含めない。
 
 器の固定サイズ・横位置、地中の配管、数値の計算、出題・採点・保存・音、虹の後の結果待機は維持。実機の見やすさや操作の受け入れは未確認。詳しい変更と公開記録はdocs/reviews/2026-11-03-flow-and-outlet.md。

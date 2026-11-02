@@ -1,0 +1,681 @@
+{
+  "version": "0.14.10",
+  "updatedFrom": "0.14.9",
+  "edit": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 20.732391357421875,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 266.55946601941747,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      58,
+      360,
+      412
+    ]
+  },
+  "result": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 20.732391357421875,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 266.55946601941747,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      58,
+      360,
+      412
+    ]
+  },
+  "rateCopy": "高い受け皿−足りない必要量毎秒3届いた量毎秒5/2（約2.50）",
+  "sizes": [
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 16.518829345703125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 212.3847087378641,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        58,
+        360,
+        412
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 756,
+        "height": 44,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 712,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 712
+      },
+      "badgeMinimum": 35.74468994140625,
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "contentWidth": 459.5744680851064,
+      "guide": false,
+      "hint": {
+        "bottom": 692,
+        "height": 160,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 532,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 532
+      },
+      "legend": {
+        "bottom": 752,
+        "height": 32,
+        "left": 563.609375,
+        "right": 862.609375,
+        "top": 720,
+        "width": 299,
+        "x": 563.609375,
+        "y": 720
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        1280,
+        800
+      ],
+      "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 697,
+        "height": 600,
+        "left": 25,
+        "right": 872.609375,
+        "top": 97,
+        "width": 847.609375,
+        "x": 25,
+        "y": 97
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    }
+  ],
+  "mouth": [
+    {
+      "height": "3",
+      "mouthY": 354.9739074707031,
+      "rulerY": 354.9739074707031
+    }
+  ],
+  "success": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 20.732391357421875,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 266.55946601941747,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "4 高い受け皿\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      58,
+      360,
+      412
+    ]
+  },
+  "timeline": [
+    {
+      "elapsed": 21,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 94,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 168,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 240,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 312,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 395,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 493,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 573,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 690,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 762,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 863,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 944,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1031,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1120,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1197,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1272,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1354,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1453,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1537,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1636,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1720,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1790,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1869,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 1953,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2029,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2104,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2180,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2260,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2338,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2411,
+      "card": false,
+      "fountain": false,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2500,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2587,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2668,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2755,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2830,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2912,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 2992,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 3064,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 3135,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 3203,
+      "card": false,
+      "fountain": true,
+      "rainbow": 0
+    },
+    {
+      "elapsed": 3293,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 3459,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 3530,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 3610,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 3688,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 3762,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 3857,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 3931,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 4012,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 4104,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 4179,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 4260,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 4341,
+      "card": false,
+      "fountain": true,
+      "rainbow": 1
+    },
+    {
+      "elapsed": 4437,
+      "card": true,
+      "fountain": true,
+      "rainbow": 1
+    }
+  ],
+  "errors": []
+}
