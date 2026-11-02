@@ -1,0 +1,935 @@
+{
+  "version": "0.14.9",
+  "commit": "589ec344db2a62a798c3a8eb61e21128a7c2b4ed",
+  "updatedFrom": "0.14.8",
+  "edit": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "labels": {
+    "buttons": [
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": false,
+        "id": "clear-pipes",
+        "left": 140.328125,
+        "right": 249.65625,
+        "text": "配管クリア",
+        "top": 614.0625,
+        "width": 109.328125,
+        "x": 140.328125,
+        "y": 614.0625
+      },
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": false,
+        "id": "run",
+        "left": 255.65625,
+        "right": 365,
+        "text": "水を流す",
+        "top": 614.0625,
+        "width": 109.34375,
+        "x": 255.65625,
+        "y": 614.0625
+      }
+    ],
+    "resultButtons": [],
+    "ruler": [
+      {
+        "value": 0,
+        "y": 370
+      },
+      {
+        "value": 1,
+        "y": 330
+      },
+      {
+        "value": 2,
+        "y": 290
+      },
+      {
+        "value": 3,
+        "y": 250
+      },
+      {
+        "value": 4,
+        "y": 210
+      },
+      {
+        "value": 5,
+        "y": 170
+      },
+      {
+        "value": 6,
+        "y": 130
+      }
+    ],
+    "source": "給水塔高さ6",
+    "sourceLabel": "給水塔の高さ6"
+  },
+  "beforeRun": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "clear": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "clearLabels": {
+    "buttons": [
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": false,
+        "id": "show-result",
+        "left": 25,
+        "right": 134.328125,
+        "text": "結果",
+        "top": 614.0625,
+        "width": 109.328125,
+        "x": 25,
+        "y": 614.0625
+      },
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": false,
+        "id": "stop",
+        "left": 140.328125,
+        "right": 249.65625,
+        "text": "もう一度",
+        "top": 614.0625,
+        "width": 109.328125,
+        "x": 140.328125,
+        "y": 614.0625
+      },
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": false,
+        "id": "next",
+        "left": 255.65625,
+        "right": 365,
+        "text": "次へ",
+        "top": 614.0625,
+        "width": 109.34375,
+        "x": 255.65625,
+        "y": 614.0625
+      }
+    ],
+    "resultButtons": [
+      {
+        "bottom": 647.0625,
+        "height": 44,
+        "hidden": false,
+        "left": 25,
+        "right": 134.328125,
+        "text": "解説",
+        "top": 603.0625,
+        "width": 109.328125,
+        "x": 25,
+        "y": 603.0625
+      },
+      {
+        "bottom": 647.0625,
+        "height": 44,
+        "hidden": false,
+        "left": 140.328125,
+        "right": 249.65625,
+        "text": "もう一度",
+        "top": 603.0625,
+        "width": 109.328125,
+        "x": 140.328125,
+        "y": 603.0625
+      },
+      {
+        "bottom": 647.0625,
+        "height": 44,
+        "hidden": false,
+        "left": 255.65625,
+        "right": 365,
+        "text": "次へ",
+        "top": 603.0625,
+        "width": 109.34375,
+        "x": 255.65625,
+        "y": 603.0625
+      }
+    ],
+    "ruler": [
+      {
+        "value": 0,
+        "y": 370
+      },
+      {
+        "value": 1,
+        "y": 330
+      },
+      {
+        "value": 2,
+        "y": 290
+      },
+      {
+        "value": 3,
+        "y": 250
+      },
+      {
+        "value": 4,
+        "y": 210
+      },
+      {
+        "value": 5,
+        "y": 170
+      },
+      {
+        "value": 6,
+        "y": 130
+      }
+    ],
+    "source": "給水塔高さ6",
+    "sourceLabel": "給水塔の高さ6"
+  },
+  "clearText": "結果\nクリア\n×\n75点\n配管 2 本\n\n試行 1 回（この面の最少 1 回）\n\n噴水盤\n✓\nちょうど\n必要量\n2\n届いた量\n2\n満点の本数\n1本\n\nグラスをマウスでなぞると、そのグラスの音を聞き直せます。\n\nくわしい記録\n解説\nもう一度\n次へ",
+  "desktop": {
+    "screen": {
+      "actions": {
+        "bottom": 756,
+        "height": 44,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 712,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 712
+      },
+      "badgeMinimum": 35.74468994140625,
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "contentWidth": 459.5744680851064,
+      "guide": false,
+      "hint": {
+        "bottom": 692,
+        "height": 160,
+        "left": 897.609375,
+        "right": 1256,
+        "top": 532,
+        "width": 358.390625,
+        "x": 897.609375,
+        "y": 532
+      },
+      "legend": {
+        "bottom": 752,
+        "height": 32,
+        "left": 563.609375,
+        "right": 862.609375,
+        "top": 720,
+        "width": 299,
+        "x": 563.609375,
+        "y": 720
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        1280,
+        800
+      ],
+      "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 697,
+        "height": 600,
+        "left": 25,
+        "right": 872.609375,
+        "top": 97,
+        "width": 847.609375,
+        "x": 25,
+        "y": 97
+      },
+      "viewBox": [
+        0,
+        0,
+        360,
+        470
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 756,
+          "height": 44,
+          "hidden": false,
+          "id": "show-result",
+          "left": 910.609375,
+          "right": 1017.40625,
+          "text": "結果",
+          "top": 712,
+          "width": 106.796875,
+          "x": 910.609375,
+          "y": 712
+        },
+        {
+          "bottom": 756,
+          "height": 44,
+          "hidden": false,
+          "id": "stop",
+          "left": 1023.40625,
+          "right": 1130.203125,
+          "text": "もう一度",
+          "top": 712,
+          "width": 106.796875,
+          "x": 1023.40625,
+          "y": 712
+        },
+        {
+          "bottom": 756,
+          "height": 44,
+          "hidden": false,
+          "id": "next",
+          "left": 1136.203125,
+          "right": 1243,
+          "text": "次へ",
+          "top": 712,
+          "width": 106.796875,
+          "x": 1136.203125,
+          "y": 712
+        }
+      ],
+      "resultButtons": [
+        {
+          "bottom": 745,
+          "height": 44,
+          "hidden": false,
+          "left": 910.609375,
+          "right": 1017.40625,
+          "text": "解説",
+          "top": 701,
+          "width": 106.796875,
+          "x": 910.609375,
+          "y": 701
+        },
+        {
+          "bottom": 745,
+          "height": 44,
+          "hidden": false,
+          "left": 1023.40625,
+          "right": 1130.203125,
+          "text": "もう一度",
+          "top": 701,
+          "width": 106.796875,
+          "x": 1023.40625,
+          "y": 701
+        },
+        {
+          "bottom": 745,
+          "height": 44,
+          "hidden": false,
+          "left": 1136.203125,
+          "right": 1243,
+          "text": "次へ",
+          "top": 701,
+          "width": 106.796875,
+          "x": 1136.203125,
+          "y": 701
+        }
+      ],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  },
+  "small": {
+    "screen": {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 17.361602783203125,
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 223.22066326530611,
+      "guide": false,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 68,
+        "left": 12,
+        "right": 308,
+        "top": 502.0625,
+        "width": 296,
+        "x": 12,
+        "y": 502.0625
+      },
+      "legend": {
+        "bottom": 496.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 468.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 468.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+      "svg": {
+        "bottom": 463.0625,
+        "height": 243.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        78,
+        360,
+        392
+      ]
+    },
+    "height": {
+      "buttons": [
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "show-result",
+          "left": 25,
+          "right": 111,
+          "text": "結果",
+          "top": 574.0625,
+          "width": 86,
+          "x": 25,
+          "y": 574.0625
+        },
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "stop",
+          "left": 117,
+          "right": 203,
+          "text": "もう一度",
+          "top": 574.0625,
+          "width": 86,
+          "x": 117,
+          "y": 574.0625
+        },
+        {
+          "bottom": 618.0625,
+          "height": 44,
+          "hidden": false,
+          "id": "next",
+          "left": 209,
+          "right": 295,
+          "text": "次へ",
+          "top": 574.0625,
+          "width": 86,
+          "x": 209,
+          "y": 574.0625
+        }
+      ],
+      "resultButtons": [
+        {
+          "bottom": 607.0625,
+          "height": 44,
+          "hidden": false,
+          "left": 25,
+          "right": 111,
+          "text": "解説",
+          "top": 563.0625,
+          "width": 86,
+          "x": 25,
+          "y": 563.0625
+        },
+        {
+          "bottom": 607.0625,
+          "height": 44,
+          "hidden": false,
+          "left": 117,
+          "right": 203,
+          "text": "もう一度",
+          "top": 563.0625,
+          "width": 86,
+          "x": 117,
+          "y": 563.0625
+        },
+        {
+          "bottom": 607.0625,
+          "height": 44,
+          "hidden": false,
+          "left": 209,
+          "right": 295,
+          "text": "次へ",
+          "top": 563.0625,
+          "width": 86,
+          "x": 209,
+          "y": 563.0625
+        }
+      ],
+      "ruler": [
+        {
+          "value": 0,
+          "y": 370
+        },
+        {
+          "value": 1,
+          "y": 330
+        },
+        {
+          "value": 2,
+          "y": 290
+        },
+        {
+          "value": 3,
+          "y": 250
+        },
+        {
+          "value": 4,
+          "y": 210
+        },
+        {
+          "value": 5,
+          "y": 170
+        },
+        {
+          "value": 6,
+          "y": 130
+        }
+      ],
+      "source": "給水塔高さ6",
+      "sourceLabel": "給水塔の高さ6"
+    }
+  },
+  "ng": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 21.7901611328125,
+    "board": {
+      "bottom": 538.0625,
+      "height": 341.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 280.15943877551024,
+    "guide": false,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 68,
+      "left": 12,
+      "right": 378,
+      "top": 542.0625,
+      "width": 366,
+      "x": 12,
+      "y": 542.0625
+    },
+    "legend": {
+      "bottom": 536.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 508.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 508.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "1 まっすぐ届ける\n選択プレイ・お試し\n∨",
+    "svg": {
+      "bottom": 503.0625,
+      "height": 305.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      78,
+      360,
+      392
+    ]
+  },
+  "ngLabels": {
+    "buttons": [
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": false,
+        "id": "show-result",
+        "left": 25,
+        "right": 134.328125,
+        "text": "結果",
+        "top": 614.0625,
+        "width": 109.328125,
+        "x": 25,
+        "y": 614.0625
+      },
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": false,
+        "id": "stop",
+        "left": 140.328125,
+        "right": 249.65625,
+        "text": "配管を見直す",
+        "top": 614.0625,
+        "width": 109.328125,
+        "x": 140.328125,
+        "y": 614.0625
+      },
+      {
+        "bottom": 658.0625,
+        "height": 44,
+        "hidden": true,
+        "id": "",
+        "left": 255.65625,
+        "right": 365,
+        "text": "",
+        "top": 614.0625,
+        "width": 109.34375,
+        "x": 255.65625,
+        "y": 614.0625
+      }
+    ],
+    "resultButtons": [
+      {
+        "bottom": 647.0625,
+        "height": 44,
+        "hidden": false,
+        "left": 25,
+        "right": 134.328125,
+        "text": "解説",
+        "top": 603.0625,
+        "width": 109.328125,
+        "x": 25,
+        "y": 603.0625
+      },
+      {
+        "bottom": 647.0625,
+        "height": 44,
+        "hidden": false,
+        "left": 140.328125,
+        "right": 249.65625,
+        "text": "配管を見直す",
+        "top": 603.0625,
+        "width": 109.328125,
+        "x": 140.328125,
+        "y": 603.0625
+      },
+      {
+        "bottom": 647.0625,
+        "height": 44,
+        "hidden": true,
+        "left": 255.65625,
+        "right": 365,
+        "text": "",
+        "top": 603.0625,
+        "width": 109.34375,
+        "x": 255.65625,
+        "y": 603.0625
+      }
+    ],
+    "ruler": [
+      {
+        "value": 0,
+        "y": 370
+      },
+      {
+        "value": 1,
+        "y": 330
+      },
+      {
+        "value": 2,
+        "y": 290
+      },
+      {
+        "value": 3,
+        "y": 250
+      },
+      {
+        "value": 4,
+        "y": 210
+      },
+      {
+        "value": 5,
+        "y": 170
+      },
+      {
+        "value": 6,
+        "y": 130
+      }
+    ],
+    "source": "給水塔高さ6",
+    "sourceLabel": "給水塔の高さ6"
+  },
+  "ngText": "結果\n×\nNG\n配管 1 本\n噴水盤\n−\n足りない\n必要量\n2\n届いた量\n0\n満点の本数\n1本\n\nグラスをマウスでなぞると、そのグラスの音を聞き直せます。\n\nくわしい記録\n解説\n配管を見直す",
+  "errors": []
+}
