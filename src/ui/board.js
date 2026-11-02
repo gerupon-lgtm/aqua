@@ -411,6 +411,22 @@ export function basinPlacement(layout, outlet) {
   return { cx, width: 62, left: cx - 31, right: cx + 31 };
 }
 
+// スマホでは、部品のない上空だけを表示範囲から外す。座標・配管の道筋は変えない。
+// 実行前から噴水・虹・札の場所も含め、途中で倍率が変わらないようにする。
+const compactViewCache = new WeakMap();
+export function boardViewBox(layout, stage, compact = false) {
+  if (!compact) return `0 0 ${VIEW_W} ${VIEW_H}`;
+  if (!compactViewCache.has(layout)) {
+    const tops = [layout.towerTop - 12, layout.yOf(layout.H) - 42];
+    for (const wall of stage.walls ?? []) tops.push(layout.yOf(Number(wall.height)) - 12);
+    for (const c of stage.candidates.filter(c => c.siphon)) tops.push(pipePath(layout, c).my - 32);
+    for (const o of stage.outlets) tops.push(layout.yOf(Number(o.height)) - 34 - 90);
+    const top = Math.max(0, Math.floor(Math.min(...tops)));
+    compactViewCache.set(layout, `0 ${top} ${VIEW_W} ${VIEW_H - top}`);
+  }
+  return compactViewCache.get(layout);
+}
+
 // model: { stage, layout, connected:Set, primed:Set, thinness(c), selected, phase, levels:Map(id→number|null),
 //          settled, view:{result, outlets, broken}（今見せている状態の計算結果）, gateClosed,
 //          prevLevels:Map, time, reducedMotion, highlight:{id, until} }

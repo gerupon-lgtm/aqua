@@ -1,0 +1,34 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v0.14.8 盤面の表示範囲</title><link rel="stylesheet" href="../../src/ui/style.css">
+<style>body{height:auto;padding:16px}svg{width:360px;height:470px}pre{white-space:pre-wrap}button{min-height:44px}</style>
+<h1>全出題の部品が表示範囲に入るか</h1><p>本番の描画と計算を使い、満点の噴水・虹まで含めて上端を検査する。</p>
+<button id="audit">点検する</button><pre id="report">待機中</pre><svg id="sample"></svg>
+<script type="module">
+import {STAGES} from '../../src/content/stages.js';
+import {CHALLENGES} from '../../src/content/challenges.js';
+import {applyValues} from '../../src/content/challenge-draw.js';
+import {PRACTICE} from '../../src/content/tutorial.js';
+import {analyzeStage,evaluate,normalizeConfig,thinnessOf} from '../../src/logic/play.js';
+import {renderBoard,layoutFor,boardViewBox} from '../../src/ui/board.js';
+const svg=document.querySelector('#sample'),report=document.querySelector('#report');
+document.querySelector('#audit').onclick=async()=>{
+ await document.fonts.ready;
+ const errors=[];let questions=0,drawings=0,elements=0;
+ for(const base of [PRACTICE,...STAGES]) for(const stage of CHALLENGES[base.id]?.map(q=>applyValues(base,q.values))??[base]){
+  const layout=layoutFor(stage),analysis=analyzeStage(stage),config=normalizeConfig(stage,analysis.perfectConfig),ev=evaluate(stage,config,analysis);
+  const box=boardViewBox(layout,stage,true).split(' ').map(Number);svg.setAttribute('viewBox',box.join(' '));questions++;
+  for(const view of ev.states){
+   renderBoard(svg,{stage,layout,connected:config.connected,primed:config.primed,thinness:c=>thinnessOf(c,config),selected:null,phase:'result',levels:new Map(stage.towers.map(t=>[t.id,view.result.towers[t.id].state==='water'?Number(view.result.towers[t.id].level):null])),settled:true,view,gateClosed:view.name==='closed',fountainAt:0,outcome:'perfect',prevLevels:new Map(),time:10000,reducedMotion:true,highlight:null,onScale:()=>false,tickDistance:()=>1});
+   drawings++;
+   for(const e of svg.querySelectorAll('text,image,path,line,circle,ellipse,rect')){
+    if(e.closest('defs')||e.getAttribute('href')?.includes('bg-trial'))continue;
+    if(e.tagName==='rect'&&e.getAttribute('x')==='0'&&e.getAttribute('y')==='0'&&e.getAttribute('width')==='360')continue;
+    const b=e.getBoundingClientRect();if(!b.width&&!b.height)continue;elements++;
+    const r=svg.getBoundingClientRect(),scale=Math.min(r.width/box[2],r.height/box[3]),cutoff=r.top+(r.height-box[3]*scale)/2;
+    if(b.top<cutoff-.1)errors.push({stage:stage.number,view:view.name,tag:e.tagName,class:e.getAttribute('class'),top:b.top,cutoff});
+   }
+  }
+ }
+ report.textContent=JSON.stringify({questions,drawings,elements,errors},null,2);
+};
+</script>

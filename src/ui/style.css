@@ -554,3 +554,25 @@ th { color: var(--ink-soft); font-weight: 500; }
 /* 無効な操作も、背後が透けて文字が消えないようにする。 */
 .app button:disabled:not(.stage-name), .title-screen button:disabled, .toast button:disabled, .sheet button:disabled { opacity: 1; background: #e7eef6; color: #52677f; border-color: #bdcbd9; box-shadow: none; }
 .switcher .nav:disabled { opacity: 1; background: #edf2f8; color: #73879c; }
+
+/* スマホ縦：文字を縮めず、条件の見出しと縦の余白を整理して盤面へ高さを戻す。
+   プレイは1画面。結果・解説の内部スクロールは従来どおり。 */
+@media (orientation: portrait) and (max-width: 1023px) {
+  .app { height: 100dvh; padding: 4px max(12px, env(safe-area-inset-right, 0px)) max(2px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); gap: 4px; }
+  .cond-card { grid-template-columns: minmax(0,1fr) auto; grid-template-rows: auto auto; padding: 6px 10px; gap: 2px 8px; }
+  .cond-head { display: contents; }
+  .cond-label { display: none; }
+  .cond-goal { grid-column: 1/-1; grid-row: 1; }
+  .cond-res { grid-column: 1; grid-row: 2; align-self: center; gap: 2px 8px; }
+  .cond-tools { grid-column: 2; grid-row: 2; justify-self: end; }
+  .board-wrap { grid-template-rows: minmax(0,1fr) 34px; }
+  .board-footer { padding: 1px 4px; }
+  .key-title { display: none; }
+  .pipe-key { padding: 0 3px; }
+  .key-sample { height: 26px; }
+  .panel { gap: 4px; }
+  .panel > .hint { min-height: 68px; }
+  .app.with-guide .panel > .hint { min-height: 104px; }
+  .hint.guide { grid-template-columns: 52px minmax(0,1fr); gap: 8px; }
+  .hint.guide .spirit { width: 52px; height: 76px; }
+}

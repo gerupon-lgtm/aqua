@@ -1,0 +1,891 @@
+{
+  "before": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 24.1466064453125,
+    "board": {
+      "bottom": 502.0625,
+      "height": 305.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 310.4567307692308,
+    "guide": true,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 104,
+      "left": 12,
+      "right": 378,
+      "top": 506.0625,
+      "width": 366,
+      "x": 12,
+      "y": 506.0625
+    },
+    "legend": {
+      "bottom": 500.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 472.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 472.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "画面の見方\n選択プレイ・練習\n∨",
+    "svg": {
+      "bottom": 467.0625,
+      "height": 269.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      158,
+      360,
+      312
+    ]
+  },
+  "result": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 24.1466064453125,
+    "board": {
+      "bottom": 502.0625,
+      "height": 305.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 310.4567307692308,
+    "guide": true,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 104,
+      "left": 12,
+      "right": 378,
+      "top": 506.0625,
+      "width": 366,
+      "x": 12,
+      "y": 506.0625
+    },
+    "legend": {
+      "bottom": 500.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 472.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 472.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "画面の見方\n選択プレイ・練習\n∨",
+    "svg": {
+      "bottom": 467.0625,
+      "height": 269.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      158,
+      360,
+      312
+    ]
+  },
+  "resultText": "結果\nPERFECT\n×\n100点\n配管 1 本\n\n噴水盤に2届きました。結果の「解説」で計算を確かめ、「次へ」でお試し1へ進みましょう。\n\n噴水盤\n✓\nちょうど\n必要量\n2\n届いた量\n2\n満点の本数\n1本\n\nグラスをマウスでなぞると、そのグラスの音を聞き直せます。\n\nくわしい記録\n解説\nもう一度\n次へ",
+  "guideScreens": [
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 18.58251953125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 238.9182692307692,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 18.58251953125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 238.9182692307692,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 18.58251953125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 238.9182692307692,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 18.58251953125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 238.9182692307692,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 308,
+        "top": 574.0625,
+        "width": 296,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 18.58251953125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 243.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "contentWidth": 238.9182692307692,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 308,
+        "top": 466.0625,
+        "width": 296,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 37.5,
+        "right": 282.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 37.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        320,
+        640
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 207.0625,
+        "left": 13,
+        "right": 307,
+        "top": 220,
+        "width": 294,
+        "x": 13,
+        "y": 220
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 618.0625,
+        "height": 44,
+        "left": 12,
+        "right": 348,
+        "top": 574.0625,
+        "width": 336,
+        "x": 12,
+        "y": 574.0625
+      },
+      "badgeMinimum": 20.556915283203125,
+      "board": {
+        "bottom": 462.0625,
+        "height": 265.0625,
+        "left": 12,
+        "right": 348,
+        "top": 197,
+        "width": 336,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 264.30288461538464,
+      "guide": true,
+      "hint": {
+        "bottom": 570.0625,
+        "height": 104,
+        "left": 12,
+        "right": 348,
+        "top": 466.0625,
+        "width": 336,
+        "x": 12,
+        "y": 466.0625
+      },
+      "legend": {
+        "bottom": 460.0625,
+        "height": 28,
+        "left": 57.5,
+        "right": 302.5,
+        "top": 432.0625,
+        "width": 245,
+        "x": 57.5,
+        "y": 432.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        360,
+        640
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 427.0625,
+        "height": 229.0625,
+        "left": 13,
+        "right": 347,
+        "top": 198,
+        "width": 334,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 658.0625,
+        "height": 44,
+        "left": 12,
+        "right": 378,
+        "top": 614.0625,
+        "width": 366,
+        "x": 12,
+        "y": 614.0625
+      },
+      "badgeMinimum": 24.1466064453125,
+      "board": {
+        "bottom": 502.0625,
+        "height": 305.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "contentWidth": 310.4567307692308,
+      "guide": true,
+      "hint": {
+        "bottom": 610.0625,
+        "height": 104,
+        "left": 12,
+        "right": 378,
+        "top": 506.0625,
+        "width": 366,
+        "x": 12,
+        "y": 506.0625
+      },
+      "legend": {
+        "bottom": 500.0625,
+        "height": 28,
+        "left": 72.5,
+        "right": 317.5,
+        "top": 472.0625,
+        "width": 245,
+        "x": 72.5,
+        "y": 472.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        390,
+        680
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 467.0625,
+        "height": 269.0625,
+        "left": 13,
+        "right": 377,
+        "top": 198,
+        "width": 364,
+        "x": 13,
+        "y": 198
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    },
+    {
+      "actions": {
+        "bottom": 718.0625,
+        "height": 44,
+        "left": 12,
+        "right": 402,
+        "top": 674.0625,
+        "width": 390,
+        "x": 12,
+        "y": 674.0625
+      },
+      "badgeMinimum": 29.710723876953125,
+      "board": {
+        "bottom": 562.0625,
+        "height": 367.0625,
+        "left": 12,
+        "right": 402,
+        "top": 195,
+        "width": 390,
+        "x": 12,
+        "y": 195
+      },
+      "contentWidth": 381.9951923076923,
+      "guide": true,
+      "hint": {
+        "bottom": 670.0625,
+        "height": 104,
+        "left": 12,
+        "right": 402,
+        "top": 566.0625,
+        "width": 390,
+        "x": 12,
+        "y": 566.0625
+      },
+      "legend": {
+        "bottom": 560.0625,
+        "height": 28,
+        "left": 84.5,
+        "right": 329.5,
+        "top": 532.0625,
+        "width": 245,
+        "x": 84.5,
+        "y": 532.0625
+      },
+      "overflow": [],
+      "pageOverflow": false,
+      "size": [
+        414,
+        740
+      ],
+      "stage": "画面の見方\n選択プレイ・練習\n∨",
+      "svg": {
+        "bottom": 527.0625,
+        "height": 331.0625,
+        "left": 13,
+        "right": 401,
+        "top": 196,
+        "width": 388,
+        "x": 13,
+        "y": 196
+      },
+      "viewBox": [
+        0,
+        158,
+        360,
+        312
+      ]
+    }
+  ],
+  "errors": [],
+  "desktop": {
+    "actions": {
+      "bottom": 756,
+      "height": 120,
+      "left": 897.609375,
+      "right": 1256,
+      "top": 636,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 636
+    },
+    "badgeMinimum": 35.74468994140625,
+    "board": {
+      "bottom": 756,
+      "height": 660,
+      "left": 24,
+      "right": 873.609375,
+      "top": 96,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "contentWidth": 459.5744680851064,
+    "guide": true,
+    "hint": {
+      "bottom": 616,
+      "height": 160,
+      "left": 897.609375,
+      "right": 1256,
+      "top": 456,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 456
+    },
+    "legend": {
+      "bottom": 752,
+      "height": 32,
+      "left": 563.609375,
+      "right": 862.609375,
+      "top": 720,
+      "width": 299,
+      "x": 563.609375,
+      "y": 720
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      1280,
+      800
+    ],
+    "stage": "画面の見方\n選択プレイ・練習\n∨",
+    "svg": {
+      "bottom": 697,
+      "height": 600,
+      "left": 25,
+      "right": 872.609375,
+      "top": 97,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "viewBox": [
+      0,
+      0,
+      360,
+      470
+    ]
+  },
+  "landscape": {
+    "actions": {
+      "bottom": 386,
+      "height": 44,
+      "left": 508,
+      "right": 828,
+      "top": 342,
+      "width": 320,
+      "x": 508,
+      "y": 342
+    },
+    "badgeMinimum": 17.514892578125,
+    "board": {
+      "bottom": 386,
+      "height": 336,
+      "left": 16,
+      "right": 500,
+      "top": 50,
+      "width": 484,
+      "x": 16,
+      "y": 50
+    },
+    "contentWidth": 225.19148936170217,
+    "guide": true,
+    "hint": {
+      "bottom": 334,
+      "height": 106,
+      "left": 508,
+      "right": 828,
+      "top": 228,
+      "width": 320,
+      "x": 508,
+      "y": 228
+    },
+    "legend": {
+      "bottom": 383,
+      "height": 32,
+      "left": 108.5,
+      "right": 407.5,
+      "top": 351,
+      "width": 299,
+      "x": 108.5,
+      "y": 351
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      844,
+      390
+    ],
+    "stage": "画面の見方\n選択プレイ・練習\n∨",
+    "svg": {
+      "bottom": 345,
+      "height": 294,
+      "left": 17,
+      "right": 499,
+      "top": 51,
+      "width": 482,
+      "x": 17,
+      "y": 51
+    },
+    "viewBox": [
+      0,
+      0,
+      360,
+      470
+    ]
+  },
+  "rotatedBack": {
+    "actions": {
+      "bottom": 658.0625,
+      "height": 44,
+      "left": 12,
+      "right": 378,
+      "top": 614.0625,
+      "width": 366,
+      "x": 12,
+      "y": 614.0625
+    },
+    "badgeMinimum": 24.1466064453125,
+    "board": {
+      "bottom": 502.0625,
+      "height": 305.0625,
+      "left": 12,
+      "right": 378,
+      "top": 197,
+      "width": 366,
+      "x": 12,
+      "y": 197
+    },
+    "contentWidth": 310.4567307692308,
+    "guide": true,
+    "hint": {
+      "bottom": 610.0625,
+      "height": 104,
+      "left": 12,
+      "right": 378,
+      "top": 506.0625,
+      "width": 366,
+      "x": 12,
+      "y": 506.0625
+    },
+    "legend": {
+      "bottom": 500.0625,
+      "height": 28,
+      "left": 72.5,
+      "right": 317.5,
+      "top": 472.0625,
+      "width": 245,
+      "x": 72.5,
+      "y": 472.0625
+    },
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      390,
+      680
+    ],
+    "stage": "画面の見方\n選択プレイ・練習\n∨",
+    "svg": {
+      "bottom": 467.0625,
+      "height": 269.0625,
+      "left": 13,
+      "right": 377,
+      "top": 198,
+      "width": 364,
+      "x": 13,
+      "y": 198
+    },
+    "viewBox": [
+      0,
+      158,
+      360,
+      312
+    ]
+  },
+  "pipeBodyTap": "配管 2 本"
+}

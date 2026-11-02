@@ -9,7 +9,7 @@
 | 構想 | 構想たたき台 v0.4 |
 | 要件定義 | ドラフト v0.4（試行回数の禁止を見直し、2つのモード F-025・F-026 を追加（範囲は未定）、目盛りの音を C のメジャーペンタトニックに） |
 | 基本設計 | v0.1 |
-| 試作・実装 | 試作中（v0.14.7）。計算・出題の検査・1〜30面・グラスの音・練習面とチュートリアル・選択／連続プレイ・タイトルとメニュー・PWAを実装。器と土等の[見た目](docs/reviews/2026-11-01-visual-finish.md)、[虹の後の結果](docs/reviews/2026-11-01-result-after-rainbow.md)、[PC配置と案内](docs/reviews/2026-11-01-series-and-guide.md)を保持。発案者の実画面の指摘でタイトルの絵・ボタン・光・判定バッジ・分数・台座・開始合図を再調整し、[文字組みを全体点検](docs/reviews/2026-11-02-visual-readability.md)。続いて[開始待機・結果の余白・判定位置・重複文を調整](docs/reviews/2026-11-02-result-refinement.md)。[管の2段の札・凡例・練習の案内](docs/reviews/2026-11-02-pipe-legend.md)を追加。自由作成・初出説明の表示と既読記録・実機の受け入れは未完了 |
+| 試作・実装 | 試作中（v0.14.8）。計算・出題の検査・1〜30面・グラスの音・練習面とチュートリアル・選択／連続プレイ・タイトルとメニュー・PWAを実装。器と土等の[見た目](docs/reviews/2026-11-01-visual-finish.md)、[虹の後の結果](docs/reviews/2026-11-01-result-after-rainbow.md)、[PC配置と案内](docs/reviews/2026-11-01-series-and-guide.md)を保持。発案者の実画面の指摘でタイトルの絵・ボタン・光・判定バッジ・分数・台座・開始合図を再調整し、[文字組みを全体点検](docs/reviews/2026-11-02-visual-readability.md)。続いて[開始待機・結果の余白・判定位置・重複文を調整](docs/reviews/2026-11-02-result-refinement.md)。[管の2段の札・凡例・練習の案内](docs/reviews/2026-11-02-pipe-legend.md)を追加。[スマホの盤面縮小を修正](docs/reviews/2026-11-02-mobile-board.md)。自由作成・初出説明の表示と既読記録・実機の受け入れは未完了 |
 | 公開 | 試作を GitHub Pages で公開中（https://aqua.sikumilab.com/ 。2026-11-01 発案者が独自ドメインを設定。旧アドレス https://gerupon-lgtm.github.io/aqua/ は新しいアドレスへ転送される） |
 
 ## 文書

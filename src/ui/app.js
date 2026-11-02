@@ -12,11 +12,11 @@ import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_
 import { guideMessage } from './guide-copy.js';
 import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
 import { PARTS_HTML, HOWTO_HTML } from './info-copy.js';
-import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board.js';
+import { renderBoard, layoutFor, towerAt, pipeAt, boardViewBox, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
 
-const APP_VERSION = '0.14.7';
+const APP_VERSION = '0.14.8';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -143,6 +143,8 @@ function selectStage(index) {
   state.resultClosed = false;
   // チュートリアルでは、お試し面の案内と予想の問いを毎回出す
   state.review = state.mode === 'tutorial' && Boolean(lessonFor(base));
+  // 同じ面の編集・実行・結果では、案内を読める高さを固定する。
+  $('app').classList.toggle('with-guide', isPractice() || guiding());
   state.asking = null;
   state.prediction = null;
   state.trials = 0;
@@ -364,6 +366,8 @@ function loop() {
 
 function drawBoard() {
   const now = performance.now();
+  const viewBox = boardViewBox(state.layout, stage(), matchMedia('(orientation: portrait) and (max-width: 1023px)').matches);
+  if ($('board').getAttribute('viewBox') !== viewBox) $('board').setAttribute('viewBox', viewBox);
   const startCue = stageCueOpacity(state.stageCueUntil, now, reducedMotionQuery.matches);
   $('cond').style.setProperty('--stage-cue', startCue.toFixed(3));
   const scale = scaleNow();
@@ -835,7 +839,7 @@ function bind() {
   $('cond').addEventListener('click', e => {
     if (e.target.closest('#redraw') && state.phase === 'edit') selectStage(state.stageIndex);
     // ふりかえり：この面の案内と予想の問いを、もう一度出す
-    if (e.target.closest('#review') && state.phase === 'edit') { state.review = true; renderAll(); }
+    if (e.target.closest('#review') && state.phase === 'edit') { state.review = true; $('app').classList.add('with-guide'); renderAll(); }
     if (e.target.closest('#practice-restart') && state.phase === 'edit') selectStage(-1);
     // 面の切り替え（選択プレイだけ）：‹ › で前後、名前で一覧
     if (state.mode === 'select' && state.phase !== 'running') {
@@ -928,6 +932,7 @@ function bind() {
       // 高さだけの変更でもPCの詰め方が変わるので、条件を測り直す。
       fitConditionHeight();
       renderPanel();
+      drawBoard();
       renderResultToast();
     });
   });
