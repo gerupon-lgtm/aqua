@@ -1,0 +1,742 @@
+[
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 134.64,
+          "right": 134.64,
+          "y": 426
+        }
+      ],
+      "stage": "T8",
+      "state": "empty"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 134.64,
+          "right": 134.64,
+          "y": 426
+        }
+      ],
+      "stage": "T8",
+      "state": "on"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 134.64,
+          "right": 134.64,
+          "y": 426
+        }
+      ],
+      "stage": "T8",
+      "state": "water"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 134.64,
+          "right": 134.64,
+          "y": 426
+        }
+      ],
+      "stage": "T8",
+      "state": "front"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 134.64,
+          "right": 134.64,
+          "y": 426
+        }
+      ],
+      "stage": "T8",
+      "state": "back"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T9",
+      "state": "empty"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T9",
+      "state": "on"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T9",
+      "state": "water"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T9",
+      "state": "front"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T9",
+      "state": "back"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T12",
+      "state": "empty"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T12",
+      "state": "on"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T12",
+      "state": "water"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T12",
+      "state": "front"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T12",
+      "state": "back"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 426
+        }
+      ],
+      "stage": "T21",
+      "state": "empty"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 426
+        }
+      ],
+      "stage": "T21",
+      "state": "on"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 426
+        }
+      ],
+      "stage": "T21",
+      "state": "water"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 426
+        }
+      ],
+      "stage": "T21",
+      "state": "front"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 426
+        }
+      ],
+      "stage": "T21",
+      "state": "back"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T22",
+      "state": "empty"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T22",
+      "state": "on"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T22",
+      "state": "water"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T22",
+      "state": "front"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 128.16,
+          "right": 128.16,
+          "y": 426
+        }
+      ],
+      "stage": "T22",
+      "state": "back"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T24",
+      "state": "empty"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T24",
+      "state": "on"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T24",
+      "state": "water"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T24",
+      "state": "front"
+    }
+  },
+  {
+    "bridges": [
+      {
+        "id": "SB",
+        "opaqueRects": 0,
+        "samePaint": true
+      },
+      {
+        "id": "SC",
+        "opaqueRects": 0,
+        "samePaint": true
+      }
+    ],
+    "sample": {
+      "crosses": [
+        {
+          "id": "SB",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 421
+        },
+        {
+          "id": "SC",
+          "left": 121.68,
+          "right": 121.68,
+          "y": 440.5
+        }
+      ],
+      "stage": "T24",
+      "state": "back"
+    }
+  }
+]

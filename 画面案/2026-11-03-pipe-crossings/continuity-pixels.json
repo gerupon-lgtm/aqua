@@ -1,0 +1,24 @@
+{
+  "point": {
+    "x": 341.13599999999997,
+    "y": 301.090625
+  },
+  "colors": {
+    "before.jpg": {
+      "rgb": [
+        190,
+        157,
+        106
+      ],
+      "pipeVisible": false
+    },
+    "after.jpg": {
+      "rgb": [
+        242,
+        250,
+        229
+      ],
+      "pipeVisible": true
+    }
+  }
+}

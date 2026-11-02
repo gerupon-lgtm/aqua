@@ -1,0 +1,40 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>噴水盤の高さバッジ配置案</title><link rel="stylesheet" href="../../src/ui/style.css"><body><div class="app" id="app">
+  <header class="bar">
+    <div class="logo" aria-label="AQUA NOTES"><span class="l1">AQUA</span><span class="l2">NOTES</span></div>
+    <p class="desktop-tagline">水をつなぎ、グラスを鳴らす。</p>
+    <div class="tools">
+      <button type="button" id="records">記録</button>
+      <button type="button" id="sound" aria-pressed="true">音 オン</button>
+      <button type="button" id="menu" aria-label="メニュー">☰</button>
+    </div>
+  </header>
+  <section class="cond" id="cond" aria-live="polite" style="--stage-cue: 0.000; min-height: 151px;">
+    <div class="switcher">
+      <button type="button" class="nav" id="stage-prev" aria-label="前の面">‹</button>
+      <button type="button" class="stage-name" id="stage-list">
+        <span class="name"><span class="text-unit">4</span> <span class="text-unit">高い受け皿</span></span><span class="sub"><span class="text-unit">選択プレイ</span>・お試し</span><span class="caret" aria-hidden="true">∨</span></button>
+      <button type="button" class="nav" id="stage-next" aria-label="次の面">›</button>
+    </div>
+    <div class="cond-card">
+      <div class="cond-head"><span class="cond-label">クリア条件</span><span class="cond-tools"><button type="button" class="mini" id="review">ふりかえり</button></span></div>
+      <div class="cond-goal">毎秒 <span class="nw">高い受け皿に <b>3</b></span> 届ける</div>
+      <div class="cond-res"><span class="nw">配管 <b>0</b> 本</span></div>
+    </div></section>
+  <main class="board-wrap">
+    <svg id="board" role="img" aria-label="真横から見た配管の断面" preserveAspectRatio="xMidYMax meet" viewBox="0 58 360 412" class="editable"></svg>
+    <div class="board-footer"><div id="board-aux" class="board-aux"></div><div class="board-legend">
+      <div class="connection-key" aria-hidden="true"><span><i></i>接続済み</span><span><i class="candidate"></i>つなげる配管</span></div>
+      <div id="pipe-key" class="pipe-key" aria-label="管の数字の凡例：太は1、中は2、細は3。同じ高さの差なら、数字が小さいほど多く流れる。">
+        <span class="key-title">管の数字</span><span class="key-pairs"><span class="key-sample"><span>太</span><b>1</b></span><span class="key-sample"><span>中</span><b>2</b></span><span class="key-sample"><span>細</span><b>3</b></span></span><span class="key-meaning">同じ高さの差なら<br>数字が小さいほど多く流れる</span>
+      </div>
+    </div></div>
+  </main>
+  <dialog class="toast" id="toast" aria-label="配管の設定"></dialog>
+  <section class="panel" id="panel">
+      <p class="hint"><span class="text-unit">受け皿の</span>口が高い位置にあります。<span class="text-unit">グラスの水位が</span>口より上がった分だけ、水が出ます。</p>
+      <div class="actions"><button type="button" class="ghost" id="clear-pipes" disabled="">配管クリア</button>
+        <button type="button" class="primary" id="run" disabled="">水を流す</button>
+      </div></section>
+  <div class="result-toast" id="result-toast" hidden=""></div>
+  <footer class="foot"><span><span id="version">v0.14.10 配置案</span> 試作</span><span>© SIKUMI LAB</span></footer>
+</div><script type="module" src="./preview.js"></script></body></html>

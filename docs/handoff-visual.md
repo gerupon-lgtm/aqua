@@ -146,3 +146,9 @@ curl -s https://aqua.sikumilab.com/build-info.json   # 公開された版を確�
 - 説明のSVG4枚も貯水と目印をやめ、吹き出し口と流れへ同期。高さの挿絵は差を測る下端が口と同じ高さ。正本はscripts/prepare-diagrams.jsで、intro-adjustable.svgは変更していない。
 - 器の寸法・横位置と左12のグラスの見える範囲は維持し、U-04の低水位を隠さない条件を保護。共有資料U-08の前回水位の印は未対応。今回で資料全体の完了とはしない。
 - [点検・公開](reviews/2026-11-03-flow-and-outlet.md)、[再現手順](../画面案/2026-11-03-flow-and-outlet/README.md)。198出題・分数計算・採点・保存形式・音・機能担当の区分は維持。実機受け入れは未確認。
+
+## 16. 配管の交差の切れ（v0.14.11）
+
+- 交差を隠す背景の四角が下の縦管まで消していた。basePipePathが元の接続点と段、pipePathがまたぎを含む実際の描画線を返す。pipeCrossingsはbasePipePathを使い、探索の循環を避ける。layout.stageは表示用の参照。
+- drawCrossingsは背景を塗らず、clipPathでまたぎ周辺だけを前へ描く。drawPipeのoverlay引数で同じ線・色・流れの点を再利用し、pipeのdata-pipeは重複させない。交差の透明な押下用の線とdata-pipe-bridgeは保持。数学上のptsと段は変更しない。
+- [点検と公開](reviews/2026-11-03-pipe-crossings.md)。高さバッジの2案は[比較画像](../画面案/2026-11-03-basin-badge-layout/README.md)で、現在の盤面へは採用していない。機能と実機受け入れの区分は従来どおり。

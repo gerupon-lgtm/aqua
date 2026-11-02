@@ -37,7 +37,7 @@ export function layoutFor(stage) {
       ports.get(c.id)[n.id] = n.cx + (i - (attached.length - 1) / 2) * 14;
     });
   }
-  return { H, unit, nodes, ports, towerTop, depthGap, yOf: level => GROUND - level * unit };
+  return { H, unit, nodes, ports, towerTop, depthGap, stage, yOf: level => GROUND - level * unit };
 }
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -46,7 +46,7 @@ const WIDTH = { 1: 5.5, 2: 5.5, 3: 5.5 };
 
 // 管の通り道：グラスの底から地面の下へ下り、横へ進んで、相手の底へ上がる。
 // サイフォンはグラスの中の入口から上がり、壁の上の山を越えて、相手の入口へ下りる（logic-design 3章）
-export function pipePath(layout, c) {
+function basePipePath(layout, c) {
   const a = layout.nodes.get(c.a);
   const b = layout.nodes.get(c.b);
   const [left, right] = a.cx <= b.cx ? [a, b] : [b, a];
@@ -65,6 +65,23 @@ export function pipePath(layout, c) {
   const y = GROUND + 12 + c.depth * layout.depthGap;
   const d = `M${x1} ${GROUND - 2} L${x1} ${y - r} Q${x1} ${y} ${x1 + r} ${y} L${x2 - r} ${y} Q${x2} ${y} ${x2} ${y - r} L${x2} ${GROUND - 2}`;
   return { d, reversed, mx: (x1 + x2) / 2, my: y, gx: x1 + (x2 - x1) * 0.72, pts: [[x1, GROUND - 2], [x1, y], [x2, y], [x2, GROUND - 2]] };
+}
+
+function bridgePath({ left, right, y }, route) {
+  const reach = Math.min(12, left - route.pts[1][0] - 9, route.pts[2][0] - right - 9);
+  const bend = Math.min(6, reach * .6);
+  return `M${left - reach} ${y} C${left - bend} ${y} ${left - bend} ${y - 8} ${left} ${y - 8} H${right} C${right + bend} ${y - 8} ${right + bend} ${y} ${right + reach} ${y}`;
+}
+
+export function pipePath(layout, c) {
+  const route = basePipePath(layout, c);
+  if (c.siphon || !layout.stage) return route;
+  const crosses = pipeCrossings(layout, layout.stage).filter(cross => cross.id === c.id);
+  if (!crosses.length) return route;
+  // またぎを後付けの絵にせず、管本体の連続した道筋へ含める。接続点と段は維持する。
+  const [[x1, y0], [, y], [x2]] = route.pts;
+  const middle = crosses.map(cross => bridgePath(cross, route).replace(/^M/, 'L')).join(' ');
+  return { ...route, d: `M${x1} ${y0} L${x1} ${y - 9} Q${x1} ${y} ${x1 + 9} ${y} ${middle} L${x2 - 9} ${y} Q${x2} ${y} ${x2} ${y - 9} L${x2} ${y0}` };
 }
 
 // 札は管の水平部分に置く。ほかの管の縦部分や水門を覆わない場所を優先する。
@@ -128,7 +145,7 @@ function segmentDistance(px, py, [ax, ay], [bx, by]) {
 const crossingCache = new WeakMap();
 export function pipeCrossings(layout, stage) {
   if (crossingCache.has(layout)) return crossingCache.get(layout);
-  const routes = stage.candidates.filter(c => !c.siphon).map(c => ({ c, p: pipePath(layout, c) }));
+  const routes = stage.candidates.filter(c => !c.siphon).map(c => ({ c, p: basePipePath(layout, c) }));
   const crossings = [];
   for (const { c, p } of routes) {
     const xs = new Set();
@@ -148,15 +165,18 @@ export function pipeCrossings(layout, stage) {
   return crossings;
 }
 
-function drawCrossings(out, layout, stage, model) {
-  for (const cross of pipeCrossings(layout, stage)) {
+function drawCrossings(out, layout, stage, model, svgId = '') {
+  for (const [i, cross] of pipeCrossings(layout, stage).entries()) {
     const { id, left, right, y } = cross;
-    const c = stage.candidates.find(c => c.id === id), on = model.connected.has(id);
+    const c = stage.candidates.find(c => c.id === id);
     const w = WIDTH[Number(model.thinness(c))] ?? 6.5;
-    const color = [215,183,131].map((v, i) => Math.round(v + ([172,128,88][i] - v) * Math.min(1, (y - GROUND) / (VIEW_H - GROUND))));
-    const d = `M${left - 10} ${y} Q${left - 6} ${y} ${left - 5} ${y - 5} Q${(left + right) / 2} ${y - 12} ${right + 5} ${y - 5} Q${right + 6} ${y} ${right + 10} ${y}`;
-    const wet = on && model.phase !== 'edit' && model.view?.result.pipes[id]?.wet && !model.view?.broken?.has(id);
-    out.push(`<g class="pipe-bridge" data-pipe-bridge="${id}"><rect x="${left - 10}" y="${y - 14}" width="${right - left + 20}" height="${w / 2 + 17}" fill="rgb(${color})" pointer-events="none"/><rect x="${left - 10}" y="${y - 14}" width="${right - left + 20}" height="${w / 2 + 17}" fill="url(#pebbles)" pointer-events="none"/><path d="${d}" fill="none" stroke="${on ? 'var(--blue)' : 'var(--pipe-off)'}" stroke-width="${w + 4}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${wet ? 'var(--water-mid)' : on && model.phase === 'edit' ? 'var(--pipe-on)' : '#fff'}" stroke-width="${w}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="transparent" stroke-width="20"/></g>`);
+    const d = bridgePath(cross, basePipePath(layout, c)), clip = `${svgId || 'board'}-bridge-${i}`;
+    // 下の管を地色の四角で消さない。曲がった管そのものと細い影だけを最前面へ描く。
+    out.push(`<defs><clipPath id="${clip}"><rect x="${left - 18}" y="${y - 15}" width="${right - left + 36}" height="23"/></clipPath></defs><g class="pipe-bridge" data-pipe-bridge="${id}" clip-path="url(#${clip})"><path class="bridge-shadow" d="${d}" fill="none" stroke="#51483e" stroke-width="${w + 6}" stroke-linecap="round" opacity=".25" pointer-events="none"/>`);
+    // 管全体と同じ道筋・色・流れの点を使い、交差の前後で色や点の位置を変えない。
+    drawPipe(out, layout, c, model, true);
+    if (model.phase === 'edit') out.push(`<path d="${d}" fill="none" stroke="transparent" stroke-width="20"/>`);
+    out.push('</g>');
   }
 }
 
@@ -273,7 +293,7 @@ function sliced(out, dir, x, y, w, h, srcW, topH, bottomH) {
 }
 
 // 1本の配管を描く。サイフォンの未開通は山に空気（泡）がたまった様子で示す（要件5.2、screens.md 2章）
-function drawPipe(out, layout, c, model) {
+function drawPipe(out, layout, c, model, overlay = false) {
   const { connected, phase, view, primed, selected } = model;
   const { d, reversed, mx, my, gx = mx } = pipePath(layout, c);
   const on = connected.has(c.id);
@@ -284,11 +304,11 @@ function drawPipe(out, layout, c, model) {
   const isPrimed = c.siphon && primed.has(c.id);
   const filled = on && ((phase !== 'edit' && flowInfo?.wet) || (phase === 'edit' && isPrimed));
   // 土にも空にも埋もれない青と白の二重の光。管そのものと札は上に描く。
-  if (model.guide === `pipe:${c.id}`) {
+  if (!overlay && model.guide === `pipe:${c.id}`) {
     const glow = guideGlowOpacity(model.time, model.reducedMotion).toFixed(3);
     out.push(`<g class="guide-pipe" pointer-events="none"><path class="guide-bloom" d="${d}" fill="none" stroke="#2bbaff" stroke-width="${w + 24}" opacity="${glow}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#0875cb" stroke-width="${w + 12}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#ffffff" stroke-width="${w + 7}" stroke-linecap="round" stroke-linejoin="round"/></g>`);
   }
-  out.push(`<g class="pipe${on ? ' on' : ''}" data-pipe="${c.id}">`);
+  if (!overlay) out.push(`<g class="pipe${on ? ' on' : ''}" data-pipe="${c.id}">`);
   if (on) {
     if (selected === c.id) out.push(`<path d="${d}" fill="none" stroke="var(--gold)" stroke-width="${w + 10}" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/>`);
     // つないだ管は、編集中は青いふちと淡い青の中身で、候補（灰色の点線）とはっきり分ける
@@ -315,8 +335,8 @@ function drawPipe(out, layout, c, model) {
     out.push(`<path d="${d}" fill="none" stroke="var(--card)" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>`);
     out.push(`<path d="${d}" fill="none" stroke="#e3ebf3" stroke-width="${Math.max(1, w * 0.3)}" stroke-linecap="round" stroke-linejoin="round" opacity=".9" transform="translate(0 ${w * 0.2})"/>`);
   }
-  if (phase === 'edit') out.push(`<path d="${d}" fill="none" stroke="transparent" stroke-width="20" class="hit" data-pipe="${c.id}"/>`);
-  out.push(`</g>`);
+  if (!overlay && phase === 'edit') out.push(`<path d="${d}" fill="none" stroke="transparent" stroke-width="20" class="hit" data-pipe="${c.id}"/>`);
+  if (!overlay) out.push(`</g>`);
 }
 
 // 管を全部描いたあとで札を描く。後から描いた管で札が隠れることを防ぐ。
@@ -464,7 +484,7 @@ export function renderBoard(svg, model) {
 
   // 地面の下を通る配管（サイフォンはグラスの後に描いて、グラスの中の入口が見えるようにする）
   for (const c of stage.candidates.filter(c => !c.siphon)) drawPipe(out, layout, c, model);
-  drawCrossings(out, layout, stage, model);
+  drawCrossings(out, layout, stage, model, svg.id);
 
   // 泉
   const spring = layout.nodes.get(stage.spring.id);

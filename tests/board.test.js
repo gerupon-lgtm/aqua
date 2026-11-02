@@ -95,6 +95,24 @@ test('8面の交差は接続点や段を動かさず、管をまたぐ図形で�
   assert.deepEqual(stage.candidates.map(c => pipePath(layout, c)), before);
 });
 
+test('交差の曲線より下で見えるはずの縦管を、背景の四角で消さない', () => {
+  for (const stage of STAGES) {
+    const layout = layoutFor(stage), crossings = pipeCrossings(layout, stage);
+    if (!crossings.length) continue;
+    const { svg } = draw(stage, { connected: new Set(), primed: new Set(), thickness: {} }, { phase: 'edit' });
+    const groups = [...svg.matchAll(/<g class="pipe-bridge"[^>]*>([\s\S]*?)<\/g>/g)];
+    for (const [i, cross] of crossings.entries()) {
+      // 水平の管は上へ曲がるので、その下（元の交点+2）の縦管は見えている必要がある。
+      const x = cross.left, y = cross.y + 2;
+      for (const rect of groups[i][1].matchAll(/<rect x="([^"]+)" y="([^"]+)" width="([^"]+)" height="([^"]+)"[^>]*fill="([^"]+)"/g)) {
+        const [, rx, ry, width, height, fill] = rect;
+        const covered = fill !== 'none' && x >= Number(rx) && x <= Number(rx) + Number(width) && y >= Number(ry) && y <= Number(ry) + Number(height);
+        assert.ok(!covered, `${stage.id}: 交差の下の縦管が消える`);
+      }
+    }
+  }
+});
+
 test('届いた量が0の噴水盤には水を描かない（空のグラスの噴水盤に水が見えた不具合）', () => {
   const stage = STAGES[0];
   const config = { connected: new Set(['SA']), primed: new Set(), thickness: {} };
