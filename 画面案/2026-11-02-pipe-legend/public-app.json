@@ -1,0 +1,217 @@
+{
+  "version": "0.14.7",
+  "commit": "f167ba9a5cc0c260c80fd41a3427994540a986c0",
+  "updatedFrom": "0.14.6",
+  "guidePhone": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "labels": [
+    "太1",
+    "太1",
+    "細3"
+  ],
+  "guideDesktop": {
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "footer": {
+      "height": 53.1875,
+      "width": 847.609375,
+      "x": 25,
+      "y": 701.8125
+    },
+    "hint": {
+      "height": 160,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 514
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 563.609375,
+      "y": 720
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      1280,
+      800
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 600,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    }
+  },
+  "afterNext": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": false,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "beforeRun": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": false,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "result": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": false,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "resultText": "結果\nPERFECT\n×\n100点\n配管 1 本\n\n噴水盤に2届きました。結果の「解説」で計算を確かめ、「次へ」でお試し1へ進みましょう。\n\n噴水盤\n✓\nちょうど\n必要量\n2\n届いた量\n2\n満点の本数\n1本\n\nグラスをマウスでなぞると、そのグラスの音を聞き直せます。\n\nくわしい記録\n解説\nもう一度\n次へ",
+  "errors": []
+}
