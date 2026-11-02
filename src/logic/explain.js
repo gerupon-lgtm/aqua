@@ -27,7 +27,7 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
   const outletOf = id => stage.outlets.find(o => o.id === id);
   const flowing = c => r.pipes[c.id];
 
-  // 計算：流れる量 ＝ 高さの差 ÷ 細さ
+  // 計算：流れる量 ＝ 高さの差 ÷ 管の数字
   const steps = [];
   for (const c of pipes) {
     const p = flowing(c);
@@ -44,14 +44,14 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     const diff = levelOf(hi).sub(levelOf(lo));
     steps.push(diff.isZero()
       ? `${name(c.a)}–${name(c.b)}：高さが同じ（${formatAmount(levelOf(c.a))}）で流れない`
-      : `${name(hi)} ${formatAmount(levelOf(hi))} → ${name(lo)} ${formatAmount(levelOf(lo))}：差 ${formatAmount(diff)} ÷ 細さ ${thin} ＝ ${formatAmount(diff.div(frac(thin)))}`);
+      : `${name(hi)} ${formatAmount(levelOf(hi))} → ${name(lo)} ${formatAmount(levelOf(lo))}：差 ${formatAmount(diff)} ÷ 管の数字 ${thin} ＝ ${formatAmount(diff.div(frac(thin)))}`);
   }
   for (const o of stage.outlets) {
     const t = r.towers[o.tower];
     const thin = new Fraction(1n).div(frac(o.conductance));
     steps.push(t.state === 'empty'
       ? `グラス${o.tower}が空なので、${o.label}に届かない`
-      : `グラス${o.tower} ${formatAmount(t.level)} → ${o.label} ${o.height}：差 ${formatAmount(t.level.sub(frac(o.height)))} ÷ 細さ ${thin} ＝ ${formatAmount(r.outlets[o.id].flow)}`);
+      : `グラス${o.tower} ${formatAmount(t.level)} → ${o.label} ${o.height}：差 ${formatAmount(t.level.sub(frac(o.height)))} ÷ 管の数字 ${thin} ＝ ${formatAmount(r.outlets[o.id].flow)}`);
   }
   // 分かれ道（グラス）では、入る量と出る量が同じ
   const balances = stage.towers
@@ -96,16 +96,16 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     if (stage.theme === 'buckets' && ev.buckets > analysis.perfectConfig.primed.length) advice.push('桶を使わずに届けられる道がないか探してみましょう。');
     idle.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は呼び水をしていないので流れていません。外せます。`));
     still.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は流れていないので、外せます。`));
-    // 途中のグラスを通る道：細さが足し算になる
+    // 途中のグラスを通る道：管の数字が足し算になる
     for (const t of stage.towers) {
       const around = pipes.filter(c => (c.a === t.id || c.b === t.id) && flowing(c));
       if (r.towers[t.id].state !== 'water' || stage.outlets.some(o => o.tower === t.id) || around.length !== 2) continue;
       if (around.some(c => flowing(c).flow.isZero())) continue;
       const parts = around.map(c => thinnessOf(c, cfg));
       const sum = parts.reduce((s, x) => s.add(frac(x)), ZERO);
-      advice.push(`グラス${t.id}を通ると細さは足し算（${parts.join('＋')}＝${sum}）。細さ ${sum} の1本で代われないか探してみましょう。`);
+      advice.push(`グラス${t.id}を通ると管の数字は足し算（${parts.join('＋')}＝${sum}）。数字が ${sum} の管1本で代われないか探してみましょう。`);
     }
-    // 同じ所を結ぶ配管を並べる：流れやすさ（1÷細さ）が足し算になる
+    // 同じ所を結ぶ配管を並べる：流れやすさ（1÷管の数字）が足し算になる
     const groups = new Map();
     for (const c of pipes.filter(flowing)) {
       const key = [c.a, c.b].sort().join('|');
@@ -114,7 +114,7 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     for (const group of groups.values()) {
       if (group.length < 2) continue;
       const ease = group.reduce((s, c) => s.add(new Fraction(1n).div(frac(thinnessOf(c, cfg)))), ZERO);
-      advice.push(`並べた配管は、細さ ${new Fraction(1n).div(ease)} の1本と同じ働きです。1本で済まないか探してみましょう。`);
+      advice.push(`並べた配管は、数字が ${new Fraction(1n).div(ease)} の管1本と同じ働きです。1本で済まないか探してみましょう。`);
     }
     if (!advice.length) advice.push('同じ働きを1本でできる配管を探してみましょう。');
   } else {

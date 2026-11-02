@@ -16,7 +16,7 @@ import { renderBoard, layoutFor, towerAt, pipeAt, VIEW_W, VIEW_H } from './board
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
 
-const APP_VERSION = '0.14.6';
+const APP_VERSION = '0.14.7';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -491,7 +491,7 @@ function chooserHtml() {
     parts.push(`<p class="chooser-note">${phraseMarkup('太いほど水が流れやすく、|たくさん運びます。')}</p>`);
   }
   if (c.adjustable) {
-    parts.push(`<div class="chooser-row"><span>太さ</span>${c.adjustable.map(t => `<button type="button" class="chip${cfg.thickness[c.id] === t ? ' on' : ''}" data-thick="${t}" aria-pressed="${cfg.thickness[c.id] === t}">${THICK_NAME[t]}</button>`).join('')}</div>`);
+    parts.push(`<div class="chooser-row"><span>太さ</span>${c.adjustable.map(t => `<button type="button" class="chip${cfg.thickness[c.id] === t ? ' on' : ''}" data-thick="${t}" aria-label="${THICK_NAME[t]} 数字${t}" aria-pressed="${cfg.thickness[c.id] === t}">${THICK_NAME[t]}<small class="chip-number">${t}</small></button>`).join('')}</div>`);
   }
   if (c.siphon) {
     const primed = cfg.primed.has(c.id);
@@ -518,6 +518,7 @@ function outletsHtml(st, outlets) {
 function renderPanel() {
   const panel = $('panel');
   const st = stage();
+  $('pipe-key').classList.toggle('legend-guide', practiceStep()?.target === 'badges');
   $('board-aux').replaceChildren();
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
@@ -573,7 +574,7 @@ function renderPanel() {
         <h3>${keepTogether(e.summary)}</h3>
         ${e.advice.length ? `${adviceTitle ? `<h4>${adviceTitle}</h4>` : ''}<ul>${li(e.advice)}</ul>` : ''}
         <details${state.prediction ? ' open' : ''}><summary>計算を見る</summary>
-          <h4>流れる量 ＝ 高さの差 ÷ 細さ</h4><ul class="calc">${li(e.steps)}</ul>
+          <h4>流れる量 ＝ 高さの差 ÷ 管の数字</h4><ul class="calc">${li(e.steps)}</ul>
           ${e.balances.length ? `<h4>グラスでは、入る量 ＝ 出る量</h4><ul class="calc">${li(e.balances)}</ul>` : ''}
         </details>
       </section>`;
@@ -636,7 +637,7 @@ function renderPanel() {
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
         <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>流れ</th></tr></thead><tbody>${towerRows}</tbody></table></div>
-        <div class="table-wrap"><table><thead><tr><th>配管</th><th>流れる量</th><th>水位の差</th><th>細さ</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>配管</th><th>流れる量</th><th>水位の差</th><th>管の数字</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
         <div class="actions"><button type="button" class="ghost" id="export-record">記録をファイルに書き出す</button></div>
       </details>
       <div class="result-actions">

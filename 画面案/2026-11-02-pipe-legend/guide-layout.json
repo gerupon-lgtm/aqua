@@ -1,0 +1,248 @@
+[
+  {
+    "board": {
+      "height": 269.0625,
+      "width": 288,
+      "x": 16,
+      "y": 263
+    },
+    "footer": {
+      "height": 37,
+      "width": 286,
+      "x": 17,
+      "y": 494.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 288,
+      "x": 16,
+      "y": 540.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 247,
+      "x": 36.5,
+      "y": 497.0625
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      320,
+      740
+    ],
+    "stage": "\n        画面の見方チュートリアル・練習",
+    "svg": {
+      "height": 227.0625,
+      "width": 286,
+      "x": 17,
+      "y": 264
+    }
+  },
+  {
+    "board": {
+      "height": 351.0625,
+      "width": 328,
+      "x": 16,
+      "y": 241
+    },
+    "footer": {
+      "height": 37,
+      "width": 326,
+      "x": 17,
+      "y": 554.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 328,
+      "x": 16,
+      "y": 600.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 247,
+      "x": 56.5,
+      "y": 557.0625
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      360,
+      800
+    ],
+    "stage": "\n        画面の見方チュートリアル・練習",
+    "svg": {
+      "height": 309.0625,
+      "width": 326,
+      "x": 17,
+      "y": 242
+    }
+  },
+  {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方チュートリアル・練習",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  {
+    "board": {
+      "height": 336,
+      "width": 484,
+      "x": 16,
+      "y": 50
+    },
+    "footer": {
+      "height": 37,
+      "width": 482,
+      "x": 17,
+      "y": 348
+    },
+    "hint": {
+      "height": 106,
+      "width": 320,
+      "x": 508,
+      "y": 228
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 108.5,
+      "y": 351
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      844,
+      390
+    ],
+    "stage": "\n        画面の見方チュートリアル・練習",
+    "svg": {
+      "height": 294,
+      "width": 482,
+      "x": 17,
+      "y": 51
+    }
+  },
+  {
+    "board": {
+      "height": 482,
+      "width": 849.609375,
+      "x": 24,
+      "y": 78
+    },
+    "footer": {
+      "height": 53.1875,
+      "width": 847.609375,
+      "x": 25,
+      "y": 505.8125
+    },
+    "hint": {
+      "height": 120,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 376
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 563.609375,
+      "y": 524
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      1280,
+      600
+    ],
+    "stage": "\n        画面の見方チュートリアル・練習",
+    "svg": {
+      "height": 422,
+      "width": 847.609375,
+      "x": 25,
+      "y": 79
+    }
+  },
+  {
+    "board": {
+      "height": 660,
+      "width": 849.609375,
+      "x": 24,
+      "y": 96
+    },
+    "footer": {
+      "height": 53.1875,
+      "width": 847.609375,
+      "x": 25,
+      "y": 701.8125
+    },
+    "hint": {
+      "height": 160,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 514
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 563.609375,
+      "y": 720
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      1280,
+      800
+    ],
+    "stage": "\n        画面の見方チュートリアル・練習",
+    "svg": {
+      "height": 600,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    }
+  }
+]

@@ -20,6 +20,17 @@ function draw(stage, config, options = {}) {
   return { ev, svg: svg.innerHTML };
 }
 
+test('太さを変えた管は、太さと同じ計算値を2段の札と読み上げに出す', () => {
+  for (const [value, word] of [['1', '太'], ['2', '中'], ['3', '細']]) {
+    const { svg } = draw(STAGES[12], { connected: new Set(['SA']), primed: new Set(), thickness: { SA: value } }, { phase: 'edit' });
+    const tag = /<g class="pipe-label" data-pipe-label="SA"[\s\S]*?<\/g>/.exec(svg)?.[0];
+    assert.ok(tag?.includes(`aria-label="配管SA ${word} 数字${value}"`));
+    assert.ok(tag.includes(`>${word}</text><text`));
+    assert.ok(tag.includes(`>${value}</text>`));
+    assert.ok(tag.includes('pointer-events="all"'));
+  }
+});
+
 test('器の案内枠に必要量の札と器が入り、高い出口でも札を外へ置き去りにしない', () => {
   for (const stage of [PRACTICE, ...STAGES]) {
     const { svg } = draw(stage, { connected: new Set(), primed: new Set(), thickness: {} }, { guide: 'basin' });

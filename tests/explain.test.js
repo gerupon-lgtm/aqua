@@ -15,7 +15,7 @@ test('NG（多すぎ）：理由と、流れにくさを増やす見直しを短
   const { e } = run(0, ['SA', 'AB', 'SB']);
   assert.equal(e.summary, '噴水盤は、水が多すぎます。');
   assert.ok(e.advice.includes('流れにくさを増やすと減ります（細く・遠く・本数を減らす）。'));
-  assert.ok(e.steps.includes('グラスB 3 → 噴水盤 0：差 3 ÷ 細さ 1 ＝ 3'));
+  assert.ok(e.steps.includes('グラスB 3 → 噴水盤 0：差 3 ÷ 管の数字 1 ＝ 3'));
 });
 
 test('NG（届かない）：空のグラスと、つながりの見直しを示す', () => {
@@ -44,7 +44,7 @@ test('未到達もまとめ、過不足が混在する場合は器との対応�
 test('クリア：100点へのヒントは、途中のグラス・流れていない配管・並べた配管を見る', () => {
   assert.ok(run(0, ['SA', 'AB']).e.advice.some(a => a.includes('（1＋1＝2）')));
   assert.ok(run(2, ['SA', 'AB', 'SB']).e.advice.includes('グラスA–グラスBは流れていないので、外せます。'));
-  assert.ok(run(1, ['P2', 'P3']).e.advice.some(a => a.includes('細さ 1 の1本と同じ働き')));
+  assert.ok(run(1, ['P2', 'P3']).e.advice.some(a => a.includes('数字が 1 の管1本と同じ働き')));
 });
 
 test('同じ高さの重なりや単音は「和音」と言わない', () => {
@@ -58,6 +58,6 @@ test('同じ高さの重なりや単音は「和音」と言わない', () => {
 test('100点：理由を短く示す', () => {
   const { e } = run(0, ['SB']);
   assert.equal(e.summary, '100点。いちばん少ない本数で届けました。');
-  assert.ok(e.steps.includes('給水塔 6 → グラスB 2：差 4 ÷ 細さ 2 ＝ 2'));
+  assert.ok(e.steps.includes('給水塔 6 → グラスB 2：差 4 ÷ 管の数字 2 ＝ 2'));
   assert.ok(e.advice.includes('グラスAはつながっていないので空です。'));
 });

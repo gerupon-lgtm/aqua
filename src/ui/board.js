@@ -74,6 +74,8 @@ export function pipeLabelPositions(layout, stage) {
   const routes = stage.candidates.map(c => ({ c, p: pipePath(layout, c) }));
   const positions = new Map();
   for (const { c, p } of routes) {
+    // 最下段の管は動かさず、札だけを5pxまで上げて盤内へ収める。
+    const labelY = Math.min(p.my, VIEW_H - 15);
     const lo = p.pts[1][0] + 16, hi = p.pts[2][0] - 16;
     const choices = [p.mx];
     for (let x = lo; x <= hi; x += 2) choices.push(x);
@@ -82,16 +84,16 @@ export function pipeLabelPositions(layout, stage) {
       for (const { c: other, p: q } of routes) {
         if (other.id === c.id) continue;
         for (const [a, b] of [[q.pts[0], q.pts[1]], [q.pts[2], q.pts[3]]]) {
-          if (p.my < Math.min(a[1], b[1]) - 8 || p.my > Math.max(a[1], b[1]) + 8) continue;
+          if (labelY < Math.min(a[1], b[1]) - 14 || labelY > Math.max(a[1], b[1]) + 14) continue;
           score += Math.max(0, 19 - Math.abs(x - a[0])) * 10;
         }
       }
       if (c.gate) score += Math.max(0, 28 - Math.abs(x - (p.gx ?? p.mx))) * 10;
-      for (const v of positions.values()) if (Math.abs(v.y - p.my) < 17) score += Math.max(0, 24 - Math.abs(v.x - x)) * 20;
+      for (const v of positions.values()) if (Math.abs(v.y - labelY) < 30) score += Math.max(0, 30 - Math.hypot(v.x - x, v.y - labelY)) * 40;
       return score;
     };
     choices.sort((a, b) => cost(a) - cost(b));
-    positions.set(c.id, { x: choices[0], y: p.my });
+    positions.set(c.id, { x: choices[0], y: labelY });
   }
   pipeLabelCache.set(layout, positions);
   return positions;
@@ -168,18 +170,19 @@ export function outletLabelPositions(layout, stage) {
   for (const o of stage.outlets) {
     const node = layout.nodes.get(o.tower);
     // 発案者の図：器の左上の空きへ丸いサイズ表示を逃がす。
-    const preferred = node.cx - 29;
+    const preferred = node.cx - 34;
     const y = layout.yOf(Number(o.height)) - 82;
-    const choices = [preferred, node.cx + 27, node.cx + 56].filter(x => x >= 10 && x <= VIEW_W - 10);
+    // 大きくした2段の札も、隣の器の名札を覆わない近い空きへ置く。
+    const choices = [preferred, ...Array.from({ length: 167 }, (_, i) => 14 + i * 2)].filter(x => x >= 14 && x <= VIEW_W - 14);
     const score = x => {
       let n = Math.abs(x - preferred) * .03;
       for (const tower of layout.nodes.values()) {
-        if (y >= layout.towerTop - 9 && y <= GROUND + 9) n += Math.max(0, tower.w / 2 + 10 - Math.abs(x - tower.cx)) * 10;
+        if (y >= layout.towerTop - 14 && y <= GROUND + 14) n += Math.max(0, tower.w / 2 + 15 - Math.abs(x - tower.cx)) * 10;
       }
       for (const wall of stage.walls ?? []) {
         if (y >= layout.yOf(Number(wall.height)) - 9 && y <= GROUND + 9) n += Math.max(0, 18 - Math.abs(x - (18 + wall.x * 32.4))) * 10;
       }
-      // 高さの違う隣の器の名札も避ける。左と右の固定3候補だけで決める。
+      // 高さの違う隣の器の名札も避ける。
       for (const other of stage.outlets) {
         const otherX = basinPlacement(layout, other).cx;
         const dy = layout.yOf(Number(other.height)) - GROUND;
@@ -190,7 +193,7 @@ export function outletLabelPositions(layout, stage) {
         if (y < Math.min(a[1], b[1]) - 9 || y > Math.max(a[1], b[1]) + 9) continue;
         n += Math.max(0, 18 - Math.abs(x - a[0])) * 10;
       }
-      for (const p of placed.values()) if (Math.abs(p.y - y) < 20) n += Math.max(0, 24 - Math.abs(x - p.x)) * 20;
+      for (const p of placed.values()) if (Math.abs(p.y - y) < 30) n += Math.max(0, 30 - Math.hypot(x - p.x, y - p.y)) * 40;
       return n;
     };
     choices.sort((a, b) => score(a) - score(b));
@@ -201,9 +204,9 @@ export function outletLabelPositions(layout, stage) {
 }
 
 function thicknessBadge(out, x, y, thin, { on = false, round = true, adjustable = false, id = '' } = {}) {
-  out.push(`<g class="pipe-label" data-pipe-label="${esc(id)}" pointer-events="none" aria-label="配管${esc(id)} ${THICK_LABEL[thin]}">`);
-  out.push(`<rect x="${x - (round ? 9 : 11)}" y="${y - 9}" width="${round ? 18 : 22}" height="18" rx="${round ? 9 : 5}" fill="${on ? '#1d56a0' : '#fffefa'}" stroke="#1d4f88" stroke-width="1.3" ${adjustable ? 'stroke-dasharray="2 1.5"' : ''}/>`);
-  out.push(`<text x="${x}" y="${y + 3.8}" text-anchor="middle" font-size="11" font-weight="700" fill="${on ? '#ffffff' : '#173f70'}">${THICK_LABEL[thin] ?? thin}</text></g>`);
+  out.push(`<g class="pipe-label" data-pipe-label="${esc(id)}" pointer-events="${id.startsWith('outlet-') ? 'none' : 'all'}" aria-label="配管${esc(id)} ${THICK_LABEL[thin]} 数字${thin}">`);
+  out.push(`<rect x="${x - 14}" y="${y - 14}" width="28" height="28" rx="${round ? 14 : 5}" fill="${on ? '#1d56a0' : '#fffefa'}" stroke="#1d4f88" stroke-width="1.3" ${adjustable ? 'stroke-dasharray="2 1.5"' : ''}/>`);
+  out.push(`<text x="${x}" y="${y - 2.5}" text-anchor="middle" font-size="11" font-weight="700" fill="${on ? '#ffffff' : '#173f70'}">${THICK_LABEL[thin] ?? thin}</text><text x="${x}" y="${y + 10}" text-anchor="middle" font-size="13" font-weight="700" fill="${on ? '#ffffff' : '#173f70'}">${thin}</text></g>`);
 }
 
 // ---- 盤面のバッジ（デザイン表 ui-badges A を図形で再現。2026-11-01 発案者が雰囲気 A を選択） ----
@@ -325,8 +328,8 @@ function drawPipeLabel(out, layout, c, model, position) {
     if (model.guide === `pipe:${c.id}`) {
       const glow = guideGlowOpacity(model.time, model.reducedMotion).toFixed(3);
       out.push(`<g class="guide-spark" opacity="${glow}" fill="#ffffff" stroke="#1a9ddd" stroke-width=".7" pointer-events="none">`);
-      for (const [dx, dy] of [[-16,-13],[16,-13],[-16,13],[16,13]]) out.push(`<path d="M${x + dx} ${y + dy - 5} l1.4 3.6 3.6 1.4 -3.6 1.4 -1.4 3.6 -1.4 -3.6 -3.6 -1.4 3.6 -1.4Z"/>`);
-      out.push(`</g><circle cx="${x}" cy="${y}" r="13" fill="#ffffff" stroke="#0875cb" stroke-width="2.5" pointer-events="none"/>`);
+      for (const [dx, dy] of [[-20,-18],[20,-18],[-20,18],[20,18]]) out.push(`<path d="M${x + dx} ${y + dy - 5} l1.4 3.6 3.6 1.4 -3.6 1.4 -1.4 3.6 -1.4 -3.6 -3.6 -1.4 3.6 -1.4Z"/>`);
+      out.push(`</g><circle cx="${x}" cy="${y}" r="18" fill="#ffffff" stroke="#0875cb" stroke-width="2.5" pointer-events="none"/>`);
     }
     thicknessBadge(out, x, y, thin, { on, round: model.pipeBadge !== 'pill', adjustable: !on && Boolean(c.adjustable), id: c.id });
   }
@@ -647,11 +650,11 @@ function drawGuide(out, stage, layout, guide) {
     const top = basinShape(cx).top - 18 - 8 - 5 + dy;
     ring(cx - vessel.width / 2 - 5, top, vessel.width + 10, GROUND + 8 + dy - top);
     const label = outletLabelPositions(layout, stage).get(o.id);
-    ring(label.x - 14, label.y - 14, 28, 28);
+    ring(label.x - 18, label.y - 18, 36, 36);
   } else if (guide === 'badges') {
     for (const c of stage.candidates) {
       const { x: mx, y: my } = pipeLabelPositions(layout, stage).get(c.id);
-      ring(mx - 14, my - 14, 28, 28);
+      ring(mx - 18, my - 18, 36, 36);
     }
   } // pipe:ID は管と札の下に描く。最後に重ねて管の中身を隠さない。
 }

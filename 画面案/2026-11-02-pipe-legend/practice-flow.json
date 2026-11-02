@@ -1,0 +1,169 @@
+{
+  "changedBadge": "配管SA 細 数字3",
+  "highlight": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": true,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "afterNext": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": false,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "beforeRun": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": false,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "result": {
+    "board": {
+      "height": 450.0625,
+      "width": 382,
+      "x": 16,
+      "y": 238
+    },
+    "footer": {
+      "height": 37,
+      "width": 380,
+      "x": 17,
+      "y": 650.0625
+    },
+    "hint": {
+      "height": 120,
+      "width": 382,
+      "x": 16,
+      "y": 696.0625
+    },
+    "key": {
+      "height": 32,
+      "width": 299,
+      "x": 57.5,
+      "y": 653.0625
+    },
+    "keyVisible": true,
+    "legendGuide": false,
+    "overflow": [],
+    "pageOverflow": false,
+    "size": [
+      414,
+      896
+    ],
+    "stage": "\n        画面の見方選択プレイ・練習∨",
+    "svg": {
+      "height": 408.0625,
+      "width": 380,
+      "x": 17,
+      "y": 239
+    }
+  },
+  "resultText": "\n        結果PERFECT\n        ×\n        \n          \n          100点\n        \n        \n        配管 1 本\n      ",
+  "errors": []
+}
