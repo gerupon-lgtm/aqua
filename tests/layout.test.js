@@ -5,6 +5,7 @@ import { CHALLENGES } from '../src/content/challenges.js';
 import { applyValues } from '../src/content/challenge-draw.js';
 import { PRACTICE } from '../src/content/tutorial.js';
 import { layoutFor, pipePath, pipeAt, pipeLabelPositions, outletLabelPositions, basinPlacement, VIEW_W } from '../src/ui/board.js';
+import { outletAnnotations, annotationRect } from '../src/ui/board-annotations.js';
 
 // 盤面の配置の点検：盤内に収まる。器とグラスの軽い重なりは発案者が許可。
 // サイフォンの脚が同じ位置に重ならない。地面の下の同じ段の管は、横に重ならない（つなぎ目の短い重なりは除く）
@@ -17,10 +18,11 @@ const WALL_HALF = 8;
 test('全198出題の2段の丸札が盤内に収まり、互いに重ならない', () => {
   for (const base of [PRACTICE, ...STAGES]) for (const stage of CHALLENGES[base.id]?.map(q => applyValues(base, q.values)) ?? [base]) {
     const layout = layoutFor(stage);
-    const labels = [...pipeLabelPositions(layout, stage).values(), ...outletLabelPositions(layout, stage).values()];
-    for (const p of labels) assert.ok(p.x >= 14 && p.x <= VIEW_W - 14 && p.y >= 14 && p.y <= 470 - 14, `${stage.number}: 札が盤外`);
+    const labels = [...[...pipeLabelPositions(layout, stage).values()].map(p => ({ ...p, r: 14.65 })),
+      ...[...outletLabelPositions(layout, stage).values()].map(p => ({ ...p, r: 13.65 }))];
+    for (const p of labels) assert.ok(p.x >= p.r && p.x <= VIEW_W - p.r && p.y >= p.r && p.y <= 470 - p.r, `${stage.number}: 札が盤外`);
     for (let i = 0; i < labels.length; i++) for (let j = i + 1; j < labels.length; j++) {
-      assert.ok(Math.hypot(labels[i].x - labels[j].x, labels[i].y - labels[j].y) >= 29.3, `${stage.number}: 2段の札同士が重なる`);
+      assert.ok(Math.hypot(labels[i].x - labels[j].x, labels[i].y - labels[j].y) >= labels[i].r + labels[j].r, `${stage.number}: 2段の札同士が重なる`);
     }
   }
 });
@@ -32,9 +34,12 @@ test('全198出題で、出口管の太さバッジが高い器の必要量・�
       const layout = layoutFor(stage), labels = outletLabelPositions(layout, stage);
       for (const p of labels.values()) for (const o of stage.outlets) {
         const cx = basinPlacement(layout, o).cx;
-        const dy = layout.yOf(Number(o.height)) - 370;
-        if (Math.abs(p.y - (318 + dy)) < 17) assert.ok(Math.abs(p.x - cx) >= 40, `${stage.number}面の必要量の札と重なる`);
-        if (Number(o.height) > 0 && Math.abs(p.y - (298 + dy)) < 16) assert.ok(Math.abs(p.x - cx) >= 29, `${stage.number}面の高さの札と重なる`);
+        const notes = outletAnnotations(layout, o, cx);
+        for (const [kind, note] of Object.entries(notes)) {
+          const r = annotationRect(note, kind);
+          const distance = Math.hypot(Math.max(r.l - p.x, 0, p.x - r.r), Math.max(r.t - p.y, 0, p.y - r.b));
+          assert.ok(distance >= 13.65, `${stage.number}面の${kind}の札と重なる`);
+        }
       }
     }
   }

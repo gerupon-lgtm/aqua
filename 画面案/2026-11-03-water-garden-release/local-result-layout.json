@@ -1,0 +1,25 @@
+{
+  "board": {
+    "bottom": 502.0625,
+    "height": 305.0625,
+    "left": 12,
+    "right": 378,
+    "top": 197,
+    "width": 366,
+    "x": 12,
+    "y": 197
+  },
+  "fountains": 1,
+  "page": [
+    390,
+    680
+  ],
+  "rainbows": 1,
+  "status": [
+    "ok"
+  ],
+  "viewport": [
+    390,
+    680
+  ]
+}

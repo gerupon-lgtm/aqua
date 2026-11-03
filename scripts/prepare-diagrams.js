@@ -1,13 +1,17 @@
 // 説明の挿絵。画面の部品と同じ白い陶器・ガラス・青い水で、文字なしのSVGを作る。
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const defs = `<defs><linearGradient id="ceramic" x2=".3" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#dbe6ef"/></linearGradient><linearGradient id="glass"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".5" stop-color="#b9e4f6" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 0 10Z" fill="#257fb9"/></marker></defs>`;
 const line = (d, color = '#66b6df', width = 12) => `<path d="${d}" fill="none" stroke="#527492" stroke-width="${width + 5}" stroke-linejoin="round" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linejoin="round" stroke-linecap="round"/>`;
 const glass = (x, y, width, height, level) => `<path d="M${x} ${y} H${x + width} V${y + height} Q${x + width / 2} ${y + height + 10} ${x} ${y + height}Z" fill="url(#glass)" stroke="#527492" stroke-width="3"/><path d="M${x + 4} ${y + height - level} H${x + width - 4} V${y + height - 3} Q${x + width / 2} ${y + height + 4} ${x + 4} ${y + height - 3}Z" fill="#61b1d9" opacity=".8"/><path d="M${x + 10} ${y + 12} V${y + height - 12}" stroke="#fff" stroke-width="4" opacity=".8"/>`;
-// 器の窓は水位のゲージではない。口から出て排水される流れだけを示す。
-const bowl = (x, y, width = 130) => `<g transform="translate(${x} ${y}) scale(${width / 130})"><path d="M-65 0 H65 L48 55 Q0 68 -48 55Z" fill="url(#ceramic)" stroke="#527492" stroke-width="3"/><path d="M-48 14 H48 L36 48 Q0 56 -36 48Z" fill="url(#glass)" stroke="#8ca4b5" stroke-width="2"/><ellipse cy="0" rx="65" ry="8" fill="#fffefa" stroke="#527492" stroke-width="3"/><ellipse cy="0" rx="56" ry="4" fill="#eef7fb" stroke="#ceb77b" stroke-width="1.5"/><ellipse cy="55" rx="5" ry="2.5" fill="#fff" stroke="#257fb9" stroke-width="2"/><path d="M0 55 V28 Q13 28 17 46 L24 50 V70 M21 67 L24 70 L27 67" fill="none" stroke="#257fb9" stroke-width="3" stroke-linecap="round"/></g>`;
-const outlet = (fromX, mouthY, cx, width = 130) => `${line(`M${fromX} ${mouthY} V${mouthY + 12} H${cx} V${mouthY}`)}${bowl(cx, mouthY - 55 * width / 130, width)}`;
+// imgとして開いたSVGでも同じ盤を出せるよう、採用PNGを内部に含める。
+const drainPanImage = 'data:image/png;base64,' + readFileSync(new URL('../public/graphics/part-drain-pan-v2.png', import.meta.url)).toString('base64');
+const outlet = (fromX, mouthY, cx, width = 130) => {
+  const scale = width / 62, depth = 13.5 * scale;
+  const photoY = mouthY - 30.611825192802055 * width / 512;
+  return `${line(`M${fromX} ${mouthY} V${mouthY + depth} H${cx} V${mouthY}`, '#f4f3e9', 5.5 * scale)}<image href="${drainPanImage}" x="${cx - width / 2}" y="${photoY}" width="${width}" height="${104 * width / 512}"/><ellipse cx="${cx}" cy="${mouthY}" rx="${2.7 * scale}" ry="${1.1 * scale}" fill="#fff" stroke="#527492" stroke-width="${scale}"/><path d="M${cx} ${mouthY} q${scale} ${-8 * scale} ${5 * scale} ${-3 * scale} q${2 * scale} ${2 * scale} ${3 * scale} ${4 * scale}" fill="none" stroke="#287fb5" stroke-width="${1.4 * scale}" stroke-linecap="round"/>`;
+};
 const arrow = d => `<path d="${d}" fill="none" stroke="#257fb9" stroke-width="4" marker-end="url(#arrow)"/>`;
 const gate = (x, y, closed) => `<g transform="translate(${x} ${y})"><rect x="-17" y="-26" width="34" height="52" rx="5" fill="#fffefa" stroke="#527492" stroke-width="3"/><path d="M-12 ${closed ? 0 : -18} H12" stroke="${closed ? '#244b6d' : '#65b5d9'}" stroke-width="9"/><path d="M0 -26 V-43 M-16 -43 H16" stroke="#527492" stroke-width="4"/></g>`;
 const diagrams = {

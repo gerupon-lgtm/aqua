@@ -1,0 +1,15 @@
+{
+  "frames": 100,
+  "outlets": 3,
+  "meanRenderMs": 10.034000000059605,
+  "p95RenderMs": 11.700000017881393,
+  "maxRenderMs": 13.400000005960464,
+  "meanFrameMs": 40.032999999999994,
+  "observedFps": 24.979392001598686,
+  "fountainFrames": 3,
+  "dropletPositions": 115,
+  "viewport": [
+    1280,
+    720
+  ]
+}

@@ -1,3 +1,8 @@
+import { materialDefs, materialWater, drawGardenSoil, drawSocket, drawGardenPedestal, drawDrainPan, drawNozzleLip, drawGardenFeed } from './board-materials.js';
+import { createOutletLabelLayout } from './outlet-label-layout.js';
+import { outletAnnotations, quantityBadge, heightBadge } from './board-annotations.js';
+import { feedPath } from './board-part-geometry.js';
+import { drawFountain, drawRainbow } from './board-water-effects.js';
 // 断面の盤面（SVG）。真横から見た図で、画面の上下がそのまま高さ（screens.md 2章）。
 // 計算は分数で済ませてあり、ここでは描画の直前に小数へ直すだけ。
 import { RAINBOW_AFTER_MS, RAINBOW_FADE_MS, guideGlowOpacity } from './visual-timing.js';
@@ -182,57 +187,21 @@ function drawCrossings(out, layout, stage, model, svgId = '') {
 
 const THICK_LABEL = { 1: '太', 2: '中', 3: '細' };
 
-const outletLabelCache = new WeakMap();
+const outletLabels = createOutletLabelLayout({ basinPlacement, pipePath, pipeCrossings, pipeLabelPositions, boardViewBox });
 export function outletLabelPositions(layout, stage) {
-  if (outletLabelCache.has(layout)) return outletLabelCache.get(layout);
-  const routes = stage.candidates.map(c => pipePath(layout, c));
-  const placed = new Map();
-  for (const o of stage.outlets) {
-    const node = layout.nodes.get(o.tower);
-    // 発案者の図：器の左上の空きへ丸いサイズ表示を逃がす。
-    const preferred = node.cx - 34;
-    const y = layout.yOf(Number(o.height)) - 82;
-    // 大きくした2段の札も、隣の器の名札を覆わない近い空きへ置く。
-    // 左端の共通の物差し（0〜22）を丸い札で隠さない。
-    const choices = [preferred, ...Array.from({ length: 154 }, (_, i) => 40 + i * 2)].filter(x => x >= 40 && x <= VIEW_W - 14);
-    const score = x => {
-      let n = Math.abs(x - preferred) * .03;
-      for (const tower of layout.nodes.values()) {
-        if (y >= layout.towerTop - 14 && y <= GROUND + 14) n += Math.max(0, tower.w / 2 + 15 - Math.abs(x - tower.cx)) * 10;
-      }
-      for (const wall of stage.walls ?? []) {
-        if (y >= layout.yOf(Number(wall.height)) - 9 && y <= GROUND + 9) n += Math.max(0, 18 - Math.abs(x - (18 + wall.x * 32.4))) * 10;
-      }
-      // 高さの違う隣の器の名札も避ける。
-      for (const other of stage.outlets) {
-        const otherX = basinPlacement(layout, other).cx;
-        const dy = layout.yOf(Number(other.height)) - GROUND;
-        if (Math.abs(y - (GROUND - 52 + dy)) < 23) n += Math.max(0, 54 - Math.abs(x - otherX)) * 30;
-        if (Math.abs(y - (GROUND - 72 + dy)) < 23) n += Math.max(0, 40 - Math.abs(x - otherX)) * 30;
-      }
-      for (const p of routes) for (const [a, b] of [[p.pts[0], p.pts[1]], [p.pts[2], p.pts[3]]]) {
-        if (y < Math.min(a[1], b[1]) - 9 || y > Math.max(a[1], b[1]) + 9) continue;
-        n += Math.max(0, 18 - Math.abs(x - a[0])) * 10;
-      }
-      for (const p of placed.values()) if (Math.abs(p.y - y) < 30) n += Math.max(0, 30 - Math.hypot(x - p.x, y - p.y)) * 40;
-      return n;
-    };
-    choices.sort((a, b) => score(a) - score(b));
-    placed.set(o.id, { x: choices[0], y });
-  }
-  outletLabelCache.set(layout, placed);
-  return placed;
+  return new Map([...outletLabels.placements(layout, stage)].map(([id, value]) => [id, value.size]));
 }
 
-function thicknessBadge(out, x, y, thin, { on = false, round = true, adjustable = false, id = '' } = {}) {
-  out.push(`<g class="pipe-label" data-pipe-label="${esc(id)}" pointer-events="${id.startsWith('outlet-') ? 'none' : 'all'}" aria-label="配管${esc(id)} ${THICK_LABEL[thin]} 数字${thin}">`);
-  out.push(`<rect x="${x - 14}" y="${y - 14}" width="28" height="28" rx="${round ? 14 : 5}" fill="${on ? '#1d56a0' : '#fffefa'}" stroke="#1d4f88" stroke-width="1.3" ${adjustable ? 'stroke-dasharray="2 1.5"' : ''}/>`);
+function thicknessBadge(out, x, y, thin, { on = false, round = true, adjustable = false, id = '', outlet = null } = {}) {
+  const radius = outlet ? 13 : 14;
+  out.push(`<g class="pipe-label${outlet ? ' elbow-size' : ''}" ${outlet ? `data-outlet="${esc(outlet.id)}" ` : ''}data-pipe-label="${esc(id)}" pointer-events="${id.startsWith('outlet-') ? 'none' : 'all'}" aria-label="配管${esc(id)} ${THICK_LABEL[thin]} 数字${thin}">`);
+  out.push(`<rect x="${x - radius}" y="${y - radius}" width="${radius * 2}" height="${radius * 2}" rx="${round ? radius : 5}" fill="${on ? '#1d56a0' : '#fffefa'}" stroke="#1d4f88" stroke-width="1.3" ${adjustable ? 'stroke-dasharray="2 1.5"' : ''}/>`);
   out.push(`<text x="${x}" y="${y - 2.5}" text-anchor="middle" font-size="11" font-weight="700" fill="${on ? '#ffffff' : '#173f70'}">${THICK_LABEL[thin] ?? thin}</text><text x="${x}" y="${y + 10}" text-anchor="middle" font-size="13" font-weight="700" fill="${on ? '#ffffff' : '#173f70'}">${thin}</text></g>`);
 }
 
 // ---- 盤面のバッジ（デザイン表 ui-badges A を図形で再現。2026-11-01 発案者が雰囲気 A を選択） ----
-// 角の丸い四角に二重の縁、左に小さな印、右に文字。指定量は状態で色と右端の印が変わる
-// （ふつう：白／ちょうど：青と✓／多い：朱と＋／足りない：灰と−）。図形なので、どの画面の大きさでもくっきり出る
+// 共通の名札。必要量はboard-annotations.jsの固定した一行版を使い、
+// 開始前の空欄／OKの青とチェック／NGの赤系とマイナスを切り替える。
 const BADGE_TONE = {
   light: { fill: '#ffffff', edge: '#1d4f88', inner: 'rgba(29, 79, 136, .22)', ink: '#17314c', icon: '#1d4f88' },
   blue: { fill: '#1d56a0', edge: '#163f78', inner: 'rgba(255, 255, 255, .45)', ink: '#ffffff', icon: '#ffffff' },
@@ -276,7 +245,7 @@ function badge(out, { x, y, text, icon, iconArg, tone = 'light', mark = null, al
   out.push('</g>');
   return w;
 }
-const VERDICT_BADGE = { exact: ['blue', 'check'], over: ['orange', 'plus'], short: ['slate', 'minus'] };
+const VERDICT_BADGE = { exact: ['blue', 'check'], over: ['orange', 'minus'], short: ['orange', 'minus'] };
 
 // 採用した絵（docs/assets.md。2026-11-01 発案者が全体の雰囲気 A「白い陶器」を選択）。
 // 候補から scripts/prepare-art.py で配信用の大きさに変換したもの。model.art === false のときは図形の仮の絵（テスト用）
@@ -317,7 +286,7 @@ function drawPipe(out, layout, c, model, overlay = false) {
     out.push(`<path d="${d}" fill="none" stroke="${edge}" stroke-width="${w + 4}" stroke-linecap="round" stroke-linejoin="round"/>`);
     out.push(`<path d="${d}" fill="none" stroke="${core}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
     // 白い陶器の管のつや（見本 A）。中身の上に細い白い線を重ねる。水が流れているときは流れの点を見せるため重ねない
-    if (!(filled && !broken)) out.push(`<path d="${d}" fill="none" stroke="#ffffff" stroke-width="${Math.max(1, w * 0.28)}" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(0 ${-w * 0.18})"/>`);
+    out.push(`<path d="${d}" fill="none" stroke="#ffffff" stroke-width="${Math.max(.6, w * 0.15)}" stroke-linecap="round" stroke-linejoin="round" opacity="${filled && !broken ? .3 : .7}" transform="translate(0 ${-w * 0.18})"/>`);
     if (filled && !broken && flowInfo && !flowInfo.flow.isZero()) {
       const speed = Math.max(0.6, 3.2 / Math.min(6, Math.abs(flowInfo.flow.toNumber())));
       const forward = (flowInfo.flow.sign() > 0) !== reversed;
@@ -381,42 +350,6 @@ function surfacePath(x0, x1, y, amp, phase) {
   return pts.join(' ');
 }
 
-// 噴水：中央の水柱と、左右へ落ちるしぶき。噴き上がり0.6秒、その後は高さを少しゆらしながら続ける
-function drawFountain(out, cx, top, since, still) {
-  const rise = still ? 1 : Math.min(1, since / 600);
-  const ease = 1 - (1 - rise) ** 2;
-  const sway = still ? 0 : Math.sin(since / 170) * 1.6;
-  const peak = top - 4 - (86 + sway) * ease;
-  const base = top + 6;
-  out.push(`<path class="fountain-core" d="M${cx} ${base} L${cx} ${peak}" stroke="#216ea8" stroke-width="4.5" stroke-linecap="round" opacity=".95"/>`);
-  out.push(`<path d="M${cx} ${base} L${cx} ${peak + 2}" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>`);
-  if (ease < 0.6) return;
-  const spread = 19 * ease;
-  for (const dir of [-1, 1]) {
-    out.push(`<path d="M${cx} ${peak + 1} Q${cx + dir * spread * 0.7} ${peak - 6} ${cx + dir * spread} ${top + 2}" fill="none" stroke="#287fb5" stroke-width="2.6" stroke-linecap="round" opacity=".9"/>`);
-    out.push(`<path d="M${cx} ${peak + 1} Q${cx + dir * spread * 0.7} ${peak - 6} ${cx + dir * spread} ${top + 2}" fill="none" stroke="#dff6ff" stroke-width=".8" stroke-linecap="round"/>`);
-    // しぶきの粒：上から盤の縁へ落ちていく
-    for (let i = 0; i < 3; i++) {
-      const p = still ? (i + 0.5) / 3 : ((since / 900) + i / 3) % 1;
-      const x = cx + dir * spread * p;
-      const y = (1 - p) ** 2 * (peak + 1) + 2 * (1 - p) * p * (peak - 6) + p * p * (top + 2);
-      out.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.6" fill="var(--water-mid)" opacity="${(0.85 - p * 0.4).toFixed(2)}"/>`);
-    }
-  }
-}
-
-function drawRainbow(out, cx, top, opacity) {
-  // 明るい空でも色が消えない7本の帯。右端の器でも円弧を盤内に収める。
-  const x = Math.max(39, Math.min(VIEW_W - 39, cx));
-  const base = top - 30;
-  out.push(`<g class="rainbow" opacity="${opacity.toFixed(3)}" fill="none" stroke-width="2.6">`);
-  ['#df565e', '#ed9941', '#ead152', '#66ad75', '#4fa9c6', '#4c78bd', '#9569b1'].forEach((color, i) => {
-    const r = 36 - i * 2.6;
-    out.push(`<path d="M${x - r} ${base} A${r} ${r} 0 0 1 ${x + r} ${base}" stroke="${color}"/>`);
-  });
-  out.push('</g>');
-}
-
 function basinShape(cx) {
   const top = GROUND - 34;
   return {
@@ -457,6 +390,8 @@ export function renderBoard(svg, model) {
   const evaluation = model.view;
   const { H, unit, towerTop } = layout;
   const out = [];
+  const foreground = [];
+  materialDefs(out);
   out.push(`<defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sky-top)"/><stop offset="1" stop-color="var(--sky-bottom)"/></linearGradient>
     <linearGradient id="glassfill" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity=".75"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient>
@@ -468,17 +403,13 @@ export function renderBoard(svg, model) {
   if (pick.bg) {
     out.push(`<image href="${art('bg-trial.webp')}" x="0" y="0" width="${VIEW_W}" height="${GROUND}" preserveAspectRatio="xMidYMax slice"/>`);
   }
-  out.push(`<rect x="0" y="${GROUND}" width="${VIEW_W}" height="${VIEW_H - GROUND}" fill="url(#soil)"/>`);
-  out.push(`<path d="M0 370 H360 V390 Q300 384 245 391 T120 389 T0 392 Z" fill="#e3c998"/>`);
-  out.push(`<path d="M0 420 Q55 412 120 422 T240 419 T360 425 V470 H0 Z" fill="#af845d" opacity=".3"/>`);
-  out.push(`<rect x="0" y="${GROUND}" width="${VIEW_W}" height="100" fill="url(#pebbles)"/>`);
-  out.push(`<path d="M0 370 Q8 368 16 370 T48 370 T80 370 T112 370 T144 370 T176 370 T208 370 T240 370 T272 370 T304 370 T336 370 T368 370" stroke="#987448" stroke-width="2" fill="none"/>`);
+  drawGardenSoil(out);
 
   // 壁（サイフォンが越える）
   for (const wall of stage.walls ?? []) {
     const x = 18 + wall.x * 32.4;
     const y = layout.yOf(Number(wall.height));
-    out.push(`<rect x="${x - 8}" y="${y}" width="16" height="${GROUND - y}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+    out.push(`<rect x="${x - 8}" y="${y}" width="16" height="${GROUND - y}" fill="url(#garden-ivory)" stroke="var(--stone-edge)" stroke-width=".8"/>`);
     for (let yy = y + 14; yy < GROUND; yy += 14) out.push(`<line x1="${x - 8}" y1="${yy}" x2="${x + 8}" y2="${yy}" stroke="var(--stone-edge)" stroke-width="1"/>`);
   }
 
@@ -493,20 +424,20 @@ export function renderBoard(svg, model) {
   // 絵の部品は、明るい背景に溶け込まないよう、部品の周りだけに青い陰影を置き、縁を濃い青で縁取る（バインディング）。
   // 前作は暗い背景に淡い陰影と明るい縁取りで分けていた。本作は明るい背景なので、その逆（2026-11-01 発案者）。
   // 仕上がりは採用する絵に合わせて決める。それまでは目立たない控えめな値にしておく（強すぎると「あからさま」になる）
-  if (pick.spring) out.push(`<rect x="${sx0 - 9}" y="${sy - 11}" width="${spring.w + 18}" height="${GROUND - sy + 11}" rx="8" fill="none" stroke="rgba(29, 79, 136, .1)" stroke-width="4"/>`);
+  if (pick.spring) out.push(`<rect x="${sx0 - 9}" y="${sy - 11}" width="${spring.w + 18}" height="${GROUND - sy + 11}" rx="8" fill="none" stroke="rgba(72, 108, 126, .08)" stroke-width="2"/>`);
   if (!pick.spring) out.push(`<rect x="${sx0 - 4}" y="${sy - 10}" width="${spring.w + 8}" height="${GROUND - sy + 10}" rx="5" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
-  out.push(`<rect x="${sx0}" y="${sy}" width="${spring.w}" height="${GROUND - sy}" fill="${waterColor(H, H)}"/>`);
-  out.push(`<path d="${surfacePath(sx0, sx0 + spring.w, sy, reducedMotion ? 0 : 0.8, time / 420)}" stroke="var(--surface)" stroke-width="2" fill="none"/>`);
+  out.push(`<rect x="${sx0}" y="${sy}" width="${spring.w}" height="${GROUND - sy}" fill="${materialWater(out,'garden-source-water',waterColor(H,H))}"/>`);
+  out.push(`<path d="${surfacePath(sx0, sx0 + spring.w, sy, reducedMotion ? 0 : 0.8, time / 420)}" stroke="var(--surface)" stroke-width="1.3" fill="none"/>`);
   if (pick.spring) {
     sliced(out, 'part-spring', sx0 - 8, sy - 12, spring.w + 16, GROUND - sy + 12, 120, 24, 20);
-    out.push(`<rect x="${sx0 - 7}" y="${sy - 11}" width="${spring.w + 14}" height="${GROUND - sy + 11}" rx="6" fill="none" stroke="var(--blue-deep)" stroke-width="1" opacity=".4"/>`);
+    out.push(`<rect x="${sx0 - 7}" y="${sy - 11}" width="${spring.w + 14}" height="${GROUND - sy + 11}" rx="6" fill="none" stroke="var(--blue-deep)" stroke-width=".7" opacity=".22"/>`);
   }
   // 給水塔：水の高さが見える縦長の設備。自然の泉という呼び名は使わない。
-  out.push(`<rect x="${sx0 - 7}" y="${GROUND - 5}" width="${spring.w + 14}" height="6" rx="2" fill="url(#porcelain)" stroke="#627e9b" stroke-width="1"/>`);
-  out.push(`<g class="source-height" aria-label="給水塔の高さ${esc(stage.spring.height)}">`);
-  badge(out, { x: spring.cx, y: sy - 32, text: '給水塔', tone: 'blue' });
-  badge(out, { x: spring.cx, y: sy - 15, text: `高さ${stage.spring.height}`, size: 9, h: 14 });
-  out.push('</g>');
+  drawSocket(out,spring.cx,GROUND,spring.w+14);
+  foreground.push(`<g class="source-height" aria-label="給水塔の高さ${esc(stage.spring.height)}">`);
+  badge(foreground, { x: spring.cx, y: sy - 32, text: '給水塔', tone: 'blue' });
+  heightBadge(foreground, { x: spring.cx, y: sy - 15, text: `高さ${stage.spring.height}` });
+  foreground.push('</g>');
   // 給水塔の目盛りも、グラスと共通の高さ1ずつ。青い水の上で読める白い刻み。
   for (let k = 1; k <= H; k++) {
     const y = layout.yOf(k);
@@ -530,10 +461,10 @@ export function renderBoard(svg, model) {
     else out.push(`<rect x="${x0 - 4}" y="${towerTop - 3}" width="${TOWER_W + 8}" height="${GROUND - towerTop + 3}" rx="8" fill="rgba(29, 79, 136, .04)" stroke="rgba(29, 79, 136, .1)" stroke-width="4"/>`);
     if (level !== null && level !== undefined && level * unit > 1.5) {
       const y = layout.yOf(level);
-      out.push(`<rect x="${x0 + 2}" y="${y}" width="${TOWER_W - 4}" height="${(GROUND - y - 1).toFixed(2)}" rx="3" fill="${waterColor(level, H)}" opacity=".92"/>`);
+      out.push(`<rect x="${x0 + 2}" y="${y}" width="${TOWER_W - 4}" height="${(GROUND - y - 1).toFixed(2)}" rx="3" fill="${materialWater(out,`garden-water-${t.id}`,waterColor(level,H))}" opacity=".92"/>`);
       const dist = settled && finalT?.state === 'water' ? model.tickDistance(finalT.level) : 0;
       const amp = reducedMotion ? 0 : dist * 6;
-      out.push(`<path d="${surfacePath(x0 + 2, x1 - 2, y, amp, time / 260 + node.cx)}" stroke="var(--surface)" stroke-width="2.2" fill="none" stroke-linecap="round"/>`);
+      out.push(`<path d="${surfacePath(x0 + 2, x1 - 2, y, amp, time / 260 + node.cx)}" stroke="var(--surface)" stroke-width="1.4" fill="none" stroke-linecap="round"/>`);
     }
     if (pick.glass) {
       sliced(out, 'part-glass', x0 - 3, towerTop - 4, TOWER_W + 6, GROUND - towerTop + 4, 68, 24, 20);
@@ -554,7 +485,7 @@ export function renderBoard(svg, model) {
     if (!pick.glass || lit) out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="none" stroke="${lit ? 'var(--gold)' : 'var(--glass-edge)'}" stroke-width="${lit ? 3 : 1.8}"/>`);
     if (!pick.glass) out.push(`<rect x="${x0 + 5}" y="${towerTop + 6}" width="3" height="${GROUND - towerTop - 14}" rx="1.5" fill="#ffffff" opacity=".7"/>`);
     if (settled && finalT?.state === 'empty') {
-      badge(out, { x: node.cx, y: GROUND - 14, text: '空', icon: 'cup', tone: 'blue' });
+      badge(foreground, { x: node.cx, y: GROUND - 14, text: '空', icon: 'cup', tone: 'blue' });
     }
   }
 
@@ -572,44 +503,22 @@ export function renderBoard(svg, model) {
     const flowing = phase !== 'edit' && evaluation?.result.outlets[o.id]?.active && !evaluation.result.outlets[o.id].flow.isZero();
     // 口の高さが0より上の出口は、口と噴水盤をその高さへ持ち上げ、台の上に置く
     const dy = layout.yOf(Number(o.height)) - GROUND;
-    if (dy < 0 && pick.basin) {
-      // 台座の絵：上（224×96 を半分にしたもの）と、縦に伸ばす中
-      const pw = 30, topH = pw * 48 / 112;
-      const top = GROUND - 4 + dy;
-      out.push(`<g class="pedestal"><ellipse cx="${cx}" cy="${GROUND + 2}" rx="20" ry="3" fill="#70583e" opacity=".22"/><path class="pedestal-body" d="M${cx - 15} ${top} H${cx + 15} V${top + 7} L${cx + 11} ${top + 11} V${GROUND - 5} H${cx - 11} V${top + 11} L${cx - 15} ${top + 7}Z" fill="#fffefa" stroke="#537594" stroke-width="1.2"/><path d="M${cx + 4} ${top + 10} H${cx + 11} V${GROUND - 5} H${cx + 4}Z" fill="#d2e1ed"/>`);
-      out.push(`<image href="${art('part-pedestal-middle.png')}" x="${cx - pw / 2}" y="${GROUND - 4 + dy + topH - 0.5}" width="${pw}" height="${Math.max(0, 4 - dy - topH + 0.5)}" preserveAspectRatio="none"/>`);
-      out.push(`<image href="${art('part-pedestal-top.png')}" x="${cx - pw / 2}" y="${GROUND - 4 + dy}" width="${pw}" height="${topH}" preserveAspectRatio="none"/>`);
-      out.push(`<path d="M${cx - 15} ${top} H${cx + 15} V${top + 7} L${cx + 11} ${top + 11} V${GROUND - 5} H${cx - 11} V${top + 11} L${cx - 15} ${top + 7}Z" fill="none" stroke="#537594" stroke-width="1.1"/><rect class="pedestal-foot" x="${cx - 17}" y="${GROUND - 6}" width="34" height="7" rx="1.5" fill="#fffefa" stroke="#537594" stroke-width="1.2"/></g>`);
-    } else if (dy < 0) out.push(`<rect x="${cx - 14}" y="${GROUND - 4 + dy}" width="28" height="${4 - dy}" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+    drawGardenPedestal(out,cx,dy);
     out.push(`<g class="basin" transform="translate(0 ${dy})">`);
     // 吹き出し口の中心が計算の高さ。グラスから短い管で回し、口を上向きにする。
     // 上下の移動dyを含め、終点の高さは必ずlayout.yOf(o.height)になる。
-    const outletPipeX = cx;
-    const outletPipe = `M${node.cx} ${GROUND} V${GROUND + 8} H${outletPipeX} V${GROUND}`;
+    const outletPipe = feedPath(node.cx,cx,GROUND);
     out.push(`<path class="outlet-pipe" data-outlet-source="${esc(o.tower)}" d="${outletPipe}" fill="none" stroke="#7b92a5" stroke-width="5" stroke-linejoin="round"/>`);
     // 出口も通常の管と同じ「太・中・細」で示す。
-    const mouth = 1 / Number(o.conductance ?? 1);
-    out.push('<g class="basin-vessel">');
-    out.push(`<path class="bowl" d="${b.bowl}" fill="${pick.basin ? 'none' : 'var(--stone)'}" stroke="${pick.basin ? 'none' : 'var(--stone-edge)'}" stroke-width="1.5"/>`);
-    if (pick.basin) out.push(`<ellipse cx="${cx}" cy="${GROUND - 1}" rx="31" ry="4" fill="rgba(29, 79, 136, .15)"/>`);
-    // 白い陶器の枠＋ガラスの内器。窓以外の縁・脚・底は不透明な白。
-    const windowTop = b.top + 8, windowBottom = GROUND - 7;
-    const windowPaths = [`M${cx - 22} ${windowTop} H${cx + 22} L${cx + 17} ${windowBottom} Q${cx} ${windowBottom + 2} ${cx - 17} ${windowBottom} Z`];
-    const windows = windowPaths.map(d => `<path d="${d}"/>`).join('');
-    out.push(`<path class="porcelain-body" d="${b.bowl} ${windowPaths.join(' ')}" fill-rule="evenodd" fill="url(#porcelain)" stroke="#527492" stroke-width="1.2"/>`);
-    out.push(`<ellipse cx="${cx}" cy="${b.top}" rx="31" ry="4.5" fill="#fffefa" stroke="#527492" stroke-width="1.2"/><ellipse cx="${cx}" cy="${b.top - .2}" rx="27.5" ry="2.7" fill="#f5f0e4" stroke="#d3b879" stroke-width=".7"/>`);
-    out.push(`<g class="ceramic-windows" fill="#f9f7ef" stroke="#8ca4b5" stroke-width=".55">${windows}</g>`);
-    // 器の窓は流れる水を見るためのもの。流量を水位へ置き換える塗り・目盛りは使わない。
-    out.push(`<path class="glass-shine" d="M${cx - 19} ${windowTop + 2} l2 8 M${cx + 19} ${windowTop + 2} l-1 5" fill="none" stroke="#ffffff" stroke-width="1.2" opacity=".8"/>`);
-    out.push(`<path class="basin-drain" d="M${cx + 11} ${GROUND - 3} h5 m-5 2 h5" stroke="#6f8aa5" stroke-width="1" fill="none"/>`);
-    out.push('</g>');
+    drawGardenFeed(out,node.cx,cx);
+    drawDrainPan(out,cx);
     // 短い出口管は細めの固定幅。実際のサイズは引き出し先の丸バッジで示す。
-    out.push(`<g class="outlet-visible" fill="none" stroke-linecap="round" pointer-events="none"><path d="${outletPipe}" stroke="#6f8aa5" stroke-width="6"/><path d="${outletPipe}" stroke="${flowing ? '#4b9ad8' : '#edf2f7'}" stroke-width="3.6"/></g>`);
+
     // 目盛りと同じ高さに出口の印。水位が低くてもグラスの左側を隠さない短い基準線。
-    out.push(`<g class="outlet-mouth" data-outlet="${esc(o.id)}" data-height="${o.height}" data-mouth-y="${layout.yOf(Number(o.height))}" aria-label="出口の高さ${o.height}" pointer-events="none"><ellipse cx="${cx}" cy="${GROUND}" rx="3.4" ry="1.6" fill="${flowing ? '#4b9ad8' : '#ffffff'}" stroke="#1d4f88" stroke-width="1"/><path d="M${node.cx - TOWER_W / 2 - 7} ${GROUND} h11" stroke="#1d4f88" stroke-width="1.4"/></g>`);
-    if (flowing && settled) {
+    out.push(`<g class="outlet-mouth" data-outlet="${esc(o.id)}" data-height="${o.height}" data-mouth-y="${layout.yOf(Number(o.height))}" aria-label="出口の高さ${o.height}" pointer-events="none"><ellipse cx="${cx}" cy="${GROUND}" rx="2.7" ry="1.1" fill="${flowing ? '#4b9ad8' : '#ffffff'}" stroke="#1d4f88" stroke-width="1"/><path d="M${node.cx - TOWER_W / 2 - 7} ${GROUND} h11" stroke="#1d4f88" stroke-width="1.4"/></g>`);
+    if (flowing && settled && !(model.fountainAt != null && model.time >= model.fountainAt && model.outcome && model.outcome !== 'ng')) {
       const p = reducedMotion ? .5 : (time % 900) / 900;
-      out.push(`<g class="through-flow" fill="none" stroke="#287fb5" stroke-linecap="round" pointer-events="none"><path d="M${cx} ${GROUND} v-18 q7 0 10 12 l4 3 v8" stroke-width="2.3"/><circle cx="${cx}" cy="${GROUND - 18 * p}" r="1.6" fill="#dff6ff" stroke-width=".5"/><path d="M${cx + 14} ${GROUND + 7} v4 m-2 -2 l2 2 2 -2" stroke-width="1.4"/></g>`);
+      out.push(`<g class="through-flow" fill="none" stroke="#287fb5" stroke-linecap="round" pointer-events="none"><path d="M${cx} ${GROUND} q1 -8 5 -3 q2 2 3 4" stroke-width="1.4"/><circle cx="${cx}" cy="${GROUND - 7 * p}" r="1.6" fill="#dff6ff" stroke-width=".5"/></g>`);
     }
     // クリアの噴水と、100点の虹（2026-11-01 発案者）。ジングルの鳴り始めと同時に噴き上がり、
     // 100点のときは噴き上がった後に虹がかかる。NGでは噴かない。
@@ -624,35 +533,21 @@ export function renderBoard(svg, model) {
             drawRainbow(out, cx, b.top, opacity);
           }
         }
-        drawFountain(out, cx, GROUND - 6, since, model.reducedMotion);
-        if (pick.fountain) {
-          // 6コマ。140ミリ秒ごとに進め、高く上がった後は4〜6コマ目を繰り返す（コマの速さは仮の値）
-          const n = Math.floor(since / 140);
-          const frame = model.reducedMotion ? 6 : n < 6 ? n + 1 : 4 + ((n - 6) % 3);
-          out.push(`<image href="${art(`fx-fountain-0${frame}.png`)}" x="${cx - 30}" y="${GROUND - 78}" width="60" height="80" opacity=".65"/>`);
-        }
+        drawFountain(out, cx, GROUND - 6, since, model.reducedMotion, pick.fountain ? art : null);
+
       }
     }
+    drawNozzleLip(out,cx);
     // 小さな札は /秒、結果の数値は毎秒と明記する。同じ量の流れを指し、水位ではない。
     const target = typeof o.target === 'object' ? (model.gateClosed ? o.target.closed : o.target.open) : o.target;
     const [vt, vm] = verdict ? VERDICT_BADGE[verdict.verdict] ?? ['light', null] : ['light', null];
-    if (model.startCue > 0) {
-      const w = 12 + textWidth(`必要量${target}/秒`, 9);
-      const left = Math.min(VIEW_W - w - 2, Math.max(2, cx - w / 2));
-      out.push(`<rect class="start-cue" x="${left - 3}" y="${b.top - 29}" width="${w + 6}" height="22" rx="5" fill="#ffe19c" stroke="#a17b29" stroke-width="2.5" opacity="${model.startCue.toFixed(3)}" pointer-events="none"/>`);
-    }
-    badge(out, { x: cx, y: b.top - 18, text: `必要量${target}/秒`, tone: model.startCue > .5 ? 'gold' : vt, mark: vm, size: 9, h: 16 });
     out.push('</g>');
-    badge(out, { x: cx, y: b.top + dy - 38, text: `出口高さ${o.height}`, size: 8, h: 13 });
-    // 短い出口の管は、引き出し線の先で太さを示す。「出口 太」の札は置かない。
-    const { x: labelX, y: labelY } = outletLabelPositions(layout, stage).get(o.id);
-    const sourceX = (node.cx + outletPipeX) / 2;
-    const leftLabel = labelX < node.cx;
-    out.push(`<path class="outlet-leader" d="M${sourceX} ${GROUND + dy + 8} L${labelX + (leftLabel ? 8 : -8)} ${labelY + 4}" fill="none" stroke="#1d4f88" stroke-width=".8" pointer-events="none"/><circle cx="${sourceX}" cy="${GROUND + dy + 8}" r="1.4" fill="#1d4f88" pointer-events="none"/>`);
-    thicknessBadge(out, labelX, labelY, mouth, { id: `outlet-${o.id}` });
+    const notes = outletAnnotations(layout, o, cx);
+    quantityBadge(foreground, { ...notes.quantity, outletId: o.id }, target, model.startCue > .5 ? 'gold' : vt, vm, model.startCue);
+    heightBadge(foreground, { ...notes.height, outletId: o.id, text: `高さ${o.height}` });
   }
   const labelPositions = pipeLabelPositions(layout, stage);
-  for (const c of stage.candidates) drawPipeLabel(out, layout, c, model, labelPositions.get(c.id));
+  for (const c of stage.candidates) drawPipeLabel(foreground, layout, c, model, labelPositions.get(c.id));
   // 左の既存の余白へ共通の物差し。グラスと給水塔に同じ yOf を使う。
   out.push(`<g class="height-ruler" aria-label="高さの物差し。地面が0、1目盛りは高さ1。" pointer-events="none"><rect x="1" y="${sy - 22}" width="21" height="${GROUND - sy + 30}" rx="3" fill="#ffffff" fill-opacity=".9" stroke="#b6cadb" stroke-width=".7"/><text x="11.5" y="${sy - 10}" text-anchor="middle" font-size="9" font-weight="700" fill="#173f70">高さ</text><path d="M19 ${sy} V${GROUND}" fill="none" stroke="#507c9f" stroke-width=".8"/>`);
   for (let k = 0; k <= H; k++) {
@@ -661,6 +556,8 @@ export function renderBoard(svg, model) {
   }
   out.push('</g>');
   drawGuide(out, stage, layout, model.guide);
+  drawOutletLabels(out, foreground, layout, stage, svg.id);
+  out.push(`<g class="badge-foreground">${foreground.join('')}</g>`);
   svg.innerHTML = out.join('');
 }
 
@@ -681,10 +578,10 @@ function drawGuide(out, stage, layout, guide) {
     const vessel = basinPlacement(layout, o);
     const cx = vessel.cx;
     const dy = layout.yOf(Number(o.height)) - GROUND;
-    // 必要量の札は器の上端−18、札の高さ16。札の上にも5px空ける。
+    // 高さ札・必要量札・盤をまとめて囲み、上側にも余白を残す。
     const top = basinShape(cx).top - 18 - 8 - 5 + dy;
-    ring(cx - vessel.width / 2 - 5, top, vessel.width + 10, GROUND + 8 + dy - top);
-    const label = outletLabelPositions(layout, stage).get(o.id);
+    ring(cx - 43, top, 94, GROUND + 20 + dy - top);
+    const label = outletLabels.placements(layout, stage).get(o.id).size;
     ring(label.x - 18, label.y - 18, 36, 36);
   } else if (guide === 'badges') {
     for (const c of stage.candidates) {
@@ -702,4 +599,22 @@ export function towerAt(layout, stage, x, y) {
     if (Math.abs(x - node.cx) <= TOWER_W / 2 + 6) return t.id;
   }
   return null;
+}
+
+// 引き出し線は部品の上、すべての札の下。位置は見本と同じ探索で決める。
+function drawOutletLabels(out, foreground, layout, stage, svgId = 'board') {
+  const positions = outletLabels.placements(layout, stage);
+  const mask = `${svgId || 'board'}-leader-cut`;
+  const fields = outletLabels.obstacles(layout, stage).rects
+    .filter(r => ['quantity', 'height', 'ruler', 'gate caption'].includes(r.kind))
+    .map(r => `<rect x="${r.l}" y="${r.t}" width="${r.r - r.l}" height="${r.b - r.t}" fill="#000"/>`).join('');
+  const cuts = [...pipeLabelPositions(layout, stage).values()]
+    .map(p => `<rect x="${p.x - 15}" y="${p.y - 15}" width="30" height="30" fill="#000"/>`).join('');
+  out.push(`<defs><mask id="${mask}" maskUnits="userSpaceOnUse" x="0" y="0" width="360" height="470"><rect width="360" height="470" fill="#fff"/>${fields}${cuts}</mask></defs>`);
+  for (const outlet of stage.outlets) {
+    const g = positions.get(outlet.id);
+    const d = `M${g.anchor.x} ${g.anchor.y} L${g.elbow.x} ${g.elbow.y} L${g.end.x} ${g.end.y}`;
+    out.push(`<g class="elbow-leader" data-outlet="${esc(outlet.id)}" data-route="${g.routeStyle}" pointer-events="none" mask="url(#${mask})"><path d="${d}" fill="none" stroke="#fffefa" stroke-width="2.6" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/><path class="leader-ink" d="${d}" fill="none" stroke="#243b50" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></g><circle class="leader-anchor" cx="${g.anchor.x}" cy="${g.anchor.y}" r="1.6" fill="#243b50" pointer-events="none"/>`);
+    thicknessBadge(foreground, g.size.x, g.size.y, 1 / Number(outlet.conductance ?? 1), { id: `outlet-${outlet.id}`, outlet });
+  }
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "layout",
+    "equal": true,
+    "sha256": "e4d7cdeafe086642ea3b915b51e8519e5a688493a6d49f361af7fa5888443f35"
+  },
+  {
+    "name": "pipeGeometry",
+    "equal": true,
+    "sha256": "4c0d2828b3a2fbc3cf31e07d097568ad1581b859881c475dc905d36cb4dd42e1"
+  },
+  {
+    "name": "basinPlacement",
+    "equal": true,
+    "sha256": "f9d6683546cbbb23ccf79d55ce45ce6e7e6711a7e29697daf937b53df9d4c94c"
+  },
+  {
+    "name": "viewBox",
+    "equal": true,
+    "sha256": "b918f0acaa69dcb1a7e536a685b329f7b8641e00fea7b53c86f656f20c043f71"
+  }
+]

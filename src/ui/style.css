@@ -585,3 +585,13 @@ th { color: var(--ink-soft); font-weight: 500; }
   .hint.guide { grid-template-columns: 52px minmax(0,1fr); gap: 8px; }
   .hint.guide .spirit { width: 52px; height: 76px; }
 }
+
+/* 2026-11-03 採用した水庭の材質。盤面の寸法と操作は従来どおり。 */
+#board,.detail-board {
+ --pipe-edge:#7693a1;--pipe-empty:#f4f3e9;--pipe-on:#d3e5eb;--pipe-off:#a8b6bd;
+ --water-mid:#54a8cd;--surface:#366b88;--glass-edge:#91a8b4;--tick:#628193;
+ --stone:#f8f6ee;--stone-edge:#a7b7b6;
+}
+#board .current,.detail-board .current {stroke:#f4fdff;stroke-dasharray:1.5 12;stroke-linecap:round}
+#board .board-badge>rect:nth-child(2),.detail-board .board-badge>rect:nth-child(2){opacity:.5}
+#board .pipe-label>rect,.detail-board .pipe-label>rect{stroke:#416983}

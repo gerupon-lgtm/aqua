@@ -122,12 +122,21 @@ test('届いた量が0の噴水盤には水を描かない（空のグラスの�
   assert.ok(!svg.includes('class="amount-fill"'), '量を水位に置き換えない');
 });
 
-test('空の器にも陶器の枠と窓があり、流量用の水位目盛りは付けない', () => {
+test('空の排水盤でも中央穴と口が内側にあり、流量用の水位目盛りは付けない', () => {
   const { svg } = draw(STAGES[0], { connected: new Set(), primed: new Set(), thickness: {} });
   assert.ok(svg.includes('class="porcelain-body"'));
-  assert.ok(svg.includes('class="ceramic-windows"'));
+  const pan = /<g class="basin-vessel"[^>]+>/.exec(svg)?.[0];
+  const image = /<image class="porcelain-body"[^>]+>/.exec(svg)?.[0];
+  const mouth = /<g class="outlet-mouth"[^>]*><ellipse[^>]+>/.exec(svg)?.[0];
+  const attr = (value, key) => Number(new RegExp(key + '="([^"]+)"').exec(value)?.[1]);
+  assert.ok(pan?.includes('data-flow-through="true"'));
+  assert.ok(image?.includes('data-single-piece="true"'));
+  assert.ok(attr(mouth, 'cy') > attr(pan, 'data-pan-top') && attr(mouth, 'cy') < attr(pan, 'data-pan-bottom'));
+  assert.ok(attr(mouth, 'cx') > attr(pan, 'data-pan-left') && attr(mouth, 'cx') < attr(pan, 'data-pan-right'));
+  assert.equal(attr(image, 'x') + attr(image, 'width') / 2, attr(mouth, 'cx'));
+  assert.equal(attr(image, 'y') + 30.611825192802055 * attr(image, 'height') / 104, attr(mouth, 'cy'));
   assert.ok(!svg.includes('class="rear-gauge"') && !svg.includes('class="amount-mark"'));
-  assert.ok(svg.includes('class="outlet-leader"'));
+  assert.ok(svg.includes('class="elbow-leader"'));
   assert.ok(!svg.includes('出口 太') && !svg.includes('細さ 1') && !svg.includes('目標'));
 });
 
@@ -183,8 +192,47 @@ test('全30面で実際に描く吹き出し口と管の終点が、計算の出
       const d = /class="outlet-pipe"[^>]*d="([^"]+)"/.exec(body)?.[1];
       const tipY = /V([\d.-]+)$/.exec(d)?.[1];
       assert.ok(Math.abs(Number(offset) + Number(tipY) - expected) < 1e-8);
-      assert.ok(svg.includes(`>出口高さ${o.height}</text>`));
+      const heightCard = new RegExp(`<g class="board-badge height-card" data-outlet="${o.id}"[^>]*>([\\s\\S]*?)</text>`).exec(svg)?.[1];
+      assert.ok(heightCard?.includes(`>高さ${o.height}`));
       assert.ok(svg.includes('/秒</text>'));
     }
   }
+});
+
+test('必要量は下、高さは上。開始前からあるチェック欄と文字は判定で動かない', () => {
+  const samples = [
+    draw(STAGES[0], { connected: new Set(), primed: new Set(), thickness: {} }, { phase: 'edit', settled: false }).svg,
+    draw(STAGES[0], { connected: new Set(['SB']), primed: new Set(), thickness: {} }).svg,
+    draw(STAGES[0], { connected: new Set(['SA']), primed: new Set(), thickness: {} }).svg
+  ];
+  const layouts = samples.map(svg => {
+    const quantity = /<g class="board-badge quantity-card"[^>]*>([\s\S]*?)<\/text>/.exec(svg)?.[1];
+    const height = /<g class="board-badge height-card" data-outlet="[^"]+"[^>]*>([\s\S]*?)<\/text>/.exec(svg)?.[1];
+    assert.ok(quantity && height);
+    const attrs = value => Object.fromEntries([.../<rect x="([^"]+)" y="([^"]+)" width="([^"]+)" height="([^"]+)"/g.exec(value)].slice(1).map((v,i) => [['x','y','w','h'][i], Number(v)]));
+    const q = attrs(quantity), h = attrs(height);
+    assert.equal(q.h, h.h);
+    assert.equal(q.x + q.w, h.x + h.w);
+    assert.ok(h.y + h.h < q.y, '高さ札が必要量札より上にない');
+    assert.ok(svg.includes('class="quantity-status-box"'));
+    const textTag = /<text class="quantity-label"[^>]+>/.exec(quantity)?.[0];
+    const text = ['x', 'y', 'font-size'].map(key => new RegExp(key + '="([^"]+)"').exec(textTag)?.[1]);
+    return { q, h, text };
+  });
+  assert.deepEqual(layouts[0], layouts[1]);
+  assert.deepEqual(layouts[0], layouts[2]);
+  assert.match(samples[0], /data-status="empty"/);
+  assert.match(samples[1], /data-status="ok"[\s\S]*?fill="#1d56a0"/);
+  assert.ok(samples[1].includes('data-mark="check"'));
+  assert.match(samples[2], /data-status="ng"[\s\S]*?fill="#dc5a2c"/);
+  assert.ok(samples[2].includes('data-mark="minus"'));
+});
+
+test('すべての札が噴水・虹・部品・引き出し線より前へ描かれる', () => {
+  const { svg } = draw(STAGES[0], { connected: new Set(['SB']), primed: new Set(), thickness: {} }, { fountainAt: 0, time: 1600 });
+  const front = svg.indexOf('<g class="badge-foreground">');
+  assert.ok(front > svg.indexOf('class="fountain-spray"'));
+  assert.ok(front > svg.indexOf('class="rainbow"'));
+  assert.ok(front > svg.indexOf('class="elbow-leader"'));
+  for (const m of svg.matchAll(/<g class="(?:board-badge|pipe-label)\b/g)) assert.ok(m.index > front, '部品より後ろに札が残っている');
 });
