@@ -1,0 +1,11 @@
+{
+  "afterRead": {
+    "fairy": false,
+    "panel": "\n      配管をタップしてつなぎ、「水を流す」を押します。\n      \n        水を流す\n      ",
+    "reviewDisabled": false
+  },
+  "review": {
+    "fairy": true,
+    "reviewDisabled": true
+  }
+}

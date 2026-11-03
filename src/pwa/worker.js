@@ -19,6 +19,13 @@ self.addEventListener('activate', event => {
 // 画面からの「新しい版を使う」で、待っている版に切り替える
 self.addEventListener('message', event => {
   if (event.data === 'activate-update') self.skipWaiting();
+  if (event.data?.type === 'AQUA_UPDATE_STATUS' && event.ports?.[0]) {
+    const reply = event.ports[0];
+    event.waitUntil(caches.open(CACHE)
+      .then(async cache => ({ version: VERSION, ready: (await Promise.all(ASSETS.map(asset => cache.match(asset)))).every(Boolean) }))
+      .then(status => reply.postMessage(status))
+      .catch(() => reply.postMessage({ version: VERSION, ready: false })));
+  }
 });
 
 self.addEventListener('fetch', event => {

@@ -1,0 +1,8 @@
+npm notice run aqua-notes@0.14.13 build
+npm notice run node scripts/build.js
+dist/ に v0.14.13 を作りました（通信なし用の資材 65 件）
+npm notice
+npm notice New minor version of npm available! 12.0.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

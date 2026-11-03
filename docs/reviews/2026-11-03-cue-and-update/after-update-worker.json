@@ -1,0 +1,12 @@
+{
+  "controller": {
+    "state": "activated",
+    "version": "0.14.14",
+    "ready": true
+  },
+  "waiting": null,
+  "installing": null,
+  "cacheNames": [
+    "aqua-notes-0.14.14"
+  ]
+}

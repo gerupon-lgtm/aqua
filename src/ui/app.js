@@ -15,8 +15,9 @@ import { PARTS_HTML, HOWTO_HTML } from './info-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, boardViewBox, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
+import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.14.12';
+const APP_VERSION = '0.14.13';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -350,16 +351,25 @@ let frame = 0;
 let lastDraw = 0;
 function boardAnimating(now = performance.now()) {
   if (state.titleOpen) return false;
-  return state.phase !== 'edit' || now < state.stageCueUntil ||
+  return state.phase !== 'edit' ||
     (!reducedMotionQuery.matches && practiceStep()?.target.startsWith('pipe:'));
+}
+function stageCueAnimating(now = performance.now()) {
+  return !state.titleOpen && now < state.stageCueUntil;
+}
+function drawStageCue(now = performance.now()) {
+  const opacity = stageCueOpacity(state.stageCueUntil, now, reducedMotionQuery.matches);
+  $('cond').style.setProperty('--stage-cue', opacity.toFixed(3));
+  $('board').style.setProperty('--stage-cue', opacity.toFixed(3));
 }
 function loop() {
   cancelAnimationFrame(frame);
   const tick = now => {
-    const done = !boardAnimating(now);
-    // 最後は32msの間隔を待たず描く。薄い合図が残ったまま停止することを防ぐ。
-    if (now - lastDraw >= 32 || done) { lastDraw = now; drawBoard(); }
-    if (!done) frame = requestAnimationFrame(tick);
+    // 条件の合図だけならSVGを作り直さない。光っている間も管のタップ先を保持する。
+    drawStageCue(now);
+    const moving = boardAnimating(now);
+    if (moving && now - lastDraw >= 32) { lastDraw = now; drawBoard(); }
+    if (moving || stageCueAnimating(now)) frame = requestAnimationFrame(tick);
   };
   frame = requestAnimationFrame(tick);
 }
@@ -368,8 +378,7 @@ function drawBoard() {
   const now = performance.now();
   const viewBox = boardViewBox(state.layout, stage(), matchMedia('(orientation: portrait) and (max-width: 1023px)').matches);
   if ($('board').getAttribute('viewBox') !== viewBox) $('board').setAttribute('viewBox', viewBox);
-  const startCue = stageCueOpacity(state.stageCueUntil, now, reducedMotionQuery.matches);
-  $('cond').style.setProperty('--stage-cue', startCue.toFixed(3));
+  drawStageCue(now);
   const scale = scaleNow();
   const v = state.run ? viewAt(now) : { index: 0, settled: false, gateClosed: false };
   const view = state.phase === 'edit' || !state.evaluation ? null : state.evaluation.states[v.index];
@@ -393,7 +402,7 @@ function drawBoard() {
     reducedMotion: reducedMotionQuery.matches,
     highlight: state.highlight,
     guide: practiceStep() && practiceStep().target !== 'run' ? practiceStep().target : null,
-    startCue,
+    startCue: 0, // 札の光はSVGを描き直さず、上のCSS変数で更新する。
     onScale: level => onScale(level, scale),
     tickDistance: level => tickDistance(level, scale)
   });
@@ -727,7 +736,8 @@ function renderAll() {
   renderResultToast();
   $('board').classList.toggle('swipeable', state.phase === 'result');
   $('board').classList.toggle('editable', state.phase === 'edit');
-  if (boardAnimating()) loop();
+  updates?.refreshControls();
+  if (boardAnimating() || stageCueAnimating()) loop();
   else cancelAnimationFrame(frame);
 }
 
@@ -922,7 +932,7 @@ function bind() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeResult(); });
   reducedMotionQuery.addEventListener('change', () => {
     drawBoard();
-    if (boardAnimating()) loop();
+    if (boardAnimating() || stageCueAnimating()) loop();
     else cancelAnimationFrame(frame);
   });
   let layoutFrame = 0;
@@ -1048,6 +1058,7 @@ function openMenu() {
     <button type="button" class="ghost" data-sheet="records">記録</button>
     <button type="button" class="ghost" data-sheet="parts">パーツの説明</button>
     <button type="button" class="ghost" data-sheet="howto">遊び方と概要</button>
+    <button type="button" class="ghost" data-sheet="update-check">更新を確認</button>
     <button type="button" class="ghost" data-sheet="tune">調整（試作用）</button>
   </div>`);
 }
@@ -1088,15 +1099,19 @@ function openStageList() {
   openSheet('面を選ぶ', body);
 }
 
-// 「更新」：新しい版を探す。見つかれば画面下に「更新する」の案内が出る（F-022）
+// 手動確認はメニューから。上下の更新ボタンは、準備済みの新しい版を適用する（F-022）。
 async function checkUpdate() {
+  const show = message => {
+    if (state.titleOpen) renderTitle(message);
+    else openSheet('更新の確認', `<p>${textMarkup(message)}</p>`);
+  };
   try {
-    const reg = await navigator.serviceWorker?.getRegistration();
-    if (!reg) { renderTitle('この画面では更新を確かめられません（開発用の画面です）。'); return; }
-    await reg.update();
-    renderTitle(reg.waiting || reg.installing ? '新しい版があります。画面下の「更新する」を押してください。' : `いまの版 v${APP_VERSION} が最新です。`);
+    if (!updates) { show('この画面では更新を確かめられません（開発用の画面です）。'); return; }
+    show('更新を確認しています。');
+    const info = await updates.check();
+    show(updateMessage(info));
   } catch {
-    renderTitle('更新を確かめられませんでした。通信できる場所でもう一度お試しください。');
+    show('更新を確かめられませんでした。通信できる場所でもう一度お試しください。');
   }
 }
 
@@ -1111,7 +1126,6 @@ function bindScreens() {
     else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
     else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
     else if (k === 'resume') closeTitle();
-    else if (k === 'update') checkUpdate();
   });
   $('sheet').addEventListener('click', e => {
     const b = e.target.closest('button');
@@ -1124,6 +1138,7 @@ function bindScreens() {
     else if (k === 'records') openRecords();
     else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
     else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
+    else if (k === 'update-check') checkUpdate();
     else if (k === 'tune') openTuning();
   });
   $('menu').addEventListener('click', openMenu);
@@ -1147,31 +1162,35 @@ function exportRecord() {
 
 // ---- 通信なしで使う仕組みと、新しい版の案内（F-022、S-11） ----
 // 配信用のビルドだけが印（aqua-offline）を入れる。開発中と確認用ページでは登録しない
+let updates = null;
+function updateMessage(info) {
+  return info?.status === 'ready' ? '新しい版を使えます。「更新する」を押してください。'
+    : info?.status === 'checking' ? '更新を確認中です。準備ができると更新の案内を表示します。'
+    : info?.status === 'unavailable' ? '更新を確かめられませんでした。時間を置いてもう一度お試しください。'
+    : `いまの版 v${APP_VERSION} が最新です。`;
+}
+function syncUpdateUI(info = updates?.state) {
+  const ready = info?.status === 'ready';
+  const titleButton = document.querySelector('[data-title="update"]');
+  $('update-notice').hidden = !ready;
+  titleButton.hidden = !ready;
+  $('update-apply').disabled = titleButton.disabled = state.phase === 'running';
+  const sheet = $('sheet');
+  if (sheet && !sheet.hidden && sheet.querySelector('#sheet-title')?.textContent === '更新の確認') {
+    const copy = sheet.querySelector('.sheet-card > p');
+    if (copy) copy.innerHTML = textMarkup(updateMessage(info));
+  }
+}
 function setupOffline() {
+  syncUpdateUI();
   if (!document.querySelector('meta[name="aqua-offline"]') || !('serviceWorker' in navigator)) return;
-  const notice = $('update-notice');
-  const offer = worker => {
-    notice.hidden = false;
-    $('update-apply').onclick = () => {
-      if (state.phase === 'running') return; // 水が流れている間は切り替えない
-      worker.postMessage('activate-update');
-    };
-  };
-  let reloading = false;
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (reloading) return;
-    reloading = true;
-    location.reload();
+  updates = createUpdateManager({
+    serviceWorker: navigator.serviceWorker, currentVersion: APP_VERSION,
+    onChange: syncUpdateUI, canApply: () => state.phase !== 'running',
+    reload: () => location.reload()
   });
-  navigator.serviceWorker.register('./sw.js').then(reg => {
-    if (reg.waiting && navigator.serviceWorker.controller) offer(reg.waiting);
-    reg.addEventListener('updatefound', () => {
-      const next = reg.installing;
-      next?.addEventListener('statechange', () => {
-        if (next.state === 'installed' && navigator.serviceWorker.controller) offer(next);
-      });
-    });
-  }).catch(() => { /* 登録できない環境では、通信ありでそのまま遊べる */ });
+  $('update-apply').onclick = document.querySelector('[data-title="update"]').onclick = () => updates.apply();
+  updates.start().catch(() => { /* 登録できない環境では、通信ありでそのまま遊べる */ });
 }
 
 bind();

@@ -1,0 +1,3 @@
+npm notice run aqua-notes@0.14.13 check:challenges
+npm notice run node scripts/generate-challenges.js --check
+出題は最新です（52.8秒）。

@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS, RAINBOW_HOLD_MS, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from '../src/ui/visual-timing.js';
 
-test('面を移ってから400ms待ち、その後1.1秒の合図。控えめでも待機する', () => {
+test('面を移ってから700ms待ち、その後1.1秒の合図。控えめでも待機する', () => {
   const until = STAGE_CUE_WAIT_MS + STAGE_CUE_MS;
   for (const still of [false, true]) {
     assert.equal(stageCueOpacity(until, 0, still), 0);
-    assert.equal(stageCueOpacity(until, 399, still), 0);
-    assert.equal(stageCueOpacity(until, 550, still), 1);
-    assert.equal(stageCueOpacity(until, 1500, still), 0);
+    assert.equal(stageCueOpacity(until, 699, still), 0);
+    assert.equal(stageCueOpacity(until, 850, still), 1);
+    assert.equal(stageCueOpacity(until, 1800, still), 0);
   }
 });
 
