@@ -26,8 +26,10 @@ export function checkChallenge(stage, scale = DEFAULT_SCALE) {
     if (towers.some(t => midiForLevel(t.level, scale) < MIN_MIDI)) { problems.push(`${c.key} で音が音域より低い`); break; }
   }
 
-  // サイフォン：切れない配置の面（初期版の25〜30面）では、どのつなぎ方でも切れない
-  if (stage.candidates.some(c => c.siphon)) {
+  // サイフォン：切れない配置の面（初期版の25〜30面）では、どのつなぎ方でも切れない。
+  // 切れるサイフォンを扱う面（31〜36面、mayBreak）では、満点のつなぎ方だけは切れない
+  if (stage.mayBreak && a.perfectConfig && judge(stage, a.perfectConfig, scale).states.some(s => s.broken.size)) problems.push('満点のつなぎ方でサイフォンが切れる');
+  if (stage.candidates.some(c => c.siphon) && !stage.mayBreak) {
     for (const config of allConfigs(stage)) {
       const j = judge(stage, config, scale);
       if (j.states.some(s => s.broken.size)) { problems.push(`${configKey(config)} でサイフォンが切れる`); break; }

@@ -2,7 +2,7 @@
 import { STAGES } from '../content/stages.js';
 import { CHALLENGES } from '../content/challenges.js';
 import { drawChallenge } from '../content/challenge-draw.js';
-import { analyzeStage, evaluate, thinnessOf } from '../logic/play.js';
+import { analyzeStage, evaluate, thinnessOf, pumpCheck } from '../logic/play.js';
 import { onScale, tickSide, tickDistance, frequencyForLevel, DEFAULT_SCALE } from '../logic/pitch.js';
 import { displayScore } from '../logic/score.js';
 import { explain, formatAmount } from '../logic/explain.js';
@@ -17,7 +17,7 @@ import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logi
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.17.5';
+const APP_VERSION = '0.18.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -35,6 +35,9 @@ const TIMING_FIELDS = [
   ['cardClearMs', '落ち着いてから結果まで（クリア）', 0, 5000, 100],
   ['cardNgMs', '落ち着いてから結果まで（NG）', 0, 5000, 100]
 ];
+
+// 連続プレイで進む面の数。要件どおり1〜30面（初期版の範囲）。31面以降（T-14）を入れるかは発案者が決める（2026-11-04）
+const CONTINUOUS_STAGES = STAGES.filter(s => s.number <= 30).length;
 
 const $ = id => document.getElementById(id);
 const audio = new GlassAudio();
@@ -68,13 +71,14 @@ function saveTiming(values) {
   try { localStorage.setItem(TIMING_KEY, JSON.stringify(values)); return true; } catch { return false; }
 }
 
-const emptyConfig = () => ({ connected: new Set(), thickness: {}, primed: new Set() });
+const emptyConfig = () => ({ connected: new Set(), thickness: {}, primed: new Set(), pumped: new Set() });
 const state = {
   stageIndex: 0,
   current: null, // 遊んでいる面（出題の数値を当てはめたもの）
   loadError: '', // 出題を出せない理由（C-04）
   config: emptyConfig(),
   selected: null,
+  pumpNote: '', // ポンプで汲めなかった理由（選んでいるサイフォンの窓に出す）
   phase: 'edit',
   analysis: null,
   layout: null,
@@ -110,7 +114,7 @@ function fieldText(key, value) {
 const scaleNow = () => DEFAULT_SCALE;
 const stage = () => state.current;
 const candidate = id => stage().candidates.find(c => c.id === id);
-const bucketsLeft = () => (stage().buckets ?? 0) - [...state.config.primed].filter(id => state.config.connected.has(id)).length;
+const bucketsLeft = () => (stage().buckets ?? 0) - [...state.config.primed].filter(id => state.config.connected.has(id) && !state.config.pumped.has(id)).length;
 const targetText = t => (typeof t === 'object' ? `開 ${t.open}・閉 ${t.closed}` : t);
 
 // 直前の出題（面IDごと）。アプリを開いている間だけ覚え、端末には保存しない（logic-design 7.4）
@@ -188,6 +192,7 @@ function tapPipe(id) {
   const cfg = state.config;
   audio.unlock();
   audio.cue(cfg.connected.has(id) ? 'tap' : 'wire'); // つなぐときは前作の結線と同じ2音、それ以外は操作音
+  state.pumpNote = '';
   if (!cfg.connected.has(id)) {
     cfg.connected.add(id);
     if (c.adjustable) cfg.thickness[id] = c.thinness;
@@ -206,6 +211,7 @@ function removePipe(id) {
   const cfg = state.config;
   cfg.connected.delete(id);
   cfg.primed.delete(id); // 管を外すと桶は手元に戻る（要件5.2）
+  cfg.pumped.delete(id);
   delete cfg.thickness[id];
   state.selected = null;
 }
@@ -310,7 +316,7 @@ function stopRun() {
     const last = state.evaluation.states[state.evaluation.states.length - 1];
     state.prevLevels = levelsOf(last.result);
     // 切れたサイフォンの桶は手元に戻る（要件5.2）
-    for (const s of state.evaluation.states) for (const id of s.broken) state.config.primed.delete(id);
+    for (const s of state.evaluation.states) for (const id of s.broken) { state.config.primed.delete(id); state.config.pumped.delete(id); }
   }
   audio.stopAll();
   state.run = null;
@@ -478,7 +484,7 @@ function fitConditionHeight() {
   probe.setAttribute('aria-hidden', 'true');
   probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;min-height:0;width:${cond.clientWidth}px`;
   cond.parentElement.append(probe);
-  const cont = new ContinuousRun('beginner', STAGES.length);
+  const cont = new ContinuousRun('beginner', CONTINUOUS_STAGES);
   let max = 0;
   for (const st of [PRACTICE, ...STAGES]) {
     const shown = CHALLENGES[st.id]?.length ? { ...st, draw: { number: 8, total: 8 } } : st;
@@ -505,8 +511,11 @@ function chooserHtml() {
   // 見出しと簡単な説明（何を選ぶのか、選ぶとどうなるか）。桶の残りはバッジで目立たせる
   if (c.siphon) {
     const left = bucketsLeft();
-    parts.push(`<div class="chooser-head"><h3>サイフォン</h3><span class="bucket-badge${left ? '' : ' empty'}" aria-label="桶の残り ${left}個（全部で${stage().buckets}個）">桶 残り <b>${left}</b> / ${stage().buckets}</span></div>`);
-    parts.push(`<p class="chooser-note">${phraseMarkup('壁を越える管は、|中に空気がたまっていて|流れません。|桶の水で満たす（呼び水）と|流れ始めます。')}</p>`);
+    const bucketBadge = stage().buckets ? `<span class="bucket-badge${left ? '' : ' empty'}" aria-label="桶の残り ${left}個（全部で${stage().buckets}個）">桶 残り <b>${left}</b> / ${stage().buckets}</span>` : '';
+    parts.push(`<div class="chooser-head"><h3>サイフォン</h3>${bucketBadge}</div>`);
+    parts.push(`<p class="chooser-note">${phraseMarkup(c.pump
+      ? `壁を越える管は、|中に空気がたまっていて|流れません。|グラス${c.pump}の水位が|入口（高さ${c.siphon.inlet}）以上なら、|手押しポンプで|呼び水ができます。|ポンプは何度でも使えて、|桶は減りません。`
+      : '壁を越える管は、|中に空気がたまっていて|流れません。|桶の水で満たす（呼び水）と|流れ始めます。')}</p>`);
   } else if (c.adjustable) {
     parts.push('<div class="chooser-head"><h3>太さを選ぶ</h3></div>');
     parts.push(`<p class="chooser-note">${phraseMarkup('太いほど水が流れやすく、|たくさん運びます。')}</p>`);
@@ -516,9 +525,15 @@ function chooserHtml() {
   }
   if (c.siphon) {
     const primed = cfg.primed.has(c.id);
+    const bucketButton = stage().buckets
+      ? `<button type="button" class="chip" data-prime="on" ${bucketsLeft() > 0 ? '' : 'disabled'}>桶で呼び水をする</button>${bucketsLeft() > 0 ? '' : '<span class="note-inline">桶が残っていません</span>'}`
+      : '';
+    // ポンプ（F-007）：押したときに、今のつなぎ方で落ち着いた水位を計算して汲めるか決める（2026-11-04 発案者が選択）
+    const pumpButton = c.pump ? '<button type="button" class="chip" data-pump="on">ポンプで呼び水をする</button>' : '';
     parts.push(`<div class="chooser-row">${primed
-      ? '<button type="button" class="chip on" data-prime="off">呼び水を取り消す</button>'
-      : `<button type="button" class="chip" data-prime="on" ${bucketsLeft() > 0 ? '' : 'disabled'}>桶で呼び水をする</button>${bucketsLeft() > 0 ? '' : '<span class="note-inline">桶が残っていません</span>'}`}</div>`);
+      ? `<button type="button" class="chip on" data-prime="off">呼び水を取り消す${c.pump ? (cfg.pumped.has(c.id) ? '（ポンプ）' : '（桶）') : ''}</button>`
+      : pumpButton + bucketButton}</div>`);
+    if (!primed && state.pumpNote) parts.push(`<p class="chooser-note pump-note" role="status">${phraseMarkup(state.pumpNote)}</p>`);
   }
   return `<div class="chooser">${parts.join('')}<div class="chooser-row chooser-actions"><button type="button" class="chip" data-remove="1">この配管を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
 }
@@ -668,7 +683,7 @@ function renderPanel() {
       ${contSummary}
       ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${textMarkup(state.saveMessage)}</p>` : ''}
-      <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectConfig.primed.length}</span>` : ''}</div></div>
+      <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectBuckets}</span>` : ''}</div></div>
       <p class="swipe-note">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
@@ -923,10 +938,24 @@ function bind() {
     if (!btn || btn.disabled || !state.selected) return;
     if (btn.dataset.thick) state.config.thickness[state.selected] = btn.dataset.thick;
     else if (btn.dataset.prime === 'on' && bucketsLeft() > 0) state.config.primed.add(state.selected);
-    else if (btn.dataset.prime === 'off') state.config.primed.delete(state.selected);
+    else if (btn.dataset.prime === 'off') { state.config.primed.delete(state.selected); state.config.pumped.delete(state.selected); }
+    else if (btn.dataset.pump) {
+      const r = pumpCheck(stage(), state.config, state.selected);
+      if (!r.ok) {
+        // 汲めないときは窓を開いたまま理由を出す（流していないので、連続プレイのNGにも数えない）
+        state.pumpNote = r.level === null
+          ? `今のつなぎ方では、|グラス${r.tower}に水が来ません。|先にグラス${r.tower}へ水を入れましょう。`
+          : `今のつなぎ方では、|グラス${r.tower}の水位が${fmt(r.level)}で、|入口の高さ${r.inlet.toString()}に届きません。|先に水位を上げましょう。`;
+        renderAll();
+        return;
+      }
+      state.config.primed.add(state.selected);
+      state.config.pumped.add(state.selected);
+    }
     else if (btn.dataset.remove) removePipe(state.selected);
     else if (!btn.dataset.close) return;
     state.selected = null;
+    state.pumpNote = '';
     renderAll();
   });
   $('toast').addEventListener('cancel', e => { e.preventDefault(); closeToast(); }); // Esc
@@ -1058,7 +1087,7 @@ function closeTitle() {
 function startMode(mode, { level = null, index = null } = {}) {
   state.mode = mode;
   state.played = true;
-  state.continuous = mode === 'continuous' ? new ContinuousRun(level, STAGES.length) : null;
+  state.continuous = mode === 'continuous' ? new ContinuousRun(level, CONTINUOUS_STAGES) : null;
   if (state.continuous) state.contStart = { best: modeBook.bestContinuous(level), allClearNg: modeBook.allClearNg(level) };
   closeTitle();
   selectStage(mode === 'tutorial' ? -1 : mode === 'continuous' ? 0 : (index ?? lastSelectIndex));

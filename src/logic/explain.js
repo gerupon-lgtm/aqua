@@ -91,9 +91,9 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
     if (offScale.length) advice.push(`目盛りからずれたグラスがあり、${kind === 'chord' ? '和音が濁りました' : '音がずれました'}。`);
   } else if (outcome === 'clear') {
     summary = stage.theme === 'buckets'
-      ? `クリア。満点は桶 ${analysis.perfectConfig.primed.length} つ・配管 ${analysis.perfectCount} 本、今は桶 ${ev.buckets} つ・配管 ${ev.used} 本です。`
+      ? `クリア。満点は桶 ${analysis.perfectBuckets} つ・配管 ${analysis.perfectCount} 本、今は桶 ${ev.buckets} つ・配管 ${ev.used} 本です。`
       : `クリア。満点は ${analysis.perfectCount} 本、今は ${ev.used} 本です。`;
-    if (stage.theme === 'buckets' && ev.buckets > analysis.perfectConfig.primed.length) advice.push('桶を使わずに届けられる道がないか探してみましょう。');
+    if (stage.theme === 'buckets' && ev.buckets > analysis.perfectBuckets) advice.push('桶を使わずに届けられる道がないか探してみましょう。');
     idle.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は呼び水をしていないので流れていません。外せます。`));
     still.forEach(c => advice.push(`${name(c.a)}–${name(c.b)}は流れていないので、外せます。`));
     // 途中のグラスを通る道：管の数字が足し算になる

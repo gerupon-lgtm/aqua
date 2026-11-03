@@ -3,20 +3,23 @@
 // つなぎ方（config）：
 //   connected：つないだ配管のID
 //   thickness：太さを変えられる配管の細さ（{ID: '1'|'2'|'3'}）。ないときは面の既定
-//   primed：桶で呼び水をしたサイフォンのID
+//   primed：呼び水をしたサイフォンのID（桶でも手押しポンプでも）
+//   pumped：そのうち手押しポンプで呼び水をしたID。桶の数に入れない（F-007）
 // 面の配管の候補（candidates）：
 //   thinness：細さ。adjustable があれば選べる細さの一覧（太さを変えられる配管、F-008）
 //   siphon：{ crest, inlet } があればサイフォン（F-005）。crest は通り道の一番高い所で、
 //           課題では泉より高く置くため、呼び水がない限り流れない。inlet はグラスの中の入口の高さ
 //   gate：true なら水門（F-010）。開いた状態と閉じた状態の両方を計算する
+//   pump：手押しポンプがあればグラスのID（ポンプが水を汲むグラス＝サイフォンの入口側。F-007、31〜36面）
 import { Fraction, frac } from './fraction.js';
 import { solveCircuit } from './flow.js';
 import { onScale, DEFAULT_SCALE } from './pitch.js';
 import { pipeScore, outletVerdict } from './score.js';
 
 export function normalizeConfig(config) {
-  if (Array.isArray(config) || config instanceof Set) return { connected: new Set(config), thickness: {}, primed: new Set() };
-  return { connected: new Set(config.connected), thickness: { ...(config.thickness ?? {}) }, primed: new Set(config.primed ?? []) };
+  if (Array.isArray(config) || config instanceof Set) return { connected: new Set(config), thickness: {}, primed: new Set(), pumped: new Set() };
+  const primed = new Set(config.primed ?? []);
+  return { connected: new Set(config.connected), thickness: { ...(config.thickness ?? {}) }, primed, pumped: new Set([...(config.pumped ?? [])].filter(id => primed.has(id))) };
 }
 
 export function thinnessOf(candidate, config) {
@@ -25,7 +28,7 @@ export function thinnessOf(candidate, config) {
 
 export function configKey(config) {
   const c = normalizeConfig(config);
-  return [...c.connected].sort().map(id => `${id}${c.thickness[id] ? `:${c.thickness[id]}` : ''}${c.primed.has(id) ? '+' : ''}`).join(',');
+  return [...c.connected].sort().map(id => `${id}${c.thickness[id] ? `:${c.thickness[id]}` : ''}${c.pumped.has(id) ? '*' : c.primed.has(id) ? '+' : ''}`).join(',');
 }
 
 const isSiphon = c => !!c.siphon;
@@ -90,7 +93,7 @@ export function judge(stage, config, scale = DEFAULT_SCALE) {
     const watered = Object.values(s.result.towers).filter(t => t.state === 'water');
     return { name, ...s, outlets, clear: outlets.every(o => o.verdict === 'exact'), allOnScale: watered.every(t => onScale(t.level, scale)) };
   });
-  const primed = [...cfg.primed].filter(id => cfg.connected.has(id));
+  const primed = [...cfg.primed].filter(id => cfg.connected.has(id) && !cfg.pumped.has(id));
   return {
     config: cfg,
     states,
@@ -103,22 +106,40 @@ export function judge(stage, config, scale = DEFAULT_SCALE) {
   };
 }
 
-// 面で選べるつなぎ方をすべて作る（配管ごとに：つながない／太さの選択／サイフォンなら呼び水の有無）
+// 手押しポンプで汲めるか（要件5.2）：そのサイフォンを除いた今のつなぎ方で落ち着いたとき、
+// ポンプのグラスの水位がサイフォンの入口以上なら汲める。編集中はグラスが空なので、計算で決める（2026-11-04 発案者が選択）。
+// 水門の面は、開いているとき（最初の状態）で判断する。汲めても、流したあとに入口より下がればサイフォンは切れる
+export function pumpCheck(stage, config, id) {
+  const c = stage.candidates.find(x => x.id === id);
+  if (!c?.siphon || !c.pump) return { ok: false, level: null, inlet: null };
+  const cfg = normalizeConfig(config);
+  cfg.primed.delete(id);
+  cfg.pumped.delete(id);
+  const inlet = frac(c.siphon.inlet);
+  const tower = solveState(stage, cfg).result.towers[c.pump];
+  const level = tower?.state === 'water' ? tower.level : null;
+  return { ok: level !== null && level.cmp(inlet) >= 0, level, inlet, tower: c.pump };
+}
+
+// 面で選べるつなぎ方をすべて作る（配管ごとに：つながない／太さの選択／サイフォンなら呼び水の有無・桶かポンプか）。
+// 桶は面の数まで。ポンプの呼び水は、汲める条件を満たすものだけ
 export function allConfigs(stage) {
-  let configs = [{ connected: [], thickness: {}, primed: [] }];
+  let configs = [{ connected: [], thickness: {}, primed: [], pumped: [] }];
   for (const c of stage.candidates) {
     const next = [];
     for (const base of configs) {
       next.push(base);
       for (const t of c.adjustable ?? [null]) {
         const thickness = t ? { ...base.thickness, [c.id]: t } : base.thickness;
-        next.push({ connected: [...base.connected, c.id], thickness, primed: base.primed });
-        if (c.siphon) next.push({ connected: [...base.connected, c.id], thickness, primed: [...base.primed, c.id] });
+        next.push({ connected: [...base.connected, c.id], thickness, primed: base.primed, pumped: base.pumped });
+        if (c.siphon) next.push({ connected: [...base.connected, c.id], thickness, primed: [...base.primed, c.id], pumped: base.pumped });
+        if (c.siphon && c.pump) next.push({ connected: [...base.connected, c.id], thickness, primed: [...base.primed, c.id], pumped: [...base.pumped, c.id] });
       }
     }
     configs = next;
   }
-  return configs.filter(c => c.connected.length && c.primed.length <= (stage.buckets ?? 0));
+  return configs.filter(c => c.connected.length && c.primed.length - c.pumped.length <= (stage.buckets ?? 0)
+    && c.pumped.every(id => pumpCheck(stage, c, id).ok));
 }
 
 // 満点の観点：基本は本数。桶の面（25〜30面）は桶の数を先に比べ、同じなら本数（要件5.7）
@@ -134,13 +155,13 @@ export function analyzeStage(stage, scale = DEFAULT_SCALE) {
     const j = judge(stage, config, scale);
     if (j.clear) clears.push({ config, key: configKey(config), ids: [...config.connected].sort(), used: j.used, buckets: j.buckets, rank: rank(stage, j), allOnScale: j.allOnScale, anyBroken: j.states.some(s => s.broken.size) });
   }
-  if (!clears.length) return { clears, perfect: null, perfectKey: null, perfectCount: null, unique: false };
+  if (!clears.length) return { clears, perfect: null, perfectKey: null, perfectCount: null, perfectBuckets: null, unique: false };
   let best = [clears[0]];
   for (const c of clears.slice(1)) {
     if (lexLess(c.rank, best[0].rank)) best = [c];
     else if (!lexLess(best[0].rank, c.rank)) best.push(c);
   }
-  return { clears, perfect: best[0].ids, perfectKey: best[0].key, perfectConfig: best[0].config, perfectCount: best[0].used, unique: best.length === 1 };
+  return { clears, perfect: best[0].ids, perfectKey: best[0].key, perfectConfig: best[0].config, perfectCount: best[0].used, perfectBuckets: best[0].buckets, unique: best.length === 1 };
 }
 
 export function evaluate(stage, config, analysis, scale = DEFAULT_SCALE) {

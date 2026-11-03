@@ -62,7 +62,7 @@ export function candidatesFor(stage) {
         flows: j.outlets.map(o => o.flow)
       };
     });
-    if (rows.some(r => r.broken)) continue; // サイフォンが切れる数値は使わない
+    if (!stage.mayBreak && rows.some(r => r.broken)) continue; // サイフォンが切れる数値は使わない（切れる面を除く）
     const seen = new Set();
     for (const r of rows) {
       if (!r.flows.every(f => f.isInteger() && f.sign() > 0 && f.cmp(frac(String(maxTarget))) <= 0)) continue;
@@ -81,6 +81,8 @@ export function candidatesFor(stage) {
       if (perfect.used < (v.minPerfect ?? 2)) continue;
       if ((v.mustUse ?? []).some(id => !perfect.config.connected.includes(id))) continue;
       if (perfect.buckets < (v.minBuckets ?? 0)) continue;
+      if (perfect.broken) continue;
+      if (perfect.config.pumped.length < (v.minPumps ?? 0)) continue;
       found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, r.flows[i].toString()])) }, family: perfect.key });
     }
   }

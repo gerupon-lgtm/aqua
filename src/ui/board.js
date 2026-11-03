@@ -460,6 +460,13 @@ export function renderBoard(svg, model) {
     // サイフォンが口から入るグラスは、縦の管を隠さないよう、管の山の上へ置く
     const crests = stage.candidates.filter(c => c.siphon && (c.a === t.id || c.b === t.id)).map(c => pipePath(layout, c).my);
     badge(foreground, { x: node.cx, y: Math.min(towerTop - 3, ...crests.map(y => y - 14)), text: `グラス${t.id}`, tone: 'blue' });
+    // 手押しポンプ（31〜36面、F-007）：サイフォンの入口（汲める水位の境目）に札を置く。
+    // 絵（part-pump）が届くまでの仮の表示。入口の高さが分かるよう「入口n」と書く
+    for (const c of stage.candidates.filter(x => x.siphon && x.pump === t.id)) {
+      const other = layout.nodes.get(c.a === t.id ? c.b : c.a);
+      const leg = pipePath(layout, c).pts[node.cx <= other.cx ? 0 : 3];
+      badge(foreground, { x: leg[0], y: leg[1], text: `ポンプ 入口${c.siphon.inlet}`, tone: 'light', size: 8.5, dashed: true });
+    }
     // グラスの光（ぼかしのフィルターは処理が重いので、太い半透明の線を重ねて表す）
     if (onTick) {
       out.push(`<rect x="${x0 - 5}" y="${towerTop - 5}" width="${TOWER_W + 10}" height="${GROUND - towerTop + 5}" rx="10" fill="none" stroke="var(--gold)" stroke-width="8" opacity=".22"/>`);

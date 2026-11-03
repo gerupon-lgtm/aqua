@@ -64,7 +64,8 @@ export function buildRecord({ stage, config, ev, appVersion, now = new Date() })
       springHeight: stage.spring.height,
       connected: [...cfg.connected].sort(),
       thickness: cfg.thickness,
-      primed: [...cfg.primed].filter(id => cfg.connected.has(id)).sort()
+      primed: [...cfg.primed].filter(id => cfg.connected.has(id)).sort(),
+      pumped: [...cfg.pumped].filter(id => cfg.connected.has(id)).sort() // 手押しポンプで呼び水をした管（桶に数えない）
     },
     // 水門の面は、開いた状態と閉じた状態のそれぞれの届いた量と、切れたサイフォン
     states: (ev.states ?? []).map(s => ({
