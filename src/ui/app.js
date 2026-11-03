@@ -14,10 +14,10 @@ import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
 import { PARTS_HTML, HOWTO_HTML, partPicture } from './info-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, boardViewBox, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logic/modes.js';
-import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
+import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.17.3';
+const APP_VERSION = '0.17.4';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -25,7 +25,7 @@ const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // カードはどちらも1.6秒」。鐘は打った瞬間が最大ですぐ引くが、グラスの和音は約1秒伸びてから引く。
 // そこで、和音が約6分の1まで下がる1.4秒を前作の0.7秒にあたる点とし、前作の間隔をそのまま当てはめた：
 // クリアのジングル1.4秒・カード2.3秒、NGのジングル2.2秒・カード2.3秒（和音の長さ2.6秒のとき。2026-11-01 発案者が選択）
-const DEFAULT_TIMING = Object.freeze({ riseMs: 1300, chordMs: 2600, jingleMs: 1400, jingleNgMs: 2200, cardClearMs: 2300, cardNgMs: 2300, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
+const DEFAULT_TIMING = Object.freeze({ riseMs: DEFAULT_RISE_MS, chordMs: 2600, jingleMs: 1400, jingleNgMs: 2200, cardClearMs: 2300, cardNgMs: 2300, latencyMs: DEFAULT_LATENCY_MS, timbre: 'fm2' });
 const TIMING_FIELDS = [
   ['latencyMs', '音の準備の余裕（音が途切れるときは大きく）', 0, 300, 10],
   ['riseMs', '水面が上がる時間', 400, 3000, 100],
@@ -35,7 +35,6 @@ const TIMING_FIELDS = [
   ['cardClearMs', '落ち着いてから結果まで（クリア）', 0, 5000, 100],
   ['cardNgMs', '落ち着いてから結果まで（NG）', 0, 5000, 100]
 ];
-const GATE_HOLD_MS = 1500; // 水門の面：開いた状態で落ち着いてから、水門を閉じるまで（試作の仮の値）
 
 const $ = id => document.getElementById(id);
 const audio = new GlassAudio();
@@ -212,21 +211,6 @@ function removePipe(id) {
 }
 
 // ---- 実行と再生 ----
-function hopDistances(st, result) {
-  const dist = new Map([[st.spring.id, 0]]);
-  const queue = [st.spring.id];
-  while (queue.length) {
-    const here = queue.shift();
-    for (const [id, p] of Object.entries(result.pipes)) {
-      if (!p.wet) continue;
-      const c = st.candidates.find(x => x.id === id);
-      const next = c.a === here ? c.b : c.b === here ? c.a : null;
-      if (next && !dist.has(next)) { dist.set(next, dist.get(here) + 1); queue.push(next); }
-    }
-  }
-  return dist;
-}
-
 const levelsOf = result => new Map(Object.entries(result.towers).map(([id, t]) => [id, t.level ? t.level.toNumber() : null]));
 
 function startRun() {
@@ -241,16 +225,9 @@ function startRun() {
   const first = evaluation.states[0].result;
   const last = evaluation.states[evaluation.states.length - 1].result;
   const gated = evaluation.states.length > 1 && st.candidates.some(c => c.gate && state.config.connected.has(c.id));
-  const hops = hopDistances(st, first);
-  const towers = st.towers.map(t => {
-    const r = first.towers[t.id];
-    const delay = r.state === 'water' ? ((hops.get(t.id) ?? 1) - 1) * 420 : 0;
-    return { id: t.id, delay, duration: timing.riseMs, target: r.state === 'water' ? r.level.toNumber() : null };
-  });
-  const settle1 = Math.max(500, ...towers.filter(t => t.target !== null).map(t => t.delay + t.duration));
-  const closeAt = gated ? settle1 + GATE_HOLD_MS : Infinity;
-  const settleAt = gated ? closeAt + timing.riseMs : settle1;
-  state.run = { start: performance.now(), towers, settle1, closeAt, settleAt, gated, open: levelsOf(first), closed: levelsOf(last), timing, timers: [] };
+  // 時間割りは上限5秒に収める（visual-timing.js の playbackPlan）
+  const { towers, settle1, closeAt, closeMs, settleAt } = playbackPlan(st, first, gated, timing.riseMs);
+  state.run = { start: performance.now(), towers, settle1, closeAt, closeMs, settleAt, gated, open: levelsOf(first), closed: levelsOf(last), timing, timers: [] };
   state.phase = 'running';
 
   const top = frequencyForLevel(0, scale);
@@ -274,7 +251,7 @@ function startRun() {
         const a = first.towers[t.id];
         const b = last.towers[t.id];
         if (a.state === 'water' && b.state === 'water' && !a.level.eq(b.level)) {
-          audio.glide(frequencyForLevel(a.level, scale), frequencyForLevel(b.level, scale), { duration: timing.riseMs / 1000 });
+          audio.glide(frequencyForLevel(a.level, scale), frequencyForLevel(b.level, scale), { duration: closeMs / 1000 });
         }
       }
     });
@@ -368,7 +345,7 @@ function currentLevels(now) {
     } else {
       const a = run.open.get(t.id) ?? 0;
       const b = run.closed.get(t.id);
-      const p = ease((elapsed - run.closeAt) / run.timing.riseMs);
+      const p = ease((elapsed - run.closeAt) / run.closeMs);
       const v = a + ((b ?? 0) - a) * p;
       levels.set(t.id, b === null && p >= 1 ? null : v);
     }
