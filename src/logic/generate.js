@@ -47,6 +47,17 @@ function valueGrid(stage) {
 
 const rankOf = rank;
 
+// 満点のつなぎ方が、指定した給水塔のすべてに配管でつながっているか
+function springsTouched(stage, config, ids) {
+  const used = stage.candidates.filter(c => config.connected.includes(c.id));
+  return ids.every(id => used.some(c => c.a === id || c.b === id));
+}
+// 満点のつなぎ方で、その給水塔へ水が流れ込む（逆向きの流れ）配管があるか
+function flowsInto(stage, config, id) {
+  const pipes = judge(stage, config).result.pipes;
+  return stage.candidates.some(c => pipes[c.id]?.wet && ((c.b === id && pipes[c.id].flow.sign() > 0) || (c.a === id && pipes[c.id].flow.sign() < 0)));
+}
+
 // 1つの面の候補をすべて集める。速くするため、つなぎ方ごとの流れる量を一度だけ計算して、指定量の候補ごとに比べる。
 // 最後に、選んだものは checkChallenge（アプリと同じ検査）で必ず確かめる
 export function candidatesFor(stage) {
@@ -85,6 +96,9 @@ export function candidatesFor(stage) {
       if (perfect.broken) continue;
       if (perfect.config.pumped.length < (v.minPumps ?? 0)) continue;
       if (Object.keys(perfect.config.drains).length < (v.minDrains ?? 0)) continue;
+      // 給水塔が2つの面（43〜48面）：bothSprings なら満点が両方の給水塔を使い、intoSpring2 なら満点で右の給水塔へ水が流れ込む
+      if (v.bothSprings && !springsTouched(base, perfect.config, [stage.spring.id, stage.spring2.id])) continue;
+      if (v.intoSpring2 && !flowsInto(base, perfect.config, stage.spring2.id)) continue;
       found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, r.flows[i].toString()])) }, family: perfect.key });
     }
   }

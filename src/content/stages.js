@@ -1,4 +1,4 @@
-// 面の定義（1〜42面）。お試し1〜6は固定の出題。7〜30面は
+// 面の定義（1〜48面）。お試し1〜6は固定の出題。7〜30面は
 // vary（変えてよい数値の範囲）から scripts/generate-challenges.js で検査済みの出題を8つずつ作り、challenges.js から抽選する。
 // vary：spring 泉の高さの候補、thinnessAll／thinness[配管] 細さの候補、maxTarget 指定量の上限、
 //       minPerfect 満点の本数の下限、mustUse 満点で必ず使う配管、minBuckets 満点で使う桶の下限、minPumps 満点で使うポンプの下限、minDrains 満点で開ける排水口の下限、seed 乱数の種。
@@ -11,6 +11,7 @@
 
 import { PUMP_STAGES } from './stages-pump.js';
 import { DRAIN_STAGES } from './stages-drain.js';
+import { LOOP_STAGES } from './stages-loop.js';
 
 export const STAGES = [
   {
@@ -2132,5 +2133,7 @@ export const STAGES = [
   // 31〜36面（後続、T-14）は stages-pump.js
   ...PUMP_STAGES,
   // 37〜42面（後続、T-14）は stages-drain.js
-  ...DRAIN_STAGES
+  ...DRAIN_STAGES,
+  // 43〜48面（後続、T-14）は stages-loop.js（給水塔が2つ）
+  ...LOOP_STAGES
 ];

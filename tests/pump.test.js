@@ -1,4 +1,4 @@
-// 後続のパーツ（T-14）：手押しポンプ（F-007、31〜36面）と排水口（F-009、37〜42面）。汲める条件、桶に数えないこと、捨てた水の観点、出題の検査
+// 後続のパーツ（T-14）：手押しポンプ（31〜36面）、排水口（37〜42面）、給水塔が2つ（43〜48面）。計算、観点、出題の検査
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { STAGES } from '../src/content/stages.js';
@@ -91,5 +91,20 @@ test('排水口（37〜42面）：開けたグラスから高さ0へ捨て、捨
       assert.ok(checkChallenge(st).ok, q.id);
       assert.ok(Object.keys(analyzeStage(st).perfectConfig.drains).length >= 1, `${q.id} の満点は排水口を開ける`);
     }
+  }
+});
+
+test('給水塔が2つ（43〜48面）：低い給水塔へも水が流れ込み、出題はすべて検査を通る', () => {
+  // 44面：左12・右3、SA太1・TA太1、Aの出口1。Aの水位 a：(12−a) ＝ a ＋ (a−3) → a＝5。TAは A→右の給水塔へ毎秒2（逆向き）
+  const s = stageOf(44, { spring: '12', spring2: '3', thinness: { SA: '1', SA2: '1', AB: '1', TB: '1', TA: '1' }, targets: { O1: '5' } });
+  const j = judge(s, { connected: ['SA', 'TA'] });
+  assert.equal(j.result.towers.A.level.toString(), '5');
+  assert.equal(j.outlets[0].flow.toString(), '5');
+  assert.equal(j.result.pipes.TA.flow.toString(), '-2'); // TA は T→A の向きで書くので、負は A から T へ
+  assert.ok(j.clear);
+  for (const base of STAGES.filter(x => x.number >= 43 && x.number <= 48)) {
+    assert.ok(base.spring2, `${base.number}面に右の給水塔`);
+    assert.equal(CHALLENGES[base.id].length, 8, `${base.number}面`);
+    for (const q of CHALLENGES[base.id]) assert.ok(checkChallenge(applyValues(base, q.values)).ok, q.id);
   }
 });
