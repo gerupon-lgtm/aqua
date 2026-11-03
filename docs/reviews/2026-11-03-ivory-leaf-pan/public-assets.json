@@ -1,0 +1,405 @@
+{
+  "version": "0.14.14",
+  "commit": "c229b7b85b0e3a407e7de11de3c9b0ea346b551d",
+  "assets": 65,
+  "checked": 66,
+  "failures": [],
+  "results": [
+    {
+      "path": "./index.html",
+      "type": "text/html; charset=utf-8",
+      "hash": "0b4136d4575c96a148bb499daf23fe2549fd2c63382d97d990934bfae7aadbc9",
+      "pass": true
+    },
+    {
+      "path": "./manifest.webmanifest",
+      "type": "application/manifest+json; charset=utf-8",
+      "hash": "dcb18b5d1ffe0bc48ecf5793ee4deab70bda0574c25f391e1b16fa75c5bb26d9",
+      "pass": true
+    },
+    {
+      "path": "./sw.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "7da7e1b588992467b8bdba478f0207d8ebc3384ad822944632f57727a276ba0c",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/apple-touch-icon.png",
+      "type": "image/png",
+      "hash": "6933653c55f01b7c2df854663b3d26a5d59daedbdf82cb6cae7869f5b4282e56",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/fonts/montserrat-500.ttf",
+      "type": "font/ttf",
+      "hash": "637639da93fdd9178e52662cce4bd5a59a544eb60677bb6ef9f89bc472607e5d",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/fonts/montserrat-600.ttf",
+      "type": "font/ttf",
+      "hash": "c535bb158e8cfc3c27654f73aa68a87732899e7d9b10d8496b68605a56d947a7",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/bg-trial.webp",
+      "type": "image/webp",
+      "hash": "4767a7a136db873cfd685a4c0b4b8ebed592690747f4a18ee9eac201330e3336",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/fx-fountain-01.png",
+      "type": "image/png",
+      "hash": "eaa3940b34b36f59d24a6d75b576738403bd7f59249cc617214e9338577ac16f",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/fx-fountain-02.png",
+      "type": "image/png",
+      "hash": "37ee37968ccc0d05a537d33e660d727902bae8d4365cb4c4099f7d2741c02959",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/fx-fountain-03.png",
+      "type": "image/png",
+      "hash": "63397aea24706430d86a64049a59ca4cd1427369bd983c0e1decad9bbbc4fc9e",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/fx-fountain-04.png",
+      "type": "image/png",
+      "hash": "96d3d559e69704f17ac697a5691ea85fa0eb80749e2c7133aa95b126bf2eca17",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/fx-fountain-05.png",
+      "type": "image/png",
+      "hash": "e0fcef1bccdc0ed781bb3b8dc7be2184aa305b5f84b66afbb861c31661d5eba7",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/fx-fountain-06.png",
+      "type": "image/png",
+      "hash": "5bc210c67f6d6fa9611ec04c612d290c30ab163e1ab199155200c57c25bfa44c",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/fx-rainbow.png",
+      "type": "image/png",
+      "hash": "7535d2b4e0dac36f110acea72aed48f43d3133928002268f91b20796c6788b5d",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/intro-adjustable.svg",
+      "type": "image/svg+xml",
+      "hash": "017830fa9746c8d1a1fb73aeb8f8f013c4fbaecfe4e4d728cc508a6db891a70d",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/intro-gate.svg",
+      "type": "image/svg+xml",
+      "hash": "d5a4e4a64a1d427bbd75476d57f6c32ab2fc7d913427a74db4debdcc0f42710c",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/intro-height.svg",
+      "type": "image/svg+xml",
+      "hash": "9a5b58e16ee705e379f046691bcff014d8021a4fb94dc886098ed1499f5baf74",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/intro-outlets.svg",
+      "type": "image/svg+xml",
+      "hash": "7c8b9d366c29653524c95bdf9381b93c38f87b3c4477a70ec2c0e576b97c8824",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/intro-siphon.svg",
+      "type": "image/svg+xml",
+      "hash": "5fcbfce0f532509589e141acef6f0c78644e9647131bb42a153adb38ef1ff5a9",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-basin.png",
+      "type": "image/png",
+      "hash": "f14cac291b9487ada092e2a7e499412bfc02e93c6127fb55941e9ff5f6f8ced5",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-drain-pan-v2.png",
+      "type": "image/png",
+      "hash": "1c91caeb19b5de8c6f07fc2da48d8b66f07242365815f9c8c135b40a47ea93e4",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-glass-bottom.png",
+      "type": "image/png",
+      "hash": "b465fe779340bf29f7af57ab621674ba4988e071d55258c42f5b7e0f98203695",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-glass-middle.png",
+      "type": "image/png",
+      "hash": "141c7ac1f40043c8f8cd8b94be5099e382e19cdee35067e5600cfe0e8b23f87d",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-glass-top.png",
+      "type": "image/png",
+      "hash": "5aed7c251df34d77ca42f163bd97ef7d0e083997b1ba54e69ba7e2c75b88ae35",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-pedestal-middle.png",
+      "type": "image/png",
+      "hash": "cfa9c880f62ac6d5551d2526f5d0eeb6d8a39bf7776426938a0ec321c05b61f1",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-pedestal-top.png",
+      "type": "image/png",
+      "hash": "39fc89f59810d3d087f9bfdbe6ecfc5f84fddfe97f56bac78510b323b985ac68",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-spring-bottom.png",
+      "type": "image/png",
+      "hash": "9c494567f75be23973ee80a85c003a86330c03241c956f00d066fea60a1e6ae5",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-spring-middle.png",
+      "type": "image/png",
+      "hash": "b16214b7e88e43a4090e06d50925d457ffa7ae36a5f60a3a80cfe8adb7da47ad",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/part-spring-top.png",
+      "type": "image/png",
+      "hash": "a33846c0f93c6e1ee7ba35b618a361e5c92d1fead5b5f87678d6a1288accf26e",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/soil-loam-v1.webp",
+      "type": "image/webp",
+      "hash": "fd8e09ea08a0874313bd496b73fd80d38cb78ab80adf057bf4d1836a0cb2db44",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/spirit-detail-v2.png",
+      "type": "image/png",
+      "hash": "d1fa4ed1502f743d94ee535dd028dc40af7d88d21e4bd4e4a6e5e7addb656c6c",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/spirit.png",
+      "type": "image/png",
+      "hash": "3cb0bed80fd67a633c1fb1f707e6f2633af9186502891a0d1959325417e39d64",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/title-fountain-v2.png",
+      "type": "image/png",
+      "hash": "5b3ee90819f07af528e1eff9801cf86151b306e00c2e7321a0c8ce99425e9eb7",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/title-glass-v2.png",
+      "type": "image/png",
+      "hash": "520f7271957a67014b69a0058b162d67a7b0e45d4d8e26d9fa6aab089ba32f23",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/title-landscape.webp",
+      "type": "image/webp",
+      "hash": "92a28145e7f0942998163f5dedd66de870195df4c0c92a724766bf8330633928",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/graphics/title-portrait.webp",
+      "type": "image/webp",
+      "hash": "1527ef278b05946e23413bd2c8288195234a7f7cffa7fba96a9e98f92e197b12",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/icon-192.png",
+      "type": "image/png",
+      "hash": "cb32e2bda25ce12686877fa9f2401c93b02c2de0ebfa8ae519f48141b1048cbf",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/public/icon-512.png",
+      "type": "image/png",
+      "hash": "f6be7b911bee79fddc0f07beb1297fc8e0aac785574645424137271c6df05c01",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/content/challenge-draw.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "e9e7322f56f4dd8b37b0205483bbdada5967a1b1b7786108f269e65cd0b0f78b",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/content/challenges.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "4710ce64542725ee08951ed0c9632964c46a67674a974001d77584b37bc4b08f",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/content/stages.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "5ebf485a6043313a909c7c9d76f8f30385ca9c96983e4810e4a83b2df43ab4c5",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/content/tutorial.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "c3516eb9647c079fb4ada1152d2e2c51824d1a65801344fe2ad4db264138dff2",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/challenge-check.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "14360d042f7bff63378c7f427cba21d80a7e8807b0758a4dc7fbe9a877f1bc45",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/explain.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "9ccad8209c7bd96991766df19656e43efd472b149e46bea5482695392c0afdd6",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/flow.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "0164f6fcdbe1a81bc9ecadc46ca8838610d6b145bdae97f89843e6e5ca34a5f7",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/fraction.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "fb06c8842d93ce76108e4feb8acc4dac43b4b6fac25aee4a3e1f7b31e6390b27",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/generate.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "01fc52677747cc4a924382238e71cec7360d7d335382b37c3fe41900f8f6b4d2",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/modes.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "517a39683eae8c23f831bff3fcd6bc54aba1bf4a3d24b6a30a5523e2bb07f809",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/pitch.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "ff2c7fd6bdbf2c0b8e5ae3a77367bba495f45923c9ffdd4573d05573af0a36a6",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/play.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "d4111a4cc69f5c02059b977a7a1cfb6e6d794ccf50b14f1ca2daf8a2a3f3323d",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/records.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "5e5a1ff372ea91c37a61322b455b76d1737edad0831a5c3f62f445be5d475f42",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/logic/score.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "a089bf44f96c9486cdb5591851d44252a78ca50b4e6fefd933b4686f9498fbbb",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/app.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "69c0effba071184b1ef66442f7380c1844993e71dddff529c1ab5d427bdae5ff",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/audio.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "c4e98dc3e9d00adf883123ab977ee94d095d0babc2d0eab4bc67a11c95a02a1f",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/board-annotations.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "f9c0fde21a6f7c4825fe03c59a682fd2faef44de414dedbc25ca3df34ffc71c8",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/board-materials.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "d64db253c3daafab106567ca9ec7f82f113d8c6c69f2112e62a0c0b1ae833ab9",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/board-part-geometry.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "5f1fe7d73115b30f80722506a2ebcea0cd1c795f8b54ac0adec2d68aa200299b",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/board-water-effects.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "9e1a63bf42b2dc9d69faaca72506b9406ec2db1aa0b59a4aa66aa774e8dce752",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/board.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "af0fd0d5d43ff21fef3b59fa3f8097a21c67f1e5e1989c8e54dd26d3e637f0ab",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/guide-copy.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "fe4ded0f99f1764fe07ec7af3bcaf4198706954034fa30a1bc2e9af9ffb60d8e",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/info-copy.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "fbe5c0ab7439b63fd3a786f2e8fda27f1b3175cf440a43ea615d3d2408cce7b5",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/outlet-label-layout.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "70e25df6ed48e2510e2ce459458584a76fe9262ff006bae0dec1a877c0921f69",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/style.css",
+      "type": "text/css; charset=utf-8",
+      "hash": "540dce7dc15b97060b96e120f330d6e3a5706f022310d34ccf692ccc615c61a4",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/text-layout.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "d87370a8900c8776df092734b2954bb32b15fe937021378fef78b4b23b01b251",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/update-manager.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "3e7f227f8510bd72c2a6b4732bda82d7fb5e72a2cc909465c5f1f27f23dbb460",
+      "pass": true
+    },
+    {
+      "path": "./v0.14.14/src/ui/visual-timing.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "da00b0c803fbe59ffc9f9532cb056ac5dbc97173908a50920188e126b56f488f",
+      "pass": true
+    }
+  ]
+}
