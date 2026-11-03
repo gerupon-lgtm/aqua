@@ -17,7 +17,7 @@ import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logi
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.19.0';
+const APP_VERSION = '0.19.1';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -1162,7 +1162,10 @@ function openLevels() {
     '<button type="button" class="ghost" data-sheet="close">やめる</button>');
 }
 
+// 面の一覧（まとまりごと）。選択プレイ中の「∨」と、タイトルの「選択プレイ」で同じ一覧を出す（2026-11-04 発案者、前作に合わせる）。
+// タイトルから開いたときは、最後に選択プレイで開いていた面を印にし、選んだ面から選択プレイを始める
 function openStageList() {
+  const current = state.titleOpen ? lastSelectIndex : state.stageIndex;
   const groups = new Map();
   for (const [i, s] of STAGES.entries()) {
     if (!groups.has(s.set)) groups.set(s.set, []);
@@ -1171,7 +1174,7 @@ function openStageList() {
   const item = (i, s, label) => {
     const best = bestOfStage(s);
     const mark = best ? (displayScore(best) === '100.00' ? '★' : '●') : '';
-    return `<button type="button" class="stage-item${i === state.stageIndex ? ' current' : ''}" data-pick="${i}"><span class="no">${label}</span><span class="t">${s.title}</span><span class="m">${mark}</span></button>`;
+    return `<button type="button" class="stage-item${i === current ? ' current' : ''}" data-pick="${i}"><span class="no">${label}</span><span class="t">${s.title}</span><span class="m">${mark}</span></button>`;
   };
   const body = `<div class="stage-list">${item(-1, PRACTICE, '練習')}${[...groups].map(([set, list]) => `<h3 class="sheet-sub">${set}</h3>${list.map(([i, s]) => item(i, s, s.number)).join('')}`).join('')}</div>`;
   openSheet('面を選ぶ', body);
@@ -1200,7 +1203,7 @@ function bindScreens() {
     const k = b.dataset.title;
     if (k === 'tutorial') startMode('tutorial');
     else if (k === 'continuous') openLevels();
-    else if (k === 'select') startMode('select');
+    else if (k === 'select') openStageList();
     else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
     else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
     else if (k === 'resume') { closeTitle(); openPartIntro(); }
@@ -1209,7 +1212,12 @@ function bindScreens() {
     const b = e.target.closest('button');
     if (!b) { if (e.target === $('sheet')) closeSheet(); return; }
     if (b.dataset.level) { closeSheet(); startMode('continuous', { level: b.dataset.level }); return; }
-    if (b.dataset.pick !== undefined) { closeSheet(); state.played = true; selectStage(Number(b.dataset.pick)); return; }
+    if (b.dataset.pick !== undefined) {
+      closeSheet();
+      if (state.titleOpen) startMode('select', { index: Number(b.dataset.pick) });
+      else { state.played = true; selectStage(Number(b.dataset.pick)); }
+      return;
+    }
     const k = b.dataset.sheet;
     if (k === 'close') closeSheet();
     else if (k === 'title') openTitle();
