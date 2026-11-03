@@ -250,3 +250,10 @@ test('前回の水面の点線には、高さの札と同じ高さ・文字の�
   }
   assert.ok(!draw(stage, config, { phase: 'result', prevLevels }).svg.includes('>前回<'));
 });
+
+test('水が届かなかったグラスに「空」の札を出さない（必要量の札の下に隠れていたため、2026-11-03 発案者の判断で廃止）', () => {
+  const stage = STAGES[2];
+  const { ev, svg } = draw(stage, { connected: new Set(['SA']), primed: new Set(), thickness: {} });
+  assert.equal(ev.states[0].result.towers.B.state, 'empty');
+  assert.ok(!svg.includes('>空<'));
+});

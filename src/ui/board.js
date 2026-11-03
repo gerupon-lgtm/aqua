@@ -218,7 +218,6 @@ const BADGE_ICON = {
   gate: c => `<rect x="-4" y="-4" width="1.6" height="8" fill="${c}"/><rect x="2.4" y="-4" width="1.6" height="8" fill="${c}"/><path d="M-2.4 -1.6 H2.4 M-2.4 1.6 H2.4" stroke="${c}" stroke-width="1.1"/>`,
   mouth: c => `<rect x="-3.8" y="-3.8" width="7.6" height="7.6" rx="1" fill="none" stroke="${c}" stroke-width="1.3"/><rect x="-2.2" y="-2.2" width="4.4" height="2.6" fill="${c}"/>`,
   pipe: (c, t = 1) => { const h = { 1: 3.4, 2: 2.2, 3: 1.2 }[t] ?? 2.2; return `<rect x="-3.4" y="${-h / 2}" width="6.8" height="${h}" fill="${c}"/><rect x="-4.6" y="-2.6" width="1.6" height="5.2" rx=".4" fill="${c}"/><rect x="3" y="-2.6" width="1.6" height="5.2" rx=".4" fill="${c}"/>`; },
-  cup: c => `<path d="M-3.4 -3.8 H3.4 L2.5 3.8 H-2.5 Z" fill="none" stroke="${c}" stroke-width="1.3" stroke-linejoin="round"/>`
 };
 const BADGE_MARK = {
   check: '<path d="M-2.6 0.2 L-0.7 2.1 L2.8 -2.2" fill="none" stroke="#f2c14e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -495,9 +494,6 @@ export function renderBoard(svg, model) {
     const lit = model.highlight && model.highlight.id === t.id && model.highlight.until > time;
     if (!pick.glass || lit) out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="none" stroke="${lit ? 'var(--gold)' : 'var(--glass-edge)'}" stroke-width="${lit ? 3 : 1.8}"/>`);
     if (!pick.glass) out.push(`<rect x="${x0 + 5}" y="${towerTop + 6}" width="3" height="${GROUND - towerTop - 14}" rx="1.5" fill="#ffffff" opacity=".7"/>`);
-    if (settled && finalT?.state === 'empty') {
-      badge(foreground, { x: node.cx, y: GROUND - 14, text: '空', icon: 'cup', tone: 'blue' });
-    }
   }
 
   // サイフォン（グラスの中の入口から、壁の上を越える）
