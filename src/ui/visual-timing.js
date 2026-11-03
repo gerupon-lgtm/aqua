@@ -2,7 +2,10 @@
 export const RAINBOW_AFTER_MS = 800;
 export const RAINBOW_FADE_MS = 700;
 export const RAINBOW_HOLD_MS = 500;
-export const STAGE_CUE_MS = 1100;
+// 開始の合図は2回光る（2026-11-03 発案者）。1回700ms（明るくなる120ms・保つ300ms・消える280ms）、間に200ms暗い
+export const STAGE_CUE_FLASH_MS = 700;
+export const STAGE_CUE_GAP_MS = 200;
+export const STAGE_CUE_MS = STAGE_CUE_FLASH_MS * 2 + STAGE_CUE_GAP_MS;
 // 画面を移ったあと、視線が条件へ向く時間を置く。
 export const STAGE_CUE_WAIT_MS = 700;
 
@@ -10,9 +13,10 @@ export function stageCueOpacity(until, now, still = false) {
   const left = until - now;
   if (left <= 0 || left > STAGE_CUE_MS) return 0;
   if (still) return 1;
-  const elapsed = STAGE_CUE_MS - left;
-  // 一度明るくなり、読める時間を保ってから消える。薄い縁だけの合図にしない。
-  return elapsed < 120 ? elapsed / 120 : elapsed < 750 ? 1 : left / 350;
+  // 1回ごとに明るくなり、読める時間を保ってから消える。薄い縁だけの合図にしない。
+  const elapsed = (STAGE_CUE_MS - left) % (STAGE_CUE_FLASH_MS + STAGE_CUE_GAP_MS);
+  if (elapsed >= STAGE_CUE_FLASH_MS) return 0;
+  return elapsed < 120 ? elapsed / 120 : elapsed < 420 ? 1 : (STAGE_CUE_FLASH_MS - elapsed) / 280;
 }
 
 export function guideGlowOpacity(time, still = false) {

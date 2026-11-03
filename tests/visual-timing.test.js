@@ -1,27 +1,34 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS, RAINBOW_HOLD_MS, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from '../src/ui/visual-timing.js';
+import { resultCardDelay, RAINBOW_AFTER_MS, RAINBOW_FADE_MS, RAINBOW_HOLD_MS, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, STAGE_CUE_FLASH_MS, STAGE_CUE_GAP_MS, stageCueOpacity } from '../src/ui/visual-timing.js';
 
-test('面を移ってから700ms待ち、その後1.1秒の合図。控えめでも待機する', () => {
+test('面を移ってから700ms待ち、その後2回光る合図。控えめでも待機する', () => {
   const until = STAGE_CUE_WAIT_MS + STAGE_CUE_MS;
   for (const still of [false, true]) {
     assert.equal(stageCueOpacity(until, 0, still), 0);
     assert.equal(stageCueOpacity(until, 699, still), 0);
     assert.equal(stageCueOpacity(until, 850, still), 1);
-    assert.equal(stageCueOpacity(until, 1800, still), 0);
+    assert.equal(stageCueOpacity(until, STAGE_CUE_WAIT_MS + STAGE_CUE_MS + 1, still), 0);
   }
 });
 
-test('開始の合図は1.1秒だけで、控えめ設定では同じ濃さを保ち、古い合図は残らない', () => {
-  assert.ok(stageCueOpacity(STAGE_CUE_MS, 550) > .8);
-  assert.equal(stageCueOpacity(STAGE_CUE_MS, STAGE_CUE_MS), 0);
+test('開始の合図は2回光り、間で暗くなる。控えめ設定では同じ濃さを保ち、古い合図は残らない', () => {
+  const at = t => stageCueOpacity(STAGE_CUE_MS, t);
+  assert.equal(STAGE_CUE_MS, STAGE_CUE_FLASH_MS * 2 + STAGE_CUE_GAP_MS);
+  assert.equal(at(300), 1);
+  assert.equal(at(STAGE_CUE_FLASH_MS + STAGE_CUE_GAP_MS / 2), 0);
+  assert.equal(at(STAGE_CUE_FLASH_MS + STAGE_CUE_GAP_MS + 300), 1);
+  assert.equal(at(STAGE_CUE_MS), 0);
   assert.equal(stageCueOpacity(0, 1), 0);
-  assert.equal(stageCueOpacity(STAGE_CUE_MS, 100, true), stageCueOpacity(STAGE_CUE_MS, 1000, true));
+  assert.equal(stageCueOpacity(STAGE_CUE_MS, 100, true), stageCueOpacity(STAGE_CUE_MS, 800, true));
 });
 
-test('開始合図には読み取れる明るさを保つ区間があり、控えめでも同じ最大の濃さを使う', () => {
-  assert.equal(stageCueOpacity(STAGE_CUE_MS, 150), 1);
-  assert.equal(stageCueOpacity(STAGE_CUE_MS, 700), 1);
+test('開始合図の各回には読み取れる明るさを保つ区間があり、控えめでも同じ最大の濃さを使う', () => {
+  for (const start of [0, STAGE_CUE_FLASH_MS + STAGE_CUE_GAP_MS]) {
+    assert.equal(stageCueOpacity(STAGE_CUE_MS, start + 150), 1);
+    assert.equal(stageCueOpacity(STAGE_CUE_MS, start + 400), 1);
+    assert.ok(stageCueOpacity(STAGE_CUE_MS, start + 560) > .4);
+  }
   assert.equal(stageCueOpacity(STAGE_CUE_MS, 150, true), 1);
 });
 
