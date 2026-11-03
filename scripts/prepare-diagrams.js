@@ -1,16 +1,22 @@
 // 説明の挿絵。画面の部品と同じ白い陶器・ガラス・青い水で、文字なしのSVGを作る。
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { materialDefs, drawDrainPan, drawGardenFeed } from '../src/ui/board-materials.js';
 
+const panDefs=[];
+materialDefs(panDefs);
 const defs = `<defs><linearGradient id="ceramic" x2=".3" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#dbe6ef"/></linearGradient><linearGradient id="glass"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".5" stop-color="#b9e4f6" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 0 10Z" fill="#257fb9"/></marker></defs>`;
 const line = (d, color = '#66b6df', width = 12) => `<path d="${d}" fill="none" stroke="#527492" stroke-width="${width + 5}" stroke-linejoin="round" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linejoin="round" stroke-linecap="round"/>`;
 const glass = (x, y, width, height, level) => `<path d="M${x} ${y} H${x + width} V${y + height} Q${x + width / 2} ${y + height + 10} ${x} ${y + height}Z" fill="url(#glass)" stroke="#527492" stroke-width="3"/><path d="M${x + 4} ${y + height - level} H${x + width - 4} V${y + height - 3} Q${x + width / 2} ${y + height + 4} ${x + 4} ${y + height - 3}Z" fill="#61b1d9" opacity=".8"/><path d="M${x + 10} ${y + 12} V${y + height - 12}" stroke="#fff" stroke-width="4" opacity=".8"/>`;
 // imgとして開いたSVGでも同じ盤を出せるよう、採用PNGを内部に含める。
 const drainPanImage = 'data:image/png;base64,' + readFileSync(new URL('../public/graphics/part-drain-pan-v2.png', import.meta.url)).toString('base64');
+let panSerial=0;
 const outlet = (fromX, mouthY, cx, width = 130) => {
-  const scale = width / 62, depth = 13.5 * scale;
-  const photoY = mouthY - 30.611825192802055 * width / 512;
-  return `${line(`M${fromX} ${mouthY} V${mouthY + depth} H${cx} V${mouthY}`, '#f4f3e9', 5.5 * scale)}<image href="${drainPanImage}" x="${cx - width / 2}" y="${photoY}" width="${width}" height="${104 * width / 512}"/><ellipse cx="${cx}" cy="${mouthY}" rx="${2.7 * scale}" ry="${1.1 * scale}" fill="#fff" stroke="#527492" stroke-width="${scale}"/><path d="M${cx} ${mouthY} q${scale} ${-8 * scale} ${5 * scale} ${-3 * scale} q${2 * scale} ${2 * scale} ${3 * scale} ${4 * scale}" fill="none" stroke="#287fb5" stroke-width="${1.4 * scale}" stroke-linecap="round"/>`;
+  const scale = width / 62;
+  const pan=[];
+  drawGardenFeed(pan,(fromX-cx)/scale,0);
+  drawDrainPan(pan,0,{imageHref:drainPanImage,id:`diagram-pan-${++panSerial}`});
+  return `<g transform="translate(${cx} ${mouthY}) scale(${scale}) translate(0 -370)">${pan.join('')}</g><ellipse cx="${cx}" cy="${mouthY}" rx="${2.7 * scale}" ry="${1.1 * scale}" fill="#fff" stroke="#527492" stroke-width="${scale}"/><path d="M${cx} ${mouthY} q${scale} ${-8 * scale} ${5 * scale} ${-3 * scale} q${2 * scale} ${2 * scale} ${3 * scale} ${4 * scale}" fill="none" stroke="#287fb5" stroke-width="${1.4 * scale}" stroke-linecap="round"/>`;
 };
 const arrow = d => `<path d="${d}" fill="none" stroke="#257fb9" stroke-width="4" marker-end="url(#arrow)"/>`;
 const gate = (x, y, closed) => `<g transform="translate(${x} ${y})"><rect x="-17" y="-26" width="34" height="52" rx="5" fill="#fffefa" stroke="#527492" stroke-width="3"/><path d="M-12 ${closed ? 0 : -18} H12" stroke="${closed ? '#244b6d' : '#65b5d9'}" stroke-width="9"/><path d="M0 -26 V-43 M-16 -43 H16" stroke="#527492" stroke-width="4"/></g>`;
@@ -22,6 +28,6 @@ const diagrams = {
   'intro-siphon': `${glass(155, 85, 85, 220, 155)}<path d="M440 330 V165 H505 V330" fill="url(#ceramic)" stroke="#8797a5" stroke-width="3"/><path d="M440 195 H505 M440 235 H505 M440 275 H505" stroke="#bdc7cd" stroke-width="2"/>${line('M240 240 H315 V105 Q315 85 335 85 H650 Q670 85 670 105 V260 H735', '#75bedf')}${outlet(735, 260, 805, 145)}<g transform="translate(350 25) rotate(20)"><path d="M-34 0 H34 L25 48 H-25Z" fill="#f7fcff" stroke="#527492" stroke-width="3"/><path d="M-34 0 Q0 -32 34 0" fill="none" stroke="#527492" stroke-width="3"/></g><path d="M377 57 Q384 70 372 83" fill="none" stroke="#58a9d4" stroke-width="6" stroke-linecap="round"/>${arrow('M530 85 H600')}${arrow('M670 155 V215')}`
 };
 for (const [name, content] of Object.entries(diagrams)) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">${defs}${content}</svg>\n`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">${defs}${content.includes('basin-vessel')?panDefs.join(''):''}${content}</svg>\n`;
   writeFileSync(fileURLToPath(new URL(`../public/graphics/${name}.svg`, import.meta.url)), svg);
 }

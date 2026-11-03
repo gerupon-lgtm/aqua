@@ -2,6 +2,11 @@ import { feedPath, FEED_WIDTH } from './board-part-geometry.js';
 const DRAIN_PAN_IMAGE=new URL('../../public/graphics/part-drain-pan-v2.png',import.meta.url).href;
 const GARDEN_SOIL_IMAGE=new URL('../../public/graphics/soil-loam-v1.webp',import.meta.url).href;
 const MATERIAL_GROUND=370;
+// The reviewed ivory mapping, in sRGB, expands the original ceramic shadows.
+const IVORY_MATRIX=[...[ [215,245],[208,242],[185,232] ].flatMap(([low,high])=>{
+ const slope=(high-low)/255/.45;
+ return[.2126*slope,.7152*slope,.0722*slope,0,low/255-slope*.55];
+}),0,0,0,1,0].join(' ');
 
 export function materialDefs(out){
  out.push(`<defs><linearGradient id="garden-pipe-shell" x1="0" y1="0" x2=".2" y2="1"><stop stop-color="#fffdf5"/><stop offset=".28" stop-color="#f8f7ef"/><stop offset=".58" stop-color="#e2e5dc"/><stop offset=".84" stop-color="#b6c2c0"/><stop offset="1" stop-color="#f0f1e9"/></linearGradient></defs>`);
@@ -38,12 +43,27 @@ export function drawGardenPedestal(out,cx,dy){
  out.push(`<ellipse cx="${cx}" cy="${top+1}" rx="13" ry="2.6" fill="url(#garden-ivory)" stroke="#b7af91" stroke-width=".6"/><rect class="pedestal-foot" x="${cx-15}" y="${MATERIAL_GROUND-5}" width="30" height="5.5" rx="2" fill="#fffefa" stroke="#9cadaa" stroke-width=".65"/><path d="M${cx-13} ${MATERIAL_GROUND-3.5} H${cx+13}" stroke="#ded9c8" stroke-width=".8"/></g>`);
 }
 
-export function drawDrainPan(out,cx){
- const key=`drain-${Math.round(cx*100)}`;
+export function drawDrainPan(out,cx,{imageHref=DRAIN_PAN_IMAGE,id=`drain-${Math.round(cx*100)}`}={}){
+ const key=id;
  // One coherent bitmap supplies both the upper face and the even sidewall.
  // The upper aperture centre, not the lower transparent bore, defines the height.
  const holeY=30.611825192802055,imageY=MATERIAL_GROUND-holeY*62/512,imageH=62*104/512;
- out.push(`<g class="basin-vessel" data-flow-through="true" data-pan-left="${cx-31.5}" data-pan-right="${cx+31.5}" data-pan-top="${MATERIAL_GROUND-4.8}" data-pan-bottom="${MATERIAL_GROUND+10.2}" data-pan-centre-x="${cx}" data-pan-centre-y="${MATERIAL_GROUND}"><defs><filter id="${key}-edge" x="-5%" y="-15%" width="110%" height="130%"><feDropShadow dx="0" dy="0" stdDeviation=".4" flood-color="#526c7a" flood-opacity=".7"/></filter></defs><image class="porcelain-body" data-single-piece="true" href="${DRAIN_PAN_IMAGE}" x="${cx-31}" y="${imageY}" width="62" height="${imageH}" filter="url(#${key}-edge)"/></g>`);
+ const cy=imageY+imageH*29.5/104,rx=62*.488,ry=imageH*27.5/104;
+ const rear=`M${cx-rx} ${cy} A${rx} ${ry} 0 0 1 ${cx+rx} ${cy}`;
+ const lower=`M${cx-62*.475} ${imageY+imageH*.72} Q${cx} ${imageY+imageH*1.21} ${cx+62*.475} ${imageY+imageH*.72}`;
+ const leaves=[];
+ for(const dx of [-20,0,20]){
+  const front=Math.sqrt(1-(dx/30.5)**2),mx=cx+dx,my=imageY+imageH*(.50+.285*front);
+  leaves.push(`<path d="M${mx-4.7} ${my+.7} Q${mx} ${my-.1} ${mx+4.7} ${my+.7}" fill="none" stroke="#a0844e" stroke-width=".5" stroke-linecap="round"/>`);
+  for(const d of[
+   `M${mx-1} ${my+.4} Q${mx-3.6} ${my-2} ${mx-4.3} ${my-1.5} Q${mx-3.2} ${my+1} ${mx-1} ${my+.4} Z`,
+   `M${mx+1} ${my+.4} Q${mx+3.6} ${my-2} ${mx+4.3} ${my-1.5} Q${mx+3.2} ${my+1} ${mx+1} ${my+.4} Z`,
+   `M${mx} ${my+.4} Q${mx-1.7} ${my-1} ${mx} ${my-2.2} Q${mx+1.7} ${my-1} ${mx} ${my+.4} Z`
+  ])leaves.push(`<path d="${d}" fill="url(#${key}-gold)" stroke="#9b7e45" stroke-width=".2"/>`);
+ }
+ // Scale around the upper aperture, keeping the jet and the plumbing fixed.
+ // A tighter shadow clears the horizontal feed beneath the thicker sidewall.
+ out.push(`<g class="basin-vessel" data-pan-finish="ivory-gold-leaves" data-flow-through="true" data-pan-left="${cx-31.5}" data-pan-right="${cx+31.5}" data-pan-top="${MATERIAL_GROUND-4.8}" data-pan-bottom="${MATERIAL_GROUND+10.2}" data-pan-centre-x="${cx}" data-pan-centre-y="${MATERIAL_GROUND}"><defs><filter id="${key}-edge" x="-5%" y="-15%" width="110%" height="130%" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="${IVORY_MATRIX}"/><feDropShadow dx="0" dy="0" stdDeviation=".15" flood-color="#7c7869" flood-opacity=".9"/></filter><linearGradient id="${key}-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8edce"/><stop offset=".3" stop-color="#c4a569"/><stop offset=".6" stop-color="#e8d19c"/><stop offset="1" stop-color="#b49965"/></linearGradient></defs><g class="pan-depth" transform="translate(0 370) scale(1 1.14) translate(0 -370)"><image class="porcelain-body" data-single-piece="true" href="${imageHref}" x="${cx-31}" y="${imageY}" width="62" height="${imageH}" filter="url(#${key}-edge)"/><g class="pan-decoration" pointer-events="none"><ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="url(#${key}-gold)" stroke-width="1.4"/><path class="pan-rear-edge" d="${rear}" fill="none" stroke="#8b6b34" stroke-width="1.4" stroke-linecap="round"/><path d="${lower}" fill="none" stroke="url(#${key}-gold)" stroke-width=".8" opacity=".95"/><g class="pan-side-pattern" data-pattern="leaves">${leaves.join('')}</g></g></g></g>`);
 }
 export function drawNozzleLip(out,cx){
  out.push(`<path class="nozzle-front-lip" d="M${cx-2.7} ${MATERIAL_GROUND} Q${cx} ${MATERIAL_GROUND+2.2} ${cx+2.7} ${MATERIAL_GROUND}" fill="none" stroke="#8b9897" stroke-width=".8"/><path d="M${cx-1.9} ${MATERIAL_GROUND+.4} Q${cx} ${MATERIAL_GROUND+1.4} ${cx+1.9} ${MATERIAL_GROUND+.4}" fill="none" stroke="#faf7e8" stroke-width=".5"/>`);

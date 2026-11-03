@@ -1,0 +1,138 @@
+[
+  {
+    "case": "mobile-stage3-empty",
+    "finish": [
+      "ivory-gold-leaves",
+      "ivory-gold-leaves"
+    ],
+    "foreground": true,
+    "leaves": 24,
+    "scroll": [
+      390,
+      844
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "case": "mobile-stage3-result",
+    "result": "\n    \n      \n        結果PERFECT\n        ×\n        \n          \n          100点\n        \n         最高点\n        配管 2 本\n      \n      \n      予想どおり！ 左の噴水盤に 毎秒4 届きました。下の解説で計算を確かめましょう。\n      試行 1 回（この面の最少 1 回）最少\n      \n      左の噴水盤✓ちょうど必要量毎秒4届いた量毎秒4右の噴水盤✓ちょうど必要量毎秒4届いた量毎秒4満点の本数2本\n      グラスをマウスでなぞると、そのグラスの音を聞き直せます。\n      \n      \n        \n        100点。いちばん少ない本数で届けました。\n        グラスの水面が目盛りに乗りました。\n        計算を見る\n          毎秒の量 ＝ 高さの差 ÷ 管の数字給水塔 8 → グラスA 4：差 4 ÷ 管の数字 1 ＝ 毎秒4給水塔 8 → グラスB 4：差 4 ÷ 管の数字 1 ＝ 毎秒4グラスA 4 → 左の噴水盤 0：差 4 ÷ 管の数字 1 ＝ 毎秒4グラスB 4 → 右の噴水盤 0：差 4 ÷ 管の数字 1 ＝ 毎秒4\n          グラスでは、毎秒入る量 ＝ 毎秒出る量グラスA：入る 4 ＝ 出る 4グラスB：入る 4 ＝ 出る 4\n        \n      \n      くわしい記録\n        グラス水位目盛り毎秒の出入りグラスA4目盛りに乗っている入る 4 ／ 出る 4グラスB4目盛りに乗っている入る 4 ／ 出る 4\n        配管毎秒の量水位の差管の数字S–A441S–B441\n        記録をファイルに書き出す\n      \n      \n        解説\n        もう一度\n        次へ\n      \n    ",
+    "scroll": [
+      390,
+      844
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "case": "mobile-stage3-perfect-closed",
+    "effectClasses": [
+      "rainbow",
+      "fountain-spray",
+      "fountain-core"
+    ],
+    "leaves": 24,
+    "pans": 2,
+    "scroll": [
+      390,
+      844
+    ],
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "case": "small-mobile-stage4-high",
+    "pans": 1,
+    "pedestal": 1,
+    "scroll": [
+      320,
+      640
+    ],
+    "viewport": [
+      320,
+      640
+    ]
+  },
+  {
+    "case": "pc-stage4-high",
+    "pans": 1,
+    "scroll": [
+      1280,
+      800
+    ],
+    "viewport": [
+      1280,
+      800
+    ]
+  },
+  {
+    "case": "parts-images",
+    "images": [
+      {
+        "height": 360,
+        "loaded": true,
+        "src": "http://localhost:5191/v0.14.14/public/graphics/intro-outlets.svg",
+        "width": 960
+      },
+      {
+        "height": 360,
+        "loaded": true,
+        "src": "http://localhost:5191/v0.14.14/public/graphics/intro-height.svg",
+        "width": 960
+      },
+      {
+        "height": 360,
+        "loaded": true,
+        "src": "http://localhost:5191/v0.14.14/public/graphics/intro-adjustable.svg",
+        "width": 960
+      },
+      {
+        "height": 360,
+        "loaded": true,
+        "src": "http://localhost:5191/v0.14.14/public/graphics/intro-siphon.svg",
+        "width": 960
+      },
+      {
+        "height": 360,
+        "loaded": true,
+        "src": "http://localhost:5191/v0.14.14/public/graphics/intro-gate.svg",
+        "width": 960
+      }
+    ]
+  },
+  {
+    "case": "landscape-attempt-wrong-active-tab",
+    "pans": 1,
+    "scroll": [
+      1280,
+      800
+    ],
+    "viewport": [
+      1280,
+      800
+    ],
+    "expectedViewport": [
+      844,
+      390
+    ],
+    "status": "recheck-in-fresh-tab"
+  },
+  {
+    "case": "mobile-landscape-stage1",
+    "pans": 1,
+    "scroll": [
+      844,
+      390
+    ],
+    "viewport": [
+      844,
+      390
+    ]
+  }
+]
