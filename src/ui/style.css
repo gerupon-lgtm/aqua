@@ -595,3 +595,10 @@ th { color: var(--ink-soft); font-weight: 500; }
 #board .current,.detail-board .current {stroke:#f4fdff;stroke-dasharray:1.5 12;stroke-linecap:round}
 #board .board-badge>rect:nth-child(2),.detail-board .board-badge>rect:nth-child(2){opacity:.5}
 #board .pipe-label>rect,.detail-board .pipe-label>rect{stroke:#416983}
+
+/* 連続プレイの終わり：GAME OVER／ALL CLEAR と、クリアした面数・記録の更新（2026-11-03 発案者） */
+.cont-summary { display: grid; justify-items: center; gap: 4px; margin: 2px 0 6px; text-align: center; }
+.cont-summary .cont-count { margin: 0; font-size: 17px; font-weight: 700; color: var(--ink); }
+.cont-summary .cont-count .phrase + .phrase { margin-left: .6em; }
+.cont-summary .cont-sub, .cont-summary .cont-record { margin: 0; font-size: 13px; color: var(--ink-soft); }
+.cont-summary .newbest { display: inline-flex; align-items: center; gap: 4px; background: #f4e4b8; color: #77541b; font-size: 13px; padding: 2px 10px; }

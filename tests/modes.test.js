@@ -1,10 +1,34 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { LEVELS, ContinuousRun, ModeBook, MODES_KEY } from '../src/logic/modes.js';
+import { LEVELS, ContinuousRun, ModeBook, MODES_KEY, continuousRecordChange } from '../src/logic/modes.js';
 
-test('レベル：フリーは上限なし、ビギナーはNG20回まで', () => {
-  assert.equal(LEVELS.find(l => l.id === 'free').limit, null);
-  assert.equal(LEVELS.find(l => l.id === 'beginner').limit, 20);
+test('レベル：フリーは上限なし、ビギナー20回・ノーマル10回・エキスパート5回まで', () => {
+  assert.deepEqual(LEVELS.map(l => [l.id, l.limit]), [['free', null], ['beginner', 20], ['normal', 10], ['expert', 5]]);
+});
+
+test('連続プレイの記録：全面クリアのNGは少ないときだけ置き換え、古い形の記録も読める', () => {
+  const store = new Map([[MODES_KEY, JSON.stringify({ fewest: { S7: 2 }, continuous: { beginner: 30 } })]]);
+  const storage = { getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, v) };
+  const book = new ModeBook(storage);
+  assert.equal(book.bestContinuous('beginner'), 30);
+  assert.equal(book.allClearNg('beginner'), null);
+  assert.equal(book.offerContinuous('expert', 0), false);
+  assert.equal(book.offerAllClear('beginner', 4), true);
+  assert.equal(book.offerAllClear('beginner', 4), false);
+  assert.equal(book.offerAllClear('beginner', 2), true);
+  assert.equal(new ModeBook(storage).allClearNg('beginner'), 2);
+  assert.equal(new ModeBook(storage).fewest('S7'), 2);
+});
+
+test('連続プレイの記録更新：遊び始めの記録と比べ、面数が増えたか、全面クリアでNGが減ったときだけ', () => {
+  const run = (cleared, ng, complete = false) => ({ cleared, ng, complete, stageCount: 30 });
+  assert.equal(continuousRecordChange({ best: null, allClearNg: null }, run(0, 21)), null);
+  assert.deepEqual(continuousRecordChange({ best: null, allClearNg: null }, run(3, 21)), { from: null, to: 3, fromNg: null, toNg: null });
+  assert.deepEqual(continuousRecordChange({ best: 8, allClearNg: null }, run(12, 21)), { from: 8, to: 12, fromNg: null, toNg: null });
+  assert.equal(continuousRecordChange({ best: 12, allClearNg: null }, run(12, 21)), null);
+  assert.deepEqual(continuousRecordChange({ best: 12, allClearNg: null }, run(30, 4, true)), { from: 12, to: 30, fromNg: null, toNg: 4 });
+  assert.deepEqual(continuousRecordChange({ best: 30, allClearNg: 4 }, run(30, 2, true)), { from: 30, to: 30, fromNg: 4, toNg: 2 });
+  assert.equal(continuousRecordChange({ best: 30, allClearNg: 2 }, run(30, 2, true)), null);
 });
 
 test('連続プレイ：NGだけを数え、上限を超えるとゲームオーバー。部分点のクリアでも次へ', () => {

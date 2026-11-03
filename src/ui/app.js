@@ -13,11 +13,11 @@ import { guideMessage } from './guide-copy.js';
 import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
 import { PARTS_HTML, HOWTO_HTML } from './info-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, boardViewBox, VIEW_W, VIEW_H } from './board.js';
-import { LEVELS, ContinuousRun, ModeBook } from '../logic/modes.js';
+import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.14.16';
+const APP_VERSION = '0.15.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -92,6 +92,8 @@ const state = {
   mode: 'select', // tutorial・continuous・select
   continuous: null, // 連続プレイの進み具合（ContinuousRun）
   contAction: null, // 連続プレイで、結果のあとにすること（next・retry・gameover・complete）
+  contStart: null, // 連続プレイを始めたときのレベルの記録（記録更新の判定に使う）
+  contRecord: null, // 終わったときの記録の更新（continuousRecordChange）
   trials: 0, // 選択プレイ：この面を開いてから「水を流す」を押した回数（F-025）
   newFewest: false,
   titleOpen: true,
@@ -284,8 +286,12 @@ function showResult() {
   // 選択プレイ：クリアまでの試行回数の最少を記録（F-025）。連続プレイ：NGを数え、次にすることを決める（F-026）
   if (state.mode === 'select' && ev.outcome !== 'ng' && !isPractice()) state.newFewest = modeBook.offerTrials(stage().id, state.trials);
   if (state.mode === 'continuous' && state.continuous) {
-    state.contAction = state.continuous.record(ev.outcome);
-    if (state.contAction === 'gameover' || state.contAction === 'complete') modeBook.offerContinuous(state.continuous.level.id, state.continuous.cleared);
+    const cont = state.continuous;
+    state.contAction = cont.record(ev.outcome);
+    // 面をクリアするたびに保存し、途中で閉じても残す。更新の表示は終わったときに、始めた時点の記録と比べて出す
+    if (ev.outcome !== 'ng') modeBook.offerContinuous(cont.level.id, cont.cleared);
+    if (state.contAction === 'complete') modeBook.offerAllClear(cont.level.id, cont.ng);
+    state.contRecord = state.contAction === 'gameover' || state.contAction === 'complete' ? continuousRecordChange(state.contStart, cont) : null;
   }
   if (isPractice() && ev.outcome !== 'ng') tutorial.complete(PRACTICE);
   if (state.prediction) {
@@ -614,11 +620,25 @@ function renderPanel() {
   const modeCopy = state.mode === 'select' && ev.outcome !== 'ng' && !isPractice()
     ? `試行 ${state.trials} 回（この面の最少 ${modeBook.fewest(stage().id) ?? state.trials} 回）`
     : state.mode === 'continuous' && cont
-      ? act === 'gameover' ? `ゲームオーバー：${cont.cleared} 面クリア（${cont.level.name}の最高 ${modeBook.bestContinuous(cont.level.id) ?? cont.cleared} 面）`
-      : act === 'complete' ? `全 ${cont.stageCount} 面クリア！（NG ${cont.ng} 回）`
+      ? finished ? ''
       : cont.level.limit === null ? `連続プレイ（${cont.level.name}）：${cont.cleared} 面クリア・NG ${cont.ng} 回`
       : `連続プレイ（${cont.level.name}）：${cont.cleared} 面クリア・NG 残り ${cont.left} 回`
       : '';
+  // 連続プレイの終わり：GAME OVER／ALL CLEAR の見出しと、クリアした面数・記録の更新（2026-11-03 発案者）
+  const crown = '<svg viewBox="0 0 20 15" width="16" height="12" aria-hidden="true"><path d="M2 12 L1 3 6 6 10 0 14 6 19 3 18 12 Z M2 14 H18" fill="currentColor"/></svg>';
+  const rec = finished ? state.contRecord : null;
+  const allClearText = ng => (ng === null ? '' : `（NG ${ng} 回）`);
+  const recordText = !finished ? ''
+    : rec ? (rec.from === null ? `初めての記録 ${rec.to} 面${allClearText(rec.toNg)}` : `前回の最高 ${rec.from} 面${allClearText(rec.fromNg)} → ${rec.to} 面${allClearText(rec.toNg)}`)
+    : `${cont.level.name}の最高 ${modeBook.bestContinuous(cont.level.id) ?? 0} 面${allClearText(modeBook.allClearNg(cont.level.id))}`;
+  const contSummary = finished ? `<div class="cont-summary">
+        <p class="cont-count">${phraseMarkup(`${cont.level.name}|${cont.cleared} / ${cont.stageCount} 面クリア`)}</p>
+        ${act === 'complete' ? `<p class="cont-sub">${textMarkup(`NG ${cont.ng} 回・${cont.stageCount}面は ${displayScore(ev.score).replace(/\.00$/, '')} 点`)}</p>` : ''}
+        ${rec ? `<span class="newbest">${crown} 記録更新</span>` : ''}
+        <p class="cont-record">${textMarkup(recordText)}</p>
+      </div>` : '';
+  // 連続プレイの終わりは、見出しの「結果」を GAME OVER／ALL CLEAR に書き換え、大きな点数・NGの字は出さない（2026-11-03 発案者）
+  const hero = ev.outcome === 'ng' ? '<span class="result-ng-word">NG</span>' : `${displayScore(ev.score).replace(/\.00$/, '')}<small>点</small>`;
   const modeLine = textMarkup(modeCopy) + (state.mode === 'select' && state.newFewest ? '<span class="newbest">最少</span>' : '');
   // 結果は下の欄に重ねるトーストで出し、下の欄は編集中と同じ高さ（案内＋ボタン1行）に保つ。
   // 欄が伸びると盤面が縮むため（2026-11-01 発案者）。閉じたトーストは「結果」で開き直す
@@ -632,17 +652,18 @@ function renderPanel() {
   state.resultHtml = `
     <div class="result ${ev.outcome}">
       <div class="result-head">
-        <span class="badge" role="status">結果${ev.outcome === 'ng' ? '' : `<small>${ev.outcome === 'perfect' ? 'PERFECT' : head}</small>`}</span>
+        <span class="badge" role="status">${finished ? (act === 'gameover' ? 'GAME OVER' : 'ALL CLEAR') : `結果${ev.outcome === 'ng' ? '' : `<small>${ev.outcome === 'perfect' ? 'PERFECT' : head}</small>`}`}</span>
         <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button>
-        <div class="result-hero">
+        ${finished ? '' : `<div class="result-hero">
           ${ev.outcome === 'perfect' ? '<svg class="laurels" viewBox="0 0 200 76" aria-hidden="true"><defs><g id="laurel"><path d="M48 68 Q17 50 29 12" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M29 15 Q15 3 25 0 Q34 2 29 15 M26 28 Q8 20 13 12 Q24 11 26 28 M28 41 Q8 39 10 28 Q23 26 28 41 M35 54 Q13 58 12 46 Q24 39 35 54 M48 66 Q24 74 23 62 Q35 53 48 66 M29 18 Q46 6 42 21 Q37 29 29 30 M28 33 Q46 22 44 35 Q40 43 31 44 M34 48 Q51 38 50 51 Q46 59 40 59" fill="currentColor"/></g></defs><use href="#laurel"/><use href="#laurel" transform="translate(200 0) scale(-1 1)"/></svg>' : ''}
-          <span class="score">${ev.outcome === 'ng' ? '<span class="result-ng-word">NG</span>' : `${displayScore(ev.score).replace(/\.00$/, '')}<small>点</small>`}</span>
-        </div>
+          <span class="score">${hero}</span>
+        </div>`}
         ${state.newBest ? '<span class="newbest"><svg viewBox="0 0 20 15" width="16" height="12" aria-hidden="true"><path d="M2 12 L1 3 6 6 10 0 14 6 19 3 18 12 Z M2 14 H18" fill="currentColor"/></svg> 最高点</span>' : ''}
         <span class="used">${textMarkup(usedText)}</span>
       </div>
       ${isPractice() ? `<p class="guide-answer">${guideMessage(practiceResultText(ev.outcome))}</p>` : ''}
       ${state.prediction ? `<p class="guide-answer">${guideMessage(answerLine(state.prediction.question, state.prediction.picked))}</p>` : ''}
+      ${contSummary}
       ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${textMarkup(state.saveMessage)}</p>` : ''}
       <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectConfig.primed.length}</span>` : ''}</div></div>
@@ -1032,6 +1053,7 @@ function startMode(mode, { level = null, index = null } = {}) {
   state.mode = mode;
   state.played = true;
   state.continuous = mode === 'continuous' ? new ContinuousRun(level, STAGES.length) : null;
+  if (state.continuous) state.contStart = { best: modeBook.bestContinuous(level), allClearNg: modeBook.allClearNg(level) };
   closeTitle();
   selectStage(mode === 'tutorial' ? -1 : mode === 'continuous' ? 0 : (index ?? lastSelectIndex));
 }
