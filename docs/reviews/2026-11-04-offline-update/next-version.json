@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-03T17:35:14.834Z",
+  "from": "0.17.5",
+  "to": "0.17.6",
+  "results": [
+    {
+      "name": "初回の準備が終わり、全資材がそろう",
+      "ok": true,
+      "detail": "{\"version\":\"0.17.5\",\"ready\":true}"
+    },
+    {
+      "name": "入口の通信が10秒遅くても、待たずに開く",
+      "ok": true,
+      "detail": "556ms"
+    },
+    {
+      "name": "通信なしで起動できる",
+      "ok": true,
+      "detail": "v0.17.5"
+    },
+    {
+      "name": "通信なしで1面を流し、結果まで進む",
+      "ok": true,
+      "detail": "3516ms"
+    },
+    {
+      "name": "更新の準備中も、保存した前の版で開く",
+      "ok": true,
+      "detail": "v0.17.5"
+    },
+    {
+      "name": "遅い資材があっても更新の案内が出る",
+      "ok": true,
+      "detail": "6674ms"
+    },
+    {
+      "name": "同じ中身の画像・書体は取り直さない",
+      "ok": true,
+      "detail": "版のフォルダから取得 1件（画像・書体 0件）：/v0.17.6/src/ui/app.js"
+    },
+    {
+      "name": "更新すると次版で開き直す",
+      "ok": true,
+      "detail": "v0.17.6"
+    },
+    {
+      "name": "更新後も端末の記録が残る",
+      "ok": true,
+      "detail": "aqua-test-keep,aqua-tutorial-v1"
+    },
+    {
+      "name": "保存は新しい版と直前の版の2つ",
+      "ok": true,
+      "detail": "[\"aqua-notes-0.17.5\",\"aqua-notes-0.17.6\"]"
+    },
+    {
+      "name": "更新後も通信なしで起動できる",
+      "ok": true,
+      "detail": "v0.17.6"
+    },
+    {
+      "name": "画面のエラーなし",
+      "ok": true,
+      "detail": "[]"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-03T17:37:59.861Z",
+  "from": "0.17.4",
+  "to": "0.17.5",
+  "results": [
+    {
+      "name": "初回の準備が終わり、全資材がそろう",
+      "ok": true,
+      "detail": "{\"version\":\"0.17.4\",\"ready\":true}"
+    },
+    {
+      "name": "入口の通信が10秒遅くても、待たずに開く",
+      "ok": false,
+      "detail": "10534ms"
+    },
+    {
+      "name": "通信なしで起動できる",
+      "ok": true,
+      "detail": "v0.17.4"
+    },
+    {
+      "name": "通信なしで1面を流し、結果まで進む",
+      "ok": true,
+      "detail": "3524ms"
+    },
+    {
+      "name": "更新の準備中も、保存した前の版で開く",
+      "ok": false,
+      "detail": "v0.17.5"
+    },
+    {
+      "name": "遅い資材があっても更新の案内が出る",
+      "ok": false,
+      "detail": "-1ms"
+    },
+    {
+      "name": "同じ中身の画像・書体は取り直さない",
+      "ok": false,
+      "detail": "版のフォルダから取得 46件（画像・書体 15件）：/v0.17.5/src/ui/style.css /v0.17.5/src/ui/app.js /v0.17.5/public/graphics/title-portrait.webp /v0.17.5/public/graphics/spirit-detail-v2.png /v0.17.5/public/fonts/montserrat-600.ttf /v0.17.5/public/fonts/montserrat-500.ttf /v0.17.5/public/graphics/title-fountain-v2.png /v0.17.5/public/graphics/title-glass-v2.png /v0.17.5/src/content/stages.js /v0.17.5/src/content/challenges.js /v0.17.5/src/content/challenge-draw.js /v0.17.5/src/logic/play.js /v0.17.5/src/logic/pitch.js /v0.17.5/src/logic/score.js /v0.17.5/src/logic/explain.js /v0.17.5/src/ui/audio.js /v0.17.5/src/logic/records.js /v0.17.5/src/content/tutorial.js /v0.17.5/src/ui/guide-copy.js /v0.17.5/src/ui/text-layout.js /v0.17.5/src/ui/info-copy.js /v0.17.5/src/ui/board.js /v0.17.5/src/logic/modes.js /v0.17.5/src/ui/visual-timing.js /v0.17.5/src/ui/update-manager.js /v0.17.5/src/logic/fraction.js /v0.17.5/src/logic/flow.js /v0.17.5/src/ui/board-materials.js /v0.17.5/src/ui/outlet-label-layout.js /v0.17.5/src/ui/board-annotations.js /v0.17.5/src/ui/board-part-geometry.js /v0.17.5/src/ui/board-water-effects.js /v0.17.5/public/graphics/bg-trial.webp /v0.17.5/public/graphics/soil-loam-v1.webp /v0.17.5/public/graphics/part-spring-middle.png /v0.17.5/public/graphics/part-spring-top.png /v0.17.5/public/graphics/part-spring-bottom.png /v0.17.5/public/graphics/part-glass-middle.png /v0.17.5/public/graphics/part-glass-top.png /v0.17.5/public/graphics/part-glass-bottom.png /v0.17.5/public/graphics/part-drain-pan-v2.png /v0.17.5/src/content/tutorial.js /v0.17.5/src/ui/app.js /v0.17.5/src/ui/board-water-effects.js /v0.17.5/src/ui/board.js /v0.17.5/src/ui/outlet-label-layout.js"
+    },
+    {
+      "name": "更新すると次版で開き直す",
+      "ok": true,
+      "detail": "v0.17.5"
+    },
+    {
+      "name": "更新後も端末の記録が残る",
+      "ok": true,
+      "detail": "aqua-test-keep,aqua-tutorial-v1"
+    },
+    {
+      "name": "保存は新しい版と直前の版の2つ",
+      "ok": true,
+      "detail": "[\"aqua-notes-0.17.4\",\"aqua-notes-0.17.5\"]"
+    },
+    {
+      "name": "更新後も通信なしで起動できる",
+      "ok": true,
+      "detail": "v0.17.5"
+    },
+    {
+      "name": "画面のエラーなし",
+      "ok": true,
+      "detail": "[]"
+    }
+  ],
+  "errors": []
+}

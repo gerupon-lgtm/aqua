@@ -60,7 +60,8 @@ writeFileSync(join(output, 'manifest.webmanifest'), JSON.stringify(manifest, nul
 const all = ['./index.html', './manifest.webmanifest', ...icons.map(name => `./${name}`), ...assets];
 const hashes = Object.fromEntries(all.map(a => [a, createHash('sha256').update(readFileSync(join(output, a))).digest('hex')]));
 writeFileSync(join(output, 'build-info.json'), JSON.stringify({ version, commit: process.env.GITHUB_SHA ?? null, assets: all, hashes }, null, 2));
-const worker = read('src/pwa/worker.js').replace('__AQUA_VERSION__', version).replace('__AQUA_ASSETS__', JSON.stringify(all));
+// workerには資材ごとの照合値も書き込み、取得した中身・前の版から使い回す中身を確かめる（前作 0.82.0 の対策）
+const worker = read('src/pwa/worker.js').replace('__AQUA_VERSION__', version).replace('__AQUA_ASSETS__', JSON.stringify(all)).replace('__AQUA_HASHES__', JSON.stringify(hashes));
 writeFileSync(join(output, 'sw.js'), worker);
 writeFileSync(join(output, '.nojekyll'), '');
 console.log(`dist/ に v${version} を作りました（通信なし用の資材 ${all.length} 件）`);
