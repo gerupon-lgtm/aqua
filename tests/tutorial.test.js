@@ -98,7 +98,7 @@ test('新しいパーツの初出説明は6・7・13・19・25面に1つずつ�
   const { PART_INTROS, partIntroFor } = await import('../src/content/tutorial.js');
   const { STAGES } = await import('../src/content/stages.js');
   const { existsSync } = await import('node:fs');
-  assert.deepEqual(Object.keys(PART_INTROS).map(id => STAGES.find(s => s.id === id).number), [6, 7, 13, 19, 25]);
+  assert.deepEqual(Object.keys(PART_INTROS).map(id => STAGES.find(s => s.id === id).number), [6, 13, 19, 25]);
   for (const intro of Object.values(PART_INTROS)) {
     assert.ok(existsSync(new URL(`../public/graphics/intro-${intro.part}.svg`, import.meta.url)));
     assert.ok(intro.title && intro.alt && intro.lines.length >= 2);

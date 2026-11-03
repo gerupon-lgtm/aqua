@@ -17,7 +17,7 @@ test('実際に足りない4面の結果は、判定バッジと分数を同じ�
   const stage = STAGES[3], ev = evaluate(stage, { connected: new Set(['SA']), primed: new Set(), thickness: {} }, analyzeStage(stage));
   assert.equal(ev.outlets[0].flow.toString(), '5/2');
   assert.equal(ev.outlets[0].verdict, 'short');
-  const html = deliveryMarkup('高い受け皿', ev.outlets[0]);
+  const html = deliveryMarkup('高い噴水盤', ev.outlets[0]);
   assert.match(html, /class="verdict-badge short"/);
   assert.ok(html.includes('足りない'));
   assert.match(html, /class="amount-unit">毎秒<\/small>5\/2/);
@@ -30,11 +30,11 @@ test('毎秒の値と小さな札の /秒 を数値と離して折り返さな�
 });
 
 test('案内と解説の分数・近似値、ゲームの語は一まとまりで、元の文を保つ', () => {
-  const text = '予想どおり！ 高い受け皿に 5/2（約2.50） 届きました。';
+  const text = '予想どおり！ 高い噴水盤に 5/2（約2.50） 届きました。';
   const html = textMarkup(text);
   assert.equal(html.replace(/<[^>]+>/g, ''), text);
   assert.match(html, /class="text-unit">5\/2（約2\.50）/);
-  assert.match(html, /class="text-unit">高い受け皿に/);
+  assert.match(html, /class="text-unit">高い噴水盤に/);
 });
 
 test('グラスの名前、数字の範囲、空白付きの本数も途中で分けない', () => {
