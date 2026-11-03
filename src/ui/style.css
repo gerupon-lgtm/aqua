@@ -386,11 +386,24 @@ th { color: var(--ink-soft); font-weight: 500; }
 .level-list .level b { font-size: 16px; }
 .level-list .level span { font-size: 12.5px; color: var(--ink-soft); }
 .stage-list { display: grid; gap: 4px; }
-.stage-item { display: grid; grid-template-columns: 40px minmax(0, 1fr) 20px; align-items: center; gap: 8px; height: 42px; padding: 0 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-align: left; cursor: pointer; }
-.stage-item.current { border-color: var(--blue); background: #eaf3fb; }
+.stage-item { box-sizing: border-box; width: 100%; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.stage-item.current { border-color: var(--blue); background: #eaf3fb; box-shadow: inset 3px 0 var(--blue); }
+/* 前作 prism の課題の一覧に合わせる：まとまりごとのページ、名前とまとまり、最高点、前へ・次へ（2026-11-04） */
+.stage-item-name { flex: 1; min-width: 0; line-height: 1.4; overflow-wrap: anywhere; }
+.stage-item-name .tier { display: inline; margin-left: 8px; color: var(--muted, #5b6f86); font-size: .82em; white-space: nowrap; }
+.stage-item-name .now { display: inline-block; margin-left: 8px; color: var(--blue); font-size: .82em; font-weight: 700; white-space: nowrap; }
+.stage-item-score { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; }
+.stage-item-score small { font-size: .72em; color: var(--muted, #5b6f86); }
+.stage-item-score strong { font-size: .95em; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stage-list-card .pager { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; }
+.stage-list-card .pager button { min-height: 44px; min-width: 72px; }
+.stage-list-card .pager span { color: var(--muted, #5b6f86); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* スマホでは前作と同じく、名前の行の下に最高点の行を置く（右へはみ出さない） */
+@media (max-width: 600px) {
+  .stage-item { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 9px 12px; }
+  .stage-item-score { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 9px; }
+}
 .stage-item .no { font-weight: 700; font-variant-numeric: tabular-nums; }
-.stage-item .t { overflow: hidden; text-overflow: ellipsis; }
-.stage-item .m { color: var(--gold); }
 .plain { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 13.5px; }
 .parts { margin: 8px 0; display: grid; grid-template-columns: minmax(0,1fr); gap: 6px; font-size: 14px; line-height: 1.65; }
 .parts dt { font-weight: 700; color: var(--blue-deep); margin-top: 12px; font-size: 16px; }

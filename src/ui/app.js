@@ -17,7 +17,7 @@ import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logi
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.19.1';
+const APP_VERSION = '0.19.2';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -1164,20 +1164,39 @@ function openLevels() {
 
 // 面の一覧（まとまりごと）。選択プレイ中の「∨」と、タイトルの「選択プレイ」で同じ一覧を出す（2026-11-04 発案者、前作に合わせる）。
 // タイトルから開いたときは、最後に選択プレイで開いていた面を印にし、選んだ面から選択プレイを始める
-function openStageList() {
-  const current = state.titleOpen ? lastSelectIndex : state.stageIndex;
-  const groups = new Map();
+// 前作 prism の課題の一覧に合わせ、面のまとまりごとに1ページで見せ、「前へ」「次へ」でめくる（2026-11-04 発案者）。
+// 行は「番号 名前・まとまり」と最高点（未達成）。開いたときは、今の面のあるページを出し、「プレイ中」と印を付ける
+let stageListPage = 0;
+function stageListPages() {
+  const pages = [];
   for (const [i, s] of STAGES.entries()) {
-    if (!groups.has(s.set)) groups.set(s.set, []);
-    groups.get(s.set).push([i, s]);
+    if (!pages.length || pages.at(-1).set !== s.set) pages.push({ set: s.set, items: [] });
+    pages.at(-1).items.push([i, s]);
   }
-  const item = (i, s, label) => {
+  pages[0].items.unshift([-1, PRACTICE]); // 練習はお試しのページの先頭
+  return pages;
+}
+function openStageList(page = null) {
+  const current = state.titleOpen ? lastSelectIndex : state.stageIndex;
+  const pages = stageListPages();
+  stageListPage = page ?? Math.max(0, pages.findIndex(p => p.items.some(([i]) => i === current)));
+  const { set, items } = pages[stageListPage];
+  const row = (i, s) => {
     const best = bestOfStage(s);
-    const mark = best ? (displayScore(best) === '100.00' ? '★' : '●') : '';
-    return `<button type="button" class="stage-item${i === current ? ' current' : ''}" data-pick="${i}"><span class="no">${label}</span><span class="t">${s.title}</span><span class="m">${mark}</span></button>`;
+    const isCurrent = i === current && (!state.titleOpen || state.played);
+    const label = s.id === PRACTICE.id ? '練習' : s.number;
+    return `<button type="button" class="stage-item${isCurrent ? ' current' : ''}" data-pick="${i}"${isCurrent ? ' aria-current="step"' : ''}>`
+      + `<span class="stage-item-name"><span class="no">${label}</span> ${textMarkup(s.title)}<small class="tier">${textMarkup(s.set ?? '練習')}</small>${isCurrent ? '<small class="now">プレイ中</small>' : ''}</span>`
+      + `<span class="stage-item-score"><small>${s.number > 6 ? '最高点（全出題）' : '最高点'}</small><strong>${best ? `${displayScore(best)}点` : '未達成'}</strong></span></button>`;
   };
-  const body = `<div class="stage-list">${item(-1, PRACTICE, '練習')}${[...groups].map(([set, list]) => `<h3 class="sheet-sub">${set}</h3>${list.map(([i, s]) => item(i, s, s.number)).join('')}`).join('')}</div>`;
-  openSheet('面を選ぶ', body);
+  // ページの位置は面の番号で出す（練習を数に入れると番号とずれるため）
+  const numbers = items.map(([, st]) => st.number).filter(n => n > 0);
+  const where = `${items.some(([i]) => i < 0) ? '練習・' : ''}${numbers[0]}–${numbers.at(-1)}面（${stageListPage + 1}/${pages.length}）`;
+  const pager = `<nav class="pager" aria-label="面の一覧のページ"><button type="button" class="ghost" data-list-page="${stageListPage - 1}" ${stageListPage > 0 ? '' : 'disabled'}>前へ</button>`
+    + `<span>${where}</span>`
+    + `<button type="button" class="ghost" data-list-page="${stageListPage + 1}" ${stageListPage < pages.length - 1 ? '' : 'disabled'}>次へ</button></nav>`;
+  openSheet('面を選ぶ', `<h3 class="sheet-sub">${textMarkup(set)}</h3><div class="stage-list">${items.map(([i, s]) => row(i, s)).join('')}</div>${pager}`);
+  $('sheet').querySelector('.sheet-card').classList.add('stage-list-card');
 }
 
 // 手動確認はメニューから。上下の更新ボタンは、準備済みの新しい版を適用する（F-022）。
@@ -1212,6 +1231,7 @@ function bindScreens() {
     const b = e.target.closest('button');
     if (!b) { if (e.target === $('sheet')) closeSheet(); return; }
     if (b.dataset.level) { closeSheet(); startMode('continuous', { level: b.dataset.level }); return; }
+    if (b.dataset.listPage !== undefined) { openStageList(Number(b.dataset.listPage)); return; }
     if (b.dataset.pick !== undefined) {
       closeSheet();
       if (state.titleOpen) startMode('select', { index: Number(b.dataset.pick) });
