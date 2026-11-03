@@ -35,6 +35,8 @@ function shuffle(list, random) {
 function valueGrid(stage) {
   const v = stage.vary;
   let grid = (v.spring ?? [stage.spring.height]).map(spring => ({ spring, thinness: {} }));
+  // 泉が2つの面は、二つ目の泉の高さも変える
+  if (stage.spring2) grid = grid.flatMap(g => (v.spring2 ?? [stage.spring2.height]).map(spring2 => ({ ...g, spring2 })));
   for (const c of stage.candidates) {
     if (c.adjustable) continue;
     const options = v.thinness?.[c.id] ?? v.thinnessAll ?? [c.thinness];

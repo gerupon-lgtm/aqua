@@ -44,8 +44,9 @@ const MIN_SETTLE_MS = 500; // 水の入るグラスがないときも、少し�
 
 // 給水塔から、水の通っている配管を何本たどって届くか
 export function hopDistances(st, result) {
-  const dist = new Map([[st.spring.id, 0]]);
-  const queue = [st.spring.id];
+  const sources = [st.spring, st.spring2].filter(Boolean).map(s => s.id);
+  const dist = new Map(sources.map(id => [id, 0]));
+  const queue = [...sources];
   while (queue.length) {
     const here = queue.shift();
     for (const [id, p] of Object.entries(result.pipes)) {

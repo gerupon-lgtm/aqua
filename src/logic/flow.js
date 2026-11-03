@@ -3,27 +3,32 @@
 //
 // 回路の形：
 //   spring:  { id, height }                       泉。水位が height に固定
+//   springs: [{ id, height }]                     （任意）泉が2つの面（43〜48面）。あれば spring の代わりにすべてを使う
 //   towers:  [{ id }]                             グラス。水位が未知
 //   outlets: [{ id, tower, height, conductance }] 出口。口の高さと流れやすさ。水を出すだけ
 //   pipes:   [{ id, a, b, conductance }]          つないだ配管。流れやすさ＝1÷細さ
 import { Fraction, ZERO } from './fraction.js';
 
-// 泉から配管をたどって行けるグラス（出口からはたどらない、4.1）
+// 水位の決まった点（泉）。泉が2つの面では両方
+export const springsOf = circuit => circuit.springs ?? [circuit.spring];
+const springHeights = circuit => new Map(springsOf(circuit).map(s => [s.id, s.height]));
+
+// 泉から配管をたどって行けるグラス（出口からはたどらない、4.1）。泉が2つなら、どちらかから行けるもの
 function reachableTowers(circuit) {
   const towerIds = new Set(circuit.towers.map(t => t.id));
-  const seen = new Set([circuit.spring.id]);
-  const queue = [circuit.spring.id];
+  const sources = springHeights(circuit);
+  const seen = new Set(sources.keys());
+  const queue = [...sources.keys()];
   while (queue.length) {
     const here = queue.shift();
     for (const p of circuit.pipes) {
       const next = p.a === here ? p.b : p.b === here ? p.a : null;
-      if (next !== null && !seen.has(next) && (towerIds.has(next) || next === circuit.spring.id)) {
+      if (next !== null && !seen.has(next) && towerIds.has(next)) {
         seen.add(next);
         queue.push(next);
       }
     }
   }
-  seen.delete(circuit.spring.id);
   return circuit.towers.map(t => t.id).filter(id => seen.has(id));
 }
 
@@ -50,13 +55,13 @@ export function levelsWithOutlets(circuit, towers, activeOutletIds) {
   const n = towers.length;
   const m = Array.from({ length: n }, () => Array.from({ length: n }, () => ZERO));
   const b = Array.from({ length: n }, () => ZERO);
-  const H = circuit.spring.height;
+  const sources = springHeights(circuit);
   for (const p of circuit.pipes) {
     for (const [here, there] of [[p.a, p.b], [p.b, p.a]]) {
       if (!index.has(here) || here === there) continue;
       const i = index.get(here);
       m[i][i] = m[i][i].add(p.conductance);
-      if (there === circuit.spring.id) b[i] = b[i].add(p.conductance.mul(H));
+      if (sources.has(there)) b[i] = b[i].add(p.conductance.mul(sources.get(there)));
       else if (index.has(there)) m[i][index.get(there)] = m[i][index.get(there)].sub(p.conductance);
     }
   }
@@ -127,7 +132,8 @@ export function bruteForceSolutions(circuit) {
 
 function describe(circuit, levels, active, iterations) {
   const result = { towers: {}, pipes: {}, outlets: {}, iterations };
-  const levelOf = id => (id === circuit.spring.id ? circuit.spring.height : levels.get(id) ?? null);
+  const sources = springHeights(circuit);
+  const levelOf = id => (sources.has(id) ? sources.get(id) : levels.get(id) ?? null);
   for (const t of circuit.towers) {
     const level = levels.get(t.id) ?? null;
     result.towers[t.id] = { state: level === null ? 'empty' : 'water', level, inflow: ZERO, outflow: ZERO };

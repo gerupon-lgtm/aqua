@@ -18,7 +18,7 @@ export function checkChallenge(stage, scale = DEFAULT_SCALE) {
   if (offScale) problems.push(`${offScale.key || '（なし）'} で音階に乗らないグラスがある`);
 
   // 範囲：水位はグラスの高さ（泉の高さ）以下、音は音域の中
-  const H = frac(stage.spring.height);
+  const H = [stage.spring, stage.spring2].filter(Boolean).map(s => frac(s.height)).reduce((a, b) => (a.cmp(b) >= 0 ? a : b));
   for (const c of a.clears) {
     const j = judge(stage, c.config, scale);
     const towers = j.states.flatMap(s => Object.values(s.result.towers)).filter(t => t.state === 'water');

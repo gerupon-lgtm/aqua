@@ -8,6 +8,7 @@ export function applyValues(stage, values) {
   const s = structuredClone(stage);
   delete s.vary;
   if (values.spring) s.spring = { ...s.spring, height: values.spring };
+  if (values.spring2) s.spring2 = { ...s.spring2, height: values.spring2 };
   s.candidates = s.candidates.map(c => (values.thinness?.[c.id] ? { ...c, thinness: values.thinness[c.id] } : c));
   s.outlets = s.outlets.map(o => (values.targets?.[o.id] !== undefined ? { ...o, target: values.targets[o.id] } : o));
   if (values.buckets !== undefined) s.buckets = values.buckets;

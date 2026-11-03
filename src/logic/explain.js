@@ -20,9 +20,11 @@ export function explain(stage, config, ev, analysis, scale = DEFAULT_SCALE, stat
   const cfg = normalizeConfig(config);
   const st = ev.states?.[stateIndex] ?? { result: ev.result, outlets: ev.outlets, broken: new Set(), name: 'only', clear: ev.clear };
   const r = st.result;
-  const H = frac(stage.spring.height);
-  const name = id => (id === stage.spring.id ? '給水塔' : `グラス${id}`);
-  const levelOf = id => (id === stage.spring.id ? H : r.towers[id]?.level ?? null);
+  // 泉が2つの面では「左の給水塔」「右の給水塔」と呼び分ける
+  const springs = [stage.spring, stage.spring2].filter(Boolean);
+  const springOf = id => springs.find(s => s.id === id);
+  const name = id => (springOf(id) ? springOf(id).label ?? '給水塔' : `グラス${id}`);
+  const levelOf = id => (springOf(id) ? frac(springOf(id).height) : r.towers[id]?.level ?? null);
   const pipes = stage.candidates.filter(c => cfg.connected.has(c.id));
   const outletOf = id => stage.outlets.find(o => o.id === id);
   const flowing = c => r.pipes[c.id];

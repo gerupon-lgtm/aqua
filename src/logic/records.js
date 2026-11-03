@@ -62,6 +62,7 @@ export function buildRecord({ stage, config, ev, appVersion, now = new Date() })
     stage: { id: stage.id, version: stage.version ?? 1, draw: stage.draw?.number ?? 1, drawId: stage.draw?.id ?? null, family: stage.draw?.family ?? null, title: stage.title },
     circuit: {
       springHeight: stage.spring.height,
+      ...(stage.spring2 ? { spring2Height: stage.spring2.height } : {}),
       connected: [...cfg.connected].sort(),
       thickness: cfg.thickness,
       primed: [...cfg.primed].filter(id => cfg.connected.has(id)).sort(),

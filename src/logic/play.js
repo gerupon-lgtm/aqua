@@ -47,6 +47,8 @@ export function buildCircuit(stage, config, { gateClosed = false, broken = new S
   const cfg = normalizeConfig(config);
   return {
     spring: { id: stage.spring.id, height: frac(stage.spring.height) },
+    // 泉が2つの面（43〜48面）：二つ目の泉 spring2 も水位の決まった点にする
+    ...(stage.spring2 ? { springs: [stage.spring, stage.spring2].map(s => ({ id: s.id, height: frac(s.height) })) } : {}),
     towers: stage.towers.map(t => ({ id: t.id })),
     outlets: [
       ...stage.outlets.map(o => ({ id: o.id, tower: o.tower, height: frac(o.height), conductance: frac(o.conductance) })),
@@ -70,7 +72,8 @@ export function solveState(stage, config, { gateClosed = false } = {}) {
   let result;
   for (let round = 0; round <= siphons.length; round++) {
     result = solveCircuit(buildCircuit(stage, cfg, { gateClosed, broken }));
-    const levelOf = id => (id === stage.spring.id ? frac(stage.spring.height) : result.towers[id]?.level ?? null);
+    const springLevel = id => [stage.spring, stage.spring2].find(s => s?.id === id);
+    const levelOf = id => (springLevel(id) ? frac(springLevel(id).height) : result.towers[id]?.level ?? null);
     const newly = siphons.filter(c => {
       if (broken.has(c.id)) return false;
       const la = levelOf(c.a);
@@ -78,7 +81,7 @@ export function solveState(stage, config, { gateClosed = false } = {}) {
       if (la === null || lb === null) return false;
       // 上流側：流れが来る側。流れがないときは水位の高い側
       const upstream = la.cmp(lb) >= 0 ? c.a : c.b;
-      if (upstream === stage.spring.id) return false;
+      if (springLevel(upstream)) return false;
       return levelOf(upstream).lt(frac(c.siphon.inlet));
     });
     if (!newly.length) break;

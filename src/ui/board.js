@@ -15,13 +15,14 @@ const TOWER_W = 34;
 const SPRING_W = 46;
 
 export function layoutFor(stage) {
-  const H = Number(stage.spring.height);
+  // 盤面の高さは、高い方の給水塔に合わせる（泉が2つの面、43〜48面）
+  const H = Math.max(...[stage.spring, stage.spring2].filter(Boolean).map(sp => Number(sp.height)));
   // 壁とサイフォンの山も入る高さにする
   const top = Math.max(H, ...(stage.walls ?? []).map(w => Number(w.height)), ...stage.candidates.filter(c => c.siphon).map(c => Number(c.siphon.crest)));
   const unit = Math.min(40, 300 / (top + 1));
   const xOf = x => 18 + x * 32.4;
   const nodes = new Map();
-  nodes.set(stage.spring.id, { id: stage.spring.id, kind: 'spring', cx: xOf(stage.spring.x), w: SPRING_W });
+  for (const sp of [stage.spring, stage.spring2].filter(Boolean)) nodes.set(sp.id, { id: sp.id, kind: 'spring', cx: xOf(sp.x), w: SPRING_W });
   for (const t of stage.towers) nodes.set(t.id, { id: t.id, kind: 'tower', cx: xOf(t.x), w: TOWER_W });
   const towerTop = GROUND - (H + 1) * unit;
   // 地面の下の段の間隔。4段ある面は少し詰めて、盤面の下に収める
@@ -420,30 +421,34 @@ export function renderBoard(svg, model) {
   drawCrossings(out, layout, stage, model, svg.id);
 
   // 泉
-  const spring = layout.nodes.get(stage.spring.id);
-  const sx0 = spring.cx - spring.w / 2;
-  const sy = layout.yOf(H);
-  // 絵の部品は、明るい背景に溶け込まないよう、部品の周りだけに青い陰影を置き、縁を濃い青で縁取る（バインディング）。
-  // 前作は暗い背景に淡い陰影と明るい縁取りで分けていた。本作は明るい背景なので、その逆（2026-11-01 発案者）。
-  // 仕上がりは採用する絵に合わせて決める。それまでは目立たない控えめな値にしておく（強すぎると「あからさま」になる）
-  if (pick.spring) out.push(`<rect x="${sx0 - 9}" y="${sy - 11}" width="${spring.w + 18}" height="${GROUND - sy + 11}" rx="8" fill="none" stroke="rgba(72, 108, 126, .08)" stroke-width="2"/>`);
-  if (!pick.spring) out.push(`<rect x="${sx0 - 4}" y="${sy - 10}" width="${spring.w + 8}" height="${GROUND - sy + 10}" rx="5" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
-  out.push(`<rect x="${sx0}" y="${sy}" width="${spring.w}" height="${GROUND - sy}" fill="${materialWater(out,'garden-source-water',waterColor(H,H))}"/>`);
-  out.push(`<path d="${surfacePath(sx0, sx0 + spring.w, sy, reducedMotion ? 0 : 0.8, time / 420)}" stroke="var(--surface)" stroke-width="1.3" fill="none"/>`);
-  if (pick.spring) {
-    sliced(out, 'part-spring', sx0 - 8, sy - 12, spring.w + 16, GROUND - sy + 12, 120, 24, 20);
-    out.push(`<rect x="${sx0 - 7}" y="${sy - 11}" width="${spring.w + 14}" height="${GROUND - sy + 11}" rx="6" fill="none" stroke="var(--blue-deep)" stroke-width=".7" opacity=".22"/>`);
-  }
-  // 給水塔：水の高さが見える縦長の設備。自然の泉という呼び名は使わない。
-  drawSocket(out,spring.cx,GROUND,spring.w+14);
-  foreground.push(`<g class="source-height" aria-label="給水塔の高さ${esc(stage.spring.height)}">`);
-  badge(foreground, { x: spring.cx, y: sy - 32, text: '給水塔', tone: 'blue' });
-  heightBadge(foreground, { x: spring.cx, y: sy - 15, text: `高さ${stage.spring.height}` });
-  foreground.push('</g>');
-  // 給水塔の目盛りも、グラスと共通の高さ1ずつ。青い水の上で読める白い刻み。
-  for (let k = 1; k <= H; k++) {
-    const y = layout.yOf(k);
-    out.push(`<line class="spring-tick" data-height-level="${k}" x1="${sx0 + spring.w - 7}" y1="${y}" x2="${sx0 + spring.w - 1}" y2="${y}" stroke="#ffffff" stroke-width="1.5"/>`);
+  // 泉が2つの面（43〜48面）では、二つ目の給水塔 spring2 も同じ形で描く。札は面の定義の label（「左の給水塔」など）
+  for (const sp of [stage.spring, stage.spring2].filter(Boolean)) {
+    const SH = Number(sp.height);
+    const spring = layout.nodes.get(sp.id);
+    const sx0 = spring.cx - spring.w / 2;
+    const sy = layout.yOf(SH);
+    // 絵の部品は、明るい背景に溶け込まないよう、部品の周りだけに青い陰影を置き、縁を濃い青で縁取る（バインディング）。
+    // 前作は暗い背景に淡い陰影と明るい縁取りで分けていた。本作は明るい背景なので、その逆（2026-11-01 発案者）。
+    // 仕上がりは採用する絵に合わせて決める。それまでは目立たない控えめな値にしておく（強すぎると「あからさま」になる）
+    if (pick.spring) out.push(`<rect x="${sx0 - 9}" y="${sy - 11}" width="${spring.w + 18}" height="${GROUND - sy + 11}" rx="8" fill="none" stroke="rgba(72, 108, 126, .08)" stroke-width="2"/>`);
+    if (!pick.spring) out.push(`<rect x="${sx0 - 4}" y="${sy - 10}" width="${spring.w + 8}" height="${GROUND - sy + 10}" rx="5" fill="var(--stone)" stroke="var(--stone-edge)" stroke-width="1.5"/>`);
+    out.push(`<rect x="${sx0}" y="${sy}" width="${spring.w}" height="${GROUND - sy}" fill="${materialWater(out,'garden-source-water',waterColor(SH,H))}"/>`);
+    out.push(`<path d="${surfacePath(sx0, sx0 + spring.w, sy, reducedMotion ? 0 : 0.8, time / 420)}" stroke="var(--surface)" stroke-width="1.3" fill="none"/>`);
+    if (pick.spring) {
+      sliced(out, 'part-spring', sx0 - 8, sy - 12, spring.w + 16, GROUND - sy + 12, 120, 24, 20);
+      out.push(`<rect x="${sx0 - 7}" y="${sy - 11}" width="${spring.w + 14}" height="${GROUND - sy + 11}" rx="6" fill="none" stroke="var(--blue-deep)" stroke-width=".7" opacity=".22"/>`);
+    }
+    // 給水塔：水の高さが見える縦長の設備。自然の泉という呼び名は使わない。
+    drawSocket(out,spring.cx,GROUND,spring.w+14);
+    foreground.push(`<g class="source-height" aria-label="給水塔の高さ${esc(sp.height)}">`);
+    badge(foreground, { x: spring.cx, y: sy - 32, text: sp.label ?? '給水塔', tone: 'blue' });
+    heightBadge(foreground, { x: spring.cx, y: sy - 15, text: `高さ${sp.height}` });
+    foreground.push('</g>');
+    // 給水塔の目盛りも、グラスと共通の高さ1ずつ。青い水の上で読める白い刻み。
+    for (let k = 1; k <= SH; k++) {
+      const y = layout.yOf(k);
+      out.push(`<line class="spring-tick" data-height-level="${k}" x1="${sx0 + spring.w - 7}" y1="${y}" x2="${sx0 + spring.w - 1}" y2="${y}" stroke="#ffffff" stroke-width="1.5"/>`);
+    }
   }
 
   // グラス
@@ -579,6 +584,7 @@ export function renderBoard(svg, model) {
   const labelPositions = pipeLabelPositions(layout, stage);
   for (const c of stage.candidates) drawPipeLabel(foreground, layout, c, model, labelPositions.get(c.id));
   // 左の既存の余白へ共通の物差し。グラスと給水塔に同じ yOf を使う。
+  const sy = layout.yOf(H); // 物差しは高い方の給水塔の高さまで
   out.push(`<g class="height-ruler" aria-label="高さの物差し。地面が0、1目盛りは高さ1。" pointer-events="none"><rect x="1" y="${sy - 22}" width="21" height="${GROUND - sy + 30}" rx="3" fill="#ffffff" fill-opacity=".9" stroke="#b6cadb" stroke-width=".7"/><text x="11.5" y="${sy - 10}" text-anchor="middle" font-size="9" font-weight="700" fill="#173f70">高さ</text><path d="M19 ${sy} V${GROUND}" fill="none" stroke="#507c9f" stroke-width=".8"/>`);
   for (let k = 0; k <= H; k++) {
     const y = layout.yOf(k);

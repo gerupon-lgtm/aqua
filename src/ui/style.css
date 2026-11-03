@@ -385,7 +385,7 @@ th { color: var(--ink-soft); font-weight: 500; }
 .level-list .level { display: grid; justify-items: start; gap: 2px; padding: 10px 14px; border-radius: 12px; text-align: left; cursor: pointer; }
 .level-list .level b { font-size: 16px; }
 .level-list .level span { font-size: 12.5px; color: var(--ink-soft); }
-.stage-list { display: grid; gap: 4px; }
+.stage-list { display: grid; gap: 8px; } /* 行どうしが触れて見えないよう 8px あける（2026-11-04） */
 .stage-item { box-sizing: border-box; width: 100%; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
 .stage-item.current { border-color: var(--blue); background: #eaf3fb; box-shadow: inset 3px 0 var(--blue); }
 /* 前作 prism の課題の一覧に合わせる：まとまりごとのページ、名前とまとまり、最高点、前へ・次へ（2026-11-04） */
@@ -395,7 +395,8 @@ th { color: var(--ink-soft); font-weight: 500; }
 .stage-item-score { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; }
 .stage-item-score small { font-size: .72em; color: var(--muted, #5b6f86); }
 .stage-item-score strong { font-size: .95em; font-weight: 600; font-variant-numeric: tabular-nums; }
-.stage-list-card .pager { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; }
+.stage-list-card .pager { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 10px 0 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+/* 「前へ」「次へ」と「閉じる」が触れないよう、ページ送りの下に区切りと間をとる（2026-11-04 発案者） */
 .stage-list-card .pager button { min-height: 44px; min-width: 72px; }
 .stage-list-card .pager span { color: var(--muted, #5b6f86); font-variant-numeric: tabular-nums; white-space: nowrap; }
 /* スマホでは前作と同じく、名前の行の下に最高点の行を置く（右へはみ出さない） */
