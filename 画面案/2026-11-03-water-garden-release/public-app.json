@@ -1,0 +1,144 @@
+{
+  "recordTableUnchanged": true,
+  "layouts": [
+    {
+      "board": {
+        "bottom": 498.0625,
+        "height": 279.0625,
+        "left": 12,
+        "right": 308,
+        "top": 219,
+        "width": 296,
+        "x": 12,
+        "y": 219
+      },
+      "body": [
+        320,
+        640
+      ],
+      "foreground": "badge-foreground",
+      "outlets": [
+        {
+          "belowHeight": true,
+          "heightDifference": 0,
+          "id": "O1",
+          "rightDifference": 0,
+          "text": "必要量4/秒"
+        },
+        {
+          "belowHeight": true,
+          "heightDifference": 0,
+          "id": "O2",
+          "rightDifference": 0,
+          "text": "必要量4/秒"
+        }
+      ],
+      "page": [
+        320,
+        640
+      ],
+      "panImages": [
+        "https://aqua.sikumilab.com/v0.14.12/public/graphics/part-drain-pan-v2.png",
+        "https://aqua.sikumilab.com/v0.14.12/public/graphics/part-drain-pan-v2.png"
+      ],
+      "version": "v0.14.12",
+      "viewport": [
+        320,
+        640
+      ]
+    },
+    {
+      "board": {
+        "bottom": 538.0625,
+        "height": 341.0625,
+        "left": 12,
+        "right": 378,
+        "top": 197,
+        "width": 366,
+        "x": 12,
+        "y": 197
+      },
+      "body": [
+        390,
+        680
+      ],
+      "foreground": "badge-foreground",
+      "outlets": [
+        {
+          "belowHeight": true,
+          "heightDifference": -0.000030517578125,
+          "id": "O1",
+          "rightDifference": 0,
+          "text": "必要量4/秒"
+        },
+        {
+          "belowHeight": true,
+          "heightDifference": -0.000030517578125,
+          "id": "O2",
+          "rightDifference": 0,
+          "text": "必要量4/秒"
+        }
+      ],
+      "page": [
+        390,
+        680
+      ],
+      "panImages": [
+        "https://aqua.sikumilab.com/v0.14.12/public/graphics/part-drain-pan-v2.png",
+        "https://aqua.sikumilab.com/v0.14.12/public/graphics/part-drain-pan-v2.png"
+      ],
+      "version": "v0.14.12",
+      "viewport": [
+        390,
+        680
+      ]
+    },
+    {
+      "board": {
+        "bottom": 756,
+        "height": 660,
+        "left": 24,
+        "right": 873.609375,
+        "top": 96,
+        "width": 849.609375,
+        "x": 24,
+        "y": 96
+      },
+      "body": [
+        1280,
+        800
+      ],
+      "foreground": "badge-foreground",
+      "outlets": [
+        {
+          "belowHeight": true,
+          "heightDifference": 0.00006103515625,
+          "id": "O1",
+          "rightDifference": 0,
+          "text": "必要量4/秒"
+        },
+        {
+          "belowHeight": true,
+          "heightDifference": 0.00006103515625,
+          "id": "O2",
+          "rightDifference": 0,
+          "text": "必要量4/秒"
+        }
+      ],
+      "page": [
+        1280,
+        800
+      ],
+      "panImages": [
+        "https://aqua.sikumilab.com/v0.14.12/public/graphics/part-drain-pan-v2.png",
+        "https://aqua.sikumilab.com/v0.14.12/public/graphics/part-drain-pan-v2.png"
+      ],
+      "version": "v0.14.12",
+      "viewport": [
+        1280,
+        800
+      ]
+    }
+  ],
+  "logs": []
+}

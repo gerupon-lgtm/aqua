@@ -1,0 +1,467 @@
+{
+  "origin": "https://aqua.sikumilab.com/",
+  "version": "0.14.12",
+  "commit": "e80cb5d15a4d1a7459226a1679977f3e6efd72a6",
+  "assets": 64,
+  "checked": 66,
+  "errors": [],
+  "rows": [
+    {
+      "path": "./index.html",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 4839,
+      "hash": "f5ec754a4173bec536815c6a06dc6ec7b0e6dcf5594ba5ebfee7b45dfc6edaec"
+    },
+    {
+      "path": "./manifest.webmanifest",
+      "status": 200,
+      "type": "application/manifest+json; charset=utf-8",
+      "bytes": 512,
+      "hash": "c0a95874c8d7ca9df171722e6e63fd2250a9a7129d8e9956ffea430c9fd1926e"
+    },
+    {
+      "path": "./v0.14.12/public/apple-touch-icon.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 776,
+      "hash": "6933653c55f01b7c2df854663b3d26a5d59daedbdf82cb6cae7869f5b4282e56"
+    },
+    {
+      "path": "./v0.14.12/public/fonts/montserrat-500.ttf",
+      "status": 200,
+      "type": "font/ttf",
+      "bytes": 180036,
+      "hash": "637639da93fdd9178e52662cce4bd5a59a544eb60677bb6ef9f89bc472607e5d"
+    },
+    {
+      "path": "./v0.14.12/public/fonts/montserrat-600.ttf",
+      "status": 200,
+      "type": "font/ttf",
+      "bytes": 180584,
+      "hash": "c535bb158e8cfc3c27654f73aa68a87732899e7d9b10d8496b68605a56d947a7"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/bg-trial.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 72606,
+      "hash": "4767a7a136db873cfd685a4c0b4b8ebed592690747f4a18ee9eac201330e3336"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/fx-fountain-01.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 11035,
+      "hash": "eaa3940b34b36f59d24a6d75b576738403bd7f59249cc617214e9338577ac16f"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/fx-fountain-02.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 23215,
+      "hash": "37ee37968ccc0d05a537d33e660d727902bae8d4365cb4c4099f7d2741c02959"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/fx-fountain-03.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 41644,
+      "hash": "63397aea24706430d86a64049a59ca4cd1427369bd983c0e1decad9bbbc4fc9e"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/fx-fountain-04.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 57202,
+      "hash": "96d3d559e69704f17ac697a5691ea85fa0eb80749e2c7133aa95b126bf2eca17"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/fx-fountain-05.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 63044,
+      "hash": "e0fcef1bccdc0ed781bb3b8dc7be2184aa305b5f84b66afbb861c31661d5eba7"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/fx-fountain-06.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 60178,
+      "hash": "5bc210c67f6d6fa9611ec04c612d290c30ab163e1ab199155200c57c25bfa44c"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/fx-rainbow.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 44943,
+      "hash": "7535d2b4e0dac36f110acea72aed48f43d3133928002268f91b20796c6788b5d"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/intro-adjustable.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 2020,
+      "hash": "017830fa9746c8d1a1fb73aeb8f8f013c4fbaecfe4e4d728cc508a6db891a70d"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/intro-gate.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 183288,
+      "hash": "ab7582d49ca7afea2b983c98ac3fad5509ac7e246d317baf752d7053b0289449"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/intro-height.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 91078,
+      "hash": "c5501a66ec4bcd8135934dace72e4737ecb5ed59003610623f18e3f7a878e5db"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/intro-outlets.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 181843,
+      "hash": "faae6358750bde4b1827959ecc2a0679da73e31970a2db0c960a09c244b3795a"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/intro-siphon.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 91759,
+      "hash": "9884464e9fac40e06fbfa934d53e8f425010837ae39b375313b56a11112ad06a"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-basin.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 14062,
+      "hash": "f14cac291b9487ada092e2a7e499412bfc02e93c6127fb55941e9ff5f6f8ced5"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-drain-pan-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 66821,
+      "hash": "1c91caeb19b5de8c6f07fc2da48d8b66f07242365815f9c8c135b40a47ea93e4"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-glass-bottom.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3317,
+      "hash": "b465fe779340bf29f7af57ab621674ba4988e071d55258c42f5b7e0f98203695"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-glass-middle.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 339,
+      "hash": "141c7ac1f40043c8f8cd8b94be5099e382e19cdee35067e5600cfe0e8b23f87d"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-glass-top.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3305,
+      "hash": "5aed7c251df34d77ca42f163bd97ef7d0e083997b1ba54e69ba7e2c75b88ae35"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-pedestal-middle.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 351,
+      "hash": "cfa9c880f62ac6d5551d2526f5d0eeb6d8a39bf7776426938a0ec321c05b61f1"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-pedestal-top.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 8279,
+      "hash": "39fc89f59810d3d087f9bfdbe6ecfc5f84fddfe97f56bac78510b323b985ac68"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-spring-bottom.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3792,
+      "hash": "9c494567f75be23973ee80a85c003a86330c03241c956f00d066fea60a1e6ae5"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-spring-middle.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 310,
+      "hash": "b16214b7e88e43a4090e06d50925d457ffa7ae36a5f60a3a80cfe8adb7da47ad"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/part-spring-top.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 3245,
+      "hash": "a33846c0f93c6e1ee7ba35b618a361e5c92d1fead5b5f87678d6a1288accf26e"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/soil-loam-v1.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 76946,
+      "hash": "fd8e09ea08a0874313bd496b73fd80d38cb78ab80adf057bf4d1836a0cb2db44"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/spirit-detail-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 118262,
+      "hash": "d1fa4ed1502f743d94ee535dd028dc40af7d88d21e4bd4e4a6e5e7addb656c6c"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/spirit.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 35229,
+      "hash": "3cb0bed80fd67a633c1fb1f707e6f2633af9186502891a0d1959325417e39d64"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/title-fountain-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 164713,
+      "hash": "5b3ee90819f07af528e1eff9801cf86151b306e00c2e7321a0c8ce99425e9eb7"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/title-glass-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 123625,
+      "hash": "520f7271957a67014b69a0058b162d67a7b0e45d4d8e26d9fa6aab089ba32f23"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/title-landscape.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 140054,
+      "hash": "92a28145e7f0942998163f5dedd66de870195df4c0c92a724766bf8330633928"
+    },
+    {
+      "path": "./v0.14.12/public/graphics/title-portrait.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 113926,
+      "hash": "1527ef278b05946e23413bd2c8288195234a7f7cffa7fba96a9e98f92e197b12"
+    },
+    {
+      "path": "./v0.14.12/public/icon-192.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 823,
+      "hash": "cb32e2bda25ce12686877fa9f2401c93b02c2de0ebfa8ae519f48141b1048cbf"
+    },
+    {
+      "path": "./v0.14.12/public/icon-512.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 7141,
+      "hash": "f6be7b911bee79fddc0f07beb1297fc8e0aac785574645424137271c6df05c01"
+    },
+    {
+      "path": "./v0.14.12/src/content/challenge-draw.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 2285,
+      "hash": "e9e7322f56f4dd8b37b0205483bbdada5967a1b1b7786108f269e65cd0b0f78b"
+    },
+    {
+      "path": "./v0.14.12/src/content/challenges.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 121028,
+      "hash": "4710ce64542725ee08951ed0c9632964c46a67674a974001d77584b37bc4b08f"
+    },
+    {
+      "path": "./v0.14.12/src/content/stages.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 41875,
+      "hash": "5ebf485a6043313a909c7c9d76f8f30385ca9c96983e4810e4a83b2df43ab4c5"
+    },
+    {
+      "path": "./v0.14.12/src/content/tutorial.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 7162,
+      "hash": "c3516eb9647c079fb4ada1152d2e2c51824d1a65801344fe2ad4db264138dff2"
+    },
+    {
+      "path": "./v0.14.12/src/logic/challenge-check.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 2180,
+      "hash": "14360d042f7bff63378c7f427cba21d80a7e8807b0758a4dc7fbe9a877f1bc45"
+    },
+    {
+      "path": "./v0.14.12/src/logic/explain.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 8968,
+      "hash": "9ccad8209c7bd96991766df19656e43efd472b149e46bea5482695392c0afdd6"
+    },
+    {
+      "path": "./v0.14.12/src/logic/flow.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 6889,
+      "hash": "0164f6fcdbe1a81bc9ecadc46ca8838610d6b145bdae97f89843e6e5ca34a5f7"
+    },
+    {
+      "path": "./v0.14.12/src/logic/fraction.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 2853,
+      "hash": "fb06c8842d93ce76108e4feb8acc4dac43b4b6fac25aee4a3e1f7b31e6390b27"
+    },
+    {
+      "path": "./v0.14.12/src/logic/generate.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 6624,
+      "hash": "01fc52677747cc4a924382238e71cec7360d7d335382b37c3fe41900f8f6b4d2"
+    },
+    {
+      "path": "./v0.14.12/src/logic/modes.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 3795,
+      "hash": "517a39683eae8c23f831bff3fcd6bc54aba1bf4a3d24b6a30a5523e2bb07f809"
+    },
+    {
+      "path": "./v0.14.12/src/logic/pitch.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 2789,
+      "hash": "ff2c7fd6bdbf2c0b8e5ae3a77367bba495f45923c9ffdd4573d05573af0a36a6"
+    },
+    {
+      "path": "./v0.14.12/src/logic/play.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 7877,
+      "hash": "d4111a4cc69f5c02059b977a7a1cfb6e6d794ccf50b14f1ca2daf8a2a3f3323d"
+    },
+    {
+      "path": "./v0.14.12/src/logic/records.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 4165,
+      "hash": "5e5a1ff372ea91c37a61322b455b76d1737edad0831a5c3f62f445be5d475f42"
+    },
+    {
+      "path": "./v0.14.12/src/logic/score.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 1165,
+      "hash": "a089bf44f96c9486cdb5591851d44252a78ca50b4e6fefd933b4686f9498fbbb"
+    },
+    {
+      "path": "./v0.14.12/src/ui/app.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 65170,
+      "hash": "79a6eb4a1a9a4eb99529cf7cb44bbf578b1a6170d59d79da27cec8a397734c95"
+    },
+    {
+      "path": "./v0.14.12/src/ui/audio.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 12342,
+      "hash": "c4e98dc3e9d00adf883123ab977ee94d095d0babc2d0eab4bc67a11c95a02a1f"
+    },
+    {
+      "path": "./v0.14.12/src/ui/board-annotations.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 3930,
+      "hash": "7c1abc801f798c595adb85d0289e114c3a8bb9bdd703da0cead193c56cf55a6b"
+    },
+    {
+      "path": "./v0.14.12/src/ui/board-materials.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 5638,
+      "hash": "c0b5f2c93caf47ebed532fd43d689ddf67b976d16d457b56478bd940b9e60cb2"
+    },
+    {
+      "path": "./v0.14.12/src/ui/board-part-geometry.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 231,
+      "hash": "5f1fe7d73115b30f80722506a2ebcea0cd1c795f8b54ac0adec2d68aa200299b"
+    },
+    {
+      "path": "./v0.14.12/src/ui/board-water-effects.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 3285,
+      "hash": "9e1a63bf42b2dc9d69faaca72506b9406ec2db1aa0b59a4aa66aa774e8dce752"
+    },
+    {
+      "path": "./v0.14.12/src/ui/board.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 43343,
+      "hash": "af0fd0d5d43ff21fef3b59fa3f8097a21c67f1e5e1989c8e54dd26d3e637f0ab"
+    },
+    {
+      "path": "./v0.14.12/src/ui/guide-copy.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 2261,
+      "hash": "fe4ded0f99f1764fe07ec7af3bcaf4198706954034fa30a1bc2e9af9ffb60d8e"
+    },
+    {
+      "path": "./v0.14.12/src/ui/info-copy.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 3867,
+      "hash": "fbe5c0ab7439b63fd3a786f2e8fda27f1b3175cf440a43ea615d3d2408cce7b5"
+    },
+    {
+      "path": "./v0.14.12/src/ui/outlet-label-layout.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 8320,
+      "hash": "70e25df6ed48e2510e2ce459458584a76fe9262ff006bae0dec1a877c0921f69"
+    },
+    {
+      "path": "./v0.14.12/src/ui/style.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 43191,
+      "hash": "540dce7dc15b97060b96e120f330d6e3a5706f022310d34ccf692ccc615c61a4"
+    },
+    {
+      "path": "./v0.14.12/src/ui/text-layout.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 4088,
+      "hash": "d87370a8900c8776df092734b2954bb32b15fe937021378fef78b4b23b01b251"
+    },
+    {
+      "path": "./v0.14.12/src/ui/visual-timing.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 1268,
+      "hash": "9038d3da187198d1b048ea7ae018534f8713da890e8bb57df5751b25a930cb57"
+    }
+  ],
+  "worker": {
+    "status": 200,
+    "type": "application/javascript; charset=utf-8",
+    "hash": "aaf09c4fb54a1bf99b48b980f032e9fbeccdbe6b48b53823945b72c20e65af47"
+  },
+  "licence": {
+    "status": 200,
+    "type": "text/plain; charset=utf-8"
+  }
+}
