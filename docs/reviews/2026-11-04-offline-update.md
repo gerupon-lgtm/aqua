@@ -46,3 +46,8 @@ v0.17.4 までの worker で分かっていた弱点は、次の4つ。
 - 未確認のこと：
   - 実機（Pixel 6a・iPhone XR）、本当に遅い回線、iOS の Safari・WebKit。
   - 自由作成とファイル入出力を含む全機能の通信なし確認。自由作成（T-07）の実装後に行う。
+
+## 公開確認
+
+- 配信元：af0d840c36b667637a19948bce72594027ce235b。GitHub Actions の build・deploy 成功。公開版の build-info は 0.17.5、sw.js に取得の期限（ASSET_FETCH_TIMEOUT_MS）が入っている。
+- 公開版をヘッドレス Chrome で開き、準備完了（全資材そろう）→通信を切って開き直し、v0.17.5 で起動、画面のエラー0件。
