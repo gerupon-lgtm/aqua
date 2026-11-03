@@ -2,9 +2,9 @@
 export const RAINBOW_AFTER_MS = 800;
 export const RAINBOW_FADE_MS = 700;
 export const RAINBOW_HOLD_MS = 500;
-// 開始の合図は2回光る（2026-11-03 発案者）。1回700ms（明るくなる120ms・保つ300ms・消える280ms）、間に200ms暗い
+// 開始の合図は2回光る（2026-11-03 発案者）。1回700ms（明るくなる120ms・保つ300ms・消える280ms）、間に350ms暗い（v0.15.2で200msから広げた）
 export const STAGE_CUE_FLASH_MS = 700;
-export const STAGE_CUE_GAP_MS = 200;
+export const STAGE_CUE_GAP_MS = 350;
 export const STAGE_CUE_MS = STAGE_CUE_FLASH_MS * 2 + STAGE_CUE_GAP_MS;
 // 画面を移ったあと、視線が条件へ向く時間を置く。
 export const STAGE_CUE_WAIT_MS = 700;
