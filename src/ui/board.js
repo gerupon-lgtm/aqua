@@ -455,6 +455,11 @@ export function renderBoard(svg, model) {
     const level = levels.get(t.id);
     const finalT = evaluation?.result.towers[t.id];
     const onTick = settled && finalT?.state === 'water' && model.onScale(finalT.level);
+    // グラスの名前（解説の「グラスA」と対応させる）。給水塔と同じ青い札を口の縁に載せる。
+    // 縁より上へ出すと、狭い画面で盤面の切り出し範囲が広がり盤面が縮むため（2026-11-03 発案者）。
+    // サイフォンが口から入るグラスは、縦の管を隠さないよう、管の山の上へ置く
+    const crests = stage.candidates.filter(c => c.siphon && (c.a === t.id || c.b === t.id)).map(c => pipePath(layout, c).my);
+    badge(foreground, { x: node.cx, y: Math.min(towerTop - 3, ...crests.map(y => y - 14)), text: `グラス${t.id}`, tone: 'blue' });
     // グラスの光（ぼかしのフィルターは処理が重いので、太い半透明の線を重ねて表す）
     if (onTick) {
       out.push(`<rect x="${x0 - 5}" y="${towerTop - 5}" width="${TOWER_W + 10}" height="${GROUND - towerTop + 5}" rx="10" fill="none" stroke="var(--gold)" stroke-width="8" opacity=".22"/>`);

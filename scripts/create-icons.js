@@ -1,63 +1,49 @@
-// アプリのアイコン（PNG）を作る。追加のライブラリなしで、node:zlib だけで書き出す。
-// 図柄：明るい青の地に、白い泉と、水位の違う3つのグラス（試作の仮。見た目の確定は T-13）
-import { writeFileSync, mkdirSync } from 'node:fs';
-import { deflateSync } from 'node:zlib';
+// アプリのアイコン（PNG）を作る。前作 prism の scripts/create-icons.cjs と同じ形：地の色の上にロゴの文字だけを置く（2026-11-03 発案者）。
+// 色はアプリの中のロゴ（style.css の .logo）に合わせ、明るい地に「AQUA」を深い青、「NOTES」を水色で描く。
+// 文字は同梱の Montserrat を使い、通信しない。描画には端末の Chrome を使う（前作の Playwright の代わり。追加のライブラリなし）
+// 使い方：node scripts/create-icons.js [Chrome の場所]
+import { spawn } from 'node:child_process';
+import { readFileSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const chromePath = process.argv[2] ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const font = weight => readFileSync(join(root, 'public/fonts', `montserrat-${weight}.ttf`)).toString('base64');
+const BG = '#eef5fb', AQUA = '#1d4f88', NOTES = '#4b9ad8';
 
-const crcTable = Array.from({ length: 256 }, (_, n) => {
-  let c = n;
-  for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
-  return c >>> 0;
-});
-function crc32(buf) {
-  let c = 0xffffffff;
-  for (const b of buf) c = crcTable[(c ^ b) & 0xff] ^ (c >>> 8);
-  return (c ^ 0xffffffff) >>> 0;
-}
-function chunk(type, data) {
-  const len = Buffer.alloc(4);
-  len.writeUInt32BE(data.length);
-  const body = Buffer.concat([Buffer.from(type), data]);
-  const crc = Buffer.alloc(4);
-  crc.writeUInt32BE(crc32(body));
-  return Buffer.concat([len, body, crc]);
-}
+// 寸法の比は前作と同じ（文字の大きさ＝一辺の0.16倍）
+const page = size => {
+  const base = size * .16;
+  return `<!doctype html><style>@font-face{font-family:Montserrat;src:url(data:font/ttf;base64,${font(600)});font-weight:600}@font-face{font-family:Montserrat;src:url(data:font/ttf;base64,${font(500)});font-weight:500}html,body{margin:0}body{background:${BG};display:grid;place-items:center;width:${size}px;height:${size}px}.logo{display:flex;flex-direction:column;align-items:center}.aqua{font:600 ${base}px Montserrat;color:${AQUA};letter-spacing:${base / 12}px;margin-right:${-base / 12}px}.notes{font:500 ${base * .375}px Montserrat;color:${NOTES};letter-spacing:${base * .2291666667}px;margin-right:${-base * .2291666667}px;margin-top:${base / 12}px}</style><div class="logo"><div class="aqua">AQUA</div><div class="notes">NOTES</div></div>`;
+};
 
-function draw(size) {
-  const px = Buffer.alloc(size * size * 4);
-  const set = (x, y, [r, g, b]) => { const i = (y * size + x) * 4; px[i] = r; px[i + 1] = g; px[i + 2] = b; px[i + 3] = 255; };
-  const sky = [42, 109, 181];
-  const glass = [235, 244, 252];
-  const water = [140, 205, 243];
-  const deep = [29, 79, 136];
-  const u = size / 16;
-  const towers = [[3.2, 9.5, deep], [7.0, 6.5, water], [10.8, 4.0, water]]; // [左端, 水位, 色]
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      let c = sky;
-      const gx = x / u;
-      const gy = (size - y) / u; // 下からの高さ
-      if (gy < 3) c = [236, 229, 214];
-      for (const [left, level, color] of towers) {
-        if (gx >= left && gx <= left + 2.2 && gy >= 3 && gy <= 12.5) c = gy <= 3 + level ? color : glass;
-      }
-      set(x, y, c);
-    }
+const profile = mkdtempSync(join(tmpdir(), 'aqua-icons-'));
+const port = 9300 + Math.floor(Math.random() * 400);
+const chrome = spawn(chromePath, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, 'about:blank']);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+try {
+  let tabs = null;
+  for (let i = 0; i < 50 && !tabs; i++) { await sleep(200); tabs = await fetch(`http://127.0.0.1:${port}/json`).then(r => r.json()).catch(() => null); }
+  if (!tabs) throw new Error('Chrome に接続できませんでした。');
+  const ws = new WebSocket(tabs.find(t => t.type === 'page').webSocketDebuggerUrl);
+  await new Promise((ok, ng) => { ws.onopen = ok; ws.onerror = ng; });
+  let id = 0; const waiting = new Map();
+  ws.onmessage = e => { const m = JSON.parse(e.data); waiting.get(m.id)?.(m); waiting.delete(m.id); };
+  const send = (method, params = {}) => new Promise((ok, ng) => { const n = ++id; waiting.set(n, m => (m.error ? ng(new Error(m.error.message)) : ok(m.result))); ws.send(JSON.stringify({ id: n, method, params })); });
+  for (const [name, size] of [['icon-192.png', 192], ['icon-512.png', 512], ['apple-touch-icon.png', 180]]) {
+    await send('Emulation.setDeviceMetricsOverride', { width: size, height: size, deviceScaleFactor: 1, mobile: false });
+    await send('Page.navigate', { url: `data:text/html;base64,${Buffer.from(page(size)).toString('base64')}` });
+    await sleep(300);
+    await send('Runtime.evaluate', { expression: 'document.fonts.ready.then(() => document.fonts.size)', awaitPromise: true });
+    const { data } = await send('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, width: size, height: size, scale: 1 } });
+    writeFileSync(join(root, 'public', name), Buffer.from(data, 'base64'));
+    console.log(`public/${name}（${size}×${size}）`);
   }
-  const raw = Buffer.alloc(size * (size * 4 + 1));
-  for (let y = 0; y < size; y++) px.copy(raw, y * (size * 4 + 1) + 1, y * size * 4, (y + 1) * size * 4);
-  const ihdr = Buffer.alloc(13);
-  ihdr.writeUInt32BE(size, 0);
-  ihdr.writeUInt32BE(size, 4);
-  ihdr[8] = 8; ihdr[9] = 6; // 8bit RGBA
-  return Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]), chunk('IHDR', ihdr), chunk('IDAT', deflateSync(raw)), chunk('IEND', Buffer.alloc(0))]);
+  ws.close();
+} finally {
+  chrome.kill();
+  await sleep(300);
+  rmSync(profile, { recursive: true, force: true, maxRetries: 3 });
 }
-
-mkdirSync(join(root, 'public'), { recursive: true });
-for (const [name, size] of [['icon-192.png', 192], ['icon-512.png', 512], ['apple-touch-icon.png', 180]]) {
-  writeFileSync(join(root, 'public', name), draw(size));
-}
-console.log('public/ にアイコンを作りました');
