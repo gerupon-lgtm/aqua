@@ -1,3 +1,4 @@
+import { DRAIN_STEP_NAMES } from '../logic/play.js';
 import { materialDefs, materialWater, drawGardenSoil, drawSocket, drawGardenPedestal, drawDrainPan, drawNozzleLip, drawGardenFeed } from './board-materials.js';
 import { createOutletLabelLayout } from './outlet-label-layout.js';
 import { outletAnnotations, quantityBadge, heightBadge, HEIGHT_BADGE, annotationRect } from './board-annotations.js';
@@ -466,6 +467,16 @@ export function renderBoard(svg, model) {
       const other = layout.nodes.get(c.a === t.id ? c.b : c.a);
       const leg = pipePath(layout, c).pts[node.cx <= other.cx ? 0 : 3];
       badge(foreground, { x: leg[0], y: leg[1], text: `ポンプ 入口${c.siphon.inlet}`, tone: 'light', size: 8.5, dashed: true });
+    }
+    // 排水口（37〜42面、F-009）：グラスの底に、今の段を書いた札を置く。編集中はタップで段を選ぶ。
+    // 絵（part-drain）が届くまでの仮の表示
+    for (const d of (stage.drains ?? []).filter(x => x.tower === t.id)) {
+      const step = model.drains?.[d.id] ?? 'closed';
+      const name = DRAIN_STEP_NAMES[step];
+      const open = step !== 'closed';
+      foreground.push(`<g class="drain${open ? ' open' : ''}" data-drain="${d.id}" pointer-events="${phase === 'edit' ? 'all' : 'none'}" aria-label="排水口 ${name}">`);
+      const w = badge(foreground, { x: node.cx, y: GROUND - 10, text: `排水口 ${name}`, tone: open ? 'blue' : 'light', size: 8.5, dashed: !open });
+      foreground.push(`<rect x="${node.cx - w / 2 - 4}" y="${GROUND - 22}" width="${w + 8}" height="24" fill="transparent"/></g>`);
     }
     // グラスの光（ぼかしのフィルターは処理が重いので、太い半透明の線を重ねて表す）
     if (onTick) {

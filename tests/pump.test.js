@@ -1,4 +1,4 @@
-// 手押しポンプ（F-007、31〜36面）：汲める条件、桶に数えないこと、出題の検査
+// 後続のパーツ（T-14）：手押しポンプ（F-007、31〜36面）と排水口（F-009、37〜42面）。汲める条件、桶に数えないこと、捨てた水の観点、出題の検査
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { STAGES } from '../src/content/stages.js';
@@ -13,15 +13,15 @@ const stageOf = (number, values) => {
 };
 
 test('31〜36面がそろい、どの面も8つの検査済みの出題を持つ', () => {
-  assert.deepEqual(STAGES.filter(s => s.number >= 31).map(s => s.number), [31, 32, 33, 34, 35, 36]);
-  for (const s of STAGES.filter(x => x.number >= 31)) {
+  assert.deepEqual(STAGES.filter(s => s.number >= 31 && s.number <= 36).map(s => s.number), [31, 32, 33, 34, 35, 36]);
+  for (const s of STAGES.filter(x => x.number >= 31 && x.number <= 36)) {
     assert.equal(CHALLENGES[s.id].length, 8, `${s.number}面`);
     for (const q of CHALLENGES[s.id]) assert.ok(checkChallenge(applyValues(s, q.values)).ok, q.id);
   }
 });
 
 test('31〜36面の満点は、どの出題もポンプで呼び水をし、桶を使わない', () => {
-  for (const s of STAGES.filter(x => x.number >= 31)) for (const q of CHALLENGES[s.id]) {
+  for (const s of STAGES.filter(x => x.number >= 31 && x.number <= 36)) for (const q of CHALLENGES[s.id]) {
     const a = analyzeStage(applyValues(s, q.values));
     assert.ok(a.perfectConfig.pumped.length >= 1, q.id);
     assert.equal(a.perfectBuckets, 0, q.id);
@@ -67,5 +67,29 @@ test('切れるサイフォンを扱う面でも、満点のつなぎ方は切�
     const st = applyValues(s, q.values);
     const j = judge(st, analyzeStage(st).perfectConfig);
     assert.ok(j.states.every(x => !x.broken.size), q.id);
+  }
+});
+
+test('排水口（37〜42面）：開けたグラスから高さ0へ捨て、捨てた水が少ないほど満点になる', async () => {
+  const { DRAIN_STEPS } = await import('../src/logic/play.js');
+  assert.deepEqual(DRAIN_STEPS, { closed: null, half: '1/2', open: '1' });
+  // 37面：泉8・SA太1・AB太1・Bの出口1。排水口を閉じるとBへ 8/3、Aの排水口を全開にすると Aの水位 x：
+  // (8−x)＝x＋(x−y)、Bの水位 y：(x−y)＝y → y＝x/2、8−x＝x＋x/2 → x＝16/5、Bへ 8/5、捨てた水 16/5
+  const s = stageOf(37, { spring: '8', thinness: { SA: '1', SA2: '1', SA3: '1', AB: '1' }, targets: { O1: '1' } });
+  const shut = judge(s, { connected: ['SA', 'AB'] });
+  assert.equal(shut.outlets[0].flow.toString(), '8/3');
+  assert.equal(shut.drained.toString(), '0');
+  const open = judge(s, { connected: ['SA', 'AB'], drains: { D1: 'open' } });
+  assert.equal(open.outlets[0].flow.toString(), '8/5');
+  assert.equal(open.drained.toString(), '16/5');
+  assert.equal(configKey({ connected: ['SA', 'AB'], drains: { D1: 'open' } }), 'AB,SA,D1:open');
+  for (const base of STAGES.filter(x => x.number >= 37 && x.number <= 42)) {
+    assert.equal(CHALLENGES[base.id].length, 8, `${base.number}面`);
+    assert.ok(!base.candidates.some(c => c.adjustable), `${base.number}面に太さを選べる配管を置かない`);
+    for (const q of CHALLENGES[base.id]) {
+      const st = applyValues(base, q.values);
+      assert.ok(checkChallenge(st).ok, q.id);
+      assert.ok(Object.keys(analyzeStage(st).perfectConfig.drains).length >= 1, `${q.id} の満点は排水口を開ける`);
+    }
   }
 });

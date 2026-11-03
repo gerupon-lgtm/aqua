@@ -2,7 +2,7 @@
 import { STAGES } from '../content/stages.js';
 import { CHALLENGES } from '../content/challenges.js';
 import { drawChallenge } from '../content/challenge-draw.js';
-import { analyzeStage, evaluate, thinnessOf, pumpCheck } from '../logic/play.js';
+import { analyzeStage, evaluate, thinnessOf, pumpCheck, DRAIN_STEP_NAMES } from '../logic/play.js';
 import { onScale, tickSide, tickDistance, frequencyForLevel, DEFAULT_SCALE } from '../logic/pitch.js';
 import { displayScore } from '../logic/score.js';
 import { explain, formatAmount } from '../logic/explain.js';
@@ -17,7 +17,7 @@ import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logi
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.18.0';
+const APP_VERSION = '0.19.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -71,7 +71,7 @@ function saveTiming(values) {
   try { localStorage.setItem(TIMING_KEY, JSON.stringify(values)); return true; } catch { return false; }
 }
 
-const emptyConfig = () => ({ connected: new Set(), thickness: {}, primed: new Set(), pumped: new Set() });
+const emptyConfig = () => ({ connected: new Set(), thickness: {}, primed: new Set(), pumped: new Set(), drains: {} });
 const state = {
   stageIndex: 0,
   current: null, // 遊んでいる面（出題の数値を当てはめたもの）
@@ -114,6 +114,7 @@ function fieldText(key, value) {
 const scaleNow = () => DEFAULT_SCALE;
 const stage = () => state.current;
 const candidate = id => stage().candidates.find(c => c.id === id);
+const drainOf = id => (stage().drains ?? []).find(d => d.id === id);
 const bucketsLeft = () => (stage().buckets ?? 0) - [...state.config.primed].filter(id => state.config.connected.has(id) && !state.config.pumped.has(id)).length;
 const targetText = t => (typeof t === 'object' ? `開 ${t.open}・閉 ${t.closed}` : t);
 
@@ -401,6 +402,7 @@ function drawBoard() {
     layout: state.layout,
     connected: state.config.connected,
     primed: state.config.primed,
+    drains: state.config.drains,
     thinness: c => thinnessOf(c, state.config),
     selected: state.selected,
     phase: state.phase,
@@ -504,6 +506,8 @@ const THICK_NAME = { 3: '細', 2: '中', 1: '太' };
 
 // 太さ・呼び水を選ぶ（S-04 部品の設定にあたる）
 function chooserHtml() {
+  const drain = drainOf(state.selected);
+  if (drain) return drainChooserHtml(drain);
   const c = candidate(state.selected);
   if (!c) return '';
   const cfg = state.config;
@@ -536,6 +540,16 @@ function chooserHtml() {
     if (!primed && state.pumpNote) parts.push(`<p class="chooser-note pump-note" role="status">${phraseMarkup(state.pumpNote)}</p>`);
   }
   return `<div class="chooser">${parts.join('')}<div class="chooser-row chooser-actions"><button type="button" class="chip" data-remove="1">この配管を外す</button><button type="button" class="chip" data-close="1">閉じる</button></div></div>`;
+}
+
+// 排水口の段を選ぶ（S-04 部品の設定にあたる。F-009、37〜42面）
+function drainChooserHtml(d) {
+  const now = state.config.drains[d.id] ?? 'closed';
+  const chips = Object.entries(DRAIN_STEP_NAMES).map(([step, name]) => `<button type="button" class="chip${now === step ? ' on' : ''}" data-drain-step="${step}" aria-pressed="${now === step}">${name}</button>`).join('');
+  return `<div class="chooser"><div class="chooser-head"><h3>排水口（グラス${d.tower}）</h3></div>`
+    + `<p class="chooser-note">${phraseMarkup('開けると、|グラスの水が|地面へ捨てられて、|水位が下がります。|つながったほかのグラスの水位も|変わります。|半分は中の管、|全開は太い管と同じだけ流れます。')}</p>`
+    + `<div class="chooser-row"><span>開け具合</span>${chips}</div>`
+    + '<div class="chooser-row chooser-actions"><button type="button" class="chip" data-close="1">閉じる</button></div></div>';
 }
 
 // かっこ書き（前に付く数値ごと）を1かたまりにして、途中で折り返さない。
@@ -616,7 +630,8 @@ function renderPanel() {
       </section>`;
     }).join('');
   }
-  const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・配管 ${ev.used} 本` : `配管 ${ev.used} 本`;
+  const usedText = st.theme === 'buckets' ? `桶 ${ev.buckets}・配管 ${ev.used} 本`
+    : st.theme === 'drain' ? `捨てた水 毎秒${fmt(ev.drained)}・配管 ${ev.used} 本` : `配管 ${ev.used} 本`;
   // ボタンの位置はクリアとNGでそろえる：左から 解説（結果）・もう一度／配管を見直す・次へ。
   // 「次へ」がないとき（NG・最後の面）も同じ幅の見えない場所を残し、「もう一度」が右端へずれないようにする。
   // 「もう一度」のつもりで「次へ」を押してしまうのを防ぐ（2026-11-01 発案者）。
@@ -683,7 +698,7 @@ function renderPanel() {
       ${contSummary}
       ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${textMarkup(state.saveMessage)}</p>` : ''}
-      <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectBuckets}</span>` : ''}</div></div>
+      <div class="result-metrics"><ul class="outlets">${outlets}</ul><div class="minimum"><span>満点の本数</span><b>${state.analysis.perfectCount}<small>本</small></b>${st.theme === 'buckets' ? `<span>桶 ${state.analysis.perfectBuckets}</span>` : ''}${st.theme === 'drain' ? `<span>捨てる水 毎秒${fmt(state.analysis.perfectDrained)}</span>` : ''}</div></div>
       <p class="swipe-note">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
       ${explainHtml}
       <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
@@ -739,12 +754,12 @@ function questionHtml() {
 function renderToast() {
   const toast = $('toast');
   const asking = state.phase === 'edit' && state.asking;
-  const c = !asking && state.phase === 'edit' && state.selected ? candidate(state.selected) : null;
+  const c = !asking && state.phase === 'edit' && state.selected ? candidate(state.selected) ?? drainOf(state.selected) : null;
   if (!c && !asking) { if (toast.open) toast.close(); toast.innerHTML = ''; return; }
   toast.innerHTML = asking ? questionHtml() : chooserHtml();
   if (!toast.open) { toast.showModal(); toastFresh = true; }
   const rect = toast.getBoundingClientRect();
-  const pipe = c ? $('board').querySelector(`[data-pipe="${CSS.escape(c.id)}"]`)?.getBoundingClientRect() : null;
+  const pipe = c ? $('board').querySelector(`[data-pipe="${CSS.escape(c.id)}"], [data-drain="${CSS.escape(c.id)}"]`)?.getBoundingClientRect() : null;
   const gap = 8;
   const bottom = Math.max(gap, innerHeight - rect.height - gap);
   const overlap = top => pipe ? Math.max(0, Math.min(top + rect.height, pipe.bottom) - Math.max(top, pipe.top)) : 0;
@@ -936,7 +951,10 @@ function bind() {
       return;
     }
     if (!btn || btn.disabled || !state.selected) return;
-    if (btn.dataset.thick) state.config.thickness[state.selected] = btn.dataset.thick;
+    if (btn.dataset.drainStep) {
+      if (btn.dataset.drainStep === 'closed') delete state.config.drains[state.selected];
+      else state.config.drains[state.selected] = btn.dataset.drainStep;
+    } else if (btn.dataset.thick) state.config.thickness[state.selected] = btn.dataset.thick;
     else if (btn.dataset.prime === 'on' && bucketsLeft() > 0) state.config.primed.add(state.selected);
     else if (btn.dataset.prime === 'off') { state.config.primed.delete(state.selected); state.config.pumped.delete(state.selected); }
     else if (btn.dataset.pump) {
@@ -1024,6 +1042,9 @@ function bind() {
     if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 12) return; // なぞった・ずれたときは押していない扱い
     const p2 = boardPoint(e);
     // 丸い札と交差のまたぎは、見えている管そのものを選ぶ。ほかは従来どおり近い管。
+    // 排水口の札（37〜42面）：段を選ぶ窓を開く
+    const drainTag = e.target.closest('[data-drain]');
+    if (drainTag) { audio.unlock(); audio.cue('tap'); state.selected = drainTag.dataset.drain; renderAll(); return; }
     const tagged = e.target.closest('[data-pipe-label], [data-pipe-bridge]');
     const taggedId = tagged?.dataset.pipeLabel ?? tagged?.dataset.pipeBridge;
     const pipe = stage().candidates.some(c => c.id === taggedId) ? taggedId : pipeAt(state.layout, stage(), p2.x, p2.y);

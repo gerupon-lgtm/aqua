@@ -5,6 +5,8 @@
 //   thickness：太さを変えられる配管の細さ（{ID: '1'|'2'|'3'}）。ないときは面の既定
 //   primed：呼び水をしたサイフォンのID（桶でも手押しポンプでも）
 //   pumped：そのうち手押しポンプで呼び水をしたID。桶の数に入れない（F-007）
+//   drains：排水口の段（{ID: 'closed'|'half'|'open'}）。ないときは閉（F-009、37〜42面）
+// 面の排水口（stage.drains）：[{ id, tower }]。グラスから地面（高さ0）へ水を捨てる出口。判定には使わない
 // 面の配管の候補（candidates）：
 //   thinness：細さ。adjustable があれば選べる細さの一覧（太さを変えられる配管、F-008）
 //   siphon：{ crest, inlet } があればサイフォン（F-005）。crest は通り道の一番高い所で、
@@ -17,18 +19,26 @@ import { onScale, DEFAULT_SCALE } from './pitch.js';
 import { pipeScore, outletVerdict } from './score.js';
 
 export function normalizeConfig(config) {
-  if (Array.isArray(config) || config instanceof Set) return { connected: new Set(config), thickness: {}, primed: new Set(), pumped: new Set() };
+  if (Array.isArray(config) || config instanceof Set) return { connected: new Set(config), thickness: {}, primed: new Set(), pumped: new Set(), drains: {} };
   const primed = new Set(config.primed ?? []);
-  return { connected: new Set(config.connected), thickness: { ...(config.thickness ?? {}) }, primed, pumped: new Set([...(config.pumped ?? [])].filter(id => primed.has(id))) };
+  const drains = Object.fromEntries(Object.entries(config.drains ?? {}).filter(([, step]) => step && step !== 'closed'));
+  return { connected: new Set(config.connected), thickness: { ...(config.thickness ?? {}) }, primed, pumped: new Set([...(config.pumped ?? [])].filter(id => primed.has(id))), drains };
 }
 
 export function thinnessOf(candidate, config) {
   return config.thickness[candidate.id] ?? candidate.thinness;
 }
 
+// 排水口の段（要件 Q-06：3段で始める）。流れやすさは、全開が太い管（1）、半分が中の管（1/2）と同じ
+export const DRAIN_STEPS = Object.freeze({ closed: null, half: '1/2', open: '1' });
+export const DRAIN_STEP_NAMES = Object.freeze({ closed: '閉', half: '半分', open: '全開' });
+
 export function configKey(config) {
   const c = normalizeConfig(config);
-  return [...c.connected].sort().map(id => `${id}${c.thickness[id] ? `:${c.thickness[id]}` : ''}${c.pumped.has(id) ? '*' : c.primed.has(id) ? '+' : ''}`).join(',');
+  const pipes = [...c.connected].sort().map(id => `${id}${c.thickness[id] ? `:${c.thickness[id]}` : ''}${c.pumped.has(id) ? '*' : c.primed.has(id) ? '+' : ''}`);
+  // 排水口は開いているものだけ「ID:段」で後ろに足す（排水口のない面の名前は変わらない）
+  const drains = Object.keys(c.drains).sort().map(id => `${id}:${c.drains[id]}`);
+  return [...pipes, ...drains].join(',');
 }
 
 const isSiphon = c => !!c.siphon;
@@ -38,7 +48,11 @@ export function buildCircuit(stage, config, { gateClosed = false, broken = new S
   return {
     spring: { id: stage.spring.id, height: frac(stage.spring.height) },
     towers: stage.towers.map(t => ({ id: t.id })),
-    outlets: stage.outlets.map(o => ({ id: o.id, tower: o.tower, height: frac(o.height), conductance: frac(o.conductance) })),
+    outlets: [
+      ...stage.outlets.map(o => ({ id: o.id, tower: o.tower, height: frac(o.height), conductance: frac(o.conductance) })),
+      // 開いている排水口は、高さ0の出口として計算する（logic-design 3章）
+      ...(stage.drains ?? []).filter(d => DRAIN_STEPS[cfg.drains[d.id]]).map(d => ({ id: d.id, tower: d.tower, height: frac('0'), conductance: frac(DRAIN_STEPS[cfg.drains[d.id]]) }))
+    ],
     pipes: stage.candidates
       .filter(c => cfg.connected.has(c.id))
       .filter(c => !(gateClosed && c.gate))
@@ -91,7 +105,9 @@ export function judge(stage, config, scale = DEFAULT_SCALE) {
       return { id: o.id, flow, target, verdict: outletVerdict(flow, target) };
     });
     const watered = Object.values(s.result.towers).filter(t => t.state === 'water');
-    return { name, ...s, outlets, clear: outlets.every(o => o.verdict === 'exact'), allOnScale: watered.every(t => onScale(t.level, scale)) };
+    // 排水口から捨てた水（毎秒）。37〜42面の観点に使う
+    const drained = (stage.drains ?? []).reduce((sum, d) => sum.add(s.result.outlets[d.id]?.flow ?? new Fraction(0n)), new Fraction(0n));
+    return { name, ...s, outlets, drained, clear: outlets.every(o => o.verdict === 'exact'), allOnScale: watered.every(t => onScale(t.level, scale)) };
   });
   const primed = [...cfg.primed].filter(id => cfg.connected.has(id) && !cfg.pumped.has(id));
   return {
@@ -102,7 +118,8 @@ export function judge(stage, config, scale = DEFAULT_SCALE) {
     clear: states.every(s => s.clear),
     allOnScale: states.every(s => s.allOnScale),
     used: cfg.connected.size,
-    buckets: primed.length
+    buckets: primed.length,
+    drained: states.reduce((sum, s) => sum.add(s.drained), new Fraction(0n))
   };
 }
 
@@ -124,44 +141,53 @@ export function pumpCheck(stage, config, id) {
 // 面で選べるつなぎ方をすべて作る（配管ごとに：つながない／太さの選択／サイフォンなら呼び水の有無・桶かポンプか）。
 // 桶は面の数まで。ポンプの呼び水は、汲める条件を満たすものだけ
 export function allConfigs(stage) {
-  let configs = [{ connected: [], thickness: {}, primed: [], pumped: [] }];
+  let configs = [{ connected: [], thickness: {}, primed: [], pumped: [], drains: {} }];
   for (const c of stage.candidates) {
     const next = [];
     for (const base of configs) {
       next.push(base);
       for (const t of c.adjustable ?? [null]) {
         const thickness = t ? { ...base.thickness, [c.id]: t } : base.thickness;
-        next.push({ connected: [...base.connected, c.id], thickness, primed: base.primed, pumped: base.pumped });
-        if (c.siphon) next.push({ connected: [...base.connected, c.id], thickness, primed: [...base.primed, c.id], pumped: base.pumped });
-        if (c.siphon && c.pump) next.push({ connected: [...base.connected, c.id], thickness, primed: [...base.primed, c.id], pumped: [...base.pumped, c.id] });
+        next.push({ ...base, connected: [...base.connected, c.id], thickness });
+        if (c.siphon) next.push({ ...base, connected: [...base.connected, c.id], thickness, primed: [...base.primed, c.id] });
+        if (c.siphon && c.pump) next.push({ ...base, connected: [...base.connected, c.id], thickness, primed: [...base.primed, c.id], pumped: [...base.pumped, c.id] });
       }
     }
     configs = next;
+  }
+  // 排水口：それぞれ閉・半分・全開
+  for (const d of stage.drains ?? []) {
+    configs = configs.flatMap(base => Object.keys(DRAIN_STEPS).map(step => (step === 'closed' ? base : { ...base, drains: { ...base.drains, [d.id]: step } })));
   }
   return configs.filter(c => c.connected.length && c.primed.length - c.pumped.length <= (stage.buckets ?? 0)
     && c.pumped.every(id => pumpCheck(stage, c, id).ok));
 }
 
-// 満点の観点：基本は本数。桶の面（25〜30面）は桶の数を先に比べ、同じなら本数（要件5.7）
-function rank(stage, j) {
-  return stage.theme === 'buckets' ? [j.buckets, j.used] : [j.used];
+// 満点の観点：基本は本数。桶の面（25〜36面）は桶の数を先に比べ、同じなら本数。
+// 排水口の面（37〜42面）は捨てる水（毎秒、分数）の少なさを先に比べ、同じなら本数（要件5.7）
+export function rank(stage, j) {
+  if (stage.theme === 'buckets') return [j.buckets, j.used];
+  if (stage.theme === 'drain') return [j.drained, j.used];
+  return [j.used];
 }
-const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i]; return false; };
+// 観点の比較。分数は大小比較で、数はそのまま比べる
+const cmpPart = (a, b) => (typeof a === 'number' ? a - b : a.cmp(b));
+export const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) { const c = cmpPart(a[i], b[i]); if (c !== 0) return c < 0; } return false; };
 
 // すべてのつなぎ方を調べ、満点のつなぎ方を決める（試作では端末で計算する。本番は事前生成、C-04）
 export function analyzeStage(stage, scale = DEFAULT_SCALE) {
   const clears = [];
   for (const config of allConfigs(stage)) {
     const j = judge(stage, config, scale);
-    if (j.clear) clears.push({ config, key: configKey(config), ids: [...config.connected].sort(), used: j.used, buckets: j.buckets, rank: rank(stage, j), allOnScale: j.allOnScale, anyBroken: j.states.some(s => s.broken.size) });
+    if (j.clear) clears.push({ config, key: configKey(config), ids: [...config.connected].sort(), used: j.used, buckets: j.buckets, drained: j.drained, rank: rank(stage, j), allOnScale: j.allOnScale, anyBroken: j.states.some(s => s.broken.size) });
   }
-  if (!clears.length) return { clears, perfect: null, perfectKey: null, perfectCount: null, perfectBuckets: null, unique: false };
+  if (!clears.length) return { clears, perfect: null, perfectKey: null, perfectCount: null, perfectBuckets: null, perfectDrained: null, unique: false };
   let best = [clears[0]];
   for (const c of clears.slice(1)) {
     if (lexLess(c.rank, best[0].rank)) best = [c];
     else if (!lexLess(best[0].rank, c.rank)) best.push(c);
   }
-  return { clears, perfect: best[0].ids, perfectKey: best[0].key, perfectConfig: best[0].config, perfectCount: best[0].used, perfectBuckets: best[0].buckets, unique: best.length === 1 };
+  return { clears, perfect: best[0].ids, perfectKey: best[0].key, perfectConfig: best[0].config, perfectCount: best[0].used, perfectBuckets: best[0].buckets, perfectDrained: best[0].drained, unique: best.length === 1 };
 }
 
 export function evaluate(stage, config, analysis, scale = DEFAULT_SCALE) {

@@ -2,7 +2,7 @@
 // 検査（challenge-check.js）をすべて通ったものだけを候補にする。乱数の種を固定して8つを選ぶので、何度実行しても同じ結果になる。
 // 指定量は「あるつなぎ方で計算した流れる量」から決め、そのつなぎ方が満点の1通りになるものだけを残す。
 import { frac } from './fraction.js';
-import { allConfigs, judge, configKey } from './play.js';
+import { allConfigs, judge, configKey, rank, lexLess } from './play.js';
 import { checkChallenge } from './challenge-check.js';
 import { applyValues } from '../content/challenge-draw.js';
 
@@ -43,8 +43,7 @@ function valueGrid(stage) {
   return grid;
 }
 
-const rankOf = (stage, row) => (stage.theme === 'buckets' ? [row.buckets, row.used] : [row.used]);
-const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i]; return false; };
+const rankOf = rank;
 
 // 1つの面の候補をすべて集める。速くするため、つなぎ方ごとの流れる量を一度だけ計算して、指定量の候補ごとに比べる。
 // 最後に、選んだものは checkChallenge（アプリと同じ検査）で必ず確かめる
@@ -57,7 +56,7 @@ export function candidatesFor(stage) {
     const rows = allConfigs(base).map(config => {
       const j = judge(base, config);
       return {
-        config, key: configKey(config), used: j.used, buckets: j.buckets, allOnScale: j.allOnScale,
+        config, key: configKey(config), used: j.used, buckets: j.buckets, drained: j.drained, allOnScale: j.allOnScale,
         broken: j.states.some(s => s.broken.size),
         flows: j.outlets.map(o => o.flow)
       };
@@ -83,6 +82,7 @@ export function candidatesFor(stage) {
       if (perfect.buckets < (v.minBuckets ?? 0)) continue;
       if (perfect.broken) continue;
       if (perfect.config.pumped.length < (v.minPumps ?? 0)) continue;
+      if (Object.keys(perfect.config.drains).length < (v.minDrains ?? 0)) continue;
       found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, r.flows[i].toString()])) }, family: perfect.key });
     }
   }

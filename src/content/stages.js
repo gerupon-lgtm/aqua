@@ -1,7 +1,7 @@
-// 面の定義（1〜36面）。お試し1〜6は固定の出題。7〜30面は
+// 面の定義（1〜42面）。お試し1〜6は固定の出題。7〜30面は
 // vary（変えてよい数値の範囲）から scripts/generate-challenges.js で検査済みの出題を8つずつ作り、challenges.js から抽選する。
 // vary：spring 泉の高さの候補、thinnessAll／thinness[配管] 細さの候補、maxTarget 指定量の上限、
-//       minPerfect 満点の本数の下限、mustUse 満点で必ず使う配管、minBuckets 満点で使う桶の下限、minPumps 満点で使うポンプの下限、seed 乱数の種。
+//       minPerfect 満点の本数の下限、mustUse 満点で必ず使う配管、minBuckets 満点で使う桶の下限、minPumps 満点で使うポンプの下限、minDrains 満点で開ける排水口の下限、seed 乱数の種。
 // mayBreak：サイフォンが切れるつなぎ方を出題に含めてよい面（31〜36面。満点のつなぎ方は切れない）。
 // 出題のある面では、ここにある細さ・指定量は使われない（出題の値で置き換える）。
 // 数値は試作用に、すべてのつなぎ方を調べて「満点が1通り・部分点あり・クリアでは水のあるグラスが目盛りに乗る」を
@@ -10,6 +10,7 @@
 // depth は地面の下を通る深さの段（重なりを避けるための描き分け）。set は面のまとまりの名前。
 
 import { PUMP_STAGES } from './stages-pump.js';
+import { DRAIN_STAGES } from './stages-drain.js';
 
 export const STAGES = [
   {
@@ -2129,5 +2130,7 @@ export const STAGES = [
     }
   },
   // 31〜36面（後続、T-14）は stages-pump.js
-  ...PUMP_STAGES
+  ...PUMP_STAGES,
+  // 37〜42面（後続、T-14）は stages-drain.js
+  ...DRAIN_STAGES
 ];
