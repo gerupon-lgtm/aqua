@@ -1,7 +1,7 @@
 // パーツと遊び方の説明。アプリと文字組み点検で、同じ内容を使う。
 import { phraseMarkup } from './text-layout.js';
 
-const partPicture = (id, alt) => `<img class="part-illustration" src="${new URL(`../../public/graphics/intro-${id}.svg`, import.meta.url).href}" alt="${alt}" width="960" height="360">`;
+export const partPicture = (id, alt) => `<img class="part-illustration" src="${new URL(`../../public/graphics/intro-${id}.svg`, import.meta.url).href}" alt="${alt}" width="960" height="360">`;
 export const PARTS_HTML = `<dl class="parts">
   <dt>給水塔</dt><dd>${phraseMarkup('水が出るところ。|給水塔の水の高さが、|流れのもとになります。')}</dd>
   <dt>グラス</dt><dd>${phraseMarkup('水がたまります。|左の物差しと目盛りを|同じ高さで見比べます。|地面が高さ0、|目盛り1つが高さ1です。|水位で音が決まり、|水が多いほど低い音。|目盛りに乗ると|澄んだ和音になります。')}</dd>

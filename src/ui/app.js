@@ -8,16 +8,16 @@ import { displayScore } from '../logic/score.js';
 import { explain, formatAmount } from '../logic/explain.js';
 import { ScoreBook, scoreKey, buildRecord } from '../logic/records.js';
 import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
-import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText } from '../content/tutorial.js';
+import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText, partIntroFor } from '../content/tutorial.js';
 import { guideMessage } from './guide-copy.js';
 import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
-import { PARTS_HTML, HOWTO_HTML } from './info-copy.js';
+import { PARTS_HTML, HOWTO_HTML, partPicture } from './info-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, boardViewBox, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
 
-const APP_VERSION = '0.16.0';
+const APP_VERSION = '0.17.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -94,6 +94,7 @@ const state = {
   contAction: null, // 連続プレイで、結果のあとにすること（next・retry・gameover・complete）
   contStart: null, // 連続プレイを始めたときのレベルの記録（記録更新の判定に使う）
   contRecord: null, // 終わったときの記録の更新（continuousRecordChange）
+  partIntro: null, // 表示中の新しいパーツの説明（PART_INTROS の1つ）
   trials: 0, // 選択プレイ：この面を開いてから「水を流す」を押した回数（F-025）
   newFewest: false,
   titleOpen: true,
@@ -155,6 +156,30 @@ function selectStage(index) {
   state.newFewest = false;
   if (state.mode === 'select') lastSelectIndex = index;
   state.stageCueUntil = !state.titleOpen && !state.loadError ? performance.now() + STAGE_CUE_WAIT_MS + STAGE_CUE_MS : 0;
+  renderAll();
+  openPartIntro();
+}
+
+// 新しいパーツの初出説明（T-08）。そのパーツを初めて見る面で一度だけ、挿絵つきの窓を出す。
+// 窓を出している間は開始の合図を止め、閉じてから700ms待って合図を始める（handoff-to-claude.md 4章）
+function openPartIntro() {
+  const intro = !state.titleOpen && !state.loadError ? partIntroFor(stage()) : null;
+  if (!intro || tutorial.partSeen(intro.part)) return;
+  state.partIntro = intro;
+  state.stageCueUntil = 0;
+  renderAll();
+  openSheet(intro.title, `${partPicture(intro.part, intro.alt)}${intro.lines.map(line => `<p class="part-intro-text">${phraseMarkup(line)}</p>`).join('')}`,
+    '<button type="button" class="primary" data-sheet="close">やってみる</button>');
+  const sheet = $('sheet');
+  sheet.classList.add('part-intro');
+  sheet.querySelector('.sheet-card').insertAdjacentHTML('afterbegin', '<button type="button" class="close" data-sheet="close" aria-label="説明を閉じる">×</button>');
+}
+function finishPartIntro() {
+  if (!state.partIntro) return;
+  tutorial.seePart(state.partIntro.part);
+  state.partIntro = null;
+  $('sheet').classList.remove('part-intro');
+  state.stageCueUntil = performance.now() + STAGE_CUE_WAIT_MS + STAGE_CUE_MS;
   renderAll();
 }
 
@@ -950,7 +975,11 @@ function bind() {
     if (e.target.closest('#result-toast, #show-result')) return;
     closeResult();
   }, true);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeResult(); });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (state.partIntro && !$('sheet').hidden) closeSheet();
+    else closeResult();
+  });
   reducedMotionQuery.addEventListener('change', () => {
     drawBoard();
     if (boardAnimating() || stageCueAnimating()) loop();
@@ -1072,7 +1101,7 @@ function openSheet(title, body, actions = '<button type="button" class="ghost" d
     <h2 id="sheet-title">${textMarkup(title)}</h2>${body}<div class="actions">${actions}</div></div>`;
   sheet.hidden = false;
 }
-function closeSheet() { $('sheet').hidden = true; }
+function closeSheet() { $('sheet').hidden = true; finishPartIntro(); }
 
 function openMenu() {
   openSheet('メニュー', `<div class="menu-grid">
@@ -1147,7 +1176,7 @@ function bindScreens() {
     else if (k === 'select') startMode('select');
     else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
     else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
-    else if (k === 'resume') closeTitle();
+    else if (k === 'resume') { closeTitle(); openPartIntro(); }
   });
   $('sheet').addEventListener('click', e => {
     const b = e.target.closest('button');

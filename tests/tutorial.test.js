@@ -93,3 +93,29 @@ test('練習面：太1を1本つなぐと 4÷(1＋口1)＝2 で100点。手順�
   assert.ok(practiceResultText('ng').length <= 52 && practiceResultText('perfect').length <= 52);
   assert.equal(lessonFor(PRACTICE), null, '練習面にはお試し面の予想の問いを出さない');
 });
+
+test('新しいパーツの初出説明は6・7・13・19・25面に1つずつあり、挿絵がある', async () => {
+  const { PART_INTROS, partIntroFor } = await import('../src/content/tutorial.js');
+  const { STAGES } = await import('../src/content/stages.js');
+  const { existsSync } = await import('node:fs');
+  assert.deepEqual(Object.keys(PART_INTROS).map(id => STAGES.find(s => s.id === id).number), [6, 7, 13, 19, 25]);
+  for (const intro of Object.values(PART_INTROS)) {
+    assert.ok(existsSync(new URL(`../public/graphics/intro-${intro.part}.svg`, import.meta.url)));
+    assert.ok(intro.title && intro.alt && intro.lines.length >= 2);
+  }
+  assert.equal(partIntroFor(STAGES[0]), null);
+});
+
+test('パーツの既読は保存され、チュートリアルのスキップとは別。古い形の記録も読める', async () => {
+  const { TutorialBook, TUTORIAL_KEY } = await import('../src/content/tutorial.js');
+  const store = new Map([[TUTORIAL_KEY, JSON.stringify({ done: { T1: true }, skipped: true })]]);
+  const storage = { getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, v) };
+  const book = new TutorialBook(storage);
+  assert.equal(book.partSeen('gate'), false);
+  book.seePart('gate');
+  const again = new TutorialBook(storage);
+  assert.equal(again.partSeen('gate'), true);
+  assert.equal(again.partSeen('siphon'), false);
+  assert.equal(again.data.skipped, true);
+  assert.equal(again.data.done.T1, true);
+});

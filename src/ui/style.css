@@ -602,3 +602,12 @@ th { color: var(--ink-soft); font-weight: 500; }
 .cont-summary .cont-count .phrase + .phrase { margin-left: .6em; }
 .cont-summary .cont-sub, .cont-summary .cont-record { margin: 0; font-size: 13px; color: var(--ink-soft); }
 .cont-summary .newbest { display: inline-flex; align-items: center; gap: 4px; background: #f4e4b8; color: #77541b; font-size: 13px; padding: 2px 10px; }
+
+/* 新しいパーツの初出説明（T-08）。前作の鏡の説明と同じく、盤面の中央に出す窓：見出し・挿絵・説明・「やってみる」 */
+.sheet.part-intro { place-items: center; padding-bottom: 16px; }
+.sheet.part-intro .sheet-card { position: relative; border-radius: 16px; max-width: 480px; padding: 16px 16px 14px; }
+.sheet.part-intro h2 { margin: 2px 44px 10px 0; font-size: 17px; }
+.sheet.part-intro .close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid #c9d6e2; background: #fff; color: var(--ink); font-size: 20px; line-height: 1; cursor: pointer; }
+.sheet.part-intro .part-intro-text { margin: 0 0 6px; font-size: 14px; line-height: 1.65; color: var(--ink); }
+.sheet.part-intro .actions { margin-top: 10px; }
+.sheet.part-intro .actions .primary { width: 100%; }

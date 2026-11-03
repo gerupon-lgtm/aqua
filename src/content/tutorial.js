@@ -48,16 +48,19 @@ export function answerLine(question, picked) {
   return `予想は毎秒${formatAmount(frac(picked))}、実際は毎秒${actual}でした。下の解説で、どこで差が出たか確かめましょう。`;
 }
 
-// 記録（D-08）：面ごとの完了と、全体のスキップ。保存できない端末でも遊べるよう、失敗は無視する
+// 記録（D-08）：面ごとの完了と、全体のスキップ、パーツごとの初出説明の既読。保存できない端末でも遊べるよう、失敗は無視する。
+// パーツの既読は、チュートリアルのスキップとは別に扱う（スキップしても新しいパーツの説明は出す）
 export class TutorialBook {
   constructor(storage) {
     this.storage = storage;
-    this.data = { done: {}, skipped: false };
+    this.data = { done: {}, skipped: false, parts: {} };
     try {
       const saved = JSON.parse(storage?.getItem(TUTORIAL_KEY) || 'null');
-      if (saved && typeof saved === 'object') this.data = { done: { ...(saved.done ?? {}) }, skipped: Boolean(saved.skipped) };
+      if (saved && typeof saved === 'object') this.data = { done: { ...(saved.done ?? {}) }, skipped: Boolean(saved.skipped), parts: { ...(saved.parts ?? {}) } };
     } catch { /* 読めないときは初めての扱い */ }
   }
+  partSeen(part) { return Boolean(this.data.parts[part]); }
+  seePart(part) { this.data.parts[part] = true; this.#save(); }
   #save() { try { this.storage?.setItem(TUTORIAL_KEY, JSON.stringify(this.data)); } catch { /* 保存できなくても続ける */ } }
   // その面で案内を出すか（ふりかえりで開き直したときは、記録にかかわらず出す）
   active(stage, review = false) { return Boolean(lessonFor(stage)) && (review || (!this.data.skipped && !this.data.done[stage.id])); }
@@ -97,3 +100,21 @@ export const PRACTICE_STEPS = [
 export const practiceResultText = outcome => (outcome === 'ng'
   ? '必要量と違う量が届きました。「配管を見直す」で、「太」の配管だけをつないでみましょう。'
   : '噴水盤に毎秒2届きました。結果の「解説」で計算を確かめ、「次へ」でお試し1へ進みましょう。');
+
+// 新しいパーツの初出説明（T-08、2026-11-01 発案者提供の前作の画面より）。
+// パーツが初めて出る面を開いたとき、挿絵つきの窓で一度だけ説明する（前作の鏡の説明と同じ形：見出し・挿絵・説明・「やってみる」）。
+// 挿絵は public/graphics/intro-*.svg。説明文はパーツの説明（info-copy.js）と同じ決まりを、操作の言葉で言い直す。
+// 本文の「|」は文節の区切り（phraseMarkup）
+export const PART_INTROS = {
+  T6: { part: 'gate', title: '水門で、流れを切り替えよう', alt: '水門が開いているときと閉じたあとで、水の通り道が変わる様子',
+    lines: ['水門のある配管は、|流したあと自動で閉じます。', '開いているときと、|閉じたあとの両方で、|噴水盤に必要量を届けます。'] },
+  T7: { part: 'outlets', title: '水を分けて、2つの噴水盤へ', alt: '給水塔から分かれた水が2つの噴水盤へ届く様子',
+    lines: ['噴水盤が2つあります。|水は、つながった道へ|分かれて流れます。', 'それぞれの噴水盤に、|必要量を届けましょう。'] },
+  T13: { part: 'adjustable', title: '配管の太さを選ぼう', alt: '配管をタップして3段階の太さを選ぶ様子',
+    lines: ['点線の丸札の配管は、|太さを選べます。|つないだあと、|もう一度タップすると|「太・中・細」から選べます。', '太いほど数字が小さく、|同じ高さの差なら|多く流れます。'] },
+  T19: { part: 'height', title: '噴水盤の高さに注目しよう', alt: '出口と水位の差に応じて、水が流れる様子',
+    lines: ['噴水盤の「高さ」は、|吹き出し口の高さです。', 'グラスの水位と口の高さの差を、|出口の管の数字で割った量が|流れます。|口より低い水位では流れません。'] },
+  T25: { part: 'siphon', title: '桶で、壁の向こうへ流そう', alt: '桶で壁を越える管の空気を水に置き換え、流れるようにする様子',
+    lines: ['壁を越える配管は、|中に空気がたまっていて|そのままでは流れません。', 'つないだあと、|もう一度タップして|桶で呼び水をすると、|壁を越えて流れます。|桶の数には限りがあります。'] }
+};
+export const partIntroFor = stage => PART_INTROS[stage?.id] ?? null;

@@ -37,22 +37,27 @@ copyTree('public');
 // 同梱するMontserratの利用条件も、配信するファイルに添える。
 mkdirSync(join(output, prefix, 'public/fonts'), { recursive: true });
 copyFileSync(join(root, 'public/fonts/OFL.txt'), join(output, prefix, 'public/fonts/OFL.txt'));
+// アイコンは版のフォルダの外の決まった場所にも置き、マニフェストと画面はこちらを指す。
+// 公開先には最新版のフォルダしか残らないため、古い版の画面のままホーム画面に追加しようとすると
+// 版つきのアイコンが見つからず「インストールできません」になることがあった（2026-11-03）
+const icons = ['icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
+for (const name of icons) copyFileSync(join(root, 'public', name), join(output, name));
 
 let index = read('index.html');
 if (!index.includes('<!-- OFFLINE_METADATA -->')) throw new Error('index.html に OFFLINE_METADATA の印がありません。');
 index = index
   .replaceAll('./src/', `./${prefix}/src/`)
-  .replace('<!-- OFFLINE_METADATA -->', `<meta name="aqua-offline" content="enabled"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./${prefix}/public/icon-192.png"><link rel="apple-touch-icon" href="./${prefix}/public/apple-touch-icon.png"><meta name="theme-color" content="#eef5fb">`);
+  .replace('<!-- OFFLINE_METADATA -->', `<meta name="aqua-offline" content="enabled"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon-192.png"><link rel="apple-touch-icon" href="./apple-touch-icon.png"><meta name="theme-color" content="#eef5fb">`);
 writeFileSync(join(output, 'index.html'), index);
 
 const manifest = {
   id: './', name: 'アクア・ノーツ', short_name: 'AQUA NOTES', lang: 'ja', start_url: './', scope: './',
   display: 'standalone', background_color: '#eef5fb', theme_color: '#eef5fb',
-  icons: [192, 512].map(size => ({ src: `./${prefix}/public/icon-${size}.png`, sizes: `${size}x${size}`, type: 'image/png', purpose: 'any' }))
+  icons: [192, 512].map(size => ({ src: `./icon-${size}.png`, sizes: `${size}x${size}`, type: 'image/png', purpose: 'any' }))
 };
 writeFileSync(join(output, 'manifest.webmanifest'), JSON.stringify(manifest, null, 2));
 
-const all = ['./index.html', './manifest.webmanifest', ...assets];
+const all = ['./index.html', './manifest.webmanifest', ...icons.map(name => `./${name}`), ...assets];
 const hashes = Object.fromEntries(all.map(a => [a, createHash('sha256').update(readFileSync(join(output, a))).digest('hex')]));
 writeFileSync(join(output, 'build-info.json'), JSON.stringify({ version, commit: process.env.GITHUB_SHA ?? null, assets: all, hashes }, null, 2));
 const worker = read('src/pwa/worker.js').replace('__AQUA_VERSION__', version).replace('__AQUA_ASSETS__', JSON.stringify(all));
