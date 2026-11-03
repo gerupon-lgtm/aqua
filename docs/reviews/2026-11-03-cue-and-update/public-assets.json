@@ -1,0 +1,399 @@
+{
+  "version": "0.14.13",
+  "commit": "b8de163823e69393aaa9e0d0b27ad6659ecf7981",
+  "url": "https://aqua.sikumilab.com/",
+  "checkedAt": "2026-11-03T06:51:07.384Z",
+  "assets": [
+    {
+      "asset": "./index.html",
+      "type": "text/html; charset=utf-8",
+      "sha256": "ea58f3f0b06413a610b2793d00899b26d8c949ad61d53a0e9b024e0f1854a824",
+      "bytes": 4846
+    },
+    {
+      "asset": "./manifest.webmanifest",
+      "type": "application/manifest+json; charset=utf-8",
+      "sha256": "c157258a9890376be832b8d53c31954c88f0dfb63024b9aed434698e58afc6d9",
+      "bytes": 512
+    },
+    {
+      "asset": "./v0.14.13/public/apple-touch-icon.png",
+      "type": "image/png",
+      "sha256": "6933653c55f01b7c2df854663b3d26a5d59daedbdf82cb6cae7869f5b4282e56",
+      "bytes": 776
+    },
+    {
+      "asset": "./v0.14.13/public/fonts/montserrat-500.ttf",
+      "type": "font/ttf",
+      "sha256": "637639da93fdd9178e52662cce4bd5a59a544eb60677bb6ef9f89bc472607e5d",
+      "bytes": 180036
+    },
+    {
+      "asset": "./v0.14.13/public/fonts/montserrat-600.ttf",
+      "type": "font/ttf",
+      "sha256": "c535bb158e8cfc3c27654f73aa68a87732899e7d9b10d8496b68605a56d947a7",
+      "bytes": 180584
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/bg-trial.webp",
+      "type": "image/webp",
+      "sha256": "4767a7a136db873cfd685a4c0b4b8ebed592690747f4a18ee9eac201330e3336",
+      "bytes": 72606
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/fx-fountain-01.png",
+      "type": "image/png",
+      "sha256": "eaa3940b34b36f59d24a6d75b576738403bd7f59249cc617214e9338577ac16f",
+      "bytes": 11035
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/fx-fountain-02.png",
+      "type": "image/png",
+      "sha256": "37ee37968ccc0d05a537d33e660d727902bae8d4365cb4c4099f7d2741c02959",
+      "bytes": 23215
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/fx-fountain-03.png",
+      "type": "image/png",
+      "sha256": "63397aea24706430d86a64049a59ca4cd1427369bd983c0e1decad9bbbc4fc9e",
+      "bytes": 41644
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/fx-fountain-04.png",
+      "type": "image/png",
+      "sha256": "96d3d559e69704f17ac697a5691ea85fa0eb80749e2c7133aa95b126bf2eca17",
+      "bytes": 57202
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/fx-fountain-05.png",
+      "type": "image/png",
+      "sha256": "e0fcef1bccdc0ed781bb3b8dc7be2184aa305b5f84b66afbb861c31661d5eba7",
+      "bytes": 63044
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/fx-fountain-06.png",
+      "type": "image/png",
+      "sha256": "5bc210c67f6d6fa9611ec04c612d290c30ab163e1ab199155200c57c25bfa44c",
+      "bytes": 60178
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/fx-rainbow.png",
+      "type": "image/png",
+      "sha256": "7535d2b4e0dac36f110acea72aed48f43d3133928002268f91b20796c6788b5d",
+      "bytes": 44943
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/intro-adjustable.svg",
+      "type": "image/svg+xml",
+      "sha256": "017830fa9746c8d1a1fb73aeb8f8f013c4fbaecfe4e4d728cc508a6db891a70d",
+      "bytes": 2020
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/intro-gate.svg",
+      "type": "image/svg+xml",
+      "sha256": "ab7582d49ca7afea2b983c98ac3fad5509ac7e246d317baf752d7053b0289449",
+      "bytes": 183288
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/intro-height.svg",
+      "type": "image/svg+xml",
+      "sha256": "c5501a66ec4bcd8135934dace72e4737ecb5ed59003610623f18e3f7a878e5db",
+      "bytes": 91078
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/intro-outlets.svg",
+      "type": "image/svg+xml",
+      "sha256": "faae6358750bde4b1827959ecc2a0679da73e31970a2db0c960a09c244b3795a",
+      "bytes": 181843
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/intro-siphon.svg",
+      "type": "image/svg+xml",
+      "sha256": "9884464e9fac40e06fbfa934d53e8f425010837ae39b375313b56a11112ad06a",
+      "bytes": 91759
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-basin.png",
+      "type": "image/png",
+      "sha256": "f14cac291b9487ada092e2a7e499412bfc02e93c6127fb55941e9ff5f6f8ced5",
+      "bytes": 14062
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-drain-pan-v2.png",
+      "type": "image/png",
+      "sha256": "1c91caeb19b5de8c6f07fc2da48d8b66f07242365815f9c8c135b40a47ea93e4",
+      "bytes": 66821
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-glass-bottom.png",
+      "type": "image/png",
+      "sha256": "b465fe779340bf29f7af57ab621674ba4988e071d55258c42f5b7e0f98203695",
+      "bytes": 3317
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-glass-middle.png",
+      "type": "image/png",
+      "sha256": "141c7ac1f40043c8f8cd8b94be5099e382e19cdee35067e5600cfe0e8b23f87d",
+      "bytes": 339
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-glass-top.png",
+      "type": "image/png",
+      "sha256": "5aed7c251df34d77ca42f163bd97ef7d0e083997b1ba54e69ba7e2c75b88ae35",
+      "bytes": 3305
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-pedestal-middle.png",
+      "type": "image/png",
+      "sha256": "cfa9c880f62ac6d5551d2526f5d0eeb6d8a39bf7776426938a0ec321c05b61f1",
+      "bytes": 351
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-pedestal-top.png",
+      "type": "image/png",
+      "sha256": "39fc89f59810d3d087f9bfdbe6ecfc5f84fddfe97f56bac78510b323b985ac68",
+      "bytes": 8279
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-spring-bottom.png",
+      "type": "image/png",
+      "sha256": "9c494567f75be23973ee80a85c003a86330c03241c956f00d066fea60a1e6ae5",
+      "bytes": 3792
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-spring-middle.png",
+      "type": "image/png",
+      "sha256": "b16214b7e88e43a4090e06d50925d457ffa7ae36a5f60a3a80cfe8adb7da47ad",
+      "bytes": 310
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/part-spring-top.png",
+      "type": "image/png",
+      "sha256": "a33846c0f93c6e1ee7ba35b618a361e5c92d1fead5b5f87678d6a1288accf26e",
+      "bytes": 3245
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/soil-loam-v1.webp",
+      "type": "image/webp",
+      "sha256": "fd8e09ea08a0874313bd496b73fd80d38cb78ab80adf057bf4d1836a0cb2db44",
+      "bytes": 76946
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/spirit-detail-v2.png",
+      "type": "image/png",
+      "sha256": "d1fa4ed1502f743d94ee535dd028dc40af7d88d21e4bd4e4a6e5e7addb656c6c",
+      "bytes": 118262
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/spirit.png",
+      "type": "image/png",
+      "sha256": "3cb0bed80fd67a633c1fb1f707e6f2633af9186502891a0d1959325417e39d64",
+      "bytes": 35229
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/title-fountain-v2.png",
+      "type": "image/png",
+      "sha256": "5b3ee90819f07af528e1eff9801cf86151b306e00c2e7321a0c8ce99425e9eb7",
+      "bytes": 164713
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/title-glass-v2.png",
+      "type": "image/png",
+      "sha256": "520f7271957a67014b69a0058b162d67a7b0e45d4d8e26d9fa6aab089ba32f23",
+      "bytes": 123625
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/title-landscape.webp",
+      "type": "image/webp",
+      "sha256": "92a28145e7f0942998163f5dedd66de870195df4c0c92a724766bf8330633928",
+      "bytes": 140054
+    },
+    {
+      "asset": "./v0.14.13/public/graphics/title-portrait.webp",
+      "type": "image/webp",
+      "sha256": "1527ef278b05946e23413bd2c8288195234a7f7cffa7fba96a9e98f92e197b12",
+      "bytes": 113926
+    },
+    {
+      "asset": "./v0.14.13/public/icon-192.png",
+      "type": "image/png",
+      "sha256": "cb32e2bda25ce12686877fa9f2401c93b02c2de0ebfa8ae519f48141b1048cbf",
+      "bytes": 823
+    },
+    {
+      "asset": "./v0.14.13/public/icon-512.png",
+      "type": "image/png",
+      "sha256": "f6be7b911bee79fddc0f07beb1297fc8e0aac785574645424137271c6df05c01",
+      "bytes": 7141
+    },
+    {
+      "asset": "./v0.14.13/src/content/challenge-draw.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "e9e7322f56f4dd8b37b0205483bbdada5967a1b1b7786108f269e65cd0b0f78b",
+      "bytes": 2285
+    },
+    {
+      "asset": "./v0.14.13/src/content/challenges.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "4710ce64542725ee08951ed0c9632964c46a67674a974001d77584b37bc4b08f",
+      "bytes": 121028
+    },
+    {
+      "asset": "./v0.14.13/src/content/stages.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "5ebf485a6043313a909c7c9d76f8f30385ca9c96983e4810e4a83b2df43ab4c5",
+      "bytes": 41875
+    },
+    {
+      "asset": "./v0.14.13/src/content/tutorial.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "c3516eb9647c079fb4ada1152d2e2c51824d1a65801344fe2ad4db264138dff2",
+      "bytes": 7162
+    },
+    {
+      "asset": "./v0.14.13/src/logic/challenge-check.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "14360d042f7bff63378c7f427cba21d80a7e8807b0758a4dc7fbe9a877f1bc45",
+      "bytes": 2180
+    },
+    {
+      "asset": "./v0.14.13/src/logic/explain.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "9ccad8209c7bd96991766df19656e43efd472b149e46bea5482695392c0afdd6",
+      "bytes": 8968
+    },
+    {
+      "asset": "./v0.14.13/src/logic/flow.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "0164f6fcdbe1a81bc9ecadc46ca8838610d6b145bdae97f89843e6e5ca34a5f7",
+      "bytes": 6889
+    },
+    {
+      "asset": "./v0.14.13/src/logic/fraction.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "fb06c8842d93ce76108e4feb8acc4dac43b4b6fac25aee4a3e1f7b31e6390b27",
+      "bytes": 2853
+    },
+    {
+      "asset": "./v0.14.13/src/logic/generate.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "01fc52677747cc4a924382238e71cec7360d7d335382b37c3fe41900f8f6b4d2",
+      "bytes": 6624
+    },
+    {
+      "asset": "./v0.14.13/src/logic/modes.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "517a39683eae8c23f831bff3fcd6bc54aba1bf4a3d24b6a30a5523e2bb07f809",
+      "bytes": 3795
+    },
+    {
+      "asset": "./v0.14.13/src/logic/pitch.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "ff2c7fd6bdbf2c0b8e5ae3a77367bba495f45923c9ffdd4573d05573af0a36a6",
+      "bytes": 2789
+    },
+    {
+      "asset": "./v0.14.13/src/logic/play.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "d4111a4cc69f5c02059b977a7a1cfb6e6d794ccf50b14f1ca2daf8a2a3f3323d",
+      "bytes": 7877
+    },
+    {
+      "asset": "./v0.14.13/src/logic/records.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "5e5a1ff372ea91c37a61322b455b76d1737edad0831a5c3f62f445be5d475f42",
+      "bytes": 4165
+    },
+    {
+      "asset": "./v0.14.13/src/logic/score.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "a089bf44f96c9486cdb5591851d44252a78ca50b4e6fefd933b4686f9498fbbb",
+      "bytes": 1165
+    },
+    {
+      "asset": "./v0.14.13/src/ui/app.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "95f3229dd45ccf1de339ba745975f53258d4f5d9e41fcc77446c47f03d5b6bfb",
+      "bytes": 66327
+    },
+    {
+      "asset": "./v0.14.13/src/ui/audio.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "c4e98dc3e9d00adf883123ab977ee94d095d0babc2d0eab4bc67a11c95a02a1f",
+      "bytes": 12342
+    },
+    {
+      "asset": "./v0.14.13/src/ui/board-annotations.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "f9c0fde21a6f7c4825fe03c59a682fd2faef44de414dedbc25ca3df34ffc71c8",
+      "bytes": 3940
+    },
+    {
+      "asset": "./v0.14.13/src/ui/board-materials.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "c0b5f2c93caf47ebed532fd43d689ddf67b976d16d457b56478bd940b9e60cb2",
+      "bytes": 5638
+    },
+    {
+      "asset": "./v0.14.13/src/ui/board-part-geometry.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "5f1fe7d73115b30f80722506a2ebcea0cd1c795f8b54ac0adec2d68aa200299b",
+      "bytes": 231
+    },
+    {
+      "asset": "./v0.14.13/src/ui/board-water-effects.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "9e1a63bf42b2dc9d69faaca72506b9406ec2db1aa0b59a4aa66aa774e8dce752",
+      "bytes": 3285
+    },
+    {
+      "asset": "./v0.14.13/src/ui/board.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "af0fd0d5d43ff21fef3b59fa3f8097a21c67f1e5e1989c8e54dd26d3e637f0ab",
+      "bytes": 43343
+    },
+    {
+      "asset": "./v0.14.13/src/ui/guide-copy.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "fe4ded0f99f1764fe07ec7af3bcaf4198706954034fa30a1bc2e9af9ffb60d8e",
+      "bytes": 2261
+    },
+    {
+      "asset": "./v0.14.13/src/ui/info-copy.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "fbe5c0ab7439b63fd3a786f2e8fda27f1b3175cf440a43ea615d3d2408cce7b5",
+      "bytes": 3867
+    },
+    {
+      "asset": "./v0.14.13/src/ui/outlet-label-layout.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "70e25df6ed48e2510e2ce459458584a76fe9262ff006bae0dec1a877c0921f69",
+      "bytes": 8320
+    },
+    {
+      "asset": "./v0.14.13/src/ui/style.css",
+      "type": "text/css; charset=utf-8",
+      "sha256": "540dce7dc15b97060b96e120f330d6e3a5706f022310d34ccf692ccc615c61a4",
+      "bytes": 43191
+    },
+    {
+      "asset": "./v0.14.13/src/ui/text-layout.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "d87370a8900c8776df092734b2954bb32b15fe937021378fef78b4b23b01b251",
+      "bytes": 4088
+    },
+    {
+      "asset": "./v0.14.13/src/ui/update-manager.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "3e7f227f8510bd72c2a6b4732bda82d7fb5e72a2cc909465c5f1f27f23dbb460",
+      "bytes": 4231
+    },
+    {
+      "asset": "./v0.14.13/src/ui/visual-timing.js",
+      "type": "application/javascript; charset=utf-8",
+      "sha256": "da00b0c803fbe59ffc9f9532cb056ac5dbc97173908a50920188e126b56f488f",
+      "bytes": 1268
+    }
+  ],
+  "worker": "Matches the tested build; correct content type."
+}

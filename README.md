@@ -12,7 +12,7 @@
 | 試作・実装 | 試作中（v0.14.13）。計算・出題の検査・1〜30面・グラスの音・練習面とチュートリアル・選択／連続プレイ・タイトルとメニュー・PWAを実装。器と土等の[見た目](docs/reviews/2026-11-01-visual-finish.md)、[虹の後の結果](docs/reviews/2026-11-01-result-after-rainbow.md)、[PC配置と案内](docs/reviews/2026-11-01-series-and-guide.md)を保持。発案者の実画面の指摘でタイトルの絵・ボタン・光・判定バッジ・分数・台座・開始合図を再調整し、[文字組みを全体点検](docs/reviews/2026-11-02-visual-readability.md)。続いて[開始待機・結果の余白・判定位置・重複文を調整](docs/reviews/2026-11-02-result-refinement.md)。[管の2段の札・凡例・練習の案内](docs/reviews/2026-11-02-pipe-legend.md)を追加。[スマホの盤面縮小を修正](docs/reviews/2026-11-02-mobile-board.md)。[高さの物差しと下部操作](docs/reviews/2026-11-02-height-and-actions.md)を反映。自由作成・初出説明の表示と既読記録・実機の受け入れは未完了 |
 | 公開 | 試作を GitHub Pages で公開中（https://aqua.sikumilab.com/ 。2026-11-01 発案者が独自ドメインを設定。旧アドレス https://gerupon-lgtm.github.io/aqua/ は新しいアドレスへ転送される） |
 
-v0.14.13で開始合図を700ms待機にし、合図中の操作と、同じ版への更新案内を修正。実装・公開前確認済み。[点検](docs/reviews/2026-11-03-cue-and-update.md)。
+v0.14.13で開始合図を700ms待機にし、合図中の操作と、同じ版への更新案内を修正。公開済み。[点検](docs/reviews/2026-11-03-cue-and-update.md)。
 
 v0.14.12で採用した水庭の部品と、必要量が下の札を取り込み、公開済み。[変更・点検・公開](docs/reviews/2026-11-03-water-garden.md)。
 
