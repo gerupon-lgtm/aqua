@@ -1,6 +1,6 @@
 import { materialDefs, materialWater, drawGardenSoil, drawSocket, drawGardenPedestal, drawDrainPan, drawNozzleLip, drawGardenFeed } from './board-materials.js';
 import { createOutletLabelLayout } from './outlet-label-layout.js';
-import { outletAnnotations, quantityBadge, heightBadge } from './board-annotations.js';
+import { outletAnnotations, quantityBadge, heightBadge, HEIGHT_BADGE, annotationRect } from './board-annotations.js';
 import { feedPath } from './board-part-geometry.js';
 import { drawFountain, drawRainbow } from './board-water-effects.js';
 // 断面の盤面（SVG）。真横から見た図で、画面の上下がそのまま高さ（screens.md 2章）。
@@ -207,7 +207,9 @@ const BADGE_TONE = {
   blue: { fill: '#1d56a0', edge: '#163f78', inner: 'rgba(255, 255, 255, .45)', ink: '#ffffff', icon: '#ffffff' },
   orange: { fill: '#dc5a2c', edge: '#b4421c', inner: 'rgba(255, 255, 255, .45)', ink: '#ffffff', icon: '#ffffff' },
   slate: { fill: '#4b5e77', edge: '#36475d', inner: 'rgba(255, 255, 255, .4)', ink: '#ffffff', icon: '#ffffff' },
-  gold: { fill: '#ffe19c', edge: '#956e21', inner: '#fff6dc', ink: '#17314c', icon: '#1d4f88' }
+  gold: { fill: '#ffe19c', edge: '#956e21', inner: '#fff6dc', ink: '#17314c', icon: '#1d4f88' },
+  // 前回の水面の線と同じ色（--prev）
+  prev: { fill: '#fffaf0', edge: '#9a7a3a', inner: 'rgba(154, 122, 58, .25)', ink: '#6e5320', icon: '#9a7a3a' }
 };
 // 印（中心 0,0、おおよそ 9×9）
 const BADGE_ICON = {
@@ -445,6 +447,8 @@ export function renderBoard(svg, model) {
   }
 
   // グラス
+  // 「前回」の札が避ける、噴水盤の「高さ」の札の範囲
+  const heightCards = stage.outlets.map(o => annotationRect(outletAnnotations(layout, o, basinPlacement(layout, o).cx).height, 'height'));
   for (const t of stage.towers) {
     const node = layout.nodes.get(t.id);
     const x0 = node.cx - TOWER_W / 2;
@@ -480,6 +484,13 @@ export function renderBoard(svg, model) {
     if (phase === 'edit' && prev !== null && prev !== undefined) {
       const y = layout.yOf(prev);
       out.push(`<line x1="${x0 + 3}" y1="${y}" x2="${x1 - 3}" y2="${y}" stroke="var(--prev)" stroke-width="1.6" stroke-dasharray="3 3"/>`);
+      // 点線を目標の高さと読み違えないよう、グラスの中に「前回」と添える（共有資料 U-08）
+      // 札の高さ15・文字9は「高さ」の札（HEIGHT_BADGE）とそろえる。
+      // 噴水盤の「高さ」の札と重なるときは、点線の下へ置く
+      const w = Math.round(12 + textWidth('前回', 9)), h = HEIGHT_BADGE.h;
+      const clear = cy => cy + h / 2 <= GROUND && !heightCards.some(r => node.cx - w / 2 < r.r && r.l < node.cx + w / 2 && cy - h / 2 < r.b && r.t < cy + h / 2);
+      const cy = [y - 10, y + 10].find(clear) ?? y - 10;
+      badge(out, { x: node.cx, y: cy, text: '前回', tone: 'prev', size: 9, h });
     }
     const lit = model.highlight && model.highlight.id === t.id && model.highlight.until > time;
     if (!pick.glass || lit) out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="none" stroke="${lit ? 'var(--gold)' : 'var(--glass-edge)'}" stroke-width="${lit ? 3 : 1.8}"/>`);

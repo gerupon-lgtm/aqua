@@ -236,3 +236,17 @@ test('すべての札が噴水・虹・部品・引き出し線より前へ描�
   assert.ok(front > svg.indexOf('class="elbow-leader"'));
   for (const m of svg.matchAll(/<g class="(?:board-badge|pipe-label)\b/g)) assert.ok(m.index > front, '部品より後ろに札が残っている');
 });
+
+test('前回の水面の点線には、高さの札と同じ高さ・文字の「前回」の札を添え、編集中だけ出す（共有資料 U-08）', () => {
+  const stage = STAGES[7];
+  const prevLevels = new Map(stage.towers.map(t => [t.id, 2]));
+  const config = { connected: new Set(), primed: new Set(), thickness: {} };
+  const { svg } = draw(stage, config, { phase: 'edit', settled: false, prevLevels });
+  const tags = svg.match(/<g class="board-badge"[^>]*>(?:(?!<\/g>)[\s\S])*>前回<\/text><\/g>/g) ?? [];
+  assert.equal(tags.length, stage.towers.length);
+  for (const tag of tags) {
+    assert.match(tag, /height="15"/);
+    assert.match(tag, /font-size="9" font-weight="700"/);
+  }
+  assert.ok(!draw(stage, config, { phase: 'result', prevLevels }).svg.includes('>前回<'));
+});
