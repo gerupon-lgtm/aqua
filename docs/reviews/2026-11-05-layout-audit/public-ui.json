@@ -1,0 +1,49 @@
+{
+  "version": "0.26.1",
+  "source": "36cf90441dfc20bf73cd39c3fdbf726545844e83",
+  "views": [
+    {
+      "body": "0 74 360 396",
+      "height": 844,
+      "outletLabels": [],
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "url": "https://aqua.sikumilab.com/",
+      "version": "© SIKUMI LABv0.26.1 試作",
+      "width": 390
+    },
+    {
+      "foreground": "badge-foreground",
+      "height": 800,
+      "labels": [
+        {
+          "text": "太1",
+          "x": "93.1",
+          "y": "390"
+        },
+        {
+          "text": "太1",
+          "x": "191.92000000000002",
+          "y": "390"
+        },
+        {
+          "text": "中2",
+          "x": "138.45999999999998",
+          "y": "434"
+        },
+        {
+          "text": "太1",
+          "x": "297",
+          "y": "379"
+        }
+      ],
+      "scrollHeight": 800,
+      "scrollWidth": 1280,
+      "url": "https://aqua.sikumilab.com/",
+      "version": "v0.26.1 試作",
+      "width": 1280
+    }
+  ],
+  "console": [],
+  "pcScreenshot": "Capture timed out; desktop layout inspected by DOM; local PC image and identical public asset hashes are recorded separately."
+}

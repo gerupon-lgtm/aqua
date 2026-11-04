@@ -1,0 +1,41 @@
+{
+  "stage1": {
+    "pipe": "SB",
+    "outcome": "perfect",
+    "score": 100,
+    "flow": 2
+  },
+  "drain42": {
+    "id": "D1",
+    "step": "half"
+  },
+  "responsive": [
+    {
+      "board": "{\"bottom\":563.0625,\"height\":365.0625,\"left\":13,\"right\":347,\"top\":198,\"width\":334,\"x\":13,\"y\":198}",
+      "height": 740,
+      "scrollHeight": 740,
+      "scrollWidth": 360,
+      "stage": "AQUA NOTES 試作",
+      "width": 360
+    },
+    {
+      "height": 800,
+      "scrollHeight": 800,
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    {
+      "height": 844,
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    {
+      "height": 390,
+      "scrollHeight": 390,
+      "scrollWidth": 844,
+      "width": 844
+    }
+  ],
+  "console": []
+}

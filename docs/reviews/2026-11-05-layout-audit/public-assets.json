@@ -1,0 +1,465 @@
+{
+  "version": "0.26.1",
+  "commit": "36cf90441dfc20bf73cd39c3fdbf726545844e83",
+  "assets": 75,
+  "checked": 76,
+  "failures": [],
+  "results": [
+    {
+      "path": "./apple-touch-icon.png",
+      "type": "image/png",
+      "hash": "c7bbf56c35950c1f351abe6670a68a364fed4feae34e7366cbd7a890d7e614d0",
+      "pass": true
+    },
+    {
+      "path": "./icon-192.png",
+      "type": "image/png",
+      "hash": "ba2d886c697b92a36f41fe2bb836ec7fb008d33793cd0ff7ccf4d968692f9350",
+      "pass": true
+    },
+    {
+      "path": "./icon-512.png",
+      "type": "image/png",
+      "hash": "37860b6bba5eb2ac4d69476d7a2472bbac2a13bdc11bb575f44cb4e278cd867a",
+      "pass": true
+    },
+    {
+      "path": "./index.html",
+      "type": "text/html; charset=utf-8",
+      "hash": "c2a9c76801499841c333fdac55640555d6c35e269e7cfc708a5c0a71de7b4ec4",
+      "pass": true
+    },
+    {
+      "path": "./manifest.webmanifest",
+      "type": "application/manifest+json; charset=utf-8",
+      "hash": "1493d96035f774ca12b8dac2b263a5dcfa49522a2ea509f889257212a6e1de42",
+      "pass": true
+    },
+    {
+      "path": "./sw.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "7cbf71a3f03550e29783ff83b5c8a16c0356d10d807547df42c1d73deafa32cf",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/apple-touch-icon.png",
+      "type": "image/png",
+      "hash": "c7bbf56c35950c1f351abe6670a68a364fed4feae34e7366cbd7a890d7e614d0",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/fonts/montserrat-500.ttf",
+      "type": "font/ttf",
+      "hash": "637639da93fdd9178e52662cce4bd5a59a544eb60677bb6ef9f89bc472607e5d",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/fonts/montserrat-600.ttf",
+      "type": "font/ttf",
+      "hash": "c535bb158e8cfc3c27654f73aa68a87732899e7d9b10d8496b68605a56d947a7",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/bg-trial.webp",
+      "type": "image/webp",
+      "hash": "4767a7a136db873cfd685a4c0b4b8ebed592690747f4a18ee9eac201330e3336",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/fx-fountain-01.png",
+      "type": "image/png",
+      "hash": "eaa3940b34b36f59d24a6d75b576738403bd7f59249cc617214e9338577ac16f",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/fx-fountain-02.png",
+      "type": "image/png",
+      "hash": "37ee37968ccc0d05a537d33e660d727902bae8d4365cb4c4099f7d2741c02959",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/fx-fountain-03.png",
+      "type": "image/png",
+      "hash": "63397aea24706430d86a64049a59ca4cd1427369bd983c0e1decad9bbbc4fc9e",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/fx-fountain-04.png",
+      "type": "image/png",
+      "hash": "96d3d559e69704f17ac697a5691ea85fa0eb80749e2c7133aa95b126bf2eca17",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/fx-fountain-05.png",
+      "type": "image/png",
+      "hash": "e0fcef1bccdc0ed781bb3b8dc7be2184aa305b5f84b66afbb861c31661d5eba7",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/fx-fountain-06.png",
+      "type": "image/png",
+      "hash": "5bc210c67f6d6fa9611ec04c612d290c30ab163e1ab199155200c57c25bfa44c",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/fx-rainbow.png",
+      "type": "image/png",
+      "hash": "7535d2b4e0dac36f110acea72aed48f43d3133928002268f91b20796c6788b5d",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/intro-adjustable.svg",
+      "type": "image/svg+xml",
+      "hash": "017830fa9746c8d1a1fb73aeb8f8f013c4fbaecfe4e4d728cc508a6db891a70d",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/intro-gate.svg",
+      "type": "image/svg+xml",
+      "hash": "d5a4e4a64a1d427bbd75476d57f6c32ab2fc7d913427a74db4debdcc0f42710c",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/intro-height.svg",
+      "type": "image/svg+xml",
+      "hash": "9a5b58e16ee705e379f046691bcff014d8021a4fb94dc886098ed1499f5baf74",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/intro-outlets.svg",
+      "type": "image/svg+xml",
+      "hash": "7c8b9d366c29653524c95bdf9381b93c38f87b3c4477a70ec2c0e576b97c8824",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/intro-siphon.svg",
+      "type": "image/svg+xml",
+      "hash": "5fcbfce0f532509589e141acef6f0c78644e9647131bb42a153adb38ef1ff5a9",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-basin.png",
+      "type": "image/png",
+      "hash": "f14cac291b9487ada092e2a7e499412bfc02e93c6127fb55941e9ff5f6f8ced5",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-drain-pan-v2.png",
+      "type": "image/png",
+      "hash": "1c91caeb19b5de8c6f07fc2da48d8b66f07242365815f9c8c135b40a47ea93e4",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-glass-bottom.png",
+      "type": "image/png",
+      "hash": "b465fe779340bf29f7af57ab621674ba4988e071d55258c42f5b7e0f98203695",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-glass-middle.png",
+      "type": "image/png",
+      "hash": "141c7ac1f40043c8f8cd8b94be5099e382e19cdee35067e5600cfe0e8b23f87d",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-glass-top.png",
+      "type": "image/png",
+      "hash": "5aed7c251df34d77ca42f163bd97ef7d0e083997b1ba54e69ba7e2c75b88ae35",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-pedestal-middle.png",
+      "type": "image/png",
+      "hash": "cfa9c880f62ac6d5551d2526f5d0eeb6d8a39bf7776426938a0ec321c05b61f1",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-pedestal-top.png",
+      "type": "image/png",
+      "hash": "39fc89f59810d3d087f9bfdbe6ecfc5f84fddfe97f56bac78510b323b985ac68",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-spring-bottom.png",
+      "type": "image/png",
+      "hash": "9c494567f75be23973ee80a85c003a86330c03241c956f00d066fea60a1e6ae5",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-spring-middle.png",
+      "type": "image/png",
+      "hash": "b16214b7e88e43a4090e06d50925d457ffa7ae36a5f60a3a80cfe8adb7da47ad",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/part-spring-top.png",
+      "type": "image/png",
+      "hash": "a33846c0f93c6e1ee7ba35b618a361e5c92d1fead5b5f87678d6a1288accf26e",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/soil-loam-v1.webp",
+      "type": "image/webp",
+      "hash": "fd8e09ea08a0874313bd496b73fd80d38cb78ab80adf057bf4d1836a0cb2db44",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/spirit-detail-v2.png",
+      "type": "image/png",
+      "hash": "d1fa4ed1502f743d94ee535dd028dc40af7d88d21e4bd4e4a6e5e7addb656c6c",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/spirit.png",
+      "type": "image/png",
+      "hash": "3cb0bed80fd67a633c1fb1f707e6f2633af9186502891a0d1959325417e39d64",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/title-fountain-v2.png",
+      "type": "image/png",
+      "hash": "5b3ee90819f07af528e1eff9801cf86151b306e00c2e7321a0c8ce99425e9eb7",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/title-glass-v2.png",
+      "type": "image/png",
+      "hash": "520f7271957a67014b69a0058b162d67a7b0e45d4d8e26d9fa6aab089ba32f23",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/title-landscape.webp",
+      "type": "image/webp",
+      "hash": "92a28145e7f0942998163f5dedd66de870195df4c0c92a724766bf8330633928",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/graphics/title-portrait.webp",
+      "type": "image/webp",
+      "hash": "1527ef278b05946e23413bd2c8288195234a7f7cffa7fba96a9e98f92e197b12",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/icon-192.png",
+      "type": "image/png",
+      "hash": "ba2d886c697b92a36f41fe2bb836ec7fb008d33793cd0ff7ccf4d968692f9350",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/public/icon-512.png",
+      "type": "image/png",
+      "hash": "37860b6bba5eb2ac4d69476d7a2472bbac2a13bdc11bb575f44cb4e278cd867a",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/challenge-draw.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "812d58b63e7a3c01594156308a062a70a345859607036f795c1d5753ddc6798f",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/challenges.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "db44a82c3cad24cb93b43589c4f5b49f6d6c5e14738d25988cc2472e6d98f137",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/free-samples.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "bfbddf0b0a74f39527aa9ddda7a1ff91caf20d1a9f659f63433562f9f715f3c8",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/stages-drain.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "6fff0f4d6e660e85fa993b66c614053df0f4378edf469f697dfa24ca90185572",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/stages-final.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "5001672731b3ef1529bbe5dd46b50fa31a4fd7c502f96fef256b1e3a37130f11",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/stages-loop.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "c423127f3c0a4676076cba00ef2c0453fa1774357a85d8669fe4ed6e104ab95f",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/stages-pump.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "790fdcaaca81f5e3ac47044343099b9bd7f224c301850ba36f20967ab52d6f45",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/stages.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "9be0d9d4b3a90bce19eced70bd5778321302d18d3731b9f7a07d216353487a06",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/content/tutorial.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "8d946581bf3e3e2c08d9c59c106777cfb2c6a483f2def5961d32a45f0c47e681",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/challenge-check.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "018e4d154c459a27473b2ff21525c4efd5b8b094110b337f538beb6cdf6d7e2b",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/explain.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "49da884e48c620cc5b9174cb28f40c59c540d9618c980b8fdb6c26223cd50e11",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/flow.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "223b3f43e5c9ed1cd4e2009dc879d184b561af7a46189fa5a5ec3b097bebb946",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/fraction.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "fb06c8842d93ce76108e4feb8acc4dac43b4b6fac25aee4a3e1f7b31e6390b27",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/free.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "979f63843c2eaea6241ec46b4ed9f50d53cce11166a4a85b7b68bb123f1a0745",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/generate.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "55470ae8d9e6bdd619e9494ff8252c23b35a1368c6775a26171e9d8b3278fb3f",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/modes.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "d2b8d7e66c028419f3783cb318a274f11d1c8072443edf069ee327b9313b72a6",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/pitch.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "22f685606747998db87d0493587ab235f2ab7a6cc8a03f798032812cb5bdec3e",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/play.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "29c2954dd85c9ae969b3eb6609ac73aefbce72fc9cc5926bdc751c24af5842a9",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/records.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "86f1fb156631c93b6fc0dc321806051c258ce2d85dfcab154567edffd42efaa2",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/logic/score.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "a089bf44f96c9486cdb5591851d44252a78ca50b4e6fefd933b4686f9498fbbb",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/app.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "3e5007f1a171672b31d64481466c5a2a46a1d2810abfdf9ef14b54b43a91bc49",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/audio.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "c4e98dc3e9d00adf883123ab977ee94d095d0babc2d0eab4bc67a11c95a02a1f",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/board-annotations.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "9bb459cf93ce3e576191ce4d7a9566db7d2e62d8c04ea1eede450ef11a076bba",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/board-label-geometry.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "250af18494d7be714a97c79c8ad0456f9e546eb4a89149098ed3eb02d59a0bc0",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/board-materials.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "d64db253c3daafab106567ca9ec7f82f113d8c6c69f2112e62a0c0b1ae833ab9",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/board-part-geometry.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "5f1fe7d73115b30f80722506a2ebcea0cd1c795f8b54ac0adec2d68aa200299b",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/board-water-effects.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "9e1a63bf42b2dc9d69faaca72506b9406ec2db1aa0b59a4aa66aa774e8dce752",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/board.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "c5efaa53d4712b5f968aea13c02eb1165fb2e9bc9d27e4a40e125d587128836a",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/guide-copy.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "fe4ded0f99f1764fe07ec7af3bcaf4198706954034fa30a1bc2e9af9ffb60d8e",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/info-copy.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "bf90ff6e2c4fc18d9dad7ae8db2ff1ecc631579d28335563dad65ea49ad76b1f",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/outlet-label-layout.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "77bf6c9b11ca7e041dd201c898aacf8d1401102aabeeb4f40a9bb4e4022148f2",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/style.css",
+      "type": "text/css; charset=utf-8",
+      "hash": "f2a1c415f55050b56bf77a367e952541d2ca0233bd251522e36e8dea219807a5",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/text-layout.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "952813b939c0b8a57e56522cbb68983618a157a81f0417ce16300975e3b7a1ce",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/update-manager.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "3e7f227f8510bd72c2a6b4732bda82d7fb5e72a2cc909465c5f1f27f23dbb460",
+      "pass": true
+    },
+    {
+      "path": "./v0.26.1/src/ui/visual-timing.js",
+      "type": "application/javascript; charset=utf-8",
+      "hash": "251b15c8ca2fff81c52ee4c39d07ed3dcd5503139ac9c0f9f151f78acb3e106e",
+      "pass": true
+    }
+  ]
+}
