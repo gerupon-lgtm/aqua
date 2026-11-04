@@ -5,6 +5,7 @@ import { frac } from './fraction.js';
 import { allConfigs, judge, configKey, rank, lexLess } from './play.js';
 import { checkChallenge } from './challenge-check.js';
 import { applyValues } from '../content/challenge-draw.js';
+import { triadOf } from './pitch.js';
 
 export const GENERATOR_VERSION = 1;
 export const PER_STAGE = 8;
@@ -73,6 +74,8 @@ export function candidatesFor(stage) {
         broken: j.states.some(s => s.broken.size),
         // 水門の面は、開いた状態と閉じた状態の両方の流れる量（噴水盤の数×2）。水門のない面は1状態だけ
         flows: j.states.flatMap(s => s.outlets.map(o => o.flow)),
+        // 水のあるグラスの水位（最後の状態）。chord の面で和音かどうかを見る
+        levels: Object.values(j.states.at(-1).result.towers).filter(t => t.state === 'water').map(t => t.level),
         gateMatters: j.states.length > 1 && j.states[0].outlets.some((o, i) => !o.flow.eq(j.states[1].outlets[i].flow))
       };
     });
@@ -103,6 +106,8 @@ export function candidatesFor(stage) {
       if (v.intoSpring2 && !flowsInto(base, perfect.config, stage.spring2.id)) continue;
       // 水門の面（49〜54面）：mustGate なら、満点のつなぎ方で水門を閉じると届く量が変わる（水門が答えに効く）
       if (v.mustGate && !perfect.gateMatters) continue;
+      // 和音の面（10・23面、要件 v0.12）：chord なら、満点のつなぎ方で3つのグラスが3和音（長・短）を鳴らす
+      if (v.chord && !triadOf(perfect.levels)) continue;
       const n = stage.outlets.length;
       const targetOf = i => (r.flows.length > n ? { open: r.flows[i].toString(), closed: r.flows[n + i].toString() } : r.flows[i].toString());
       found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, targetOf(i)])) }, family: perfect.key });
@@ -121,7 +126,11 @@ export function generateStage(stage, seed = stage.vary.seed) {
     byFamily.get(c.family).push(c);
   }
   const each = PER_STAGE / FAMILIES;
-  const families = shuffle([...byFamily.keys()].sort().filter(k => byFamily.get(k).length >= each), random).slice(0, FAMILIES);
+  let families = shuffle([...byFamily.keys()].sort().filter(k => byFamily.get(k).length >= each), random);
+  // distinctShapes（23面）：同じ両端の管の違い（SA と SA2）だけの系統は選ばず、つなぎ方の形が違う2系統にする
+  const shape = key => key.split(',').map(id => id.replace(/\d+(?=$|[:*+])/, '')).sort().join(',');
+  if (stage.vary.distinctShapes) families = families.filter((k, i) => families.findIndex(x => shape(x) === shape(k)) === i);
+  families = families.slice(0, FAMILIES);
   if (families.length < FAMILIES) throw new Error(`${stage.number}面：${each}つ以上の出題がある系統が${FAMILIES}つ見つかりません（候補 ${pool.length}件、系統 ${byFamily.size}）。数値の範囲を見直してください。`);
   const picked = [];
   families.forEach((key, fi) => {

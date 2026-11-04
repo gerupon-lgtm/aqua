@@ -266,110 +266,31 @@ export const STAGES = [
   },
   {
     id: 'T10',
-    version: 1,
+    // 版2（2026-11-04 要件 v0.12）：満点の答えで3つのグラスが3和音（長・短）を鳴らす出題だけにした。
+    // 3つの水位が違う値になるよう、A–C の管を2本・B–C の管を2本にした（同じ水位のグラスがないと、部分点の答えが作りにくいため）
+    version: 2,
     number: 10,
     set: '分けて届ける',
     title: '三つの噴水盤',
     hint: '三つの噴水盤に、それぞれ必要な量を届けます。',
-    spring: {
-      id: 'S',
-      x: 1.1,
-      height: '8'
-    },
-    towers: [
-      {
-        id: 'A',
-        x: 2.9
-      },
-      {
-        id: 'B',
-        x: 5.6
-      },
-      {
-        id: 'C',
-        x: 8.4
-      }
-    ],
+    spring: { id: 'S', x: 1.1, height: '8' },
+    towers: [{ id: 'A', x: 2.9 }, { id: 'B', x: 5.6 }, { id: 'C', x: 8.4 }],
     outlets: [
-      {
-        id: 'O1',
-        tower: 'A',
-        height: '0',
-        conductance: '1',
-        target: '2',
-        label: '左の噴水盤'
-      },
-      {
-        id: 'O2',
-        tower: 'B',
-        height: '0',
-        conductance: '1',
-        target: '2',
-        label: '中の噴水盤'
-      },
-      {
-        id: 'O3',
-        tower: 'C',
-        height: '0',
-        conductance: '1',
-        target: '2',
-        label: '右の噴水盤'
-      }
+      { id: 'O1', tower: 'A', height: '0', conductance: '1', target: '2', label: '左の噴水盤' },
+      { id: 'O2', tower: 'B', height: '0', conductance: '1', target: '2', label: '中の噴水盤' },
+      { id: 'O3', tower: 'C', height: '0', conductance: '1', target: '2', label: '右の噴水盤' }
     ],
     candidates: [
-      {
-        id: 'SA',
-        a: 'S',
-        b: 'A',
-        thinness: '1',
-        depth: 1
-      },
-      {
-        id: 'AB',
-        a: 'A',
-        b: 'B',
-        thinness: '1',
-        depth: 1
-      },
-      {
-        id: 'BC',
-        a: 'B',
-        b: 'C',
-        thinness: '1',
-        depth: 1
-      },
-      {
-        id: 'SB',
-        a: 'S',
-        b: 'B',
-        thinness: '1',
-        depth: 2
-      },
-      {
-        id: 'SC',
-        a: 'S',
-        b: 'C',
-        thinness: '1',
-        depth: 3
-      }
+      { id: 'SA', a: 'S', b: 'A', thinness: '1', depth: 1 },
+      { id: 'AB', a: 'A', b: 'B', thinness: '1', depth: 1 },
+      { id: 'BC', a: 'B', b: 'C', thinness: '1', depth: 1 },
+      { id: 'BC2', a: 'B', b: 'C', thinness: '1', depth: 4 },
+      { id: 'SB', a: 'S', b: 'B', thinness: '1', depth: 4 },
+      { id: 'AC', a: 'A', b: 'C', thinness: '1', depth: 2 },
+      { id: 'AC2', a: 'A', b: 'C', thinness: '1', depth: 3 }
     ],
-    vary: {
-      spring: [
-        '6',
-        '8',
-        '9',
-        '10',
-        '12'
-      ],
-      thinnessAll: [
-        '1',
-        '2',
-        '3'
-      ],
-      maxTarget: 6,
-      minPerfect: 2,
-      seed: 10010
-    }
+    // 給水塔の高さは、和音の出題が見つかる値に絞った（5〜16を調べ、12でだけ見つかった。生成と検査の時間を短くするため）
+    vary: { spring: ['11', '12'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, chord: true, distinctShapes: true, seed: 10010 }
   },
   {
     id: 'T11',
@@ -1376,110 +1297,31 @@ export const STAGES = [
   },
   {
     id: 'T23',
-    version: 1,
+    // 版2（2026-11-04 要件 v0.12）：満点の答えで3つのグラスが3和音（長・短）を鳴らす出題だけにした。
+    // 3つの水位が違う値になるよう、給水塔–A の管を2本にし、A–C の管を足した（同じ水位のグラスがないと、部分点の答えが作りにくいため）
+    version: 2,
     number: 23,
     set: '低い出口、高い出口',
     title: '三つの高さ',
-    hint: '三つの噴水盤の口は、それぞれ高さが違います。',
-    spring: {
-      id: 'S',
-      x: 1.1,
-      height: '8'
-    },
-    towers: [
-      {
-        id: 'A',
-        x: 2.9
-      },
-      {
-        id: 'B',
-        x: 5.6
-      },
-      {
-        id: 'C',
-        x: 8.4
-      }
-    ],
+    hint: '三つの噴水盤の口は、それぞれ高さが違います。ちょうど届けると、3つのグラスが和音を鳴らします。',
+    spring: { id: 'S', x: 1.1, height: '8' },
+    towers: [{ id: 'A', x: 2.9 }, { id: 'B', x: 5.6 }, { id: 'C', x: 8.4 }],
     outlets: [
-      {
-        id: 'O1',
-        tower: 'A',
-        height: '0',
-        conductance: '1',
-        target: '2',
-        label: '左の噴水盤'
-      },
-      {
-        id: 'O2',
-        tower: 'B',
-        height: '2',
-        conductance: '1',
-        target: '2',
-        label: '中の噴水盤'
-      },
-      {
-        id: 'O3',
-        tower: 'C',
-        height: '1',
-        conductance: '1',
-        target: '2',
-        label: '右の噴水盤'
-      }
+      { id: 'O1', tower: 'A', height: '0', conductance: '1', target: '2', label: '左の噴水盤' },
+      { id: 'O2', tower: 'B', height: '2', conductance: '1', target: '2', label: '中の噴水盤' },
+      { id: 'O3', tower: 'C', height: '1', conductance: '1', target: '2', label: '右の噴水盤' }
     ],
     candidates: [
-      {
-        id: 'SA',
-        a: 'S',
-        b: 'A',
-        thinness: '1',
-        depth: 1
-      },
-      {
-        id: 'AB',
-        a: 'A',
-        b: 'B',
-        thinness: '1',
-        depth: 1
-      },
-      {
-        id: 'BC',
-        a: 'B',
-        b: 'C',
-        thinness: '1',
-        depth: 1
-      },
-      {
-        id: 'SB',
-        a: 'S',
-        b: 'B',
-        thinness: '1',
-        depth: 2
-      },
-      {
-        id: 'SC',
-        a: 'S',
-        b: 'C',
-        thinness: '1',
-        depth: 3
-      }
+      { id: 'SA', a: 'S', b: 'A', thinness: '1', depth: 1 },
+      { id: 'SA2', a: 'S', b: 'A', thinness: '1', depth: 3 },
+      { id: 'AB', a: 'A', b: 'B', thinness: '1', depth: 1 },
+      { id: 'BC', a: 'B', b: 'C', thinness: '1', depth: 1 },
+      { id: 'AC', a: 'A', b: 'C', thinness: '1', depth: 3 },
+      { id: 'SB', a: 'S', b: 'B', thinness: '1', depth: 2 },
+      { id: 'SC', a: 'S', b: 'C', thinness: '1', depth: 4 }
     ],
-    vary: {
-      spring: [
-        '6',
-        '8',
-        '9',
-        '10',
-        '12'
-      ],
-      thinnessAll: [
-        '1',
-        '2',
-        '3'
-      ],
-      maxTarget: 6,
-      minPerfect: 2,
-      seed: 23023
-    }
+    // 給水塔の高さは、和音の出題が見つかる値に絞った（5〜16を調べた。生成と検査の時間を短くするため）
+    vary: { spring: ['9', '11', '13'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, chord: true, distinctShapes: true, seed: 23023 }
   },
   {
     id: 'T24',

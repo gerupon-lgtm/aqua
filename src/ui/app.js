@@ -16,10 +16,10 @@ import { renderBoard, layoutFor, towerAt, pipeAt, springAt, levelAtY, boardViewB
 import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
-import { freeStage, freeConfig, evaluateFree, addTower, removeTower, pipesOf, setOutlet, setSpringHeight, addPipe, updatePipe, removePipeFrom, setPrimed, minCrest, maxCrest, SPRING_HEIGHTS, SIPHON_INLET } from '../logic/free.js';
+import { freeStage, freeConfig, evaluateFree, addTower, removeTower, pipesOf, setOutlet, setSpringHeight, addPipe, updatePipe, removePipeFrom, setPrimed, minCrest, maxCrest, SPRING_HEIGHTS, SIPHON_INLET, goalResult } from '../logic/free.js';
 import { FREE_SAMPLES } from '../content/free-samples.js';
 
-const APP_VERSION = '0.22.0';
+const APP_VERSION = '0.23.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -226,10 +226,20 @@ function removePipe(id) {
 // ---- 自由作成（T-07、F-016）：置いた回路を、課題と同じ計算で流す（C-02） ----
 // 回路は state.free.circuit に持ち、変えるたびに課題と同じ形（stage・config）へ作り直して描く
 const isFree = () => state.mode === 'free';
+// お題の達成の印（F-018）。端末の保存領域に { お題ID: true } で残す。読めない・保存できないときは印なしで遊べる
+const GOALS_KEY = 'aqua-free-goals-v1';
+const goalsDone = () => { try { return JSON.parse(localStorage.getItem(GOALS_KEY) || '{}') ?? {}; } catch { return {}; } };
+function markGoal(id) {
+  const done = goalsDone();
+  if (done[id]) return true;
+  done[id] = true;
+  try { localStorage.setItem(GOALS_KEY, JSON.stringify(done)); return true; } catch { return false; }
+}
+const freeGoalNow = () => (isFree() && state.free?.goal ? goalResult(state.free.goal, state.evaluation) : null);
 const partName = id => (id === 'S' ? '給水塔' : `グラス${id}`);
-function loadFree(circuit, { name = '', dirty = false } = {}) {
+function loadFree(circuit, { name = '', dirty = false, goal = null } = {}) {
   stopRun();
-  state.free = { circuit, name, dirty };
+  state.free = { circuit, name, dirty, goal };
   state.selected = null;
   state.freeNote = '';
   state.freeConfirm = null;
@@ -267,9 +277,10 @@ function startFree() {
   state.continuous = null;
   state.stageCueUntil = 0;
   $('app').classList.remove('with-guide');
+  // 回路を用意してから画面を閉じる（タイトルを閉じるときの描画で、回路がないと止まるため）
+  if (!state.free) state.free = { circuit: FREE_SAMPLES[0].circuit(), name: `見本「${FREE_SAMPLES[0].name}」`, dirty: false, goal: null };
   closeTitle();
-  if (state.free) refreshFree();
-  else loadFree(FREE_SAMPLES[0].circuit(), { name: `見本「${FREE_SAMPLES[0].name}」` });
+  refreshFree();
 }
 // 見本を開く。今の回路を変えていたら、消えることを確かめてから（C-01 の考え方。保存は T-07 の2回目）
 function openFreeSamples(confirmId = null) {
@@ -279,7 +290,8 @@ function openFreeSamples(confirmId = null) {
       `<button type="button" class="ghost" data-sheet="close">やめる</button><button type="button" class="primary" data-free-sample-ok="${sample.id}">入れ替える</button>`);
     return;
   }
-  const items = FREE_SAMPLES.map(s => `<button type="button" class="ghost level" data-free-sample="${s.id}"><b>${textMarkup(s.name)}</b><span>${textMarkup(s.note)}</span></button>`).join('');
+  const done = goalsDone();
+  const items = FREE_SAMPLES.map(s => `<button type="button" class="ghost level" data-free-sample="${s.id}"><b>${textMarkup(s.name)}${s.goal && done[s.goal.id] ? ' <span class="newbest">達成</span>' : ''}</b><span>${textMarkup(s.note)}</span></button>`).join('');
   openSheet('見本', `<div class="level-list">${items}</div>`);
 }
 function pickFreeSample(id, confirmed = false) {
@@ -287,7 +299,7 @@ function pickFreeSample(id, confirmed = false) {
   if (!sample) return;
   if (state.free?.dirty && !confirmed) { openFreeSamples(id); return; }
   closeSheet();
-  loadFree(sample.circuit(), { name: `見本「${sample.name}」` });
+  loadFree(sample.circuit(), { name: `見本「${sample.name}」`, goal: sample.goal ?? null });
 }
 
 // 部品と管の窓（自由作成）。給水塔：高さとつなぐ先。グラス：噴水盤とつなぐ先、外す。
@@ -445,6 +457,8 @@ function startRun() {
   }
   // 自由作成は採点しないので、ジングルは鳴らさない
   if (!isFree()) later(settleAt + (evaluation.outcome === 'ng' ? timing.jingleNgMs : timing.jingleMs), () => audio.jingle(evaluation.outcome));
+  // 自由作成のお題を達成したときだけ、100点と同じジングルと虹（F-018 達成の演出）
+  else if (freeGoalNow()?.done) later(settleAt + timing.jingleMs, () => audio.jingle('perfect'));
   later(settleAt + resultCardDelay(evaluation.outcome, timing), showResult);
   renderAll();
 }
@@ -462,7 +476,13 @@ function askOrRun() {
 function showResult() {
   if (!state.run) return;
   state.phase = 'result';
-  if (isFree()) { state.resultClosed = false; renderAll(); return; }
+  if (isFree()) {
+    state.resultClosed = false;
+    const g = freeGoalNow();
+    state.saveMessage = g?.done && !markGoal(state.free.goal.id) ? 'お題の達成を、この端末に保存できませんでした。' : '';
+    renderAll();
+    return;
+  }
   const ev = state.evaluation;
   state.saveMessage = '';
   state.newBest = false;
@@ -596,7 +616,9 @@ function drawBoard() {
     gateClosed: v.gateClosed,
     // 噴水が噴き始める時刻：クリアのジングルの鳴り始めと同じ（2026-11-01 発案者。NGは噴かない）
     fountainAt: state.run ? state.run.start + state.run.settleAt + state.run.timing.jingleMs : null,
-    outcome: state.evaluation?.outcome ?? null,
+    // 自由作成のお題を達成したら、100点と同じく噴水のあとに虹をかける
+    outcome: isFree() && state.evaluation ? (freeGoalNow()?.done ? 'perfect' : 'free') : state.evaluation?.outcome ?? null,
+    freeGoal: isFree() ? state.free?.goal?.targets ?? null : null,
     prevLevels: state.prevLevels,
     time: now,
     reducedMotion: reducedMotionQuery.matches,
@@ -664,7 +686,7 @@ function freeCondHtml(st, { connected = 0, phase = 'edit' } = {}) {
     </div>
     <div class="cond-card">
       <div class="cond-head"><span class="cond-label">自由作成</span><span class="cond-tools"><button type="button" class="mini" id="free-samples" ${phase === 'edit' ? '' : 'disabled'}>見本</button></span></div>
-      <div class="cond-goal">${phraseMarkup('部品を置いて|配管でつなぎ、|水を流して|音と流れを確かめます。')}</div>
+      <div class="cond-goal">${state.free?.goal ? textMarkup(`お題：${state.free.goal.title}${goalsDone()[state.free.goal.id] ? '（達成）' : ''}`) : phraseMarkup('部品を置いて|配管でつなぎ、|水を流して|音と流れを確かめます。')}</div>
       <div class="cond-res"><span class="nw">グラス <b>${st.towers.length}</b> / 3</span><span class="nw">配管 <b>${connected}</b> 本</span></div>
     </div>`;
 }
@@ -775,7 +797,7 @@ function renderPanel() {
   if (state.phase === 'edit' && isFree()) {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      ${state.freeNote && !state.selected ? `<p class="warn" role="alert">${textMarkup(state.freeNote)}</p>` : `<p class="hint">${textMarkup(st.hint)}</p>`}
+      ${state.freeNote && !state.selected ? `<p class="warn" role="alert">${textMarkup(state.freeNote)}</p>` : `<p class="hint">${textMarkup(state.free?.goal ? state.free.goal.text : st.hint)}</p>`}
       <div class="actions">
         <button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
         <button type="button" class="primary" id="run" ${n ? '' : 'disabled'}>水を流す</button>
@@ -954,6 +976,12 @@ function renderFreeResult(panel) {
     if (!r) return `<tr><td>${textMarkup(name)}</td><td colspan="2">${why}</td><td>${p.thinness}</td></tr>`;
     return `<tr><td>${textMarkup(name)}</td><td>${fmt(r.flow)}</td><td>${fmt(r.diff)}</td><td>${p.thinness}</td></tr>`;
   }).join('');
+  // お題（F-018）：達成なら印、まだなら目標と今の水位をグラスごとに
+  const g = freeGoalNow();
+  const crownSvg = '<svg viewBox="0 0 20 15" width="16" height="12" aria-hidden="true"><path d="M2 12 L1 3 6 6 10 0 14 6 19 3 18 12 Z M2 14 H18" fill="currentColor"/></svg>';
+  const goalHtml = !g ? '' : g.done
+    ? `<p class="goal-line"><span class="newbest">${crownSvg} お題達成</span> ${textMarkup(state.free.goal.title)}</p>`
+    : `<p class="goal-line">${textMarkup(`お題：${state.free.goal.title}`)}</p><ul class="plain goal-rows">${g.rows.map(r => `<li>${textMarkup(`グラス${r.id}：印 ${r.target}・いま ${r.level === null ? '空' : fmt(r.level)}${r.ok ? ' ✓' : ''}`)}</li>`).join('')}</ul>`;
   const siphonNote = ev.siphons.size ? `<p class="mode-line">${textMarkup(`サイフォンになった管：${[...ev.siphons].map(id => { const p = state.free.circuit.pipes.find(x => x.id === id); return `${partName(p.a)}–${partName(p.b)}`; }).join('、')}`)}</p>` : '';
   panel.innerHTML = `
     <p class="hint">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
@@ -968,6 +996,8 @@ function renderFreeResult(panel) {
         <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button>
         <span class="used">${textMarkup(`配管 ${ev.used} 本`)}</span>
       </div>
+      ${goalHtml}
+      ${state.saveMessage ? `<p class="warn">${textMarkup(state.saveMessage)}</p>` : ''}
       <div class="result-metrics"><ul class="outlets">${outlets}</ul></div>
       ${siphonNote}
       <p class="swipe-note">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>

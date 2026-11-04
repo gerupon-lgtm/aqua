@@ -507,6 +507,12 @@ export function renderBoard(svg, model) {
       const y = layout.yOf(k);
       out.push(`<line class="glass-tick" data-height-level="${k}" x1="${x0 - 5}" y1="${y}" x2="${x0 + 5}" y2="${y}" stroke="var(--tick)" stroke-width="1.4"/>`);
     }
+    // 自由作成のお題（F-018）：目標の水位に金色の印（グラスを横切る帯）。札は噴水盤の札と重なるので付けない
+    const goal = stage.free ? model.freeGoal?.[t.id] : null;
+    if (goal !== null && goal !== undefined) {
+      const gy = layout.yOf(Number(goal));
+      out.push(`<g class="goal-mark" data-goal="${esc(t.id)}" pointer-events="none"><rect x="${x0 - 7}" y="${gy - 2.5}" width="${TOWER_W + 14}" height="5" rx="2.5" fill="#ffe19c" stroke="#956e21" stroke-width="1"/></g>`);
+    }
     // 前回の水面の線（編集中だけ）
     const prev = prevLevels?.get(t.id);
     if (phase === 'edit' && prev !== null && prev !== undefined) {

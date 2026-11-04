@@ -204,3 +204,16 @@ export function validateCircuit(c) {
   if (Math.max(0, ...assignDepths(c).values()) > MAX_DEPTH) bad('地面の下の管が多すぎます');
   return c;
 }
+
+// お題（F-018）：見本ごとに、グラスの目標の水位（目盛りの印）を示す。採点はせず、達成したかだけを見る。
+// goal：{ id, title, text, targets: { グラスID: 水位 } }。流して落ち着いた（水門があれば閉じたあとの）水位が、印とちょうど同じなら達成
+export function goalResult(goal, evaluation) {
+  if (!goal || !evaluation) return null;
+  const towers = evaluation.states.at(-1).result.towers;
+  const rows = Object.entries(goal.targets).map(([id, target]) => {
+    const t = towers[id];
+    const level = t?.state === 'water' ? t.level : null;
+    return { id, target, level, ok: level !== null && level.eq(frac(target)) };
+  });
+  return { done: rows.every(r => r.ok), rows };
+}

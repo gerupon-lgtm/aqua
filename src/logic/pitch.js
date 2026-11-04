@@ -57,3 +57,18 @@ export function frequencyForMidi(midi) {
 export function frequencyForLevel(level, scale = DEFAULT_SCALE) {
   return frequencyForMidi(midiForLevel(level, scale));
 }
+
+// 3つの水位が3和音（長3和音・短3和音）になっているか（10・23面の出題、自由作成のお題。要件 v0.12）。
+// 音階に乗っていない水位、同じ音名が重なるものは和音としない。戻り値：{ root: 'C', quality: 'major'|'minor', name: 'Cメジャー' } か null
+const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+export function triadOf(levels, scale = DEFAULT_SCALE) {
+  if (levels.length !== 3 || levels.some(l => l === null || !onScale(l, scale))) return null;
+  const pcs = [...new Set(levels.map(l => ((midiForLevel(l, scale) % 12) + 12) % 12))];
+  if (pcs.length !== 3) return null;
+  for (const r of pcs) {
+    const shape = pcs.map(p => (p - r + 12) % 12).sort((a, b) => a - b).join(',');
+    if (shape === '0,4,7') return { root: NOTE_NAMES[r], quality: 'major', name: `${NOTE_NAMES[r]}メジャー` };
+    if (shape === '0,3,7') return { root: NOTE_NAMES[r], quality: 'minor', name: `${NOTE_NAMES[r]}マイナー` };
+  }
+  return null;
+}

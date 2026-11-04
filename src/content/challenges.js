@@ -827,33 +827,36 @@ export const CHALLENGES = {
     {
       "id": "T10-1",
       "number": 1,
-      "baseVersion": 1,
-      "family": "B",
+      "baseVersion": 2,
+      "family": "A",
       "values": {
         "spring": "12",
         "thinness": {
-          "SA": "1",
-          "AB": "3",
-          "BC": "1",
+          "SA": "3",
+          "AB": "2",
+          "BC": "3",
+          "BC2": "3",
           "SB": "1",
-          "SC": "2"
+          "AC": "2",
+          "AC2": "2"
         },
         "targets": {
-          "O1": "6",
-          "O2": "6",
-          "O3": "4"
+          "O1": "3",
+          "O2": "5",
+          "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "SA,SB,SC",
-        "perfectCount": 3,
+        "perfectKey": "BC,BC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "AB,SA,SB,SC"
+          "AB,AC,AC2,BC,SA,SB",
+          "AB,AC,AC2,BC2,SA,SB"
         ],
         "levels": {
-          "A": "6",
-          "B": "6",
-          "C": "4"
+          "A": "3",
+          "B": "5",
+          "C": "2"
         }
       },
       "seed": 10010,
@@ -862,33 +865,35 @@ export const CHALLENGES = {
     {
       "id": "T10-2",
       "number": 2,
-      "baseVersion": 1,
+      "baseVersion": 2,
       "family": "A",
       "values": {
-        "spring": "8",
+        "spring": "12",
         "thinness": {
           "SA": "3",
           "AB": "1",
-          "BC": "1",
-          "SB": "2",
-          "SC": "3"
+          "BC": "3",
+          "BC2": "3",
+          "SB": "1",
+          "AC": "1",
+          "AC2": "1"
         },
         "targets": {
-          "O1": "2",
-          "O2": "2",
-          "O3": "1"
+          "O1": "3",
+          "O2": "5",
+          "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SB",
-        "perfectCount": 3,
+        "perfectKey": "BC,BC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AB,AC,AC2,SA,SB"
         ],
         "levels": {
-          "A": "2",
-          "B": "2",
-          "C": "1"
+          "A": "3",
+          "B": "5",
+          "C": "2"
         }
       },
       "seed": 10010,
@@ -897,33 +902,36 @@ export const CHALLENGES = {
     {
       "id": "T10-3",
       "number": 3,
-      "baseVersion": 1,
-      "family": "B",
+      "baseVersion": 2,
+      "family": "A",
       "values": {
-        "spring": "6",
+        "spring": "12",
         "thinness": {
-          "SA": "2",
-          "AB": "1",
+          "SA": "3",
+          "AB": "2",
           "BC": "3",
-          "SB": "2",
-          "SC": "1"
+          "BC2": "3",
+          "SB": "1",
+          "AC": "3",
+          "AC2": "1"
         },
         "targets": {
-          "O1": "2",
-          "O2": "2",
-          "O3": "3"
+          "O1": "3",
+          "O2": "5",
+          "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "SA,SB,SC",
-        "perfectCount": 3,
+        "perfectKey": "BC,BC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "AB,SA,SB,SC"
+          "AB,AC2,BC,SA,SB",
+          "AB,AC2,BC2,SA,SB"
         ],
         "levels": {
-          "A": "2",
-          "B": "2",
-          "C": "3"
+          "A": "3",
+          "B": "5",
+          "C": "2"
         }
       },
       "seed": 10010,
@@ -932,33 +940,36 @@ export const CHALLENGES = {
     {
       "id": "T10-4",
       "number": 4,
-      "baseVersion": 1,
-      "family": "A",
+      "baseVersion": 2,
+      "family": "B",
       "values": {
-        "spring": "8",
+        "spring": "12",
         "thinness": {
-          "SA": "3",
+          "SA": "1",
           "AB": "2",
-          "BC": "1",
-          "SB": "2",
-          "SC": "1"
+          "BC": "2",
+          "BC2": "1",
+          "SB": "3",
+          "AC": "3",
+          "AC2": "3"
         },
         "targets": {
-          "O1": "2",
-          "O2": "2",
-          "O3": "1"
+          "O1": "5",
+          "O2": "3",
+          "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SB",
-        "perfectCount": 3,
+        "perfectKey": "AC,AC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AB,AC,BC2,SA,SB",
+          "AB,AC2,BC2,SA,SB"
         ],
         "levels": {
-          "A": "2",
-          "B": "2",
-          "C": "1"
+          "A": "5",
+          "B": "3",
+          "C": "2"
         }
       },
       "seed": 10010,
@@ -967,33 +978,36 @@ export const CHALLENGES = {
     {
       "id": "T10-5",
       "number": 5,
-      "baseVersion": 1,
-      "family": "A",
+      "baseVersion": 2,
+      "family": "B",
       "values": {
-        "spring": "8",
+        "spring": "12",
         "thinness": {
-          "SA": "3",
-          "AB": "1",
-          "BC": "1",
-          "SB": "2",
-          "SC": "2"
+          "SA": "1",
+          "AB": "2",
+          "BC": "2",
+          "BC2": "2",
+          "SB": "3",
+          "AC": "3",
+          "AC2": "3"
         },
         "targets": {
-          "O1": "2",
-          "O2": "2",
-          "O3": "1"
+          "O1": "5",
+          "O2": "3",
+          "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SB",
-        "perfectCount": 3,
+        "perfectKey": "AC,AC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AB,AC,BC,BC2,SA,SB",
+          "AB,AC2,BC,BC2,SA,SB"
         ],
         "levels": {
-          "A": "2",
-          "B": "2",
-          "C": "1"
+          "A": "5",
+          "B": "3",
+          "C": "2"
         }
       },
       "seed": 10010,
@@ -1002,35 +1016,38 @@ export const CHALLENGES = {
     {
       "id": "T10-6",
       "number": 6,
-      "baseVersion": 1,
-      "family": "B",
+      "baseVersion": 2,
+      "family": "A",
       "values": {
-        "spring": "9",
+        "spring": "12",
         "thinness": {
-          "SA": "2",
-          "AB": "1",
-          "BC": "2",
-          "SB": "2",
-          "SC": "2"
+          "SA": "3",
+          "AB": "2",
+          "BC": "3",
+          "BC2": "3",
+          "SB": "1",
+          "AC": "1",
+          "AC2": "1"
         },
         "targets": {
           "O1": "3",
-          "O2": "3",
-          "O3": "3"
+          "O2": "5",
+          "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "SA,SB,SC",
-        "perfectCount": 3,
+        "perfectKey": "BC,BC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "AB,BC,SA,SB,SC",
-          "AB,SA,SB,SC",
-          "BC,SA,SB,SC"
+          "AB,AC,BC,SA,SB",
+          "AB,AC,BC2,SA,SB",
+          "AB,AC2,BC,SA,SB",
+          "AB,AC2,BC2,SA,SB"
         ],
         "levels": {
           "A": "3",
-          "B": "3",
-          "C": "3"
+          "B": "5",
+          "C": "2"
         }
       },
       "seed": 10010,
@@ -1039,33 +1056,35 @@ export const CHALLENGES = {
     {
       "id": "T10-7",
       "number": 7,
-      "baseVersion": 1,
-      "family": "A",
+      "baseVersion": 2,
+      "family": "B",
       "values": {
-        "spring": "8",
+        "spring": "12",
         "thinness": {
-          "SA": "3",
-          "AB": "2",
+          "SA": "1",
+          "AB": "1",
           "BC": "1",
-          "SB": "2",
-          "SC": "3"
+          "BC2": "1",
+          "SB": "3",
+          "AC": "3",
+          "AC2": "3"
         },
         "targets": {
-          "O1": "2",
-          "O2": "2",
-          "O3": "1"
+          "O1": "5",
+          "O2": "3",
+          "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SB",
-        "perfectCount": 3,
+        "perfectKey": "AC,AC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AB,BC,BC2,SA,SB"
         ],
         "levels": {
-          "A": "2",
-          "B": "2",
-          "C": "1"
+          "A": "5",
+          "B": "3",
+          "C": "2"
         }
       },
       "seed": 10010,
@@ -1074,32 +1093,35 @@ export const CHALLENGES = {
     {
       "id": "T10-8",
       "number": 8,
-      "baseVersion": 1,
+      "baseVersion": 2,
       "family": "B",
       "values": {
-        "spring": "6",
+        "spring": "12",
         "thinness": {
           "SA": "1",
-          "AB": "1",
-          "BC": "2",
-          "SB": "2",
-          "SC": "2"
+          "AB": "2",
+          "BC": "1",
+          "BC2": "3",
+          "SB": "3",
+          "AC": "3",
+          "AC2": "3"
         },
         "targets": {
-          "O1": "3",
-          "O2": "2",
+          "O1": "5",
+          "O2": "3",
           "O3": "2"
         }
       },
       "expected": {
-        "perfectKey": "SA,SB,SC",
-        "perfectCount": 3,
+        "perfectKey": "AC,AC2,SA,SB",
+        "perfectCount": 4,
         "partialKeys": [
-          "BC,SA,SB,SC"
+          "AB,AC,BC,SA,SB",
+          "AB,AC2,BC,SA,SB"
         ],
         "levels": {
-          "A": "3",
-          "B": "2",
+          "A": "5",
+          "B": "3",
           "C": "2"
         }
       },
@@ -4278,33 +4300,35 @@ export const CHALLENGES = {
     {
       "id": "T23-1",
       "number": 1,
-      "baseVersion": 1,
-      "family": "B",
+      "baseVersion": 2,
+      "family": "A",
       "values": {
-        "spring": "12",
+        "spring": "9",
         "thinness": {
-          "SA": "3",
-          "AB": "3",
-          "BC": "1",
+          "SA": "2",
+          "SA2": "1",
+          "AB": "2",
+          "BC": "3",
+          "AC": "1",
           "SB": "1",
           "SC": "2"
         },
         "targets": {
           "O1": "3",
-          "O2": "1",
-          "O3": "3"
+          "O2": "3",
+          "O3": "1"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SC",
+        "perfectKey": "BC,SA,SB",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SC"
+          "AB,AC,SA,SB"
         ],
         "levels": {
           "A": "3",
-          "B": "3",
-          "C": "4"
+          "B": "5",
+          "C": "2"
         }
       },
       "seed": 23023,
@@ -4313,33 +4337,35 @@ export const CHALLENGES = {
     {
       "id": "T23-2",
       "number": 2,
-      "baseVersion": 1,
+      "baseVersion": 2,
       "family": "B",
       "values": {
-        "spring": "12",
+        "spring": "13",
         "thinness": {
           "SA": "3",
+          "SA2": "1",
           "AB": "3",
-          "BC": "1",
+          "BC": "2",
+          "AC": "1",
           "SB": "2",
           "SC": "2"
         },
         "targets": {
-          "O1": "3",
+          "O1": "6",
           "O2": "1",
-          "O3": "3"
+          "O3": "4"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SC",
+        "perfectKey": "AB,SA2,SC",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SC"
+          "AC,BC,SA2,SC"
         ],
         "levels": {
-          "A": "3",
+          "A": "6",
           "B": "3",
-          "C": "4"
+          "C": "5"
         }
       },
       "seed": 23023,
@@ -4348,33 +4374,35 @@ export const CHALLENGES = {
     {
       "id": "T23-3",
       "number": 3,
-      "baseVersion": 1,
+      "baseVersion": 2,
       "family": "B",
       "values": {
-        "spring": "12",
+        "spring": "13",
         "thinness": {
           "SA": "3",
-          "AB": "2",
-          "BC": "3",
-          "SB": "2",
-          "SC": "1"
+          "SA2": "1",
+          "AB": "3",
+          "BC": "2",
+          "AC": "1",
+          "SB": "1",
+          "SC": "2"
         },
         "targets": {
-          "O1": "3",
+          "O1": "6",
           "O2": "1",
-          "O3": "5"
+          "O3": "4"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SC",
+        "perfectKey": "AB,SA2,SC",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SC"
+          "AC,BC,SA2,SC"
         ],
         "levels": {
-          "A": "3",
+          "A": "6",
           "B": "3",
-          "C": "6"
+          "C": "5"
         }
       },
       "seed": 23023,
@@ -4383,33 +4411,35 @@ export const CHALLENGES = {
     {
       "id": "T23-4",
       "number": 4,
-      "baseVersion": 1,
+      "baseVersion": 2,
       "family": "A",
       "values": {
-        "spring": "10",
+        "spring": "9",
         "thinness": {
-          "SA": "1",
-          "AB": "1",
-          "BC": "1",
+          "SA": "2",
+          "SA2": "1",
+          "AB": "2",
+          "BC": "3",
+          "AC": "1",
           "SB": "1",
           "SC": "3"
         },
         "targets": {
-          "O1": "5",
+          "O1": "3",
           "O2": "3",
-          "O3": "2"
+          "O3": "1"
         }
       },
       "expected": {
         "perfectKey": "BC,SA,SB",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AB,AC,SA,SB"
         ],
         "levels": {
-          "A": "5",
+          "A": "3",
           "B": "5",
-          "C": "3"
+          "C": "2"
         }
       },
       "seed": 23023,
@@ -4418,33 +4448,35 @@ export const CHALLENGES = {
     {
       "id": "T23-5",
       "number": 5,
-      "baseVersion": 1,
-      "family": "A",
+      "baseVersion": 2,
+      "family": "B",
       "values": {
-        "spring": "10",
+        "spring": "13",
         "thinness": {
-          "SA": "1",
-          "AB": "2",
-          "BC": "1",
-          "SB": "1",
-          "SC": "1"
+          "SA": "2",
+          "SA2": "1",
+          "AB": "3",
+          "BC": "2",
+          "AC": "1",
+          "SB": "2",
+          "SC": "2"
         },
         "targets": {
-          "O1": "5",
-          "O2": "3",
-          "O3": "2"
+          "O1": "6",
+          "O2": "1",
+          "O3": "4"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SB",
+        "perfectKey": "AB,SA2,SC",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AC,BC,SA2,SC"
         ],
         "levels": {
-          "A": "5",
-          "B": "5",
-          "C": "3"
+          "A": "6",
+          "B": "3",
+          "C": "5"
         }
       },
       "seed": 23023,
@@ -4453,33 +4485,35 @@ export const CHALLENGES = {
     {
       "id": "T23-6",
       "number": 6,
-      "baseVersion": 1,
-      "family": "A",
+      "baseVersion": 2,
+      "family": "B",
       "values": {
-        "spring": "9",
+        "spring": "13",
         "thinness": {
           "SA": "2",
+          "SA2": "1",
           "AB": "3",
-          "BC": "1",
-          "SB": "3",
+          "BC": "2",
+          "AC": "1",
+          "SB": "1",
           "SC": "2"
         },
         "targets": {
-          "O1": "3",
+          "O1": "6",
           "O2": "1",
-          "O3": "1"
+          "O3": "4"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SB",
+        "perfectKey": "AB,SA2,SC",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AC,BC,SA2,SC"
         ],
         "levels": {
-          "A": "3",
+          "A": "6",
           "B": "3",
-          "C": "2"
+          "C": "5"
         }
       },
       "seed": 23023,
@@ -4488,33 +4522,35 @@ export const CHALLENGES = {
     {
       "id": "T23-7",
       "number": 7,
-      "baseVersion": 1,
+      "baseVersion": 2,
       "family": "A",
       "values": {
-        "spring": "10",
+        "spring": "9",
         "thinness": {
-          "SA": "1",
-          "AB": "1",
-          "BC": "1",
+          "SA": "2",
+          "SA2": "3",
+          "AB": "2",
+          "BC": "3",
+          "AC": "1",
           "SB": "1",
           "SC": "1"
         },
         "targets": {
-          "O1": "5",
+          "O1": "3",
           "O2": "3",
-          "O3": "2"
+          "O3": "1"
         }
       },
       "expected": {
         "perfectKey": "BC,SA,SB",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SB"
+          "AB,AC,SA,SB"
         ],
         "levels": {
-          "A": "5",
+          "A": "3",
           "B": "5",
-          "C": "3"
+          "C": "2"
         }
       },
       "seed": 23023,
@@ -4523,33 +4559,35 @@ export const CHALLENGES = {
     {
       "id": "T23-8",
       "number": 8,
-      "baseVersion": 1,
-      "family": "B",
+      "baseVersion": 2,
+      "family": "A",
       "values": {
-        "spring": "12",
+        "spring": "9",
         "thinness": {
-          "SA": "3",
+          "SA": "2",
+          "SA2": "3",
           "AB": "2",
-          "BC": "1",
+          "BC": "3",
+          "AC": "1",
           "SB": "1",
           "SC": "2"
         },
         "targets": {
           "O1": "3",
-          "O2": "1",
-          "O3": "3"
+          "O2": "3",
+          "O3": "1"
         }
       },
       "expected": {
-        "perfectKey": "BC,SA,SC",
+        "perfectKey": "BC,SA,SB",
         "perfectCount": 3,
         "partialKeys": [
-          "AB,BC,SA,SC"
+          "AB,AC,SA,SB"
         ],
         "levels": {
           "A": "3",
-          "B": "3",
-          "C": "4"
+          "B": "5",
+          "C": "2"
         }
       },
       "seed": 23023,
