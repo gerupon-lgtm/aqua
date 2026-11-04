@@ -18,7 +18,8 @@ export function layoutFor(stage) {
   // 盤面の高さは、高い方の給水塔に合わせる（泉が2つの面、43〜48面）
   const H = Math.max(...[stage.spring, stage.spring2].filter(Boolean).map(sp => Number(sp.height)));
   // 壁とサイフォンの山も入る高さにする
-  const top = Math.max(H, ...(stage.walls ?? []).map(w => Number(w.height)), ...stage.candidates.filter(c => c.siphon).map(c => Number(c.siphon.crest)));
+  // 自由作成（T-07）は、つまみで山を動かしても倍率が変わらないよう、上端を stage.boardTop に固定する
+  const top = Math.max(H, stage.boardTop ?? 0, ...(stage.walls ?? []).map(w => Number(w.height)), ...stage.candidates.filter(c => c.siphon).map(c => Number(c.siphon.crest)));
   const unit = Math.min(40, 300 / (top + 1));
   const xOf = x => 18 + x * 32.4;
   const nodes = new Map();
@@ -527,6 +528,9 @@ export function renderBoard(svg, model) {
   // サイフォン（グラスの中の入口から、壁の上を越える）
   for (const c of stage.candidates.filter(c => c.siphon)) drawPipe(out, layout, c, model);
 
+  // 自由作成（T-07）：空いている置き場所（点線のグラスと「＋」）、選んだ部品の印、持ち上げた管のつまみ
+  if (stage.free && phase === 'edit') drawFreeEdit(out, foreground, layout, stage, model);
+
   // 出口の噴水盤
   for (const o of stage.outlets) {
     const node = layout.nodes.get(o.tower);
@@ -558,7 +562,8 @@ export function renderBoard(svg, model) {
     // クリアの噴水と、100点の虹（2026-11-01 発案者）。ジングルの鳴り始めと同時に噴き上がり、
     // 100点のときは噴き上がった後に虹がかかる。NGでは噴かない。
     // 盤面は毎フレーム描き直すので、CSSのアニメーションではなく時刻から形と濃さを計算する
-    if (verdict && model.fountainAt != null && model.outcome && model.outcome !== 'ng') {
+    // 自由作成は採点しないので、水が出ている噴水盤だけ噴かせる
+    if (verdict && model.fountainAt != null && model.outcome && model.outcome !== 'ng' && (!stage.free || flowing)) {
       const since = model.time - model.fountainAt;
       if (since >= 0) {
         if (model.outcome === 'perfect') {
@@ -578,7 +583,11 @@ export function renderBoard(svg, model) {
     const [vt, vm] = verdict ? VERDICT_BADGE[verdict.verdict] ?? ['light', null] : ['light', null];
     out.push('</g>');
     const notes = outletAnnotations(layout, o, cx);
-    quantityBadge(foreground, { ...notes.quantity, outletId: o.id }, target, model.startCue > .5 ? 'gold' : vt, vm, model.startCue);
+    if (stage.free) {
+      // 自由作成は指定量がない。流して落ち着いたら届いた量を出す（編集中は「噴水盤」）
+      const flow = settled ? evaluation?.result.outlets[o.id]?.flow : null;
+      quantityBadge(foreground, { ...notes.quantity, outletId: o.id, label: flow ? `毎秒${flow.toString()}` : '噴水盤' }, '', 'light', null, 0);
+    } else quantityBadge(foreground, { ...notes.quantity, outletId: o.id }, target, model.startCue > .5 ? 'gold' : vt, vm, model.startCue);
     heightBadge(foreground, { ...notes.height, outletId: o.id, text: `高さ${o.height}` });
   }
   const labelPositions = pipeLabelPositions(layout, stage);
@@ -626,6 +635,41 @@ function drawGuide(out, stage, layout, guide) {
     }
   } // pipe:ID は管と札の下に描く。最後に重ねて管の中身を隠さない。
 }
+
+// 自由作成の編集の印（T-07）。置き場所は点線のグラスに「＋グラス」。選んだグラス・給水塔は金色の枠。
+// 持ち上げた管は、山の中ほどに上下へ動かすつまみ（丸に上下の矢印）を置く（要件 F-016）
+function drawFreeEdit(out, foreground, layout, stage, model) {
+  const xOf = x => 18 + x * 32.4;
+  for (const s of stage.freeSlots ?? []) {
+    const cx = xOf(s.x);
+    out.push(`<g class="free-slot" data-free-slot="${s.slot}" pointer-events="all"><rect x="${cx - TOWER_W / 2}" y="${layout.towerTop}" width="${TOWER_W}" height="${GROUND - layout.towerTop}" rx="6" fill="rgba(255,255,255,.35)" stroke="#1d4f88" stroke-width="1.4" stroke-dasharray="5 4"/>`
+      + `<circle cx="${cx}" cy="${(layout.towerTop + GROUND) / 2}" r="13" fill="#ffffff" stroke="#1d4f88" stroke-width="1.4"/><path d="M${cx - 6} ${(layout.towerTop + GROUND) / 2} h12 M${cx} ${(layout.towerTop + GROUND) / 2 - 6} v12" stroke="#1d4f88" stroke-width="2.2" stroke-linecap="round"/></g>`);
+    badge(foreground, { x: cx, y: layout.towerTop - 10, text: `グラス${s.id}を置く`, tone: 'light', size: 8.5, dashed: true });
+  }
+  const sel = model.freeSelected;
+  if (sel) {
+    const n = layout.nodes.get(sel);
+    if (n) {
+      const top = n.kind === 'spring' ? layout.yOf(Number(stage.spring.height)) - 12 : layout.towerTop - 6;
+      out.push(`<rect x="${n.cx - n.w / 2 - 6}" y="${top}" width="${n.w + 12}" height="${GROUND - top + 6}" rx="9" fill="none" stroke="var(--gold)" stroke-width="4" opacity=".8" pointer-events="none"/>`);
+    }
+  }
+  for (const c of stage.candidates.filter(x => x.lifted)) {
+    const { mx, my } = pipePath(layout, c);
+    const hx = mx + 26; // 太さの丸い札（中心 mx・半径14）と重ならない位置
+    foreground.push(`<g class="crest-handle" data-crest-handle="${esc(c.id)}" pointer-events="all" aria-label="配管${esc(c.id)}の山の高さ ${esc(c.siphon?.crest ?? '')}"><circle cx="${hx}" cy="${my}" r="15" fill="transparent"/><circle cx="${hx}" cy="${my}" r="9" fill="#fffefa" stroke="#1d4f88" stroke-width="1.4"/><path d="M${hx} ${my - 5.5} l-3 3.2 h6 Z M${hx} ${my + 5.5} l-3 -3.2 h6 Z" fill="#1d4f88"/></g>`);
+  }
+}
+
+// 盤面上の点から給水塔を探す（自由作成で給水塔を選ぶ）
+export function springAt(layout, stage, x, y) {
+  const n = layout.nodes.get(stage.spring.id);
+  const top = layout.yOf(Number(stage.spring.height)) - 40;
+  return y >= top && y <= GROUND + 4 && Math.abs(x - n.cx) <= n.w / 2 + 6 ? stage.spring.id : null;
+}
+
+// 画面の y を、高さ（目盛り）に直す（自由作成のつまみ）
+export const levelAtY = (layout, y) => (GROUND - y) / layout.unit;
 
 // 盤面上の点からグラスを探す（結果表示中のなぞりに使う）
 export function towerAt(layout, stage, x, y) {

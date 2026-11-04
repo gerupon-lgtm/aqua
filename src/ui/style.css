@@ -625,3 +625,7 @@ th { color: var(--ink-soft); font-weight: 500; }
 .sheet.part-intro .part-intro-text { margin: 0 0 6px; font-size: 14px; line-height: 1.65; color: var(--ink); }
 .sheet.part-intro .actions { margin-top: 10px; }
 .sheet.part-intro .actions .primary { width: 100%; }
+
+/* 自由作成（T-07）：管の窓の「− 山の高さ ＋」は1行にまとめる */
+.crest-stepper { display: inline-flex; align-items: center; gap: 6px; }
+.crest-stepper .chip-value { font-weight: 700; padding: 0 2px; }

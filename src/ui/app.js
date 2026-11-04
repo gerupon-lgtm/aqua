@@ -12,12 +12,14 @@ import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_
 import { guideMessage } from './guide-copy.js';
 import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
 import { PARTS_HTML, HOWTO_HTML, partPicture } from './info-copy.js';
-import { renderBoard, layoutFor, towerAt, pipeAt, boardViewBox, VIEW_W, VIEW_H } from './board.js';
+import { renderBoard, layoutFor, towerAt, pipeAt, springAt, levelAtY, boardViewBox, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
 import { createUpdateManager } from './update-manager.js';
+import { freeStage, freeConfig, evaluateFree, addTower, removeTower, pipesOf, setOutlet, setSpringHeight, addPipe, updatePipe, removePipeFrom, setPrimed, minCrest, maxCrest, SPRING_HEIGHTS, SIPHON_INLET } from '../logic/free.js';
+import { FREE_SAMPLES } from '../content/free-samples.js';
 
-const APP_VERSION = '0.21.0';
+const APP_VERSION = '0.22.0';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -101,7 +103,10 @@ const state = {
   trials: 0, // 選択プレイ：この面を開いてから「水を流す」を押した回数（F-025）
   newFewest: false,
   titleOpen: true,
-  played: false
+  played: false,
+  free: null, // 自由作成の回路 { circuit, name, dirty }（アプリを開いている間。保存は T-07 の2回目）
+  freeNote: '', // 自由作成で、できなかった操作の理由
+  freeConfirm: null // 自由作成の確かめ（グラスを外す など）{ title, text, ok, run }
 };
 audio.setLatency(state.timing.latencyMs);
 audio.timbre = state.timing.timbre;
@@ -217,6 +222,180 @@ function removePipe(id) {
   state.selected = null;
 }
 
+
+// ---- 自由作成（T-07、F-016）：置いた回路を、課題と同じ計算で流す（C-02） ----
+// 回路は state.free.circuit に持ち、変えるたびに課題と同じ形（stage・config）へ作り直して描く
+const isFree = () => state.mode === 'free';
+const partName = id => (id === 'S' ? '給水塔' : `グラス${id}`);
+function loadFree(circuit, { name = '', dirty = false } = {}) {
+  stopRun();
+  state.free = { circuit, name, dirty };
+  state.selected = null;
+  state.freeNote = '';
+  state.freeConfirm = null;
+  state.prevLevels = new Map();
+  refreshFree();
+}
+function refreshFree() {
+  const c = state.free.circuit;
+  state.current = freeStage(c);
+  const cfg = freeConfig(c);
+  state.config = { connected: new Set(cfg.connected), thickness: {}, primed: new Set(cfg.primed), pumped: new Set(), drains: {} };
+  state.layout = layoutFor(state.current);
+  state.analysis = null;
+  state.evaluation = null;
+  state.loadError = '';
+  // 選んでいた部品・管がなくなったら、選ぶのをやめる
+  const sel = state.selected;
+  if (sel && !(sel.startsWith('part:') ? sel === 'part:S' || c.towers.some(t => `part:${t.id}` === sel) : c.pipes.some(p => p.id === sel))) state.selected = null;
+  renderAll();
+}
+// 回路を変える。できないとき（地面の下がいっぱい など）は、回路を変えずに理由を出す
+function changeFree(fn) {
+  try {
+    state.free.circuit = fn(state.free.circuit);
+    state.free.dirty = true;
+    state.freeNote = '';
+  } catch (error) {
+    state.freeNote = error.message;
+  }
+  refreshFree();
+}
+function startFree() {
+  state.mode = 'free';
+  state.played = true;
+  state.continuous = null;
+  state.stageCueUntil = 0;
+  $('app').classList.remove('with-guide');
+  closeTitle();
+  if (state.free) refreshFree();
+  else loadFree(FREE_SAMPLES[0].circuit(), { name: `見本「${FREE_SAMPLES[0].name}」` });
+}
+// 見本を開く。今の回路を変えていたら、消えることを確かめてから（C-01 の考え方。保存は T-07 の2回目）
+function openFreeSamples(confirmId = null) {
+  if (confirmId) {
+    const sample = FREE_SAMPLES.find(s => s.id === confirmId);
+    openSheet('見本に入れ替える', `<p>${phraseMarkup(`今の回路は|まだ保存していません。|見本「${sample.name}」に入れ替えると、|今の回路は消えます。`)}</p>`,
+      `<button type="button" class="ghost" data-sheet="close">やめる</button><button type="button" class="primary" data-free-sample-ok="${sample.id}">入れ替える</button>`);
+    return;
+  }
+  const items = FREE_SAMPLES.map(s => `<button type="button" class="ghost level" data-free-sample="${s.id}"><b>${textMarkup(s.name)}</b><span>${textMarkup(s.note)}</span></button>`).join('');
+  openSheet('見本', `<div class="level-list">${items}</div>`);
+}
+function pickFreeSample(id, confirmed = false) {
+  const sample = FREE_SAMPLES.find(s => s.id === id);
+  if (!sample) return;
+  if (state.free?.dirty && !confirmed) { openFreeSamples(id); return; }
+  closeSheet();
+  loadFree(sample.circuit(), { name: `見本「${sample.name}」` });
+}
+
+// 部品と管の窓（自由作成）。給水塔：高さとつなぐ先。グラス：噴水盤とつなぐ先、外す。
+// 管：太さ・持ち上げ（つまみ）・呼び水（桶は使い放題）・水門・外す
+function freeChooserHtml() {
+  const c = state.free.circuit;
+  const actions = extra => `<div class="chooser-row chooser-actions">${extra}<button type="button" class="chip" data-close="1">閉じる</button></div>`;
+  const note = state.freeNote ? `<p class="chooser-note pump-note" role="status">${textMarkup(state.freeNote)}</p>` : '';
+  if (state.freeConfirm) {
+    const f = state.freeConfirm;
+    return `<div class="chooser"><div class="chooser-head"><h3>${textMarkup(f.title)}</h3></div><p class="chooser-note">${phraseMarkup(f.text)}</p>`
+      + `<div class="chooser-row chooser-actions"><button type="button" class="chip" data-confirm-cancel="1">やめる</button><button type="button" class="chip on" data-confirm-ok="1">${textMarkup(f.ok)}</button></div></div>`;
+  }
+  const sel = state.selected;
+  const connectRow = from => {
+    const others = ['S', ...c.towers.map(t => t.id)].filter(id => id !== from);
+    return others.length ? `<div class="chooser-row"><span>つなぐ</span>${others.map(id => `<button type="button" class="chip" data-connect="${id}">${partName(id)}へ</button>`).join('')}</div>` : '';
+  };
+  if (sel === 'part:S') {
+    const chips = SPRING_HEIGHTS.map(h => `<button type="button" class="chip${c.spring.height === h ? ' on' : ''}" data-spring-h="${h}" aria-pressed="${c.spring.height === h}">${h}</button>`).join('');
+    return `<div class="chooser"><div class="chooser-head"><h3>給水塔</h3></div>`
+      + `<p class="chooser-note">${phraseMarkup('給水塔の水位は|いつもこの高さです。|配管で|グラスへつなぎます。')}</p>`
+      + `<div class="chooser-row"><span>高さ</span>${chips}</div>${connectRow('S')}${note}${actions('')}</div>`;
+  }
+  if (sel?.startsWith('part:')) {
+    const t = c.towers.find(x => `part:${x.id}` === sel);
+    const H = Number(c.spring.height);
+    const now = t.outlet?.height ?? null;
+    const heights = Array.from({ length: Math.min(H, 7) }, (_, i) => String(i));
+    const chips = `<button type="button" class="chip${now === null ? ' on' : ''}" data-outlet-h="none" aria-pressed="${now === null}">なし</button>`
+      + heights.map(h => `<button type="button" class="chip${now === h ? ' on' : ''}" data-outlet-h="${h}" aria-pressed="${now === h}">口${h}</button>`).join('');
+    return `<div class="chooser"><div class="chooser-head"><h3>グラス${t.id}</h3></div>`
+      + `<p class="chooser-note">${phraseMarkup('噴水盤は|グラスの水を出す口です。|口の高さより水位が上がった分だけ|水が出ます。')}</p>`
+      + `<div class="chooser-row"><span>噴水盤</span>${chips}</div>${connectRow(t.id)}${note}`
+      + actions('<button type="button" class="chip" data-remove-tower="1">このグラスを外す</button>') + '</div>';
+  }
+  const p = c.pipes.find(x => x.id === sel);
+  if (!p) return '';
+  const thick = ['1', '2', '3'].map(t => `<button type="button" class="chip${p.thinness === t ? ' on' : ''}" data-thick="${t}" aria-label="${THICK_NAME[t]} 数字${t}" aria-pressed="${p.thinness === t}">${THICK_NAME[t]}<small class="chip-number">${t}</small></button>`).join('');
+  const lift = p.crest
+    // −・山の高さ・＋ は1行にまとめて、途中で折り返さない
+    ? `<button type="button" class="chip" data-crest="none">下ろす</button><span class="nw crest-stepper"><button type="button" class="chip" data-crest-step="-1" aria-label="山を1下げる" ${Number(p.crest) > minCrest() ? '' : 'disabled'}>−</button><span class="chip-value">山の高さ ${p.crest}</span><button type="button" class="chip" data-crest-step="1" aria-label="山を1上げる" ${Number(p.crest) < maxCrest(c) ? '' : 'disabled'}>＋</button></span>`
+    : '<button type="button" class="chip" data-crest="lift">持ち上げる</button>';
+  const primed = c.primed.includes(p.id);
+  const prime = p.crest ? `<div class="chooser-row"><span>呼び水</span>${primed
+    ? '<button type="button" class="chip on" data-prime="off">呼び水を取り消す</button>'
+    : '<button type="button" class="chip" data-prime="on">桶で呼び水をする</button>'}</div>` : '';
+  const gate = `<div class="chooser-row"><span>水門</span><button type="button" class="chip${p.gate ? '' : ' on'}" data-gate="off" aria-pressed="${!p.gate}">なし</button><button type="button" class="chip${p.gate ? ' on' : ''}" data-gate="on" aria-pressed="${p.gate}">あり</button></div>`;
+  return `<div class="chooser"><div class="chooser-head"><h3>${textMarkup(`配管 ${partName(p.a)}–${partName(p.b)}`)}</h3></div>`
+    + `<div class="chooser-row"><span>太さ</span>${thick}</div>`
+    + `<div class="chooser-row"><span>通り道</span>${lift}</div>`
+    + (p.crest ? `<p class="chooser-note">${phraseMarkup(`山が|上流の水面より高いと|サイフォンになり、|呼び水をしないと流れません。|入口は高さ${SIPHON_INLET}です。|盤面のつまみ（↕）でも|山を動かせます。`)}</p>` : '')
+    + prime + gate + note
+    + actions('<button type="button" class="chip" data-remove-pipe="1">この配管を外す</button>') + '</div>';
+}
+
+function freeToastClick(btn) {
+  const d = btn.dataset;
+  const sel = state.selected;
+  if (d.close) { state.selected = null; state.freeConfirm = null; state.freeNote = ''; renderAll(); return; }
+  if (d.confirmCancel) { state.freeConfirm = null; renderAll(); return; }
+  if (d.confirmOk) { const run = state.freeConfirm.run; state.freeConfirm = null; state.selected = null; changeFree(run); return; }
+  const tower = sel?.startsWith('part:') ? sel.slice(5) : null;
+  if (d.springH) changeFree(c => setSpringHeight(c, d.springH));
+  else if (d.connect) {
+    const from = tower;
+    changeFree(c => addPipe(c, from, d.connect));
+    // つないだ管をそのまま選んで、太さなどを決められるようにする
+    if (!state.freeNote) { state.selected = state.free.circuit.pipes.at(-1).id; renderAll(); }
+  } else if (d.outletH) changeFree(c => setOutlet(c, tower, d.outletH === 'none' ? null : d.outletH));
+  else if (d.removeTower) {
+    const gone = pipesOf(state.free.circuit, tower);
+    state.freeConfirm = {
+      title: `グラス${tower}を外す`, ok: '外す', run: c => removeTower(c, tower),
+      // かっこでまとめると狭い画面で折り返せず窓が横にはみ出すため、管の名前は1本ずつ区切る
+      text: gone.length ? `グラス${tower}と、|つながっている配管${gone.length}本を|外します。|${gone.map(p => `${partName(p.a)}–${partName(p.b)}`).join('、|')}` : `グラス${tower}を外します。`
+    };
+    renderAll();
+  } else if (d.thick) changeFree(c => updatePipe(c, sel, { thinness: d.thick }));
+  else if (d.crest === 'lift') changeFree(c => updatePipe(c, sel, { crest: String(Math.min(maxCrest(c), Number(c.spring.height) + 1)) }));
+  else if (d.crest === 'none') changeFree(c => updatePipe(c, sel, { crest: null }));
+  else if (d.crestStep) changeFree(c => {
+    const p = c.pipes.find(x => x.id === sel);
+    const next = Math.max(minCrest(), Math.min(maxCrest(c), Number(p.crest) + Number(d.crestStep)));
+    return updatePipe(c, sel, { crest: String(next) });
+  });
+  else if (d.prime) changeFree(c => setPrimed(c, sel, d.prime === 'on'));
+  else if (d.gate) changeFree(c => updatePipe(c, sel, { gate: d.gate === 'on' }));
+  else if (d.removePipe) { const id = sel; state.selected = null; changeFree(c => removePipeFrom(c, id)); }
+}
+
+// 盤面のタップ（自由作成）：置き場所→グラスを置く。管・グラス・給水塔→その窓を開く
+function freeTap(e, pt) {
+  const slot = e.target.closest('[data-free-slot]');
+  if (slot) { audio.unlock(); audio.cue('wire'); changeFree(c => addTower(c, Number(slot.dataset.freeSlot))); return; }
+  const tagged = e.target.closest('[data-pipe-label], [data-pipe-bridge]');
+  const taggedId = tagged?.dataset.pipeLabel ?? tagged?.dataset.pipeBridge;
+  const pipe = stage().candidates.some(c => c.id === taggedId) ? taggedId : pipeAt(state.layout, stage(), pt.x, pt.y);
+  const part = pipe ? null : towerAt(state.layout, stage(), pt.x, pt.y) ?? springAt(state.layout, stage(), pt.x, pt.y);
+  if (!pipe && !part) return;
+  audio.unlock();
+  audio.cue('tap');
+  state.freeNote = '';
+  state.freeConfirm = null;
+  state.selected = pipe ?? `part:${part}`;
+  renderAll();
+}
+
 // ---- 実行と再生 ----
 const levelsOf = result => new Map(Object.entries(result.towers).map(([id, t]) => [id, t.level ? t.level.toNumber() : null]));
 
@@ -226,7 +405,7 @@ function startRun() {
   const st = stage();
   const timing = { ...state.timing };
   const scale = DEFAULT_SCALE;
-  const evaluation = evaluate(st, state.config, state.analysis, scale);
+  const evaluation = isFree() ? evaluateFree(state.free.circuit) : evaluate(st, state.config, state.analysis, scale);
   state.evaluation = evaluation;
   state.selected = null;
   const first = evaluation.states[0].result;
@@ -264,7 +443,8 @@ function startRun() {
     });
     later(settleAt, () => settleSound(last));
   }
-  later(settleAt + (evaluation.outcome === 'ng' ? timing.jingleNgMs : timing.jingleMs), () => audio.jingle(evaluation.outcome));
+  // 自由作成は採点しないので、ジングルは鳴らさない
+  if (!isFree()) later(settleAt + (evaluation.outcome === 'ng' ? timing.jingleNgMs : timing.jingleMs), () => audio.jingle(evaluation.outcome));
   later(settleAt + resultCardDelay(evaluation.outcome, timing), showResult);
   renderAll();
 }
@@ -282,6 +462,7 @@ function askOrRun() {
 function showResult() {
   if (!state.run) return;
   state.phase = 'result';
+  if (isFree()) { state.resultClosed = false; renderAll(); return; }
   const ev = state.evaluation;
   state.saveMessage = '';
   state.newBest = false;
@@ -318,6 +499,7 @@ function stopRun() {
     state.prevLevels = levelsOf(last.result);
     // 切れたサイフォンの桶は手元に戻る（要件5.2）
     for (const s of state.evaluation.states) for (const id of s.broken) { state.config.primed.delete(id); state.config.pumped.delete(id); }
+    if (isFree() && state.free) state.free.circuit.primed = state.free.circuit.primed.filter(id => state.config.primed.has(id));
   }
   audio.stopAll();
   state.run = null;
@@ -401,10 +583,12 @@ function drawBoard() {
     stage: stage(),
     layout: state.layout,
     connected: state.config.connected,
-    primed: state.config.primed,
+    // 自由作成で、持ち上げても水面より低くてふつうに流れた管は、泡（未開通の印）を出さない
+    primed: isFree() && state.evaluation?.flowingLifted && state.phase !== 'edit' ? new Set([...state.config.primed, ...state.evaluation.flowingLifted]) : state.config.primed,
     drains: state.config.drains,
     thinness: c => thinnessOf(c, state.config),
-    selected: state.selected,
+    selected: state.selected?.startsWith('part:') ? null : state.selected,
+    freeSelected: state.selected?.startsWith('part:') ? state.selected.slice(5) : null,
     phase: state.phase,
     levels: currentLevels(now),
     settled: v.settled,
@@ -440,6 +624,7 @@ function bestOfStage(s) {
 // 条件カード：「クリア条件」と、出題・別の出題などの小さなボタン／条件の一文／資源の行（桶・配管・連続プレイのNGの残り）
 const MODE_NAME = { tutorial: 'チュートリアル', continuous: '連続プレイ', select: '選択プレイ' };
 function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', review = false, mode = 'select', cont = null } = {}) {
+  if (st.free) return freeCondHtml(st, { connected, phase });
   const isPrac = st.id === PRACTICE.id;
   const nav = mode === 'select' && phase !== 'running';
   const sub = mode === 'continuous' && cont ? `連続プレイ（${cont.level.name}）・${st.set}` : `${MODE_NAME[mode]}・${st.set}`;
@@ -467,6 +652,23 @@ function condHtml(st, { left = st.buckets ?? 0, connected = 0, phase = 'edit', r
     </div>`;
 }
 
+// 自由作成の条件の欄：名前と「未保存」、見本、グラスと配管の数（課題の欄と同じ形）
+function freeCondHtml(st, { connected = 0, phase = 'edit' } = {}) {
+  const name = state.free?.name || '自由作成';
+  return `
+    <div class="switcher">
+      <button type="button" class="nav" id="stage-prev" aria-label="前の面" disabled hidden>‹</button>
+      <button type="button" class="stage-name" id="free-name" disabled>
+        <span class="name">${textMarkup(name)}</span><span class="sub">${textMarkup(`自由作成${state.free?.dirty ? '・未保存' : ''}`)}</span></button>
+      <button type="button" class="nav" id="stage-next" aria-label="次の面" disabled hidden>›</button>
+    </div>
+    <div class="cond-card">
+      <div class="cond-head"><span class="cond-label">自由作成</span><span class="cond-tools"><button type="button" class="mini" id="free-samples" ${phase === 'edit' ? '' : 'disabled'}>見本</button></span></div>
+      <div class="cond-goal">${phraseMarkup('部品を置いて|配管でつなぎ、|水を流して|音と流れを確かめます。')}</div>
+      <div class="cond-res"><span class="nw">グラス <b>${st.towers.length}</b> / 3</span><span class="nw">配管 <b>${connected}</b> 本</span></div>
+    </div>`;
+}
+
 function renderCondition() {
   $('cond').innerHTML = condHtml(stage(), {
     left: bucketsLeft(), connected: state.config.connected.size, phase: state.phase,
@@ -488,7 +690,7 @@ function fitConditionHeight() {
   cond.parentElement.append(probe);
   const cont = new ContinuousRun('beginner', CONTINUOUS_STAGES);
   let max = 0;
-  for (const st of [PRACTICE, ...STAGES]) {
+  for (const st of [PRACTICE, ...STAGES, freeStage(FREE_SAMPLES[0].circuit())]) {
     const shown = CHALLENGES[st.id]?.length ? { ...st, draw: { number: 8, total: 8 } } : st;
     for (const mode of ['select', 'continuous', 'tutorial']) {
       probe.innerHTML = condHtml(shown, { left: 10, connected: 10, mode, cont });
@@ -570,6 +772,20 @@ function renderPanel() {
   const st = stage();
   $('pipe-key').classList.toggle('legend-guide', practiceStep()?.target === 'badges');
   $('board-aux').replaceChildren();
+  if (state.phase === 'edit' && isFree()) {
+    const n = state.config.connected.size;
+    panel.innerHTML = `
+      ${state.freeNote && !state.selected ? `<p class="warn" role="alert">${textMarkup(state.freeNote)}</p>` : `<p class="hint">${textMarkup(st.hint)}</p>`}
+      <div class="actions">
+        <button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
+        <button type="button" class="primary" id="run" ${n ? '' : 'disabled'}>水を流す</button>
+      </div>`;
+    if (matchMedia('(min-width: 1024px) and (min-height: 600px)').matches) {
+      const clear = panel.querySelector('#clear-pipes');
+      if (clear) $('board-aux').append(clear);
+    }
+    return;
+  }
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
@@ -592,6 +808,7 @@ function renderPanel() {
       <div class="actions"><button type="button" class="ghost" id="stop">停止</button></div>`;
     return;
   }
+  if (isFree()) { renderFreeResult(panel); return; }
   const ev = state.evaluation;
   const gated = ev.states.length > 1;
   const head = ev.outcome === 'perfect' ? '100点' : ev.outcome === 'clear' ? 'クリア' : 'NG';
@@ -714,6 +931,54 @@ function renderPanel() {
     </div>`;
 }
 
+
+// 自由作成の結果（採点なし）。噴水盤ごとの届いた量、グラスの水位、配管の量を見せる
+function renderFreeResult(panel) {
+  const ev = state.evaluation;
+  const st = stage();
+  const gated = ev.states.length > 1;
+  const swipeVerb = coarsePointer ? '指でなぞる' : 'マウスでなぞる';
+  const scale = scaleNow();
+  const outletList = s => (st.outlets.length ? s.outlets.map(o => `<li>${textMarkup(`${st.outlets.find(x => x.id === o.id).label}：毎秒${fmt(o.flow)}`)}</li>`).join('') : `<li>${textMarkup('噴水盤がありません')}</li>`);
+  const outlets = gated ? ev.states.map(s => `<li class="state-head">${textMarkup(stateTitle[s.name])}</li>${outletList(s)}`).join('') : outletList(ev.states[0]);
+  const shown = ev.states[ev.states.length - 1];
+  const towerRows = st.towers.map(t => {
+    const r = shown.result.towers[t.id];
+    if (r.state === 'empty') return `<tr><td>グラス${t.id}</td><td colspan="3">空（給水塔につながっていない）</td></tr>`;
+    return `<tr><td>グラス${t.id}</td><td>${fmt(r.level)}</td><td>${sideText[tickSide(r.level, scale)]}</td><td>入る ${fmt(r.inflow)} ／ 出る ${fmt(r.outflow)}</td></tr>`;
+  }).join('');
+  const pipeRows = state.free.circuit.pipes.map(p => {
+    const r = shown.result.pipes[p.id];
+    const name = `${partName(p.a)}–${partName(p.b)}`;
+    const why = p.gate && shown.name === 'closed' ? '水門が閉じている' : shown.broken.has(p.id) ? 'サイフォンが切れた' : ev.siphons.has(p.id) && !state.free.circuit.primed.includes(p.id) ? 'サイフォン（呼び水なし）' : '流れない';
+    if (!r) return `<tr><td>${textMarkup(name)}</td><td colspan="2">${why}</td><td>${p.thinness}</td></tr>`;
+    return `<tr><td>${textMarkup(name)}</td><td>${fmt(r.flow)}</td><td>${fmt(r.diff)}</td><td>${p.thinness}</td></tr>`;
+  }).join('');
+  const siphonNote = ev.siphons.size ? `<p class="mode-line">${textMarkup(`サイフォンになった管：${[...ev.siphons].map(id => { const p = state.free.circuit.pipes.find(x => x.id === id); return `${partName(p.a)}–${partName(p.b)}`; }).join('、')}`)}</p>` : '';
+  panel.innerHTML = `
+    <p class="hint">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
+    <div class="actions">
+      <button type="button" class="ghost" id="show-result" aria-expanded="${!state.resultClosed}">結果</button>
+      <button type="button" class="primary" id="stop">編集に戻る</button>
+    </div>`;
+  state.resultHtml = `
+    <div class="result free">
+      <div class="result-head">
+        <span class="badge" role="status">結果<small>自由作成</small></span>
+        <button type="button" class="close" id="result-close" aria-label="結果を閉じる">×</button>
+        <span class="used">${textMarkup(`配管 ${ev.used} 本`)}</span>
+      </div>
+      <div class="result-metrics"><ul class="outlets">${outlets}</ul></div>
+      ${siphonNote}
+      <p class="swipe-note">${textMarkup(`グラスを${swipeVerb}と、そのグラスの音を聞き直せます。`)}</p>
+      <details id="detail" ${state.details ? 'open' : ''}><summary>くわしい記録${gated ? '（水門を閉じたとき）' : ''}</summary>
+        <div class="table-wrap"><table><thead><tr><th>グラス</th><th>水位</th><th>目盛り</th><th>毎秒の出入り</th></tr></thead><tbody>${towerRows}</tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>配管</th><th>毎秒の量</th><th>水位の差</th><th>管の数字</th></tr></thead><tbody>${pipeRows}</tbody></table></div>
+      </details>
+      <div class="result-actions"><button type="button" class="primary" id="stop">編集に戻る</button></div>
+    </div>`;
+}
+
 // 結果のトースト（前作 prism のクリア・未達成のトーストに合わせる）。クリアもNGも同じ。
 // 画面の下、下の欄（案内とボタン）に重ねて置く。トーストに同じボタンがあるので欄は隠れてよい。
 // 解説・くわしい記録を開くとトーストを上へ広げ、盤面の上端までの高さでスクロールする（2026-11-01 発案者）
@@ -754,9 +1019,10 @@ function questionHtml() {
 function renderToast() {
   const toast = $('toast');
   const asking = state.phase === 'edit' && state.asking;
-  const c = !asking && state.phase === 'edit' && state.selected ? candidate(state.selected) ?? drainOf(state.selected) : null;
-  if (!c && !asking) { if (toast.open) toast.close(); toast.innerHTML = ''; return; }
-  toast.innerHTML = asking ? questionHtml() : chooserHtml();
+  const free = isFree() && state.phase === 'edit' && state.selected;
+  const c = !asking && !free && state.phase === 'edit' && state.selected ? candidate(state.selected) ?? drainOf(state.selected) : null;
+  if (!c && !asking && !free) { if (toast.open) toast.close(); toast.innerHTML = ''; return; }
+  toast.innerHTML = asking ? questionHtml() : free ? freeChooserHtml() : chooserHtml();
   if (!toast.open) { toast.showModal(); toastFresh = true; }
   const rect = toast.getBoundingClientRect();
   const pipe = c ? $('board').querySelector(`[data-pipe="${CSS.escape(c.id)}"], [data-drain="${CSS.escape(c.id)}"]`)?.getBoundingClientRect() : null;
@@ -772,10 +1038,18 @@ function closeToast() {
   if (!state.selected && !state.asking) return;
   state.selected = null;
   state.asking = null;
+  state.freeConfirm = null;
+  state.freeNote = '';
   renderAll();
 }
 
 function clearPipes() {
+  if (isFree()) {
+    // 自由作成の配管クリアは、確かめてから全部の管を外す（前作の削除の確認と同じ考え方）
+    openSheet('配管クリア', `<p>${phraseMarkup(`配管${state.free.circuit.pipes.length}本を|全部外します。|グラスと給水塔は残ります。`)}</p>`,
+      '<button type="button" class="ghost" data-sheet="close">やめる</button><button type="button" class="primary" data-free-clear="1">外す</button>');
+    return;
+  }
   state.config = emptyConfig();
   state.selected = null;
   renderAll();
@@ -904,6 +1178,7 @@ function bind() {
     // ふりかえり：この面の案内と予想の問いを、もう一度出す
     if (e.target.closest('#review') && state.phase === 'edit') { state.review = true; $('app').classList.add('with-guide'); renderAll(); }
     if (e.target.closest('#practice-restart') && state.phase === 'edit') selectStage(-1);
+    if (e.target.closest('#free-samples:not(:disabled)') && state.phase === 'edit') openFreeSamples();
     // 面の切り替え（選択プレイだけ）：‹ › で前後、名前で一覧
     if (state.mode === 'select' && state.phase !== 'running') {
       if (e.target.closest('#stage-prev:not(:disabled)')) selectStage(state.stageIndex - 1);
@@ -951,6 +1226,7 @@ function bind() {
       return;
     }
     if (!btn || btn.disabled || !state.selected) return;
+    if (isFree()) { freeToastClick(btn); return; }
     if (btn.dataset.drainStep) {
       if (btn.dataset.drainStep === 'closed') delete state.config.drains[state.selected];
       else state.config.drains[state.selected] = btn.dataset.drainStep;
@@ -1032,15 +1308,36 @@ function bind() {
   // 管のタップ：指を離した時点で、触れた点にいちばん近い管を選ぶ。
   // 管は端で7ほどの間隔で並ぶので、重なったタップ領域の上下関係で選ぶと、隣の管を拾ってしまう
   let press = null;
+  // 自由作成のつまみ（持ち上げた管の山）：上下になぞって、目盛り1ずつ山の高さを変える
+  let lift = null;
   svg.addEventListener('pointerdown', e => {
+    const handle = isFree() && state.phase === 'edit' ? e.target.closest('[data-crest-handle]') : null;
+    if (handle) {
+      lift = { id: handle.dataset.crestHandle, pointerId: e.pointerId };
+      svg.setPointerCapture?.(e.pointerId);
+      press = null;
+      e.preventDefault();
+      return;
+    }
     if (state.phase === 'edit') press = { id: e.pointerId, x: e.clientX, y: e.clientY };
   });
+  svg.addEventListener('pointermove', e => {
+    if (!lift || lift.pointerId !== e.pointerId) return;
+    const c = state.free.circuit;
+    const level = Math.max(minCrest(), Math.min(maxCrest(c), Math.round(levelAtY(state.layout, boardPoint(e).y))));
+    const p = c.pipes.find(x => x.id === lift.id);
+    if (p && p.crest !== String(level)) changeFree(cc => updatePipe(cc, lift.id, { crest: String(level) }));
+  });
+  const endLift = e => { if (lift && lift.pointerId === e.pointerId) lift = null; };
+  svg.addEventListener('pointerup', endLift);
+  svg.addEventListener('pointercancel', endLift);
   svg.addEventListener('pointerup', e => {
     const p = press;
     press = null;
     if (state.phase !== 'edit' || !p || p.id !== e.pointerId) return;
     if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 12) return; // なぞった・ずれたときは押していない扱い
     const p2 = boardPoint(e);
+    if (isFree()) { freeTap(e, p2); return; }
     // 丸い札と交差のまたぎは、見えている管そのものを選ぶ。ほかは従来どおり近い管。
     // 排水口の札（37〜42面）：段を選ぶ窓を開く
     const drainTag = e.target.closest('[data-drain]');
@@ -1223,6 +1520,7 @@ function bindScreens() {
     if (k === 'tutorial') startMode('tutorial');
     else if (k === 'continuous') openLevels();
     else if (k === 'select') openStageList();
+    else if (k === 'free') startFree();
     else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
     else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
     else if (k === 'resume') { closeTitle(); openPartIntro(); }
@@ -1232,6 +1530,9 @@ function bindScreens() {
     if (!b) { if (e.target === $('sheet')) closeSheet(); return; }
     if (b.dataset.level) { closeSheet(); startMode('continuous', { level: b.dataset.level }); return; }
     if (b.dataset.listPage !== undefined) { openStageList(Number(b.dataset.listPage)); return; }
+    if (b.dataset.freeSample) { pickFreeSample(b.dataset.freeSample); return; }
+    if (b.dataset.freeSampleOk) { pickFreeSample(b.dataset.freeSampleOk, true); return; }
+    if (b.dataset.freeClear) { closeSheet(); state.selected = null; changeFree(c => ({ ...c, pipes: [], primed: [] })); return; }
     if (b.dataset.pick !== undefined) {
       closeSheet();
       if (state.titleOpen) startMode('select', { index: Number(b.dataset.pick) });
