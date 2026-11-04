@@ -236,6 +236,41 @@ th { color: var(--ink-soft); font-weight: 500; }
   background: var(--card); border-radius: 16px 16px 0 0; padding: 14px 16px 16px;
 }
 .sheet-card h2 { margin: 0 0 4px; font-size: 16px; }
+.sheet-card.help-sheet { max-width: 760px; max-height: 90dvh; padding: 18px 18px 0; }
+.help-lead { color: var(--ink-soft); font-size: 13px; line-height: 1.7; margin: 5px 0 14px; }
+.help-section-title { font-size: 13px; color: var(--blue-deep); margin: 0 0 8px; }
+.help-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.help-card { display: flex; gap: 12px; align-items: flex-start; width: 100%; padding: 14px; text-align: left; font: inherit; color: var(--ink); border: 1px solid var(--line); border-radius: 12px; background: #f5f9fd; cursor: pointer; }
+.help-card:hover { border-color: var(--blue); background: #eaf3fb; }
+.help-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.help-number { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: var(--blue-deep); background: #e0edf9; font-size: 12px; font-weight: 700; }
+.help-card-copy { min-width: 0; }
+.help-card strong { display: block; font-size: 14px; line-height: 1.5; }
+.help-summary { display: block; font-size: 12.5px; line-height: 1.65; color: var(--ink-soft); margin-top: 4px; }
+.help-card small { display: block; font-size: 11px; color: var(--blue-deep); margin-top: 7px; }
+.help-pager { display: grid; grid-template-columns: 80px minmax(0,1fr) 80px; align-items: center; gap: 10px; margin: 12px 0; }
+.help-pager > span { text-align: center; font-size: 12.5px; color: var(--ink-soft); }
+.help-pager button { min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 9px; color: var(--blue-deep); background: var(--card); font: inherit; cursor: pointer; }
+.help-pager button:disabled { opacity: .45; cursor: default; }
+.help-sheet > .actions { position: sticky; bottom: 0; display: flex; gap: 8px; margin: 0 -18px; padding: 12px 18px 16px; background: var(--card); border-top: 1px solid var(--line); }
+.help-sheet > .actions button { flex: 1; min-height: 44px; }
+.help-detail-sheet > h2 { max-width: 480px; margin: 0 auto 4px; }
+.help-detail { max-width: 480px; margin: 0 auto 18px; font-size: 14px; line-height: 1.85; }
+.help-detail h3 { font-size: 14px; color: var(--blue-deep); margin: 20px 0 7px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.help-detail p { margin: 0 0 10px; }
+.help-detail .part-illustration { background: #f1f7fc; border-radius: 10px; margin: 12px 0; }
+.help-sheet .phrase { display: inline; white-space: normal; }
+@media (max-width: 520px) {
+  .help-list { grid-template-columns: minmax(0,1fr); gap: 8px; }
+  .help-card { padding: 10px 12px; gap: 10px; }
+  .help-summary { margin-top: 2px; }
+  .help-card small { margin-top: 3px; }
+}
+@media (orientation: landscape) and (max-height: 560px) {
+  .sheet-card.help-sheet { max-height: calc(100dvh - 12px); }
+  .help-card { padding: 8px; gap: 8px; }
+  .help-lead { margin-bottom: 8px; }
+}
 .note { margin: 0 0 8px; font-size: 12.5px; color: var(--ink-soft); }
 .field { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; margin-bottom: 10px; font-size: 13.5px; }
 .field input, .field select { grid-column: 1 / -1; width: 100%; accent-color: var(--blue); }

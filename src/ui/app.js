@@ -11,7 +11,7 @@ import { GlassAudio, DEFAULT_LATENCY_MS, TIMBRES } from './audio.js';
 import { lessonFor, buildQuestion, answerLine, TutorialBook, PRACTICE, PRACTICE_STEPS, practiceResultText, partIntroFor } from '../content/tutorial.js';
 import { guideMessage } from './guide-copy.js';
 import { textMarkup, phraseMarkup, deliveryMarkup } from './text-layout.js';
-import { PARTS_HTML, HOWTO_HTML, partPicture } from './info-copy.js';
+import { helpOverview, helpTopic, partPicture } from './info-copy.js';
 import { renderBoard, layoutFor, towerAt, pipeAt, springAt, levelAtY, boardViewBox, VIEW_W, VIEW_H } from './board.js';
 import { LEVELS, ContinuousRun, ModeBook, continuousRecordChange } from '../logic/modes.js';
 import { resultCardDelay, STAGE_CUE_MS, STAGE_CUE_WAIT_MS, stageCueOpacity, playbackPlan, DEFAULT_RISE_MS } from './visual-timing.js';
@@ -19,7 +19,7 @@ import { createUpdateManager } from './update-manager.js';
 import { freeStage, freeConfig, evaluateFree, addTower, removeTower, pipesOf, setOutlet, setSpringHeight, addPipe, updatePipe, removePipeFrom, setPrimed, minCrest, maxCrest, SPRING_HEIGHTS, SIPHON_INLET, goalResult } from '../logic/free.js';
 import { FREE_SAMPLES } from '../content/free-samples.js';
 
-const APP_VERSION = '0.26.1';
+const APP_VERSION = '0.26.2';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -1403,7 +1403,7 @@ function bind() {
 }
 
 // ---- タイトル画面・モード・メニュー（前作 prism に合わせる。要件 F-025・F-026、2026-11-01 確定） ----
-// タイトル：チュートリアル／連続プレイ／選択プレイ／自由作成（準備中）／パーツの説明／遊び方と概要／プレイ画面へ／更新
+// タイトル：チュートリアル／連続プレイ／選択プレイ／自由作成／パーツの説明／遊び方と概要／プレイ画面へ／更新
 const TUTORIAL_LAST = 5; // チュートリアルはお試し6面（番号5）まで
 let lastSelectIndex = 0; // 選択プレイで最後に開いていた面（アプリを開いている間だけ）
 
@@ -1456,6 +1456,35 @@ function openSheet(title, body, actions = '<button type="button" class="ghost" d
   sheet.hidden = false;
 }
 function closeSheet() { $('sheet').hidden = true; finishPartIntro(); }
+
+function focusHelp(returnId = null) {
+  const card = $('sheet').querySelector('.help-sheet');
+  const heading = card.querySelector('h2');
+  heading.tabIndex = -1;
+  const target = returnId ? card.querySelector(`[data-help-topic="${CSS.escape(returnId)}"]`) : heading;
+  (target ?? heading).focus();
+  card.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const buttons = [...card.querySelectorAll('button:not(:disabled)')];
+    const first = buttons[0], last = buttons.at(-1);
+    if (e.shiftKey && (document.activeElement === first || document.activeElement === heading)) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+}
+function openHelp(kind, page = 0, returnId = null) {
+  const view = helpOverview(kind, page);
+  if (!view) return;
+  openSheet(view.title, view.html);
+  $('sheet').querySelector('.sheet-card').classList.add('help-sheet');
+  focusHelp(returnId);
+}
+function openHelpTopic(kind, id) {
+  const view = helpTopic(kind, id);
+  if (!view) return;
+  openSheet(view.title, view.html, `<button type="button" class="ghost" data-help-kind="${kind}" data-help-page="${view.page}" data-help-return="${id}">一覧へ戻る</button><button type="button" class="ghost" data-sheet="close">閉じる</button>`);
+  $('sheet').querySelector('.sheet-card').classList.add('help-sheet', 'help-detail-sheet');
+  focusHelp();
+}
 
 function openMenu() {
   openSheet('メニュー', `<div class="menu-grid">
@@ -1551,8 +1580,8 @@ function bindScreens() {
     else if (k === 'continuous') openLevels();
     else if (k === 'select') openStageList();
     else if (k === 'free') startFree();
-    else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
-    else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
+    else if (k === 'parts') openHelp('parts');
+    else if (k === 'howto') openHelp('howto');
     else if (k === 'resume') { closeTitle(); openPartIntro(); }
   });
   $('sheet').addEventListener('click', e => {
@@ -1560,6 +1589,8 @@ function bindScreens() {
     if (!b) { if (e.target === $('sheet')) closeSheet(); return; }
     if (b.dataset.level) { closeSheet(); startMode('continuous', { level: b.dataset.level }); return; }
     if (b.dataset.listPage !== undefined) { openStageList(Number(b.dataset.listPage)); return; }
+    if (b.dataset.helpPage !== undefined) { openHelp(b.dataset.helpKind, Number(b.dataset.helpPage), b.dataset.helpReturn); return; }
+    if (b.dataset.helpTopic) { openHelpTopic(b.dataset.helpKind, b.dataset.helpTopic); return; }
     if (b.dataset.freeSample) { pickFreeSample(b.dataset.freeSample); return; }
     if (b.dataset.freeSampleOk) { pickFreeSample(b.dataset.freeSampleOk, true); return; }
     if (b.dataset.freeClear) { closeSheet(); state.selected = null; changeFree(c => ({ ...c, pipes: [], primed: [] })); return; }
@@ -1573,8 +1604,8 @@ function bindScreens() {
     if (k === 'close') closeSheet();
     else if (k === 'title') openTitle();
     else if (k === 'records') openRecords();
-    else if (k === 'parts') openSheet('パーツの説明', PARTS_HTML);
-    else if (k === 'howto') openSheet('遊び方と概要', HOWTO_HTML);
+    else if (k === 'parts') openHelp('parts');
+    else if (k === 'howto') openHelp('howto');
     else if (k === 'update-check') checkUpdate();
     else if (k === 'tune') openTuning();
   });

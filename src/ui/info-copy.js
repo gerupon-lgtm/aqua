@@ -1,23 +1,24 @@
-// パーツと遊び方の説明。アプリと文字組み点検で、同じ内容を使う。
+// パーツと遊び方：概要の一覧から、項目ごとの詳しい説明を開く。
 import { phraseMarkup } from './text-layout.js';
-
+import { HELP_TOPICS } from './help-content.js';
+export { HELP_TOPICS };
 export const partPicture = (id, alt) => `<img class="part-illustration" src="${new URL(`../../public/graphics/intro-${id}.svg`, import.meta.url).href}" alt="${alt}" width="960" height="360">`;
-export const PARTS_HTML = `<dl class="parts">
-  <dt>給水塔</dt><dd>${phraseMarkup('水が出るところ。|給水塔の水の高さが、|流れのもとになります。')}</dd>
-  <dt>グラス</dt><dd>${phraseMarkup('水がたまります。|左の物差しと目盛りを|同じ高さで見比べます。|地面が高さ0、|目盛り1つが高さ1です。|水位で音が決まり、|水が多いほど低い音。|目盛りに乗ると|澄んだ和音になります。')}</dd>
-  <dt>配管</dt><dd>${phraseMarkup('給水塔とグラスをつなぎます。|丸い札は太さと数字の2段です。|太＝1・中＝2・細＝3。|同じ高さの差なら、|小さい数字ほど多く流れます。|流れる量＝高さの差÷管の数字。|縦につなぐと数字は足し算、|並べると流れやすくなります。')}</dd>
-  <dt>噴水盤</dt><dd>${partPicture('outlets', '給水塔から分かれた水が2つの噴水盤へ届く様子')}${phraseMarkup('水を受けて流す場所です。|必要量・届いた量は|1秒あたりの量です。|「2/秒」は毎秒2のこと。|器にたまった水位ではありません。|水は下へ流れ出ます。|噴水盤の「高さ」は、|吹き出し口の高さです。|丸い札は出口の管の数字です。')}</dd>
-  <dt>高さの違う出口</dt><dd>${partPicture('height', '出口と水位の差に応じて、水が流れる様子')}${phraseMarkup('水位と口の高さの差を、|出口の管の数字で割ります。|口より低い水位では流れません。')}</dd>
-  <dt>太さを選べる配管</dt><dd>${partPicture('adjustable', '配管をタップして3段階の太さを選ぶ様子')}${phraseMarkup('タップして|「太・中・細」から選びます。')}</dd>
-  <dt>サイフォンと桶</dt><dd>${partPicture('siphon', '桶で壁を越える管の空気を水に置き換え、流れるようにする様子')}${phraseMarkup('壁を越える配管です。|桶で呼び水をすると流れます。|桶の数には限りがあります。')}</dd>
-  <dt>水門</dt><dd>${partPicture('gate', '水門が開いているときと閉じたあとで、水の通り道が変わる様子')}${phraseMarkup('流したあと自動で閉じます。|開いたときと閉じたときの両方で、|必要量を届けます。')}</dd>
-</dl>`;
-export const HOWTO_HTML = `<div class="howto">
-  <p>${phraseMarkup('配管をタップしてつなぎ、|「水を流す」を押します。|噴水盤に毎秒、|必要量が届けばクリア。|器にためる量ではありません。|使った配管が少ないほど高い点で、|いちばん少ない答えが100点です|（桶を使う面は、|桶の少なさが先）。')}</p>
-  <p>${phraseMarkup('流れたあと、|グラスを指でなぞると、|そのグラスの音を聞き直せます。|結果の「解説」で、|なぜその量になったかを|確かめられます。')}</p>
-  <h3 class="sheet-sub">遊び方</h3>
-  <ul class="plain"><li>${phraseMarkup('チュートリアル：|画面の見方と、|お試し1〜6面で|流れの決まりを学びます。')}</li>
-  <li>${phraseMarkup('連続プレイ：|1面から順に進みます。|レベルごとに、|NGの回数に上限があります。')}</li>
-  <li>${phraseMarkup('選択プレイ：|好きな面を選んで遊びます。|面ごとに最高点と、|クリアまでの最少の試行回数を|記録します。')}</li>
-  <li>自由作成：準備中です。</li></ul>
-</div>`;
+const META = {
+  parts:{title:'パーツの説明',lead:'役割と表示を知り、詳しい使い方を確かめられます。',pages:['水を運ぶ部品','高さと管の工夫','流れを調える部品']},
+  howto:{title:'遊び方と概要',lead:'まずは4つの手順から。流れの決まりと自由作成も案内します。',pages:['基本の遊び方','決まりとモード','自由作成と記録']}
+};
+export function helpOverview(kind, page = 0) {
+  const items = HELP_TOPICS[kind], meta = META[kind];
+  if (!items || !Number.isInteger(page)) return null;
+  const pages = Math.ceil(items.length / 4), current = Math.max(0,Math.min(pages-1,page));
+  const cards = items.slice(current*4,current*4+4).map((item,i)=>`<button type="button" class="help-card" data-help-kind="${kind}" data-help-topic="${item.id}" aria-label="${item.name}の説明"><span class="help-number" aria-hidden="true">${String(current*4+i+1).padStart(2,'0')}</span><span class="help-card-copy"><strong>${phraseMarkup(item.name)}</strong><span class="help-summary">${phraseMarkup(item.summary)}</span><small>詳しく見る <span aria-hidden="true">→</span></small></span></button>`).join('');
+  return {title:meta.title,html:`<p class="help-lead">${phraseMarkup(meta.lead)}</p><h3 class="help-section-title">${meta.pages[current]}</h3><div class="help-list">${cards}</div><nav class="pager help-pager" aria-label="${meta.title}のページ"><button type="button" class="ghost" data-help-kind="${kind}" data-help-page="${current-1}" ${current===0?'disabled':''}>前へ</button><span>${current+1} / ${pages}</span><button type="button" class="ghost" data-help-kind="${kind}" data-help-page="${current+1}" ${current===pages-1?'disabled':''}>次へ</button></nav>`};
+}
+export function helpTopic(kind, id) {
+  const index = HELP_TOPICS[kind]?.findIndex(item=>item.id===id) ?? -1;
+  if (index<0) return null;
+  const item=HELP_TOPICS[kind][index];
+  const picture=item.picture?partPicture(item.picture,item.alt):'';
+  const sections=item.sections.map(s=>`<section><h3>${phraseMarkup(s.title)}</h3>${s.paragraphs.map(p=>`<p>${phraseMarkup(p)}</p>`).join('')}</section>`).join('');
+  return {title:item.name,html:`<article class="help-detail"><p class="help-lead">${phraseMarkup(item.summary)}</p>${picture}${sections}</article>`,page:Math.floor(index/4)};
+}

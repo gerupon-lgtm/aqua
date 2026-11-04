@@ -1,0 +1,1014 @@
+{
+  "rows": [
+    {
+      "kind": "howto",
+      "page": "3 / 3",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 717,
+      "scrollWidth": 313,
+      "title": "遊び方と概要",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "free",
+      "clientHeight": 657,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 656.734375,
+        "left": 16,
+        "right": 344,
+        "top": 83.265625,
+        "width": 328,
+        "x": 16,
+        "y": 83.265625
+      },
+      "scrollHeight": 657,
+      "scrollWidth": 328,
+      "title": "自由作成で作る",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "free-siphon",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-siphon.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 737,
+      "scrollWidth": 313,
+      "title": "自由作成で管を持ち上げる",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "free-goal",
+      "clientHeight": 657,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 656.734375,
+        "left": 16,
+        "right": 344,
+        "top": 83.265625,
+        "width": 328,
+        "x": 16,
+        "y": 83.265625
+      },
+      "scrollHeight": 657,
+      "scrollWidth": 328,
+      "title": "自由作成の見本と和音のお題",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "records",
+      "clientHeight": 569,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 569.0625,
+        "left": 16,
+        "right": 344,
+        "top": 170.9375,
+        "width": 328,
+        "x": 16,
+        "y": 170.9375
+      },
+      "scrollHeight": 569,
+      "scrollWidth": 328,
+      "title": "記録と回路の扱い",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "page": "2 / 3",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 717,
+      "scrollWidth": 313,
+      "title": "遊び方と概要",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "flow",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-height.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 787,
+      "scrollWidth": 313,
+      "title": "流れの決まり",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "score",
+      "clientHeight": 569,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 569.0625,
+        "left": 16,
+        "right": 344,
+        "top": 170.9375,
+        "width": 328,
+        "x": 16,
+        "y": 170.9375
+      },
+      "scrollHeight": 569,
+      "scrollWidth": 328,
+      "title": "点数と100点",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "modes",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 810,
+      "scrollWidth": 313,
+      "title": "チュートリアルとプレイモード",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "sound",
+      "clientHeight": 569,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 569.0625,
+        "left": 16,
+        "right": 344,
+        "top": 170.9375,
+        "width": 328,
+        "x": 16,
+        "y": 170.9375
+      },
+      "scrollHeight": 569,
+      "scrollWidth": 328,
+      "title": "音・表示・更新",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "page": "1 / 3",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 717,
+      "scrollWidth": 313,
+      "title": "遊び方と概要",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "condition",
+      "clientHeight": 406,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 405.609375,
+        "left": 16,
+        "right": 344,
+        "top": 334.390625,
+        "width": 328,
+        "x": 16,
+        "y": 334.390625
+      },
+      "scrollHeight": 406,
+      "scrollWidth": 328,
+      "title": "1　課題を読む",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "connect",
+      "clientHeight": 581,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-adjustable.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 580.796875,
+        "left": 16,
+        "right": 344,
+        "top": 159.203125,
+        "width": 328,
+        "x": 16,
+        "y": 159.203125
+      },
+      "scrollHeight": 581,
+      "scrollWidth": 328,
+      "title": "2　配管をつなぐ",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "run",
+      "clientHeight": 481,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 481.390625,
+        "left": 16,
+        "right": 344,
+        "top": 258.609375,
+        "width": 328,
+        "x": 16,
+        "y": 258.609375
+      },
+      "scrollHeight": 481,
+      "scrollWidth": 328,
+      "title": "3　水を流す",
+      "width": 360
+    },
+    {
+      "kind": "howto",
+      "topic": "result",
+      "clientHeight": 507,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 507.28125,
+        "left": 16,
+        "right": 344,
+        "top": 232.71875,
+        "width": 328,
+        "x": 16,
+        "y": 232.71875
+      },
+      "scrollHeight": 507,
+      "scrollWidth": 328,
+      "title": "4　結果を比べる",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "page": "1 / 3",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 717,
+      "scrollWidth": 313,
+      "title": "パーツの説明",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "source",
+      "clientHeight": 617,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-outlets.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 616.6875,
+        "left": 16,
+        "right": 344,
+        "top": 123.3125,
+        "width": 328,
+        "x": 16,
+        "y": 123.3125
+      },
+      "scrollHeight": 617,
+      "scrollWidth": 328,
+      "title": "給水塔",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "glass",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 723,
+      "scrollWidth": 313,
+      "title": "グラス",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "pipe",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-adjustable.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 848,
+      "scrollWidth": 313,
+      "title": "配管と丸い札",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "outlet",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-outlets.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 848,
+      "scrollWidth": 313,
+      "title": "噴水盤",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "page": "2 / 3",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 717,
+      "scrollWidth": 313,
+      "title": "パーツの説明",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "height",
+      "clientHeight": 527,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-height.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 527.109375,
+        "left": 16,
+        "right": 344,
+        "top": 212.890625,
+        "width": 328,
+        "x": 16,
+        "y": 212.890625
+      },
+      "scrollHeight": 527,
+      "scrollWidth": 328,
+      "title": "高さの違う出口",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "adjustable",
+      "clientHeight": 607,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-adjustable.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 606.6875,
+        "left": 16,
+        "right": 344,
+        "top": 133.3125,
+        "width": 328,
+        "x": 16,
+        "y": 133.3125
+      },
+      "scrollHeight": 607,
+      "scrollWidth": 328,
+      "title": "太さを選べる配管",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "siphon",
+      "clientHeight": 666,
+      "clientWidth": 313,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-siphon.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 666,
+        "left": 16,
+        "right": 344,
+        "top": 74,
+        "width": 328,
+        "x": 16,
+        "y": 74
+      },
+      "scrollHeight": 711,
+      "scrollWidth": 313,
+      "title": "サイフォンと桶",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "pump",
+      "clientHeight": 569,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 569.0625,
+        "left": 16,
+        "right": 344,
+        "top": 170.9375,
+        "width": 328,
+        "x": 16,
+        "y": 170.9375
+      },
+      "scrollHeight": 569,
+      "scrollWidth": 328,
+      "title": "手押しポンプ",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "page": "3 / 3",
+      "clientHeight": 604,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 603.78125,
+        "left": 16,
+        "right": 344,
+        "top": 136.21875,
+        "width": 328,
+        "x": 16,
+        "y": 136.21875
+      },
+      "scrollHeight": 604,
+      "scrollWidth": 328,
+      "title": "パーツの説明",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "drain",
+      "clientHeight": 485,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 485.1875,
+        "left": 16,
+        "right": 344,
+        "top": 254.8125,
+        "width": 328,
+        "x": 16,
+        "y": 254.8125
+      },
+      "scrollHeight": 485,
+      "scrollWidth": 328,
+      "title": "排水口",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "sources",
+      "clientHeight": 485,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 485.1875,
+        "left": 16,
+        "right": 344,
+        "top": 254.8125,
+        "width": 328,
+        "x": 16,
+        "y": 254.8125
+      },
+      "scrollHeight": 485,
+      "scrollWidth": 328,
+      "title": "二つの給水塔",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "gate",
+      "clientHeight": 665,
+      "clientWidth": 328,
+      "height": 740,
+      "images": [
+        {
+          "ok": true,
+          "src": "http://localhost:5192/public/graphics/intro-gate.svg"
+        }
+      ],
+      "overflow": [],
+      "rect": {
+        "bottom": 740,
+        "height": 664.671875,
+        "left": 16,
+        "right": 344,
+        "top": 75.328125,
+        "width": 328,
+        "x": 16,
+        "y": 75.328125
+      },
+      "scrollHeight": 665,
+      "scrollWidth": 328,
+      "title": "水門",
+      "width": 360
+    },
+    {
+      "kind": "parts",
+      "topic": "drain",
+      "clientHeight": 408,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 407.515625,
+        "left": 260,
+        "right": 1020,
+        "top": 392.484375,
+        "width": 760,
+        "x": 260,
+        "y": 392.484375
+      },
+      "scrollHeight": 408,
+      "scrollWidth": 760,
+      "title": "排水口",
+      "width": 1280
+    },
+    {
+      "kind": "howto",
+      "page": "3 / 3",
+      "clientHeight": 499,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 498.5,
+        "left": 260,
+        "right": 1020,
+        "top": 301.5,
+        "width": 760,
+        "x": 260,
+        "y": 301.5
+      },
+      "scrollHeight": 499,
+      "scrollWidth": 760,
+      "title": "遊び方と概要",
+      "width": 1280
+    },
+    {
+      "kind": "howto",
+      "topic": "free",
+      "clientHeight": 531,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 531.078125,
+        "left": 260,
+        "right": 1020,
+        "top": 268.921875,
+        "width": 760,
+        "x": 260,
+        "y": 268.921875
+      },
+      "scrollHeight": 531,
+      "scrollWidth": 760,
+      "title": "自由作成で作る",
+      "width": 1280
+    },
+    {
+      "kind": "howto",
+      "page": "2 / 3",
+      "clientHeight": 499,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 498.5,
+        "left": 260,
+        "right": 1020,
+        "top": 301.5,
+        "width": 760,
+        "x": 260,
+        "y": 301.5
+      },
+      "scrollHeight": 499,
+      "scrollWidth": 760,
+      "title": "遊び方と概要",
+      "width": 1280
+    },
+    {
+      "kind": "howto",
+      "page": "1 / 3",
+      "clientHeight": 499,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 498.5,
+        "left": 260,
+        "right": 1020,
+        "top": 301.5,
+        "width": 760,
+        "x": 260,
+        "y": 301.5
+      },
+      "scrollHeight": 499,
+      "scrollWidth": 760,
+      "title": "遊び方と概要",
+      "width": 1280
+    },
+    {
+      "kind": "parts",
+      "page": "1 / 3",
+      "clientHeight": 478,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 477.875,
+        "left": 260,
+        "right": 1020,
+        "top": 322.125,
+        "width": 760,
+        "x": 260,
+        "y": 322.125
+      },
+      "scrollHeight": 478,
+      "scrollWidth": 760,
+      "title": "パーツの説明",
+      "width": 1280
+    },
+    {
+      "kind": "parts",
+      "page": "2 / 3",
+      "clientHeight": 499,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 498.5,
+        "left": 260,
+        "right": 1020,
+        "top": 301.5,
+        "width": 760,
+        "x": 260,
+        "y": 301.5
+      },
+      "scrollHeight": 499,
+      "scrollWidth": 760,
+      "title": "パーツの説明",
+      "width": 1280
+    },
+    {
+      "kind": "parts",
+      "page": "3 / 3",
+      "clientHeight": 478,
+      "clientWidth": 760,
+      "height": 800,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 800,
+        "height": 477.875,
+        "left": 260,
+        "right": 1020,
+        "top": 322.125,
+        "width": 760,
+        "x": 260,
+        "y": 322.125
+      },
+      "scrollHeight": 478,
+      "scrollWidth": 760,
+      "title": "パーツの説明",
+      "width": 1280
+    },
+    {
+      "kind": "parts",
+      "topic": "drain",
+      "clientHeight": 378,
+      "clientWidth": 745,
+      "height": 390,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 390,
+        "height": 378,
+        "left": 42,
+        "right": 802,
+        "top": 12,
+        "width": 760,
+        "x": 42,
+        "y": 12
+      },
+      "scrollHeight": 408,
+      "scrollWidth": 745,
+      "title": "排水口",
+      "width": 844
+    },
+    {
+      "kind": "parts",
+      "page": "3 / 3",
+      "clientHeight": 378,
+      "clientWidth": 745,
+      "height": 390,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 390,
+        "height": 378,
+        "left": 42,
+        "right": 802,
+        "top": 12,
+        "width": 760,
+        "x": 42,
+        "y": 12
+      },
+      "scrollHeight": 427,
+      "scrollWidth": 745,
+      "title": "パーツの説明",
+      "width": 844
+    },
+    {
+      "kind": "parts",
+      "entry": "play-menu",
+      "clientHeight": 378,
+      "clientWidth": 745,
+      "height": 390,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 390,
+        "height": 378,
+        "left": 42,
+        "right": 802,
+        "top": 12,
+        "width": 760,
+        "x": 42,
+        "y": 12
+      },
+      "scrollHeight": 448,
+      "scrollWidth": 745,
+      "title": "パーツの説明",
+      "width": 844
+    },
+    {
+      "kind": "howto",
+      "entry": "play-menu",
+      "clientHeight": 378,
+      "clientWidth": 745,
+      "height": 390,
+      "images": [],
+      "overflow": [],
+      "rect": {
+        "bottom": 390,
+        "height": 378,
+        "left": 42,
+        "right": 802,
+        "top": 12,
+        "width": 760,
+        "x": 42,
+        "y": 12
+      },
+      "scrollHeight": 448,
+      "scrollWidth": 745,
+      "title": "遊び方と概要",
+      "width": 844
+    }
+  ],
+  "keyboard": [
+    {
+      "case": "Tab from last",
+      "text": "09排水口水を地面へ捨てて、グラスの水位を調整します。詳しく見る →",
+      "topic": "drain"
+    },
+    {
+      "case": "Shift Tab from first",
+      "text": "閉じる"
+    },
+    {
+      "case": "Detail heading",
+      "id": "sheet-title",
+      "text": "排水口"
+    }
+  ],
+  "console": []
+}
