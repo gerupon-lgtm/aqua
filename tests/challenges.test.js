@@ -9,11 +9,12 @@ import { generateStage, PER_STAGE } from '../src/logic/generate.js';
 
 const varied = STAGES.filter(s => s.vary);
 
-test('出題のある面は、すべて検査済みの出題が8つあり、2つ以上の系統に分かれる（logic-design 7.1）', () => {
+test('出題のある面は、すべて検査済みの出題が8つまで（中身の違う数だけ、要件 v0.15）あり、2つ以上の系統に分かれる（logic-design 7.1）', () => {
   assert.ok(varied.length >= 4);
   for (const s of varied) {
     const bank = CHALLENGES[s.id];
-    assert.equal(bank?.length, PER_STAGE, `${s.number}面`);
+    assert.ok(bank?.length >= 2 && bank.length <= PER_STAGE, `${s.number}面`);
+    assert.deepEqual(bank.map(q => q.number), bank.map((_, i) => i + 1), `${s.number}面の出題番号`);
     const families = new Map();
     for (const item of bank) {
       assert.equal(item.baseVersion, s.version, `${item.id} の内容版`);

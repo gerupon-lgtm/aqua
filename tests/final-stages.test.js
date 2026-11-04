@@ -19,10 +19,10 @@ test('49〜54面は「総まとめ」の6面で、水門は1面に1〜2個', () 
   }
 });
 
-test('49〜54面の出題は8つずつ検査を通り、開・閉の指定量を持ち、満点で水門が効く', () => {
+test('49〜54面の出題は検査を通り（中身の違う数だけ、8つまで）、開・閉の指定量を持ち、満点で水門が効く', () => {
   for (const base of FINAL) {
     const bank = CHALLENGES[base.id];
-    assert.equal(bank.length, 8, `${base.number}面`);
+    assert.ok(bank.length >= 2 && bank.length <= 8, `${base.number}面`);
     assert.equal(new Set(bank.map(b => b.family)).size, 2);
     for (const item of bank) {
       const st = applyValues(base, item.values);

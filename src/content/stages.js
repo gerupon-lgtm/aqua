@@ -499,7 +499,7 @@ export const STAGES = [
   },
   {
     id: 'T13',
-    version: 3,
+    version: 4,
     number: 13,
     set: '流れを調える',
     title: '太さで分ける',
@@ -519,7 +519,7 @@ export const STAGES = [
   },
   {
     id: 'T14',
-    version: 2,
+    version: 3,
     number: 14,
     set: '流れを調える',
     title: '二本の太さ',
@@ -901,7 +901,7 @@ export const STAGES = [
   },
   {
     id: 'T18',
-    version: 2,
+    version: 3,
     number: 18,
     set: '流れを調える',
     title: '流れを調えるのまとめ',
@@ -998,7 +998,7 @@ export const STAGES = [
   },
   {
     id: 'T19',
-    version: 2,
+    version: 3,
     number: 19,
     set: '低い出口、高い出口',
     title: '高い噴水盤',
@@ -1086,7 +1086,7 @@ export const STAGES = [
   },
   {
     id: 'T20',
-    version: 2,
+    version: 3,
     number: 20,
     set: '低い出口、高い出口',
     title: '奥ほど高い',

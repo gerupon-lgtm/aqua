@@ -29,7 +29,7 @@ export const DRAIN_STAGES = [
     // 捨てる水を少なく：近道の太い管で多く入れて捨てるより、細い道で入れて捨てる水を減らす方が良い答え
     ...common,
     id: 'T38',
-    version: 2,
+    version: 3,
     number: 38,
     title: '捨てる水を少なく',
     hint: '同じ量を届けるなら、排水口で捨てる水が少ないほど良い答えです。',
@@ -71,7 +71,7 @@ export const DRAIN_STAGES = [
     // 高い口と排水口：口の高い噴水盤は、水位が口を越えた分だけ出る。排水口で水位を口の近くまで下げる
     ...common,
     id: 'T40',
-    version: 2,
+    version: 3,
     number: 40,
     title: '高い口と排水口',
     hint: '口の高い噴水盤には、水位が口を越えた分だけ届きます。排水口で水位を調えます。',

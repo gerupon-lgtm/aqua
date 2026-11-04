@@ -84,7 +84,7 @@ test('排水口（37〜42面）：開けたグラスから高さ0へ捨て、捨
   assert.equal(open.drained.toString(), '16/5');
   assert.equal(configKey({ connected: ['SA', 'AB'], drains: { D1: 'open' } }), 'AB,SA,D1:open');
   for (const base of STAGES.filter(x => x.number >= 37 && x.number <= 42)) {
-    assert.equal(CHALLENGES[base.id].length, 8, `${base.number}面`);
+    assert.ok(CHALLENGES[base.id].length >= 2 && CHALLENGES[base.id].length <= 8, `${base.number}面`); // 中身の違う数だけ（要件 v0.15）
     assert.ok(!base.candidates.some(c => c.adjustable), `${base.number}面に太さを選べる配管を置かない`);
     for (const q of CHALLENGES[base.id]) {
       const st = applyValues(base, q.values);

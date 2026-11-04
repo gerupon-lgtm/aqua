@@ -1,5 +1,5 @@
 // 出題の生成（logic-design 7.1）。面の定義の vary（変えてよい数値の範囲）から、数値のすべての組み合わせを調べ、
-// 検査（challenge-check.js）をすべて通ったものだけを候補にする。乱数の種を固定して8つを選ぶので、何度実行しても同じ結果になる。
+// 検査（challenge-check.js）をすべて通ったものだけを候補にする。乱数の種を固定して8つまで（中身の違う出題だけ）を選ぶので、何度実行しても同じ結果になる。
 // 指定量は「あるつなぎ方で計算した流れる量」から決め、そのつなぎ方が満点の1通りになるものだけを残す。
 import { frac } from './fraction.js';
 import { allConfigs, judge, configKey, rank, lexLess } from './play.js';
@@ -160,23 +160,22 @@ export function generateStage(stage, seed = stage.vary.seed) {
     const want = chordFamily ? chordEach : 0;
     if (want) list = [...list.filter(c => c.chord), ...list.filter(c => !c.chord)];
     const mine = [];
-    // 1回目は中身の違う出題だけ。それでも4つそろわない系統だけ、2回目で中身の同じ出題を足す（予備）
-    for (const allowSame of distinct ? [false, true] : [true]) {
-      for (const c of list) {
-        if (mine.length >= each) break;
-        if (mine.some(p => p.values === c.values)) continue;
-        const chords = mine.filter(p => p.chord).length;
-        if (chordEach && (c.chord ? chords >= want : chords < want)) continue;
-        if (!allowSame && mine.some(p => contentKey(p) === contentKey(c))) continue;
-        const s = applyValues(stage, c.values);
-        const check = checkChallenge(s);
-        if (!check.ok) continue; // 速い下調べと食い違うものは採らない（アプリと同じ検査を正とする）
-        mine.push({ ...c, familyIndex: fi, check });
-      }
+    // 中身の違う出題だけを、系統ごとに4つまで選ぶ。4つ作れない系統は作れる数だけ（要件 v0.15：中身の同じ出題で埋めない）。
+    // 管の並びや数値の範囲を変えて中身の違う出題が増えれば、作り直すだけで問題の数も増える（上限8）
+    for (const c of list) {
+      if (mine.length >= each) break;
+      const chords = mine.filter(p => p.chord).length;
+      if (chordEach && (c.chord ? chords >= want : chords < want)) continue;
+      if (distinct && mine.some(p => contentKey(p) === contentKey(c))) continue;
+      const s = applyValues(stage, c.values);
+      const check = checkChallenge(s);
+      if (!check.ok) continue; // 速い下調べと食い違うものは採らない（アプリと同じ検査を正とする）
+      mine.push({ ...c, familyIndex: fi, check });
     }
+    if (!mine.length) throw new Error(`${stage.number}面：系統${fi + 1}に検査を通る出題がありません。`);
     picked.push(...mine);
   });
-  if (picked.length < PER_STAGE) throw new Error(`${stage.number}面：検査を通る出題が${PER_STAGE}つそろいません。`);
+  if (!distinct && picked.length < PER_STAGE) throw new Error(`${stage.number}面：検査を通る出題が${PER_STAGE}つそろいません。`);
   return shuffle(picked, random).map((p, i) => {
     const s = applyValues(stage, p.values);
     const best = judge(s, p.check.analysis.perfectConfig);

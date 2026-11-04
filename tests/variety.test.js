@@ -1,5 +1,5 @@
 // 出題の重なり（要件 v0.14、2026-11-05 発案者）：同じ系統の中に、給水塔の高さと届ける量が同じ出題を重ねない。
-// 管の並びの都合で中身の違う出題が4つ作れない面だけ、作れる数まで重ならないようにして、残りを重ねる（下の表）
+// 管の並びの都合で中身の違う出題が4つ作れない面は、作れる数だけを出題にする（要件 v0.15。中身の同じ出題で埋めない。下の表）
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { STAGES } from '../src/content/stages.js';
@@ -13,5 +13,7 @@ test('同じ系統の中で、中身（給水塔の高さと届ける量）の�
     const bank = CHALLENGES[st.id];
     const count = f => new Set(bank.filter(q => q.family === f).map(q => JSON.stringify([q.values.spring, q.values.spring2 ?? null, q.values.targets]))).size;
     assert.deepEqual([count('A'), count('B')], LIMITED[st.number] ?? [4, 4], `${st.number}面`);
+    // 問題の数は中身の数と同じ（重なりがない）
+    assert.equal(bank.length, count('A') + count('B'), `${st.number}面の問題の数`);
   }
 });
