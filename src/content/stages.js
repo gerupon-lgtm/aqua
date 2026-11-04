@@ -126,7 +126,7 @@ export const STAGES = [
   },
   {
     id: 'T7',
-    version: 1,
+    version: 2,
     number: 7,
     set: '分けて届ける',
     title: '二つの噴水盤へ',
@@ -147,7 +147,7 @@ export const STAGES = [
   },
   {
     id: 'T8',
-    version: 1,
+    version: 2,
     number: 8,
     set: '分けて届ける',
     title: '間のグラスを通って',
@@ -169,7 +169,7 @@ export const STAGES = [
   },
   {
     id: 'T9',
-    version: 1,
+    version: 2,
     number: 9,
     set: '分けて届ける',
     title: '奥の二つへ',
@@ -298,7 +298,7 @@ export const STAGES = [
   },
   {
     id: 'T11',
-    version: 1,
+    version: 2,
     number: 11,
     set: '分けて届ける',
     title: '二本ずつの道',
@@ -393,7 +393,7 @@ export const STAGES = [
   },
   {
     id: 'T12',
-    version: 1,
+    version: 2,
     number: 12,
     set: '分けて届ける',
     title: '分けて届けるのまとめ',
@@ -499,7 +499,7 @@ export const STAGES = [
   },
   {
     id: 'T13',
-    version: 2,
+    version: 3,
     number: 13,
     set: '流れを調える',
     title: '太さで分ける',
@@ -519,7 +519,7 @@ export const STAGES = [
   },
   {
     id: 'T14',
-    version: 1,
+    version: 2,
     number: 14,
     set: '流れを調える',
     title: '二本の太さ',
@@ -610,7 +610,7 @@ export const STAGES = [
   },
   {
     id: 'T15',
-    version: 1,
+    version: 2,
     number: 15,
     set: '流れを調える',
     title: '奥で分ける',
@@ -712,7 +712,7 @@ export const STAGES = [
   },
   {
     id: 'T16',
-    version: 1,
+    version: 2,
     number: 16,
     set: '流れを調える',
     title: '並べるか、太くするか',
@@ -786,13 +786,7 @@ export const STAGES = [
       }
     ],
     vary: {
-      spring: [
-        '6',
-        '8',
-        '9',
-        '10',
-        '12'
-      ],
+      spring: ['4', '5', '6', '7', '8', '9', '10', '11', '12'],
       thinnessAll: [
         '1',
         '2',
@@ -805,7 +799,7 @@ export const STAGES = [
   },
   {
     id: 'T17',
-    version: 1,
+    version: 2,
     number: 17,
     set: '流れを調える',
     title: '遠くまで調える',
@@ -907,7 +901,7 @@ export const STAGES = [
   },
   {
     id: 'T18',
-    version: 1,
+    version: 2,
     number: 18,
     set: '流れを調える',
     title: '流れを調えるのまとめ',
@@ -1004,7 +998,7 @@ export const STAGES = [
   },
   {
     id: 'T19',
-    version: 1,
+    version: 2,
     number: 19,
     set: '低い出口、高い出口',
     title: '高い噴水盤',
@@ -1092,7 +1086,7 @@ export const STAGES = [
   },
   {
     id: 'T20',
-    version: 1,
+    version: 2,
     number: 20,
     set: '低い出口、高い出口',
     title: '奥ほど高い',
@@ -1161,13 +1155,7 @@ export const STAGES = [
       }
     ],
     vary: {
-      spring: [
-        '6',
-        '8',
-        '9',
-        '10',
-        '12'
-      ],
+      spring: ['4', '5', '6', '7', '8', '9', '10', '11', '12'],
       thinnessAll: [
         '1',
         '2',
@@ -1180,7 +1168,7 @@ export const STAGES = [
   },
   {
     id: 'T21',
-    version: 1,
+    version: 2,
     number: 21,
     set: '低い出口、高い出口',
     title: '高さの違う両端',
@@ -1279,7 +1267,7 @@ export const STAGES = [
   },
   {
     id: 'T22',
-    version: 1,
+    version: 2,
     number: 22,
     set: '低い出口、高い出口',
     title: '高い口と低い口',
@@ -1331,7 +1319,7 @@ export const STAGES = [
   },
   {
     id: 'T24',
-    version: 1,
+    version: 2,
     number: 24,
     set: '低い出口、高い出口',
     title: '高さのまとめ',
@@ -1437,7 +1425,7 @@ export const STAGES = [
   },
   {
     id: 'T25',
-    version: 2,
+    version: 3,
     number: 25,
     set: '壁を越える',
     theme: 'buckets',
@@ -1459,7 +1447,7 @@ export const STAGES = [
   },
   {
     id: 'T26',
-    version: 1,
+    version: 2,
     number: 26,
     set: '壁を越える',
     theme: 'buckets',
@@ -1539,11 +1527,7 @@ export const STAGES = [
       }
     ],
     vary: {
-      spring: [
-        '4',
-        '5',
-        '6'
-      ],
+      spring: ['4', '5', '6', '7', '8', '9', '10'],
       thinnessAll: [
         '1',
         '2',
@@ -1557,7 +1541,7 @@ export const STAGES = [
   },
   {
     id: 'T27',
-    version: 1,
+    version: 2,
     number: 27,
     set: '壁を越える',
     theme: 'buckets',
@@ -1661,7 +1645,7 @@ export const STAGES = [
   },
   {
     id: 'T28',
-    version: 1,
+    version: 2,
     number: 28,
     set: '壁を越える',
     theme: 'buckets',
@@ -1748,11 +1732,7 @@ export const STAGES = [
       }
     ],
     vary: {
-      spring: [
-        '4',
-        '5',
-        '6'
-      ],
+      spring: ['4', '5', '6', '7', '8', '9', '10'],
       thinnessAll: [
         '1',
         '2',
@@ -1766,7 +1746,7 @@ export const STAGES = [
   },
   {
     id: 'T29',
-    version: 1,
+    version: 2,
     number: 29,
     set: '壁を越える',
     theme: 'buckets',
@@ -1870,7 +1850,7 @@ export const STAGES = [
   },
   {
     id: 'T30',
-    version: 1,
+    version: 2,
     number: 30,
     set: '壁を越える',
     theme: 'buckets',

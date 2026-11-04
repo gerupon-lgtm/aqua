@@ -132,13 +132,20 @@ export function generateStage(stage, seed = stage.vary.seed) {
   // chord が数（10・23面、要件 v0.13）：各系統のその数だけを、満点で和音が鳴る出題にする。残りは和音でない出題
   const chordEach = typeof v.chord === 'number' ? v.chord : 0;
   // distinctTargets：同じ系統の中で、給水塔の高さと届ける量の組が同じ出題を選ばない（答えに使わない管の太さだけが違う出題を重ねない）
+  // 要件 v0.14（2026-11-05）からすべての面で既定にした。false を書いた面だけ重なりを許す
+  const distinct = v.distinctTargets ?? true;
   const contentKey = c => JSON.stringify([c.values.spring, c.values.spring2 ?? null, c.values.targets]);
-  const distinctCount = list => (v.distinctTargets ? new Set(list.map(contentKey)).size : list.length);
+  const distinctCount = list => (distinct ? new Set(list.map(contentKey)).size : list.length);
   const plainOk = list => distinctCount(list) >= each;
   const chordOk = list => list.filter(c => c.chord).length >= chordEach && distinctCount(list.filter(c => !c.chord)) >= each - chordEach;
   // chordFamilies：和音の出題を置く系統の数（既定は2系統とも）。23面は C メジャーの系統で普段の出題が足りないため1
   const chordFamilies = chordEach ? (v.chordFamilies ?? FAMILIES) : 0;
-  const order = shuffle([...byFamily.keys()].sort().filter(k => plainOk(byFamily.get(k))), random);
+  // 中身の違う出題が4つそろう系統を先に（乱数で並べる）。そろわない系統は、中身の違う数が多い順に後ろへ（予備）
+  const order = [
+    ...shuffle([...byFamily.keys()].sort().filter(k => plainOk(byFamily.get(k))), random),
+    ...[...byFamily.keys()].sort().filter(k => !plainOk(byFamily.get(k)) && byFamily.get(k).length >= each)
+      .sort((a, b) => distinctCount(byFamily.get(b)) - distinctCount(byFamily.get(a)))
+  ];
   // distinctShapes（23面）：同じ両端の管の違い（SA と SA2）だけの系統は選ばず、つなぎ方の形が違う2系統にする
   const shape = key => key.split(',').map(id => id.replace(/\d+(?=$|[:*+])/, '')).sort().join(',');
   const families = [];
@@ -153,15 +160,19 @@ export function generateStage(stage, seed = stage.vary.seed) {
     const want = chordFamily ? chordEach : 0;
     if (want) list = [...list.filter(c => c.chord), ...list.filter(c => !c.chord)];
     const mine = [];
-    for (const c of list) {
-      if (mine.length >= each) break;
-      const chords = mine.filter(p => p.chord).length;
-      if (chordEach && (c.chord ? chords >= want : chords < want)) continue;
-      if (v.distinctTargets && mine.some(p => contentKey(p) === contentKey(c))) continue;
-      const s = applyValues(stage, c.values);
-      const check = checkChallenge(s);
-      if (!check.ok) continue; // 速い下調べと食い違うものは採らない（アプリと同じ検査を正とする）
-      mine.push({ ...c, familyIndex: fi, check });
+    // 1回目は中身の違う出題だけ。それでも4つそろわない系統だけ、2回目で中身の同じ出題を足す（予備）
+    for (const allowSame of distinct ? [false, true] : [true]) {
+      for (const c of list) {
+        if (mine.length >= each) break;
+        if (mine.some(p => p.values === c.values)) continue;
+        const chords = mine.filter(p => p.chord).length;
+        if (chordEach && (c.chord ? chords >= want : chords < want)) continue;
+        if (!allowSame && mine.some(p => contentKey(p) === contentKey(c))) continue;
+        const s = applyValues(stage, c.values);
+        const check = checkChallenge(s);
+        if (!check.ok) continue; // 速い下調べと食い違うものは採らない（アプリと同じ検査を正とする）
+        mine.push({ ...c, familyIndex: fi, check });
+      }
     }
     picked.push(...mine);
   });

@@ -3,13 +3,14 @@
 // 太さを選べる配管とは役目を分ける（構想：太さは「分け方を調える」、排水口は「水位（音）を調える」）。
 // このため37〜42面には太さを選べる配管を置かない。排水口を開けると、そのグラスの水位が下がり、つながった全体の水位と届く量が変わる
 const common = { version: 1, set: '音を調える', theme: 'drain', spring: { id: 'S', x: 1.1, height: '8' } };
-const vary = (seed, more = {}) => ({ spring: ['6', '8', '9', '10', '12'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, minDrains: 1, seed, ...more });
+const vary = (seed, more = {}) => ({ spring: ['4', '5', '6', '7', '8', '9', '10', '11', '12'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, minDrains: 1, seed, ...more });
 
 export const DRAIN_STAGES = [
   {
     // 入門：Aを通ってBの噴水盤へ。配管だけでは届く量が多すぎるので、Aの排水口で水位を下げる
     ...common,
     id: 'T37',
+    version: 2,
     number: 37,
     title: '排水口で調える',
     hint: 'グラスの下の排水口をタップすると、閉・半分・全開を選べます。開けると水が地面へ捨てられ、水位が下がります。',
@@ -28,6 +29,7 @@ export const DRAIN_STAGES = [
     // 捨てる水を少なく：近道の太い管で多く入れて捨てるより、細い道で入れて捨てる水を減らす方が良い答え
     ...common,
     id: 'T38',
+    version: 2,
     number: 38,
     title: '捨てる水を少なく',
     hint: '同じ量を届けるなら、排水口で捨てる水が少ないほど良い答えです。',
@@ -46,6 +48,7 @@ export const DRAIN_STAGES = [
     // 真ん中で調える：噴水盤のないBの排水口が、両側のAとCの噴水盤の両方に響く
     ...common,
     id: 'T39',
+    version: 2,
     number: 39,
     title: '真ん中の排水口',
     hint: '真ん中のグラスBの排水口を開けると、Bだけでなく、つながったグラスAとCの水位も変わります。',
@@ -68,6 +71,7 @@ export const DRAIN_STAGES = [
     // 高い口と排水口：口の高い噴水盤は、水位が口を越えた分だけ出る。排水口で水位を口の近くまで下げる
     ...common,
     id: 'T40',
+    version: 2,
     number: 40,
     title: '高い口と排水口',
     hint: '口の高い噴水盤には、水位が口を越えた分だけ届きます。排水口で水位を調えます。',
@@ -89,6 +93,7 @@ export const DRAIN_STAGES = [
     // 二つの排水口：どちらを開けるかで、捨てる水の量が変わる
     ...common,
     id: 'T41',
+    version: 2,
     number: 41,
     title: 'どちらを開けるか',
     hint: '排水口が二つあります。どちらを開けても届く量を合わせられますが、捨てる水の量が違います。',
@@ -107,6 +112,7 @@ export const DRAIN_STAGES = [
     // まとめ：二つの噴水盤と二つの排水口。配管と排水口を合わせて、捨てる水と本数を少なくする
     ...common,
     id: 'T42',
+    version: 2,
     number: 42,
     title: '音を調えるのまとめ',
     hint: '配管の選び方と排水口の段を合わせて、捨てる水と配管を少なくします。',

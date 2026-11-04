@@ -14,6 +14,7 @@ export const PUMP_STAGES = [
     // 入門：Aには出口がないので、Aへ水を入れればポンプで汲める。桶でも呼び水できるが、ポンプなら桶を使わずに済む
     ...common,
     id: 'T31',
+    version: 2,
     number: 31,
     buckets: 1,
     title: 'ポンプで呼び水',
@@ -32,6 +33,7 @@ export const PUMP_STAGES = [
     // 道を足してAの水位を上げてから汲む
     ...common,
     id: 'T32',
+    version: 2,
     number: 32,
     buckets: 1,
     title: '先に水位を上げる',
@@ -46,12 +48,13 @@ export const PUMP_STAGES = [
       { id: 'SA2', a: 'S', b: 'A', thinness: '1', depth: 2 },
       siphonAB('2')
     ],
-    vary: { spring: ['4', '5', '6', '7'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 32032 }
+    vary: { spring: ['4', '5', '6', '7', '8', '9', '10'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 32032 }
   },
   {
     // 桶を使わずに：泉とAの間にも壁がある。泉からは桶のサイフォンか地面の下の道、Aから先はポンプ。桶が少ないほど良い答え
     ...common,
     id: 'T33',
+    version: 2,
     number: 33,
     buckets: 1,
     title: '桶を使わずに',
@@ -70,6 +73,7 @@ export const PUMP_STAGES = [
     // 二つの噴水盤：Aにも噴水盤がある。Aへ入れる道を選び、Aの水位を入口より上に保ったまま、ポンプでBへも届ける
     ...common,
     id: 'T34',
+    version: 2,
     number: 34,
     buckets: 1,
     title: '二つの噴水盤とポンプ',
@@ -86,12 +90,13 @@ export const PUMP_STAGES = [
       siphonAB('2'),
       { id: 'SB', a: 'S', b: 'B', thinness: '3', depth: 3 }
     ],
-    vary: { spring: ['4', '5', '6', '7'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 34034 }
+    vary: { spring: ['4', '5', '6', '7', '8', '9', '10'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 34034 }
   },
   {
     // 太さで水位を保つ：太さを選べる道で、Aの水位を入口より上に保ちながら、両方の噴水盤へ届ける
     ...common,
     id: 'T35',
+    version: 2,
     number: 35,
     buckets: 1,
     title: '切れないように',
@@ -106,12 +111,13 @@ export const PUMP_STAGES = [
       { id: 'SA2', a: 'S', b: 'A', thinness: '1', depth: 2 },
       siphonAB('2')
     ],
-    vary: { spring: ['4', '5', '6', '7'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 35035 }
+    vary: { spring: ['4', '5', '6', '7', '8', '9', '10'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 35035 }
   },
   {
     // まとめ：桶・ポンプ・地面の下の道を組み合わせて、桶と本数を少なくする
     ...common,
     id: 'T36',
+    version: 2,
     number: 36,
     buckets: 1,
     title: '呼び水のまとめ',
@@ -127,6 +133,6 @@ export const PUMP_STAGES = [
       { id: 'SA2', a: 'S', b: 'A', thinness: '1', depth: 2 },
       siphonAB('3')
     ],
-    vary: { spring: ['4', '5', '6', '7'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 36036 }
+    vary: { spring: ['4', '5', '6', '7', '8', '9', '10', '11', '12', '13'], thinnessAll: ['1', '2', '3'], maxTarget: 8, minPerfect: 2, minPumps: 1, seed: 36036 }
   }
 ];
