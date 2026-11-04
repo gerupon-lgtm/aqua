@@ -14,6 +14,7 @@ export const FINAL_STAGES = [
     // 水門と二つの噴水盤：水門の管は開いた状態だけ水を運ぶ。閉じたあとも残る道で、両方の噴水盤へ届ける
     ...common,
     id: 'T49',
+    version: 2,
     number: 49,
     title: '水門と二つの噴水盤',
     hint: '水門は、開いた状態のあと自動で閉じます。開いても閉じても、両方の噴水盤にちょうど届けます。',
@@ -35,6 +36,7 @@ export const FINAL_STAGES = [
     // 二つの水門：グラスが三つ。水門は二つで、同時に閉じる。閉じたあとに残る道を考える
     ...common,
     id: 'T50',
+    version: 2,
     number: 50,
     title: '二つの水門',
     hint: '水門が二つあります。二つは同時に閉じます。閉じたあとに残る道で、右の噴水盤へ届けます。',
@@ -53,6 +55,7 @@ export const FINAL_STAGES = [
     // 水門と高い口：水門を閉じて水位が下がると、口の高い噴水盤へ届く量は大きく減る
     ...common,
     id: 'T51',
+    version: 2,
     number: 51,
     title: '水門と高い口',
     hint: '口の高い噴水盤には、水位が口を越えた分だけ届きます。水門を閉じて水位が下がったときも考えます。',
@@ -74,6 +77,7 @@ export const FINAL_STAGES = [
     // 水門と太さ：太さを選べる配管で、開いたときと閉じたときの両方をちょうどにする
     ...common,
     id: 'T52',
+    version: 2,
     number: 52,
     title: '水門と太さ',
     hint: '太さを選べる配管があります。水門が開いても閉じても、ちょうどになる太さを探します。',
@@ -95,6 +99,7 @@ export const FINAL_STAGES = [
     // 水門と排水口：排水口で捨てる水を少なくしながら、水門が閉じても届ける
     ...common,
     id: 'T53',
+    version: 2,
     number: 53,
     title: '水門と排水口',
     theme: 'drain',
@@ -115,6 +120,7 @@ export const FINAL_STAGES = [
     // 総まとめ：二つの給水塔と口の高い噴水盤に、水門を一つ
     ...common,
     id: 'T54',
+    version: 2,
     number: 54,
     title: '総まとめ',
     hint: '二つの給水塔、口の高い噴水盤、水門。開いても閉じても、少ない配管で届けます。',
