@@ -3,6 +3,7 @@ import { materialDefs, materialWater, drawGardenSoil, drawSocket, drawGardenPede
 import { createOutletLabelLayout } from './outlet-label-layout.js';
 import { outletAnnotations, quantityBadge, heightBadge, HEIGHT_BADGE, annotationRect } from './board-annotations.js';
 import { feedPath } from './board-part-geometry.js';
+import { equipmentAnnotations, captionRect, rectsOverlap } from './board-label-geometry.js';
 import { drawFountain, drawRainbow } from './board-water-effects.js';
 // 断面の盤面（SVG）。真横から見た図で、画面の上下がそのまま高さ（screens.md 2章）。
 // 計算は分数で済ませてあり、ここでは描画の直前に小数へ直すだけ。
@@ -13,6 +14,10 @@ export const VIEW_H = 470;
 const GROUND = 370;
 const TOWER_W = 34;
 const SPRING_W = 46;
+// 54面は左の盤が隣のグラス、中央の盤が右の給水塔を覆っていた。
+// 表示上だけ間隔を広げる。高さ・接続・出題データはそのまま使う。
+const DISPLAY_OFFSETS = { T54: { A: -12, T: 10 }, FREE: { A: -5, C: 5 } };
+const displayX = (stage, x, id) => 18 + x * 32.4 + (DISPLAY_OFFSETS[stage.id]?.[id] ?? 0);
 
 export function layoutFor(stage) {
   // 盤面の高さは、高い方の給水塔に合わせる（泉が2つの面、43〜48面）
@@ -21,10 +26,10 @@ export function layoutFor(stage) {
   // 自由作成（T-07）は、つまみで山を動かしても倍率が変わらないよう、上端を stage.boardTop に固定する
   const top = Math.max(H, stage.boardTop ?? 0, ...(stage.walls ?? []).map(w => Number(w.height)), ...stage.candidates.filter(c => c.siphon).map(c => Number(c.siphon.crest)));
   const unit = Math.min(40, 300 / (top + 1));
-  const xOf = x => 18 + x * 32.4;
+  const xOf = (x, id) => displayX(stage, x, id);
   const nodes = new Map();
-  for (const sp of [stage.spring, stage.spring2].filter(Boolean)) nodes.set(sp.id, { id: sp.id, kind: 'spring', cx: xOf(sp.x), w: SPRING_W });
-  for (const t of stage.towers) nodes.set(t.id, { id: t.id, kind: 'tower', cx: xOf(t.x), w: TOWER_W });
+  for (const sp of [stage.spring, stage.spring2].filter(Boolean)) nodes.set(sp.id, { id: sp.id, kind: 'spring', cx: xOf(sp.x, sp.id), w: SPRING_W });
+  for (const t of stage.towers) nodes.set(t.id, { id: t.id, kind: 'tower', cx: xOf(t.x, t.id), w: TOWER_W });
   const towerTop = GROUND - (H + 1) * unit;
   // 地面の下の段の間隔。4段ある面は少し詰めて、盤面の下に収める
   const maxDepth = Math.max(0, ...stage.candidates.map(c => c.depth ?? 0));
@@ -97,11 +102,12 @@ const pipeLabelCache = new WeakMap();
 export function pipeLabelPositions(layout, stage) {
   if (pipeLabelCache.has(layout)) return pipeLabelCache.get(layout);
   const routes = stage.candidates.map(c => ({ c, p: pipePath(layout, c) }));
+  const reserved = equipmentAnnotations(layout, stage, pipePath).all;
   const positions = new Map();
-  for (const { c, p } of routes) {
+  const choicesFor = routes.map(({ c, p }) => {
     // 最下段の管は動かさず、札だけを5pxまで上げて盤内へ収める。
     const labelY = Math.min(p.my, VIEW_H - 15);
-    const lo = p.pts[1][0] + 16, hi = p.pts[2][0] - 16;
+    const lo = p.pts[1][0] + 8, hi = p.pts[2][0] - 8;
     const choices = [p.mx];
     for (let x = lo; x <= hi; x += 2) choices.push(x);
     const cost = x => {
@@ -114,11 +120,40 @@ export function pipeLabelPositions(layout, stage) {
         }
       }
       if (c.gate) score += Math.max(0, 28 - Math.abs(x - (p.gx ?? p.mx))) * 10;
-      for (const v of positions.values()) if (Math.abs(v.y - labelY) < 30) score += Math.max(0, 30 - Math.hypot(v.x - x, v.y - labelY)) * 40;
+      for (const r of reserved) {
+        const gap = Math.hypot(Math.max(r.l - x, 0, x - r.r), Math.max(r.t - labelY, 0, labelY - r.b));
+        score += Math.max(0, 16.5 - gap) * 400;
+      }
       return score;
     };
     choices.sort((a, b) => cost(a) - cost(b));
-    positions.set(c.id, { x: choices[0], y: labelY });
+    const options = [...new Set(choices)].map(x => ({ x, y: labelY, cost: cost(x) }));
+    const clear = options.filter(p => !reserved.some(r => Math.hypot(Math.max(r.l - p.x, 0, p.x - r.r), Math.max(r.t - p.y, 0, p.y - r.b)) < 15.2)
+      && !routes.some(({ c: other, p: q }) => other.id !== c.id && [[q.pts[0], q.pts[1]], [q.pts[2], q.pts[3]]].some(([a, b]) => p.y >= Math.min(a[1], b[1]) - 7 && p.y <= Math.max(a[1], b[1]) + 7 && Math.abs(p.x - a[0]) < 15.2)));
+    return { id: c.id, options: clear.length ? clear : options };
+  }).sort((a, b) => a.options.length - b.options.length || a.id.localeCompare(b.id));
+  // 隣の段まで含めて札を置く。後から来た札を水門か別の札へ押し込まない。
+  let attempts = 0;
+  const place = index => {
+    if (index === choicesFor.length) return true;
+    if (++attempts > 12000) return false;
+    const row = choicesFor[index];
+    for (const p of row.options) {
+      if ([...positions.values()].some(q => Math.hypot(q.x - p.x, q.y - p.y) < 29.6)) continue;
+      positions.set(row.id, { x: p.x, y: p.y });
+      if (place(index + 1)) return true;
+      positions.delete(row.id);
+    }
+    return false;
+  };
+  if (!place(0)) {
+    // 自由作成の非常に密な回路でも描画は継続する。隠れる量が最小の場所へ置く。
+    positions.clear();
+    for (const row of choicesFor) {
+      const score = p => p.cost + [...positions.values()].reduce((n, q) => n + Math.max(0, 29.6 - Math.hypot(q.x - p.x, q.y - p.y)) * 10000, 0);
+      const p = [...row.options].sort((a, b) => score(a) - score(b))[0];
+      positions.set(row.id, { x: p.x, y: p.y });
+    }
   }
   pipeLabelCache.set(layout, positions);
   return positions;
@@ -229,11 +264,11 @@ const BADGE_MARK = {
 };
 const textWidth = (text, size) => [...String(text)].reduce((n, ch) => n + (/[\x20-\x7e]/.test(ch) ? size * 0.6 : size * 1.02), 0);
 // x：align が 'middle' なら中心、'start' なら左端。戻り値は幅
-function badge(out, { x, y, text, icon, iconArg, tone = 'light', mark = null, align = 'middle', size = 9.5, dashed = false, h = 15 }) {
+function badge(out, { x, y, text, icon, iconArg, tone = 'light', mark = null, align = 'middle', size = 9.5, dashed = false, h = 15, width = null }) {
   const t = BADGE_TONE[tone];
   const iconW = icon ? 12 : 0;
   const markW = mark ? 13 : 0;
-  const w = Math.round(6 + iconW + textWidth(text, size) + 6 + markW);
+  const w = width ?? Math.round(6 + iconW + textWidth(text, size) + 6 + markW);
   // 盤面の端で切れないよう、内側に収める
   const x0 = Math.min(VIEW_W - w - 2, Math.max(2, align === 'start' ? x : x - w / 2));
   const y0 = y - h / 2;
@@ -330,8 +365,10 @@ function drawPipeLabel(out, layout, c, model, position) {
   if (c.gate) {
     const closed = model.gateClosed;
     // 印は操作を受け取らない（下の配管のタップを邪魔しない）
-    out.push(`<rect x="${gx - 5}" y="${my - 12}" width="10" height="24" rx="2" fill="${closed ? 'var(--ink)' : 'var(--card)'}" stroke="var(--ink)" stroke-width="1.5" pointer-events="none"/>`);
-    badge(out, { x: gx, y: my - 19, text: closed ? '閉' : '水門', tone: closed ? 'slate' : 'blue', size: 8, h: 13 });
+    out.push(`<rect class="gate-body" data-gate="${esc(c.id)}" x="${gx - 5}" y="${my - 9}" width="10" height="18" rx="2" fill="${closed ? 'var(--ink)' : 'var(--card)'}" stroke="var(--ink)" stroke-width="1.5" pointer-events="none"/>`);
+    const p = equipmentAnnotations(layout, layout.stage, pipePath).gates.get(c.id);
+    if (Math.abs(p.x - gx) > 1 || Math.abs(p.y - (my - 19)) > 1) out.push(`<path class="gate-caption-leader" data-gate-caption="${esc(c.id)}" d="M${gx} ${my - 9} L${p.x} ${p.y}" stroke="#243b50" stroke-width="1" fill="none" pointer-events="none"/>`);
+    badge(out, { x: p.x, y: p.y, text: closed ? '閉' : '水門', tone: closed ? 'slate' : 'blue', size: 8, h: 13, width: p.w });
   }
 }
 
@@ -379,7 +416,7 @@ export function boardViewBox(layout, stage, compact = false) {
     // 札の上端（水面−40）からさらに約16の余白をとる
     const tops = [layout.towerTop - 12, layout.yOf(layout.H) - 56];
     for (const wall of stage.walls ?? []) tops.push(layout.yOf(Number(wall.height)) - 12);
-    for (const c of stage.candidates.filter(c => c.siphon)) tops.push(pipePath(layout, c).my - 32);
+    for (const c of stage.candidates.filter(c => c.siphon)) tops.push(pipePath(layout, c).my - (stage.free ? 44 : 32));
     for (const o of stage.outlets) tops.push(layout.yOf(Number(o.height)) - 34 - 90);
     const top = Math.max(0, Math.floor(Math.min(...tops)));
     compactViewCache.set(layout, `0 ${top} ${VIEW_W} ${VIEW_H - top}`);
@@ -456,7 +493,10 @@ export function renderBoard(svg, model) {
 
   // グラス
   // 「前回」の札が避ける、噴水盤の「高さ」の札の範囲
-  const heightCards = stage.outlets.map(o => annotationRect(outletAnnotations(layout, o, basinPlacement(layout, o).cx).height, 'height'));
+  const equipment = equipmentAnnotations(layout, stage, pipePath);
+  const previousAvoid = [...equipment.all, ...stage.outlets.flatMap(o => Object.values(outletAnnotations(layout, o, basinPlacement(layout, o).cx)).map(p => annotationRect(p, 'outlet caption'))),
+    ...stage.outlets.map(o => ({ l: basinPlacement(layout, o).left - 1, r: basinPlacement(layout, o).right + 1, t: layout.yOf(Number(o.height)) - 5, b: layout.yOf(Number(o.height)) + 11 })),
+    ...[...outletLabelPositions(layout, stage).values()].map(p => captionRect(p.x, p.y, 27.3, 27.3))];
   for (const t of stage.towers) {
     const node = layout.nodes.get(t.id);
     const x0 = node.cx - TOWER_W / 2;
@@ -467,24 +507,27 @@ export function renderBoard(svg, model) {
     // グラスの名前（解説の「グラスA」と対応させる）。給水塔と同じ青い札を口の縁に載せる。
     // 縁より上へ出すと、狭い画面で盤面の切り出し範囲が広がり盤面が縮むため（2026-11-03 発案者）。
     // サイフォンが口から入るグラスは、縦の管を隠さないよう、管の山の上へ置く
-    const crests = stage.candidates.filter(c => c.siphon && (c.a === t.id || c.b === t.id)).map(c => pipePath(layout, c).my);
-    badge(foreground, { x: node.cx, y: Math.min(towerTop - 3, ...crests.map(y => y - 14)), text: `グラス${t.id}`, tone: 'blue' });
-    // 手押しポンプ（31〜36面、F-007）：サイフォンの入口（汲める水位の境目）に札を置く。
-    // 絵（part-pump）が届くまでの仮の表示。入口の高さが分かるよう「入口n」と書く
+    const name = equipment.names.find(p => p.owner === t.id);
+    badge(foreground, { x: name.x, y: name.y, text: `グラス${t.id}`, tone: 'blue' });
+    // 手押しポンプ（31〜36面、F-007）：札はグラスと壁の間へ出し、線の先を入口の高さに保つ。
     for (const c of stage.candidates.filter(x => x.siphon && x.pump === t.id)) {
-      const other = layout.nodes.get(c.a === t.id ? c.b : c.a);
-      const leg = pipePath(layout, c).pts[node.cx <= other.cx ? 0 : 3];
-      badge(foreground, { x: leg[0], y: leg[1], text: `ポンプ 入口${c.siphon.inlet}`, tone: 'light', size: 8.5, dashed: true });
+      const p = equipment.pumps.get(c.id), edge = p.x + Math.sign(p.anchor.x - p.x) * p.w / 2;
+      out.push(`<path class="pump-caption-leader" data-pump="${esc(c.id)}" d="M${p.anchor.x} ${p.anchor.y} L${edge} ${p.y}" stroke="#fffefa" stroke-width="3" fill="none" pointer-events="none"/><path d="M${p.anchor.x} ${p.anchor.y} L${edge} ${p.y}" stroke="#243b50" stroke-width="1" fill="none" pointer-events="none"/>`);
+      foreground.push(`<g class="pump-caption" data-pump="${esc(c.id)}" aria-label="ポンプ 入口${esc(c.siphon.inlet)}" pointer-events="none"><rect x="${p.l + .6}" y="${p.t + .6}" width="${p.w}" height="${p.h}" rx="3.5" fill="#ffffff" stroke="#1d4f88" stroke-width="1.2" stroke-dasharray="2.5 1.8"/><text x="${p.x}" y="${p.y - 3}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#17314c">ポンプ</text><text x="${p.x}" y="${p.y + 9}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#17314c">入口${esc(c.siphon.inlet)}</text></g>`);
     }
-    // 排水口（37〜42面、F-009）：グラスの底に、今の段を書いた札を置く。編集中はタップで段を選ぶ。
+    // 排水口（37〜42面、F-009）：底の印と、ほかの札を避けた名札。編集中はタップで段を選ぶ。
     // 絵（part-drain）が届くまでの仮の表示
     for (const d of (stage.drains ?? []).filter(x => x.tower === t.id)) {
       const step = model.drains?.[d.id] ?? 'closed';
       const name = DRAIN_STEP_NAMES[step];
       const open = step !== 'closed';
       foreground.push(`<g class="drain${open ? ' open' : ''}" data-drain="${d.id}" pointer-events="${phase === 'edit' ? 'all' : 'none'}" aria-label="排水口 ${name}">`);
-      const w = badge(foreground, { x: node.cx, y: GROUND - 10, text: `排水口 ${name}`, tone: open ? 'blue' : 'light', size: 8.5, dashed: !open });
-      foreground.push(`<rect x="${node.cx - w / 2 - 4}" y="${GROUND - 22}" width="${w + 8}" height="24" fill="transparent"/></g>`);
+      const p = equipment.drains.get(d.id);
+      // 名札を上へ出しても排水口そのものの高さは0。底の印へ細い線で対応を示す。
+      const edge = p.x + p.side * p.w / 2, ink = open ? '#287fb5' : '#718395';
+      foreground.push(`<path class="drain-caption-leader" d="M${edge} ${p.y} V${GROUND} H${p.portX}" fill="none" stroke="#fffefa" stroke-width="2.5" pointer-events="none"/><path d="M${edge} ${p.y} V${GROUND} H${p.portX}" fill="none" stroke="#243b50" stroke-width="1" pointer-events="none"/><g class="drain-marker" data-height="0" pointer-events="none"><path d="M${node.cx + p.side * 12} ${GROUND} H${p.portX} V${GROUND + 8}" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linecap="round"/><path d="M${p.portX - 3} ${GROUND + 5} L${p.portX} ${GROUND + 8} L${p.portX + 3} ${GROUND + 5}" fill="none" stroke="${ink}" stroke-width="1.4"/><path d="M${p.portX - 3} ${GROUND + 2} H${p.portX + 3}" stroke="${open ? 'none' : ink}" stroke-width="2"/></g>`);
+      const w = badge(foreground, { x: p.x, y: p.y, text: `排水口 ${name}`, tone: open ? 'blue' : 'light', size: 8.5, dashed: !open, width: p.w });
+      foreground.push(`<rect x="${p.x - w / 2 - 4}" y="${p.y - 12}" width="${w + 8}" height="24" fill="transparent"/></g>`);
     }
     // グラスの光（ぼかしのフィルターは処理が重いので、太い半透明の線を重ねて表す）
     if (onTick) {
@@ -524,9 +567,11 @@ export function renderBoard(svg, model) {
       // 札の高さ15・文字9は「高さ」の札（HEIGHT_BADGE）とそろえる。
       // 噴水盤の「高さ」の札と重なるときは、点線の下へ置く
       const w = Math.round(12 + textWidth('前回', 9)), h = HEIGHT_BADGE.h;
-      const clear = cy => cy + h / 2 <= GROUND && !heightCards.some(r => node.cx - w / 2 < r.r && r.l < node.cx + w / 2 && cy - h / 2 < r.b && r.t < cy + h / 2);
-      const cy = [y - 10, y + 10].find(clear) ?? y - 10;
-      badge(out, { x: node.cx, y: cy, text: '前回', tone: 'prev', size: 9, h });
+      const clear = cy => cy - h / 2 >= towerTop + 12 && cy + h / 2 <= GROUND - 3 && !previousAvoid.some(r => rectsOverlap(captionRect(node.cx, cy, w, h), r));
+      const candidates = [y - 10, y + 10];
+      for (let cy = towerTop + 21; cy <= GROUND - 12; cy += 4) candidates.push(cy);
+      const cy = candidates.filter(clear).sort((a, b) => Math.abs(a - y) - Math.abs(b - y))[0] ?? y - 10;
+      badge(foreground, { x: node.cx, y: cy, text: '前回', tone: 'prev', size: 9, h });
     }
     const lit = model.highlight && model.highlight.id === t.id && model.highlight.until > time;
     if (!pick.glass || lit) out.push(`<rect x="${x0}" y="${towerTop}" width="${TOWER_W}" height="${GROUND - towerTop}" rx="6" fill="none" stroke="${lit ? 'var(--gold)' : 'var(--glass-edge)'}" stroke-width="${lit ? 3 : 1.8}"/>`);
@@ -647,9 +692,8 @@ function drawGuide(out, stage, layout, guide) {
 // 自由作成の編集の印（T-07）。置き場所は点線のグラスに「＋グラス」。選んだグラス・給水塔は金色の枠。
 // 持ち上げた管は、山の中ほどに上下へ動かすつまみ（丸に上下の矢印）を置く（要件 F-016）
 function drawFreeEdit(out, foreground, layout, stage, model) {
-  const xOf = x => 18 + x * 32.4;
   for (const s of stage.freeSlots ?? []) {
-    const cx = xOf(s.x);
+    const cx = displayX(stage, s.x, s.id);
     out.push(`<g class="free-slot" data-free-slot="${s.slot}" pointer-events="all"><rect x="${cx - TOWER_W / 2}" y="${layout.towerTop}" width="${TOWER_W}" height="${GROUND - layout.towerTop}" rx="6" fill="rgba(255,255,255,.35)" stroke="#1d4f88" stroke-width="1.4" stroke-dasharray="5 4"/>`
       + `<circle cx="${cx}" cy="${(layout.towerTop + GROUND) / 2}" r="13" fill="#ffffff" stroke="#1d4f88" stroke-width="1.4"/><path d="M${cx - 6} ${(layout.towerTop + GROUND) / 2} h12 M${cx} ${(layout.towerTop + GROUND) / 2 - 6} v12" stroke="#1d4f88" stroke-width="2.2" stroke-linecap="round"/></g>`);
     badge(foreground, { x: cx, y: layout.towerTop - 10, text: `グラス${s.id}を置く`, tone: 'light', size: 8.5, dashed: true });
@@ -663,8 +707,8 @@ function drawFreeEdit(out, foreground, layout, stage, model) {
     }
   }
   for (const c of stage.candidates.filter(x => x.lifted)) {
-    const { mx, my } = pipePath(layout, c);
-    const hx = mx + 26; // 太さの丸い札（中心 mx・半径14）と重ならない位置
+    const { my } = pipePath(layout, c);
+    const hx = equipmentAnnotations(layout, stage, pipePath).crests.get(c.id).x;
     foreground.push(`<g class="crest-handle" data-crest-handle="${esc(c.id)}" pointer-events="all" aria-label="配管${esc(c.id)}の山の高さ ${esc(c.siphon?.crest ?? '')}"><circle cx="${hx}" cy="${my}" r="15" fill="transparent"/><circle cx="${hx}" cy="${my}" r="9" fill="#fffefa" stroke="#1d4f88" stroke-width="1.4"/><path d="M${hx} ${my - 5.5} l-3 3.2 h6 Z M${hx} ${my + 5.5} l-3 -3.2 h6 Z" fill="#1d4f88"/></g>`);
   }
 }
@@ -694,7 +738,7 @@ function drawOutletLabels(out, foreground, layout, stage, svgId = 'board') {
   const positions = outletLabels.placements(layout, stage);
   const mask = `${svgId || 'board'}-leader-cut`;
   const fields = outletLabels.obstacles(layout, stage).rects
-    .filter(r => ['quantity', 'height', 'ruler', 'gate caption'].includes(r.kind))
+    .filter(r => ['quantity', 'height', 'ruler'].includes(r.kind) || r.kind.endsWith('caption'))
     .map(r => `<rect x="${r.l}" y="${r.t}" width="${r.r - r.l}" height="${r.b - r.t}" fill="#000"/>`).join('');
   const cuts = [...pipeLabelPositions(layout, stage).values()]
     .map(p => `<rect x="${p.x - 15}" y="${p.y - 15}" width="30" height="30" fill="#000"/>`).join('');

@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v0.26.1 配置と重なりの点検</title>
+<link rel="stylesheet" href="../src/ui/style.css?v=0.26.1">
+<style>body{height:auto;min-height:100vh;overflow:auto;padding:16px}h1{font-size:18px}.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}#preview{width:min(100%,720px);height:auto;aspect-ratio:360/470;border:1px solid #cfdbe7;border-radius:12px}pre{white-space:pre-wrap;max-height:50vh;overflow:auto}#audit-board{position:absolute;left:-10000px;top:0;width:720px;height:940px}label{display:flex;gap:4px;align-items:center}</style>
+<h1>v0.26.1 本体の描画で配置を点検</h1>
+<p>課題と自由作成の実データ・計算・描画を使用。札、器、別のグラス、文字の収まりを確認します。</p>
+<div class="tools"><label>面<select id="stage"></select></label><label>出題<select id="question"></select></label><label>状態<select id="state"><option value="empty">編集中</option><option value="perfect">満点</option><option value="all">全接続</option><option value="previous-low">前回：低い水位</option><option value="previous-high">前回：高い水位</option></select></label><button id="audit">全出題を点検</button></div>
+<svg id="preview" viewBox="0 0 360 470" role="img" aria-label="配置の確認用盤面"></svg>
+<pre id="report">待機中</pre><svg id="audit-board" viewBox="0 0 360 470" aria-hidden="true"></svg>
+<script type="module" src="./visual-layout.js?v=0.26.1"></script>
+</html>

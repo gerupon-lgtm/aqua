@@ -19,7 +19,7 @@ import { createUpdateManager } from './update-manager.js';
 import { freeStage, freeConfig, evaluateFree, addTower, removeTower, pipesOf, setOutlet, setSpringHeight, addPipe, updatePipe, removePipeFrom, setPrimed, minCrest, maxCrest, SPRING_HEIGHTS, SIPHON_INLET, goalResult } from '../logic/free.js';
 import { FREE_SAMPLES } from '../content/free-samples.js';
 
-const APP_VERSION = '0.26.0';
+const APP_VERSION = '0.26.1';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。

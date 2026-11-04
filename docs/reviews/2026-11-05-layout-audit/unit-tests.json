@@ -1,0 +1,110 @@
+[
+  {
+    "batch": 1,
+    "files": [
+      "tests\\board.test.js",
+      "tests\\challenges.test.js",
+      "tests\\chord.test.js",
+      "tests\\explain.test.js",
+      "tests\\final-stages.test.js"
+    ],
+    "exit": 0,
+    "seconds": 4.36,
+    "summary": [
+      "ℹ tests 84",
+      "ℹ suites 0",
+      "ℹ pass 84",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 4248.1493"
+    ]
+  },
+  {
+    "batch": 2,
+    "files": [
+      "tests\\flow.test.js",
+      "tests\\free.test.js",
+      "tests\\guide-copy.test.js",
+      "tests\\layout.test.js",
+      "tests\\modes.test.js"
+    ],
+    "exit": 0,
+    "seconds": 10.91,
+    "summary": [
+      "ℹ tests 137",
+      "ℹ suites 0",
+      "ℹ pass 137",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 10800.0226"
+    ]
+  },
+  {
+    "batch": 3,
+    "files": [
+      "tests\\pitch.test.js",
+      "tests\\play.test.js",
+      "tests\\playback-limit.test.js",
+      "tests\\pump.test.js",
+      "tests\\records.test.js"
+    ],
+    "exit": 0,
+    "seconds": 2.2,
+    "summary": [
+      "ℹ tests 30",
+      "ℹ suites 0",
+      "ℹ pass 30",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 2107.6782"
+    ]
+  },
+  {
+    "batch": 4,
+    "files": [
+      "tests\\stage-cue-input.test.js",
+      "tests\\text-layout.test.js",
+      "tests\\tutorial.test.js",
+      "tests\\update-manager.test.js",
+      "tests\\variety.test.js"
+    ],
+    "exit": 0,
+    "seconds": 1.42,
+    "summary": [
+      "ℹ tests 31",
+      "ℹ suites 0",
+      "ℹ pass 31",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 1322.7242"
+    ]
+  },
+  {
+    "batch": 5,
+    "files": [
+      "tests\\visual-layout.test.js",
+      "tests\\visual-timing.test.js",
+      "tests\\worker-update.test.js"
+    ],
+    "exit": 0,
+    "seconds": 3.33,
+    "summary": [
+      "ℹ tests 23",
+      "ℹ suites 0",
+      "ℹ pass 23",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 3227.9329"
+    ]
+  }
+]
