@@ -25,8 +25,9 @@ test('全面・全出題・全つなぎ方で、既定の速さの演出が5秒�
       longest = Math.max(longest, plan.settleAt);
     }
   }
-  // 6面（水門）の最長：グラス2つ目の待ち420＋上がる1300＋閉じるまで1500＋動く1300
-  assert.equal(longest, 420 + DEFAULT_RISE_MS + GATE_HOLD_MS + DEFAULT_RISE_MS);
+  // 最長は50面（水門、グラス3つが一列）：3つ目のグラスの待ち420×2＋上がる1300＋閉じるまで1500＋動く1300＝4.94秒。
+  // 49面より前では6面（水門）の4.52秒が最長だった
+  assert.equal(longest, 420 * 2 + DEFAULT_RISE_MS + GATE_HOLD_MS + DEFAULT_RISE_MS);
 });
 
 test('上限を超える時間割りは、すべての時間を同じ割合で縮めて上限ちょうどに収める', () => {

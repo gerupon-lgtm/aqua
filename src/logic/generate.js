@@ -71,7 +71,9 @@ export function candidatesFor(stage) {
       return {
         config, key: configKey(config), used: j.used, buckets: j.buckets, drained: j.drained, allOnScale: j.allOnScale,
         broken: j.states.some(s => s.broken.size),
-        flows: j.outlets.map(o => o.flow)
+        // 水門の面は、開いた状態と閉じた状態の両方の流れる量（噴水盤の数×2）。水門のない面は1状態だけ
+        flows: j.states.flatMap(s => s.outlets.map(o => o.flow)),
+        gateMatters: j.states.length > 1 && j.states[0].outlets.some((o, i) => !o.flow.eq(j.states[1].outlets[i].flow))
       };
     });
     if (!stage.mayBreak && rows.some(r => r.broken)) continue; // サイフォンが切れる数値は使わない（切れる面を除く）
@@ -99,7 +101,11 @@ export function candidatesFor(stage) {
       // 給水塔が2つの面（43〜48面）：bothSprings なら満点が両方の給水塔を使い、intoSpring2 なら満点で右の給水塔へ水が流れ込む
       if (v.bothSprings && !springsTouched(base, perfect.config, [stage.spring.id, stage.spring2.id])) continue;
       if (v.intoSpring2 && !flowsInto(base, perfect.config, stage.spring2.id)) continue;
-      found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, r.flows[i].toString()])) }, family: perfect.key });
+      // 水門の面（49〜54面）：mustGate なら、満点のつなぎ方で水門を閉じると届く量が変わる（水門が答えに効く）
+      if (v.mustGate && !perfect.gateMatters) continue;
+      const n = stage.outlets.length;
+      const targetOf = i => (r.flows.length > n ? { open: r.flows[i].toString(), closed: r.flows[n + i].toString() } : r.flows[i].toString());
+      found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, targetOf(i)])) }, family: perfect.key });
     }
   }
   return found;

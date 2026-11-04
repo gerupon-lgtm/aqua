@@ -11194,5 +11194,1835 @@ export const CHALLENGES = {
       "seed": 48048,
       "generator": 1
     }
+  ],
+  "T49": [
+    {
+      "id": "T49-1",
+      "number": 1,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "3",
+          "AB2": "1",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB2,SA,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB2"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    },
+    {
+      "id": "T49-2",
+      "number": 2,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "2",
+          "AB2": "1",
+          "SB": "3",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB2,SA,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB2"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    },
+    {
+      "id": "T49-3",
+      "number": 3,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "2",
+          "AB2": "1",
+          "SB": "2",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB2,SA,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB2"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    },
+    {
+      "id": "T49-4",
+      "number": 4,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "1",
+          "AB": "2",
+          "AB2": "3",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "3",
+            "closed": "3"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    },
+    {
+      "id": "T49-5",
+      "number": 5,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "3",
+          "AB2": "1",
+          "SB": "3",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB2,SA,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB2"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    },
+    {
+      "id": "T49-6",
+      "number": 6,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "12",
+        "thinness": {
+          "SA": "1",
+          "AB": "2",
+          "AB2": "3",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "6"
+          },
+          "O2": {
+            "open": "6",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "6",
+          "B": "6"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    },
+    {
+      "id": "T49-7",
+      "number": 7,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "12",
+        "thinness": {
+          "SA": "1",
+          "AB": "1",
+          "AB2": "2",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "6"
+          },
+          "O2": {
+            "open": "6",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "6",
+          "B": "6"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    },
+    {
+      "id": "T49-8",
+      "number": 8,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "1",
+          "AB": "2",
+          "AB2": "1",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "3",
+            "closed": "3"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 49049,
+      "generator": 1
+    }
+  ],
+  "T50": [
+    {
+      "id": "T50-1",
+      "number": 1,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "SA2": "2",
+          "BC": "3",
+          "AC": "1",
+          "SC": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "5"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SC",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AC,BC,SA,SC"
+        ],
+        "levels": {
+          "A": "8",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    },
+    {
+      "id": "T50-2",
+      "number": 2,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "2",
+          "SA2": "2",
+          "BC": "3",
+          "AC": "1",
+          "SC": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "5"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SA2,SC",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AC,BC,SA,SA2,SC"
+        ],
+        "levels": {
+          "A": "8",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    },
+    {
+      "id": "T50-3",
+      "number": 3,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "12",
+        "thinness": {
+          "SA": "1",
+          "SA2": "2",
+          "BC": "2",
+          "AC": "1",
+          "SC": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SC",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AC,BC,SA,SC"
+        ],
+        "levels": {
+          "A": "9",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    },
+    {
+      "id": "T50-4",
+      "number": 4,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "12",
+        "thinness": {
+          "SA": "2",
+          "SA2": "2",
+          "BC": "1",
+          "AC": "1",
+          "SC": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SA2,SC",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AC,BC,SA,SA2,SC"
+        ],
+        "levels": {
+          "A": "9",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    },
+    {
+      "id": "T50-5",
+      "number": 5,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "12",
+        "thinness": {
+          "SA": "1",
+          "SA2": "3",
+          "BC": "2",
+          "AC": "1",
+          "SC": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SC",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AC,BC,SA,SC"
+        ],
+        "levels": {
+          "A": "9",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    },
+    {
+      "id": "T50-6",
+      "number": 6,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "SA2": "2",
+          "BC": "1",
+          "AC": "1",
+          "SC": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "5"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SC",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AC,BC,SA,SC"
+        ],
+        "levels": {
+          "A": "8",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    },
+    {
+      "id": "T50-7",
+      "number": 7,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "12",
+        "thinness": {
+          "SA": "1",
+          "SA2": "1",
+          "BC": "1",
+          "AC": "1",
+          "SC": "3"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SA2,SC",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AC,BC,SA,SA2,SC"
+        ],
+        "levels": {
+          "A": "10",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    },
+    {
+      "id": "T50-8",
+      "number": 8,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "2",
+          "SA2": "2",
+          "BC": "2",
+          "AC": "1",
+          "SC": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "5"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AC,SA,SA2,SC",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AC,BC,SA,SA2,SC"
+        ],
+        "levels": {
+          "A": "8",
+          "B": null,
+          "C": "6"
+        }
+      },
+      "seed": 50050,
+      "generator": 1
+    }
+  ],
+  "T51": [
+    {
+      "id": "T51-1",
+      "number": 1,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "2",
+          "AB": "3",
+          "SA2": "1",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "2",
+            "closed": "2"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA2,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    },
+    {
+      "id": "T51-2",
+      "number": 2,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "2",
+          "AB": "1",
+          "SA2": "3",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "1",
+            "closed": "1"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA2,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    },
+    {
+      "id": "T51-3",
+      "number": 3,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "3",
+          "AB": "2",
+          "SA2": "1",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "2",
+            "closed": "2"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA2,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    },
+    {
+      "id": "T51-4",
+      "number": 4,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "1",
+          "AB": "1",
+          "SA2": "3",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "2",
+            "closed": "2"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    },
+    {
+      "id": "T51-5",
+      "number": 5,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "3",
+          "AB": "2",
+          "SA2": "1",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "1",
+            "closed": "1"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    },
+    {
+      "id": "T51-6",
+      "number": 6,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "3",
+          "AB": "3",
+          "SA2": "1",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "1",
+            "closed": "1"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    },
+    {
+      "id": "T51-7",
+      "number": 7,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "2",
+          "AB": "2",
+          "SA2": "1",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "2",
+            "closed": "2"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA2,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    },
+    {
+      "id": "T51-8",
+      "number": 8,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "3",
+          "AB": "2",
+          "SA2": "2",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "1",
+            "closed": "1"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 51051,
+      "generator": 1
+    }
+  ],
+  "T52": [
+    {
+      "id": "T52-1",
+      "number": 1,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "AB": "3",
+          "SA2": "2",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "3",
+            "closed": "3"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA:1,SB,SB2",
+          "AB,SA:2,SA2,SB,SB2",
+          "SA:2,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    },
+    {
+      "id": "T52-2",
+      "number": 2,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "AB": "2",
+          "SA2": "1",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "4",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SA2,SB,SB2",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AB,SA:1,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    },
+    {
+      "id": "T52-3",
+      "number": 3,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "AB": "2",
+          "SA2": "2",
+          "SB": "2",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "5"
+          },
+          "O2": {
+            "open": "6",
+            "closed": "5"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "SA:2,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "6"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    },
+    {
+      "id": "T52-4",
+      "number": 4,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "AB": "3",
+          "SA2": "2",
+          "SB": "2",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "6"
+          },
+          "O2": {
+            "open": "6",
+            "closed": "5"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SA2,SB,SB2",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AB,SA:1,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "6",
+          "B": "6"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    },
+    {
+      "id": "T52-5",
+      "number": 5,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "AB": "3",
+          "SA2": "1",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "4",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SA2,SB,SB2",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AB,SA:1,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    },
+    {
+      "id": "T52-6",
+      "number": 6,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "AB": "1",
+          "SA2": "3",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "3",
+            "closed": "3"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA:1,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    },
+    {
+      "id": "T52-7",
+      "number": 7,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "AB": "1",
+          "SA2": "1",
+          "SB": "1",
+          "SB2": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "4",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "3"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SA2,SB,SB2",
+        "perfectCount": 4,
+        "partialKeys": [
+          "AB,SA:1,SA2,SB,SB2"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    },
+    {
+      "id": "T52-8",
+      "number": 8,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "AB": "3",
+          "SA2": "3",
+          "SB": "2",
+          "SB2": "2"
+        },
+        "targets": {
+          "O1": {
+            "open": "3",
+            "closed": "3"
+          },
+          "O2": {
+            "open": "3",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA:1,SB,SB2",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,SA:1,SB,SB2"
+        ],
+        "levels": {
+          "A": "3",
+          "B": "3"
+        }
+      },
+      "seed": 52052,
+      "generator": 1
+    }
+  ],
+  "T53": [
+    {
+      "id": "T53-1",
+      "number": 1,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "1",
+          "SA2": "3",
+          "AB2": "1",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    },
+    {
+      "id": "T53-2",
+      "number": 2,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "3",
+          "AB": "1",
+          "SA2": "1",
+          "AB2": "2",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA2,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA2,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    },
+    {
+      "id": "T53-3",
+      "number": 3,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "3",
+          "AB": "1",
+          "SA2": "1",
+          "AB2": "3",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA2,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA2,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    },
+    {
+      "id": "T53-4",
+      "number": 4,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "1",
+          "SA2": "3",
+          "AB2": "3",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    },
+    {
+      "id": "T53-5",
+      "number": 5,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "3",
+          "AB": "1",
+          "SA2": "1",
+          "AB2": "1",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA2,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA2,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    },
+    {
+      "id": "T53-6",
+      "number": 6,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "2",
+          "AB": "1",
+          "SA2": "1",
+          "AB2": "1",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA2,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA2,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    },
+    {
+      "id": "T53-7",
+      "number": 7,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "1",
+          "SA2": "2",
+          "AB2": "1",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    },
+    {
+      "id": "T53-8",
+      "number": 8,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "AB": "1",
+          "SA2": "2",
+          "AB2": "3",
+          "SB": "1"
+        },
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "AB,SA,SB,D1:open",
+        "perfectCount": 3,
+        "partialKeys": [
+          "AB,AB2,SA,SB,D1:open"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "5"
+        }
+      },
+      "seed": 53053,
+      "generator": 1
+    }
+  ],
+  "T54": [
+    {
+      "id": "T54-1",
+      "number": 1,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "1",
+          "SA2": "1",
+          "TB": "1",
+          "TA": "2",
+          "SB": "1"
+        },
+        "spring2": "4",
+        "targets": {
+          "O1": {
+            "open": "4",
+            "closed": "3"
+          },
+          "O2": {
+            "open": "2",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB",
+        "perfectCount": 3,
+        "partialKeys": [
+          "SA,SA2,SB,TB"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "4"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    },
+    {
+      "id": "T54-2",
+      "number": 2,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "SA2": "2",
+          "TB": "2",
+          "TA": "3",
+          "SB": "1"
+        },
+        "spring2": "6",
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "5"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB",
+        "perfectCount": 3,
+        "partialKeys": [
+          "SA,SA2,SB,TB"
+        ],
+        "levels": {
+          "A": "6",
+          "B": "6"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    },
+    {
+      "id": "T54-3",
+      "number": 3,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "1",
+          "SA2": "2",
+          "TB": "3",
+          "TA": "2",
+          "SB": "1"
+        },
+        "spring2": "6",
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "5"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB",
+        "perfectCount": 3,
+        "partialKeys": [
+          "SA,SA2,SB,TB"
+        ],
+        "levels": {
+          "A": "6",
+          "B": "6"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    },
+    {
+      "id": "T54-4",
+      "number": 4,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "8",
+        "thinness": {
+          "SA": "1",
+          "SA2": "1",
+          "TB": "3",
+          "TA": "1",
+          "SB": "2"
+        },
+        "spring2": "4",
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "2",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB,TA",
+        "perfectCount": 4,
+        "partialKeys": [
+          "SA,SA2,SB,TA,TB"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "4"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    },
+    {
+      "id": "T54-5",
+      "number": 5,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "8",
+        "thinness": {
+          "SA": "1",
+          "SA2": "1",
+          "TB": "2",
+          "TA": "1",
+          "SB": "2"
+        },
+        "spring2": "4",
+        "targets": {
+          "O1": {
+            "open": "5",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "2",
+            "closed": "2"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB,TA",
+        "perfectCount": 4,
+        "partialKeys": [
+          "SA,SA2,SB,TA,TB"
+        ],
+        "levels": {
+          "A": "5",
+          "B": "4"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    },
+    {
+      "id": "T54-6",
+      "number": 6,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "2",
+          "SA2": "1",
+          "TB": "2",
+          "TA": "2",
+          "SB": "1"
+        },
+        "spring2": "6",
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB,TA",
+        "perfectCount": 4,
+        "partialKeys": [
+          "SA,SA2,SB,TA,TB"
+        ],
+        "levels": {
+          "A": "6",
+          "B": "6"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    },
+    {
+      "id": "T54-7",
+      "number": 7,
+      "baseVersion": 1,
+      "family": "B",
+      "values": {
+        "spring": "10",
+        "thinness": {
+          "SA": "2",
+          "SA2": "1",
+          "TB": "3",
+          "TA": "2",
+          "SB": "1"
+        },
+        "spring2": "6",
+        "targets": {
+          "O1": {
+            "open": "6",
+            "closed": "4"
+          },
+          "O2": {
+            "open": "4",
+            "closed": "4"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB,TA",
+        "perfectCount": 4,
+        "partialKeys": [
+          "SA,SA2,SB,TA,TB"
+        ],
+        "levels": {
+          "A": "6",
+          "B": "6"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    },
+    {
+      "id": "T54-8",
+      "number": 8,
+      "baseVersion": 1,
+      "family": "A",
+      "values": {
+        "spring": "6",
+        "thinness": {
+          "SA": "1",
+          "SA2": "1",
+          "TB": "1",
+          "TA": "2",
+          "SB": "3"
+        },
+        "spring2": "3",
+        "targets": {
+          "O1": {
+            "open": "4",
+            "closed": "3"
+          },
+          "O2": {
+            "open": "1",
+            "closed": "1"
+          }
+        }
+      },
+      "expected": {
+        "perfectKey": "SA,SA2,SB",
+        "perfectCount": 3,
+        "partialKeys": [
+          "SA,SA2,SB,TB"
+        ],
+        "levels": {
+          "A": "4",
+          "B": "3"
+        }
+      },
+      "seed": 54054,
+      "generator": 1
+    }
   ]
 };
