@@ -106,11 +106,13 @@ export function candidatesFor(stage) {
       if (v.intoSpring2 && !flowsInto(base, perfect.config, stage.spring2.id)) continue;
       // 水門の面（49〜54面）：mustGate なら、満点のつなぎ方で水門を閉じると届く量が変わる（水門が答えに効く）
       if (v.mustGate && !perfect.gateMatters) continue;
-      // 和音の面（10・23面、要件 v0.12）：chord なら、満点のつなぎ方で3つのグラスが3和音（長・短）を鳴らす
-      if (v.chord && !triadOf(perfect.levels)) continue;
+      // 和音の面（10・23面、要件 v0.12・v0.13）：満点のつなぎ方で3つのグラスが3和音（長・短）を鳴らすかを記録する。
+      // chord が true なら和音の出題だけを残す。数なら、各系統のその数だけを和音の出題にする（generateStage）
+      const chord = v.chord ? Boolean(triadOf(perfect.levels)) : false;
+      if (v.chord === true && !chord) continue;
       const n = stage.outlets.length;
       const targetOf = i => (r.flows.length > n ? { open: r.flows[i].toString(), closed: r.flows[n + i].toString() } : r.flows[i].toString());
-      found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, targetOf(i)])) }, family: perfect.key });
+      found.push({ values: { ...g, targets: Object.fromEntries(stage.outlets.map((o, i) => [o.id, targetOf(i)])) }, family: perfect.key, chord });
     }
   }
   return found;
@@ -126,21 +128,42 @@ export function generateStage(stage, seed = stage.vary.seed) {
     byFamily.get(c.family).push(c);
   }
   const each = PER_STAGE / FAMILIES;
-  let families = shuffle([...byFamily.keys()].sort().filter(k => byFamily.get(k).length >= each), random);
+  const v = stage.vary;
+  // chord が数（10・23面、要件 v0.13）：各系統のその数だけを、満点で和音が鳴る出題にする。残りは和音でない出題
+  const chordEach = typeof v.chord === 'number' ? v.chord : 0;
+  // distinctTargets：同じ系統の中で、給水塔の高さと届ける量の組が同じ出題を選ばない（答えに使わない管の太さだけが違う出題を重ねない）
+  const contentKey = c => JSON.stringify([c.values.spring, c.values.spring2 ?? null, c.values.targets]);
+  const distinctCount = list => (v.distinctTargets ? new Set(list.map(contentKey)).size : list.length);
+  const plainOk = list => distinctCount(list) >= each;
+  const chordOk = list => list.filter(c => c.chord).length >= chordEach && distinctCount(list.filter(c => !c.chord)) >= each - chordEach;
+  // chordFamilies：和音の出題を置く系統の数（既定は2系統とも）。23面は C メジャーの系統で普段の出題が足りないため1
+  const chordFamilies = chordEach ? (v.chordFamilies ?? FAMILIES) : 0;
+  const order = shuffle([...byFamily.keys()].sort().filter(k => plainOk(byFamily.get(k))), random);
   // distinctShapes（23面）：同じ両端の管の違い（SA と SA2）だけの系統は選ばず、つなぎ方の形が違う2系統にする
   const shape = key => key.split(',').map(id => id.replace(/\d+(?=$|[:*+])/, '')).sort().join(',');
-  if (stage.vary.distinctShapes) families = families.filter((k, i) => families.findIndex(x => shape(x) === shape(k)) === i);
-  families = families.slice(0, FAMILIES);
-  if (families.length < FAMILIES) throw new Error(`${stage.number}面：${each}つ以上の出題がある系統が${FAMILIES}つ見つかりません（候補 ${pool.length}件、系統 ${byFamily.size}）。数値の範囲を見直してください。`);
+  const families = [];
+  const fits = k => !families.some(f => f.key === k || (v.distinctShapes && shape(f.key) === shape(k)));
+  for (const k of order) if (families.length < chordFamilies && fits(k) && chordOk(byFamily.get(k))) families.push({ key: k, chord: true });
+  for (const k of order) if (families.length < FAMILIES && fits(k)) families.push({ key: k, chord: false });
+  if (families.length < FAMILIES || families.filter(f => f.chord).length < chordFamilies) throw new Error(`${stage.number}面：${each}つ以上の出題がある系統が${FAMILIES}つ見つかりません（候補 ${pool.length}件、系統 ${byFamily.size}）。数値の範囲を見直してください。`);
   const picked = [];
-  families.forEach((key, fi) => {
-    for (const c of shuffle(byFamily.get(key), random)) {
-      if (picked.filter(p => p.familyIndex === fi).length >= each) break;
+  families.forEach(({ key, chord: chordFamily }, fi) => {
+    let list = shuffle(byFamily.get(key), random);
+    // 和音の系統は、和音の出題を先に決めた数だけ選び、そのあと和音でない出題を選ぶ。ほかの系統は和音でない出題だけ
+    const want = chordFamily ? chordEach : 0;
+    if (want) list = [...list.filter(c => c.chord), ...list.filter(c => !c.chord)];
+    const mine = [];
+    for (const c of list) {
+      if (mine.length >= each) break;
+      const chords = mine.filter(p => p.chord).length;
+      if (chordEach && (c.chord ? chords >= want : chords < want)) continue;
+      if (v.distinctTargets && mine.some(p => contentKey(p) === contentKey(c))) continue;
       const s = applyValues(stage, c.values);
       const check = checkChallenge(s);
       if (!check.ok) continue; // 速い下調べと食い違うものは採らない（アプリと同じ検査を正とする）
-      picked.push({ ...c, familyIndex: fi, check });
+      mine.push({ ...c, familyIndex: fi, check });
     }
+    picked.push(...mine);
   });
   if (picked.length < PER_STAGE) throw new Error(`${stage.number}面：検査を通る出題が${PER_STAGE}つそろいません。`);
   return shuffle(picked, random).map((p, i) => {

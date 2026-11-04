@@ -375,7 +375,9 @@ const compactViewCache = new WeakMap();
 export function boardViewBox(layout, stage, compact = false) {
   if (!compact) return `0 0 ${VIEW_W} ${VIEW_H}`;
   if (!compactViewCache.has(layout)) {
-    const tops = [layout.towerTop - 12, layout.yOf(layout.H) - 42];
+    // 給水塔の札（「給水塔」「高さn」）の上に余白を残す。iPhone（XR、v0.23.0）では盤面の枠が数px低いと札の上半分が切れたため、
+    // 札の上端（水面−40）からさらに約16の余白をとる
+    const tops = [layout.towerTop - 12, layout.yOf(layout.H) - 56];
     for (const wall of stage.walls ?? []) tops.push(layout.yOf(Number(wall.height)) - 12);
     for (const c of stage.candidates.filter(c => c.siphon)) tops.push(pipePath(layout, c).my - 32);
     for (const o of stage.outlets) tops.push(layout.yOf(Number(o.height)) - 34 - 90);

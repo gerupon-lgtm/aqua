@@ -19,20 +19,28 @@ test('3和音の判定：C・E・G はCメジャー、A・C・E はAマイナー
   assert.equal(triadOf(['5', '3', '5/2'].map(frac)), null); // 目盛りの間
 });
 
-test('10面・23面の出題は、満点の答えで3つのグラスが3和音を鳴らし、つなぎ方の形が違う2系統', () => {
-  for (const n of [10, 23]) {
+// 要件 v0.13（2026-11-05）：和音の出題は一部だけ。10面は各系統1問（2問）、23面は A マイナーの1問。
+// 残りは普段の出題で、同じ系統の中に給水塔の高さと届ける量が同じ出題を重ねない（8問とも中身が違う）
+test('10面・23面：和音の出題は一部だけ（10面は各系統1問、23面は1問）。8問とも中身が違い、つなぎ方の形が違う2系統', () => {
+  for (const [n, chordsPerFamily] of [[10, [1, 1]], [23, [1, 0]]]) {
     const base = STAGES.find(s => s.number === n);
-    assert.equal(base.version, 2);
+    assert.equal(base.version, 3);
     const bank = CHALLENGES[base.id];
     assert.equal(bank.length, 8);
     const shapes = new Set(bank.map(q => q.expected.perfectKey.split(',').map(id => id.replace(/\d+$/, '')).sort().join(',')));
     assert.equal(shapes.size, 2, `${n}面の系統の形`);
-    for (const q of bank) {
-      const st = applyValues(base, q.values);
-      const j = judge(st, q.expected.perfectKey.split(','));
-      const levels = st.towers.map(t => j.result.towers[t.id].level);
-      assert.ok(triadOf(levels), `${q.id}：${levels.join('/')} が和音でない`);
+    const chords = { A: 0, B: 0 };
+    for (const fam of ['A', 'B']) {
+      const mine = bank.filter(q => q.family === fam);
+      const contents = new Set(mine.map(q => JSON.stringify([q.values.spring, q.values.targets])));
+      assert.equal(contents.size, 4, `${n}面の系統${fam}に中身の同じ出題がある`);
+      for (const q of mine) {
+        const st = applyValues(base, q.values);
+        const j = judge(st, q.expected.perfectKey.split(','));
+        if (triadOf(st.towers.map(t => j.result.towers[t.id].level))) chords[fam] += 1;
+      }
     }
+    assert.deepEqual([chords.A, chords.B], chordsPerFamily, `${n}面の和音の出題の数`);
   }
 });
 

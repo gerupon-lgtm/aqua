@@ -1,7 +1,9 @@
 // 面の定義（1〜54面）。お試し1〜6は固定の出題。7〜30面は
 // vary（変えてよい数値の範囲）から scripts/generate-challenges.js で検査済みの出題を8つずつ作り、challenges.js から抽選する。
 // vary：spring 泉の高さの候補、thinnessAll／thinness[配管] 細さの候補、maxTarget 指定量の上限、
-//       minPerfect 満点の本数の下限、mustUse 満点で必ず使う配管、minBuckets 満点で使う桶の下限、minPumps 満点で使うポンプの下限、minDrains 満点で開ける排水口の下限、mustGate 満点で水門を閉じると届く量が変わる、seed 乱数の種。
+//       minPerfect 満点の本数の下限、mustUse 満点で必ず使う配管、minBuckets 満点で使う桶の下限、minPumps 満点で使うポンプの下限、minDrains 満点で開ける排水口の下限、mustGate 満点で水門を閉じると届く量が変わる、
+//       chord 満点で3和音が鳴る出題（true ならすべて、数なら系統ごとのその数だけ）、chordFamilies 和音の出題を置く系統の数（既定2）、distinctShapes 2系統のつなぎ方の形を変える、
+//       distinctTargets 同じ系統の中で給水塔の高さと届ける量が同じ出題を重ねない、seed 乱数の種。
 // mayBreak：サイフォンが切れるつなぎ方を出題に含めてよい面（31〜36面。満点のつなぎ方は切れない）。
 // 出題のある面では、ここにある細さ・指定量は使われない（出題の値で置き換える）。
 // 数値は試作用に、すべてのつなぎ方を調べて「満点が1通り・部分点あり・クリアでは水のあるグラスが目盛りに乗る」を
@@ -268,7 +270,9 @@ export const STAGES = [
     id: 'T10',
     // 版2（2026-11-04 要件 v0.12）：満点の答えで3つのグラスが3和音（長・短）を鳴らす出題だけにした。
     // 3つの水位が違う値になるよう、A–C の管を2本・B–C の管を2本にした（同じ水位のグラスがないと、部分点の答えが作りにくいため）
-    version: 2,
+    // 版3（2026-11-05 要件 v0.13）：この並びで和音が鳴る組み合わせは系統ごとに1通りしかなく、8問が2通りに重なったため、
+    // 和音の出題は各系統1問だけにし、残りは届ける量の違う普段の出題にした
+    version: 3,
     number: 10,
     set: '分けて届ける',
     title: '三つの噴水盤',
@@ -289,8 +293,8 @@ export const STAGES = [
       { id: 'AC', a: 'A', b: 'C', thinness: '1', depth: 2 },
       { id: 'AC2', a: 'A', b: 'C', thinness: '1', depth: 3 }
     ],
-    // 給水塔の高さは、和音の出題が見つかる値に絞った（5〜16を調べ、12でだけ見つかった。生成と検査の時間を短くするため）
-    vary: { spring: ['11', '12'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, chord: true, distinctShapes: true, seed: 10010 }
+    // 給水塔の高さは版1と同じ範囲（和音の出題は12でだけ見つかる）
+    vary: { spring: ['6', '8', '9', '10', '12'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, chord: 1, distinctTargets: true, distinctShapes: true, seed: 10010 }
   },
   {
     id: 'T11',
@@ -1299,7 +1303,9 @@ export const STAGES = [
     id: 'T23',
     // 版2（2026-11-04 要件 v0.12）：満点の答えで3つのグラスが3和音（長・短）を鳴らす出題だけにした。
     // 3つの水位が違う値になるよう、給水塔–A の管を2本にし、A–C の管を足した（同じ水位のグラスがないと、部分点の答えが作りにくいため）
-    version: 2,
+    // 版3（2026-11-05 要件 v0.13）：和音の出題は1問だけ（Aマイナーの系統）にし、残りは届ける量の違う普段の出題にした（10面と同じ理由）。
+    // C メジャーの系統（BC・SA・SB）は、つなぎ方の形の都合で中身が3通りしか作れず4問そろわないため使わない
+    version: 3,
     number: 23,
     set: '低い出口、高い出口',
     title: '三つの高さ',
@@ -1320,8 +1326,8 @@ export const STAGES = [
       { id: 'SB', a: 'S', b: 'B', thinness: '1', depth: 2 },
       { id: 'SC', a: 'S', b: 'C', thinness: '1', depth: 4 }
     ],
-    // 給水塔の高さは、和音の出題が見つかる値に絞った（5〜16を調べた。生成と検査の時間を短くするため）
-    vary: { spring: ['9', '11', '13'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, chord: true, distinctShapes: true, seed: 23023 }
+    // 給水塔の高さは版1の範囲に、Aマイナーの出題が見つかる13を足した
+    vary: { spring: ['6', '8', '9', '10', '12', '13'], thinnessAll: ['1', '2', '3'], maxTarget: 6, minPerfect: 2, chord: 1, chordFamilies: 1, distinctTargets: true, distinctShapes: true, seed: 23023 }
   },
   {
     id: 'T24',
