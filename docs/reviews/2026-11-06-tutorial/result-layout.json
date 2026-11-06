@@ -1,0 +1,20 @@
+{
+  "document": [
+    390,
+    844
+  ],
+  "fairyAnimation": "none",
+  "guideText": "水の妖精水が届いたね！予想どおり！ 噴水盤に 毎秒2 届きました。下の解説で計算を確かめましょう。",
+  "reduced": true,
+  "result": {
+    "bottom": 822.0625,
+    "clientHeight": 648,
+    "height": 650.0625,
+    "scrollHeight": 851,
+    "top": 172
+  },
+  "viewport": [
+    390,
+    844
+  ]
+}

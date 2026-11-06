@@ -1,0 +1,32 @@
+[
+  {
+    "label": "normal-css first",
+    "bubbleAnimation": "guide-arrive",
+    "cheerAnimation": "none",
+    "fairyAnimation": "fairy-float",
+    "fairyTransform": "matrix(0.999787, -0.0206252, 0.0206252, 0.999787, 0, -1.77273)",
+    "reducedPreference": true,
+    "ringAnimation": "guide-trace",
+    "ringOffset": "-15.9737px"
+  },
+  {
+    "label": "normal-css later",
+    "bubbleAnimation": "guide-arrive",
+    "cheerAnimation": "none",
+    "fairyAnimation": "fairy-float",
+    "fairyTransform": "matrix(0.999522, -0.0309071, 0.0309071, 0.999522, 0, -2.6567)",
+    "reducedPreference": true,
+    "ringAnimation": "guide-trace",
+    "ringOffset": "-0.726362px"
+  },
+  {
+    "label": "connected cheer",
+    "bubbleAnimation": "guide-arrive",
+    "cheerAnimation": "fairy-cheer",
+    "fairyAnimation": "fairy-float",
+    "fairyTransform": "matrix(0.999998, -0.00217992, 0.00217992, 0.999998, 0, -0.18735)",
+    "reducedPreference": true,
+    "ringAnimation": null,
+    "ringOffset": null
+  }
+]

@@ -1,0 +1,992 @@
+[
+  {
+    "label": "320 step1",
+    "actions": {
+      "bottom": 546.0625,
+      "height": 44,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 502.0625
+    },
+    "board": {
+      "bottom": 347.0625,
+      "height": 174.0625,
+      "right": 307,
+      "width": 294,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 568,
+    "documentWidth": 320,
+    "guide": {
+      "bottom": 498.0625,
+      "height": 112,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 386.0625
+    },
+    "height": 568,
+    "overflowPhrases": [],
+    "text": "水の妖精1 / 6水をつないで、音をつくろうわたしは水の妖精。高さ4の給水塔から、いっしょに水を届けよう！",
+    "width": 320
+  },
+  {
+    "label": "320 step2",
+    "actions": {
+      "bottom": 546.0625,
+      "height": 44,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 502.0625
+    },
+    "board": {
+      "bottom": 347.0625,
+      "height": 174.0625,
+      "right": 307,
+      "width": 294,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 568,
+    "documentWidth": 320,
+    "guide": {
+      "bottom": 498.0625,
+      "height": 112,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 386.0625
+    },
+    "height": 568,
+    "overflowPhrases": [],
+    "text": "水の妖精2 / 6グラスの水面に注目ここはグラス。水面の高さは、左の数字と目盛りで読めるよ。",
+    "width": 320
+  },
+  {
+    "label": "320 step3",
+    "actions": {
+      "bottom": 546.0625,
+      "height": 44,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 502.0625
+    },
+    "board": {
+      "bottom": 347.0625,
+      "height": 174.0625,
+      "right": 307,
+      "width": 294,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 568,
+    "documentWidth": 320,
+    "guide": {
+      "bottom": 498.0625,
+      "height": 112,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 386.0625
+    },
+    "height": 568,
+    "overflowPhrases": [],
+    "text": "水の妖精3 / 6毎秒2ずつ、届けよう「必要量2/秒」は、毎秒2。水はたまらず、下へ流れるよ。",
+    "width": 320
+  },
+  {
+    "label": "320 step4",
+    "actions": {
+      "bottom": 546.0625,
+      "height": 44,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 502.0625
+    },
+    "board": {
+      "bottom": 347.0625,
+      "height": 174.0625,
+      "right": 307,
+      "width": 294,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 568,
+    "documentWidth": 320,
+    "guide": {
+      "bottom": 498.0625,
+      "height": 112,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 386.0625
+    },
+    "height": 568,
+    "overflowPhrases": [],
+    "text": "水の妖精4 / 6太さは、丸い札で太1・中2・細3。同じ高さの差なら、数字が小さいほど多く流れるよ。",
+    "width": 320
+  },
+  {
+    "label": "320 step5",
+    "actions": {
+      "bottom": 546.0625,
+      "height": 44,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 502.0625
+    },
+    "board": {
+      "bottom": 347.0625,
+      "height": 174.0625,
+      "right": 307,
+      "width": 294,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 568,
+    "documentWidth": 320,
+    "guide": {
+      "bottom": 498.0625,
+      "height": 112,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 386.0625
+    },
+    "height": 568,
+    "overflowPhrases": [],
+    "text": "水の妖精5 / 6さあ、つないでみよう光る「太1」をタップ。給水塔とグラスがつながるよ！",
+    "width": 320
+  },
+  {
+    "label": "320 step6",
+    "actions": {
+      "bottom": 546.0625,
+      "height": 44,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 502.0625
+    },
+    "board": {
+      "bottom": 347.0625,
+      "height": 174.0625,
+      "right": 307,
+      "width": 294,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 568,
+    "documentWidth": 320,
+    "guide": {
+      "bottom": 498.0625,
+      "height": 112,
+      "right": 308,
+      "width": 296,
+      "x": 12,
+      "y": 386.0625
+    },
+    "height": 568,
+    "overflowPhrases": [],
+    "text": "水の妖精6 / 6水を流すと、どうなる？つながったね！「水を流す」を押して、水面と噴水を見てみよう。",
+    "width": 320
+  },
+  {
+    "label": "360 step1",
+    "actions": {
+      "bottom": 718.0625,
+      "height": 44,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 674.0625
+    },
+    "board": {
+      "bottom": 503,
+      "height": 330,
+      "right": 347,
+      "width": 334,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 740,
+    "documentWidth": 360,
+    "guide": {
+      "bottom": 670.0625,
+      "height": 128.0625,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 542
+    },
+    "height": 740,
+    "overflowPhrases": [],
+    "text": "水の妖精1 / 6水をつないで、音をつくろうわたしは水の妖精。高さ4の給水塔から、いっしょに水を届けよう！",
+    "width": 360
+  },
+  {
+    "label": "360 step2",
+    "actions": {
+      "bottom": 718.0625,
+      "height": 44,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 674.0625
+    },
+    "board": {
+      "bottom": 503.0625,
+      "height": 330.0625,
+      "right": 347,
+      "width": 334,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 740,
+    "documentWidth": 360,
+    "guide": {
+      "bottom": 670.0625,
+      "height": 128,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 542.0625
+    },
+    "height": 740,
+    "overflowPhrases": [],
+    "text": "水の妖精2 / 6グラスの水面に注目ここはグラス。水面の高さは、左の数字と目盛りで読めるよ。",
+    "width": 360
+  },
+  {
+    "label": "360 step3",
+    "actions": {
+      "bottom": 718.0625,
+      "height": 44,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 674.0625
+    },
+    "board": {
+      "bottom": 503.0625,
+      "height": 330.0625,
+      "right": 347,
+      "width": 334,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 740,
+    "documentWidth": 360,
+    "guide": {
+      "bottom": 670.0625,
+      "height": 128,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 542.0625
+    },
+    "height": 740,
+    "overflowPhrases": [],
+    "text": "水の妖精3 / 6毎秒2ずつ、届けよう「必要量2/秒」は、毎秒2。水はたまらず、下へ流れるよ。",
+    "width": 360
+  },
+  {
+    "label": "360 step4",
+    "actions": {
+      "bottom": 718.0625,
+      "height": 44,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 674.0625
+    },
+    "board": {
+      "bottom": 503,
+      "height": 330,
+      "right": 347,
+      "width": 334,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 740,
+    "documentWidth": 360,
+    "guide": {
+      "bottom": 670.0625,
+      "height": 128.0625,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 542
+    },
+    "height": 740,
+    "overflowPhrases": [],
+    "text": "水の妖精4 / 6太さは、丸い札で太1・中2・細3。同じ高さの差なら、数字が小さいほど多く流れるよ。",
+    "width": 360
+  },
+  {
+    "label": "360 step5",
+    "actions": {
+      "bottom": 718.0625,
+      "height": 44,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 674.0625
+    },
+    "board": {
+      "bottom": 503.0625,
+      "height": 330.0625,
+      "right": 347,
+      "width": 334,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 740,
+    "documentWidth": 360,
+    "guide": {
+      "bottom": 670.0625,
+      "height": 128,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 542.0625
+    },
+    "height": 740,
+    "overflowPhrases": [],
+    "text": "水の妖精5 / 6さあ、つないでみよう光る「太1」をタップ。給水塔とグラスがつながるよ！",
+    "width": 360
+  },
+  {
+    "label": "360 step6",
+    "actions": {
+      "bottom": 718.0625,
+      "height": 44,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 674.0625
+    },
+    "board": {
+      "bottom": 503,
+      "height": 330,
+      "right": 347,
+      "width": 334,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 740,
+    "documentWidth": 360,
+    "guide": {
+      "bottom": 670.0625,
+      "height": 128.0625,
+      "right": 348,
+      "width": 336,
+      "x": 12,
+      "y": 542
+    },
+    "height": 740,
+    "overflowPhrases": [],
+    "text": "水の妖精6 / 6水を流すと、どうなる？つながったね！「水を流す」を押して、水面と噴水を見てみよう。",
+    "width": 360
+  },
+  {
+    "label": "390 step1",
+    "actions": {
+      "bottom": 822.0625,
+      "height": 44,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 778.0625
+    },
+    "board": {
+      "bottom": 607,
+      "height": 434,
+      "right": 377,
+      "width": 364,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 844,
+    "documentWidth": 390,
+    "guide": {
+      "bottom": 774.0625,
+      "height": 128.0625,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 646
+    },
+    "height": 844,
+    "overflowPhrases": [],
+    "text": "水の妖精1 / 6水をつないで、音をつくろうわたしは水の妖精。高さ4の給水塔から、いっしょに水を届けよう！",
+    "width": 390
+  },
+  {
+    "label": "390 step2",
+    "actions": {
+      "bottom": 822.0625,
+      "height": 44,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 778.0625
+    },
+    "board": {
+      "bottom": 607.0625,
+      "height": 434.0625,
+      "right": 377,
+      "width": 364,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 844,
+    "documentWidth": 390,
+    "guide": {
+      "bottom": 774.0625,
+      "height": 128,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 646.0625
+    },
+    "height": 844,
+    "overflowPhrases": [],
+    "text": "水の妖精2 / 6グラスの水面に注目ここはグラス。水面の高さは、左の数字と目盛りで読めるよ。",
+    "width": 390
+  },
+  {
+    "label": "390 step3",
+    "actions": {
+      "bottom": 822.0625,
+      "height": 44,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 778.0625
+    },
+    "board": {
+      "bottom": 607.0625,
+      "height": 434.0625,
+      "right": 377,
+      "width": 364,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 844,
+    "documentWidth": 390,
+    "guide": {
+      "bottom": 774.0625,
+      "height": 128,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 646.0625
+    },
+    "height": 844,
+    "overflowPhrases": [],
+    "text": "水の妖精3 / 6毎秒2ずつ、届けよう「必要量2/秒」は、毎秒2。水はたまらず、下へ流れるよ。",
+    "width": 390
+  },
+  {
+    "label": "390 step4",
+    "actions": {
+      "bottom": 822.0625,
+      "height": 44,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 778.0625
+    },
+    "board": {
+      "bottom": 607.0625,
+      "height": 434.0625,
+      "right": 377,
+      "width": 364,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 844,
+    "documentWidth": 390,
+    "guide": {
+      "bottom": 774.0625,
+      "height": 128,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 646.0625
+    },
+    "height": 844,
+    "overflowPhrases": [],
+    "text": "水の妖精4 / 6太さは、丸い札で太1・中2・細3。同じ高さの差なら、数字が小さいほど多く流れるよ。",
+    "width": 390
+  },
+  {
+    "label": "390 step5",
+    "actions": {
+      "bottom": 822.0625,
+      "height": 44,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 778.0625
+    },
+    "board": {
+      "bottom": 607.0625,
+      "height": 434.0625,
+      "right": 377,
+      "width": 364,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 844,
+    "documentWidth": 390,
+    "guide": {
+      "bottom": 774.0625,
+      "height": 128,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 646.0625
+    },
+    "height": 844,
+    "overflowPhrases": [],
+    "text": "水の妖精5 / 6さあ、つないでみよう光る「太1」をタップ。給水塔とグラスがつながるよ！",
+    "width": 390
+  },
+  {
+    "label": "390 step6",
+    "actions": {
+      "bottom": 822.0625,
+      "height": 44,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 778.0625
+    },
+    "board": {
+      "bottom": 607.0625,
+      "height": 434.0625,
+      "right": 377,
+      "width": 364,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 844,
+    "documentWidth": 390,
+    "guide": {
+      "bottom": 774.0625,
+      "height": 128,
+      "right": 378,
+      "width": 366,
+      "x": 12,
+      "y": 646.0625
+    },
+    "height": 844,
+    "overflowPhrases": [],
+    "text": "水の妖精6 / 6水を流すと、どうなる？つながったね！「水を流す」を押して、水面と噴水を見てみよう。",
+    "width": 390
+  },
+  {
+    "label": "430 step1",
+    "actions": {
+      "bottom": 910.0625,
+      "height": 44,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 866.0625
+    },
+    "board": {
+      "bottom": 695.0625,
+      "height": 522.0625,
+      "right": 417,
+      "width": 404,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 932,
+    "documentWidth": 430,
+    "guide": {
+      "bottom": 862.0625,
+      "height": 128,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 734.0625
+    },
+    "height": 932,
+    "overflowPhrases": [],
+    "text": "水の妖精1 / 6水をつないで、音をつくろうわたしは水の妖精。高さ4の給水塔から、いっしょに水を届けよう！",
+    "width": 430
+  },
+  {
+    "label": "430 step2",
+    "actions": {
+      "bottom": 910.0625,
+      "height": 44,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 866.0625
+    },
+    "board": {
+      "bottom": 695.0625,
+      "height": 522.0625,
+      "right": 417,
+      "width": 404,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 932,
+    "documentWidth": 430,
+    "guide": {
+      "bottom": 862.0625,
+      "height": 128,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 734.0625
+    },
+    "height": 932,
+    "overflowPhrases": [],
+    "text": "水の妖精2 / 6グラスの水面に注目ここはグラス。水面の高さは、左の数字と目盛りで読めるよ。",
+    "width": 430
+  },
+  {
+    "label": "430 step3",
+    "actions": {
+      "bottom": 910.0625,
+      "height": 44,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 866.0625
+    },
+    "board": {
+      "bottom": 695.0625,
+      "height": 522.0625,
+      "right": 417,
+      "width": 404,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 932,
+    "documentWidth": 430,
+    "guide": {
+      "bottom": 862.0625,
+      "height": 128,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 734.0625
+    },
+    "height": 932,
+    "overflowPhrases": [],
+    "text": "水の妖精3 / 6毎秒2ずつ、届けよう「必要量2/秒」は、毎秒2。水はたまらず、下へ流れるよ。",
+    "width": 430
+  },
+  {
+    "label": "430 step4",
+    "actions": {
+      "bottom": 910.0625,
+      "height": 44,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 866.0625
+    },
+    "board": {
+      "bottom": 695.0625,
+      "height": 522.0625,
+      "right": 417,
+      "width": 404,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 932,
+    "documentWidth": 430,
+    "guide": {
+      "bottom": 862.0625,
+      "height": 128,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 734.0625
+    },
+    "height": 932,
+    "overflowPhrases": [],
+    "text": "水の妖精4 / 6太さは、丸い札で太1・中2・細3。同じ高さの差なら、数字が小さいほど多く流れるよ。",
+    "width": 430
+  },
+  {
+    "label": "430 step5",
+    "actions": {
+      "bottom": 910.0625,
+      "height": 44,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 866.0625
+    },
+    "board": {
+      "bottom": 695.0625,
+      "height": 522.0625,
+      "right": 417,
+      "width": 404,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 932,
+    "documentWidth": 430,
+    "guide": {
+      "bottom": 862.0625,
+      "height": 128,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 734.0625
+    },
+    "height": 932,
+    "overflowPhrases": [],
+    "text": "水の妖精5 / 6さあ、つないでみよう光る「太1」をタップ。給水塔とグラスがつながるよ！",
+    "width": 430
+  },
+  {
+    "label": "430 step6",
+    "actions": {
+      "bottom": 910.0625,
+      "height": 44,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 866.0625
+    },
+    "board": {
+      "bottom": 695.0625,
+      "height": 522.0625,
+      "right": 417,
+      "width": 404,
+      "x": 13,
+      "y": 173
+    },
+    "documentHeight": 932,
+    "documentWidth": 430,
+    "guide": {
+      "bottom": 862.0625,
+      "height": 128,
+      "right": 418,
+      "width": 406,
+      "x": 12,
+      "y": 734.0625
+    },
+    "height": 932,
+    "overflowPhrases": [],
+    "text": "水の妖精6 / 6水を流すと、どうなる？つながったね！「水を流す」を押して、水面と噴水を見てみよう。",
+    "width": 430
+  },
+  {
+    "label": "PC step1",
+    "actions": {
+      "bottom": 756,
+      "height": 44,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 712
+    },
+    "board": {
+      "bottom": 697,
+      "height": 600,
+      "right": 872.609375,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "documentHeight": 800,
+    "documentWidth": 1280,
+    "guide": {
+      "bottom": 692,
+      "height": 160,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 532
+    },
+    "height": 800,
+    "overflowPhrases": [],
+    "text": "水の妖精1 / 6水をつないで、音をつくろうわたしは水の妖精。高さ4の給水塔から、いっしょに水を届けよう！",
+    "width": 1280
+  },
+  {
+    "label": "PC step2",
+    "actions": {
+      "bottom": 756,
+      "height": 44,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 712
+    },
+    "board": {
+      "bottom": 697,
+      "height": 600,
+      "right": 872.609375,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "documentHeight": 800,
+    "documentWidth": 1280,
+    "guide": {
+      "bottom": 692,
+      "height": 160,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 532
+    },
+    "height": 800,
+    "overflowPhrases": [],
+    "text": "水の妖精2 / 6グラスの水面に注目ここはグラス。水面の高さは、左の数字と目盛りで読めるよ。",
+    "width": 1280
+  },
+  {
+    "label": "PC step3",
+    "actions": {
+      "bottom": 756,
+      "height": 44,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 712
+    },
+    "board": {
+      "bottom": 697,
+      "height": 600,
+      "right": 872.609375,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "documentHeight": 800,
+    "documentWidth": 1280,
+    "guide": {
+      "bottom": 692,
+      "height": 160,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 532
+    },
+    "height": 800,
+    "overflowPhrases": [],
+    "text": "水の妖精3 / 6毎秒2ずつ、届けよう「必要量2/秒」は、毎秒2。水はたまらず、下へ流れるよ。",
+    "width": 1280
+  },
+  {
+    "label": "PC step4",
+    "actions": {
+      "bottom": 756,
+      "height": 44,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 712
+    },
+    "board": {
+      "bottom": 697,
+      "height": 600,
+      "right": 872.609375,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "documentHeight": 800,
+    "documentWidth": 1280,
+    "guide": {
+      "bottom": 692,
+      "height": 160,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 532
+    },
+    "height": 800,
+    "overflowPhrases": [],
+    "text": "水の妖精4 / 6太さは、丸い札で太1・中2・細3。同じ高さの差なら、数字が小さいほど多く流れるよ。",
+    "width": 1280
+  },
+  {
+    "label": "PC step5",
+    "actions": {
+      "bottom": 756,
+      "height": 44,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 712
+    },
+    "board": {
+      "bottom": 697,
+      "height": 600,
+      "right": 872.609375,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "documentHeight": 800,
+    "documentWidth": 1280,
+    "guide": {
+      "bottom": 692,
+      "height": 160,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 532
+    },
+    "height": 800,
+    "overflowPhrases": [],
+    "text": "水の妖精5 / 6さあ、つないでみよう光る「太1」をタップ。給水塔とグラスがつながるよ！",
+    "width": 1280
+  },
+  {
+    "label": "PC step6",
+    "actions": {
+      "bottom": 756,
+      "height": 44,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 712
+    },
+    "board": {
+      "bottom": 697,
+      "height": 600,
+      "right": 872.609375,
+      "width": 847.609375,
+      "x": 25,
+      "y": 97
+    },
+    "documentHeight": 800,
+    "documentWidth": 1280,
+    "guide": {
+      "bottom": 692,
+      "height": 160,
+      "right": 1256,
+      "width": 358.390625,
+      "x": 897.609375,
+      "y": 532
+    },
+    "height": 800,
+    "overflowPhrases": [],
+    "text": "水の妖精6 / 6水を流すと、どうなる？つながったね！「水を流す」を押して、水面と噴水を見てみよう。",
+    "width": 1280
+  }
+]

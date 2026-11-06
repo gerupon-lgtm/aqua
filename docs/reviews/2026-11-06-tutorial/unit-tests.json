@@ -1,0 +1,80 @@
+[
+  {
+    "exit": 0,
+    "summary": [
+      "ℹ tests 84",
+      "ℹ pass 84",
+      "ℹ fail 0"
+    ],
+    "seconds": 16.75,
+    "files": [
+      "tests\\board.test.js",
+      "tests\\challenges.test.js",
+      "tests\\chord.test.js",
+      "tests\\explain.test.js",
+      "tests\\final-stages.test.js"
+    ]
+  },
+  {
+    "exit": 0,
+    "summary": [
+      "ℹ tests 138",
+      "ℹ pass 138",
+      "ℹ fail 0"
+    ],
+    "seconds": 25.42,
+    "files": [
+      "tests\\flow.test.js",
+      "tests\\free.test.js",
+      "tests\\guide-copy.test.js",
+      "tests\\layout.test.js",
+      "tests\\modes.test.js"
+    ]
+  },
+  {
+    "exit": 0,
+    "summary": [
+      "ℹ tests 30",
+      "ℹ pass 30",
+      "ℹ fail 0"
+    ],
+    "seconds": 8.95,
+    "files": [
+      "tests\\pitch.test.js",
+      "tests\\play.test.js",
+      "tests\\playback-limit.test.js",
+      "tests\\pump.test.js",
+      "tests\\records.test.js"
+    ]
+  },
+  {
+    "exit": 0,
+    "summary": [
+      "ℹ tests 31",
+      "ℹ pass 31",
+      "ℹ fail 0"
+    ],
+    "seconds": 3.67,
+    "files": [
+      "tests\\stage-cue-input.test.js",
+      "tests\\text-layout.test.js",
+      "tests\\tutorial.test.js",
+      "tests\\update-manager.test.js",
+      "tests\\variety.test.js"
+    ]
+  },
+  {
+    "exit": 0,
+    "summary": [
+      "ℹ tests 23",
+      "ℹ pass 23",
+      "ℹ fail 0"
+    ],
+    "seconds": 10.12,
+    "files": [
+      "tests\\visual-layout.test.js",
+      "tests\\visual-timing.test.js",
+      "tests\\worker-update.test.js"
+    ]
+  }
+]

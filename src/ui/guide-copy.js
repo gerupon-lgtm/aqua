@@ -1,24 +1,10 @@
-// 画面幅に合わせて、短い文節の間だけで折り返す。文そのものや案内の進行は変えない。
-// auto-phraseが使えない端末でも、精霊の右側で文の左端をそろえる。
+// 画面幅に合わせて、本文を短い文節の間で折り返す。文と区切りはチュートリアル側が正本。
 import { textMarkup } from './text-layout.js';
-const COPY = [
-  '水は|高いところから|低いところへ|流れます。|毎秒の量＝高さの差÷管の数字。|縦につなぐと|数字は足し算です。',
-  '配管を並べてつなぐと、|通り道が増えて|流れやすくなります。|中の管2本と、|太の管1本を|比べてみましょう。',
-  'グラスに入った水は、|入った分だけ|出ていきます。|水は分かれて、|両方の噴水盤へ届きます。',
-  '水位と口の高さの差を、|出口の管の数字で|割ります。|口より低い水位では|流れません。',
-  '近道と回り道があります。|同じ量を届けられるなら、|配管の本数が少ないほど|高い点になります。',
-  '水門は流したあと|自動で閉じます。|道が1本減ると、|水の分かれ方が|変わります。',
-  '左は給水塔です。|水が高さ4まで入っていて、|ここから流れ出します。',
-  'グラスの|目盛り1つが高さ1です。|左の数字と見比べます。|水が多いほど|低い音です。',
-  '「必要量2/秒」は|毎秒2です。|器にためる量では|ありません。|水は出たあと|下へ流れます。',
-  '下の凡例を見ましょう。|太は1、中は2、細は3。|同じ高さの差なら、|小さい数字ほど|多く流れます。',
-  '光っている「太」の配管を|タップして、|つなぎましょう。',
-  '毎秒の量＝|高さの差÷管の数字の合計。|4÷(1＋出口の1)＝2。|「水を流す」を|押しましょう。'
-];
-const PHRASES = new Map(COPY.map(copy => { const parts = copy.split('|'); return [parts.join(''), parts]; }));
+import { LESSONS, PRACTICE_STEPS } from '../content/tutorial.js';
+const PHRASES = new Map([...Object.values(LESSONS), ...PRACTICE_STEPS].map(s => [s.intro ?? s.text, s.phrases]));
 
-export function guideMessage(text) {
+export function guideMessage(text, { title = '', progress = '', cheer = false } = {}) {
   const parts = PHRASES.get(text);
   const copy = parts ? parts.map(part => `<span class="phrase">${textMarkup(part)}</span>`).join('') : textMarkup(text);
-  return `<span class="spirit" role="img" aria-label="水の精霊"></span><span class="guide-copy">${copy}</span>`;
+  return `<span class="spirit${cheer ? ' spirit-cheer' : ''}" role="img" aria-label="水の妖精"></span><span class="guide-copy"><strong class="guide-caption">水の妖精${progress ? `<small>${textMarkup(progress)}</small>` : ''}</strong>${title ? `<strong class="guide-title">${textMarkup(title)}</strong>` : ''}<span class="guide-text">${copy}</span></span>`;
 }

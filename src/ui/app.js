@@ -19,7 +19,7 @@ import { createUpdateManager } from './update-manager.js';
 import { freeStage, freeConfig, evaluateFree, addTower, removeTower, pipesOf, setOutlet, setSpringHeight, addPipe, updatePipe, removePipeFrom, setPrimed, minCrest, maxCrest, SPRING_HEIGHTS, SIPHON_INLET, goalResult } from '../logic/free.js';
 import { FREE_SAMPLES } from '../content/free-samples.js';
 
-const APP_VERSION = '0.26.2';
+const APP_VERSION = '0.26.3';
 // v3：結果の間合いをグラスの和音の減衰に合わせて置き直した（2026-11-01）。初期値を新しい値にそろえるため、それまでの調整は引き継がない
 const TIMING_KEY = 'aqua-notes.prototype-timing.v3';
 // 結果の間合い（試作の仮の値）。秒数はグラスハープの余韻に合わせて試作で決める（要件NF-002・Q-04）。
@@ -158,6 +158,7 @@ function selectStage(index) {
   state.review = state.mode === 'tutorial' && Boolean(lessonFor(base));
   // 同じ面の編集・実行・結果では、案内を読める高さを固定する。
   $('app').classList.toggle('with-guide', isPractice() || guiding());
+  $('app').classList.toggle('practice', isPractice());
   state.asking = null;
   state.prediction = null;
   state.trials = 0;
@@ -276,7 +277,7 @@ function startFree() {
   state.played = true;
   state.continuous = null;
   state.stageCueUntil = 0;
-  $('app').classList.remove('with-guide');
+  $('app').classList.remove('with-guide', 'practice');
   // 回路を用意してから画面を閉じる（タイトルを閉じるときの描画で、回路がないと止まるため）
   if (!state.free) state.free = { circuit: FREE_SAMPLES[0].circuit(), name: `見本「${FREE_SAMPLES[0].name}」`, dirty: false, goal: null };
   closeTitle();
@@ -698,7 +699,8 @@ function renderCondition() {
   });
 }
 
-// 条件の欄の高さを、全部の面・全部のモードで一番高いものにそろえる。面の名前・噴水盤の数・桶の有無で折り返しの行数が変わり、
+// 通常の条件欄は全部の面・全部のモードで一番高いものにそろえる。練習とスマホ縦の案内6面は、各群の最大高も別に記録する。
+// 面の名前・噴水盤の数・桶の有無で折り返しの行数が変わり、
 // 盤面の大きさが面ごとに変わっていたため（2026-11-01 発案者、iPhone で確認）。
 // 文字の幅は端末の書体で変わるので、その端末・その画面幅で実際に測る。画面幅が変わったら測り直す
 function fitConditionHeight() {
@@ -712,15 +714,23 @@ function fitConditionHeight() {
   cond.parentElement.append(probe);
   const cont = new ContinuousRun('beginner', CONTINUOUS_STAGES);
   let max = 0;
+  let practiceHeight = 0;
+  let guidedHeight = 0;
   for (const st of [PRACTICE, ...STAGES, freeStage(FREE_SAMPLES[0].circuit())]) {
     const shown = CHALLENGES[st.id]?.length ? { ...st, draw: { number: 8, total: 8 } } : st;
     for (const mode of ['select', 'continuous', 'tutorial']) {
       probe.innerHTML = condHtml(shown, { left: 10, connected: 10, mode, cont });
-      max = Math.max(max, probe.getBoundingClientRect().height);
+      const height = probe.getBoundingClientRect().height;
+      max = Math.max(max, height);
+      if (st.id === PRACTICE.id) practiceHeight = Math.max(practiceHeight, height);
+      if (lessonFor(st)) guidedHeight = Math.max(guidedHeight, height);
     }
   }
   probe.remove();
   cond.style.minHeight = `${Math.ceil(max)}px`;
+  // 面切替のない練習だけは専用の高さ。後半の長い課題用の空白で盤面を縮めない。
+  cond.style.setProperty('--practice-condition-height', `${Math.ceil(practiceHeight)}px`);
+  cond.style.setProperty('--guided-condition-height', `${Math.ceil(guidedHeight)}px`);
 }
 
 const fmt = formatAmount;
@@ -811,7 +821,7 @@ function renderPanel() {
   if (state.phase === 'edit') {
     const n = state.config.connected.size;
     panel.innerHTML = `
-      ${state.loadError ? `<p class="warn" role="alert">${textMarkup(state.loadError)}</p>` : practiceStep() ? `<p class="hint guide">${guideMessage(practiceStep().text)}</p>` : guiding() ? `<p class="hint guide">${guideMessage(lessonFor(st).intro)}</p>` : `<p class="hint">${textMarkup(st.hint)}</p>`}
+      ${state.loadError ? `<p class="warn" role="alert">${textMarkup(state.loadError)}</p>` : practiceStep() ? `<p class="hint guide">${guideMessage(practiceStep().text, { title: practiceStep().title, progress: `${state.practiceStep + 1} / ${PRACTICE_STEPS.length}`, cheer: practiceStep().target === 'run' })}</p>` : guiding() ? `<p class="hint guide">${guideMessage(lessonFor(st).intro, { title: lessonFor(st).title })}</p>` : `<p class="hint">${textMarkup(st.hint)}</p>`}
       <div class="actions">${practiceStep()?.until === 'next'
         ? '<button type="button" class="primary" id="guide-next">次へ</button>'
         : `<button type="button" class="ghost" id="clear-pipes" ${n ? '' : 'disabled'}>配管クリア</button>
@@ -825,8 +835,10 @@ function renderPanel() {
     return;
   }
   if (state.phase === 'running') {
+    const withFairy = isPractice() || guiding();
+    const runningText = state.run?.gated ? '水門が閉じると、どう変わるかな？ 水面と噴水に注目！' : '水面が落ち着いたら、グラスの音も聴いてみてね！';
     panel.innerHTML = `
-      <p class="hint running">${textMarkup(state.run?.gated ? '水が流れています。落ち着いたら水門を閉じます…' : '水が流れています…')}</p>
+      <p class="hint running${withFairy ? ' guide' : ''}">${withFairy ? guideMessage(runningText, { title: '水の行方を見てみよう' }) : textMarkup(state.run?.gated ? '水が流れています。落ち着いたら水門を閉じます…' : '水が流れています…')}</p>
       <div class="actions"><button type="button" class="ghost" id="stop">停止</button></div>`;
     return;
   }
@@ -932,8 +944,8 @@ function renderPanel() {
         ${state.newBest ? '<span class="newbest"><svg viewBox="0 0 20 15" width="16" height="12" aria-hidden="true"><path d="M2 12 L1 3 6 6 10 0 14 6 19 3 18 12 Z M2 14 H18" fill="currentColor"/></svg> 最高点</span>' : ''}
         <span class="used">${textMarkup(usedText)}</span>
       </div>
-      ${isPractice() ? `<p class="guide-answer">${guideMessage(practiceResultText(ev.outcome))}</p>` : ''}
-      ${state.prediction ? `<p class="guide-answer">${guideMessage(answerLine(state.prediction.question, state.prediction.picked))}</p>` : ''}
+      ${isPractice() ? `<p class="guide-answer">${guideMessage(practiceResultText(ev.outcome), { title: ev.outcome === 'ng' ? 'つなぎ方で、水の量が変わるよ' : '水が届いた！ 次は音を聴こう', cheer: ev.outcome !== 'ng' })}</p>` : ''}
+      ${state.prediction ? `<p class="guide-answer">${guideMessage(answerLine(state.prediction.question, state.prediction.picked), { title: ev.outcome === 'ng' ? 'もう一度、試してみよう' : '水が届いたね！', cheer: ev.outcome !== 'ng' })}</p>` : ''}
       ${contSummary}
       ${modeLine ? `<p class="mode-line">${modeLine}</p>` : ''}
       ${state.saveMessage ? `<p class="warn">${textMarkup(state.saveMessage)}</p>` : ''}
@@ -1039,8 +1051,8 @@ function closeResult() {
 function questionHtml() {
   const q = state.asking;
   return `<div class="chooser">
-    <div class="chooser-head"><h3><span class="spirit" aria-label="水の精霊"></span>予想してから流そう</h3></div>
-    <p class="chooser-note">${textMarkup(q.text)}<br>${textMarkup('選んでから水が流れます。')}</p>
+    <div class="chooser-head"><h3><span class="spirit" role="img" aria-label="水の妖精"></span>予想してから流そう</h3></div>
+    <p class="chooser-note">${textMarkup(q.text)}<br>${textMarkup('まだ分からなくても大丈夫。選んで、確かめよう！')}</p>
     <div class="chooser-row">${q.choices.map(c => `<button type="button" class="chip" data-predict="${c.value}">毎秒${textMarkup(c.text)} 届く</button>`).join('')}</div>
     <div class="chooser-row chooser-actions"><button type="button" class="chip" data-skip="1">案内をスキップ</button><button type="button" class="chip" data-close="1">やめる</button></div>
   </div>`;
